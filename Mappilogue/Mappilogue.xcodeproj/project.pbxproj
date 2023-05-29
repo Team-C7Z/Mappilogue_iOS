@@ -23,6 +23,10 @@
 		926999442A14F756003DDAD2 /* GatheringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999432A14F756003DDAD2 /* GatheringViewController.swift */; };
 		926999462A14F75F003DDAD2 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999452A14F75F003DDAD2 /* RecordViewController.swift */; };
 		926999482A14F76A003DDAD2 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999472A14F76A003DDAD2 /* MyViewController.swift */; };
+		929158222A2529660022BEF9 /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 929158192A2529660022BEF9 /* Pretendard-Regular.ttf */; };
+		929158242A2529660022BEF9 /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581B2A2529660022BEF9 /* Pretendard-Medium.ttf */; };
+		929158252A2529660022BEF9 /* Pretendard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */; };
+		929158272A2529660022BEF9 /* Pretendard-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581E2A2529660022BEF9 /* Pretendard-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +67,10 @@
 		926999432A14F756003DDAD2 /* GatheringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatheringViewController.swift; sourceTree = "<group>"; };
 		926999452A14F75F003DDAD2 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		926999472A14F76A003DDAD2 /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
+		929158192A2529660022BEF9 /* Pretendard-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.ttf"; sourceTree = "<group>"; };
+		9291581B2A2529660022BEF9 /* Pretendard-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.ttf"; sourceTree = "<group>"; };
+		9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.ttf"; sourceTree = "<group>"; };
+		9291581E2A2529660022BEF9 /* Pretendard-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +163,7 @@
 		926999272A14F0FA003DDAD2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				929158162A25292A0022BEF9 /* Fonts */,
 				926998FF2A14EC09003DDAD2 /* Assets.xcassets */,
 				926999012A14EC09003DDAD2 /* LaunchScreen.storyboard */,
 			);
@@ -250,6 +259,17 @@
 				926999452A14F75F003DDAD2 /* RecordViewController.swift */,
 			);
 			path = Record;
+			sourceTree = "<group>";
+		};
+		929158162A25292A0022BEF9 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */,
+				9291581B2A2529660022BEF9 /* Pretendard-Medium.ttf */,
+				929158192A2529660022BEF9 /* Pretendard-Regular.ttf */,
+				9291581E2A2529660022BEF9 /* Pretendard-SemiBold.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -360,7 +380,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				929158272A2529660022BEF9 /* Pretendard-SemiBold.ttf in Resources */,
+				929158222A2529660022BEF9 /* Pretendard-Regular.ttf in Resources */,
 				926999032A14EC09003DDAD2 /* LaunchScreen.storyboard in Resources */,
+				929158242A2529660022BEF9 /* Pretendard-Medium.ttf in Resources */,
+				929158252A2529660022BEF9 /* Pretendard-Bold.ttf in Resources */,
 				926999002A14EC09003DDAD2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
