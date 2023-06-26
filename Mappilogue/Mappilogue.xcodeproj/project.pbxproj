@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		926998F72A14EC07003DDAD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926998F62A14EC07003DDAD2 /* AppDelegate.swift */; };
 		926998F92A14EC07003DDAD2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926998F82A14EC07003DDAD2 /* SceneDelegate.swift */; };
-		926998FB2A14EC07003DDAD2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926998FA2A14EC07003DDAD2 /* ViewController.swift */; };
 		926999002A14EC09003DDAD2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 926998FF2A14EC09003DDAD2 /* Assets.xcassets */; };
 		926999032A14EC09003DDAD2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 926999012A14EC09003DDAD2 /* LaunchScreen.storyboard */; };
 		9269990E2A14EC09003DDAD2 /* MappilogueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9269990D2A14EC09003DDAD2 /* MappilogueTests.swift */; };
@@ -30,6 +29,7 @@
 		9291582A2A252CC20022BEF9 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929158292A252CC20022BEF9 /* UIColor.swift */; };
 		929158302A2537E40022BEF9 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9291582F2A2537E40022BEF9 /* SnapKit */; };
 		929158332A2538040022BEF9 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 929158322A2538040022BEF9 /* Then */; };
+		92FE260C2A4A3FD100BCDB82 /* NavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FE260B2A4A3FD100BCDB82 /* NavigationBarViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,7 +53,6 @@
 		926998F32A14EC07003DDAD2 /* Mappilogue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mappilogue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		926998F62A14EC07003DDAD2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		926998F82A14EC07003DDAD2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		926998FA2A14EC07003DDAD2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		926998FF2A14EC09003DDAD2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		926999022A14EC09003DDAD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		926999042A14EC09003DDAD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -75,6 +74,7 @@
 		9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.ttf"; sourceTree = "<group>"; };
 		9291581E2A2529660022BEF9 /* Pretendard-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.ttf"; sourceTree = "<group>"; };
 		929158292A252CC20022BEF9 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		92FE260B2A4A3FD100BCDB82 /* NavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NavigationBarViewController.swift; path = ../../../../../../.Trash/Mappilogue_iOS/Mappilogue/Mappilogue/Sources/Base/NavigationBarViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,7 +156,6 @@
 			children = (
 				926998F62A14EC07003DDAD2 /* AppDelegate.swift */,
 				926998F82A14EC07003DDAD2 /* SceneDelegate.swift */,
-				926998FA2A14EC07003DDAD2 /* ViewController.swift */,
 				926999282A14F113003DDAD2 /* Base */,
 				926999292A14F11B003DDAD2 /* Extension */,
 				9269992A2A14F140003DDAD2 /* Model */,
@@ -181,6 +180,7 @@
 			children = (
 				926999332A14F2A3003DDAD2 /* BaseViewController.swift */,
 				926999352A14F443003DDAD2 /* BaseView.swift */,
+				92FE260B2A4A3FD100BCDB82 /* NavigationBarViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -424,8 +424,8 @@
 				926999422A14F74B003DDAD2 /* CalendarViewController.swift in Sources */,
 				9291582A2A252CC20022BEF9 /* UIColor.swift in Sources */,
 				926999382A14F4AA003DDAD2 /* TabBarControllerViewController.swift in Sources */,
-				926998FB2A14EC07003DDAD2 /* ViewController.swift in Sources */,
 				926999342A14F2A3003DDAD2 /* BaseViewController.swift in Sources */,
+				92FE260C2A4A3FD100BCDB82 /* NavigationBarViewController.swift in Sources */,
 				926999362A14F443003DDAD2 /* BaseView.swift in Sources */,
 				926998F72A14EC07003DDAD2 /* AppDelegate.swift in Sources */,
 				926999482A14F76A003DDAD2 /* MyViewController.swift in Sources */,
