@@ -24,6 +24,7 @@ extension UIColor {
     static let color9B9791 = UIColor(hex: 0x9B9791) // Gray 4
     static let colorC9C6C2 = UIColor(hex: 0xC9C6C2) // Gray 3
     static let colorEAE6E1 = UIColor(hex: 0xEAE6E1) // Gray 2
+    static let colorF5F3F0 = UIColor(hex: 0xF5F3F0) // Gray 1.5
     static let colorF9F8F7 = UIColor(hex: 0xF9F8F7) // Gray 1
     static let colorFFFFFF = UIColor(hex: 0xFFFFFF) // White
     
