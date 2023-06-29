@@ -19,10 +19,10 @@ class TabBarController: UITabBarController {
     func setTabBar() {
         let viewControllers = [
             createViewController(HomeViewController(), title: "홈", imageName: "home"),
-            createViewController(HomeViewController(), title: "캘린더", imageName: "calendar"),
-            createViewController(HomeViewController(), title: "모임", imageName: "gathering"),
-            createViewController(HomeViewController(), title: "기록", imageName: "record"),
-            createViewController(HomeViewController(), title: "My", imageName: "my")
+            createViewController(CalendarViewController(), title: "캘린더", imageName: "calendar"),
+            createViewController(GatheringViewController(), title: "모임", imageName: "gathering"),
+            createViewController(RecordViewController(), title: "기록", imageName: "record"),
+            createViewController(MyViewController(), title: "My", imageName: "my")
         ]
 
         setViewControllers(viewControllers, animated: false)
