@@ -8,6 +8,8 @@
 import UIKit
 
 class HomeViewController: NavigationBarViewController {
+    let dummyData = generateDummyScheduleData(schduleCount: 1)
+    
     var scheduleType: ScheduleType = .today
     
     private lazy var collectionView: UICollectionView = {
@@ -17,7 +19,10 @@ class HomeViewController: NavigationBarViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
         collectionView.register(EmptyScheduleCell.self, forCellWithReuseIdentifier: EmptyScheduleCell.registerId)
-        collectionView.register(AddButtonCell.self, forCellWithReuseIdentifier: AddButtonCell.registerId)
+        collectionView.register(AddScheduleButtonCell.self, forCellWithReuseIdentifier: AddScheduleButtonCell.registerId)
+        collectionView.register(TodayScheduleCell.self, forCellWithReuseIdentifier: TodayScheduleCell.registerId)
+        collectionView.register(TodayScheduleInfoCell.self, forCellWithReuseIdentifier: TodayScheduleInfoCell.registerId)
+        collectionView.register(AddLocationButtonCell.self, forCellWithReuseIdentifier: AddLocationButtonCell.registerId)
         collectionView.register(ScheduleHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ScheduleHeaderView.registerId)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -55,25 +60,54 @@ class HomeViewController: NavigationBarViewController {
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return dummyData.count == 0 ? 2 : dummyData.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        if dummyData.count == 0 || section == dummyData.count {
+            return 1
+        }
+        return dummyData[section].location.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch indexPath.section {
-        case 0:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyScheduleCell.registerId, for: indexPath) as? EmptyScheduleCell else { return UICollectionViewCell() }
+        if dummyData.count == 0 {
+            switch indexPath.section {
+            case 0:
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyScheduleCell.registerId, for: indexPath) as? EmptyScheduleCell else { return UICollectionViewCell() }
+                return cell
+                
+            case 1:
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddScheduleButtonCell.registerId, for: indexPath) as? AddScheduleButtonCell else { return UICollectionViewCell() }
+                return cell
+                
+            default:
+                return UICollectionViewCell()
+            }
+        }
+        
+        if indexPath.section == 1 {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddLocationButtonCell.registerId, for: indexPath) as? AddLocationButtonCell else { return UICollectionViewCell() }
             return cell
             
-        case 1:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddButtonCell.registerId, for: indexPath) as? AddButtonCell else { return UICollectionViewCell() }
+        } else if indexPath.row == 0 {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TodayScheduleCell.registerId, for: indexPath) as? TodayScheduleCell else { return UICollectionViewCell() }
+            
+            let title = dummyData[indexPath.section].title
+            let backgroundColor = dummyData[indexPath.section].color
+            
+            cell.configure(with: title, backgroundColor: backgroundColor)
             return cell
             
-        default:
-            return UICollectionViewCell()
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TodayScheduleInfoCell.registerId, for: indexPath) as? TodayScheduleInfoCell else { return UICollectionViewCell() }
+            
+            let index = "\(indexPath.row)"
+            let location = dummyData[indexPath.section].location[indexPath.row - 1]
+            let time = dummyData[indexPath.section].time[indexPath.row - 1]
+            
+            cell.configure(with: index, location: location, time: time)
+            return cell
         }
     }
     
@@ -84,8 +118,27 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.bounds.width - 32
-        let height: CGFloat = (indexPath.section == 0) ? 130 : 53
-        return CGSize(width: width, height: height)
+        
+        if dummyData.count == 0 {
+            let height: CGFloat = (indexPath.section == 0) ? 130 : 53
+            return CGSize(width: width, height: height)
+            
+        } else if indexPath.row == 0 {
+            let height: CGFloat = 38
+            return CGSize(width: width, height: height)
+            
+        } else if indexPath.section == dummyData.count {
+            let height: CGFloat = 53
+            return CGSize(width: width, height: height)
+            
+        } else {
+            let height: CGFloat = 50
+            return CGSize(width: width, height: height)
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
