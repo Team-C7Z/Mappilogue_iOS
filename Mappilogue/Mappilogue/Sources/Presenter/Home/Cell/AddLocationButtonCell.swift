@@ -7,22 +7,28 @@
 
 import UIKit
 
-class AddLocationButtonCell: BaseCollectionViewCell {
+class AddLocationButtonCell: BaseTableViewCell {
     static let registerId = "\(AddLocationButtonCell.self)"
     
     private let addScheduleButton = AddButton(text: "장소 추가하기", backgroundColor: .color1C1C1C)
     
-    override func setupHierarchy() {
-        super.setupProperty()
+    override func layoutSubviews() {
+        super.layoutSubviews()
         
-        addSubview(addScheduleButton)
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
+    }
+    
+    override func setupHierarchy() {
+        super.setupHierarchy()
+        
+        contentView.addSubview(addScheduleButton)
     }
     
     override func setupLayout() {
-        super.setupProperty()
+        super.setupLayout()
         
         addScheduleButton.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
+            $0.edges.equalTo(contentView)
             $0.height.equalTo(53)
         }
     }

@@ -7,18 +7,24 @@
 
 import UIKit
 
-class EmptyScheduleCell: BaseCollectionViewCell {
+class EmptyScheduleCell: BaseTableViewCell {
     static let registerId = "\(EmptyScheduleCell.self)"
     
     private let stackView = UIStackView()
     private let emptyScheduleLabel = UILabel()
     private let emptyScheduleSubLabel = UILabel()
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
+    }
+    
     override func setupProperty() {
         super.setupProperty()
         
-        backgroundColor = .colorF5F3F0
-        layer.cornerRadius = 12
+        contentView.backgroundColor = .colorF5F3F0
+        contentView.layer.cornerRadius = 12
         
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
@@ -36,19 +42,18 @@ class EmptyScheduleCell: BaseCollectionViewCell {
     }
     
     override func setupHierarchy() {
-        super.setupProperty()
+        super.setupHierarchy()
         
-        addSubview(stackView)
-        [emptyScheduleLabel, emptyScheduleSubLabel].forEach {
-            stackView.addArrangedSubview($0)
-        }
+        contentView.addSubview(stackView)
+        stackView.addArrangedSubview(emptyScheduleLabel)
+        stackView.addArrangedSubview(emptyScheduleSubLabel)
     }
     
     override func setupLayout() {
-        super.setupProperty()
+        super.setupLayout()
         
         stackView.snp.makeConstraints {
-            $0.centerX.centerY.equalToSuperview()
+            $0.centerX.centerY.equalTo(contentView)
         }
     }
 }

@@ -8,6 +8,7 @@
 import UIKit
 
 class BaseCollectionReusableView: UICollectionReusableView, BaseViewProtocol {
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
