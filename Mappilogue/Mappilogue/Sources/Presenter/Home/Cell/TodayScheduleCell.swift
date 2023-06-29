@@ -20,7 +20,6 @@ class TodayScheduleCell: BaseTableViewCell {
     
     private let todayScheduleLabel = UILabel()
     private let expandButton = UIButton()
-    private let expandButtonImage = UIImageView()
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -36,11 +35,8 @@ class TodayScheduleCell: BaseTableViewCell {
         todayScheduleLabel.textColor = .color1C1C1C
         todayScheduleLabel.textAlignment = .center
         todayScheduleLabel.font = UIFont.pretendard(.medium, size: 16)
-        
+ 
         expandButton.addTarget(self, action: #selector(expandButtonTapped), for: .touchUpInside)
-        
-        expandButtonImage.image = UIImage(named: "hide")
-        expandButtonImage.contentMode = .scaleAspectFill
     }
     
     override func setupHierarchy() {
@@ -48,7 +44,6 @@ class TodayScheduleCell: BaseTableViewCell {
         
         contentView.addSubview(todayScheduleLabel)
         contentView.addSubview(expandButton)
-        expandButton.addSubview(expandButtonImage)
     }
     
     override func setupLayout() {
@@ -60,27 +55,24 @@ class TodayScheduleCell: BaseTableViewCell {
         }
         
         expandButton.snp.makeConstraints {
-            $0.trailing.equalTo(contentView).offset(-7)
+            $0.trailing.equalTo(contentView).offset(-14)
             $0.centerY.equalTo(contentView)
             $0.width.height.equalTo(24)
         }
+    }
+    
+    func configure(with title: String, backgroundColor: UIColor, isExpandable: Bool, isExpanded: Bool) {
+        todayScheduleLabel.text = title
+        contentView.backgroundColor = backgroundColor
         
-        expandButtonImage.snp.makeConstraints {
-            $0.centerX.centerY.equalTo(expandButton)
-            $0.width.equalTo(14)
-            $0.height.equalTo(7)
+        if isExpandable {
+            expandButton.setImage(UIImage(named: isExpanded ? "hide" : "open"), for: .normal)
+        } else {
+            expandButton.isEnabled = false
         }
     }
     
-    func configure(with title: String, backgroundColor: UIColor) {
-        todayScheduleLabel.text = title
-        contentView.backgroundColor = backgroundColor
-    }
-    
     @objc private func expandButtonTapped(_ sender: UIButton) {
-        expandButtonImage.image = isExpanded ? UIImage(named: "open") : UIImage(named: "hide")
-        isExpanded = !isExpanded
-        
         delegate?.expandButtonTapped(in: self)
     }
 }

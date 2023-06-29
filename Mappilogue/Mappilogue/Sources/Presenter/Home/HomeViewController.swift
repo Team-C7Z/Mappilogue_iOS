@@ -105,8 +105,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 let title = dummyData[indexPath.section].title
                 let backgroundColor = dummyData[indexPath.section].color
+                let isExpandable = dummyData.count > 1 ? true : false
                 
-                cell.configure(with: title, backgroundColor: backgroundColor)
+                cell.configure(with: title, backgroundColor: backgroundColor, isExpandable: isExpandable, isExpanded: isScheduleExpanded[indexPath.section])
                 return cell
                 
             default:
@@ -117,7 +118,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 let location = dummyData[indexPath.section].location[indexPath.row - 1]
                 let time = dummyData[indexPath.section].time[indexPath.row - 1]
                 
-                cell.configure(with: index, location: location, time: time)
+                cell.configure(order: index, location: location, time: time)
                 return cell
             }
             
@@ -154,7 +155,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         return headerHeight
     }
     
-    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if dummyData.count == 0 {
             return 10
@@ -170,10 +170,9 @@ extension HomeViewController: ScheduleTypeDelegate, ExpandCellDelegate {
     }
     
     func expandButtonTapped(in cell: UITableViewCell) {
-        guard let indexPath = tableView.indexPath(for: cell) else {
-            return
-        }
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
         
         isScheduleExpanded[indexPath.section] = !isScheduleExpanded[indexPath.section]
+        tableView.reloadSections([indexPath.section], with: .none)
     }
 }
