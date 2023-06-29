@@ -99,7 +99,7 @@ class TodayScheduleInfoCell: BaseTableViewCell {
         }
     }
     
-    func configure(with order: String, location: String, time: String) {
+    func configure(order: String, location: String, time: String) {
         scheduleIndexLabel.text = order
         locationLabel.text = location
         timeLabel.text = time
