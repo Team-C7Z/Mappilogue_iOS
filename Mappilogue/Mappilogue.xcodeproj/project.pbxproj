@@ -31,8 +31,11 @@
 		929158332A2538040022BEF9 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 929158322A2538040022BEF9 /* Then */; };
 		92A7B64C2A4CC0E6009C9293 /* EmptyScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B64B2A4CC0E6009C9293 /* EmptyScheduleCell.swift */; };
 		92A7B64F2A4CCE29009C9293 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B64E2A4CCE29009C9293 /* AddButton.swift */; };
-		92A7B6512A4CD261009C9293 /* AddButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6502A4CD261009C9293 /* AddButtonCell.swift */; };
+		92A7B6512A4CD261009C9293 /* AddScheduleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6502A4CD261009C9293 /* AddScheduleButton.swift */; };
 		92A7B6532A4CDD4D009C9293 /* ScheduleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6522A4CDD4D009C9293 /* ScheduleType.swift */; };
+		92A7B6552A4CEA28009C9293 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6542A4CEA28009C9293 /* Schedule.swift */; };
+		92A7B6592A4D01B3009C9293 /* TodayScheduleInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6582A4D01B3009C9293 /* TodayScheduleInfoCell.swift */; };
+		92A7B65B2A4D0FD9009C9293 /* AddLocationButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B65A2A4D0FD9009C9293 /* AddLocationButtonCell.swift */; };
 		92FE260C2A4A3FD100BCDB82 /* NavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FE260B2A4A3FD100BCDB82 /* NavigationBarViewController.swift */; };
 		92FE260F2A4A68FE00BCDB82 /* TodayScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FE260E2A4A68FE00BCDB82 /* TodayScheduleCell.swift */; };
 		92FE26112A4A6E1600BCDB82 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FE26102A4A6E1600BCDB82 /* BaseCollectionViewCell.swift */; };
@@ -85,8 +88,11 @@
 		929158292A252CC20022BEF9 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		92A7B64B2A4CC0E6009C9293 /* EmptyScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyScheduleCell.swift; sourceTree = "<group>"; };
 		92A7B64E2A4CCE29009C9293 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
-		92A7B6502A4CD261009C9293 /* AddButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonCell.swift; sourceTree = "<group>"; };
+		92A7B6502A4CD261009C9293 /* AddScheduleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleButton.swift; sourceTree = "<group>"; };
 		92A7B6522A4CDD4D009C9293 /* ScheduleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScheduleType.swift; path = Mappilogue/Sources/Presenter/Home/Cell/ScheduleType.swift; sourceTree = SOURCE_ROOT; };
+		92A7B6542A4CEA28009C9293 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Schedule.swift; path = Mappilogue/Sources/Presenter/Home/Cell/Schedule.swift; sourceTree = SOURCE_ROOT; };
+		92A7B6582A4D01B3009C9293 /* TodayScheduleInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayScheduleInfoCell.swift; sourceTree = "<group>"; };
+		92A7B65A2A4D0FD9009C9293 /* AddLocationButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationButtonCell.swift; sourceTree = "<group>"; };
 		92FE260B2A4A3FD100BCDB82 /* NavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NavigationBarViewController.swift; path = ../../../../../../.Trash/Mappilogue_iOS/Mappilogue/Mappilogue/Sources/Base/NavigationBarViewController.swift; sourceTree = "<group>"; };
 		92FE260E2A4A68FE00BCDB82 /* TodayScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayScheduleCell.swift; sourceTree = "<group>"; };
 		92FE26102A4A6E1600BCDB82 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -218,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				92A7B6522A4CDD4D009C9293 /* ScheduleType.swift */,
+				92A7B6542A4CEA28009C9293 /* Schedule.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -308,8 +315,10 @@
 			isa = PBXGroup;
 			children = (
 				92A7B64B2A4CC0E6009C9293 /* EmptyScheduleCell.swift */,
+				92A7B6502A4CD261009C9293 /* AddScheduleButton.swift */,
 				92FE260E2A4A68FE00BCDB82 /* TodayScheduleCell.swift */,
-				92A7B6502A4CD261009C9293 /* AddButtonCell.swift */,
+				92A7B6582A4D01B3009C9293 /* TodayScheduleInfoCell.swift */,
+				92A7B65A2A4D0FD9009C9293 /* AddLocationButtonCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -466,6 +475,7 @@
 			files = (
 				92A7B64C2A4CC0E6009C9293 /* EmptyScheduleCell.swift in Sources */,
 				92FE26152A4B751000BCDB82 /* BaseCollectionReusableView.swift in Sources */,
+				92A7B6552A4CEA28009C9293 /* Schedule.swift in Sources */,
 				92FE26172A4B76B800BCDB82 /* UIFont.swift in Sources */,
 				926999422A14F74B003DDAD2 /* CalendarViewController.swift in Sources */,
 				92FE26112A4A6E1600BCDB82 /* BaseCollectionViewCell.swift in Sources */,
@@ -480,7 +490,9 @@
 				92FE260F2A4A68FE00BCDB82 /* TodayScheduleCell.swift in Sources */,
 				926999482A14F76A003DDAD2 /* MyViewController.swift in Sources */,
 				926999442A14F756003DDAD2 /* GatheringViewController.swift in Sources */,
-				92A7B6512A4CD261009C9293 /* AddButtonCell.swift in Sources */,
+				92A7B6512A4CD261009C9293 /* AddScheduleButton.swift in Sources */,
+				92A7B65B2A4D0FD9009C9293 /* AddLocationButtonCell.swift in Sources */,
+				92A7B6592A4D01B3009C9293 /* TodayScheduleInfoCell.swift in Sources */,
 				926999462A14F75F003DDAD2 /* RecordViewController.swift in Sources */,
 				926999402A14F73C003DDAD2 /* HomeViewController.swift in Sources */,
 				926998F92A14EC07003DDAD2 /* SceneDelegate.swift in Sources */,

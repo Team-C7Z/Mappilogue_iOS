@@ -1,5 +1,5 @@
 //
-//  AddButtonCell.swift
+//  AddScheduleButton.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/06/29.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-class AddButtonCell: BaseCollectionViewCell {
-    static let registerId = "\(AddButtonCell.self)"
+class AddScheduleButtonCell: BaseCollectionViewCell {
+    static let registerId = "\(AddScheduleButtonCell.self)"
     
     private let addScheduleButton = AddButton(text: "일정 추가하기", backgroundColor: .color43B54E)
     
