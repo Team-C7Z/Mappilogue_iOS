@@ -1,5 +1,5 @@
 //
-//  ScheduleHeaderView.swift
+//  ScheduleTypeHeaderView.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/06/28.
@@ -11,8 +11,8 @@ protocol ScheduleTypeDelegate: AnyObject {
     func scheduleButtonTapped(scheduleType: ScheduleType)
 }
 
-class ScheduleHeaderView: BaseCollectionReusableView {
-    static let registerId = "\(ScheduleHeaderView.self)"
+class ScheduleTypeHeaderView: BaseTableViewHeaderFooterView {
+    static let registerId = "\(ScheduleTypeHeaderView.self)"
     
     var scheduleType: ScheduleType = .today {
         didSet {
@@ -25,6 +25,12 @@ class ScheduleHeaderView: BaseCollectionReusableView {
     private let stackView = UIStackView()
     private let todayScheduleButton = UIButton()
     private let upcomingScheduleButton = UIButton()
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
+    }
     
     override func setupProperty() {
         super.setupProperty()
@@ -48,7 +54,7 @@ class ScheduleHeaderView: BaseCollectionReusableView {
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        addSubview(stackView)
+        contentView.addSubview(stackView)
         [todayScheduleButton, upcomingScheduleButton].forEach {
             stackView.addArrangedSubview($0)
         }
@@ -58,16 +64,18 @@ class ScheduleHeaderView: BaseCollectionReusableView {
         super.setupLayout()
         
         stackView.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(16)
-            $0.centerY.equalToSuperview()
+            $0.top.leading.equalTo(contentView)
         }
     }
     
     @objc private func scheduleButtonTapped(_ sender: UIButton) {
-        if sender == todayScheduleButton {
+        switch sender {
+        case todayScheduleButton:
             scheduleType = .today
-        } else if sender == upcomingScheduleButton {
+        case upcomingScheduleButton:
             scheduleType = .upcoming
+        default:
+            break
         }
         
         delegate?.scheduleButtonTapped(scheduleType: scheduleType)

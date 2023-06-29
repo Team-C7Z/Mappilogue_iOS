@@ -15,12 +15,12 @@ struct Schedule {
     let color: UIColor
 }
 
-func generateDummyScheduleData(schduleCount: Int) -> [Schedule] {
+func generateDummyScheduleData(scheduleCount: Int) -> [Schedule] {
     var schedules = [Schedule]()
     
-    if schduleCount == 0 {
+    if scheduleCount == 0 {
         
-    } else if schduleCount == 1 {
+    } else if scheduleCount == 1 {
         let schedule = Schedule(title: "아빠랑 데이트 🏃🏻", location: ["춘배식당", "카페 문", "아주 건강해지는 제이슨 건강어쩌구어쩌구"], time: ["9:00 AM", "10:00 AM", "1:00 PM"], color: .yellow)
         schedules = [schedule]
     } else {

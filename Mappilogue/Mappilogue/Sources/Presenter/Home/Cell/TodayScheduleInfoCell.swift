@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TodayScheduleInfoCell: BaseCollectionViewCell {
+class TodayScheduleInfoCell: BaseTableViewCell {
     static let registerId = "\(TodayScheduleInfoCell.self)"
     
     private let scheduleIndexView = UIView()
@@ -17,11 +17,17 @@ class TodayScheduleInfoCell: BaseCollectionViewCell {
     private let separatorImage = UIImageView()
     private let timeLabel = UILabel()
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 16, bottom: 0, right: 16))
+    }
+    
     override func setupProperty() {
         super.setupProperty()
         
-        layer.cornerRadius = 12
-        backgroundColor = .colorEAE6E1
+        contentView.layer.cornerRadius = 12
+        contentView.backgroundColor = .colorEAE6E1
         
         scheduleIndexView.layer.cornerRadius = 26 / 2
         scheduleIndexView.backgroundColor = .color1C1C1C
@@ -45,33 +51,33 @@ class TodayScheduleInfoCell: BaseCollectionViewCell {
     }
     
     override func setupHierarchy() {
-        super.setupProperty()
+        super.setupHierarchy()
         
-        addSubview(scheduleIndexView)
+        contentView.addSubview(scheduleIndexView)
         scheduleIndexView.addSubview(scheduleIndexLabel)
         
-        addSubview(scheduleInfoView)
+        contentView.addSubview(scheduleInfoView)
         scheduleInfoView.addSubview(locationLabel)
         scheduleInfoView.addSubview(separatorImage)
         scheduleInfoView.addSubview(timeLabel)
     }
     
     override func setupLayout() {
-        super.setupProperty()
+        super.setupLayout()
         
         scheduleIndexView.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(15)
-            $0.centerY.equalToSuperview()
+            $0.leading.equalTo(contentView).offset(15)
+            $0.centerY.equalTo(contentView)
             $0.width.height.equalTo(26)
         }
         
         scheduleIndexLabel.snp.makeConstraints {
-            $0.centerX.centerY.equalTo(scheduleIndexView)
+            $0.center.equalTo(scheduleIndexView)
         }
         
         scheduleInfoView.snp.makeConstraints {
-            $0.top.trailing.bottom.equalToSuperview()
-            $0.leading.equalToSuperview().offset(55)
+            $0.top.trailing.bottom.equalTo(contentView)
+            $0.leading.equalTo(contentView).offset(55)
         }
         
         locationLabel.snp.makeConstraints {
