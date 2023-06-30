@@ -35,7 +35,7 @@ class AddButton: UIButton {
         addImage.image = UIImage(named: "add")
         addLabel.textColor = .white
         addLabel.textAlignment = .center
-        addLabel.font = UIFont.pretendard(.semiBold, size: 14)
+        addLabel.font = .pretendard(.semiBold, size: 14)
     }
     
     private func setupHierarchy() {
