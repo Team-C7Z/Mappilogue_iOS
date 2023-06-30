@@ -32,12 +32,12 @@ class EmptyScheduleCell: BaseTableViewCell {
         
         emptyScheduleLabel.textColor = .color707070
         emptyScheduleLabel.textAlignment = .center
-        emptyScheduleLabel.font = UIFont.pretendard(.medium, size: 16)
+        emptyScheduleLabel.font = .pretendard(.medium, size: 16)
         
         emptyScheduleSubLabel.text = "아래 버튼을 눌러 일정을 추가해 보세요!"
         emptyScheduleSubLabel.textColor = .color404040
         emptyScheduleSubLabel.textAlignment = .center
-        emptyScheduleSubLabel.font = UIFont.pretendard(.medium, size: 12)
+        emptyScheduleSubLabel.font = .pretendard(.medium, size: 12)
     }
     
     override func setupHierarchy() {

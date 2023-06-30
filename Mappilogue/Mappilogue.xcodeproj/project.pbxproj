@@ -40,6 +40,7 @@
 		92A7B6612A4E2039009C9293 /* BaseTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6602A4E2039009C9293 /* BaseTableViewHeaderFooterView.swift */; };
 		92A7B6632A4E20BF009C9293 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6622A4E20BF009C9293 /* BaseTableViewCell.swift */; };
 		92A7B6662A4E5B3A009C9293 /* UpcomingSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6652A4E5B3A009C9293 /* UpcomingSchedule.swift */; };
+		92A7B6682A4E6154009C9293 /* UpcomingScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6672A4E6154009C9293 /* UpcomingScheduleCell.swift */; };
 		92FE260C2A4A3FD100BCDB82 /* NavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FE260B2A4A3FD100BCDB82 /* NavigationBarViewController.swift */; };
 		92FE26112A4A6E1600BCDB82 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FE26102A4A6E1600BCDB82 /* BaseCollectionViewCell.swift */; };
 		92FE26132A4B74D800BCDB82 /* ScheduleTypeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FE26122A4B74D800BCDB82 /* ScheduleTypeHeaderView.swift */; };
@@ -100,6 +101,7 @@
 		92A7B6602A4E2039009C9293 /* BaseTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
 		92A7B6622A4E20BF009C9293 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		92A7B6652A4E5B3A009C9293 /* UpcomingSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingSchedule.swift; sourceTree = "<group>"; };
+		92A7B6672A4E6154009C9293 /* UpcomingScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingScheduleCell.swift; sourceTree = "<group>"; };
 		92FE260B2A4A3FD100BCDB82 /* NavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NavigationBarViewController.swift; path = ../../../../../../.Trash/Mappilogue_iOS/Mappilogue/Mappilogue/Sources/Base/NavigationBarViewController.swift; sourceTree = "<group>"; };
 		92FE26102A4A6E1600BCDB82 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		92FE26122A4B74D800BCDB82 /* ScheduleTypeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTypeHeaderView.swift; sourceTree = "<group>"; };
@@ -314,9 +316,10 @@
 			isa = PBXGroup;
 			children = (
 				92A7B64B2A4CC0E6009C9293 /* EmptyScheduleCell.swift */,
-				92A7B6502A4CD261009C9293 /* AddScheduleButton.swift */,
 				92A7B65E2A4E07DB009C9293 /* TodayScheduleCell.swift */,
 				92A7B6582A4D01B3009C9293 /* TodayScheduleInfoCell.swift */,
+				92A7B6672A4E6154009C9293 /* UpcomingScheduleCell.swift */,
+				92A7B6502A4CD261009C9293 /* AddScheduleButton.swift */,
 				92A7B65A2A4D0FD9009C9293 /* AddLocationButtonCell.swift */,
 			);
 			path = Cell;
@@ -502,6 +505,7 @@
 				926999482A14F76A003DDAD2 /* MyViewController.swift in Sources */,
 				926999442A14F756003DDAD2 /* GatheringViewController.swift in Sources */,
 				92A7B6512A4CD261009C9293 /* AddScheduleButton.swift in Sources */,
+				92A7B6682A4E6154009C9293 /* UpcomingScheduleCell.swift in Sources */,
 				92A7B65B2A4D0FD9009C9293 /* AddLocationButtonCell.swift in Sources */,
 				92A7B6592A4D01B3009C9293 /* TodayScheduleInfoCell.swift in Sources */,
 				926999462A14F75F003DDAD2 /* RecordViewController.swift in Sources */,

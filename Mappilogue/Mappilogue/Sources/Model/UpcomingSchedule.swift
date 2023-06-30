@@ -18,7 +18,7 @@ func dummyUpcomingScheduleData(scheduleCount: Int) -> [UpcomingSchedule] {
     
     if scheduleCount > 0 {
         let schedule1 = UpcomingSchedule(title: "찬희랑 저녁 약속💗", date: "5월 13일", time: "6:00PM")
-        let schedule2 = UpcomingSchedule(title: "말이 길어진다면 말줄임표로 대체해 주세요 졸려죽게따", date: "5월 16일", time: "10:00PM")
+        let schedule2 = UpcomingSchedule(title: "말이 길어진다면 말줄임표로 대체해 주세요 이렇게이렇게", date: "5월 16일", time: "10:00PM")
         
         schedules = [schedule1, schedule2]
     }

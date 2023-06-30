@@ -34,7 +34,7 @@ class TodayScheduleCell: BaseTableViewCell {
         
         todayScheduleLabel.textColor = .color1C1C1C
         todayScheduleLabel.textAlignment = .center
-        todayScheduleLabel.font = UIFont.pretendard(.medium, size: 16)
+        todayScheduleLabel.font = .pretendard(.medium, size: 16)
  
         expandButton.addTarget(self, action: #selector(expandButtonTapped), for: .touchUpInside)
     }

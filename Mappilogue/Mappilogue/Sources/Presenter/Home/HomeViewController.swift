@@ -21,9 +21,10 @@ class HomeViewController: NavigationBarViewController {
         tableView.sectionHeaderHeight = 0
         tableView.sectionFooterHeight = 0
         tableView.register(EmptyScheduleCell.self, forCellReuseIdentifier: EmptyScheduleCell.registerId)
-        tableView.register(AddScheduleButtonCell.self, forCellReuseIdentifier: AddScheduleButtonCell.registerId)
         tableView.register(TodayScheduleCell.self, forCellReuseIdentifier: TodayScheduleCell.registerId)
         tableView.register(TodayScheduleInfoCell.self, forCellReuseIdentifier: TodayScheduleInfoCell.registerId)
+        tableView.register(UpcomingScheduleCell.self, forCellReuseIdentifier: UpcomingScheduleCell.registerId)
+        tableView.register(AddScheduleButtonCell.self, forCellReuseIdentifier: AddScheduleButtonCell.registerId)
         tableView.register(AddLocationButtonCell.self, forCellReuseIdentifier: AddLocationButtonCell.registerId)
         tableView.register(ScheduleTypeHeaderView.self, forHeaderFooterViewReuseIdentifier: ScheduleTypeHeaderView.registerId)
         tableView.delegate = self
@@ -144,7 +145,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 return cell
             }
         case .upcoming:
-           // if dummyUpcomingData.count == 0 {
+            if dummyUpcomingData.count == 0 {
                 switch indexPath.section {
                 case 0:
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: EmptyScheduleCell.registerId, for: indexPath) as? EmptyScheduleCell else { return UITableViewCell() }
@@ -163,8 +164,26 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 default:
                     return UITableViewCell()
                 }
+                
+            } else if dummyUpcomingData.count > indexPath.section {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: UpcomingScheduleCell.registerId, for: indexPath) as? UpcomingScheduleCell else { return UITableViewCell() }
+                cell.selectionStyle = .none
+                
+                let title = dummyUpcomingData[indexPath.section].title
+                let date = dummyUpcomingData[indexPath.section].date
+                let time = dummyUpcomingData[indexPath.section].time
+                
+                cell.configure(with: title, date: date, time: time)
+                
+                return cell
+                
+            } else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: AddScheduleButtonCell.registerId, for: indexPath) as? AddScheduleButtonCell else { return UITableViewCell() }
+                cell.selectionStyle = .none
+                
+                return cell
             }
-      //  }
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -183,9 +202,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 return 53
             }
         case .upcoming:
-           // if dummyUpcomingData.count == 0 {
+            if dummyUpcomingData.count == 0 {
                 return (indexPath.section == 0) ? 130 : 53
-           // }
+            } else if dummyUpcomingData.count > indexPath.section {
+                return 76
+            } else {
+                return 53
+            }
         }
     }
     
@@ -209,9 +232,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 return (dummyTodayData.count - 1) == section ? 10 : 13
             }
         case .upcoming:
-          //  if dummyTodayData.count == 0 {
-                return 10
-          //  }
+            return 10
         }
     }
 }
