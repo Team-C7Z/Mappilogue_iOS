@@ -30,7 +30,6 @@ class EmptyScheduleCell: BaseTableViewCell {
         stackView.distribution = .equalSpacing
         stackView.spacing = 4
         
-        emptyScheduleLabel.text = "오늘은 등록된 일정이 없어요"
         emptyScheduleLabel.textColor = .color707070
         emptyScheduleLabel.textAlignment = .center
         emptyScheduleLabel.font = UIFont.pretendard(.medium, size: 16)
@@ -56,5 +55,13 @@ class EmptyScheduleCell: BaseTableViewCell {
             $0.centerX.centerY.equalTo(contentView)
         }
     }
-}
     
+    func configure(scheduleType: ScheduleType) {
+        switch scheduleType {
+        case .today:
+            emptyScheduleLabel.text = "오늘은 등록된 일정이 없어요"
+        case .upcoming:
+            emptyScheduleLabel.text = "다가오는 일정이 없어요"
+        }
+    }
+}
