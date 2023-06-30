@@ -91,8 +91,8 @@
 		92A7B64B2A4CC0E6009C9293 /* EmptyScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyScheduleCell.swift; sourceTree = "<group>"; };
 		92A7B64E2A4CCE29009C9293 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		92A7B6502A4CD261009C9293 /* AddScheduleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleButton.swift; sourceTree = "<group>"; };
-		92A7B6522A4CDD4D009C9293 /* ScheduleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScheduleType.swift; path = Mappilogue/Sources/Presenter/Home/Cell/ScheduleType.swift; sourceTree = SOURCE_ROOT; };
-		92A7B6542A4CEA28009C9293 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Schedule.swift; path = Mappilogue/Sources/Presenter/Home/Cell/Schedule.swift; sourceTree = SOURCE_ROOT; };
+		92A7B6522A4CDD4D009C9293 /* ScheduleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScheduleType.swift; path = Mappilogue/Sources/Model/ScheduleType.swift; sourceTree = SOURCE_ROOT; };
+		92A7B6542A4CEA28009C9293 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Schedule.swift; path = Mappilogue/Sources/Model/Schedule.swift; sourceTree = SOURCE_ROOT; };
 		92A7B6582A4D01B3009C9293 /* TodayScheduleInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayScheduleInfoCell.swift; sourceTree = "<group>"; };
 		92A7B65A2A4D0FD9009C9293 /* AddLocationButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationButtonCell.swift; sourceTree = "<group>"; };
 		92A7B65E2A4E07DB009C9293 /* TodayScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayScheduleCell.swift; sourceTree = "<group>"; };
@@ -186,7 +186,7 @@
 				926998F82A14EC07003DDAD2 /* SceneDelegate.swift */,
 				926999282A14F113003DDAD2 /* Base */,
 				926999292A14F11B003DDAD2 /* Extension */,
-				9269992A2A14F140003DDAD2 /* Model */,
+				92A7B6642A4E52A6009C9293 /* Model */,
 				9269992B2A14F157003DDAD2 /* Network */,
 				9269992C2A14F164003DDAD2 /* Presenter */,
 			);
@@ -224,15 +224,6 @@
 				92FE26162A4B76B800BCDB82 /* UIFont.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		9269992A2A14F140003DDAD2 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				92A7B6522A4CDD4D009C9293 /* ScheduleType.swift */,
-				92A7B6542A4CEA28009C9293 /* Schedule.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		9269992B2A14F157003DDAD2 /* Network */ = {
@@ -335,6 +326,15 @@
 				92A7B64E2A4CCE29009C9293 /* AddButton.swift */,
 			);
 			path = Resuable;
+			sourceTree = "<group>";
+		};
+		92A7B6642A4E52A6009C9293 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				92A7B6522A4CDD4D009C9293 /* ScheduleType.swift */,
+				92A7B6542A4CEA28009C9293 /* Schedule.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
