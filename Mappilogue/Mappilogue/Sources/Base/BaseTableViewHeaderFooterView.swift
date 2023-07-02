@@ -21,7 +21,6 @@ class BaseTableViewHeaderFooterView: UITableViewHeaderFooterView, BaseViewProtoc
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     func setupProperty() {}
     
     func setupHierarchy() {}

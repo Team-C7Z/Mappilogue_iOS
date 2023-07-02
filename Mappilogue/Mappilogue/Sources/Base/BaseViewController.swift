@@ -37,4 +37,3 @@ class BaseViewController: UIViewController, BaseViewControllerProtocol {
     
     func setupLayout() {}
 }
-

@@ -67,16 +67,16 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         switch scheduleType {
         case .today:
-            return (dummyTodayData.count == 0) ? 2 : dummyTodayData.count + 1
+            return dummyTodayData.isEmpty ? 2 : dummyTodayData.count + 1
         case .upcoming:
-            return (dummyUpcomingData.count == 0) ? 2 : dummyUpcomingData.count + 1
+            return dummyUpcomingData.isEmpty ? 2 : dummyUpcomingData.count + 1
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch scheduleType {
         case .today:
-            if dummyTodayData.count == 0 {
+            if dummyTodayData.isEmpty {
                 return 1
             } else {
                 if dummyTodayData.count > section && isScheduleExpanded[section] {
@@ -93,7 +93,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch scheduleType {
         case .today:
-            if dummyTodayData.count == 0 {
+            if dummyTodayData.isEmpty {
                 switch indexPath.section {
                 case 0:
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: EmptyScheduleCell.registerId, for: indexPath) as? EmptyScheduleCell else { return UITableViewCell() }
@@ -114,7 +114,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             } else if dummyTodayData.count > indexPath.section {
                 switch indexPath.row {
-                case 0 :
+                case 0:
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: TodayScheduleCell.registerId, for: indexPath) as? TodayScheduleCell else { return UITableViewCell() }
                     cell.selectionStyle = .none
                     cell.delegate = self
@@ -145,7 +145,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 return cell
             }
         case .upcoming:
-            if dummyUpcomingData.count == 0 {
+            if dummyUpcomingData.isEmpty {
                 switch indexPath.section {
                 case 0:
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: EmptyScheduleCell.registerId, for: indexPath) as? EmptyScheduleCell else { return UITableViewCell() }
@@ -189,11 +189,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch scheduleType {
         case .today:
-            if dummyTodayData.count == 0 {
+            if dummyTodayData.isEmpty {
                 return (indexPath.section == 0) ? 130 : 53
             } else if dummyTodayData.count > indexPath.section {
                 switch indexPath.row {
-                case 0 :
+                case 0:
                     return 38
                 default:
                     return 50 + 10
@@ -202,7 +202,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 return 53
             }
         case .upcoming:
-            if dummyUpcomingData.count == 0 {
+            if dummyUpcomingData.isEmpty {
                 return (indexPath.section == 0) ? 130 : 53
             } else if dummyUpcomingData.count > indexPath.section {
                 return 76
@@ -226,7 +226,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch scheduleType {
         case .today:
-            if dummyTodayData.count == 0 {
+            if dummyTodayData.isEmpty {
                 return 10
             } else {
                 return (dummyTodayData.count - 1) == section ? 10 : 13
