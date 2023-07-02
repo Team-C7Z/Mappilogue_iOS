@@ -1,5 +1,5 @@
 //
-//  AddScheduleButton.swift
+//  AddScheduleButtonCell.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/06/29.
