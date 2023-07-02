@@ -1,0 +1,36 @@
+disabled_rules: # 비활성화할 규칙
+    # 라인 뒤에 공백이 없어야 합니다.
+    - trailing_whitespace
+
+    # 라인 수를 제한합니다.
+    - line_length
+    
+    # 순환 복잡성
+    - cyclomatic_complexity
+    
+    # 함수 매개변수가 여러 개일 경우 세로로 같은 줄에 있어야 합니다.
+    - vertical_parameter_alignment
+    
+    # 함수 길이를 제한합니다.
+    - function_body_length
+
+    # 강제 캐스팅은 피해야합니다.
+    - force_cast
+    
+    # 강제 언래핑은 피해야합니다.
+    - force_unwrapping
+
+opt_in_rules:
+    # .count == 0 보다는 .isEmpty를 사용하는 것이 좋습니다.
+    - empty_count
+    
+    # 빈 String 문자열과 비교하는 것 보다는 .isEmpty를 사용하는 것이 좋습니다.
+    - empty_string
+
+
+included:
+    - Mappilogue
+excluded:
+    - ./**/AppDelegate.swift
+    - ./**/SceneDelegate.swift
+    
