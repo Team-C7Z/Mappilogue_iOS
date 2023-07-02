@@ -36,7 +36,6 @@ extension UIColor {
     // Secondary
     static let colorF14C4C = UIColor(hex: 0xF14C4C) // Red 1
     
-    
     // Schedule Colors
     static let colorFFA1A1 = UIColor(hex: 0xFFA1A1)
     static let colorFFAF82 = UIColor(hex: 0xFFAF82)
