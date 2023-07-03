@@ -8,8 +8,8 @@
 import UIKit
 
 class HomeViewController: NavigationBarViewController {
-    let dummyTodayData = dummyTodayScheduleData(scheduleCount: 0)
-    let dummyUpcomingData = dummyUpcomingScheduleData(scheduleCount: 0)
+    let dummyTodayData = dummyTodayScheduleData(scheduleCount: 2)
+    let dummyUpcomingData = dummyUpcomingScheduleData(scheduleCount: 2)
     var isScheduleExpanded = [Bool]()
     
     var scheduleType: ScheduleType = .today
@@ -70,7 +70,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         case .today:
             return dummyTodayData.isEmpty ? 3 : dummyTodayData.count + 2
         case .upcoming:
-            return dummyUpcomingData.isEmpty ? 2 : dummyUpcomingData.count + 1
+            return dummyUpcomingData.isEmpty ? 3 : dummyUpcomingData.count + 2
         }
     }
     
@@ -174,6 +174,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     
                     return cell
                     
+                case 2:
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: MarkedRecordsCell.registerId, for: indexPath) as? MarkedRecordsCell else { return UITableViewCell() }
+                    cell.selectionStyle = .none
+                    
+                    return cell
+                    
                 default:
                     return UITableViewCell()
                 }
@@ -191,8 +197,14 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 return cell
                 
-            } else {
+            } else if dummyUpcomingData.count == indexPath.section {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: AddScheduleButtonCell.registerId, for: indexPath) as? AddScheduleButtonCell else { return UITableViewCell() }
+                cell.selectionStyle = .none
+                
+                return cell
+                
+            } else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: MarkedRecordsCell.registerId, for: indexPath) as? MarkedRecordsCell else { return UITableViewCell() }
                 cell.selectionStyle = .none
                 
                 return cell
@@ -228,11 +240,20 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             }
         case .upcoming:
             if dummyUpcomingData.isEmpty {
-                return (indexPath.section == 0) ? 130 : 53
+                switch indexPath.section {
+                case 0:
+                    return 130
+                case 1:
+                    return 53
+                default:
+                    return 259
+                }
             } else if dummyUpcomingData.count > indexPath.section {
                 return 76
-            } else {
+            } else if dummyUpcomingData.count == indexPath.section {
                 return 53
+            } else {
+                return 259
             }
         }
     }
@@ -265,12 +286,31 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     return 13
                 } else if (dummyTodayData.count - 1) == section {
                     return 10
+                } else if dummyTodayData.count == section {
+                    return 27
                 } else {
-                    return 57
+                    return 0
                 }
             }
         case .upcoming:
-            return 10
+            if dummyUpcomingData.isEmpty {
+                switch section {
+                case 0:
+                    return 10
+                case 1:
+                    return 27
+                default:
+                    return 0
+                }
+            } else {
+                if dummyUpcomingData.count > section {
+                    return 10
+                } else if dummyUpcomingData.count == section {
+                    return 27
+                } else {
+                    return 0
+                }
+            }
         }
     }
 }
