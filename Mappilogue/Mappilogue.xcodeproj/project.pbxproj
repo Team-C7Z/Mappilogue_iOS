@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		92459ED82A52494200493941 /* AddMarkedRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92459ED72A52494200493941 /* AddMarkedRecordCell.swift */; };
+		92459EDA2A530D1100493941 /* MarkedRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92459ED92A530D1100493941 /* MarkedRecordCell.swift */; };
+		92459EDC2A53158A00493941 /* MarkedRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92459EDB2A53158A00493941 /* MarkedRecord.swift */; };
 		924BE0CA2A51AE25002C70FF /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 924BE0C92A51AE25002C70FF /* .swiftlint.yml */; };
 		924BE0CE2A51C4D4002C70FF /* MarkedRecordsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BE0CD2A51C4D4002C70FF /* MarkedRecordsCell.swift */; };
 		926998F72A14EC07003DDAD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926998F62A14EC07003DDAD2 /* AppDelegate.swift */; };
@@ -69,6 +71,8 @@
 
 /* Begin PBXFileReference section */
 		92459ED72A52494200493941 /* AddMarkedRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMarkedRecordCell.swift; sourceTree = "<group>"; };
+		92459ED92A530D1100493941 /* MarkedRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkedRecordCell.swift; sourceTree = "<group>"; };
+		92459EDB2A53158A00493941 /* MarkedRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkedRecord.swift; sourceTree = "<group>"; };
 		924BE0C92A51AE25002C70FF /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		924BE0CD2A51C4D4002C70FF /* MarkedRecordsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkedRecordsCell.swift; sourceTree = "<group>"; };
 		926998F32A14EC07003DDAD2 /* Mappilogue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mappilogue.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -327,6 +331,7 @@
 				92A7B6502A4CD261009C9293 /* AddScheduleButtonCell.swift */,
 				92A7B65A2A4D0FD9009C9293 /* AddLocationButtonCell.swift */,
 				924BE0CD2A51C4D4002C70FF /* MarkedRecordsCell.swift */,
+				92459ED92A530D1100493941 /* MarkedRecordCell.swift */,
 				92459ED72A52494200493941 /* AddMarkedRecordCell.swift */,
 			);
 			path = Cell;
@@ -346,6 +351,7 @@
 				92A7B6522A4CDD4D009C9293 /* ScheduleType.swift */,
 				92A7B6542A4CEA28009C9293 /* TodaySchedule.swift */,
 				92A7B6652A4E5B3A009C9293 /* UpcomingSchedule.swift */,
+				92459EDB2A53158A00493941 /* MarkedRecord.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -514,6 +520,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92459EDC2A53158A00493941 /* MarkedRecord.swift in Sources */,
 				92A7B64C2A4CC0E6009C9293 /* EmptyScheduleCell.swift in Sources */,
 				92FE26152A4B751000BCDB82 /* BaseCollectionReusableView.swift in Sources */,
 				92A7B6552A4CEA28009C9293 /* TodaySchedule.swift in Sources */,
@@ -541,6 +548,7 @@
 				92A7B6592A4D01B3009C9293 /* TodayScheduleInfoCell.swift in Sources */,
 				926999462A14F75F003DDAD2 /* RecordViewController.swift in Sources */,
 				926999402A14F73C003DDAD2 /* HomeViewController.swift in Sources */,
+				92459EDA2A530D1100493941 /* MarkedRecordCell.swift in Sources */,
 				926998F92A14EC07003DDAD2 /* SceneDelegate.swift in Sources */,
 				92A7B6632A4E20BF009C9293 /* BaseTableViewCell.swift in Sources */,
 				92A7B64F2A4CCE29009C9293 /* AddButton.swift in Sources */,
