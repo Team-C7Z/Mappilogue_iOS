@@ -33,7 +33,7 @@ extension UIFont {
     static var caption03: UIFont { pretendard(.medium, size: 10) }
     
     // 폰트 적용 함수
-    private static func pretendard(_ type: PretendardType, size: CGFloat) -> UIFont {
+    static func pretendard(_ type: PretendardType, size: CGFloat) -> UIFont {
         return UIFont(name: "Pretendard-\(type.rawValue)", size: size)!
     }
 }

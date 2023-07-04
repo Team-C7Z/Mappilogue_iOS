@@ -14,6 +14,9 @@
 		92459EE02A544A7B00493941 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92459EDF2A544A7B00493941 /* UIButton.swift */; };
 		924BE0CA2A51AE25002C70FF /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 924BE0C92A51AE25002C70FF /* .swiftlint.yml */; };
 		924BE0CE2A51C4D4002C70FF /* MarkedRecordsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BE0CD2A51C4D4002C70FF /* MarkedRecordsCell.swift */; };
+		9263786B2A546BDE004E5B6E /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9263786A2A546BDE004E5B6E /* OnboardingViewController.swift */; };
+		9263786E2A5475AF004E5B6E /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9263786D2A5475AF004E5B6E /* OnboardingCell.swift */; };
+		926378712A54E0E6004E5B6E /* OnboardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926378702A54E0E6004E5B6E /* OnboardingManager.swift */; };
 		926998F72A14EC07003DDAD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926998F62A14EC07003DDAD2 /* AppDelegate.swift */; };
 		926998F92A14EC07003DDAD2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926998F82A14EC07003DDAD2 /* SceneDelegate.swift */; };
 		926999002A14EC09003DDAD2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 926998FF2A14EC09003DDAD2 /* Assets.xcassets */; };
@@ -23,7 +26,7 @@
 		9269991A2A14EC09003DDAD2 /* MappilogueUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999192A14EC09003DDAD2 /* MappilogueUITestsLaunchTests.swift */; };
 		926999342A14F2A3003DDAD2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999332A14F2A3003DDAD2 /* BaseViewController.swift */; };
 		926999362A14F443003DDAD2 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999352A14F443003DDAD2 /* BaseView.swift */; };
-		926999382A14F4AA003DDAD2 /* TabBarControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999372A14F4AA003DDAD2 /* TabBarControllerViewController.swift */; };
+		926999382A14F4AA003DDAD2 /* TabBarControllerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999372A14F4AA003DDAD2 /* TabBarControllerController.swift */; };
 		926999402A14F73C003DDAD2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9269993F2A14F73C003DDAD2 /* HomeViewController.swift */; };
 		926999422A14F74B003DDAD2 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999412A14F74B003DDAD2 /* CalendarViewController.swift */; };
 		926999442A14F756003DDAD2 /* GatheringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999432A14F756003DDAD2 /* GatheringViewController.swift */; };
@@ -79,6 +82,9 @@
 		92459EDF2A544A7B00493941 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		924BE0C92A51AE25002C70FF /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		924BE0CD2A51C4D4002C70FF /* MarkedRecordsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkedRecordsCell.swift; sourceTree = "<group>"; };
+		9263786A2A546BDE004E5B6E /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		9263786D2A5475AF004E5B6E /* OnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
+		926378702A54E0E6004E5B6E /* OnboardingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingManager.swift; sourceTree = "<group>"; };
 		926998F32A14EC07003DDAD2 /* Mappilogue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mappilogue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		926998F62A14EC07003DDAD2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		926998F82A14EC07003DDAD2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,7 +98,7 @@
 		926999192A14EC09003DDAD2 /* MappilogueUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappilogueUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		926999332A14F2A3003DDAD2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		926999352A14F443003DDAD2 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
-		926999372A14F4AA003DDAD2 /* TabBarControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarControllerViewController.swift; sourceTree = "<group>"; };
+		926999372A14F4AA003DDAD2 /* TabBarControllerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarControllerController.swift; sourceTree = "<group>"; };
 		9269993F2A14F73C003DDAD2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		926999412A14F74B003DDAD2 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		926999432A14F756003DDAD2 /* GatheringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatheringViewController.swift; sourceTree = "<group>"; };
@@ -148,6 +154,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9263786C2A546BE3004E5B6E /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				9263786A2A546BDE004E5B6E /* OnboardingViewController.swift */,
+				9263786D2A5475AF004E5B6E /* OnboardingCell.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		9263786F2A54E0CB004E5B6E /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				926378702A54E0E6004E5B6E /* OnboardingManager.swift */,
+			);
+			path = UserDefaults;
+			sourceTree = "<group>";
+		};
 		926998EA2A14EC07003DDAD2 = {
 			isa = PBXGroup;
 			children = (
@@ -204,7 +227,7 @@
 				926999282A14F113003DDAD2 /* Base */,
 				926999292A14F11B003DDAD2 /* Extension */,
 				92A7B6642A4E52A6009C9293 /* Model */,
-				9269992B2A14F157003DDAD2 /* Network */,
+				9269992B2A14F157003DDAD2 /* Data */,
 				9269992C2A14F164003DDAD2 /* Presenter */,
 			);
 			path = Sources;
@@ -245,16 +268,18 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		9269992B2A14F157003DDAD2 /* Network */ = {
+		9269992B2A14F157003DDAD2 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				9263786F2A54E0CB004E5B6E /* UserDefaults */,
 			);
-			path = Network;
+			path = Data;
 			sourceTree = "<group>";
 		};
 		9269992C2A14F164003DDAD2 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				9263786C2A546BE3004E5B6E /* Onboarding */,
 				926999392A14F673003DDAD2 /* TabBar */,
 				9269993A2A14F689003DDAD2 /* Home */,
 				9269993B2A14F6A4003DDAD2 /* Calendar */,
@@ -269,7 +294,7 @@
 		926999392A14F673003DDAD2 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
-				926999372A14F4AA003DDAD2 /* TabBarControllerViewController.swift */,
+				926999372A14F4AA003DDAD2 /* TabBarControllerController.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -536,10 +561,11 @@
 				92A7B6662A4E5B3A009C9293 /* UpcomingSchedule.swift in Sources */,
 				924BE0CE2A51C4D4002C70FF /* MarkedRecordsCell.swift in Sources */,
 				9291582A2A252CC20022BEF9 /* UIColor.swift in Sources */,
-				926999382A14F4AA003DDAD2 /* TabBarControllerViewController.swift in Sources */,
+				926999382A14F4AA003DDAD2 /* TabBarControllerController.swift in Sources */,
 				92A7B65F2A4E07DB009C9293 /* TodayScheduleCell.swift in Sources */,
 				926999342A14F2A3003DDAD2 /* BaseViewController.swift in Sources */,
 				92459ED82A52494200493941 /* AddMarkedRecordCell.swift in Sources */,
+				9263786E2A5475AF004E5B6E /* OnboardingCell.swift in Sources */,
 				92A7B6532A4CDD4D009C9293 /* ScheduleType.swift in Sources */,
 				92FE260C2A4A3FD100BCDB82 /* NavigationBarViewController.swift in Sources */,
 				926999362A14F443003DDAD2 /* BaseView.swift in Sources */,
@@ -549,6 +575,7 @@
 				92A7B6612A4E2039009C9293 /* BaseTableViewHeaderFooterView.swift in Sources */,
 				926999482A14F76A003DDAD2 /* MyViewController.swift in Sources */,
 				926999442A14F756003DDAD2 /* GatheringViewController.swift in Sources */,
+				926378712A54E0E6004E5B6E /* OnboardingManager.swift in Sources */,
 				92A7B6512A4CD261009C9293 /* AddScheduleButtonCell.swift in Sources */,
 				92A7B6682A4E6154009C9293 /* UpcomingScheduleCell.swift in Sources */,
 				92A7B65B2A4D0FD9009C9293 /* AddLocationButtonCell.swift in Sources */,
@@ -558,6 +585,7 @@
 				926999402A14F73C003DDAD2 /* HomeViewController.swift in Sources */,
 				92459EDA2A530D1100493941 /* MarkedRecordCell.swift in Sources */,
 				926998F92A14EC07003DDAD2 /* SceneDelegate.swift in Sources */,
+				9263786B2A546BDE004E5B6E /* OnboardingViewController.swift in Sources */,
 				92A7B6632A4E20BF009C9293 /* BaseTableViewCell.swift in Sources */,
 				92A7B64F2A4CCE29009C9293 /* AddButton.swift in Sources */,
 			);
