@@ -33,21 +33,21 @@ class TodayScheduleInfoCell: BaseTableViewCell {
         scheduleIndexView.backgroundColor = .color1C1C1C
         
         scheduleIndexLabel.textColor = .colorFFFFFF
-        scheduleIndexLabel.font = .pretendard(.medium, size: 16)
+        scheduleIndexLabel.font = .title02
         
         scheduleInfoView.layer.cornerRadius = 12
         scheduleInfoView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         scheduleInfoView.backgroundColor = .colorF5F3F0
         
         locationLabel.textColor = .color1C1C1C
-        locationLabel.font = .pretendard(.medium, size: 16)
+        locationLabel.font = .title02
         locationLabel.lineBreakMode = .byTruncatingTail
         
         separatorImage.image = UIImage(named: "separator")
         separatorImage.tintColor = .color9B9791
         
         timeLabel.textColor = .color9B9791
-        timeLabel.font = .pretendard(.regular, size: 14)
+        timeLabel.font = .body02
     }
     
     override func setupHierarchy() {
@@ -100,8 +100,8 @@ class TodayScheduleInfoCell: BaseTableViewCell {
     }
     
     func configure(order: String, location: String, time: String) {
-        scheduleIndexLabel.text = order
-        locationLabel.text = location
-        timeLabel.text = time
+        scheduleIndexLabel.setTextWithLineHeight(text: order, lineHeight: UILabel.title02)
+        locationLabel.setTextWithLineHeight(text: location, lineHeight: UILabel.title02)
+        timeLabel.setTextWithLineHeight(text: time, lineHeight: UILabel.body02)
     }
 }

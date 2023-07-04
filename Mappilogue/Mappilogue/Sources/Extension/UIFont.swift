@@ -24,8 +24,8 @@ extension UIFont {
     
     // Body
     static var body01: UIFont { pretendard(.regular, size: 16) }
-    static var body02: UIFont { pretendard(.semiBold, size: 14) }
-    static var body03: UIFont { pretendard(.regular, size: 14) }
+    static var body02: UIFont { pretendard(.regular, size: 14) }
+    static var body03: UIFont { pretendard(.semiBold, size: 14) }
     
     // Caption
     static var caption01: UIFont { pretendard(.regular, size: 12) }
