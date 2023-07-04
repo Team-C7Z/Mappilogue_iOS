@@ -13,7 +13,7 @@ struct OnboardingPage {
 }
 
 class OnboardingViewController: BaseViewController {
-    let onboardingPages = [
+    private let onboardingPages = [
         OnboardingPage(title: "일정에 여러 장소를 추가해 보세요", image: "markedRecordTest"),
         OnboardingPage(title: "내 일정을 기반으로 하루를 기록해 보세요", image: "markedRecordTest"),
         OnboardingPage(title: "지도로 내 기록을 한 눈에 볼 수 있어요", image: "markedRecordTest")
@@ -107,9 +107,11 @@ class OnboardingViewController: BaseViewController {
     }
     
     @objc private func startButtonTapped(_ sender: UIButton) {
+        OnboardingManager.setOnboardingComplete()
+        
         let tabBarC = TabBarController()
         tabBarC.modalPresentationStyle = .fullScreen
-        self.present(tabBarC, animated: false)
+        present(tabBarC, animated: false)
     }
 }
 
