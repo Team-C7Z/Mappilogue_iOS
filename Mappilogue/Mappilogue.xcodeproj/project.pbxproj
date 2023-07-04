@@ -25,7 +25,7 @@
 		9269991A2A14EC09003DDAD2 /* MappilogueUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999192A14EC09003DDAD2 /* MappilogueUITestsLaunchTests.swift */; };
 		926999342A14F2A3003DDAD2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999332A14F2A3003DDAD2 /* BaseViewController.swift */; };
 		926999362A14F443003DDAD2 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999352A14F443003DDAD2 /* BaseView.swift */; };
-		926999382A14F4AA003DDAD2 /* TabBarControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999372A14F4AA003DDAD2 /* TabBarControllerViewController.swift */; };
+		926999382A14F4AA003DDAD2 /* TabBarControllerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999372A14F4AA003DDAD2 /* TabBarControllerController.swift */; };
 		926999402A14F73C003DDAD2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9269993F2A14F73C003DDAD2 /* HomeViewController.swift */; };
 		926999422A14F74B003DDAD2 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999412A14F74B003DDAD2 /* CalendarViewController.swift */; };
 		926999442A14F756003DDAD2 /* GatheringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999432A14F756003DDAD2 /* GatheringViewController.swift */; };
@@ -96,7 +96,7 @@
 		926999192A14EC09003DDAD2 /* MappilogueUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappilogueUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		926999332A14F2A3003DDAD2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		926999352A14F443003DDAD2 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
-		926999372A14F4AA003DDAD2 /* TabBarControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarControllerViewController.swift; sourceTree = "<group>"; };
+		926999372A14F4AA003DDAD2 /* TabBarControllerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarControllerController.swift; sourceTree = "<group>"; };
 		9269993F2A14F73C003DDAD2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		926999412A14F74B003DDAD2 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		926999432A14F756003DDAD2 /* GatheringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatheringViewController.swift; sourceTree = "<group>"; };
@@ -283,7 +283,7 @@
 		926999392A14F673003DDAD2 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
-				926999372A14F4AA003DDAD2 /* TabBarControllerViewController.swift */,
+				926999372A14F4AA003DDAD2 /* TabBarControllerController.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -550,7 +550,7 @@
 				92A7B6662A4E5B3A009C9293 /* UpcomingSchedule.swift in Sources */,
 				924BE0CE2A51C4D4002C70FF /* MarkedRecordsCell.swift in Sources */,
 				9291582A2A252CC20022BEF9 /* UIColor.swift in Sources */,
-				926999382A14F4AA003DDAD2 /* TabBarControllerViewController.swift in Sources */,
+				926999382A14F4AA003DDAD2 /* TabBarControllerController.swift in Sources */,
 				92A7B65F2A4E07DB009C9293 /* TodayScheduleCell.swift in Sources */,
 				926999342A14F2A3003DDAD2 /* BaseViewController.swift in Sources */,
 				92459ED82A52494200493941 /* AddMarkedRecordCell.swift in Sources */,
