@@ -32,14 +32,12 @@ class MarkedRecordCell: BaseCollectionViewCell {
         
         markedRecordButtonImage.image = UIImage(named: "markedRecord")
         markedRecordImage.contentMode = .scaleAspectFill
-        
-        markedRecordDateLabel.text = "2일 전"
+    
         markedRecordDateLabel.textColor = .color707070
-        markedRecordDateLabel.font = .pretendard(.regular, size: 14)
+        markedRecordDateLabel.font = .body02
         
-        markedRecordLocationLabel.text = "롯데월드"
         markedRecordLocationLabel.textColor = .color1C1C1C
-        markedRecordLocationLabel.font = .pretendard(.medium, size: 16)
+        markedRecordLocationLabel.font = .title02
     }
     
     override func setupHierarchy() {
@@ -77,15 +75,15 @@ class MarkedRecordCell: BaseCollectionViewCell {
         }
         
         markedRecordLocationLabel.snp.makeConstraints {
-            $0.top.equalTo(markedRecordDateLabel.snp.bottom).offset(3)
+            $0.top.equalTo(markedRecordDateLabel.snp.bottom)
             $0.leading.equalTo(markedRecordImage).offset(14)
         }
     }
     
     func configure(image: String, date: String, location: String, color: UIColor) {
         markedRecordImage.image = UIImage(named: image)
-        markedRecordDateLabel.text = date
-        markedRecordLocationLabel.text = location
+        markedRecordDateLabel.setTextWithLineHeight(text: date, lineHeight: UILabel.body02)
+        markedRecordLocationLabel.setTextWithLineHeight(text: location, lineHeight: UILabel.title02)
         markedRecordButton.backgroundColor = color
     }
 }

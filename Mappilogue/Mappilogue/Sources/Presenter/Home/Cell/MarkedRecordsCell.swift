@@ -36,9 +36,9 @@ class MarkedRecordsCell: BaseTableViewCell {
     override func setupProperty() {
         super.setupProperty()
 
-        markedRecordsLabel.text = "마크한 기록"
+        markedRecordsLabel.setTextWithLineHeight(text: "마크한 기록", lineHeight: UILabel.title01)
+        markedRecordsLabel.font = .title01
         markedRecordsLabel.textColor = .color1C1C1C
-        markedRecordsLabel.font = .pretendard(.medium, size: 20)
     }
     
     override func setupHierarchy() {

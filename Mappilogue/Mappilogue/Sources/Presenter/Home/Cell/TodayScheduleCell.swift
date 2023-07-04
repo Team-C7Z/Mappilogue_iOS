@@ -34,7 +34,7 @@ class TodayScheduleCell: BaseTableViewCell {
         
         todayScheduleLabel.textColor = .color1C1C1C
         todayScheduleLabel.textAlignment = .center
-        todayScheduleLabel.font = .pretendard(.medium, size: 16)
+        todayScheduleLabel.font = .title02
  
         expandButton.addTarget(self, action: #selector(expandButtonTapped), for: .touchUpInside)
     }
@@ -62,7 +62,7 @@ class TodayScheduleCell: BaseTableViewCell {
     }
     
     func configure(with title: String, backgroundColor: UIColor, isExpandable: Bool, isExpanded: Bool) {
-        todayScheduleLabel.text = title
+        todayScheduleLabel.setTextWithLineHeight(text: title, lineHeight: UILabel.title02)
         contentView.backgroundColor = backgroundColor
         
         if isExpandable {
