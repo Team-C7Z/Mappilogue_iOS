@@ -35,6 +35,7 @@ class OnboardingViewController: BaseViewController {
     }()
     private let pageControl = UIPageControl()
     private let startButton = UIButton()
+    private let startButtonLabel = UILabel()
     
     private var currentPage: Int = 0
     
@@ -52,11 +53,16 @@ class OnboardingViewController: BaseViewController {
         pageControl.pageIndicatorTintColor = .colorC9C6C2
         pageControl.currentPageIndicatorTintColor = .color2EBD3D
         pageControl.isUserInteractionEnabled = false
-        
-        startButton.setTextWithLineHeight(text: "시작하기", lineHeight: 23.87)
-        startButton.titleLabel?.font = .pretendard(.regular, size: 20)
-        startButton.titleLabel?.textColor = .colorFFFFFF
+    
         startButton.backgroundColor = .color9B9791
+        startButton.layer.cornerRadius = 12
+        startButton.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        
+        startButtonLabel.text = "시작하기"
+        startButtonLabel.textColor = .colorFFFFFF
+        startButtonLabel.font = .pretendard(.regular, size: 20)
+        startButton.isEnabled = false
+        startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -66,6 +72,7 @@ class OnboardingViewController: BaseViewController {
         view.addSubview(collectionView)
         view.addSubview(pageControl)
         view.addSubview(startButton)
+        startButton.addSubview(startButtonLabel)
     }
     
     override func setupLayout() {
@@ -92,6 +99,17 @@ class OnboardingViewController: BaseViewController {
             $0.bottom.equalToSuperview()
             $0.height.equalTo(94)
         }
+        
+        startButtonLabel.snp.makeConstraints {
+            $0.top.equalTo(startButton).offset(28)
+            $0.centerX.equalTo(startButton)
+        }
+    }
+    
+    @objc private func startButtonTapped(_ sender: UIButton) {
+        let tabBarC = TabBarController()
+        tabBarC.modalPresentationStyle = .fullScreen
+        self.present(tabBarC, animated: false)
     }
 }
 
@@ -120,5 +138,13 @@ extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDa
         currentPage = Int(scrollView.contentOffset.x / scrollView.frame.width)
         pageControl.currentPage = currentPage
         onboardingLabel.text = onboardingPages[currentPage].title
+        
+        if currentPage < (onboardingPages.count - 1) {
+            startButton.backgroundColor = .color9B9791
+            startButton.isEnabled = false
+        } else {
+            startButton.backgroundColor = .color1C1C1C
+            startButton.isEnabled = true
+        }
     }
 }
