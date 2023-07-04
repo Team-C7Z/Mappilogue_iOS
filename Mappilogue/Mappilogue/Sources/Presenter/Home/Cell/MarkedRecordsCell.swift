@@ -11,6 +11,7 @@ class MarkedRecordsCell: BaseTableViewCell {
     static let registerId = "\(MarkedRecordsCell.self)"
     
     let dummyMarkedData = dummyMarkedRecordData(markedRecordCount: 4)
+    let limitedMarkedRecordsCount = 3
     
     private var markedRecordsLabel = UILabel()
     private lazy var collectionView: UICollectionView = {
@@ -64,44 +65,22 @@ class MarkedRecordsCell: BaseTableViewCell {
 
 extension MarkedRecordsCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if dummyMarkedData.isEmpty {
-            return 1
-        } else if dummyMarkedData.count <= 3 {
-            return dummyMarkedData.count + 1
-        } else {
-            return 4
-        }
+        return min(dummyMarkedData.count, limitedMarkedRecordsCount) + 1
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if dummyMarkedData.count <= 3 {
-            if dummyMarkedData.count > indexPath.row {
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MarkedRecordCell.registerId, for: indexPath) as? MarkedRecordCell else { return UICollectionViewCell() }
-                
-                let image = "markedRecordTest"
-                let date = dummyMarkedData[indexPath.row].date
-                let location = dummyMarkedData[indexPath.row].location
-                cell.configure(image: image, date: date, location: location, color: dummyMarkedData[indexPath.row].color)
-                
-                return cell
-            } else {
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddMarkedRecordCell.registerId, for: indexPath) as? AddMarkedRecordCell else { return UICollectionViewCell() }
-                return cell
-            }
+        if indexPath.row < min(dummyMarkedData.count, limitedMarkedRecordsCount) {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MarkedRecordCell.registerId, for: indexPath) as? MarkedRecordCell else { return UICollectionViewCell() }
+            
+            let image = "markedRecordTest"
+            let date = dummyMarkedData[indexPath.row].date
+            let location = dummyMarkedData[indexPath.row].location
+            cell.configure(image: image, date: date, location: location, color: dummyMarkedData[indexPath.row].color)
+            
+            return cell
         } else {
-            if 3 > indexPath.row {
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MarkedRecordCell.registerId, for: indexPath) as? MarkedRecordCell else { return UICollectionViewCell() }
-                
-                let image = "markedRecordTest"
-                let date = dummyMarkedData[indexPath.row].date
-                let location = dummyMarkedData[indexPath.row].location
-                cell.configure(image: image, date: date, location: location, color: dummyMarkedData[indexPath.row].color)
-                
-                return cell
-            } else {
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddMarkedRecordCell.registerId, for: indexPath) as? AddMarkedRecordCell else { return UICollectionViewCell() }
-                return cell
-            }
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddMarkedRecordCell.registerId, for: indexPath) as? AddMarkedRecordCell else { return UICollectionViewCell() }
+            return cell
         }
     }
     

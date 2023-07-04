@@ -31,7 +31,7 @@ class MarkedRecordCell: BaseCollectionViewCell {
         markedRecordButton.backgroundColor = .colorC9C6C2
         
         markedRecordButtonImage.image = UIImage(named: "markedRecord")
-        markedRecordImage.contentMode = .scaleAspectFit
+        markedRecordImage.contentMode = .scaleAspectFill
         
         markedRecordDateLabel.text = "2일 전"
         markedRecordDateLabel.textColor = .color707070
@@ -54,7 +54,7 @@ class MarkedRecordCell: BaseCollectionViewCell {
     
     override func setupLayout() {
         super.setupLayout()
-      
+        
         markedRecordImage.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(contentView)
             $0.height.equalTo(148)
@@ -70,7 +70,7 @@ class MarkedRecordCell: BaseCollectionViewCell {
             $0.centerX.centerY.equalTo(markedRecordButton)
             $0.width.height.equalTo(18)
         }
-
+        
         markedRecordDateLabel.snp.makeConstraints {
             $0.top.equalTo(markedRecordImage.snp.bottom).offset(9)
             $0.leading.equalTo(markedRecordImage).offset(14)
