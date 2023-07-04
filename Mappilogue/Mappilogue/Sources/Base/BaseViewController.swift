@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import Then
 
 protocol BaseViewControllerProtocol {
     func setupProperty()

@@ -8,8 +8,8 @@
 import UIKit
 
 class HomeViewController: NavigationBarViewController {
-    let dummyTodayData = dummyTodayScheduleData(scheduleCount: 0)
-    let dummyUpcomingData = dummyUpcomingScheduleData(scheduleCount: 0)
+    let dummyTodayData = dummyTodayScheduleData(scheduleCount: 2)
+    let dummyUpcomingData = dummyUpcomingScheduleData(scheduleCount: 2)
     var isScheduleExpanded = [Bool]()
     
     var scheduleType: ScheduleType = .today
@@ -26,6 +26,7 @@ class HomeViewController: NavigationBarViewController {
         tableView.register(UpcomingScheduleCell.self, forCellReuseIdentifier: UpcomingScheduleCell.registerId)
         tableView.register(AddScheduleButtonCell.self, forCellReuseIdentifier: AddScheduleButtonCell.registerId)
         tableView.register(AddLocationButtonCell.self, forCellReuseIdentifier: AddLocationButtonCell.registerId)
+        tableView.register(MarkedRecordsCell.self, forCellReuseIdentifier: MarkedRecordsCell.registerId)
         tableView.register(ScheduleTypeHeaderView.self, forHeaderFooterViewReuseIdentifier: ScheduleTypeHeaderView.registerId)
         tableView.delegate = self
         tableView.dataSource = self
@@ -67,9 +68,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         switch scheduleType {
         case .today:
-            return dummyTodayData.isEmpty ? 2 : dummyTodayData.count + 1
+            return dummyTodayData.isEmpty ? 3 : dummyTodayData.count + 2
         case .upcoming:
-            return dummyUpcomingData.isEmpty ? 2 : dummyUpcomingData.count + 1
+            return dummyUpcomingData.isEmpty ? 3 : dummyUpcomingData.count + 2
         }
     }
     
@@ -78,12 +79,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         case .today:
             if dummyTodayData.isEmpty {
                 return 1
+            } else if dummyTodayData.count > section && isScheduleExpanded[section] {
+                return dummyTodayData[section].location.count + 1
             } else {
-                if dummyTodayData.count > section && isScheduleExpanded[section] {
-                    return dummyTodayData[section].location.count + 1
-                } else {
-                    return 1
-                }
+                return 1
             }
         case .upcoming:
             return 1
@@ -109,6 +108,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     
                     return cell
                     
+                case 2:
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: MarkedRecordsCell.registerId, for: indexPath) as? MarkedRecordsCell else { return UITableViewCell() }
+                    cell.selectionStyle = .none
+                    
+                    return cell
+                    
                 default:
                     return UITableViewCell()
                 }
@@ -119,27 +124,35 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.selectionStyle = .none
                     cell.delegate = self
                     
-                    let title = dummyTodayData[indexPath.section].title
-                    let backgroundColor = dummyTodayData[indexPath.section].color
-                    let isExpandable = dummyTodayData.count > 1 ? true : false
+                    let schedule = dummyTodayData[indexPath.section]
+                    let title = schedule.title
+                    let backgroundColor = schedule.color
+                    let isExpandable = dummyTodayData.count > 1
                     
                     cell.configure(with: title, backgroundColor: backgroundColor, isExpandable: isExpandable, isExpanded: isScheduleExpanded[indexPath.section])
+                    
                     return cell
                     
                 default:
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: TodayScheduleInfoCell.registerId, for: indexPath) as? TodayScheduleInfoCell else { return UITableViewCell() }
                     cell.selectionStyle = .none
                     
+                    let schedule = dummyTodayData[indexPath.section]
                     let index = "\(indexPath.row)"
-                    let location = dummyTodayData[indexPath.section].location[indexPath.row - 1]
-                    let time = dummyTodayData[indexPath.section].time[indexPath.row - 1]
+                    let location = schedule.location[indexPath.row - 1]
+                    let time = schedule.time[indexPath.row - 1]
                     
                     cell.configure(order: index, location: location, time: time)
                     return cell
                 }
                 
-            } else {
+            } else if dummyTodayData.count == indexPath.section {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: AddLocationButtonCell.registerId, for: indexPath) as? AddLocationButtonCell else { return UITableViewCell() }
+                cell.selectionStyle = .none
+                
+                return cell
+            } else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: MarkedRecordsCell.registerId, for: indexPath) as? MarkedRecordsCell else { return UITableViewCell() }
                 cell.selectionStyle = .none
                 
                 return cell
@@ -152,11 +165,17 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.selectionStyle = .none
                     
                     cell.configure(scheduleType: .upcoming)
-                    
+
                     return cell
                     
                 case 1:
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: AddScheduleButtonCell.registerId, for: indexPath) as? AddScheduleButtonCell else { return UITableViewCell() }
+                    cell.selectionStyle = .none
+                    
+                    return cell
+                    
+                case 2:
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: MarkedRecordsCell.registerId, for: indexPath) as? MarkedRecordsCell else { return UITableViewCell() }
                     cell.selectionStyle = .none
                     
                     return cell
@@ -169,16 +188,23 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: UpcomingScheduleCell.registerId, for: indexPath) as? UpcomingScheduleCell else { return UITableViewCell() }
                 cell.selectionStyle = .none
                 
-                let title = dummyUpcomingData[indexPath.section].title
-                let date = dummyUpcomingData[indexPath.section].date
-                let time = dummyUpcomingData[indexPath.section].time
+                let schedule = dummyUpcomingData[indexPath.section]
+                let title = schedule.title
+                let date = schedule.date
+                let time = schedule.time
                 
                 cell.configure(with: title, date: date, time: time)
                 
                 return cell
                 
-            } else {
+            } else if dummyUpcomingData.count == indexPath.section {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: AddScheduleButtonCell.registerId, for: indexPath) as? AddScheduleButtonCell else { return UITableViewCell() }
+                cell.selectionStyle = .none
+                
+                return cell
+                
+            } else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: MarkedRecordsCell.registerId, for: indexPath) as? MarkedRecordsCell else { return UITableViewCell() }
                 cell.selectionStyle = .none
                 
                 return cell
@@ -190,7 +216,16 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         switch scheduleType {
         case .today:
             if dummyTodayData.isEmpty {
-                return (indexPath.section == 0) ? 130 : 53
+                switch indexPath.section {
+                case 0:
+                    return 130
+                case 1:
+                    return 53
+                case 2:
+                    return 259
+                default:
+                    return 0
+                }
             } else if dummyTodayData.count > indexPath.section {
                 switch indexPath.row {
                 case 0:
@@ -198,16 +233,27 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 default:
                     return 50 + 10
                 }
-            } else {
+            } else if dummyTodayData.count == indexPath.section {
                 return 53
+            } else {
+                return 259
             }
         case .upcoming:
             if dummyUpcomingData.isEmpty {
-                return (indexPath.section == 0) ? 130 : 53
+                switch indexPath.section {
+                case 0:
+                    return 130
+                case 1:
+                    return 53
+                default:
+                    return 259
+                }
             } else if dummyUpcomingData.count > indexPath.section {
                 return 76
-            } else {
+            } else if dummyUpcomingData.count == indexPath.section {
                 return 53
+            } else {
+                return 259
             }
         }
     }
@@ -227,12 +273,44 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         switch scheduleType {
         case .today:
             if dummyTodayData.isEmpty {
-                return 10
+                switch section {
+                case 0:
+                    return 10
+                case 1:
+                    return 27
+                default:
+                    return 0
+                }
             } else {
-                return (dummyTodayData.count - 1) == section ? 10 : 13
+                if (dummyTodayData.count - 1) > section {
+                    return 13
+                } else if (dummyTodayData.count - 1) == section {
+                    return 10
+                } else if dummyTodayData.count == section {
+                    return 27
+                } else {
+                    return 0
+                }
             }
         case .upcoming:
-            return 10
+            if dummyUpcomingData.isEmpty {
+                switch section {
+                case 0:
+                    return 10
+                case 1:
+                    return 27
+                default:
+                    return 0
+                }
+            } else {
+                if dummyUpcomingData.count > section {
+                    return 10
+                } else if dummyUpcomingData.count == section {
+                    return 27
+                } else {
+                    return 0
+                }
+            }
         }
     }
 }

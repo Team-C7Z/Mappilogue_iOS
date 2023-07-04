@@ -66,7 +66,7 @@ class TodayScheduleCell: BaseTableViewCell {
         contentView.backgroundColor = backgroundColor
         
         if isExpandable {
-            expandButton.setImage(UIImage(named: isExpanded ? "hide" : "open"), for: .normal)
+            expandButton.setImage(UIImage(named: isExpanded ? "hideSchedule" : "openSchedule"), for: .normal)
         } else {
             expandButton.isEnabled = false
         }
