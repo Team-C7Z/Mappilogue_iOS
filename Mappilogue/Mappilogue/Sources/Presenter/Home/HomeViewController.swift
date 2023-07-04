@@ -9,10 +9,11 @@ import UIKit
 
 class HomeViewController: NavigationBarViewController {
     let dummyTodayData = dummyTodayScheduleData(scheduleCount: 1)
-    let dummyUpcomingData = dummyUpcomingScheduleData(scheduleCount: 2)
+    let dummyUpcomingData = dummyUpcomingScheduleData(scheduleCount: 1)
     var isScheduleExpanded = [Bool]()
     
     var scheduleType: ScheduleType = .today
+    var limitedUpcomingScheduleCount = 4
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -70,7 +71,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         case .today:
             return dummyTodayData.isEmpty ? 3 : dummyTodayData.count + 2
         case .upcoming:
-            return dummyUpcomingData.isEmpty ? 3 : dummyUpcomingData.count + 2
+            return dummyUpcomingData.isEmpty ? 3 : 3
         }
     }
     
@@ -85,7 +86,16 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 return 1
             }
         case .upcoming:
-            return 1
+            if dummyUpcomingData.isEmpty {
+               return 1
+            } else {
+                switch section {
+                case 0:
+                    return min(dummyUpcomingData.count, limitedUpcomingScheduleCount)
+                default:
+                    return 1
+                }
+            }
         }
     }
     
@@ -165,7 +175,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.selectionStyle = .none
                     
                     cell.configure(scheduleType: .upcoming)
-
+                    
                     return cell
                     
                 case 1:
@@ -184,30 +194,33 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     return UITableViewCell()
                 }
                 
-            } else if dummyUpcomingData.count > indexPath.section {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: UpcomingScheduleCell.registerId, for: indexPath) as? UpcomingScheduleCell else { return UITableViewCell() }
-                cell.selectionStyle = .none
-                
-                let schedule = dummyUpcomingData[indexPath.section]
-                let title = schedule.title
-                let date = schedule.date
-                let time = schedule.time
-                
-                cell.configure(with: title, date: date, time: time)
-                
-                return cell
-                
-            } else if dummyUpcomingData.count == indexPath.section {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: AddScheduleButtonCell.registerId, for: indexPath) as? AddScheduleButtonCell else { return UITableViewCell() }
-                cell.selectionStyle = .none
-                
-                return cell
-                
             } else {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: MarkedRecordsCell.registerId, for: indexPath) as? MarkedRecordsCell else { return UITableViewCell() }
-                cell.selectionStyle = .none
-                
-                return cell
+                switch indexPath.section {
+                case 0:
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: UpcomingScheduleCell.registerId, for: indexPath) as? UpcomingScheduleCell else { return UITableViewCell() }
+                    cell.selectionStyle = .none
+                    
+                    let schedule = dummyUpcomingData[indexPath.row]
+                    let title = schedule.title
+                    let date = schedule.date
+                    let time = schedule.time
+                    
+                    cell.configure(with: title, date: date, time: time)
+                    
+                    return cell
+                case 1:
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: AddScheduleButtonCell.registerId, for: indexPath) as? AddScheduleButtonCell else { return UITableViewCell() }
+                    cell.selectionStyle = .none
+                    
+                    return cell
+                case 2:
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: MarkedRecordsCell.registerId, for: indexPath) as? MarkedRecordsCell else { return UITableViewCell() }
+                    cell.selectionStyle = .none
+                    
+                    return cell
+                default:
+                    return UITableViewCell()
+                }
             }
         }
     }
@@ -248,12 +261,15 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 default:
                     return 259
                 }
-            } else if dummyUpcomingData.count > indexPath.section {
-                return 76
-            } else if dummyUpcomingData.count == indexPath.section {
-                return 53
             } else {
-                return 259
+                switch indexPath.section {
+                case 0:
+                    return 76 + 10
+                case 1:
+                    return 53
+                default:
+                    return 259
+                }
             }
         }
     }
@@ -303,12 +319,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     return 0
                 }
             } else {
-                if dummyUpcomingData.count > section {
-                    return 10
-                } else if dummyUpcomingData.count == section {
-                    return 27
-                } else {
+                switch section {
+                case 0:
                     return 0
+                default:
+                    return 27
                 }
             }
         }
