@@ -41,7 +41,7 @@ class OnboardingViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
     
-        onboardingLabel.setTextWithLineHeight(text: "일정에 여러 장소를 추가해 보세요", lineHeight: UILabel.title01)
+        onboardingLabel.text = "일정에 여러 장소를 추가해 보세요"
         onboardingLabel.textColor = .color1C1C1C
         onboardingLabel.font = .title01
         
@@ -72,7 +72,7 @@ class OnboardingViewController: BaseViewController {
         super.setupLayout()
         
         onboardingLabel.snp.makeConstraints {
-            $0.top.equalTo(view).offset(112)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(68)
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
         }
         
@@ -88,7 +88,8 @@ class OnboardingViewController: BaseViewController {
         }
         
         startButton.snp.makeConstraints {
-            $0.leading.bottom.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalToSuperview()
             $0.height.equalTo(94)
         }
     }
@@ -117,6 +118,7 @@ extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         currentPage = Int(scrollView.contentOffset.x / scrollView.frame.width)
-        self.pageControl.currentPage = currentPage
+        pageControl.currentPage = currentPage
+        onboardingLabel.text = onboardingPages[currentPage].title
     }
 }
