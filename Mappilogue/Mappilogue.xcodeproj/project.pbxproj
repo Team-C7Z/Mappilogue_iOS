@@ -11,6 +11,7 @@
 		92459EDA2A530D1100493941 /* MarkedRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92459ED92A530D1100493941 /* MarkedRecordCell.swift */; };
 		92459EDC2A53158A00493941 /* MarkedRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92459EDB2A53158A00493941 /* MarkedRecord.swift */; };
 		92459EDE2A53BA5A00493941 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92459EDD2A53BA5A00493941 /* UILabel.swift */; };
+		92459EE02A544A7B00493941 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92459EDF2A544A7B00493941 /* UIButton.swift */; };
 		924BE0CA2A51AE25002C70FF /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 924BE0C92A51AE25002C70FF /* .swiftlint.yml */; };
 		924BE0CE2A51C4D4002C70FF /* MarkedRecordsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BE0CD2A51C4D4002C70FF /* MarkedRecordsCell.swift */; };
 		926998F72A14EC07003DDAD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926998F62A14EC07003DDAD2 /* AppDelegate.swift */; };
@@ -75,6 +76,7 @@
 		92459ED92A530D1100493941 /* MarkedRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkedRecordCell.swift; sourceTree = "<group>"; };
 		92459EDB2A53158A00493941 /* MarkedRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkedRecord.swift; sourceTree = "<group>"; };
 		92459EDD2A53BA5A00493941 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
+		92459EDF2A544A7B00493941 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		924BE0C92A51AE25002C70FF /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		924BE0CD2A51C4D4002C70FF /* MarkedRecordsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkedRecordsCell.swift; sourceTree = "<group>"; };
 		926998F32A14EC07003DDAD2 /* Mappilogue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mappilogue.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -238,6 +240,7 @@
 				929158292A252CC20022BEF9 /* UIColor.swift */,
 				92FE26162A4B76B800BCDB82 /* UIFont.swift */,
 				92459EDD2A53BA5A00493941 /* UILabel.swift */,
+				92459EDF2A544A7B00493941 /* UIButton.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 				92A7B6532A4CDD4D009C9293 /* ScheduleType.swift in Sources */,
 				92FE260C2A4A3FD100BCDB82 /* NavigationBarViewController.swift in Sources */,
 				926999362A14F443003DDAD2 /* BaseView.swift in Sources */,
+				92459EE02A544A7B00493941 /* UIButton.swift in Sources */,
 				92FE26132A4B74D800BCDB82 /* ScheduleTypeHeaderView.swift in Sources */,
 				926998F72A14EC07003DDAD2 /* AppDelegate.swift in Sources */,
 				92A7B6612A4E2039009C9293 /* BaseTableViewHeaderFooterView.swift in Sources */,

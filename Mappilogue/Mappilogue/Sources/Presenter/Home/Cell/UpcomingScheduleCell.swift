@@ -27,9 +27,17 @@ class UpcomingScheduleCell: BaseTableViewCell {
         contentView.layer.cornerRadius = 12
         contentView.backgroundColor = .colorF5F3F0
         
-        upcomingScheduleDateLabel.font = .pretendard(.medium, size: 12)
-        upcomingScheduleTimeLabel.font = .pretendard(.regular, size: 12)
-        upcomingScheduleLabel.font = .pretendard(.medium, size: 16)
+        upcomingScheduleTimeLabel.textColor = .color1C1C1C
+        upcomingScheduleDateLabel.font = .caption02
+        
+        separatorImage.image = UIImage(named: "separator")
+        separatorImage.tintColor = .color1C1C1C
+        
+        upcomingScheduleTimeLabel.textColor = .color1C1C1C
+        upcomingScheduleTimeLabel.font = .caption01
+        
+        upcomingScheduleLabel.textColor = .color1C1C1C
+        upcomingScheduleLabel.font = .title02
     }
     
     override func setupHierarchy() {

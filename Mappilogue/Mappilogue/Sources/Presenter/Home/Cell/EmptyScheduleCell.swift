@@ -28,16 +28,16 @@ class EmptyScheduleCell: BaseTableViewCell {
         
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
-        stackView.spacing = 4
+        stackView.spacing = 1
         
+        emptyScheduleLabel.font = .title02
         emptyScheduleLabel.textColor = .color707070
         emptyScheduleLabel.textAlignment = .center
-        emptyScheduleLabel.font = .pretendard(.medium, size: 16)
         
-        emptyScheduleSubLabel.text = "아래 버튼을 눌러 일정을 추가해 보세요!"
+        emptyScheduleSubLabel.setTextWithLineHeight(text: "아래 버튼을 눌러 일정을 추가해 보세요!", lineHeight: UILabel.caption02)
+        emptyScheduleSubLabel.font = .caption02
         emptyScheduleSubLabel.textColor = .color404040
         emptyScheduleSubLabel.textAlignment = .center
-        emptyScheduleSubLabel.font = .pretendard(.medium, size: 12)
     }
     
     override func setupHierarchy() {
@@ -59,9 +59,9 @@ class EmptyScheduleCell: BaseTableViewCell {
     func configure(scheduleType: ScheduleType) {
         switch scheduleType {
         case .today:
-            emptyScheduleLabel.text = "오늘은 등록된 일정이 없어요"
+            emptyScheduleLabel.setTextWithLineHeight(text: "오늘은 등록된 일정이 없어요", lineHeight: UILabel.title02)
         case .upcoming:
-            emptyScheduleLabel.text = "다가오는 일정이 없어요"
+            emptyScheduleLabel.setTextWithLineHeight(text: "다가오는 일정이 없어요", lineHeight: UILabel.title02)
         }
     }
 }
