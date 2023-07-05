@@ -13,6 +13,9 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        tabBar.tintColor = .color1C1C1C // 선택 아이템
+        tabBar.unselectedItemTintColor = .color707070
+        
         setTabBar()
     }
     
@@ -22,7 +25,7 @@ class TabBarController: UITabBarController {
             createViewController(CalendarViewController(), title: "캘린더", imageName: "calendar"),
             createViewController(GatheringViewController(), title: "모임", imageName: "gathering"),
             createViewController(RecordViewController(), title: "기록", imageName: "record"),
-            createViewController(MyViewController(), title: "My", imageName: "my")
+            createViewController(MyViewController(), title: "MY", imageName: "my")
         ]
 
         setViewControllers(viewControllers, animated: false)
