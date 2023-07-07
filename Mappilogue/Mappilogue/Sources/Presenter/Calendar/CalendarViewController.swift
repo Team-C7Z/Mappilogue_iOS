@@ -26,6 +26,8 @@ class CalendarViewController: NavigationBarViewController {
         collectionView.dataSource = self
         return collectionView
     }()
+    
+    private let addScheduleButton = UIButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +41,8 @@ class CalendarViewController: NavigationBarViewController {
         currentDateLabel.font = .subtitle01
         
         changeDateButton.setImage(UIImage(named: "changeDate"), for: .normal)
+        
+        addScheduleButton.setImage(UIImage(named: "addSchedule"), for: .normal)
     }
     
     override func setupHierarchy() {
@@ -49,6 +53,7 @@ class CalendarViewController: NavigationBarViewController {
         calendarHeaderView.addSubview(changeDateButton)
         
         view.addSubview(collectionView)
+        view.addSubview(addScheduleButton)
     }
     
     override func setupLayout() {
@@ -72,6 +77,12 @@ class CalendarViewController: NavigationBarViewController {
         collectionView.snp.makeConstraints {
             $0.top.equalTo(calendarHeaderView.snp.bottom).offset(10)
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        addScheduleButton.snp.makeConstraints {
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-13)
+            $0.width.height.equalTo(55)
         }
     }
 }
