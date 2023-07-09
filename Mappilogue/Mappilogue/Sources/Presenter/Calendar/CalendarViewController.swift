@@ -9,7 +9,7 @@ import UIKit
 
 class CalendarViewController: NavigationBarViewController {
     private let weekday: [String] = ["일", "월", "화", "수", "목", "금", "토"]
-    private let monthlyCalendar = MonthlyCalendar()
+    private var monthlyCalendar = MonthlyCalendar()
     private var days: [String] = []
 
     private let calendarHeaderView = UIView()
@@ -110,14 +110,25 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeekdayCell.registerId, for: indexPath) as? WeekdayCell else { return UICollectionViewCell() }
             
             let weekday = weekday[indexPath.row]
-            cell.configure(with: weekday)
-        
+            let isSaturday = indexPath.row % 7 == 6
+            let isSunday = indexPath.row % 7 == 0
+            
+            cell.configure(with: weekday, isSaturday: isSaturday, isSunday: isSunday)
+            
             return cell
         default:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCell.registerId, for: indexPath) as? DayCell else { return UICollectionViewCell() }
             
             let day = days[indexPath.row]
-            cell.configure(with: day)
+            if indexPath.row >= monthlyCalendar.lastMonthDays.count && indexPath.row < days.count - monthlyCalendar.nextMonthDays.count {
+                let isSaturday = indexPath.row % 7 == 6
+                let isSunday = indexPath.row % 7 == 0
+                
+                cell.configure(with: day, isNotCurrentMonth: false, isSaturday: isSaturday, isSunday: isSunday)
+                
+            } else {
+                cell.configure(with: day, isNotCurrentMonth: true, isSaturday: false, isSunday: false)
+            }
             
             return cell
         }

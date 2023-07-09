@@ -16,7 +16,7 @@ class DayCell: BaseCollectionViewCell {
     override func setupProperty() {
         super.setupProperty()
         
-        dayLabel.setTextWithLineHeight(text: "13", lineHeight: UILabel.body02)
+        dayLabel.setTextWithLineHeight(text: "", lineHeight: UILabel.body02)
         dayLabel.font = .body02
         
         lineView.backgroundColor = .colorEAE6E1
@@ -43,7 +43,17 @@ class DayCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(with day: String) {
+    func configure(with day: String, isNotCurrentMonth: Bool, isSaturday: Bool, isSunday: Bool) {
         dayLabel.setTextWithLineHeight(text: day, lineHeight: UILabel.body02)
+    
+        if isNotCurrentMonth {
+            dayLabel.textColor = .color9B9791
+        } else if isSaturday {
+            dayLabel.textColor = .color3C58EE
+        } else if isSunday {
+            dayLabel.textColor = .colorF14C4C
+        } else {
+            dayLabel.textColor = .color1C1C1C
+        }
     }
 }
