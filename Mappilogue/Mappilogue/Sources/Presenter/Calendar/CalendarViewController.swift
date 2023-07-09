@@ -8,7 +8,9 @@
 import UIKit
 
 class CalendarViewController: NavigationBarViewController {
-    let weekday: [String] = ["일", "월", "화", "수", "목", "금", "토"]
+    private let weekday: [String] = ["일", "월", "화", "수", "목", "금", "토"]
+    private let monthlyCalendar = MonthlyCalendar()
+    private var days: [String] = []
 
     private let calendarHeaderView = UIView()
     private let currentDateLabel = UILabel()
@@ -31,13 +33,14 @@ class CalendarViewController: NavigationBarViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+      
+        days = monthlyCalendar.getCurrentMonthlyCalendar()
     }
     
     override func setupProperty() {
         super.setupProperty()
         
-        currentDateLabel.setTextWithLineHeight(text: "2023년 5월", lineHeight: UILabel.subtitle01)
+        currentDateLabel.setTextWithLineHeight(text: "2023년 7월", lineHeight: UILabel.subtitle01)
         currentDateLabel.font = .subtitle01
         
         changeDateButton.setImage(UIImage(named: "changeDate"), for: .normal)
@@ -95,9 +98,9 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 7
+            return weekday.count
         default:
-            return 35
+            return days.count
         }
     }
 
@@ -106,12 +109,16 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
         case 0:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeekdayCell.registerId, for: indexPath) as? WeekdayCell else { return UICollectionViewCell() }
             
-            let day = weekday[indexPath.row]
-            cell.configure(with: day)
+            let weekday = weekday[indexPath.row]
+            cell.configure(with: weekday)
         
             return cell
         default:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCell.registerId, for: indexPath) as? DayCell else { return UICollectionViewCell() }
+            
+            let day = days[indexPath.row]
+            cell.configure(with: day)
+            
             return cell
         }
     }
@@ -126,7 +133,7 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
         case 0:
             return CGSize(width: width, height: 31)
         default:
-            let height = (collectionView.bounds.height - 31) / 5
+            let height = (collectionView.bounds.height - 31) / CGFloat(days.count / 7)
             return CGSize(width: width, height: height)
         }
     }

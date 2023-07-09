@@ -32,7 +32,7 @@ class WeekdayCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(with day: String) {
-        weekdayLabel.setTextWithLineHeight(text: day, lineHeight: UILabel.caption02)
+    func configure(with weekday: String) {
+        weekdayLabel.setTextWithLineHeight(text: weekday, lineHeight: UILabel.caption02)
     }
 }
