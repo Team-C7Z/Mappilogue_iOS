@@ -42,4 +42,8 @@ class DayCell: BaseCollectionViewCell {
             $0.height.equalTo(1)
         }
     }
+    
+    func configure(with day: String) {
+        dayLabel.setTextWithLineHeight(text: day, lineHeight: UILabel.body02)
+    }
 }
