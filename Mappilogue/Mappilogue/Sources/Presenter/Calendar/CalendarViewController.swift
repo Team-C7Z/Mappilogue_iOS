@@ -8,7 +8,6 @@
 import UIKit
 
 class CalendarViewController: NavigationBarViewController {
-    private let weekday: [String] = ["일", "월", "화", "수", "목", "금", "토"]
     private var monthlyCalendar = MonthlyCalendar()
     private var days: [String] = []
 
@@ -34,7 +33,7 @@ class CalendarViewController: NavigationBarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
       
-        days = monthlyCalendar.getCurrentMonthlyCalendar()
+        days = monthlyCalendar.getThisMonthlyCalendar()
     }
     
     override func setupProperty() {
@@ -98,7 +97,7 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return weekday.count
+            return monthlyCalendar.weekday.count
         default:
             return days.count
         }
@@ -109,9 +108,9 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
         case 0:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeekdayCell.registerId, for: indexPath) as? WeekdayCell else { return UICollectionViewCell() }
             
-            let weekday = weekday[indexPath.row]
-            let isSaturday = indexPath.row % 7 == 6
-            let isSunday = indexPath.row % 7 == 0
+            let weekday = monthlyCalendar.weekday[indexPath.row]
+            let isSaturday = monthlyCalendar.isSaturday(weekday)
+            let isSunday = monthlyCalendar.isSunday(weekday)
             
             cell.configure(with: weekday, isSaturday: isSaturday, isSunday: isSunday)
             
@@ -120,16 +119,12 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCell.registerId, for: indexPath) as? DayCell else { return UICollectionViewCell() }
             
             let day = days[indexPath.row]
-            if indexPath.row >= monthlyCalendar.lastMonthDays.count && indexPath.row < days.count - monthlyCalendar.nextMonthDays.count {
-                let isSaturday = indexPath.row % 7 == 6
-                let isSunday = indexPath.row % 7 == 0
-                let isToday = day == String(monthlyCalendar.currentDay)
-                
-                cell.configure(with: day, isNotCurrentMonth: false, isSaturday: isSaturday, isSunday: isSunday, isToday: isToday)
-                
-            } else {
-                cell.configure(with: day, isNotCurrentMonth: true, isSaturday: false, isSunday: false, isToday: false)
-            }
+            let isCurrentMonth = monthlyCalendar.isCurrentMonth(indexPath.row)
+            let isSaturday = monthlyCalendar.isDaySaturday(day)
+            let isSunday = monthlyCalendar.isDaySunday(day)
+            let isToday = day == String(monthlyCalendar.currentDay)
+        
+            cell.configure(with: day, isCurrentMonth: isCurrentMonth, isSaturday: isSaturday, isSunday: isSunday, isToday: isToday)
             
             return cell
         }
@@ -141,13 +136,17 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.bounds.width - 32) / 7
+        let height: CGFloat
+        
         switch indexPath.section {
         case 0:
-            return CGSize(width: width, height: 31)
+            height = 31
         default:
-            let height = (collectionView.bounds.height - 31) / CGFloat(days.count / 7)
-            return CGSize(width: width, height: height)
+            let collectionViewHeight = collectionView.bounds.height - 31
+            let cellHeight = CGFloat(days.count / 7)
+            height = collectionViewHeight / cellHeight
         }
+        return CGSize(width: width, height: height)
     }
     
     // 수평 간격
