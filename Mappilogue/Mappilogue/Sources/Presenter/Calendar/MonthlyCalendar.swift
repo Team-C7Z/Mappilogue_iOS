@@ -20,6 +20,10 @@ struct MonthlyCalendar {
         return Calendar.current.component(.month, from: Date())
     }
     
+    var currentDay: Int {
+        return Calendar.current.component(.day, from: Date())
+    }
+    
     mutating func getMonthlyCalendar(year: Int, month: Int) -> [String] {
         let calendar = Calendar.current
         let dateFormatter = DateFormatter()

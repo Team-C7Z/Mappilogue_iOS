@@ -123,11 +123,12 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
             if indexPath.row >= monthlyCalendar.lastMonthDays.count && indexPath.row < days.count - monthlyCalendar.nextMonthDays.count {
                 let isSaturday = indexPath.row % 7 == 6
                 let isSunday = indexPath.row % 7 == 0
+                let isToday = day == String(monthlyCalendar.currentDay)
                 
-                cell.configure(with: day, isNotCurrentMonth: false, isSaturday: isSaturday, isSunday: isSunday)
+                cell.configure(with: day, isNotCurrentMonth: false, isSaturday: isSaturday, isSunday: isSunday, isToday: isToday)
                 
             } else {
-                cell.configure(with: day, isNotCurrentMonth: true, isSaturday: false, isSunday: false)
+                cell.configure(with: day, isNotCurrentMonth: true, isSaturday: false, isSunday: false, isToday: false)
             }
             
             return cell
