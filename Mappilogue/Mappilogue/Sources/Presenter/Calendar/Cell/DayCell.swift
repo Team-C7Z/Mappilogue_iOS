@@ -52,26 +52,22 @@ class DayCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(with day: String, isNotCurrentMonth: Bool, isSaturday: Bool, isSunday: Bool, isToday: Bool) {
+    func configure(with day: String, isCurrentMonth: Bool, isSaturday: Bool, isSunday: Bool, isToday: Bool) {
         dayLabel.setTextWithLineHeight(text: day, lineHeight: UILabel.body02)
     
-        if isToday {
-            todayView.backgroundColor = .color2EBD3D
+        if isCurrentMonth {
+            dayLabel.textColor = .color1C1C1C
             
-            dayLabel.textColor = .colorFFFFFF
-            
-        } else {
-            todayView.backgroundColor = .clear
-            
-            if isNotCurrentMonth {
-                dayLabel.textColor = .color9B9791
+            if isToday {
+                todayView.backgroundColor = .color2EBD3D
+                dayLabel.textColor = .colorFFFFFF
             } else if isSaturday {
                 dayLabel.textColor = .color3C58EE
             } else if isSunday {
                 dayLabel.textColor = .colorF14C4C
-            } else {
-                dayLabel.textColor = .color1C1C1C
             }
+        } else {
+            dayLabel.textColor = .color9B9791
         }
     }
 }
