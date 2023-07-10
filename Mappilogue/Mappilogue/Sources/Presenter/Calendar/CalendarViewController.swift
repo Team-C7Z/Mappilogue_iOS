@@ -9,6 +9,7 @@ import UIKit
 
 class CalendarViewController: NavigationBarViewController {
     private var monthlyCalendar = MonthlyCalendar()
+    private var schedules = dummyCalendarScheduleData()
     private var days: [String] = []
 
     private let calendarHeaderView = UIView()
@@ -119,12 +120,13 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCell.registerId, for: indexPath) as? DayCell else { return UICollectionViewCell() }
             
             let day = days[indexPath.row]
+            let schedule = schedules[day]
             let isCurrentMonth = monthlyCalendar.isCurrentMonth(indexPath.row)
             let isSaturday = monthlyCalendar.isDaySaturday(day)
             let isSunday = monthlyCalendar.isDaySunday(day)
             let isToday = day == String(monthlyCalendar.currentDay)
         
-            cell.configure(with: day, isCurrentMonth: isCurrentMonth, isSaturday: isSaturday, isSunday: isSunday, isToday: isToday)
+            cell.configure(with: day, schedules: schedule ?? [], isCurrentMonth: isCurrentMonth, isSaturday: isSaturday, isSunday: isSunday, isToday: isToday)
             
             return cell
         }
