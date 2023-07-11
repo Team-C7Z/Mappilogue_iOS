@@ -142,13 +142,17 @@ struct MonthlyCalendar {
         let week = weeks[weekIndex]
         return week
     }
+    
+    func isToday(_ day: String) -> Bool {
+        return day == String(currentDay)
+    }
 
     func isLastMonth(_ row: Int) -> Bool {
-        return row < lastMonthRange
+        return row >= lastMonthRange
     }
 
     func isNextMonth(_ row: Int) -> Bool {
-        return row >= nextMonthRange
+        return row < nextMonthRange
     }
     
     func isDaySaturday(_ day: String) -> Bool {

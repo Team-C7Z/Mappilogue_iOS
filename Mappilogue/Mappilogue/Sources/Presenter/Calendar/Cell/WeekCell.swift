@@ -93,14 +93,14 @@ extension WeekCell: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             let day = week[indexPath.row]
             let isSaturday = monthlyCalendar.isDaySaturday(day)
             let isSunday = monthlyCalendar.isDaySunday(day)
-            let isToday = day == String(monthlyCalendar.currentDay)
+            let isToday = monthlyCalendar.isToday(day)
             
             if weekIndex == 0 {
-                isCurrentMonth = indexPath.row >= monthlyCalendar.lastMonthRange
+                isCurrentMonth = monthlyCalendar.isLastMonth(indexPath.row)
             }
             
             if weekIndex == monthlyCalendar.getThisMonthlyCalendarWeekCount() - 1 {
-                isCurrentMonth = indexPath.row < monthlyCalendar.nextMonthRange
+                isCurrentMonth = monthlyCalendar.isNextMonth(indexPath.row)
             }
             
             cell.configure(with: day, isCurrentMonth: isCurrentMonth, isSaturday: isSaturday, isSunday: isSunday, isToday: isToday)
@@ -110,26 +110,24 @@ extension WeekCell: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ScheduleCell.registerId, for: indexPath) as? ScheduleCell else { return UICollectionViewCell() }
             
             let day = week[indexPath.row]
-            if let schedules = daySchedules[day] {
-                if schedules.count > indexPath.section - 1 {
-                    let schedule = schedules[indexPath.section-1].0
-                    
-                    let scheduleTitle = schedule.schedule
-                    let color = schedule.color
-                    
-                    var isScheduleContinuous: Bool = false
-                    
-                    if let dayInt = Int(day), indexPath.row > 0, let previousDaySchedules = daySchedules[String(dayInt - 1)] {
-                        if scheduleTitle == previousDaySchedules[indexPath.section-1].0.schedule {
-                            isScheduleContinuous = true
-                        }
-                    }
-                    let continuousDay = schedules[indexPath.section-1].1
-        
-                    cell.configure(with: scheduleTitle, color: color, isScheduleContinuous: isScheduleContinuous, continuousDay: continuousDay)
+            if let schedules = daySchedules[day], schedules.count > indexPath.section - 1 {
+                let schedule = schedules[indexPath.section-1].0
+                let scheduleTitle = schedule.schedule
+                let color = schedule.color
+                
+                var isScheduleContinuous: Bool = false
+                
+                if let day = Int(day), indexPath.row > 0,
+                    let previousDaySchedules = daySchedules[String(day - 1)],
+                   scheduleTitle == previousDaySchedules[indexPath.section-1].0.schedule {
+                        isScheduleContinuous = true
                 }
+                
+                let continuousDay = schedules[indexPath.section-1].1
+                
+                cell.configure(with: scheduleTitle, color: color, isScheduleContinuous: isScheduleContinuous, continuousDay: continuousDay)
             }
-
+            
             return cell
         }
     }
