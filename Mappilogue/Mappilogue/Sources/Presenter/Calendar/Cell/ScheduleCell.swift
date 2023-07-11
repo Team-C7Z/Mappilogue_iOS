@@ -10,6 +10,7 @@ import UIKit
 class ScheduleCell: BaseCollectionViewCell {
     static let registerId = "\(ScheduleCell.self)"
     
+    private let scheduleColorView = UIView()
     private let scheduleLabel = UILabel()
     
     override func setupProperty() {
@@ -22,11 +23,16 @@ class ScheduleCell: BaseCollectionViewCell {
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        contentView.addSubview(scheduleLabel)
+        contentView.addSubview(scheduleColorView)
+        scheduleColorView.addSubview(scheduleLabel)
     }
     
     override func setupLayout() {
         super.setupLayout()
+        
+        scheduleColorView.snp.makeConstraints {
+            $0.width.height.equalTo(contentView)
+        }
         
         scheduleLabel.snp.makeConstraints {
             $0.leading.equalTo(contentView).offset(4)
@@ -34,11 +40,12 @@ class ScheduleCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(with schedule: String, color: UIColor) {
-        scheduleLabel.setTextWithLineHeight(text: schedule, lineHeight: UILabel.caption03)
-        contentView.backgroundColor = color
-        
-        scheduleLabel.clipsToBounds = false
-
+    func configure(with schedule: String, color: UIColor, isScheduleContinuous: Bool, continuousDay: Int) {
+        if !isScheduleContinuous {
+            scheduleLabel.setTextWithLineHeight(text: schedule, lineHeight: UILabel.caption03)
+            print(continuousDay, schedule)
+            contentView.backgroundColor = color
+            frame.size.width = contentView.bounds.width * CGFloat(continuousDay)
+        }
     }
 }
