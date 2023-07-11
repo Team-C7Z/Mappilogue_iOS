@@ -37,5 +37,8 @@ class ScheduleCell: BaseCollectionViewCell {
     func configure(with schedule: String, color: UIColor) {
         scheduleLabel.setTextWithLineHeight(text: schedule, lineHeight: UILabel.caption03)
         contentView.backgroundColor = color
+        
+        scheduleLabel.clipsToBounds = false
+
     }
 }
