@@ -22,10 +22,15 @@ func dummyCalendarScheduleData() -> [String: [Schedule]] {
     let schedule2 = Schedule(schedule: "홈트레이닝", color: .colorF0B4D5)
     let schedule3 = Schedule(schedule: "저녁 회의", color: .colorB2EAD6)
     let schedule4 = Schedule(schedule: "데이트", color: .colorF5DC82)
+    let schedule5 = Schedule(schedule: "부산 여행 🚙🚙🚙", color: .colorABD9F3)
     
     let schedules: [String: [Schedule]] = [
         "9": [schedule4],
-        "13": [schedule1, schedule2, schedule3, schedule4]
+        "13": [schedule1, schedule2, schedule3, schedule4],
+        "21": [schedule5],
+        "22": [schedule5],
+        "23": [schedule5],
+        "24": [schedule5]
     ]
     
     return schedules
