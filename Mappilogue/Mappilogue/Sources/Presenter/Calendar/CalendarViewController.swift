@@ -7,9 +7,9 @@
 
 import UIKit
 
-class CalendarViewController: NavigationBarViewController {
+class CalendarViewController: NavigationBarViewController {    
     private var monthlyCalendar = MonthlyCalendar()
-    private var days: [String] = []
+    private var weekCount: Int = 0
 
     private let calendarHeaderView = UIView()
     private let currentDateLabel = UILabel()
@@ -22,6 +22,7 @@ class CalendarViewController: NavigationBarViewController {
         collectionView.backgroundColor = .colorFFFFFF
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(WeekdayCell.self, forCellWithReuseIdentifier: WeekdayCell.registerId)
+        collectionView.register(WeekCell.self, forCellWithReuseIdentifier: WeekCell.registerId)
         collectionView.register(DayCell.self, forCellWithReuseIdentifier: DayCell.registerId)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -33,7 +34,7 @@ class CalendarViewController: NavigationBarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
       
-        days = monthlyCalendar.getThisMonthlyCalendar()
+        weekCount = monthlyCalendar.getThisMonthlyCalendarWeekCount()
     }
     
     override func setupProperty() {
@@ -99,7 +100,7 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
         case 0:
             return monthlyCalendar.weekday.count
         default:
-            return days.count
+            return weekCount
         }
     }
 
@@ -107,24 +108,18 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
         switch indexPath.section {
         case 0:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeekdayCell.registerId, for: indexPath) as? WeekdayCell else { return UICollectionViewCell() }
-            
+        
             let weekday = monthlyCalendar.weekday[indexPath.row]
             let isSaturday = monthlyCalendar.isSaturday(weekday)
             let isSunday = monthlyCalendar.isSunday(weekday)
-            
+
             cell.configure(with: weekday, isSaturday: isSaturday, isSunday: isSunday)
-            
+
             return cell
         default:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCell.registerId, for: indexPath) as? DayCell else { return UICollectionViewCell() }
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeekCell.registerId, for: indexPath) as? WeekCell else { return UICollectionViewCell() }
             
-            let day = days[indexPath.row]
-            let isCurrentMonth = monthlyCalendar.isCurrentMonth(indexPath.row)
-            let isSaturday = monthlyCalendar.isDaySaturday(day)
-            let isSunday = monthlyCalendar.isDaySunday(day)
-            let isToday = day == String(monthlyCalendar.currentDay)
-        
-            cell.configure(with: day, isCurrentMonth: isCurrentMonth, isSaturday: isSaturday, isSunday: isSunday, isToday: isToday)
+            cell.configure(weekIndex: indexPath.row)
             
             return cell
         }
@@ -135,15 +130,17 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.bounds.width - 32) / 7
-        let height: CGFloat
+        var width: CGFloat
+        var height: CGFloat
         
         switch indexPath.section {
         case 0:
+            width = (collectionView.bounds.width - 32) / 7
             height = 31
         default:
+            width = collectionView.bounds.width - 32
             let collectionViewHeight = collectionView.bounds.height - 31
-            let cellHeight = CGFloat(days.count / 7)
+            let cellHeight = CGFloat(weekCount)
             height = collectionViewHeight / cellHeight
         }
         return CGSize(width: width, height: height)
