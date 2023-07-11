@@ -28,29 +28,30 @@ struct MonthlyCalendar {
         Calendar.current.component(.day, from: Date())
     }
     
-    mutating func getMonthlyCalendar(year: Int, month: Int) -> [String] {
+    mutating func getMonthlyCalendar(year: Int, month: Int) -> [[String]] {
         let calendar = Calendar.current
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "d"
         
+        var weeks: [[String]] = []
         var days: [String] = []
         
         // 월의 첫 번째 날 가져오기
         let startDateComponents = DateComponents(year: year, month: month, day: 1)
         guard let startDate = calendar.date(from: startDateComponents) else {
-            return []
+            return weeks
         }
         
         // 월의 마지막 날 가져오기
         guard let range = calendar.range(of: .day, in: .month, for: startDate) else {
-            return []
+            return weeks
         }
         let endDate = calendar.date(byAdding: .day, value: range.count - 1, to: startDate)!
         
         // 이전 달의 마지막 날 가져오기
         let previousMonth = calendar.date(byAdding: .month, value: -1, to: startDate)!
         guard let previousRange = calendar.range(of: .day, in: .month, for: previousMonth) else {
-            return []
+            return weeks
         }
         let previousMonthEndDate = calendar.date(byAdding: .day, value: previousRange.count - 1, to: previousMonth)!
         
@@ -85,15 +86,20 @@ struct MonthlyCalendar {
             if calendar.component(.weekday, from: currentDate) == 1 {
                 thisMonthSunday.append(day)
             }
-    
+            
             // 다음 날로 이동
             currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
+            
+            if calendar.component(.weekday, from: currentDate) == calendar.firstWeekday {
+                weeks.append(days)
+                days = []
+            }
         }
         
         // 마지막 주에 다음 달 날짜 출력
         let lastWeekday = calendar.component(.weekday, from: endDate)
         let emptyLastWeekRange = (calendar.firstWeekday + 6 - lastWeekday) % 7
-        nextMonthRange = days.count
+        nextMonthRange = 7 - emptyLastWeekRange
         
         var nextMonthDate = nextMonthStartDate
         for _ in 0..<emptyLastWeekRange {
@@ -102,7 +108,20 @@ struct MonthlyCalendar {
             nextMonthDate = calendar.date(byAdding: .day, value: 1, to: nextMonthDate)!
         }
         
-        return days
+        weeks.append(days)
+        
+        return weeks
+    }
+    
+    mutating func getWeekCount(year: Int, month: Int) -> Int {
+        let weeks = getMonthlyCalendar(year: year, month: month)
+        return weeks.count
+    }
+    
+    mutating func getWeek(year: Int, month: Int, weekIndex: Int) -> [String] {
+        let weeks = getMonthlyCalendar(year: year, month: month)
+        let week = weeks[weekIndex]
+        return week
     }
     
     func isSaturday(_ weekday: String) -> Bool {
@@ -113,12 +132,27 @@ struct MonthlyCalendar {
         return weekday == "일"
     }
     
-    mutating func getThisMonthlyCalendar() -> [String] {
-        return getMonthlyCalendar(year: currentYear, month: currentMonth)
+    mutating func getThisMonthlyCalendarWeekCount() -> Int {
+        let weeks = getMonthlyCalendar(year: currentYear, month: currentMonth)
+        return weeks.count
     }
     
-    func isCurrentMonth(_ row: Int) -> Bool {
-        return row >= lastMonthRange && row < nextMonthRange
+    mutating func getThisMonthlyCalendarWeek(weekIndex: Int) -> [String] {
+        let weeks = getMonthlyCalendar(year: currentYear, month: currentMonth)
+        let week = weeks[weekIndex]
+        return week
+    }
+    
+    func isToday(_ day: String) -> Bool {
+        return day == String(currentDay)
+    }
+
+    func isLastMonth(_ row: Int) -> Bool {
+        return row >= lastMonthRange
+    }
+
+    func isNextMonth(_ row: Int) -> Bool {
+        return row < nextMonthRange
     }
     
     func isDaySaturday(_ day: String) -> Bool {
