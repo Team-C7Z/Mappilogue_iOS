@@ -18,7 +18,6 @@ class DayCell: BaseCollectionViewCell {
         
         todayView.layer.cornerRadius = 21 / 2
         
-        dayLabel.setTextWithLineHeight(text: "", lineHeight: UILabel.body02)
         dayLabel.font = .body02
     }
     

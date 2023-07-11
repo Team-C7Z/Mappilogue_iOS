@@ -16,7 +16,7 @@ class ScheduleCell: BaseCollectionViewCell {
     override func setupProperty() {
         super.setupProperty()
         
-        contentView.layer.cornerRadius = 4
+        scheduleColorView.layer.cornerRadius = 4
         scheduleLabel.font = .caption03
     }
     
@@ -35,16 +35,15 @@ class ScheduleCell: BaseCollectionViewCell {
         }
         
         scheduleLabel.snp.makeConstraints {
-            $0.leading.equalTo(contentView).offset(4)
-            $0.centerY.equalTo(contentView)
+            $0.leading.equalTo(scheduleColorView).offset(4)
+            $0.centerY.equalTo(scheduleColorView)
         }
     }
     
     func configure(with schedule: String, color: UIColor, isScheduleContinuous: Bool, continuousDay: Int) {
         if !isScheduleContinuous {
             scheduleLabel.setTextWithLineHeight(text: schedule, lineHeight: UILabel.caption03)
-            print(continuousDay, schedule)
-            contentView.backgroundColor = color
+            scheduleColorView.backgroundColor = color
             frame.size.width = contentView.bounds.width * CGFloat(continuousDay)
         }
     }
