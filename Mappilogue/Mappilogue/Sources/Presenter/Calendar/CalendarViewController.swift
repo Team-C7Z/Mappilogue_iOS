@@ -16,8 +16,6 @@ class CalendarViewController: NavigationBarViewController {
     private var monthlyCalendar = MonthlyCalendar()
     private var selectedDate: SelectedDate?
     private var weekCount: Int = 0
-
-    private var isDatePickerMode: Bool = false
     
     private let contentView = UIView()
     private let calendarHeaderView = UIView()
@@ -52,8 +50,8 @@ class CalendarViewController: NavigationBarViewController {
         
         view.backgroundColor = .colorFFFFFF
         contentView.backgroundColor = .colorFFFFFF
-        
-        currentDateLabel.setTextWithLineHeight(text: "2023년 7월", lineHeight: UILabel.subtitle01)
+    
+        currentDateLabel.setTextWithLineHeight(text: "\(monthlyCalendar.currentYear)년 \(monthlyCalendar.currentMonth)월", lineHeight: UILabel.subtitle01)
         currentDateLabel.font = .subtitle01
         
         changeDateButton.setImage(UIImage(named: "changeDate"), for: .normal)
@@ -111,17 +109,15 @@ class CalendarViewController: NavigationBarViewController {
     @objc func changeDateButtonTapped(_ sender: UIButton) {
         let datePickerViewController = DatePickerViewController()
         datePickerViewController.selectedDate = selectedDate
+        datePickerViewController.delegate = self
         datePickerViewController.modalPresentationStyle = .overCurrentContext
         present(datePickerViewController, animated: false)
         
-        isDatePickerMode = true
         chageDatePickerMode()
     }
     
     func chageDatePickerMode() {
-        if isDatePickerMode {
-            view.backgroundColor = .colorF5F3F0
-        }
+        view.backgroundColor = .colorF5F3F0
     }
 }
 
@@ -189,5 +185,15 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
     // 수직 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+}
+
+extension CalendarViewController: ChangedDateDelegate {
+    func chagedDate(_ selectedDate: SelectedDate) {
+        view.backgroundColor = .colorFFFFFF
+        
+        let year = selectedDate.year
+        let month = selectedDate.month
+        currentDateLabel.setTextWithLineHeight(text: "\(year)년 \(month)월", lineHeight: UILabel.subtitle01)
     }
 }
