@@ -13,6 +13,7 @@ class NavigationBarViewController: BaseViewController {
         super.viewDidLoad()
 
         setUpRightBarButtonItem()
+
     }
     
     func setUpRightBarButtonItem() {
