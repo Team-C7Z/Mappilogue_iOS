@@ -102,7 +102,7 @@ extension WeekCell: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 isCurrentMonth = monthlyCalendar.isLastMonth(indexPath.row)
             }
             
-            if weekIndex == monthlyCalendar.getWeekCount(year: monthlyCalendar.currentYear, month: monthlyCalendar.currentMonth) - 1 {
+            if weekIndex == monthlyCalendar.getWeekCount(year: selectedDate.year, month: selectedDate.month) - 1 {
                 isCurrentMonth = monthlyCalendar.isNextMonth(indexPath.row)
             }
             

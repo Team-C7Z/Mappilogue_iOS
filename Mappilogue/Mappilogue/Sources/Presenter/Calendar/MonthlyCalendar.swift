@@ -109,7 +109,6 @@ struct MonthlyCalendar {
     
     mutating func getWeek(year: Int, month: Int, weekIndex: Int) -> [String] {
         let weeks = getMonthlyCalendar(year: year, month: month)
-
         let week = weeks[weekIndex]
         return week
     }
