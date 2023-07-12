@@ -41,8 +41,7 @@ class CalendarViewController: NavigationBarViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        selectedDate = SelectedDate(year: monthlyCalendar.currentYear, month: monthlyCalendar.currentMonth)
-        weekCount = monthlyCalendar.getWeekCount(year: selectedDate.year, month: selectedDate.month)
+        setCalendarDate()
         
         view.backgroundColor = .colorFFFFFF
         contentView.backgroundColor = .colorFFFFFF
@@ -100,6 +99,11 @@ class CalendarViewController: NavigationBarViewController {
             $0.bottom.equalTo(contentView).offset(-13)
             $0.width.height.equalTo(55)
         }
+    }
+    
+    func setCalendarDate() {
+        selectedDate = SelectedDate(year: monthlyCalendar.currentYear, month: monthlyCalendar.currentMonth)
+        weekCount = monthlyCalendar.getWeekCount(year: selectedDate.year, month: selectedDate.month)
     }
     
     @objc func changeDateButtonTapped(_ sender: UIButton) {
