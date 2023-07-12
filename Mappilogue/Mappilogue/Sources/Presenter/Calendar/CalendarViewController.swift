@@ -14,7 +14,7 @@ struct SelectedDate {
 
 class CalendarViewController: NavigationBarViewController {    
     private var monthlyCalendar = MonthlyCalendar()
-    private var selectedDate: SelectedDate?
+    private var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0)
     private var weekCount: Int = 0
     
     private let contentView = UIView()
@@ -37,21 +37,17 @@ class CalendarViewController: NavigationBarViewController {
     }()
     
     private let addScheduleButton = UIButton()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-      
-        selectedDate = SelectedDate(year: monthlyCalendar.currentYear, month: monthlyCalendar.currentMonth)
-        weekCount = monthlyCalendar.getThisMonthlyCalendarWeekCount()
-    }
     
     override func setupProperty() {
         super.setupProperty()
         
+        selectedDate = SelectedDate(year: monthlyCalendar.currentYear, month: monthlyCalendar.currentMonth)
+        weekCount = monthlyCalendar.getWeekCount(year: selectedDate.year, month: selectedDate.month)
+        
         view.backgroundColor = .colorFFFFFF
         contentView.backgroundColor = .colorFFFFFF
-    
-        currentDateLabel.setTextWithLineHeight(text: "\(monthlyCalendar.currentYear)년 \(monthlyCalendar.currentMonth)월", lineHeight: UILabel.subtitle01)
+        
+        currentDateLabel.setTextWithLineHeight(text: "\(selectedDate.year)년 \(selectedDate.month)월", lineHeight: UILabel.subtitle01)
         currentDateLabel.font = .subtitle01
         
         changeDateButton.setImage(UIImage(named: "changeDate"), for: .normal)
@@ -150,7 +146,7 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
         default:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeekCell.registerId, for: indexPath) as? WeekCell else { return UICollectionViewCell() }
             
-            cell.configure(weekIndex: indexPath.row)
+            cell.configure(year: selectedDate.year, month: selectedDate.month, weekIndex: indexPath.row)
             
             return cell
         }
@@ -192,8 +188,13 @@ extension CalendarViewController: ChangedDateDelegate {
     func chagedDate(_ selectedDate: SelectedDate) {
         view.backgroundColor = .colorFFFFFF
         
+        self.selectedDate = selectedDate
+        
         let year = selectedDate.year
         let month = selectedDate.month
         currentDateLabel.setTextWithLineHeight(text: "\(year)년 \(month)월", lineHeight: UILabel.subtitle01)
+        weekCount = monthlyCalendar.getWeekCount(year: year, month: month)
+        
+        collectionView.reloadData()
     }
 }

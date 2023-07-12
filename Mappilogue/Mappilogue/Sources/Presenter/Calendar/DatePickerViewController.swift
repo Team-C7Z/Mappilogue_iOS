@@ -52,7 +52,7 @@ class DatePickerViewController: BaseViewController {
         if touches.first!.location(in: self.view).y > pickerView.frame.maxY {
             dismiss(animated: false) {
                 guard let date = self.selectedDate else { return }
-                
+             //   print(date)
                 self.delegate?.chagedDate(date)
             }
         }
