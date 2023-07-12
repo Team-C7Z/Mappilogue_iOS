@@ -9,6 +9,7 @@ import UIKit
 
 class DatePickerViewController: BaseViewController {
     var selectedDate: SelectedDate?
+    weak var delegate: ChangedDateDelegate?
     
     let years = Array(1970...2050)
     let months = Array(1...12)
@@ -35,7 +36,6 @@ class DatePickerViewController: BaseViewController {
         super.setupHierarchy()
 
         view.addSubview(pickerView)
-    
     }
     
     override func setupLayout() {
@@ -48,8 +48,19 @@ class DatePickerViewController: BaseViewController {
         }
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if touches.first!.location(in: self.view).y > pickerView.frame.maxY {
+            dismiss(animated: false) {
+                guard let date = self.selectedDate else { return }
+                
+                self.delegate?.chagedDate(date)
+            }
+        }
+    }
+    
     func setDate() {
-        if let year = selectedDate?.year, let currentYearIndex = years.firstIndex(of: year) {
+        if let year = selectedDate?.year, let currentYearIndex =
+            years.firstIndex(of: year) {
             pickerView.selectRow(currentYearIndex, inComponent: 0, animated: false)
         }
         
@@ -78,15 +89,9 @@ extension DatePickerViewController: UIPickerViewDelegate, UIPickerViewDataSource
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch component {
         case 0:
-            if let selectedYear = selectedDate?.year, selectedYear == years[row] {
-                return "\(years[row]) 년"
-            }
-            return "\(years[row])"
+            return "\(years[row]) 년"
         case 1:
-            if let selectedMonth = selectedDate?.month, selectedMonth == months[row] {
-                return "\(months[row]) 월"
-            }
-            return "\(months[row])"
+            return "\(months[row]) 월"
         default:
             return ""
         }
@@ -96,12 +101,14 @@ extension DatePickerViewController: UIPickerViewDelegate, UIPickerViewDataSource
         switch component {
         case 0:
             selectedDate?.year = years[row]
-            pickerView.reloadComponent(component)
         case 1:
             selectedDate?.month = months[row]
-            pickerView.reloadComponent(component)
         default:
             break
         }
     }
+}
+
+protocol ChangedDateDelegate: AnyObject {
+    func chagedDate(_ selectedDate: SelectedDate)
 }
