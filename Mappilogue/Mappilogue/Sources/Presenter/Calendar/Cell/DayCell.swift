@@ -13,6 +13,12 @@ class DayCell: BaseCollectionViewCell {
     private let todayView = UIView()
     private let dayLabel = UILabel()
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+  
+        todayView.backgroundColor = .clear
+    }
+    
     override func setupProperty() {
         super.setupProperty()
         

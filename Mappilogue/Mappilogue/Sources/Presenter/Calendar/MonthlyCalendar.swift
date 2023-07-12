@@ -10,9 +10,6 @@ import Foundation
 struct MonthlyCalendar {
     let weekday: [String] = ["일", "월", "화", "수", "목", "금", "토"]
     
-    var thisMonthSaturday: [String] = []
-    var thisMonthSunday: [String] = []
-    
     var lastMonthRange: Int = 0
     var nextMonthRange: Int = 0
     
@@ -79,14 +76,6 @@ struct MonthlyCalendar {
             let day = dateFormatter.string(from: currentDate)
             days.append(day)
             
-            if calendar.component(.weekday, from: currentDate) == 7 {
-                thisMonthSaturday.append(day)
-            }
-            
-            if calendar.component(.weekday, from: currentDate) == 1 {
-                thisMonthSunday.append(day)
-            }
-            
             // 다음 날로 이동
             currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
             
@@ -120,6 +109,7 @@ struct MonthlyCalendar {
     
     mutating func getWeek(year: Int, month: Int, weekIndex: Int) -> [String] {
         let weeks = getMonthlyCalendar(year: year, month: month)
+
         let week = weeks[weekIndex]
         return week
     }
@@ -132,19 +122,8 @@ struct MonthlyCalendar {
         return weekday == "일"
     }
     
-    mutating func getThisMonthlyCalendarWeekCount() -> Int {
-        let weeks = getMonthlyCalendar(year: currentYear, month: currentMonth)
-        return weeks.count
-    }
-    
-    mutating func getThisMonthlyCalendarWeek(weekIndex: Int) -> [String] {
-        let weeks = getMonthlyCalendar(year: currentYear, month: currentMonth)
-        let week = weeks[weekIndex]
-        return week
-    }
-    
-    func isToday(_ day: String) -> Bool {
-        return day == String(currentDay)
+    func isToday(year: Int, month: Int, day: String) -> Bool {
+        return year == currentYear && month == currentMonth && day == String(currentDay)
     }
 
     func isLastMonth(_ row: Int) -> Bool {
@@ -153,13 +132,5 @@ struct MonthlyCalendar {
 
     func isNextMonth(_ row: Int) -> Bool {
         return row < nextMonthRange
-    }
-    
-    func isDaySaturday(_ day: String) -> Bool {
-        return thisMonthSaturday.contains(day)
-    }
-    
-    func isDaySunday(_ day: String) -> Bool {
-        return thisMonthSunday.contains(day)
     }
 }
