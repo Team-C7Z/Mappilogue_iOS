@@ -42,19 +42,19 @@ class DatePickerViewController: BaseViewController {
         super.setupLayout()
 
         pickerView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(88)
-            $0.leading.trailing.equalTo(view.safeAreaInsets)
+            $0.top.leading.trailing.equalTo(view.safeAreaInsets)
             $0.height.equalTo(226)
         }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if touches.first!.location(in: self.view).y > pickerView.frame.maxY {
-            dismiss(animated: false) {
-                guard let date = self.selectedDate else { return }
-             //   print(date)
-                self.delegate?.chagedDate(date)
-            }
+        guard let touch = touches.first, touch.location(in: view).y > pickerView.frame.maxY else {
+            return
+        }
+        
+        dismiss(animated: false) {
+            guard let date = self.selectedDate else { return }
+            self.delegate?.chagedDate(date)
         }
     }
     
