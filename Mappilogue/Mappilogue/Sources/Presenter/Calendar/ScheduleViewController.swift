@@ -47,6 +47,8 @@ class ScheduleViewController: BaseViewController {
         lunarDateLabel.text = "음력 3월 27일"
         lunarDateLabel.font = .body02
         lunarDateLabel.textColor = .color707070
+        
+        addScheduleButton.addTarget(self, action: #selector(addScheduleButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -96,6 +98,10 @@ class ScheduleViewController: BaseViewController {
         dismiss(animated: false) {
             self.delegate?.dismissScheduleViewController()
         }
+    }
+    
+    @objc func addScheduleButtonTapped(_ sender: UIButton) {
+        
     }
 }
 
