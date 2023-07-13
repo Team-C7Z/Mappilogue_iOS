@@ -42,7 +42,8 @@ class DatePickerViewController: BaseViewController {
         super.setupLayout()
 
         pickerView.snp.makeConstraints {
-            $0.top.leading.trailing.equalTo(view.safeAreaInsets)
+            $0.top.equalToSuperview().offset(88)
+            $0.leading.trailing.equalTo(view.safeAreaInsets)
             $0.height.equalTo(226)
         }
     }
