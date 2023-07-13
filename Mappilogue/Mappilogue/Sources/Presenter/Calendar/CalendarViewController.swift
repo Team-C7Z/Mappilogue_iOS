@@ -205,7 +205,7 @@ extension CalendarViewController: ChangedDateDelegate, ScheduleViewControllerDel
     
     func presentScheduleViewController(in cell: WeekCell) {
         let scheduleViewController = ScheduleViewController()
-        scheduleViewController.modalPresentationStyle = .overCurrentContext
+        scheduleViewController.modalPresentationStyle = .overFullScreen
         present(scheduleViewController, animated: false)
     }
 }
