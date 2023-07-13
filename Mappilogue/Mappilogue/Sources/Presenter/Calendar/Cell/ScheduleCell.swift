@@ -13,6 +13,13 @@ class ScheduleCell: BaseCollectionViewCell {
     private let scheduleColorView = UIView()
     private let scheduleLabel = UILabel()
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+  
+        scheduleColorView.backgroundColor = .clear
+        scheduleLabel.text = nil
+    }
+
     override func setupProperty() {
         super.setupProperty()
         

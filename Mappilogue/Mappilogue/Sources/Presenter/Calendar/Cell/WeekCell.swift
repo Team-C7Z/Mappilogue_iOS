@@ -13,6 +13,7 @@ class WeekCell: BaseCollectionViewCell {
     private var monthlyCalendar = MonthlyCalendar()
     private var daySchedules = dummyCalendarScheduleData()
     
+    var selectedDate = SelectedDate(year: 0, month: 0)
     var weekIndex: Int = 0
     var week: [String] = []
     var isCurrentMonth: Bool = true
@@ -46,7 +47,6 @@ class WeekCell: BaseCollectionViewCell {
         super.setupProperty()
         
         lineView.backgroundColor = .colorEAE6E1
-
     }
     
     override func setupHierarchy() {
@@ -70,9 +70,12 @@ class WeekCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(weekIndex: Int) {
+    func configure(year: Int, month: Int, weekIndex: Int) {
+        selectedDate = SelectedDate(year: year, month: month)
         self.weekIndex = weekIndex
-        week = monthlyCalendar.getThisMonthlyCalendarWeek(weekIndex: weekIndex)
+        week = monthlyCalendar.getWeek(year: year, month: month, weekIndex: weekIndex)
+        
+        collectionView.reloadData()
     }
 }
 
@@ -89,17 +92,17 @@ extension WeekCell: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         switch indexPath.section {
         case 0:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DayCell.registerId, for: indexPath) as? DayCell else { return UICollectionViewCell() }
-            
+    
             let day = week[indexPath.row]
-            let isSaturday = monthlyCalendar.isDaySaturday(day)
-            let isSunday = monthlyCalendar.isDaySunday(day)
-            let isToday = monthlyCalendar.isToday(day)
+            let isSaturday = indexPath.row == 6
+            let isSunday = indexPath.row == 0
+            let isToday = monthlyCalendar.isToday(year: selectedDate.year, month: selectedDate.month, day: day)
             
             if weekIndex == 0 {
                 isCurrentMonth = monthlyCalendar.isLastMonth(indexPath.row)
             }
             
-            if weekIndex == monthlyCalendar.getThisMonthlyCalendarWeekCount() - 1 {
+            if weekIndex == monthlyCalendar.getWeekCount(year: selectedDate.year, month: selectedDate.month) - 1 {
                 isCurrentMonth = monthlyCalendar.isNextMonth(indexPath.row)
             }
             
@@ -126,7 +129,7 @@ extension WeekCell: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 let continuousDay = schedules[indexPath.section-1].1
                 
                 cell.configure(with: scheduleTitle, color: color, isScheduleContinuous: isScheduleContinuous, continuousDay: continuousDay)
-            }
+            } 
             
             return cell
         }

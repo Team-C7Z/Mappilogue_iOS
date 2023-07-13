@@ -7,10 +7,17 @@
 
 import UIKit
 
+struct SelectedDate {
+    var year: Int
+    var month: Int
+}
+
 class CalendarViewController: NavigationBarViewController {    
     private var monthlyCalendar = MonthlyCalendar()
+    private var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0)
     private var weekCount: Int = 0
-
+    
+    private let contentView = UIView()
     private let calendarHeaderView = UIView()
     private let currentDateLabel = UILabel()
     private let changeDateButton = UIButton()
@@ -30,20 +37,20 @@ class CalendarViewController: NavigationBarViewController {
     }()
     
     private let addScheduleButton = UIButton()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-      
-        weekCount = monthlyCalendar.getThisMonthlyCalendarWeekCount()
-    }
     
     override func setupProperty() {
         super.setupProperty()
         
-        currentDateLabel.setTextWithLineHeight(text: "2023년 7월", lineHeight: UILabel.subtitle01)
+        setCalendarDate()
+        
+        view.backgroundColor = .colorFFFFFF
+        contentView.backgroundColor = .colorFFFFFF
+        
+        currentDateLabel.setTextWithLineHeight(text: "\(selectedDate.year)년 \(selectedDate.month)월", lineHeight: UILabel.subtitle01)
         currentDateLabel.font = .subtitle01
         
         changeDateButton.setImage(UIImage(named: "changeDate"), for: .normal)
+        changeDateButton.addTarget(self, action: #selector(changeDateButtonTapped), for: .touchUpInside)
         
         addScheduleButton.setImage(UIImage(named: "addSchedule"), for: .normal)
     }
@@ -51,19 +58,24 @@ class CalendarViewController: NavigationBarViewController {
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        view.addSubview(calendarHeaderView)
+        view.addSubview(contentView)
+        contentView.addSubview(calendarHeaderView)
         calendarHeaderView.addSubview(currentDateLabel)
         calendarHeaderView.addSubview(changeDateButton)
         
-        view.addSubview(collectionView)
-        view.addSubview(addScheduleButton)
+        contentView.addSubview(collectionView)
+        contentView.addSubview(addScheduleButton)
     }
     
     override func setupLayout() {
         super.setupLayout()
     
+        contentView.snp.makeConstraints {
+            $0.top.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
         calendarHeaderView.snp.makeConstraints {
-            $0.centerX.top.equalTo(view.safeAreaLayoutGuide)
+            $0.centerX.top.equalTo(contentView)
             $0.width.equalTo(118)
             $0.height.equalTo(28)
         }
@@ -79,14 +91,33 @@ class CalendarViewController: NavigationBarViewController {
         
         collectionView.snp.makeConstraints {
             $0.top.equalTo(calendarHeaderView.snp.bottom).offset(10)
-            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.bottom.equalTo(contentView)
         }
         
         addScheduleButton.snp.makeConstraints {
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-13)
+            $0.trailing.equalTo(contentView).offset(-16)
+            $0.bottom.equalTo(contentView).offset(-13)
             $0.width.height.equalTo(55)
         }
+    }
+    
+    func setCalendarDate() {
+        selectedDate = SelectedDate(year: monthlyCalendar.currentYear, month: monthlyCalendar.currentMonth)
+        weekCount = monthlyCalendar.getWeekCount(year: selectedDate.year, month: selectedDate.month)
+    }
+    
+    @objc func changeDateButtonTapped(_ sender: UIButton) {
+        let datePickerViewController = DatePickerViewController()
+        datePickerViewController.selectedDate = selectedDate
+        datePickerViewController.delegate = self
+        datePickerViewController.modalPresentationStyle = .overCurrentContext
+        present(datePickerViewController, animated: false)
+        
+        chageDatePickerMode()
+    }
+    
+    func chageDatePickerMode() {
+        view.backgroundColor = .colorF5F3F0
     }
 }
 
@@ -119,7 +150,7 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
         default:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeekCell.registerId, for: indexPath) as? WeekCell else { return UICollectionViewCell() }
             
-            cell.configure(weekIndex: indexPath.row)
+            cell.configure(year: selectedDate.year, month: selectedDate.month, weekIndex: indexPath.row)
             
             return cell
         }
@@ -154,5 +185,20 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
     // 수직 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+}
+
+extension CalendarViewController: ChangedDateDelegate {
+    func chagedDate(_ selectedDate: SelectedDate) {
+        view.backgroundColor = .colorFFFFFF
+        
+        self.selectedDate = selectedDate
+        
+        let year = selectedDate.year
+        let month = selectedDate.month
+        currentDateLabel.setTextWithLineHeight(text: "\(year)년 \(month)월", lineHeight: UILabel.subtitle01)
+        weekCount = monthlyCalendar.getWeekCount(year: year, month: month)
+        
+        collectionView.reloadData()
     }
 }
