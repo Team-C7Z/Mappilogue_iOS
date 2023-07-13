@@ -51,6 +51,8 @@ class CalendarViewController: NavigationBarViewController {
         
         changeDateButton.setImage(UIImage(named: "changeDate"), for: .normal)
         changeDateButton.addTarget(self, action: #selector(changeDateButtonTapped), for: .touchUpInside)
+        
+        addScheduleButton.addTarget(self, action: #selector(addScheduleButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -115,6 +117,11 @@ class CalendarViewController: NavigationBarViewController {
     
     func chageDatePickerMode() {
         view.backgroundColor = .colorF5F3F0
+    }
+    
+    @objc func addScheduleButtonTapped(_ sender: UIButton) {
+        let addScheduleViewController = AddScheduleViewController()
+        navigationController?.pushViewController(addScheduleViewController, animated: false)
     }
 }
 
