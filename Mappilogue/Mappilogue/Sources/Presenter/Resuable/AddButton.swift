@@ -12,11 +12,6 @@ class AddButton: UIButton {
     private let addImage = UIImageView()
     private let addLabel = UILabel()
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupButton()
-     }
-    
     init(text: String, backgroundColor: UIColor) {
         super.init(frame: .zero)
         setupButton()
@@ -30,6 +25,11 @@ class AddButton: UIButton {
         setupHierarchy()
         setupLayout()
     }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupButton()
+     }
     
     private func setupButton() {
         addImage.image = UIImage(named: "add")

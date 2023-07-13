@@ -10,6 +10,8 @@ import UIKit
 class WeekCell: BaseCollectionViewCell {
     static let registerId = "\(WeekCell.self)"
     
+    weak var delegate: ScheduleViewControllerDelegate?
+    
     private var monthlyCalendar = MonthlyCalendar()
     private var daySchedules = dummyCalendarScheduleData()
     
@@ -157,4 +159,17 @@ extension WeekCell: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+    
+    // section 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: section == 0 ? 1 : 3, right: 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.presentScheduleViewController(in: self)
+    }
+}
+
+protocol ScheduleViewControllerDelegate: AnyObject {
+    func presentScheduleViewController(in cell: WeekCell)
 }

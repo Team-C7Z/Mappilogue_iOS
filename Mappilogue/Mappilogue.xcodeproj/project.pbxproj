@@ -11,6 +11,9 @@
 		9224FCF12A5BF304000A56A6 /* Schedules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF02A5BF304000A56A6 /* Schedules.swift */; };
 		9224FCF32A5C5E7A000A56A6 /* WeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */; };
 		9224FCF52A5D6C65000A56A6 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */; };
+		9224FCF72A5FC4CA000A56A6 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF62A5FC4CA000A56A6 /* ScheduleViewController.swift */; };
+		9224FCF92A5FCF72000A56A6 /* ScheduleInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF82A5FCF72000A56A6 /* ScheduleInfoCell.swift */; };
+		9224FCFB2A5FDD90000A56A6 /* AddScheduleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCFA2A5FDD90000A56A6 /* AddScheduleButton.swift */; };
 		9230BE452A57F01E0053E535 /* WeekdayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BE442A57F01E0053E535 /* WeekdayCell.swift */; };
 		9230BE472A57FEB80053E535 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BE462A57FEB80053E535 /* DayCell.swift */; };
 		9230BE492A58D23B0053E535 /* NavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BE482A58D23B0053E535 /* NavigationBarViewController.swift */; };
@@ -86,6 +89,9 @@
 		9224FCF02A5BF304000A56A6 /* Schedules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedules.swift; sourceTree = "<group>"; };
 		9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCell.swift; sourceTree = "<group>"; };
 		9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
+		9224FCF62A5FC4CA000A56A6 /* ScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
+		9224FCF82A5FCF72000A56A6 /* ScheduleInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleInfoCell.swift; sourceTree = "<group>"; };
+		9224FCFA2A5FDD90000A56A6 /* AddScheduleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleButton.swift; sourceTree = "<group>"; };
 		9230BE442A57F01E0053E535 /* WeekdayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayCell.swift; sourceTree = "<group>"; };
 		9230BE462A57FEB80053E535 /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
 		9230BE482A58D23B0053E535 /* NavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarViewController.swift; sourceTree = "<group>"; };
@@ -175,6 +181,7 @@
 				9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */,
 				9230BE462A57FEB80053E535 /* DayCell.swift */,
 				9224FCED2A5BEF80000A56A6 /* ScheduleCell.swift */,
+				9224FCF82A5FCF72000A56A6 /* ScheduleInfoCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -340,6 +347,7 @@
 				926999412A14F74B003DDAD2 /* CalendarViewController.swift */,
 				9230BE502A59B45D0053E535 /* MonthlyCalendar.swift */,
 				9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */,
+				9224FCF62A5FC4CA000A56A6 /* ScheduleViewController.swift */,
 				9230BE432A57EFF10053E535 /* Cell */,
 			);
 			path = Calendar;
@@ -400,6 +408,7 @@
 			isa = PBXGroup;
 			children = (
 				92A7B64E2A4CCE29009C9293 /* AddButton.swift */,
+				9224FCFA2A5FDD90000A56A6 /* AddScheduleButton.swift */,
 			);
 			path = Resuable;
 			sourceTree = "<group>";
@@ -598,6 +607,7 @@
 				92A7B65F2A4E07DB009C9293 /* TodayScheduleCell.swift in Sources */,
 				926999342A14F2A3003DDAD2 /* BaseViewController.swift in Sources */,
 				92459ED82A52494200493941 /* AddMarkedRecordCell.swift in Sources */,
+				9224FCF92A5FCF72000A56A6 /* ScheduleInfoCell.swift in Sources */,
 				9263786E2A5475AF004E5B6E /* OnboardingCell.swift in Sources */,
 				92A7B6532A4CDD4D009C9293 /* ScheduleType.swift in Sources */,
 				926999362A14F443003DDAD2 /* BaseView.swift in Sources */,
@@ -618,8 +628,10 @@
 				92A7B6592A4D01B3009C9293 /* TodayScheduleInfoCell.swift in Sources */,
 				9224FCF32A5C5E7A000A56A6 /* WeekCell.swift in Sources */,
 				926999462A14F75F003DDAD2 /* RecordViewController.swift in Sources */,
+				9224FCFB2A5FDD90000A56A6 /* AddScheduleButton.swift in Sources */,
 				926999402A14F73C003DDAD2 /* HomeViewController.swift in Sources */,
 				92459EDA2A530D1100493941 /* MarkedRecordCell.swift in Sources */,
+				9224FCF72A5FC4CA000A56A6 /* ScheduleViewController.swift in Sources */,
 				926998F92A14EC07003DDAD2 /* SceneDelegate.swift in Sources */,
 				9263786B2A546BDE004E5B6E /* OnboardingViewController.swift in Sources */,
 				92A7B6632A4E20BF009C9293 /* BaseTableViewCell.swift in Sources */,
