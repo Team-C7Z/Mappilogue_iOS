@@ -149,6 +149,7 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
             return cell
         default:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeekCell.registerId, for: indexPath) as? WeekCell else { return UICollectionViewCell() }
+            cell.delegate = self
             
             cell.configure(year: selectedDate.year, month: selectedDate.month, weekIndex: indexPath.row)
             
@@ -188,7 +189,7 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
     }
 }
 
-extension CalendarViewController: ChangedDateDelegate {
+extension CalendarViewController: ChangedDateDelegate, ScheduleViewControllerDelegate {
     func chagedDate(_ selectedDate: SelectedDate) {
         view.backgroundColor = .colorFFFFFF
         
@@ -200,5 +201,11 @@ extension CalendarViewController: ChangedDateDelegate {
         weekCount = monthlyCalendar.getWeekCount(year: year, month: month)
         
         collectionView.reloadData()
+    }
+    
+    func presentScheduleViewController(in cell: WeekCell) {
+        let scheduleViewController = ScheduleViewController()
+        scheduleViewController.modalPresentationStyle = .overCurrentContext
+        present(scheduleViewController, animated: false)
     }
 }
