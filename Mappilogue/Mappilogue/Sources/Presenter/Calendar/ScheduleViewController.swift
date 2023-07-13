@@ -91,11 +91,7 @@ class ScheduleViewController: BaseViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first, touch.location(in: view).x < scheduleView.frame.minX ||
-                touch.location(in: view).x > scheduleView.frame.maxX ||
-                touch.location(in: view).y < scheduleView.frame.minY ||
-                touch.location(in: view).y > scheduleView.frame.maxY
-        else { return }
+        guard let touch = touches.first, !scheduleView.frame.contains(touch.location(in: view)) else { return }
         
         dismiss(animated: false) {
             self.delegate?.dismissScheduleViewController()
@@ -112,10 +108,7 @@ extension ScheduleViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ScheduleInfoCell.registerId, for: indexPath) as? ScheduleInfoCell else { return UICollectionViewCell() }
         
-        //cell.configure(year: selectedDate.year, month: selectedDate.month, weekIndex: indexPath.row)
-        
         return cell
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

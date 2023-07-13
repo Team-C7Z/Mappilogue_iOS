@@ -212,5 +212,4 @@ extension CalendarViewController: ChangedDateDelegate, ScheduleViewControllerDel
     func dismissScheduleViewController() {
         addScheduleButton.isHidden = false
     }
-    
 }
