@@ -8,7 +8,8 @@
 import UIKit
 
 class ScheduleViewController: BaseViewController {
-
+    weak var delegate: DismissScheduleViewControllerDelegate?
+    
     private let scheduleView = UIView()
     private let dateLabel = UILabel()
     private let lunarDateLabel = UILabel()
@@ -24,6 +25,8 @@ class ScheduleViewController: BaseViewController {
         collectionView.dataSource = self
         return collectionView
     }()
+    
+    private let addScheduleButton = AddScheduleButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +56,7 @@ class ScheduleViewController: BaseViewController {
         scheduleView.addSubview(dateLabel)
         scheduleView.addSubview(lunarDateLabel)
         scheduleView.addSubview(collectionView)
+        scheduleView.addSubview(addScheduleButton)
     }
     
     override func setupLayout() {
@@ -78,6 +82,23 @@ class ScheduleViewController: BaseViewController {
         collectionView.snp.makeConstraints {
             $0.top.equalTo(scheduleView).offset(78)
             $0.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        addScheduleButton.snp.makeConstraints {
+            $0.trailing.equalTo(scheduleView).offset(-20)
+            $0.bottom.equalTo(scheduleView).offset(-21)
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first, touch.location(in: view).x < scheduleView.frame.minX ||
+                touch.location(in: view).x > scheduleView.frame.maxX ||
+                touch.location(in: view).y < scheduleView.frame.minY ||
+                touch.location(in: view).y > scheduleView.frame.maxY
+        else { return }
+        
+        dismiss(animated: false) {
+            self.delegate?.dismissScheduleViewController()
         }
     }
 }
@@ -114,4 +135,8 @@ extension ScheduleViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
+}
+
+protocol DismissScheduleViewControllerDelegate: AnyObject {
+    func dismissScheduleViewController()
 }

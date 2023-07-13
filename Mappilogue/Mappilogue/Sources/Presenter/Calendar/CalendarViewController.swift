@@ -36,7 +36,7 @@ class CalendarViewController: NavigationBarViewController {
         return collectionView
     }()
     
-    private let addScheduleButton = UIButton()
+    private let addScheduleButton = AddScheduleButton()
     
     override func setupProperty() {
         super.setupProperty()
@@ -51,8 +51,6 @@ class CalendarViewController: NavigationBarViewController {
         
         changeDateButton.setImage(UIImage(named: "changeDate"), for: .normal)
         changeDateButton.addTarget(self, action: #selector(changeDateButtonTapped), for: .touchUpInside)
-        
-        addScheduleButton.setImage(UIImage(named: "addSchedule"), for: .normal)
     }
     
     override func setupHierarchy() {
@@ -97,7 +95,6 @@ class CalendarViewController: NavigationBarViewController {
         addScheduleButton.snp.makeConstraints {
             $0.trailing.equalTo(contentView).offset(-16)
             $0.bottom.equalTo(contentView).offset(-13)
-            $0.width.height.equalTo(55)
         }
     }
     
@@ -189,7 +186,7 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
     }
 }
 
-extension CalendarViewController: ChangedDateDelegate, ScheduleViewControllerDelegate {
+extension CalendarViewController: ChangedDateDelegate, ScheduleViewControllerDelegate, DismissScheduleViewControllerDelegate {
     func chagedDate(_ selectedDate: SelectedDate) {
         view.backgroundColor = .colorFFFFFF
         
@@ -204,8 +201,16 @@ extension CalendarViewController: ChangedDateDelegate, ScheduleViewControllerDel
     }
     
     func presentScheduleViewController(in cell: WeekCell) {
+        addScheduleButton.isHidden = true
+        
         let scheduleViewController = ScheduleViewController()
+        scheduleViewController.delegate = self
         scheduleViewController.modalPresentationStyle = .overFullScreen
         present(scheduleViewController, animated: false)
     }
+    
+    func dismissScheduleViewController() {
+        addScheduleButton.isHidden = false
+    }
+    
 }
