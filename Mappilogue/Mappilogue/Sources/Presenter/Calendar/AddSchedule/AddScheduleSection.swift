@@ -45,8 +45,8 @@ enum AddScheduleSection: Int, CaseIterable {
         }
     }
     
-    func configureScheduleTitleColorCell(_ cell: ScheduleTitleColorCell, color: UIColor) {
-        cell.configure(with: color)
+    func configureScheduleTitleColorCell(_ cell: ScheduleTitleColorCell, color: UIColor, isColorSelection: Bool) {
+        cell.configure(with: color, isColorSelection: isColorSelection)
     }
     
     func configureNotificationRepeatCell(_ cell: NotificationRepeatCell, row: Int) {

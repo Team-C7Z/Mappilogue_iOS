@@ -99,7 +99,7 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
         
         if let scheduleTitleColorCell = cell as? ScheduleTitleColorCell {
             scheduleTitleColorCell.delegate = self
-            scheduleTitleColorCell.configure(with: selectedColor)
+            scheduleTitleColorCell.configure(with: selectedColor, isColorSelection: isColorSelection)
         }
         
         if let colorSelectionCell = cell as? ColorSelectionCell {
