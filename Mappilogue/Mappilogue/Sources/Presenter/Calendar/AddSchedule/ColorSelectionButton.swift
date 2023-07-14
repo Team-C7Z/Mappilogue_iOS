@@ -14,6 +14,20 @@ class ColorSelectionButton: UIButton {
     init() {
         super.init(frame: .zero)
         
+        setupProperty()
+        setupHierarchy()
+        setupLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        
+        setupProperty()
+        setupHierarchy()
+        setupLayout()
+    }
+    
+    func setupProperty() {
         layer.cornerRadius = 14
         backgroundColor = .color1C1C1C
         
@@ -22,10 +36,14 @@ class ColorSelectionButton: UIButton {
         colorSelectionLabel.font = .caption01
         
         colorSelectionArrowImage.image = UIImage(named: "colorSelection")
-        
+    }
+    
+    func setupHierarchy() {
         addSubview(colorSelectionLabel)
         addSubview(colorSelectionArrowImage)
-        
+    }
+    
+    func setupLayout() {
         colorSelectionLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(11)
@@ -37,9 +55,5 @@ class ColorSelectionButton: UIButton {
             $0.width.equalTo(10)
             $0.height.equalTo(5)
         }
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
     }
 }
