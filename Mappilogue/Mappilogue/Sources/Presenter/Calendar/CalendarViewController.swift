@@ -193,7 +193,7 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
     }
 }
 
-extension CalendarViewController: ChangedDateDelegate, ScheduleViewControllerDelegate, DismissScheduleViewControllerDelegate {
+extension CalendarViewController: ChangedDateDelegate, ScheduleViewControllerDelegate, DismissScheduleViewControllerDelegate, PresentAddScheduleViewControllerDelegate {
     func chagedDate(_ selectedDate: SelectedDate) {
         view.backgroundColor = .colorFFFFFF
         
@@ -211,12 +211,18 @@ extension CalendarViewController: ChangedDateDelegate, ScheduleViewControllerDel
         addScheduleButton.isHidden = true
         
         let scheduleViewController = ScheduleViewController()
-        scheduleViewController.delegate = self
+        scheduleViewController.dismissDelegate = self
+        scheduleViewController.presentDelegate = self
         scheduleViewController.modalPresentationStyle = .overFullScreen
         present(scheduleViewController, animated: false)
     }
     
     func dismissScheduleViewController() {
         addScheduleButton.isHidden = false
+    }
+    
+    func presentAddScheduleViewController() {
+        let addScheduleViewController = AddScheduleViewController()
+        navigationController?.pushViewController(addScheduleViewController, animated: false)
     }
 }
