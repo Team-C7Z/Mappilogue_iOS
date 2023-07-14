@@ -42,11 +42,11 @@ class ScheduleTypeHeaderView: BaseTableViewHeaderFooterView {
         stackView.distribution = .equalSpacing
         stackView.spacing = 14
         
-        todayScheduleButton.setTextWithLineHeight(text: "오늘의 일정", lineHeight: UILabel.title01)
+        todayScheduleButton.setTitle("오늘의 일정", for: .normal)
         todayScheduleButton.titleLabel?.font = .title01
         todayScheduleButton.setTitleColor(.color1C1C1C, for: .normal)
         
-        upcomingScheduleButton.setTextWithLineHeight(text: "다가오는 일정", lineHeight: UILabel.title01)
+        upcomingScheduleButton.setTitle("다가오는 일정", for: .normal)
         upcomingScheduleButton.titleLabel?.font = .title01
         upcomingScheduleButton.setTitleColor(.color9B9791, for: .normal)
     }

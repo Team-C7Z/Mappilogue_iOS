@@ -46,7 +46,7 @@ class CalendarViewController: NavigationBarViewController {
         view.backgroundColor = .colorFFFFFF
         contentView.backgroundColor = .colorFFFFFF
         
-        currentDateLabel.setTextWithLineHeight(text: "\(selectedDate.year)년 \(selectedDate.month)월", lineHeight: UILabel.subtitle01)
+        currentDateLabel.text = "\(selectedDate.year)년 \(selectedDate.month)월"
         currentDateLabel.font = .subtitle01
         
         changeDateButton.setImage(UIImage(named: "changeDate"), for: .normal)
@@ -201,7 +201,7 @@ extension CalendarViewController: ChangedDateDelegate, ScheduleViewControllerDel
         
         let year = selectedDate.year
         let month = selectedDate.month
-        currentDateLabel.setTextWithLineHeight(text: "\(year)년 \(month)월", lineHeight: UILabel.subtitle01)
+        currentDateLabel.text = "\(year)년 \(month)월"
         weekCount = monthlyCalendar.getWeekCount(year: year, month: month)
         
         collectionView.reloadData()

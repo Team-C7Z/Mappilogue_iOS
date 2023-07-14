@@ -62,7 +62,7 @@ class TodayScheduleCell: BaseTableViewCell {
     }
     
     func configure(with title: String, backgroundColor: UIColor, isExpandable: Bool, isExpanded: Bool) {
-        todayScheduleLabel.setTextWithLineHeight(text: title, lineHeight: UILabel.title02)
+        todayScheduleLabel.text = title
         contentView.backgroundColor = backgroundColor
         
         if isExpandable {

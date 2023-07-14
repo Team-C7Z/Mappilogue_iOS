@@ -14,6 +14,7 @@ class AddScheduleViewController: BaseViewController {
         tableView.separatorStyle = .none
         tableView.sectionHeaderHeight = 0
         tableView.sectionFooterHeight = 0
+        
         tableView.register(ScheduleTitleColorCell.self, forCellReuseIdentifier: ScheduleTitleColorCell.registerId)
         tableView.register(ScheduleDurationCell.self, forCellReuseIdentifier: ScheduleDurationCell.registerId)
         tableView.register(NotificationRepeatCell.self, forCellReuseIdentifier: NotificationRepeatCell.registerId)
@@ -100,8 +101,8 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let tableViewSection = AddScheduleSection(rawValue: indexPath.section) else { return 0 }
-        return tableViewSection.rowHeight
+        guard let section = AddScheduleSection(rawValue: indexPath.section) else { return 0 }
+        return section.rowHeight
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

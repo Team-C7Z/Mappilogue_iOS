@@ -33,7 +33,7 @@ class WeekdayCell: BaseCollectionViewCell {
     }
     
     func configure(with weekday: String, isSaturday: Bool, isSunday: Bool) {
-        weekdayLabel.setTextWithLineHeight(text: weekday, lineHeight: UILabel.caption02)
+        weekdayLabel.text = weekday
         weekdayLabel.textColor = isSaturday ? .color3C58EE : isSunday ? .colorF14C4C : .color1C1C1C
     }
 }

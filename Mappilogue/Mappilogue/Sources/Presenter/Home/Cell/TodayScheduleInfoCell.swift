@@ -100,8 +100,8 @@ class TodayScheduleInfoCell: BaseTableViewCell {
     }
     
     func configure(order: String, location: String, time: String) {
-        scheduleIndexLabel.setTextWithLineHeight(text: order, lineHeight: UILabel.title02)
-        locationLabel.setTextWithLineHeight(text: location, lineHeight: UILabel.title02)
-        timeLabel.setTextWithLineHeight(text: time, lineHeight: UILabel.body02)
+        scheduleIndexLabel.text = order
+        locationLabel.text = location
+        timeLabel.text = time
     }
 }

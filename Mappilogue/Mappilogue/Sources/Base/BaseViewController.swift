@@ -11,7 +11,6 @@ import SnapKit
 protocol BaseViewControllerProtocol {
     func setupProperty()
     func setupHierarchy()
-    func setupDelegate()
     func setupLayout()
 }
 
@@ -24,15 +23,12 @@ class BaseViewController: UIViewController, BaseViewControllerProtocol {
         
         setupProperty()
         setupHierarchy()
-        setupDelegate()
         setupLayout()
     }
     
     func setupProperty() {}
     
     func setupHierarchy() {}
-    
-    func setupDelegate() {}
     
     func setupLayout() {}
 }
