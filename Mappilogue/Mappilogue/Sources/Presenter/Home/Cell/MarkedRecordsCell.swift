@@ -36,7 +36,7 @@ class MarkedRecordsCell: BaseTableViewCell {
     override func setupProperty() {
         super.setupProperty()
 
-        markedRecordsLabel.setTextWithLineHeight(text: "마크한 기록", lineHeight: UILabel.title01)
+        markedRecordsLabel.text = "마크한 기록"
         markedRecordsLabel.font = .title01
         markedRecordsLabel.textColor = .color1C1C1C
     }
@@ -89,6 +89,6 @@ extension MarkedRecordsCell: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return CGSize(width: 176, height: 211)
+        return CGSize(width: 176, height: 211)
     }
 }

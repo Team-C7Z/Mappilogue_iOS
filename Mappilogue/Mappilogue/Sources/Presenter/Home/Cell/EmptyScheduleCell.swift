@@ -34,7 +34,7 @@ class EmptyScheduleCell: BaseTableViewCell {
         emptyScheduleLabel.textColor = .color707070
         emptyScheduleLabel.textAlignment = .center
         
-        emptyScheduleSubLabel.setTextWithLineHeight(text: "아래 버튼을 눌러 일정을 추가해 보세요!", lineHeight: UILabel.caption02)
+        emptyScheduleSubLabel.text = "아래 버튼을 눌러 일정을 추가해 보세요!"
         emptyScheduleSubLabel.font = .caption02
         emptyScheduleSubLabel.textColor = .color404040
         emptyScheduleSubLabel.textAlignment = .center
@@ -59,9 +59,9 @@ class EmptyScheduleCell: BaseTableViewCell {
     func configure(scheduleType: ScheduleType) {
         switch scheduleType {
         case .today:
-            emptyScheduleLabel.setTextWithLineHeight(text: "오늘은 등록된 일정이 없어요", lineHeight: UILabel.title02)
+            emptyScheduleLabel.text = "오늘은 등록된 일정이 없어요"
         case .upcoming:
-            emptyScheduleLabel.setTextWithLineHeight(text: "다가오는 일정이 없어요", lineHeight: UILabel.title02)
+            emptyScheduleLabel.text = "다가오는 일정이 없어요"
         }
     }
 }

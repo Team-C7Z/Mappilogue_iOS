@@ -16,7 +16,7 @@ class AddButton: UIButton {
         super.init(frame: .zero)
         setupButton()
         
-        addLabel.setTextWithLineHeight(text: text, lineHeight: UILabel.body03)
+        addLabel.text = text
         setTitleColor(.colorFFFFFF, for: .normal)
         self.backgroundColor = backgroundColor
         
