@@ -10,8 +10,8 @@ import UIKit
 class AddScheduleViewController: BaseViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.separatorStyle = .none
         tableView.backgroundColor = .colorFFFFFF
+        tableView.separatorStyle = .none
         tableView.sectionHeaderHeight = 0
         tableView.sectionFooterHeight = 0
         tableView.register(ScheduleTitleColorCell.self, forCellReuseIdentifier: ScheduleTitleColorCell.registerId)
@@ -44,7 +44,8 @@ class AddScheduleViewController: BaseViewController {
         super.setupLayout()
         
         tableView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(22)
+            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
@@ -97,22 +98,18 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
         switch indexPath.section {
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTitleColorCell.registerId, for: indexPath) as? ScheduleTitleColorCell else { return UITableViewCell() }
-            cell.selectionStyle = .none
             
             return cell
         case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleDurationCell.registerId, for: indexPath) as? ScheduleDurationCell else { return UITableViewCell() }
-            cell.selectionStyle = .none
             
             return cell
         case 2:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: NotificationRepeatCell.registerId, for: indexPath) as? NotificationRepeatCell else { return UITableViewCell() }
-            cell.selectionStyle = .none
             
             return cell
         case 3:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AddLocationButtonCell.registerId, for: indexPath) as? AddLocationButtonCell else { return UITableViewCell() }
-            cell.selectionStyle = .none
             
             return cell
         default:
