@@ -9,6 +9,7 @@ import UIKit
 
 class AddScheduleViewController: BaseViewController {
     var isColorSelection: Bool = false
+    var selectedColor: UIColor = .color1C1C1C
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -98,6 +99,11 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
         
         if let scheduleTitleColorCell = cell as? ScheduleTitleColorCell {
             scheduleTitleColorCell.delegate = self
+            scheduleTitleColorCell.configure(with: selectedColor)
+        }
+        
+        if let colorSelectionCell = cell as? ColorSelectionCell {
+            colorSelectionCell.delegate = self
         }
         
         if let notificationRepeatCell = cell as? NotificationRepeatCell {
@@ -118,10 +124,16 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
     }
 }
 
-extension AddScheduleViewController: ColorSelectionDelegate {
+extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelegate {
     func colorSelectionButtonTapped() {
         isColorSelection = !isColorSelection
         
         tableView.reloadSections([0], with: .none)
+    }
+    
+    func selectColor(_ color: UIColor) {
+        selectedColor = color
+        
+        tableView.reloadData()
     }
 }

@@ -54,6 +54,10 @@ class ScheduleTitleColorCell: BaseTableViewCell {
         }
     }
     
+    func configure(with color: UIColor) {
+        colorSelectionButton.backgroundColor = color
+    }
+    
     @objc func colorSelectionButtonTapped(_ sender: UIButton) {
         delegate?.colorSelectionButtonTapped()
     }

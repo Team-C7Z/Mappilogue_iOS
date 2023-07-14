@@ -10,8 +10,10 @@ import UIKit
 class ColorSelectionCell: BaseTableViewCell {
     static let registerId = "\(ColorSelectionCell.self)"
     
+    var delegate: SelectedColorDelegate?
+    
     private let dummyColorData = dummyColorSelectionData()
-    private var selectedColorIndex = 0
+    private var selectedColorIndex = Int.random(in: 0...14)
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -93,5 +95,11 @@ extension ColorSelectionCell: UICollectionViewDelegate, UICollectionViewDataSour
         selectedColorIndex = indexPath.row
         
         collectionView.reloadData()
+        
+        delegate?.selectColor(dummyColorData[selectedColorIndex])
     }
+}
+
+protocol SelectedColorDelegate: AnyObject {
+    func selectColor(_ color: UIColor)
 }

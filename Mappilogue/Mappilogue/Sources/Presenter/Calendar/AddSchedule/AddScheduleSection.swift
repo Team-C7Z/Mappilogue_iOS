@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum AddScheduleSection: Int, CaseIterable {
     case titleColor
@@ -42,6 +43,10 @@ enum AddScheduleSection: Int, CaseIterable {
         case .addLocation:
             return AddLocationButtonCell.registerId
         }
+    }
+    
+    func configureScheduleTitleColorCell(_ cell: ScheduleTitleColorCell, color: UIColor) {
+        cell.configure(with: color)
     }
     
     func configureNotificationRepeatCell(_ cell: NotificationRepeatCell, row: Int) {
