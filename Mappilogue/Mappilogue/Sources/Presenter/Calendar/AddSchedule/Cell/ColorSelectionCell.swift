@@ -51,10 +51,6 @@ class ColorSelectionCell: BaseTableViewCell {
             $0.edges.equalTo(contentView)
         }
     }
-    
-    func configure(color: UIColor) {
-        
-    }
 }
 
 extension ColorSelectionCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

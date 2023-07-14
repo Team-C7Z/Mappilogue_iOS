@@ -46,7 +46,9 @@ class ColorCell: BaseCollectionViewCell {
     func configure(with color: UIColor, isColorSelected: Bool) {
         contentView.backgroundColor = color
         if color == .color9B9791 || color == .color404040 {
-            selectedColorImage.tintColor = .white
+            selectedColorImage.tintColor = .colorFFFFFF
+        } else {
+            selectedColorImage.tintColor = .color1C1C1C
         }
         
         if isColorSelected {
