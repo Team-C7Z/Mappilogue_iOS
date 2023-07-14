@@ -8,7 +8,8 @@
 import UIKit
 
 class ScheduleViewController: BaseViewController {
-    weak var delegate: DismissScheduleViewControllerDelegate?
+    weak var dismissDelegate: DismissScheduleViewControllerDelegate?
+    weak var presentDelegate: PresentAddScheduleViewControllerDelegate?
     
     private let scheduleView = UIView()
     private let dateLabel = UILabel()
@@ -96,12 +97,14 @@ class ScheduleViewController: BaseViewController {
         guard let touch = touches.first, !scheduleView.frame.contains(touch.location(in: view)) else { return }
         
         dismiss(animated: false) {
-            self.delegate?.dismissScheduleViewController()
+            self.dismissDelegate?.dismissScheduleViewController()
         }
     }
     
     @objc func addScheduleButtonTapped(_ sender: UIButton) {
-        
+        dismiss(animated: false) {
+            self.presentDelegate?.presentAddScheduleViewController()
+        }
     }
 }
 
@@ -138,4 +141,8 @@ extension ScheduleViewController: UICollectionViewDelegate, UICollectionViewData
 
 protocol DismissScheduleViewControllerDelegate: AnyObject {
     func dismissScheduleViewController()
+}
+
+protocol PresentAddScheduleViewControllerDelegate: AnyObject {
+    func presentAddScheduleViewController()
 }
