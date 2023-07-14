@@ -16,6 +16,7 @@ class ColorCell: BaseCollectionViewCell {
         super.prepareForReuse()
   
         selectedColorImage.image = nil
+        selectedColorImage.tintColor = .color1C1C1C
     }
 
     override func setupProperty() {
@@ -44,6 +45,9 @@ class ColorCell: BaseCollectionViewCell {
     
     func configure(with color: UIColor, isColorSelected: Bool) {
         contentView.backgroundColor = color
+        if color == .color9B9791 || color == .color404040 {
+            selectedColorImage.tintColor = .white
+        }
         
         if isColorSelected {
             selectedColorImage.image = UIImage(named: "selectedColor")
