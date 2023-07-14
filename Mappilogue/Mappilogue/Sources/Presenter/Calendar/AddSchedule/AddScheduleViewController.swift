@@ -106,6 +106,15 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
             return cell
         case 2:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: NotificationRepeatCell.registerId, for: indexPath) as? NotificationRepeatCell else { return UITableViewCell() }
+
+            switch indexPath.row {
+            case 0:
+                cell.configure(imageName: "notification", title: "알림")
+            case 1:
+                cell.configure(imageName: "repeat", title: "반복")
+            default:
+                break
+            }
             
             return cell
         case 3:
@@ -130,5 +139,9 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
         default:
             return 0
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return section == 2 ? 16 : 0
     }
 }
