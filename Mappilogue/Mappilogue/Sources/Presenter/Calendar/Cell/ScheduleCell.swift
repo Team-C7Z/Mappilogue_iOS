@@ -49,7 +49,7 @@ class ScheduleCell: BaseCollectionViewCell {
     
     func configure(with schedule: String, color: UIColor, isScheduleContinuous: Bool, continuousDay: Int) {
         if !isScheduleContinuous {
-            scheduleLabel.setTextWithLineHeight(text: schedule, lineHeight: UILabel.caption03)
+            scheduleLabel.text = schedule
             scheduleColorView.backgroundColor = color
             frame.size.width = contentView.bounds.width * CGFloat(continuousDay)
         }

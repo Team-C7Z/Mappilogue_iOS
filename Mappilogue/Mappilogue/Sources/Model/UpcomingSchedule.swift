@@ -16,7 +16,9 @@ struct UpcomingSchedule {
 func dummyUpcomingScheduleData(scheduleCount: Int) -> [UpcomingSchedule] {
     var schedules = [UpcomingSchedule]()
     
-    if scheduleCount == 1 {
+    if scheduleCount == 0 {
+        
+    } else if scheduleCount == 1 {
         let schedule1 = UpcomingSchedule(title: "찬희랑 저녁 약속💗", date: "5월 13일", time: "6:00PM")
         
         schedules = [schedule1]

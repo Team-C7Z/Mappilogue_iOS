@@ -49,7 +49,7 @@ class DayCell: BaseCollectionViewCell {
     }
     
     func configure(with day: String, isCurrentMonth: Bool, isSaturday: Bool, isSunday: Bool, isToday: Bool) {
-        dayLabel.setTextWithLineHeight(text: day, lineHeight: UILabel.body02)
+        dayLabel.text = day
         
         if isCurrentMonth {
             dayLabel.textColor = .color1C1C1C

@@ -82,8 +82,8 @@ class MarkedRecordCell: BaseCollectionViewCell {
     
     func configure(image: String, date: String, location: String, color: UIColor) {
         markedRecordImage.image = UIImage(named: image)
-        markedRecordDateLabel.setTextWithLineHeight(text: date, lineHeight: UILabel.body02)
-        markedRecordLocationLabel.setTextWithLineHeight(text: location, lineHeight: UILabel.title02)
+        markedRecordDateLabel.text = date
+        markedRecordLocationLabel.text = location
         markedRecordButton.backgroundColor = color
     }
 }
