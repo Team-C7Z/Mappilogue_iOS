@@ -51,6 +51,8 @@ class CalendarViewController: NavigationBarViewController {
         
         changeDateButton.setImage(UIImage(named: "changeDate"), for: .normal)
         changeDateButton.addTarget(self, action: #selector(changeDateButtonTapped), for: .touchUpInside)
+        
+        addScheduleButton.addTarget(self, action: #selector(addScheduleButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -115,6 +117,11 @@ class CalendarViewController: NavigationBarViewController {
     
     func chageDatePickerMode() {
         view.backgroundColor = .colorF5F3F0
+    }
+    
+    @objc func addScheduleButtonTapped(_ sender: UIButton) {
+        let addScheduleViewController = AddScheduleViewController()
+        navigationController?.pushViewController(addScheduleViewController, animated: false)
     }
 }
 
@@ -186,7 +193,7 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
     }
 }
 
-extension CalendarViewController: ChangedDateDelegate, ScheduleViewControllerDelegate, DismissScheduleViewControllerDelegate {
+extension CalendarViewController: ChangedDateDelegate, ScheduleViewControllerDelegate, DismissScheduleViewControllerDelegate, PresentAddScheduleViewControllerDelegate {
     func chagedDate(_ selectedDate: SelectedDate) {
         view.backgroundColor = .colorFFFFFF
         
@@ -204,12 +211,18 @@ extension CalendarViewController: ChangedDateDelegate, ScheduleViewControllerDel
         addScheduleButton.isHidden = true
         
         let scheduleViewController = ScheduleViewController()
-        scheduleViewController.delegate = self
+        scheduleViewController.dismissDelegate = self
+        scheduleViewController.presentDelegate = self
         scheduleViewController.modalPresentationStyle = .overFullScreen
         present(scheduleViewController, animated: false)
     }
     
     func dismissScheduleViewController() {
         addScheduleButton.isHidden = false
+    }
+    
+    func presentAddScheduleViewController() {
+        let addScheduleViewController = AddScheduleViewController()
+        navigationController?.pushViewController(addScheduleViewController, animated: false)
     }
 }
