@@ -9,7 +9,9 @@ import UIKit
 
 class ScheduleTitleColorCell: BaseTableViewCell {
     static let registerId = "\(ScheduleTitleColorCell.self)"
-
+    
+    weak var delegate: ColorSelectionDelegate?
+    
     private let scheduleNameTextField = UITextField()
     private let colorSelectionButton = ColorSelectionButton()
     
@@ -24,6 +26,8 @@ class ScheduleTitleColorCell: BaseTableViewCell {
 
         scheduleNameTextField.font = .title02
         scheduleNameTextField.placeholder = "일정 제목을 적어 주세요"
+        
+        colorSelectionButton.addTarget(self, action: #selector(colorSelectionButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -49,4 +53,12 @@ class ScheduleTitleColorCell: BaseTableViewCell {
             $0.height.equalTo(28)
         }
     }
+    
+    @objc func colorSelectionButtonTapped(_ sender: UIButton) {
+        delegate?.colorSelectionButtonTapped()
+    }
+}
+
+protocol ColorSelectionDelegate: AnyObject {
+    func colorSelectionButtonTapped()
 }

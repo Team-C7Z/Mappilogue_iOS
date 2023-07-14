@@ -13,8 +13,10 @@ enum AddScheduleSection: Int, CaseIterable {
     case notificationRepeat
     case addLocation
     
-    var numberOfRows: Int {
+    func numberOfRows(_ isColorSelection: Bool) -> Int {
         switch self {
+        case .titleColor:
+            return isColorSelection ? 2 : 1
         case .notificationRepeat:
             return 2
         default:
@@ -22,10 +24,17 @@ enum AddScheduleSection: Int, CaseIterable {
         }
     }
     
-    var cellIdentifier: String {
+    func cellIdentifier(_ isColorSelection: Bool, row: Int) -> String {
         switch self {
         case .titleColor:
-            return ScheduleTitleColorCell.registerId
+            switch row {
+            case 0:
+                return ScheduleTitleColorCell.registerId
+            case 1:
+                return ColorSelectionCell.registerId
+            default:
+                return ""
+            }
         case .duration:
             return ScheduleDurationCell.registerId
         case .notificationRepeat:
@@ -46,10 +55,17 @@ enum AddScheduleSection: Int, CaseIterable {
         }
     }
     
-    var rowHeight: CGFloat {
+    func rowHeight(row: Int) -> CGFloat {
         switch self {
         case .titleColor:
-            return 48
+            switch row {
+            case 0:
+                return 48
+            case 1:
+                return 186
+            default:
+                return 0
+            }
         case .duration:
             return 81
         case .notificationRepeat:
