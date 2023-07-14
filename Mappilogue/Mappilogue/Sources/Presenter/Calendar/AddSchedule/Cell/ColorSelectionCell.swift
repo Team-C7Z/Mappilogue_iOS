@@ -11,6 +11,7 @@ class ColorSelectionCell: BaseTableViewCell {
     static let registerId = "\(ColorSelectionCell.self)"
     
     private let dummyColorData = dummyColorSelectionData()
+    private var selectedColorIndex = 0
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -62,7 +63,9 @@ extension ColorSelectionCell: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ColorCell.registerId, for: indexPath) as? ColorCell else { return UICollectionViewCell() }
         
-        cell.configure(color: dummyColorData[indexPath.row])
+        let isColorSelected = indexPath.row == selectedColorIndex
+        
+        cell.configure(with: dummyColorData[indexPath.row], isColorSelected: isColorSelected)
         
         return cell
         
@@ -87,6 +90,8 @@ extension ColorSelectionCell: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       
+        selectedColorIndex = indexPath.row
+        
+        collectionView.reloadData()
     }
 }
