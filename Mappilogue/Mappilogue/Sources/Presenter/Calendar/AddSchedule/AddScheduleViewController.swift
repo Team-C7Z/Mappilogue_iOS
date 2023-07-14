@@ -51,28 +51,24 @@ class AddScheduleViewController: BaseViewController {
     
     func setNavigationBar() {
         title = "일정"
-        setNavigationBackButton()
-        setNavigationCompletionButton()
+        setNavigationButton(imageName: "back", action: #selector(backButtonTapped), isLeft: true)
+        setNavigationButton(imageName: "completion", action: #selector(completionButtonTapped), isLeft: false)
     }
     
-    func setNavigationBackButton() {
-        let backButton = UIButton(type: .custom)
-        backButton.setImage(UIImage(named: "back"), for: .normal)
-        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        let leftButton = UIBarButtonItem(customView: backButton)
-        navigationItem.leftBarButtonItem = leftButton
+    func setNavigationButton(imageName: String, action: Selector, isLeft: Bool) {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: imageName), for: .normal)
+        button.addTarget(self, action: action, for: .touchUpInside)
+        let barButtonItem = UIBarButtonItem(customView: button)
+        if isLeft {
+            navigationItem.leftBarButtonItem = barButtonItem
+        } else {
+            navigationItem.rightBarButtonItem = barButtonItem
+        }
     }
-    
+
     @objc func backButtonTapped(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
-    }
-    
-    func setNavigationCompletionButton() {
-        let completionButton = UIButton(type: .custom)
-        completionButton.setImage(UIImage(named: "completion"), for: .normal)
-        completionButton.addTarget(self, action: #selector(completionButtonTapped), for: .touchUpInside)
-        let rightButton = UIBarButtonItem(customView: completionButton)
-        navigationItem.rightBarButtonItem = rightButton
     }
     
     @objc func completionButtonTapped(_ sender: UIButton) {
@@ -82,66 +78,34 @@ class AddScheduleViewController: BaseViewController {
 
 extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return AddScheduleSection.allCases.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 2:
-            return 2
-        default:
-            return 1
-        }
+        guard let section = AddScheduleSection(rawValue: section) else { return 0 }
+        return section.numberOfRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTitleColorCell.registerId, for: indexPath) as? ScheduleTitleColorCell else { return UITableViewCell() }
-            
-            return cell
-        case 1:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleDurationCell.registerId, for: indexPath) as? ScheduleDurationCell else { return UITableViewCell() }
-            
-            return cell
-        case 2:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: NotificationRepeatCell.registerId, for: indexPath) as? NotificationRepeatCell else { return UITableViewCell() }
-
-            switch indexPath.row {
-            case 0:
-                cell.configure(imageName: "notification", title: "알림")
-            case 1:
-                cell.configure(imageName: "repeat", title: "반복")
-            default:
-                break
-            }
-            
-            return cell
-        case 3:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: AddLocationButtonCell.registerId, for: indexPath) as? AddLocationButtonCell else { return UITableViewCell() }
-            
-            return cell
-        default:
-            return UITableViewCell()
+        guard let section = AddScheduleSection(rawValue: indexPath.section) else { return UITableViewCell() }
+        
+        let cellIdentifier = section.cellIdentifier
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        
+        if let notificationRepeatCell = cell as? NotificationRepeatCell {
+            section.configureNotificationRepeatCell(notificationRepeatCell, row: indexPath.row)
         }
+        
+        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.section {
-        case 0:
-            return 48
-        case 1:
-            return 81
-        case 2:
-            return 48
-        case 3:
-            return 53
-        default:
-            return 0
-        }
+        guard let tableViewSection = AddScheduleSection(rawValue: indexPath.section) else { return 0 }
+        return tableViewSection.rowHeight
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return section == 2 ? 16 : 0
+        guard let section = AddScheduleSection(rawValue: section) else { return 0 }
+        return section.footerHeight
     }
 }
