@@ -25,6 +25,8 @@
 		9224FD112A611218000A56A6 /* TodayScheduleSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD102A611218000A56A6 /* TodayScheduleSection.swift */; };
 		9224FD152A613AB8000A56A6 /* UpcomingScheduleSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD142A613AB8000A56A6 /* UpcomingScheduleSection.swift */; };
 		9224FD172A6161B0000A56A6 /* ColorSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD162A6161B0000A56A6 /* ColorSelectionCell.swift */; };
+		9224FD192A616EB1000A56A6 /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD182A616EB1000A56A6 /* ColorCell.swift */; };
+		9224FD1B2A61705D000A56A6 /* ColorSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD1A2A61705D000A56A6 /* ColorSelection.swift */; };
 		9230BE452A57F01E0053E535 /* WeekdayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BE442A57F01E0053E535 /* WeekdayCell.swift */; };
 		9230BE472A57FEB80053E535 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BE462A57FEB80053E535 /* DayCell.swift */; };
 		9230BE492A58D23B0053E535 /* NavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BE482A58D23B0053E535 /* NavigationBarViewController.swift */; };
@@ -112,6 +114,8 @@
 		9224FD102A611218000A56A6 /* TodayScheduleSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayScheduleSection.swift; sourceTree = "<group>"; };
 		9224FD142A613AB8000A56A6 /* UpcomingScheduleSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingScheduleSection.swift; sourceTree = "<group>"; };
 		9224FD162A6161B0000A56A6 /* ColorSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectionCell.swift; sourceTree = "<group>"; };
+		9224FD182A616EB1000A56A6 /* ColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
+		9224FD1A2A61705D000A56A6 /* ColorSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelection.swift; sourceTree = "<group>"; };
 		9230BE442A57F01E0053E535 /* WeekdayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayCell.swift; sourceTree = "<group>"; };
 		9230BE462A57FEB80053E535 /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
 		9230BE482A58D23B0053E535 /* NavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarViewController.swift; sourceTree = "<group>"; };
@@ -208,6 +212,7 @@
 			children = (
 				9224FD002A600A86000A56A6 /* ScheduleTitleColorCell.swift */,
 				9224FD162A6161B0000A56A6 /* ColorSelectionCell.swift */,
+				9224FD182A616EB1000A56A6 /* ColorCell.swift */,
 				9224FD022A600ACF000A56A6 /* ScheduleDurationCell.swift */,
 				9224FD042A600F42000A56A6 /* NotificationRepeatCell.swift */,
 			);
@@ -464,6 +469,7 @@
 				92A7B6652A4E5B3A009C9293 /* UpcomingSchedule.swift */,
 				92459EDB2A53158A00493941 /* MarkedRecord.swift */,
 				9224FCF02A5BF304000A56A6 /* Schedules.swift */,
+				9224FD1A2A61705D000A56A6 /* ColorSelection.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -670,6 +676,7 @@
 				926378712A54E0E6004E5B6E /* OnboardingManager.swift in Sources */,
 				92A7B6512A4CD261009C9293 /* AddScheduleButtonCell.swift in Sources */,
 				9224FCFD2A5FF185000A56A6 /* AddScheduleViewController.swift in Sources */,
+				9224FD192A616EB1000A56A6 /* ColorCell.swift in Sources */,
 				92A7B6682A4E6154009C9293 /* UpcomingScheduleCell.swift in Sources */,
 				9224FD112A611218000A56A6 /* TodayScheduleSection.swift in Sources */,
 				92A7B65B2A4D0FD9009C9293 /* AddLocationButtonCell.swift in Sources */,
@@ -687,6 +694,7 @@
 				926998F92A14EC07003DDAD2 /* SceneDelegate.swift in Sources */,
 				9263786B2A546BDE004E5B6E /* OnboardingViewController.swift in Sources */,
 				92A7B6632A4E20BF009C9293 /* BaseTableViewCell.swift in Sources */,
+				9224FD1B2A61705D000A56A6 /* ColorSelection.swift in Sources */,
 				92A7B64F2A4CCE29009C9293 /* AddButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

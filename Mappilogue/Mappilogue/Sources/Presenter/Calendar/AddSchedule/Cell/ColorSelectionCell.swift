@@ -10,15 +10,17 @@ import UIKit
 class ColorSelectionCell: BaseTableViewCell {
     static let registerId = "\(ColorSelectionCell.self)"
     
+    private let dummyColorData = dummyColorSelectionData()
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .red
+        collectionView.backgroundColor = .colorFFFFFF
         collectionView.showsHorizontalScrollIndicator = false
-        //collectionView.register(DayCell.self, forCellWithReuseIdentifier: DayCell.registerId)
-        //collectionView.delegate = self
-        //collectionView.dataSource = self
+        collectionView.register(ColorCell.self, forCellWithReuseIdentifier: ColorCell.registerId)
+        collectionView.delegate = self
+        collectionView.dataSource = self
        
         return collectionView
     }()
@@ -49,5 +51,42 @@ class ColorSelectionCell: BaseTableViewCell {
     
     func configure(color: UIColor) {
         
+    }
+}
+
+extension ColorSelectionCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dummyColorData.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ColorCell.registerId, for: indexPath) as? ColorCell else { return UICollectionViewCell() }
+        
+        cell.configure(color: dummyColorData[indexPath.row])
+        
+        return cell
+        
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 32, height: 32)
+    }
+
+    // 수평 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 36
+    }
+
+    // 수직 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 18
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 27, left: 20, bottom: 27, right: 19)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+       
     }
 }
