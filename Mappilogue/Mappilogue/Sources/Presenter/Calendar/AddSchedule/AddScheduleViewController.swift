@@ -144,47 +144,34 @@ class AddScheduleViewController: BaseViewController {
     }
     
     func setSelectedDate() {
-       
-        if let currentYearIndex = years.firstIndex(of: startDate.year) {
-            startDatePickerView.selectRow(currentYearIndex, inComponent: 0, animated: true)
+        func selectedRow(for pickerView: UIPickerView, withValue value: Int, isComponent component: Int) {
+            pickerView.selectRow(value, inComponent: component, animated: true)
         }
         
-        if let currentMonthIndex = months.firstIndex(of: startDate.month) {
-            startDatePickerView.selectRow(currentMonthIndex, inComponent: 1, animated: true)
-        }
-        
+        selectedRow(for: startDatePickerView, withValue: years.firstIndex(of: startDate.year) ?? 0, isComponent: ComponentType.year.rawValue)
+        selectedRow(for: startDatePickerView, withValue: months.firstIndex(of: startDate.month) ?? 0, isComponent: ComponentType.month.rawValue)
+
         if let day = startDate.day, let currentDayIndex = days.firstIndex(of: day) {
-            startDatePickerView.selectRow(currentDayIndex, inComponent: 2, animated: true)
+            selectedRow(for: startDatePickerView, withValue: currentDayIndex, isComponent: ComponentType.day.rawValue)
         }
         
-        if let currentYearIndex = years.firstIndex(of: endDate.year) {
-            endDatePickerView.selectRow(currentYearIndex, inComponent: 0, animated: true)
-        }
-        
-        if let currentMonthIndex = months.firstIndex(of: endDate.month) {
-            endDatePickerView.selectRow(currentMonthIndex, inComponent: 1, animated: true)
-        }
-        
+        selectedRow(for: endDatePickerView, withValue: years.firstIndex(of: endDate.year) ?? 0, isComponent: ComponentType.year.rawValue)
+        selectedRow(for: endDatePickerView, withValue: months.firstIndex(of: endDate.month) ?? 0, isComponent: ComponentType.month.rawValue)
+
         if let day = endDate.day, let currentDayIndex = days.firstIndex(of: day) {
-            endDatePickerView.selectRow(currentDayIndex, inComponent: 2, animated: true)
+            selectedRow(for: endDatePickerView, withValue: currentDayIndex, isComponent: ComponentType.day.rawValue)
         }
-        
     }
     
     @objc func viewTapped(_ gesture: UITapGestureRecognizer) {
         let location = gesture.location(in: tableView)
-        if !startDatePickerOuterView.isHidden {
-            if location.y < startDatePickerOuterView.frame.minY {
-                startDatePickerOuterView.isHidden = true
-                
-                tableView.reloadData()
-            }
-        } else if !endDatePickerOuterView.isHidden {
-            if location.y < endDatePickerOuterView.frame.minY {
-                endDatePickerOuterView.isHidden = true
-                
-                tableView.reloadData()
-            }
+        
+        if !startDatePickerOuterView.isHidden && location.y < startDatePickerOuterView.frame.minY {
+            startDatePickerOuterView.isHidden = true
+            tableView.reloadData()
+        } else if !endDatePickerOuterView.isHidden && location.y < endDatePickerOuterView.frame.minY {
+            endDatePickerOuterView.isHidden = true
+            tableView.reloadData()
         }
     }
 }
@@ -243,61 +230,67 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
 }
 
 extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    enum ComponentType: Int, CaseIterable {
+        case year
+        case month
+        case day
+    }
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 3
+        return ComponentType.allCases.count
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        switch component {
-        case 0:
-            return years.count
-        case 1:
-            return months.count
-        case 2:
-            return days.count
-        default:
+        guard let componentType = ComponentType(rawValue: component) else {
             return 0
+        }
+        
+        switch componentType {
+        case .year:
+            return years.count
+        case .month:
+            return months.count
+        case .day:
+            return days.count
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        switch component {
-        case 0:
+        guard let componentType = ComponentType(rawValue: component) else { return nil }
+        
+        switch componentType {
+        case .year:
             return "\(years[row])"
-        case 1:
+        case .month:
             return "\(months[row])"
-        case 2:
+        case .day:
             return "\(days[row])"
-        default:
-            return ""
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        switch component {
-        case 0:
-            if !startDatePickerOuterView.isHidden {
+        guard let componentType = ComponentType(rawValue: component) else { return }
+        
+        if !startDatePickerOuterView.isHidden {
+            switch componentType {
+            case .year:
                 startDate.year = years[row]
-            }
-            if !endDatePickerOuterView.isHidden {
-                endDate.year = years[row]
-            }
-        case 1:
-            if !startDatePickerOuterView.isHidden {
+            case .month:
                 startDate.month = months[row]
-            }
-            if !endDatePickerOuterView.isHidden {
-                endDate.month = months[row]
-            }
-        case 2:
-            if !startDatePickerOuterView.isHidden {
+            case .day:
                 startDate.day = days[row]
             }
-            if !endDatePickerOuterView.isHidden {
+        }
+        
+        if !endDatePickerOuterView.isHidden {
+            switch componentType {
+            case .year:
+                endDate.year = years[row]
+            case .month:
+                endDate.month = months[row]
+            case .day:
                 endDate.day = days[row]
             }
-        default:
-            break
         }
     }
 }
@@ -327,6 +320,5 @@ extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelega
         endDatePickerOuterView.isHidden = false
         
         tableView.reloadData()
-
     }
 }
