@@ -10,6 +10,8 @@ import UIKit
 class ScheduleDurationCell: BaseTableViewCell {
     static let registerId = "\(ScheduleDurationCell.self)"
     
+    private var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0, day: 0)
+    
     weak var startDateDelegate: DatePickerStartDateDelegate?
     weak var endDateDelegate: DatePickerEndDateDelegate?
     
@@ -46,7 +48,7 @@ class ScheduleDurationCell: BaseTableViewCell {
         startLabel.textColor = .color707070
         startLabel.font = .body02
         
-        startDateLabel.text = "2023년 5월 10일"
+        startDateLabel.text = "\(selectedDate.year)년 \(selectedDate.month)월 \(selectedDate.day ?? 1)일"
         startDateLabel.textColor = .color1C1C1C
         startDateLabel.font = .title02
         
@@ -54,7 +56,7 @@ class ScheduleDurationCell: BaseTableViewCell {
         endLabel.textColor = .color707070
         endLabel.font = .body02
         
-        endDateLabel.text = "2023년 5월 10일"
+        endDateLabel.text = "\(selectedDate.year)년 \(selectedDate.month)월 \(selectedDate.day ?? 1)일"
         endDateLabel.textColor = .color1C1C1C
         endDateLabel.font = .title02
     }
@@ -99,6 +101,10 @@ class ScheduleDurationCell: BaseTableViewCell {
             $0.centerX.equalTo(endDateButton)
             $0.top.equalTo(endDateButton).offset(41)
         }
+    }
+    
+    func configure(with selectedDate: SelectedDate) {
+        self.selectedDate = selectedDate
     }
     
     @objc func startDateButtonTapped(_ sender: UIButton) {
