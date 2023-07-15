@@ -49,6 +49,10 @@ enum AddScheduleSection: Int, CaseIterable {
         cell.configure(with: color, isColorSelection: isColorSelection)
     }
     
+    func configureScheduleDurationColorCell(_ cell: ScheduleDurationCell, startDate: SelectedDate, endDate: SelectedDate) {
+        cell.configure(startDate: startDate, endDate: endDate)
+    }
+    
     func configureNotificationRepeatCell(_ cell: NotificationRepeatCell, row: Int) {
         switch row {
         case 0:

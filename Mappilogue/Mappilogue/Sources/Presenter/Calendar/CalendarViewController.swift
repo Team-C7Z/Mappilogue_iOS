@@ -10,6 +10,7 @@ import UIKit
 struct SelectedDate {
     var year: Int
     var month: Int
+    var day: Int?
 }
 
 class CalendarViewController: NavigationBarViewController {    
