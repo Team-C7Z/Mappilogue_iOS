@@ -15,9 +15,9 @@ class AddScheduleViewController: BaseViewController {
     var isColorSelection: Bool = false
     var selectedColor: UIColor = .color1C1C1C
     
-    let years = Array(1970...2050)
-    let months = Array(1...12)
-    let days = Array(1...31)
+    let years: [Int] = Array(1970...2050)
+    let months: [Int] = Array(1...12)
+    var days: [Int] = []
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -44,6 +44,7 @@ class AddScheduleViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        days = monthlyCalendar.getDays(year: monthlyCalendar.currentYear, month: monthlyCalendar.currentMonth)
         startDate = .init(year: monthlyCalendar.currentYear, month: monthlyCalendar.currentMonth, day: monthlyCalendar.currentDay)
         endDate = .init(year: monthlyCalendar.currentYear, month: monthlyCalendar.currentMonth, day: monthlyCalendar.currentDay)
 
@@ -275,8 +276,12 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
             switch componentType {
             case .year:
                 startDate.year = years[row]
+                days = monthlyCalendar.getDays(year: startDate.year, month: startDate.month)
+                startDatePickerView.reloadComponent(2)
             case .month:
                 startDate.month = months[row]
+                days = monthlyCalendar.getDays(year: startDate.year, month: startDate.month)
+                startDatePickerView.reloadComponent(2)
             case .day:
                 startDate.day = days[row]
             }
@@ -286,8 +291,12 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
             switch componentType {
             case .year:
                 endDate.year = years[row]
+                days = monthlyCalendar.getDays(year: startDate.year, month: startDate.month)
+                startDatePickerView.reloadComponent(2)
             case .month:
                 endDate.month = months[row]
+                days = monthlyCalendar.getDays(year: endDate.year, month: endDate.month)
+                endDatePickerView.reloadComponent(2)
             case .day:
                 endDate.day = days[row]
             }
