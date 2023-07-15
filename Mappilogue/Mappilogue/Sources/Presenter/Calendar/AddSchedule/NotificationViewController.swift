@@ -9,7 +9,9 @@ import UIKit
 
 class NotificationViewController: BaseViewController {
     private let notificationTimes = ["10분 전", "30분 전", "1시간 30분 전", "2시간 전", "2시간 30분 전", "3시간 전", "4시간 전", "5시간 전", "6시간 전", "1일(24시간) 전", "2일(48시간) 전", "3일(72시간) 전", "일주일 전"]
-    var selectedTimes: [Bool] = []
+    var selectedTime: [Bool] = []
+    
+    weak var delegate: NotificationTimeDelegate?
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -26,7 +28,7 @@ class NotificationViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        selectedTimes = Array(repeating: false, count: notificationTimes.count)
+        selectedTime = Array(repeating: false, count: notificationTimes.count)
     }
     
     override func setupProperty() {
@@ -49,8 +51,8 @@ class NotificationViewController: BaseViewController {
         }
     }
     
-    func setNavigationBar() {
-        title = "일정"
+    private func setNavigationBar() {
+        title = "알림"
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: "back2"), for: .normal)
         button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
@@ -59,6 +61,8 @@ class NotificationViewController: BaseViewController {
     }
     
     @objc func backButtonTapped(_ sender: UIButton) {
+        delegate?.selectedNotificationTime([])
+        
         navigationController?.popViewController(animated: true)
     }
 }
@@ -73,7 +77,7 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
         cell.selectionStyle = .none
         
         let notificationTime = notificationTimes[indexPath.row]
-        let isSelect = selectedTimes[indexPath.row]
+        let isSelect = selectedTime[indexPath.row]
         cell.configure(with: notificationTime, isSelect: isSelect)
         
         return cell
@@ -92,8 +96,12 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedTimes[indexPath.row] = !selectedTimes[indexPath.row]
+        selectedTime[indexPath.row] = !selectedTime[indexPath.row]
         
         tableView.reloadRows(at: [indexPath], with: .none)
     }
+}
+
+protocol NotificationTimeDelegate: AnyObject {
+    func selectedNotificationTime(_ selectedTime: [String])
 }
