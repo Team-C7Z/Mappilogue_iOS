@@ -62,7 +62,6 @@ class OnboardingViewController: BaseViewController {
         startButtonLabel.textColor = .colorFFFFFF
         startButtonLabel.font = .pretendard(.regular, size: 20)
         startButton.isEnabled = false
-        startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
