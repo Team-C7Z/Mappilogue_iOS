@@ -11,10 +11,12 @@ class NotificationCell: BaseTableViewCell {
     static let registerId = "\(NotificationCell.self)"
     
     private let notificationTimeLabel = UILabel()
+    private let selectedTimeImage = UIImageView()
     
     override func prepareForReuse() {
         super.prepareForReuse()
 
+        selectedTimeImage.image = nil
     }
     
     override func layoutSubviews() {
@@ -34,6 +36,7 @@ class NotificationCell: BaseTableViewCell {
         super.setupHierarchy()
         
         contentView.addSubview(notificationTimeLabel)
+        contentView.addSubview(selectedTimeImage)
     }
 
     override func setupLayout() {
@@ -42,9 +45,18 @@ class NotificationCell: BaseTableViewCell {
         notificationTimeLabel.snp.makeConstraints {
             $0.leading.centerY.equalTo(contentView)
         }
+        
+        selectedTimeImage.snp.makeConstraints {
+            $0.trailing.centerY.equalTo(contentView)
+            $0.width.height.equalTo(25)
+        }
     }
     
-    func configure(with title: String) {
+    func configure(with title: String, isSelect: Bool) {
         notificationTimeLabel.text = title
+        
+        if isSelect {
+            selectedTimeImage.image = UIImage(named: "completion")
+        }
     }
 }

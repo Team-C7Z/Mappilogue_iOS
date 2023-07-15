@@ -9,6 +9,7 @@ import UIKit
 
 class NotificationViewController: BaseViewController {
     private let notificationTimes = ["10분 전", "30분 전", "1시간 30분 전", "2시간 전", "2시간 30분 전", "3시간 전", "4시간 전", "5시간 전", "6시간 전", "1일(24시간) 전", "2일(48시간) 전", "3일(72시간) 전", "일주일 전"]
+    var selectedTimes: [Bool] = []
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -25,6 +26,7 @@ class NotificationViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        selectedTimes = Array(repeating: false, count: notificationTimes.count)
     }
     
     override func setupProperty() {
@@ -71,7 +73,8 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
         cell.selectionStyle = .none
         
         let notificationTime = notificationTimes[indexPath.row]
-        cell.configure(with: notificationTime)
+        let isSelect = selectedTimes[indexPath.row]
+        cell.configure(with: notificationTime, isSelect: isSelect)
         
         return cell
     }
@@ -89,6 +92,8 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedTimes[indexPath.row] = !selectedTimes[indexPath.row]
         
+        tableView.reloadRows(at: [indexPath], with: .none)
     }
 }
