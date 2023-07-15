@@ -27,6 +27,8 @@
 		9224FD172A6161B0000A56A6 /* ColorSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD162A6161B0000A56A6 /* ColorSelectionCell.swift */; };
 		9224FD192A616EB1000A56A6 /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD182A616EB1000A56A6 /* ColorCell.swift */; };
 		9224FD1B2A61705D000A56A6 /* ColorSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD1A2A61705D000A56A6 /* ColorSelection.swift */; };
+		9224FD1F2A62B4E9000A56A6 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD1E2A62B4E9000A56A6 /* NotificationViewController.swift */; };
+		9224FD212A62BBB7000A56A6 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD202A62BBB6000A56A6 /* NotificationCell.swift */; };
 		9230BE452A57F01E0053E535 /* WeekdayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BE442A57F01E0053E535 /* WeekdayCell.swift */; };
 		9230BE472A57FEB80053E535 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BE462A57FEB80053E535 /* DayCell.swift */; };
 		9230BE492A58D23B0053E535 /* NavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BE482A58D23B0053E535 /* NavigationBarViewController.swift */; };
@@ -116,6 +118,8 @@
 		9224FD162A6161B0000A56A6 /* ColorSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectionCell.swift; sourceTree = "<group>"; };
 		9224FD182A616EB1000A56A6 /* ColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
 		9224FD1A2A61705D000A56A6 /* ColorSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelection.swift; sourceTree = "<group>"; };
+		9224FD1E2A62B4E9000A56A6 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		9224FD202A62BBB6000A56A6 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		9230BE442A57F01E0053E535 /* WeekdayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayCell.swift; sourceTree = "<group>"; };
 		9230BE462A57FEB80053E535 /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
 		9230BE482A58D23B0053E535 /* NavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarViewController.swift; sourceTree = "<group>"; };
@@ -199,9 +203,10 @@
 		9224FCFE2A5FF82F000A56A6 /* AddSchedule */ = {
 			isa = PBXGroup;
 			children = (
+				9224FD0A2A60F2B5000A56A6 /* AddScheduleSection.swift */,
 				9224FCFC2A5FF185000A56A6 /* AddScheduleViewController.swift */,
 				9224FD082A601B00000A56A6 /* ColorSelectionButton.swift */,
-				9224FD0A2A60F2B5000A56A6 /* AddScheduleSection.swift */,
+				9224FD1E2A62B4E9000A56A6 /* NotificationViewController.swift */,
 				9224FCFF2A600A25000A56A6 /* Cell */,
 			);
 			path = AddSchedule;
@@ -215,6 +220,7 @@
 				9224FD182A616EB1000A56A6 /* ColorCell.swift */,
 				9224FD022A600ACF000A56A6 /* ScheduleDurationCell.swift */,
 				9224FD042A600F42000A56A6 /* NotificationRepeatCell.swift */,
+				9224FD202A62BBB6000A56A6 /* NotificationCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -650,6 +656,7 @@
 				92A7B6662A4E5B3A009C9293 /* UpcomingSchedule.swift in Sources */,
 				9224FCEE2A5BEF80000A56A6 /* ScheduleCell.swift in Sources */,
 				924BE0CE2A51C4D4002C70FF /* MarkedRecordsCell.swift in Sources */,
+				9224FD1F2A62B4E9000A56A6 /* NotificationViewController.swift in Sources */,
 				9291582A2A252CC20022BEF9 /* UIColor.swift in Sources */,
 				9224FCF12A5BF304000A56A6 /* Schedules.swift in Sources */,
 				926999382A14F4AA003DDAD2 /* TabBarControllerController.swift in Sources */,
@@ -665,6 +672,7 @@
 				92A7B6532A4CDD4D009C9293 /* ScheduleType.swift in Sources */,
 				926999362A14F443003DDAD2 /* BaseView.swift in Sources */,
 				92FE26132A4B74D800BCDB82 /* ScheduleTypeHeaderView.swift in Sources */,
+				9224FD212A62BBB7000A56A6 /* NotificationCell.swift in Sources */,
 				9224FD0D2A610134000A56A6 /* EmptyTodayScheduleSection.swift in Sources */,
 				926998F72A14EC07003DDAD2 /* AppDelegate.swift in Sources */,
 				9224FD032A600ACF000A56A6 /* ScheduleDurationCell.swift in Sources */,
