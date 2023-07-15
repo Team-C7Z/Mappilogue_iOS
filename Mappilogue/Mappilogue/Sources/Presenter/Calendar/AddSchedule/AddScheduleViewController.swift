@@ -228,8 +228,11 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let notificationViewController = NotificationViewController()
-        navigationController?.pushViewController(notificationViewController, animated: true)
+        if indexPath.section == 2 && indexPath.row == 0 {
+            let notificationViewController = NotificationViewController()
+            notificationViewController.delegate = self
+            navigationController?.pushViewController(notificationViewController, animated: true)
+        }
     }
 }
 
@@ -307,7 +310,7 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
     }
 }
 
-extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelegate, DatePickerStartDateDelegate, DatePickerEndDateDelegate {
+extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelegate, DatePickerStartDateDelegate, DatePickerEndDateDelegate, NotificationTimeDelegate {
     func colorSelectionButtonTapped() {
         isColorSelection = !isColorSelection
         
@@ -332,5 +335,9 @@ extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelega
         endDatePickerOuterView.isHidden = false
         
         tableView.reloadData()
+    }
+    
+    func selectedNotificationTime(_ selectedTime: [String]) {
+        print(selectedTime)
     }
 }
