@@ -8,9 +8,11 @@
 import UIKit
 
 class AddScheduleViewController: BaseViewController {
+    private var monthlyCalendar = MonthlyCalendar()
+    private var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0, day: 0)
+    
     var isColorSelection: Bool = false
     var selectedColor: UIColor = .color1C1C1C
-    private var selectedDate: SelectedDate?
     
     let years = Array(1970...2050)
     let months = Array(1...12)
@@ -41,6 +43,8 @@ class AddScheduleViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        selectedDate = .init(year: monthlyCalendar.currentYear, month: monthlyCalendar.currentMonth, day: monthlyCalendar.currentDay)
+        setDate()
     }
     
     override func setupProperty() {
@@ -131,6 +135,25 @@ class AddScheduleViewController: BaseViewController {
     @objc func completionButtonTapped(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
     }
+    
+    func setDate() {
+        let year = selectedDate.year
+        if let currentYearIndex = years.firstIndex(of: year) {
+            startDatePickerView.selectRow(currentYearIndex, inComponent: 0, animated: true)
+            endDatePickerView.selectRow(currentYearIndex, inComponent: 0, animated: true)
+        }
+        
+        let month = selectedDate.month
+        if let currentMonthIndex = months.firstIndex(of: month) {
+            startDatePickerView.selectRow(currentMonthIndex, inComponent: 1, animated: true)
+            endDatePickerView.selectRow(currentMonthIndex, inComponent: 1, animated: true)
+        }
+        
+        if let day = selectedDate.day, let currentDayIndex = days.firstIndex(of: day) {
+            startDatePickerView.selectRow(currentDayIndex, inComponent: 2, animated: true)
+            endDatePickerView.selectRow(currentDayIndex, inComponent: 2, animated: true)
+        }
+    }
 }
 
 extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource {
@@ -161,6 +184,7 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
         if let scheduleDurationCell = cell as? ScheduleDurationCell {
             scheduleDurationCell.startDateDelegate = self
             scheduleDurationCell.endDateDelegate = self
+            scheduleDurationCell.configure(with: selectedDate)
         }
         
         if let notificationRepeatCell = cell as? NotificationRepeatCell {
@@ -219,11 +243,11 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         switch component {
         case 0:
-            selectedDate?.year = years[row]
+            selectedDate.year = years[row]
         case 1:
-            selectedDate?.month = months[row]
+            selectedDate.month = months[row]
         case 2:
-            selectedDate?.day = days[row]
+            selectedDate.day = days[row]
         default:
             break
         }
