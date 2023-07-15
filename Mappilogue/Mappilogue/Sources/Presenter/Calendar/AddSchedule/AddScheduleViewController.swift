@@ -10,6 +10,11 @@ import UIKit
 class AddScheduleViewController: BaseViewController {
     var isColorSelection: Bool = false
     var selectedColor: UIColor = .color1C1C1C
+    private var selectedDate: SelectedDate?
+    
+    let years = Array(1970...2050)
+    let months = Array(1...12)
+    let days = Array(1...31)
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -28,6 +33,11 @@ class AddScheduleViewController: BaseViewController {
         return tableView
     }()
     
+    private let startDatePickerOuterView = UIView()
+    private let startDatePickerView = UIPickerView()
+    private let endDatePickerOuterView = UIView()
+    private let endDatePickerView = UIPickerView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,12 +47,30 @@ class AddScheduleViewController: BaseViewController {
         super.setupProperty()
         
         setNavigationBar()
+        
+        startDatePickerOuterView.backgroundColor = .colorF5F3F0
+        endDatePickerOuterView.backgroundColor = .colorF5F3F0
+        
+        startDatePickerView.backgroundColor = .colorF5F3F0
+        startDatePickerView.delegate = self
+        startDatePickerView.dataSource = self
+
+        endDatePickerView.backgroundColor = .colorF5F3F0
+        endDatePickerView.delegate = self
+        endDatePickerView.dataSource = self
+        
+        startDatePickerOuterView.isHidden = true
+        endDatePickerOuterView.isHidden = true
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
         
         view.addSubview(tableView)
+        view.addSubview(startDatePickerOuterView)
+        view.addSubview(endDatePickerOuterView)
+        startDatePickerOuterView.addSubview(startDatePickerView)
+        endDatePickerOuterView.addSubview(endDatePickerView)
     }
     
     override func setupLayout() {
@@ -51,6 +79,30 @@ class AddScheduleViewController: BaseViewController {
         tableView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(22)
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+    
+        startDatePickerOuterView.snp.makeConstraints {
+            $0.leading.bottom.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(236)
+        }
+        
+        endDatePickerOuterView.snp.makeConstraints {
+            $0.leading.bottom.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(236)
+        }
+        
+        startDatePickerView.snp.makeConstraints {
+            $0.top.equalTo(startDatePickerOuterView).offset(5)
+            $0.leading.equalTo(startDatePickerOuterView).offset(40)
+            $0.trailing.equalTo(startDatePickerOuterView).offset(-40)
+            $0.bottom.equalTo(startDatePickerOuterView).offset(-5)
+        }
+        
+        endDatePickerView.snp.makeConstraints {
+            $0.top.equalTo(endDatePickerOuterView).offset(5)
+            $0.leading.equalTo(endDatePickerOuterView).offset(40)
+            $0.trailing.equalTo(endDatePickerOuterView).offset(-40)
+            $0.bottom.equalTo(endDatePickerOuterView).offset(-5)
         }
     }
     
@@ -106,6 +158,11 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
             colorSelectionCell.delegate = self
         }
         
+        if let scheduleDurationCell = cell as? ScheduleDurationCell {
+            scheduleDurationCell.startDateDelegate = self
+            scheduleDurationCell.endDateDelegate = self
+        }
+        
         if let notificationRepeatCell = cell as? NotificationRepeatCell {
             section.configureNotificationRepeatCell(notificationRepeatCell, row: indexPath.row)
         }
@@ -122,9 +179,58 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
         guard let section = AddScheduleSection(rawValue: section) else { return 0 }
         return section.footerHeight
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
 }
 
-extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelegate {
+extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 3
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        switch component {
+        case 0:
+            return years.count
+        case 1:
+            return months.count
+        case 2:
+            return days.count
+        default:
+            return 0
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        switch component {
+        case 0:
+            return "\(years[row])"
+        case 1:
+            return "\(months[row])"
+        case 2:
+            return "\(days[row])"
+        default:
+            return ""
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        switch component {
+        case 0:
+            selectedDate?.year = years[row]
+        case 1:
+            selectedDate?.month = months[row]
+        case 2:
+            selectedDate?.day = days[row]
+        default:
+            break
+        }
+    }
+}
+
+extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelegate, DatePickerStartDateDelegate, DatePickerEndDateDelegate {
     func colorSelectionButtonTapped() {
         isColorSelection = !isColorSelection
         
@@ -135,5 +241,15 @@ extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelega
         selectedColor = color
         
         tableView.reloadData()
+    }
+    
+    func startDateButtonTapped() {
+        startDatePickerOuterView.isHidden = false
+        endDatePickerOuterView.isHidden = true
+    }
+    
+    func endDateButtonTapped() {
+        startDatePickerOuterView.isHidden = true
+        endDatePickerOuterView.isHidden = false
     }
 }

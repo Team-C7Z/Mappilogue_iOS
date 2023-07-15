@@ -10,11 +10,14 @@ import UIKit
 class ScheduleDurationCell: BaseTableViewCell {
     static let registerId = "\(ScheduleDurationCell.self)"
     
+    weak var startDateDelegate: DatePickerStartDateDelegate?
+    weak var endDateDelegate: DatePickerEndDateDelegate?
+    
     private let stackView = UIStackView()
-    private let startView = UIView()
+    private let startDateButton = UIButton()
     private let startLabel = UILabel()
     private let startDateLabel = UILabel()
-    private let endView = UIView()
+    private let endDateButton = UIButton()
     private let endLabel = UILabel()
     private let endDateLabel = UILabel()
     
@@ -33,9 +36,12 @@ class ScheduleDurationCell: BaseTableViewCell {
         stackView.distribution = .fillEqually
         stackView.spacing = 1
         
-        startView.backgroundColor = .colorFFFFFF
-        endView.backgroundColor = .colorFFFFFF
+        startDateButton.backgroundColor = .colorFFFFFF
+        startDateButton.addTarget(self, action: #selector(startDateButtonTapped), for: .touchUpInside)
         
+        endDateButton.backgroundColor = .colorFFFFFF
+        endDateButton.addTarget(self, action: #selector(endDateButtonTapped), for: .touchUpInside)
+
         startLabel.text = "시작"
         startLabel.textColor = .color707070
         startLabel.font = .body02
@@ -56,14 +62,14 @@ class ScheduleDurationCell: BaseTableViewCell {
     override func setupHierarchy() {
         super.setupHierarchy()
     
-        [startView, endView].forEach {
+        [startDateButton, endDateButton].forEach {
             stackView.addArrangedSubview($0)
         }
         contentView.addSubview(stackView)
-        startView.addSubview(startLabel)
-        startView.addSubview(startDateLabel)
-        endView.addSubview(endLabel)
-        endView.addSubview(endDateLabel)
+        startDateButton.addSubview(startLabel)
+        startDateButton.addSubview(startDateLabel)
+        endDateButton.addSubview(endLabel)
+        endDateButton.addSubview(endDateLabel)
     }
     
     override func setupLayout() {
@@ -75,23 +81,39 @@ class ScheduleDurationCell: BaseTableViewCell {
         }
 
         startLabel.snp.makeConstraints {
-            $0.centerX.equalTo(startView)
-            $0.top.equalTo(startView).offset(15)
+            $0.centerX.equalTo(startDateButton)
+            $0.top.equalTo(startDateButton).offset(15)
         }
 
         startDateLabel.snp.makeConstraints {
-            $0.centerX.equalTo(startView)
-            $0.top.equalTo(startView).offset(41)
+            $0.centerX.equalTo(startDateButton)
+            $0.top.equalTo(startDateButton).offset(41)
         }
 
         endLabel.snp.makeConstraints {
-            $0.centerX.equalTo(endView)
-            $0.top.equalTo(endView).offset(15)
+            $0.centerX.equalTo(endDateButton)
+            $0.top.equalTo(endDateButton).offset(15)
         }
 
         endDateLabel.snp.makeConstraints {
-            $0.centerX.equalTo(endView)
-            $0.top.equalTo(endView).offset(41)
+            $0.centerX.equalTo(endDateButton)
+            $0.top.equalTo(endDateButton).offset(41)
         }
     }
+    
+    @objc func startDateButtonTapped(_ sender: UIButton) {
+        startDateDelegate?.startDateButtonTapped()
+    }
+    
+    @objc func endDateButtonTapped(_ sender: UIButton) {
+        endDateDelegate?.endDateButtonTapped()
+    }
+}
+
+protocol DatePickerStartDateDelegate: AnyObject {
+    func startDateButtonTapped()
+}
+
+protocol DatePickerEndDateDelegate: AnyObject {
+    func endDateButtonTapped()
 }
