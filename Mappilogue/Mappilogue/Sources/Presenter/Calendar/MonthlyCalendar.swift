@@ -132,4 +132,35 @@ struct MonthlyCalendar {
     func isNextMonth(_ row: Int) -> Bool {
         return row < nextMonthRange
     }
+    
+    mutating func getDays(year: Int, month: Int) -> [Int] {
+        let calendar = Calendar.current
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "d"
+        
+        var currentMonthDays: [String] = []
+        
+        // 월의 첫 번째 날 가져오기
+        let startDateComponents = DateComponents(year: year, month: month, day: 1)
+        guard let startDate = calendar.date(from: startDateComponents) else {
+            return []
+        }
+        
+        // 월의 마지막 날 가져오기
+        guard let range = calendar.range(of: .day, in: .month, for: startDate) else {
+            return []
+        }
+        let endDate = calendar.date(byAdding: .day, value: range.count - 1, to: startDate)!
+        
+        var currentDate = startDate
+        while currentDate <= endDate {
+            let day = dateFormatter.string(from: currentDate)
+            currentMonthDays.append(day)
+            
+            // 다음 날로 이동
+            currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
+        }
+    
+        return currentMonthDays.compactMap {Int($0)}
+    }
 }
