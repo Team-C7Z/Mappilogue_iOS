@@ -11,8 +11,13 @@ class ColorSelectionButton: UIButton {
     private let colorSelectionLabel = UILabel()
     private let colorSelectionArrowImage = UIImageView()
     
-    init() {
+    init(textColor: UIColor, color: UIColor, isColorSelection: Bool) {
         super.init(frame: .zero)
+
+        colorSelectionLabel.textColor = textColor
+        backgroundColor = color
+        colorSelectionArrowImage.image = UIImage(named: isColorSelection ? "closedColorSelection" : "openColorSelection")
+        colorSelectionArrowImage.tintColor = textColor
         
         setupProperty()
         setupHierarchy()
@@ -29,13 +34,9 @@ class ColorSelectionButton: UIButton {
     
     func setupProperty() {
         layer.cornerRadius = 14
-        backgroundColor = .color1C1C1C
         
         colorSelectionLabel.text = "색상"
-        colorSelectionLabel.textColor = .colorFFFFFF
         colorSelectionLabel.font = .caption01
-        
-        colorSelectionArrowImage.image = UIImage(named: "colorSelection")
     }
     
     func setupHierarchy() {
