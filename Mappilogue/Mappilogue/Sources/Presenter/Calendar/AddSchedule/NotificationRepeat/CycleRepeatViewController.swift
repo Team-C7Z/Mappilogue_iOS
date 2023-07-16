@@ -10,7 +10,7 @@ import UIKit
 class CycleRepeatViewController: BaseViewController {
     var selectedCycle: String?
     
-    private let stackView = UIStackView()
+    private let weekdayStackView = UIStackView()
     private var dailyButton = UIButton()
     private let monthlyButton = UIButton()
     private let yearlyButton = UIButton()
@@ -23,9 +23,9 @@ class CycleRepeatViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
-        stackView.spacing = 8
+        weekdayStackView.axis = .horizontal
+        weekdayStackView.distribution = .fillEqually
+        weekdayStackView.spacing = 8
         
         dailyButton.setTitle("매일", for: .normal)
         dailyButton.setTitleColor(.colorC9C6C2, for: .normal)
@@ -55,16 +55,16 @@ class CycleRepeatViewController: BaseViewController {
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        view.addSubview(stackView)
+        view.addSubview(weekdayStackView)
         [dailyButton, monthlyButton, yearlyButton].forEach {
-            stackView.addArrangedSubview($0)
+            weekdayStackView.addArrangedSubview($0)
         }
     }
     
     override func setupLayout() {
         super.setupLayout()
         
-        stackView.snp.makeConstraints {
+        weekdayStackView.snp.makeConstraints {
             $0.top.equalTo(view).offset(18)
             $0.leading.equalTo(view)
         }
