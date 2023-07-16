@@ -69,9 +69,7 @@ class RepeatViewController: BaseViewController {
         
         continerView.snp.makeConstraints {
             $0.top.equalTo(stackView.snp.bottom)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
