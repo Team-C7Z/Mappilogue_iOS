@@ -13,18 +13,24 @@ class WeekdayRepeatViewController: BaseViewController {
     var selectedWeekday: String?
     
     private let weekdayStackView = UIStackView()
+    
     private let separatorView = UIView()
     private let spacingEndStackView = UIStackView()
+    
     private let spacingButton = UIButton()
     private let spacingLabel = UILabel()
+    private let spacingStackView = UIStackView()
     private let spacingTextField = UITextField()
+    private let spacingDateLabel = UILabel()
+    
     private let endButton = UIButton()
     private let endLabel = UILabel()
     private let endDateLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.hideKeyboardWhenTappedAround()
     }
     
     override func setupProperty() {
@@ -58,11 +64,21 @@ class WeekdayRepeatViewController: BaseViewController {
         spacingButton.backgroundColor = .colorFFFFFF
         endButton.backgroundColor = .colorFFFFFF
         
+        spacingStackView.axis = .horizontal
+        spacingStackView.distribution = .fillEqually
+        spacingStackView.spacing = 0
+        
         spacingLabel.text = "간격"
         spacingLabel.textColor = .color707070
         spacingLabel.font = .body02
 
-        spacingTextField.text = "1주"
+        spacingTextField.text = "1"
+        spacingTextField.textColor = .color1C1C1C
+        spacingTextField.font = .title02
+        spacingTextField.keyboardType = .numberPad
+        spacingTextField.textAlignment = .center
+        
+        spacingDateLabel.text = "주"
         spacingTextField.textColor = .color1C1C1C
         spacingTextField.font = .title02
 
@@ -86,9 +102,13 @@ class WeekdayRepeatViewController: BaseViewController {
             spacingEndStackView.addArrangedSubview($0)
         }
         
+        spacingButton.addSubview(spacingStackView)
         spacingButton.addSubview(spacingLabel)
-        spacingButton.addSubview(spacingTextField)
-
+        
+        [spacingTextField, spacingDateLabel].forEach {
+            spacingStackView.addArrangedSubview($0)
+        }
+        
         endButton.addSubview(endLabel)
         endButton.addSubview(endDateLabel)
     }
@@ -117,7 +137,7 @@ class WeekdayRepeatViewController: BaseViewController {
             $0.centerX.equalTo(spacingButton)
         }
 
-        spacingTextField.snp.makeConstraints {
+        spacingStackView.snp.makeConstraints {
             $0.top.equalTo(spacingButton).offset(41)
             $0.centerX.equalTo(spacingButton)
         }
