@@ -77,6 +77,10 @@ class WeekdayRepeatViewController: BaseViewController {
         spacingTextField.font = .title02
         spacingTextField.keyboardType = .numberPad
         spacingTextField.textAlignment = .center
+        spacingTextField.delegate = self
+        spacingTextField.addTarget(self, action: #selector(textFieldDidBeginEditing), for: .editingDidBegin)
+        spacingTextField.addTarget(self, action: #selector(textFieldEditingChanged), for: .editingChanged)
+        spacingTextField.addTarget(self, action: #selector(textFieldDidEndEditing), for: .editingDidEnd)
         
         spacingDateLabel.text = "주"
         spacingTextField.textColor = .color1C1C1C
@@ -151,12 +155,30 @@ class WeekdayRepeatViewController: BaseViewController {
             $0.top.equalTo(endButton).offset(41)
             $0.centerX.equalTo(endButton)
         }
-        
     }
     
     @objc func weekdayButtonTapped(_ sender: UIButton) {
         if let title = sender.titleLabel?.text {
             selectedWeekday = title
+        }
+    }
+}
+
+extension WeekdayRepeatViewController: UITextFieldDelegate {
+    @objc func textFieldDidBeginEditing(_ textField: UITextField) {
+        spacingTextField.text = ""
+    }
+    
+    @objc func textFieldEditingChanged(_ textField: UITextField) {
+        if let spacing = spacingTextField.text, spacing.count > 2 {
+            spacingTextField.text = String(spacing.prefix(2))
+        }
+        
+    }
+    
+    @objc func textFieldDidEndEditing(_ textField: UITextField) {
+        if let spacing = spacingTextField.text, spacing.isEmpty {
+            spacingTextField.text = "1"
         }
     }
 }
