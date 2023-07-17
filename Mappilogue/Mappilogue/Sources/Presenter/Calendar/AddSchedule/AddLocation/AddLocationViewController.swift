@@ -8,8 +8,22 @@
 import UIKit
 
 class AddLocationViewController: BaseViewController {
+    let dummyLocation = dummyLocationData()
+    
     private let addLocationView = UIView()
     private let locationTextField = UITextField()
+    
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = .colorF9F8F7
+        tableView.sectionHeaderHeight = 0
+        tableView.sectionFooterHeight = 0
+        tableView.register(LocationCell.self, forCellReuseIdentifier: LocationCell.registerId)
+        tableView.delegate = self
+        tableView.dataSource = self
+        return tableView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +50,7 @@ class AddLocationViewController: BaseViewController {
         
         view.addSubview(addLocationView)
         addLocationView.addSubview(locationTextField)
+        addLocationView.addSubview(tableView)
     }
     
     override func setupLayout() {
@@ -54,6 +69,12 @@ class AddLocationViewController: BaseViewController {
             $0.trailing.equalTo(addLocationView).offset(-20)
             $0.height.equalTo(40)
         }
+        
+        tableView.snp.makeConstraints {
+            $0.top.equalTo(locationTextField.snp.bottom).offset(12)
+            $0.leading.trailing.equalTo(addLocationView)
+            $0.bottom.equalTo(addLocationView).offset(-25)
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -61,6 +82,35 @@ class AddLocationViewController: BaseViewController {
             return
         }
 
+        dismiss(animated: false)
+    }
+}
+
+extension AddLocationViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: LocationCell.registerId, for: indexPath) as? LocationCell else { return UITableViewCell() }
+        cell.selectionStyle = .none
+        
+        let location = dummyLocation[indexPath.row]
+        let title = location.title
+        let address = location.address
+        
+        cell.configure(with: title, address: address)
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 55
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let location = dummyLocation[indexPath.row].title
+    
         dismiss(animated: false)
     }
 }
