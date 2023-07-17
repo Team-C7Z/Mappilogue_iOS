@@ -17,9 +17,17 @@ class WeekdayRepeatViewController: BaseViewController {
     let months: [Int] = Array(1...12)
     var days: [Int] = []
     
-    var selectedWeekday: String?
+    var selectedWeekday: [String] = []
+    var weekdayButton: [UIButton] = []
     
     private let weekdayStackView = UIStackView()
+    private let mondayButtoun = UIButton()
+    private let tuesdayButtoun = UIButton()
+    private let wednesdayButton = UIButton()
+    private let thursdayButton = UIButton()
+    private let fridayButtoun = UIButton()
+    private let saturdayButton = UIButton()
+    private let sundayButtoun = UIButton()
     
     private let separatorView = UIView()
     private let spacingEndStackView = UIStackView()
@@ -54,9 +62,9 @@ class WeekdayRepeatViewController: BaseViewController {
         weekdayStackView.axis = .horizontal
         weekdayStackView.distribution = .equalSpacing
         
-        for day in weekday {
-            let button = UIButton()
-            button.setTitle(day, for: .normal)
+        weekdayButton = [mondayButtoun, tuesdayButtoun, wednesdayButton, thursdayButton, fridayButtoun, saturdayButton, sundayButtoun]
+        for (index, button) in weekdayButton.enumerated() {
+            button.setTitle(weekday[index], for: .normal)
             button.titleLabel?.font = .body01
             button.setTitleColor(.color1C1C1C, for: .normal)
             button.layer.cornerRadius = 18
@@ -208,8 +216,23 @@ class WeekdayRepeatViewController: BaseViewController {
     
     @objc func weekdayButtonTapped(_ sender: UIButton) {
         if let title = sender.titleLabel?.text {
-            selectedWeekday = title
+            sender.isSelected = !sender.isSelected
+            
+            if sender.isSelected {
+                selectedWeekday.append(title)
+            } else {
+                if let index = selectedWeekday.firstIndex(of: title) {
+                    selectedWeekday.remove(at: index)
+                }
+            }
+            
+            updateCycleButtonDesign(sender)
         }
+    }
+    
+    func updateCycleButtonDesign(_ sender: UIButton) {
+        sender.backgroundColor = sender.isSelected ? .color1C1C1C : .colorEAE6E1
+        sender.setTitleColor(sender.isSelected ? .colorFFFFFF : .color1C1C1C, for: .normal)
     }
     
     func setSelectedDate() {
