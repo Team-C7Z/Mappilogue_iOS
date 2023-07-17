@@ -228,10 +228,16 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 2 && indexPath.row == 0 {
-            let notificationViewController = NotificationViewController()
-            notificationViewController.delegate = self
-            navigationController?.pushViewController(notificationViewController, animated: true)
+        if indexPath.section == 2 {
+            
+            if indexPath.row == 0 {
+                let notificationViewController = NotificationViewController()
+                notificationViewController.delegate = self
+                navigationController?.pushViewController(notificationViewController, animated: true)
+            } else if indexPath.row == 1 {
+                let repeatViewController = RepeatViewController()
+                navigationController?.pushViewController(repeatViewController, animated: true)
+            }
         }
     }
 }
