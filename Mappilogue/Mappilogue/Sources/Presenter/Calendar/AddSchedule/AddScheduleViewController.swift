@@ -214,6 +214,10 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
             section.configureNotificationRepeatCell(notificationRepeatCell, row: indexPath.row)
         }
         
+        if let addLocationButtonCell = cell as? AddLocationButtonCell {
+            addLocationButtonCell.delegate = self
+        }
+        
         return cell
     }
     
@@ -229,7 +233,6 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 2 {
-            
             if indexPath.row == 0 {
                 let notificationViewController = NotificationViewController()
                 notificationViewController.delegate = self
@@ -316,7 +319,7 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
     }
 }
 
-extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelegate, DatePickerStartDateDelegate, DatePickerEndDateDelegate, NotificationTimeDelegate {
+extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelegate, DatePickerStartDateDelegate, DatePickerEndDateDelegate, NotificationTimeDelegate, AddLocationDelegate {
     func colorSelectionButtonTapped() {
         isColorSelection = !isColorSelection
         
@@ -345,5 +348,11 @@ extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelega
     
     func selectedNotificationTime(_ selectedTime: [String]) {
         print(selectedTime)
+    }
+    
+    func addLocationButtonTapped() {
+        let addLocationViewController = AddLocationViewController()
+        addLocationViewController.modalPresentationStyle = .overFullScreen
+        present(addLocationViewController, animated: false)
     }
 }
