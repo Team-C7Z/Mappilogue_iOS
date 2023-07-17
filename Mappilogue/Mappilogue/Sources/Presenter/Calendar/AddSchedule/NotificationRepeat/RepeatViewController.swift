@@ -9,22 +9,24 @@ import UIKit
 
 class RepeatViewController: BaseViewController {
     var selectedRepeatType: RepeatType = .weekday {
-       didSet {
-           showWeekdayRepeatViewController()
-       }
-   }
+        didSet {
+            setRepeatButtonDesign()
+        }
+    }
+   
     private let stackView = UIStackView()
-    private let weekdayButton = UIButton()
-    private let cycleButton = UIButton()
+    private var weekdayButton = UIButton()
+    private var cycleButton = UIButton()
     
-    private let continerView = UIView()
+    private let containerView = UIView()
     private let weekdayRepeatViewController = WeekdayRepeatViewController()
     private let cycleRepeatViewController = CycleRepeatViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        showWeekdayRepeatViewController()
+        setRepeatButtonDesign()
+        showViewController(weekdayRepeatViewController)
     }
     
     override func setupProperty() {
@@ -36,27 +38,18 @@ class RepeatViewController: BaseViewController {
         stackView.distribution = .equalSpacing
         stackView.spacing = 14
         
-        weekdayButton.setTitle("요일 별", for: .normal)
-        weekdayButton.titleLabel?.font = .title02
-        weekdayButton.setTitleColor(.color1C1C1C, for: .normal)
-        
-        cycleButton.setTitle("주기 별", for: .normal)
-        cycleButton.titleLabel?.font = .title02
-        cycleButton.setTitleColor(.color9B9791, for: .normal)
-        
-        weekdayButton.addTarget(self, action: #selector(showWeekdayRepeatViewController), for: .touchUpInside)
-        cycleButton.addTarget(self, action: #selector(showCycleRepeatViewController), for: .touchUpInside)
+        weekdayButton = createRepeatButton("요일 별")
+        cycleButton = createRepeatButton("주기 별")
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
         
         view.addSubview(stackView)
-        [weekdayButton, cycleButton].forEach {
-            stackView.addArrangedSubview($0)
-        }
-        
-        view.addSubview(continerView)
+        stackView.addArrangedSubview(weekdayButton)
+        stackView.addArrangedSubview(cycleButton)
+     
+        view.addSubview(containerView)
     }
     
     override func setupLayout() {
@@ -67,7 +60,7 @@ class RepeatViewController: BaseViewController {
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
         }
         
-        continerView.snp.makeConstraints {
+        containerView.snp.makeConstraints {
             $0.top.equalTo(stackView.snp.bottom)
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
@@ -86,48 +79,47 @@ class RepeatViewController: BaseViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    private func createRepeatButton(_ title: String) -> UIButton {
+        let button = UIButton()
+        button.setTitle(title, for: .normal)
+        button.titleLabel?.font = .title02
+        button.addTarget(self, action: #selector(repeatButtonTapped), for: .touchUpInside)
+        
+        return button
+    }
+    
+    private func setRepeatButtonDesign() {
+        weekdayButton.setTitleColor(selectedRepeatType == .weekday ? .color1C1C1C : .color9B9791, for: .normal)
+        cycleButton.setTitleColor(selectedRepeatType == .cycle ? .color1C1C1C : .color9B9791, for: .normal)
+    }
+    
     @objc private func repeatButtonTapped(_ sender: UIButton) {
         switch sender {
         case weekdayButton:
             selectedRepeatType = .weekday
+            showViewController(weekdayRepeatViewController)
         case cycleButton:
             selectedRepeatType = .cycle
+            showViewController(cycleRepeatViewController)
         default:
             break
         }
     }
     
-    @objc func showWeekdayRepeatViewController() {
-        weekdayButton.setTitleColor(.color1C1C1C, for: .normal)
-        cycleButton.setTitleColor(.color9B9791, for: .normal)
+    private func showViewController(_ viewController: UIViewController) {
+        containerView.subviews.forEach { $0.removeFromSuperview() }
+        addChild(viewController)
+        containerView.addSubview(viewController.view)
         
-        cycleRepeatViewController.removeFromParent()
-        cycleRepeatViewController.view.removeFromSuperview()
-        
-        addChild(weekdayRepeatViewController)
-        continerView.addSubview(weekdayRepeatViewController.view)
-    
-        weekdayRepeatViewController.view.snp.makeConstraints {
+        viewController.view.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
-        weekdayRepeatViewController.didMove(toParent: self)
+        viewController.didMove(toParent: self)
     }
-    
-    @objc func showCycleRepeatViewController() {
-        weekdayButton.setTitleColor(.color9B9791, for: .normal)
-        cycleButton.setTitleColor(.color1C1C1C, for: .normal)
+}
+
+extension RepeatViewController: WeekdayRepeatDelegate {
+    func selecteWeekdayRepeat(weekday: [String], spacing: String, endDate: SelectedDate) {
         
-        weekdayRepeatViewController.removeFromParent()
-        weekdayRepeatViewController.view.removeFromSuperview()
-        
-        addChild(cycleRepeatViewController)
-        continerView.addSubview(cycleRepeatViewController.view)
-        
-        cycleRepeatViewController.view.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        
-        cycleRepeatViewController.didMove(toParent: self)
     }
 }

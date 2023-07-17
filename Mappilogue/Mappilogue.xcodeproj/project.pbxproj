@@ -34,6 +34,9 @@
 		9224FD272A6394A9000A56A6 /* WeekdayRepeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD262A6394A9000A56A6 /* WeekdayRepeatViewController.swift */; };
 		9224FD312A6397BD000A56A6 /* CycleRepeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD302A6397BD000A56A6 /* CycleRepeatViewController.swift */; };
 		9224FD332A641B64000A56A6 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD322A641B64000A56A6 /* UIViewController.swift */; };
+		9224FD352A652A96000A56A6 /* WeekdayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD342A652A96000A56A6 /* WeekdayView.swift */; };
+		9224FD372A653024000A56A6 /* SpacingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD362A653024000A56A6 /* SpacingButton.swift */; };
+		9224FD3B2A6532E3000A56A6 /* EndButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD3A2A6532E3000A56A6 /* EndButton.swift */; };
 		9230BE452A57F01E0053E535 /* WeekdayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BE442A57F01E0053E535 /* WeekdayCell.swift */; };
 		9230BE472A57FEB80053E535 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BE462A57FEB80053E535 /* DayCell.swift */; };
 		9230BE492A58D23B0053E535 /* NavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BE482A58D23B0053E535 /* NavigationBarViewController.swift */; };
@@ -130,6 +133,9 @@
 		9224FD262A6394A9000A56A6 /* WeekdayRepeatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayRepeatViewController.swift; sourceTree = "<group>"; };
 		9224FD302A6397BD000A56A6 /* CycleRepeatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleRepeatViewController.swift; sourceTree = "<group>"; };
 		9224FD322A641B64000A56A6 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		9224FD342A652A96000A56A6 /* WeekdayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayView.swift; sourceTree = "<group>"; };
+		9224FD362A653024000A56A6 /* SpacingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacingButton.swift; sourceTree = "<group>"; };
+		9224FD3A2A6532E3000A56A6 /* EndButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndButton.swift; sourceTree = "<group>"; };
 		9230BE442A57F01E0053E535 /* WeekdayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayCell.swift; sourceTree = "<group>"; };
 		9230BE462A57FEB80053E535 /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
 		9230BE482A58D23B0053E535 /* NavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarViewController.swift; sourceTree = "<group>"; };
@@ -242,10 +248,14 @@
 		9224FD2A2A639547000A56A6 /* NotificationRepeat */ = {
 			isa = PBXGroup;
 			children = (
-				9224FD1E2A62B4E9000A56A6 /* NotificationViewController.swift */,
+				9224FD382A653038000A56A6 /* Notification */,
+				9224FD392A65304A000A56A6 /* Repeat */,
 				9224FD222A62EC0B000A56A6 /* RepeatViewController.swift */,
 				9224FD242A638F01000A56A6 /* RepeatType.swift */,
 				9224FD262A6394A9000A56A6 /* WeekdayRepeatViewController.swift */,
+				9224FD342A652A96000A56A6 /* WeekdayView.swift */,
+				9224FD362A653024000A56A6 /* SpacingButton.swift */,
+				9224FD3A2A6532E3000A56A6 /* EndButton.swift */,
 				9224FD302A6397BD000A56A6 /* CycleRepeatViewController.swift */,
 				9224FD2C2A6395AD000A56A6 /* Cell */,
 			);
@@ -304,6 +314,21 @@
 				92A7B65A2A4D0FD9009C9293 /* AddLocationButtonCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		9224FD382A653038000A56A6 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				9224FD1E2A62B4E9000A56A6 /* NotificationViewController.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		9224FD392A65304A000A56A6 /* Repeat */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repeat;
 			sourceTree = "<group>";
 		};
 		9230BE432A57EFF10053E535 /* Cell */ = {
@@ -720,6 +745,7 @@
 				92FE26152A4B751000BCDB82 /* BaseCollectionReusableView.swift in Sources */,
 				92A7B6552A4CEA28009C9293 /* TodaySchedule.swift in Sources */,
 				9224FCF52A5D6C65000A56A6 /* DatePickerViewController.swift in Sources */,
+				9224FD3B2A6532E3000A56A6 /* EndButton.swift in Sources */,
 				9230BE472A57FEB80053E535 /* DayCell.swift in Sources */,
 				92FE26172A4B76B800BCDB82 /* UIFont.swift in Sources */,
 				926999422A14F74B003DDAD2 /* CalendarViewController.swift in Sources */,
@@ -729,6 +755,7 @@
 				9224FCEE2A5BEF80000A56A6 /* ScheduleCell.swift in Sources */,
 				924BE0CE2A51C4D4002C70FF /* MarkedRecordsCell.swift in Sources */,
 				9224FD1F2A62B4E9000A56A6 /* NotificationViewController.swift in Sources */,
+				9224FD372A653024000A56A6 /* SpacingButton.swift in Sources */,
 				9291582A2A252CC20022BEF9 /* UIColor.swift in Sources */,
 				9224FCF12A5BF304000A56A6 /* Schedules.swift in Sources */,
 				926999382A14F4AA003DDAD2 /* TabBarControllerController.swift in Sources */,
@@ -742,6 +769,7 @@
 				9263786E2A5475AF004E5B6E /* OnboardingCell.swift in Sources */,
 				9224FD012A600A86000A56A6 /* ScheduleTitleColorCell.swift in Sources */,
 				92A7B6532A4CDD4D009C9293 /* ScheduleType.swift in Sources */,
+				9224FD352A652A96000A56A6 /* WeekdayView.swift in Sources */,
 				926999362A14F443003DDAD2 /* BaseView.swift in Sources */,
 				92FE26132A4B74D800BCDB82 /* ScheduleTypeHeaderView.swift in Sources */,
 				9224FD212A62BBB7000A56A6 /* NotificationCell.swift in Sources */,

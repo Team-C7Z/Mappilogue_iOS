@@ -236,7 +236,6 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
                 navigationController?.pushViewController(notificationViewController, animated: true)
             } else if indexPath.row == 1 {
                 let repeatViewController = RepeatViewController()
-                //repeatViewController.delegate = self
                 navigationController?.pushViewController(repeatViewController, animated: true)
             }
         }
