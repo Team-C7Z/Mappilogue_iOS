@@ -10,6 +10,8 @@ import UIKit
 class CycleRepeatViewController: BaseViewController {
     var selectedCycle: String?
     
+    var weekdayButton: [UIButton] = []
+    
     private let weekdayStackView = UIStackView()
     private var dailyButton = UIButton()
     private let monthlyButton = UIButton()
@@ -50,6 +52,8 @@ class CycleRepeatViewController: BaseViewController {
         yearlyButton.layer.borderWidth = 2
         yearlyButton.layer.borderColor = UIColor.colorC9C6C2.cgColor
         yearlyButton.addTarget(self, action: #selector(cycleButtonTapped), for: .touchUpInside)
+        
+        weekdayButton = [dailyButton, monthlyButton, yearlyButton]
     }
     
     override func setupHierarchy() {
@@ -66,7 +70,7 @@ class CycleRepeatViewController: BaseViewController {
         
         weekdayStackView.snp.makeConstraints {
             $0.top.equalTo(view).offset(18)
-            $0.leading.equalTo(view)
+            $0.leading.equalTo(view).offset(16)
         }
         
         dailyButton.snp.makeConstraints {
@@ -86,12 +90,23 @@ class CycleRepeatViewController: BaseViewController {
     }
 
     @objc func cycleButtonTapped(_ sender: UIButton) {
-        if let title = sender.titleLabel?.text, title == "매일" {
-            selectedCycle = title
-        } else if let title = sender.titleLabel?.text, title == "매월" {
-            selectedCycle = title
-        } else if let title = sender.titleLabel?.text, title == "매년" {
+        if let title = sender.titleLabel?.text, !sender.isSelected {
             selectedCycle = title
         }
+        
+        sender.isSelected = !sender.isSelected
+        
+        for button in weekdayButton {
+            if button != sender {
+                button.isSelected = false
+            }
+            updateCycleButtonDesign(button)
+        }
+    }
+    
+    func updateCycleButtonDesign(_ sender: UIButton) {
+        sender.layer.borderWidth = sender.isSelected ? 0 : 2
+        sender.backgroundColor = sender.isSelected ? .color1C1C1C : .colorFFFFFF
+        sender.setTitleColor(sender.isSelected ? .colorFFFFFF : .colorC9C6C2, for: .normal)
     }
 }
