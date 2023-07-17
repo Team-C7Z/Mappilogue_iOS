@@ -18,6 +18,8 @@ class AddScheduleViewController: BaseViewController {
     let years: [Int] = Array(1970...2050)
     let months: [Int] = Array(1...12)
     var days: [Int] = []
+
+    var locations: [LocationTime] = dummyLocationTimeData(2)
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -29,6 +31,8 @@ class AddScheduleViewController: BaseViewController {
         tableView.register(ColorSelectionCell.self, forCellReuseIdentifier: ColorSelectionCell.registerId)
         tableView.register(ScheduleDurationCell.self, forCellReuseIdentifier: ScheduleDurationCell.registerId)
         tableView.register(NotificationRepeatCell.self, forCellReuseIdentifier: NotificationRepeatCell.registerId)
+        tableView.register(DeleteLocationCell.self, forCellReuseIdentifier: DeleteLocationCell.registerId)
+        tableView.register(LocationTimeCell.self, forCellReuseIdentifier: LocationTimeCell.registerId)
         tableView.register(AddLocationButtonCell.self, forCellReuseIdentifier: AddLocationButtonCell.registerId)
         tableView.delegate = self
         tableView.dataSource = self
@@ -180,16 +184,17 @@ class AddScheduleViewController: BaseViewController {
 
 extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return AddScheduleSection.allCases.count
+        return locations.isEmpty ? 4 : 5
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let section = AddScheduleSection(rawValue: section) else { return 0 }
-        return section.numberOfRows(isColorSelection)
+        guard let section = AddScheduleSection(rawValue: locations.isEmpty && section == 3 ? 4 : section) else { return 0 }
+       
+        return section.numberOfRows(isLocation: !locations.isEmpty, isColorSelection: isColorSelection)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let section = AddScheduleSection(rawValue: indexPath.section) else { return UITableViewCell() }
+        guard let section = AddScheduleSection(rawValue: locations.isEmpty && indexPath.section == 3 ? 4 : indexPath.section) else { return UITableViewCell() }
         
         let cellIdentifier = section.cellIdentifier(isColorSelection, row: indexPath.row)
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
@@ -214,6 +219,14 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
             section.configureNotificationRepeatCell(notificationRepeatCell, row: indexPath.row)
         }
         
+        if let deleteLocationCell = cell as? DeleteLocationCell {
+            section.configureDeleteLocationCell(deleteLocationCell)
+        }
+        
+        if let locationTimeCell = cell as? LocationTimeCell {
+            section.configureLocationTimeCell(locationTimeCell)
+        }
+        
         if let addLocationButtonCell = cell as? AddLocationButtonCell {
             addLocationButtonCell.delegate = self
         }
@@ -222,7 +235,7 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let section = AddScheduleSection(rawValue: indexPath.section) else { return 0 }
+        guard let section = AddScheduleSection(rawValue: locations.isEmpty && indexPath.section == 3 ? 4 : indexPath.section) else { return 0 }
         return section.rowHeight(row: indexPath.row)
     }
     
@@ -352,7 +365,14 @@ extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelega
     
     func addLocationButtonTapped() {
         let addLocationViewController = AddLocationViewController()
+        addLocationViewController.delegate = self
         addLocationViewController.modalPresentationStyle = .overFullScreen
         present(addLocationViewController, animated: false)
+    }
+}
+
+extension AddScheduleViewController: SelectedLocationDelegate {
+    func selectLocation(_ selectedLocation: String) {
+        print(selectedLocation)
     }
 }

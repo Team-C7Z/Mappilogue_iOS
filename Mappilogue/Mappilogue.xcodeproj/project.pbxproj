@@ -41,6 +41,8 @@
 		9224FD3F2A6561CD000A56A6 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD3E2A6561CD000A56A6 /* UITextField.swift */; };
 		9224FD422A656407000A56A6 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD412A656407000A56A6 /* LocationCell.swift */; };
 		9224FD442A657150000A56A6 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD432A657150000A56A6 /* Location.swift */; };
+		9224FD462A6579A7000A56A6 /* DeleteLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD452A6579A7000A56A6 /* DeleteLocationCell.swift */; };
+		9224FD482A6579ED000A56A6 /* LocationTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD472A6579ED000A56A6 /* LocationTimeCell.swift */; };
 		9230BE452A57F01E0053E535 /* WeekdayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BE442A57F01E0053E535 /* WeekdayCell.swift */; };
 		9230BE472A57FEB80053E535 /* DayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BE462A57FEB80053E535 /* DayCell.swift */; };
 		9230BE492A58D23B0053E535 /* NavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BE482A58D23B0053E535 /* NavigationBarViewController.swift */; };
@@ -144,6 +146,8 @@
 		9224FD3E2A6561CD000A56A6 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		9224FD412A656407000A56A6 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		9224FD432A657150000A56A6 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		9224FD452A6579A7000A56A6 /* DeleteLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteLocationCell.swift; sourceTree = "<group>"; };
+		9224FD472A6579ED000A56A6 /* LocationTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTimeCell.swift; sourceTree = "<group>"; };
 		9230BE442A57F01E0053E535 /* WeekdayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayCell.swift; sourceTree = "<group>"; };
 		9230BE462A57FEB80053E535 /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
 		9230BE482A58D23B0053E535 /* NavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarViewController.swift; sourceTree = "<group>"; };
@@ -232,7 +236,7 @@
 				9224FD282A6394B0000A56A6 /* ScheduleTitleColor */,
 				9224FD292A639508000A56A6 /* ScheduleDuration */,
 				9224FD2A2A639547000A56A6 /* NotificationRepeat */,
-				9224FD402A6563CF000A56A6 /* AddLocation */,
+				9224FD402A6563CF000A56A6 /* Location */,
 			);
 			path = AddSchedule;
 			sourceTree = "<group>";
@@ -340,13 +344,15 @@
 			path = Repeat;
 			sourceTree = "<group>";
 		};
-		9224FD402A6563CF000A56A6 /* AddLocation */ = {
+		9224FD402A6563CF000A56A6 /* Location */ = {
 			isa = PBXGroup;
 			children = (
 				9224FD3C2A6559A0000A56A6 /* AddLocationViewController.swift */,
 				9224FD412A656407000A56A6 /* LocationCell.swift */,
+				9224FD452A6579A7000A56A6 /* DeleteLocationCell.swift */,
+				9224FD472A6579ED000A56A6 /* LocationTimeCell.swift */,
 			);
-			path = AddLocation;
+			path = Location;
 			sourceTree = "<group>";
 		};
 		9230BE432A57EFF10053E535 /* Cell */ = {
@@ -799,6 +805,7 @@
 				926998F72A14EC07003DDAD2 /* AppDelegate.swift in Sources */,
 				9224FD032A600ACF000A56A6 /* ScheduleDurationCell.swift in Sources */,
 				92A7B6612A4E2039009C9293 /* BaseTableViewHeaderFooterView.swift in Sources */,
+				9224FD482A6579ED000A56A6 /* LocationTimeCell.swift in Sources */,
 				926999482A14F76A003DDAD2 /* MyViewController.swift in Sources */,
 				9224FD172A6161B0000A56A6 /* ColorSelectionCell.swift in Sources */,
 				9230BE492A58D23B0053E535 /* NavigationBarViewController.swift in Sources */,
@@ -826,6 +833,7 @@
 				92459EDA2A530D1100493941 /* MarkedRecordCell.swift in Sources */,
 				9224FCF72A5FC4CA000A56A6 /* ScheduleViewController.swift in Sources */,
 				926998F92A14EC07003DDAD2 /* SceneDelegate.swift in Sources */,
+				9224FD462A6579A7000A56A6 /* DeleteLocationCell.swift in Sources */,
 				9224FD332A641B64000A56A6 /* UIViewController.swift in Sources */,
 				9263786B2A546BDE004E5B6E /* OnboardingViewController.swift in Sources */,
 				92A7B6632A4E20BF009C9293 /* BaseTableViewCell.swift in Sources */,

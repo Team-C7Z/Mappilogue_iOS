@@ -12,14 +12,21 @@ enum AddScheduleSection: Int, CaseIterable {
     case titleColor
     case duration
     case notificationRepeat
+    case locationTime
     case addLocation
     
-    func numberOfRows(_ isColorSelection: Bool) -> Int {
+    func numberOfRows(isLocation: Bool, isColorSelection: Bool) -> Int {
         switch self {
         case .titleColor:
             return isColorSelection ? 2 : 1
         case .notificationRepeat:
             return 2
+        case .locationTime:
+            if !isLocation {
+                return 0
+            } else {
+                return 2
+            }
         default:
             return 1
         }
@@ -40,6 +47,13 @@ enum AddScheduleSection: Int, CaseIterable {
             return ScheduleDurationCell.registerId
         case .notificationRepeat:
             return NotificationRepeatCell.registerId
+        case .locationTime:
+            switch row {
+            case 0:
+                return DeleteLocationCell.registerId
+            default:
+                return LocationTimeCell.registerId
+            }
         case .addLocation:
             return AddLocationButtonCell.registerId
         }
@@ -64,6 +78,14 @@ enum AddScheduleSection: Int, CaseIterable {
         }
     }
     
+    func configureDeleteLocationCell(_ cell: DeleteLocationCell) {
+        cell.backgroundColor = .orange
+    }
+    
+    func configureLocationTimeCell(_ cell: LocationTimeCell) {
+        cell.backgroundColor = .yellow
+    }
+    
     func rowHeight(row: Int) -> CGFloat {
         switch self {
         case .titleColor:
@@ -79,12 +101,23 @@ enum AddScheduleSection: Int, CaseIterable {
             return 81
         case .notificationRepeat:
             return 48
+        case .locationTime:
+            switch row {
+            case 0:
+                return 32
+            default:
+                return 96
+            }
         case .addLocation:
             return 53
         }
     }
     
     var footerHeight: CGFloat {
-        return self == .notificationRepeat ? 16 : 0
+        if self == .notificationRepeat || self == .locationTime {
+            return 16
+        } else {
+            return 0
+        }
     }
 }

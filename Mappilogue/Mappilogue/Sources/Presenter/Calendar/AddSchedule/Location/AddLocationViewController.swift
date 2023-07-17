@@ -9,6 +9,9 @@ import UIKit
 
 class AddLocationViewController: BaseViewController {
     let dummyLocation = dummyLocationData()
+    var selectedLocation: String?
+    
+    weak var delegate: SelectedLocationDelegate?
     
     private let addLocationView = UIView()
     private let locationTextField = UITextField()
@@ -110,7 +113,13 @@ extension AddLocationViewController: UITableViewDelegate, UITableViewDataSource 
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let location = dummyLocation[indexPath.row].title
-    
+        selectedLocation = location
+        
+        delegate?.selectLocation(location)
         dismiss(animated: false)
     }
+}
+
+protocol SelectedLocationDelegate: AnyObject {
+    func selectLocation(_ selectedLocation: String)
 }
