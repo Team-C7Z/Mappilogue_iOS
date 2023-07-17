@@ -210,8 +210,10 @@ class WeekdayRepeatViewController: BaseViewController {
         guard let touch = touches.first, touch.location(in: view).y < datePickerOuterView.frame.minY else {
             return
         }
-        datePickerOuterView.isHidden = true
-        endDateLabel.text = "\(selectedDate.year)년 \(selectedDate.month)월 \(selectedDate.day ?? 1)일"
+        if !datePickerOuterView.isHidden {
+            datePickerOuterView.isHidden = true
+            endDateLabel.text = "\(selectedDate.year)년 \(selectedDate.month)월 \(selectedDate.day ?? 1)일"
+        }
     }
     
     @objc func weekdayButtonTapped(_ sender: UIButton) {
