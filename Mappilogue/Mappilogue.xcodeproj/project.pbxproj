@@ -291,11 +291,9 @@
 		9224FD2E2A6395F9000A56A6 /* MarkedRecord */ = {
 			isa = PBXGroup;
 			children = (
-				9224FD0C2A610134000A56A6 /* EmptyTodayScheduleSection.swift */,
-				9224FD0E2A610E64000A56A6 /* EmptyUpcomingScheduleSection.swift */,
-				9224FD102A611218000A56A6 /* TodayScheduleSection.swift */,
-				9224FD142A613AB8000A56A6 /* UpcomingScheduleSection.swift */,
-				92A7B64A2A4CC01B009C9293 /* Cell */,
+				924BE0CD2A51C4D4002C70FF /* MarkedRecordsCell.swift */,
+				92459ED92A530D1100493941 /* MarkedRecordCell.swift */,
+				92459ED72A52494200493941 /* AddMarkedRecordCell.swift */,
 			);
 			path = MarkedRecord;
 			sourceTree = "<group>";
@@ -508,6 +506,10 @@
 			isa = PBXGroup;
 			children = (
 				9269993F2A14F73C003DDAD2 /* HomeViewController.swift */,
+				9224FD0C2A610134000A56A6 /* EmptyTodayScheduleSection.swift */,
+				9224FD0E2A610E64000A56A6 /* EmptyUpcomingScheduleSection.swift */,
+				9224FD102A611218000A56A6 /* TodayScheduleSection.swift */,
+				9224FD142A613AB8000A56A6 /* UpcomingScheduleSection.swift */,
 				9224FD2D2A6395EE000A56A6 /* Schedule */,
 				9224FD2E2A6395F9000A56A6 /* MarkedRecord */,
 			);
@@ -518,9 +520,9 @@
 			isa = PBXGroup;
 			children = (
 				926999412A14F74B003DDAD2 /* CalendarViewController.swift */,
-				9230BE502A59B45D0053E535 /* MonthlyCalendar.swift */,
 				9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */,
 				9224FCF62A5FC4CA000A56A6 /* ScheduleViewController.swift */,
+				9230BE502A59B45D0053E535 /* MonthlyCalendar.swift */,
 				9230BE432A57EFF10053E535 /* Cell */,
 				9224FCFE2A5FF82F000A56A6 /* AddSchedule */,
 			);
@@ -560,16 +562,6 @@
 				9291581E2A2529660022BEF9 /* Pretendard-SemiBold.ttf */,
 			);
 			path = Fonts;
-			sourceTree = "<group>";
-		};
-		92A7B64A2A4CC01B009C9293 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				924BE0CD2A51C4D4002C70FF /* MarkedRecordsCell.swift */,
-				92459ED92A530D1100493941 /* MarkedRecordCell.swift */,
-				92459ED72A52494200493941 /* AddMarkedRecordCell.swift */,
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 		92A7B64D2A4CCDB7009C9293 /* Resuable */ = {
