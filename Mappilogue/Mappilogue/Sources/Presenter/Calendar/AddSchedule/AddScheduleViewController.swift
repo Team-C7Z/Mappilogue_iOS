@@ -381,7 +381,7 @@ extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelega
 
 extension AddScheduleViewController: SelectedLocationDelegate, TimeButtonDelegate {
     func selectLocation(_ selectedLocation: String) {
-        locations.append(LocationTime(location: selectedLocation, time: "10:00 AM"))
+        locations.append(LocationTime(location: selectedLocation, time: "9:00 AM"))
         
         tableView.reloadData()
     }
