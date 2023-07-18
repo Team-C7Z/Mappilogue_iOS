@@ -261,9 +261,9 @@
 		9224FD2A2A639547000A56A6 /* NotificationRepeat */ = {
 			isa = PBXGroup;
 			children = (
+				9224FD042A600F42000A56A6 /* NotificationRepeatCell.swift */,
 				9224FD382A653038000A56A6 /* Notification */,
 				9224FD392A65304A000A56A6 /* Repeat */,
-				9224FD2C2A6395AD000A56A6 /* Cell */,
 			);
 			path = NotificationRepeat;
 			sourceTree = "<group>";
@@ -274,15 +274,6 @@
 				9224FD182A616EB1000A56A6 /* ColorCell.swift */,
 				9224FD162A6161B0000A56A6 /* ColorSelectionCell.swift */,
 				9224FD002A600A86000A56A6 /* ScheduleTitleColorCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
-		9224FD2C2A6395AD000A56A6 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				9224FD042A600F42000A56A6 /* NotificationRepeatCell.swift */,
-				9224FD202A62BBB6000A56A6 /* NotificationCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -326,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				9224FD1E2A62B4E9000A56A6 /* NotificationViewController.swift */,
+				9224FD202A62BBB6000A56A6 /* NotificationCell.swift */,
 			);
 			path = Notification;
 			sourceTree = "<group>";
