@@ -10,7 +10,7 @@ import UIKit
 class TimePickerViewController: BaseViewController {
     weak var delegate: SelectedTimeDelegate?
     
-    private var selectedTime: String = "09:00 AM"
+   var selectedTime: String?
     
     private let timePickerOuterView = UIView()
     private let deleteTimeButton = UIButton()
@@ -27,6 +27,8 @@ class TimePickerViewController: BaseViewController {
         
         timePickerOuterView.layer.cornerRadius = 12
         timePickerOuterView.backgroundColor = .colorF9F8F7
+        
+        deleteTimeButton.addTarget(self, action: #selector(deleteTimeButtonTapped), for: .touchUpInside)
         
         deleteTimeImage.image = UIImage(named: "deleteTime")
         
@@ -104,14 +106,6 @@ class TimePickerViewController: BaseViewController {
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first, !timePickerOuterView.frame.contains(touch.location(in: view)) else {
-            return
-        }
-
-        dismiss(animated: false)
-    }
-    
     func setTimePicker() {
         timePicker.datePickerMode = .time
         timePicker.preferredDatePickerStyle = .wheels
@@ -120,9 +114,16 @@ class TimePickerViewController: BaseViewController {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "h:mm a"
-        if let date = dateFormatter.date(from: selectedTime) {
+        if let time = selectedTime, let date = dateFormatter.date(from: time) {
             timePicker.date = date
         }
+    }
+    
+    @objc func deleteTimeButtonTapped(_ sender: UIButton) {
+        selectedTime = "설정 안 함"
+        delegate?.selectTime(selectedTime)
+        
+        dismiss(animated: false)
     }
     
     @objc func cancelButtonTapped(_ sender: UIButton) {
@@ -144,5 +145,5 @@ class TimePickerViewController: BaseViewController {
 }
 
 protocol SelectedTimeDelegate: AnyObject {
-    func selectTime(_ selectedTime: String)
+    func selectTime(_ selectedTime: String?)
 }

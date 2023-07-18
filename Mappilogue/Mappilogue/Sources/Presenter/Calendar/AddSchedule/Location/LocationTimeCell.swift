@@ -93,7 +93,7 @@ class LocationTimeCell: BaseTableViewCell {
         }
         
         timeLineView.snp.makeConstraints {
-            $0.top.equalTo(timeLabel.snp.bottom)
+            $0.top.equalTo(timeLabel.snp.bottom).offset(0.5)
             $0.leading.trailing.equalTo(timeLabel)
             $0.height.equalTo(1)
         }
