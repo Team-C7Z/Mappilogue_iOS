@@ -31,6 +31,7 @@ class AddLocationViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        hideKeyboardWhenTappedAround()
     }
     
     override func setupProperty() {
@@ -46,6 +47,8 @@ class AddLocationViewController: BaseViewController {
         locationTextField.placeholder = "장소 검색"
         locationTextField.font = .body01
         locationTextField.addLeftPadding()
+        locationTextField.returnKeyType = .search
+        locationTextField.delegate = self
     }
     
     override func setupHierarchy() {
@@ -117,6 +120,13 @@ extension AddLocationViewController: UITableViewDelegate, UITableViewDataSource 
         
         delegate?.selectLocation(location)
         dismiss(animated: false)
+    }
+}
+
+extension AddLocationViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        locationTextField.resignFirstResponder()
+        return true
     }
 }
 
