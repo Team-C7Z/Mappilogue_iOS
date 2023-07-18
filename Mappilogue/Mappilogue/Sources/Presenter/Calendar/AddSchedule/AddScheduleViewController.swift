@@ -18,6 +18,8 @@ class AddScheduleViewController: BaseViewController {
     let years: [Int] = Array(1970...2050)
     let months: [Int] = Array(1...12)
     var days: [Int] = []
+
+    var locations: [LocationTime] = []
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -29,9 +31,12 @@ class AddScheduleViewController: BaseViewController {
         tableView.register(ColorSelectionCell.self, forCellReuseIdentifier: ColorSelectionCell.registerId)
         tableView.register(ScheduleDurationCell.self, forCellReuseIdentifier: ScheduleDurationCell.registerId)
         tableView.register(NotificationRepeatCell.self, forCellReuseIdentifier: NotificationRepeatCell.registerId)
+        tableView.register(DeleteLocationCell.self, forCellReuseIdentifier: DeleteLocationCell.registerId)
+        tableView.register(LocationTimeCell.self, forCellReuseIdentifier: LocationTimeCell.registerId)
         tableView.register(AddLocationButtonCell.self, forCellReuseIdentifier: AddLocationButtonCell.registerId)
         tableView.delegate = self
         tableView.dataSource = self
+
         return tableView
     }()
     
@@ -43,10 +48,7 @@ class AddScheduleViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        days = monthlyCalendar.getDays(year: monthlyCalendar.currentYear, month: monthlyCalendar.currentMonth)
-        startDate = .init(year: monthlyCalendar.currentYear, month: monthlyCalendar.currentMonth, day: monthlyCalendar.currentDay)
-        endDate = .init(year: monthlyCalendar.currentYear, month: monthlyCalendar.currentMonth, day: monthlyCalendar.currentDay)
-
+        setCurrentDate()
         setSelectedDate()
     }
     
@@ -72,7 +74,6 @@ class AddScheduleViewController: BaseViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
         tapGesture.cancelsTouchesInView = false
         tableView.addGestureRecognizer(tapGesture)
-        
     }
     
     override func setupHierarchy() {
@@ -116,7 +117,12 @@ class AddScheduleViewController: BaseViewController {
             $0.trailing.equalTo(endDatePickerOuterView).offset(-40)
             $0.bottom.equalTo(endDatePickerOuterView).offset(-5)
         }
+    }
     
+    func setCurrentDate() {
+        days = monthlyCalendar.getDays(year: monthlyCalendar.currentYear, month: monthlyCalendar.currentMonth)
+        startDate = .init(year: monthlyCalendar.currentYear, month: monthlyCalendar.currentMonth, day: monthlyCalendar.currentDay)
+        endDate = .init(year: monthlyCalendar.currentYear, month: monthlyCalendar.currentMonth, day: monthlyCalendar.currentDay)
     }
     
     func setNavigationBar() {
@@ -180,45 +186,59 @@ class AddScheduleViewController: BaseViewController {
 
 extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return AddScheduleSection.allCases.count
+        return locations.isEmpty ? 4 : 5
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let section = AddScheduleSection(rawValue: section) else { return 0 }
-        return section.numberOfRows(isColorSelection)
+        let adjustedSection = locations.isEmpty && section == 3 ? 4 : section
+        guard let section = AddScheduleSection(rawValue: adjustedSection) else { return 0 }
+        return section.numberOfRows(isColorSelection: isColorSelection, locationCount: locations.count)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let section = AddScheduleSection(rawValue: indexPath.section) else { return UITableViewCell() }
+        let adjustedSection = locations.isEmpty && indexPath.section == 3 ? 4 : indexPath.section
+        guard let section = AddScheduleSection(rawValue: adjustedSection) else { return UITableViewCell() }
         
         let cellIdentifier = section.cellIdentifier(isColorSelection, row: indexPath.row)
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         cell.selectionStyle = .none
         
-        if let scheduleTitleColorCell = cell as? ScheduleTitleColorCell {
+        switch cell {
+        case let scheduleTitleColorCell as ScheduleTitleColorCell:
             scheduleTitleColorCell.delegate = self
             scheduleTitleColorCell.configure(with: selectedColor, isColorSelection: isColorSelection)
-        }
         
-        if let colorSelectionCell = cell as? ColorSelectionCell {
+        case let colorSelectionCell as ColorSelectionCell:
             colorSelectionCell.delegate = self
-        }
         
-        if let scheduleDurationCell = cell as? ScheduleDurationCell {
+        case let scheduleDurationCell as ScheduleDurationCell:
             scheduleDurationCell.startDateDelegate = self
             scheduleDurationCell.endDateDelegate = self
             scheduleDurationCell.configure(startDate: startDate, endDate: endDate)
-        }
         
-        if let notificationRepeatCell = cell as? NotificationRepeatCell {
+        case let notificationRepeatCell as NotificationRepeatCell:
             section.configureNotificationRepeatCell(notificationRepeatCell, row: indexPath.row)
+            
+        case let locationTimeCell as LocationTimeCell:
+            let location = locations[indexPath.row-1]
+            let locationTitle = location.location
+            let time = location.time
+            
+            section.configureLocationTimeCell(locationTimeCell, location: locationTitle, time: time)
+        
+        case let addLocationButtonCell as AddLocationButtonCell:
+            addLocationButtonCell.delegate = self
+            
+        default:
+            break
         }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let section = AddScheduleSection(rawValue: indexPath.section) else { return 0 }
+        let adjustedSection = locations.isEmpty && indexPath.section == 3 ? 4 : indexPath.section
+        guard let section = AddScheduleSection(rawValue: adjustedSection) else { return 0 }
         return section.rowHeight(row: indexPath.row)
     }
     
@@ -228,16 +248,19 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 2 {
-            
-            if indexPath.row == 0 {
-                let notificationViewController = NotificationViewController()
-                notificationViewController.delegate = self
-                navigationController?.pushViewController(notificationViewController, animated: true)
-            } else if indexPath.row == 1 {
-                let repeatViewController = RepeatViewController()
-                navigationController?.pushViewController(repeatViewController, animated: true)
-            }
+        guard indexPath.section == 2 else { return }
+
+        switch indexPath.row {
+        case 0:
+            let notificationViewController = NotificationViewController()
+            notificationViewController.delegate = self
+            navigationController?.pushViewController(notificationViewController, animated: true)
+        case 1:
+            let repeatViewController = RepeatViewController()
+            navigationController?.pushViewController(repeatViewController, animated: true)
+        
+        default:
+            break
         }
     }
 }
@@ -288,35 +311,34 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
             switch componentType {
             case .year:
                 startDate.year = years[row]
-                days = monthlyCalendar.getDays(year: startDate.year, month: startDate.month)
-                startDatePickerView.reloadComponent(2)
             case .month:
                 startDate.month = months[row]
-                days = monthlyCalendar.getDays(year: startDate.year, month: startDate.month)
-                startDatePickerView.reloadComponent(2)
             case .day:
                 startDate.day = days[row]
             }
+            updateDaysComponent(startDate, datePickerView: startDatePickerView)
         }
         
         if !endDatePickerOuterView.isHidden {
             switch componentType {
             case .year:
                 endDate.year = years[row]
-                days = monthlyCalendar.getDays(year: startDate.year, month: startDate.month)
-                startDatePickerView.reloadComponent(2)
             case .month:
                 endDate.month = months[row]
-                days = monthlyCalendar.getDays(year: endDate.year, month: endDate.month)
-                endDatePickerView.reloadComponent(2)
             case .day:
                 endDate.day = days[row]
             }
+            updateDaysComponent(endDate, datePickerView: endDatePickerView)
         }
+    }
+    
+    private func updateDaysComponent(_ selectedDate: SelectedDate, datePickerView: UIPickerView) {
+        days = monthlyCalendar.getDays(year: selectedDate.year, month: selectedDate.month)
+        datePickerView.reloadComponent(ComponentType.day.rawValue)
     }
 }
 
-extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelegate, DatePickerStartDateDelegate, DatePickerEndDateDelegate, NotificationTimeDelegate {
+extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelegate, DatePickerStartDateDelegate, DatePickerEndDateDelegate, NotificationTimeDelegate, AddLocationDelegate {
     func colorSelectionButtonTapped() {
         isColorSelection = !isColorSelection
         
@@ -345,5 +367,20 @@ extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelega
     
     func selectedNotificationTime(_ selectedTime: [String]) {
         print(selectedTime)
+    }
+    
+    func addLocationButtonTapped() {
+        let addLocationViewController = AddLocationViewController()
+        addLocationViewController.delegate = self
+        addLocationViewController.modalPresentationStyle = .overFullScreen
+        present(addLocationViewController, animated: false)
+    }
+}
+
+extension AddScheduleViewController: SelectedLocationDelegate {
+    func selectLocation(_ selectedLocation: String) {
+        locations.append(LocationTime(location: selectedLocation, time: "10:00 AM"))
+        
+        tableView.reloadData()
     }
 }
