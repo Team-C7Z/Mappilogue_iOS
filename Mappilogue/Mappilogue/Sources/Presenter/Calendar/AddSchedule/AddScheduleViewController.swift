@@ -220,6 +220,8 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
             section.configureNotificationRepeatCell(notificationRepeatCell, row: indexPath.row)
             
         case let locationTimeCell as LocationTimeCell:
+            locationTimeCell.delegate = self
+            
             let location = locations[indexPath.row-1]
             let locationTitle = location.location
             let time = location.time
@@ -377,10 +379,17 @@ extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelega
     }
 }
 
-extension AddScheduleViewController: SelectedLocationDelegate {
+extension AddScheduleViewController: SelectedLocationDelegate, TimeButtonDelegate {
     func selectLocation(_ selectedLocation: String) {
         locations.append(LocationTime(location: selectedLocation, time: "10:00 AM"))
         
         tableView.reloadData()
+    }
+    
+    func timeButtonTapped() {
+        let timePickerViewController = TimePickerViewController()
+       // timePickerViewController.delegate = self
+        timePickerViewController.modalPresentationStyle = .overFullScreen
+        present(timePickerViewController, animated: false)
     }
 }

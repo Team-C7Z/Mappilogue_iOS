@@ -10,8 +10,11 @@ import UIKit
 class LocationTimeCell: BaseTableViewCell {
     static let registerId = "\(LocationTimeCell.self)"
     
+    weak var delegate: TimeButtonDelegate?
+    
     private let locationLabel = UILabel()
     private let locationImage = UIImageView()
+    private let timeButton = UIButton()
     private let timeImage = UIImageView()
     private let timeLabel = UILabel()
     private let timeLineView = UIView()
@@ -33,6 +36,8 @@ class LocationTimeCell: BaseTableViewCell {
         locationLabel.font = .subtitle01
         locationImage.image = UIImage(named: "location")
         
+        timeButton.addTarget(self, action: #selector(timeButtonTapped), for: .touchUpInside)
+        
         timeImage.image = UIImage(named: "time")
         timeLabel.textColor = .color707070
         timeLabel.font = .body02
@@ -46,9 +51,10 @@ class LocationTimeCell: BaseTableViewCell {
         
         contentView.addSubview(locationLabel)
         contentView.addSubview(locationImage)
-        contentView.addSubview(timeImage)
-        contentView.addSubview(timeLabel)
-        contentView.addSubview(timeLineView)
+        contentView.addSubview(timeButton)
+        timeButton.addSubview(timeImage)
+        timeButton.addSubview(timeLabel)
+        timeButton.addSubview(timeLineView)
         contentView.addSubview(editImage)
     }
     
@@ -66,9 +72,16 @@ class LocationTimeCell: BaseTableViewCell {
             $0.width.height.equalTo(20)
         }
         
-        timeImage.snp.makeConstraints {
-            $0.top.equalTo(contentView).offset(55)
+        timeButton.snp.makeConstraints {
+            $0.top.equalTo(contentView).offset(52)
             $0.leading.equalTo(contentView).offset(20)
+            $0.width.equalTo(81)
+            $0.height.equalTo(21)
+        }
+        
+        timeImage.snp.makeConstraints {
+            $0.centerY.equalTo(timeButton)
+            $0.leading.equalTo(timeButton)
             $0.width.height.equalTo(15)
         }
         
@@ -94,4 +107,12 @@ class LocationTimeCell: BaseTableViewCell {
         locationLabel.text = location
         timeLabel.text = time
     }
+    
+    @objc func timeButtonTapped(_ sender: UIButton) {
+        delegate?.timeButtonTapped()
+    }
+}
+
+protocol TimeButtonDelegate: AnyObject {
+    func timeButtonTapped()
 }
