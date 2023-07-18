@@ -20,6 +20,8 @@ class AddScheduleViewController: BaseViewController {
     var days: [Int] = []
 
     var locations: [LocationTime] = []
+    var timeIndex: Int?
+    var initialTime: String = "9:00 AM"
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -220,11 +222,14 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
             section.configureNotificationRepeatCell(notificationRepeatCell, row: indexPath.row)
             
         case let locationTimeCell as LocationTimeCell:
+            locationTimeCell.delegate = self
+            
             let location = locations[indexPath.row-1]
+            let index = indexPath.row-1
             let locationTitle = location.location
             let time = location.time
             
-            section.configureLocationTimeCell(locationTimeCell, location: locationTitle, time: time)
+            section.configureLocationTimeCell(locationTimeCell, index: index, location: locationTitle, time: time)
         
         case let addLocationButtonCell as AddLocationButtonCell:
             addLocationButtonCell.delegate = self
@@ -377,10 +382,33 @@ extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelega
     }
 }
 
-extension AddScheduleViewController: SelectedLocationDelegate {
+extension AddScheduleViewController: SelectedLocationDelegate, TimeButtonDelegate, SelectedTimeDelegate {
     func selectLocation(_ selectedLocation: String) {
-        locations.append(LocationTime(location: selectedLocation, time: "10:00 AM"))
+        locations.append(LocationTime(location: selectedLocation, time: initialTime))
         
         tableView.reloadData()
+    }
+    
+    func timeButtonTapped(_ index: Int) {
+        timeIndex = index
+        
+        let timePickerViewController = TimePickerViewController()
+        timePickerViewController.delegate = self
+        timePickerViewController.selectedTime = locations[index].time
+        timePickerViewController.modalPresentationStyle = .overFullScreen
+        present(timePickerViewController, animated: false)
+    }
+    
+    func selectTime(_ selectedTime: String?) {
+        guard let selectedTime = selectedTime else { return }
+        let time = formatTime(selectedTime)
+        guard let index = timeIndex else { return }
+        locations[index].time = time
+        
+        tableView.reloadData()
+    }
+    
+    private func formatTime(_ time: String) -> String {
+        return time.replacingOccurrences(of: "오전", with: "AM").replacingOccurrences(of: "오후", with: "PM")
     }
 }
