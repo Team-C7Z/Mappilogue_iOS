@@ -11,26 +11,31 @@ class ScheduleViewController: BaseViewController {
     weak var dismissDelegate: DismissScheduleViewControllerDelegate?
     weak var presentDelegate: PresentAddScheduleViewControllerDelegate?
     
+    let dummySchedule = dummyScheduleData()
+    let date: String = ""
+    let lunarDate: String = ""
+    
     private let scheduleView = UIView()
     private let dateLabel = UILabel()
     private let lunarDateLabel = UILabel()
     
-    private lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .clear
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.register(ScheduleInfoCell.self, forCellWithReuseIdentifier: ScheduleInfoCell.registerId)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        return collectionView
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = .colorF9F8F7
+        tableView.sectionHeaderHeight = 0
+        tableView.sectionFooterHeight = 0
+        tableView.register(ScheduleCell.self, forCellReuseIdentifier: ScheduleCell.registerId)
+        tableView.delegate = self
+        tableView.dataSource = self
+        return tableView
     }()
     
     private let addScheduleButton = AddScheduleButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
     }
     
     override func setupProperty() {
@@ -58,7 +63,7 @@ class ScheduleViewController: BaseViewController {
         view.addSubview(scheduleView)
         scheduleView.addSubview(dateLabel)
         scheduleView.addSubview(lunarDateLabel)
-        scheduleView.addSubview(collectionView)
+        scheduleView.addSubview(tableView)
         scheduleView.addSubview(addScheduleButton)
     }
     
@@ -82,9 +87,10 @@ class ScheduleViewController: BaseViewController {
             $0.leading.equalTo(dateLabel.snp.trailing).offset(6)
         }
         
-        collectionView.snp.makeConstraints {
+        tableView.snp.makeConstraints {
             $0.top.equalTo(scheduleView).offset(78)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(scheduleView).offset(-18)
         }
         
         addScheduleButton.snp.makeConstraints {
@@ -108,34 +114,31 @@ class ScheduleViewController: BaseViewController {
     }
 }
 
-extension ScheduleViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
-        
+extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dummySchedule.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ScheduleInfoCell.registerId, for: indexPath) as? ScheduleInfoCell else { return UICollectionViewCell() }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleCell.registerId, for: indexPath) as? ScheduleCell else { return UITableViewCell() }
+        cell.selectionStyle = .none
+        
+        let schedule = dummySchedule[indexPath.row]
+        let scheduleTitle = schedule.title
+        let color = schedule.color
+        let time = schedule.time
+        let location = schedule.location
+        
+        cell.configure(scheduleTitle, color: color, time: time, location: location)
         
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 52
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width-40, height: 52)
-    }
-    
-    // 수평 간격
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    
-    // 수직 간격
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
 }
 

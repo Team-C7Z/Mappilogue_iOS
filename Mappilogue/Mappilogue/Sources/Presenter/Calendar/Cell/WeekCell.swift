@@ -13,7 +13,6 @@ class WeekCell: BaseCollectionViewCell {
     weak var delegate: ScheduleViewControllerDelegate?
     
     private var monthlyCalendar = MonthlyCalendar()
-    private var daySchedules = dummyCalendarScheduleData()
     
     var selectedDate = SelectedDate(year: 0, month: 0)
     var weekIndex: Int = 0
@@ -27,7 +26,7 @@ class WeekCell: BaseCollectionViewCell {
         collectionView.backgroundColor = .colorFFFFFF
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(DayCell.self, forCellWithReuseIdentifier: DayCell.registerId)
-        collectionView.register(ScheduleCell.self, forCellWithReuseIdentifier: ScheduleCell.registerId)
+        collectionView.register(ScheduleTitleCell.self, forCellWithReuseIdentifier: ScheduleTitleCell.registerId)
         collectionView.delegate = self
         collectionView.dataSource = self
        
@@ -112,26 +111,11 @@ extension WeekCell: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 
             return cell
         default:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ScheduleCell.registerId, for: indexPath) as? ScheduleCell else { return UICollectionViewCell() }
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ScheduleTitleCell.registerId, for: indexPath) as? ScheduleTitleCell else { return UICollectionViewCell() }
             
             let day = week[indexPath.row]
-            if let schedules = daySchedules[day], schedules.count > indexPath.section - 1 {
-                let schedule = schedules[indexPath.section-1].0
-                let scheduleTitle = schedule.schedule
-                let color = schedule.color
-                
-                var isScheduleContinuous: Bool = false
-                
-                if let day = Int(day), indexPath.row > 0,
-                    let previousDaySchedules = daySchedules[String(day - 1)],
-                   scheduleTitle == previousDaySchedules[indexPath.section-1].0.schedule {
-                        isScheduleContinuous = true
-                }
-                
-                let continuousDay = schedules[indexPath.section-1].1
-                
-                cell.configure(with: scheduleTitle, color: color, isScheduleContinuous: isScheduleContinuous, continuousDay: continuousDay)
-            } 
+//                cell.configure(with: scheduleTitle, color: color, isScheduleContinuous: isScheduleContinuous, continuousDay: continuousDay)
+//
             
             return cell
         }
