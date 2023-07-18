@@ -15,18 +15,14 @@ enum AddScheduleSection: Int, CaseIterable {
     case locationTime
     case addLocation
     
-    func numberOfRows(isLocation: Bool, isColorSelection: Bool) -> Int {
+    func numberOfRows(isColorSelection: Bool, locationCount: Int) -> Int {
         switch self {
         case .titleColor:
             return isColorSelection ? 2 : 1
         case .notificationRepeat:
             return 2
         case .locationTime:
-            if !isLocation {
-                return 0
-            } else {
-                return 2
-            }
+            return locationCount + 1
         default:
             return 1
         }
@@ -82,8 +78,8 @@ enum AddScheduleSection: Int, CaseIterable {
         cell.backgroundColor = .orange
     }
     
-    func configureLocationTimeCell(_ cell: LocationTimeCell) {
-        cell.backgroundColor = .yellow
+    func configureLocationTimeCell(_ cell: LocationTimeCell, location: String, time: String) {
+        cell.configure(location, time: time)
     }
     
     func rowHeight(row: Int) -> CGFloat {
@@ -106,7 +102,7 @@ enum AddScheduleSection: Int, CaseIterable {
             case 0:
                 return 32
             default:
-                return 96
+                return 104
             }
         case .addLocation:
             return 53
@@ -114,9 +110,12 @@ enum AddScheduleSection: Int, CaseIterable {
     }
     
     var footerHeight: CGFloat {
-        if self == .notificationRepeat || self == .locationTime {
+        switch self {
+        case .notificationRepeat:
             return 16
-        } else {
+        case .locationTime:
+            return 8
+        default:
             return 0
         }
     }

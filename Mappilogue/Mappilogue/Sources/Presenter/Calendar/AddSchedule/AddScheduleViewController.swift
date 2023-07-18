@@ -19,7 +19,7 @@ class AddScheduleViewController: BaseViewController {
     let months: [Int] = Array(1...12)
     var days: [Int] = []
 
-    var locations: [LocationTime] = dummyLocationTimeData(2)
+    var locations: [LocationTime] = dummyLocationTimeData(0)
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -76,7 +76,6 @@ class AddScheduleViewController: BaseViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
         tapGesture.cancelsTouchesInView = false
         tableView.addGestureRecognizer(tapGesture)
-        
     }
     
     override func setupHierarchy() {
@@ -190,7 +189,7 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let section = AddScheduleSection(rawValue: locations.isEmpty && section == 3 ? 4 : section) else { return 0 }
        
-        return section.numberOfRows(isLocation: !locations.isEmpty, isColorSelection: isColorSelection)
+        return section.numberOfRows(isColorSelection: isColorSelection, locationCount: locations.count)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -222,9 +221,13 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
 //        if let deleteLocationCell = cell as? DeleteLocationCell {
 //            section.configureDeleteLocationCell(deleteLocationCell)
 //        }
-        
+//        
         if let locationTimeCell = cell as? LocationTimeCell {
-            section.configureLocationTimeCell(locationTimeCell)
+            let location = locations[indexPath.row-1]
+            let locationTitle = location.location
+            let time = location.time
+            
+            section.configureLocationTimeCell(locationTimeCell, location: locationTitle, time: time)
         }
         
         if let addLocationButtonCell = cell as? AddLocationButtonCell {
