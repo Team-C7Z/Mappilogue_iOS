@@ -219,9 +219,9 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
             section.configureNotificationRepeatCell(notificationRepeatCell, row: indexPath.row)
         }
         
-        if let deleteLocationCell = cell as? DeleteLocationCell {
-            section.configureDeleteLocationCell(deleteLocationCell)
-        }
+//        if let deleteLocationCell = cell as? DeleteLocationCell {
+//            section.configureDeleteLocationCell(deleteLocationCell)
+//        }
         
         if let locationTimeCell = cell as? LocationTimeCell {
             section.configureLocationTimeCell(locationTimeCell)
