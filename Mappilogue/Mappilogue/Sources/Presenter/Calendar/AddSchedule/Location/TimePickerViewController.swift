@@ -10,7 +10,7 @@ import UIKit
 class TimePickerViewController: BaseViewController {
     weak var delegate: SelectedTimeDelegate?
     
-   var selectedTime: String?
+    var selectedTime: String?
     
     private let timePickerOuterView = UIView()
     private let deleteTimeButton = UIButton()
@@ -119,24 +119,24 @@ class TimePickerViewController: BaseViewController {
         }
     }
     
-    @objc func deleteTimeButtonTapped(_ sender: UIButton) {
+    @objc private func deleteTimeButtonTapped(_ sender: UIButton) {
         selectedTime = "설정 안 함"
         delegate?.selectTime(selectedTime)
         
         dismiss(animated: false)
     }
     
-    @objc func cancelButtonTapped(_ sender: UIButton) {
+    @objc private func cancelButtonTapped(_ sender: UIButton) {
         dismiss(animated: false)
     }
     
-    @objc func selectedTimeButtonTapped(_ sender: UIButton) {
+    @objc private func selectedTimeButtonTapped(_ sender: UIButton) {
         delegate?.selectTime(selectedTime)
         
         dismiss(animated: false)
     }
     
-    @objc func timePickerValueDidChage(_ timePicker: UIDatePicker) {
+    @objc private func timePickerValueDidChage(_ timePicker: UIDatePicker) {
         let formatter = DateFormatter()
         formatter.dateFormat = "h:mm a"
         formatter.locale = Locale(identifier: "ko_KR")

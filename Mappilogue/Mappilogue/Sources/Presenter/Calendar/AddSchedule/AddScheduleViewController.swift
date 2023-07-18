@@ -21,7 +21,7 @@ class AddScheduleViewController: BaseViewController {
 
     var locations: [LocationTime] = []
     var timeIndex: Int?
-    var initialTime: String = "09:00 AM"
+    var initialTime: String = "9:00 AM"
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -401,10 +401,14 @@ extension AddScheduleViewController: SelectedLocationDelegate, TimeButtonDelegat
     
     func selectTime(_ selectedTime: String?) {
         guard let selectedTime = selectedTime else { return }
-        let time = selectedTime.replacingOccurrences(of: "오전", with: "AM").replacingOccurrences(of: "오후", with: "PM")
+        let time = formatTime(selectedTime)
         guard let index = timeIndex else { return }
         locations[index].time = time
         
         tableView.reloadData()
+    }
+    
+    private func formatTime(_ time: String) -> String {
+        return time.replacingOccurrences(of: "오전", with: "AM").replacingOccurrences(of: "오후", with: "PM")
     }
 }
