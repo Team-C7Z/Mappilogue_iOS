@@ -27,7 +27,7 @@ func dummyLocationData() -> [Location] {
 
 struct LocationTime {
     let location: String
-    let time: String
+    var time: String
 }
 
 func dummyLocationTimeData(_ locationCount: Int) -> [LocationTime] {
