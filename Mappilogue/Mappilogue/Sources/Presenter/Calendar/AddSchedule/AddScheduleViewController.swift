@@ -19,7 +19,7 @@ class AddScheduleViewController: BaseViewController {
     let months: [Int] = Array(1...12)
     var days: [Int] = []
 
-    var locations: [LocationTime] = dummyLocationTimeData(0)
+    var locations: [LocationTime] = []
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -376,6 +376,8 @@ extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelega
 
 extension AddScheduleViewController: SelectedLocationDelegate {
     func selectLocation(_ selectedLocation: String) {
-        print(selectedLocation)
+        locations.append(LocationTime(location: selectedLocation, time: "10:00 AM"))
+        
+        tableView.reloadData()
     }
 }
