@@ -78,8 +78,8 @@ enum AddScheduleSection: Int, CaseIterable {
         cell.backgroundColor = .orange
     }
     
-    func configureLocationTimeCell(_ cell: LocationTimeCell, location: String, time: String) {
-        cell.configure(location, time: time)
+    func configureLocationTimeCell(_ cell: LocationTimeCell, index: Int, location: String, time: String) {
+        cell.configure(index, location: location, time: time)
     }
     
     func rowHeight(row: Int) -> CGFloat {

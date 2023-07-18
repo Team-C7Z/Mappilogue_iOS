@@ -8,14 +8,17 @@
 import UIKit
 
 class TimePickerViewController: BaseViewController {
+    weak var delegate: SelectedTimeDelegate?
+    
+    private var selectedTime: String = "09:00 AM"
+    
     private let timePickerOuterView = UIView()
     private let deleteTimeButton = UIButton()
     private let deleteTimeImage = UIImageView()
     private let deleteTimeLabel = UILabel()
+    private let timePicker = UIDatePicker()
     private let cancelButton = UIButton()
     private let selectedTimeButton = UIButton()
-    
-    var datePicker = UIDatePicker()
 
     override func setupProperty() {
         super.setupProperty()
@@ -37,16 +40,8 @@ class TimePickerViewController: BaseViewController {
         selectedTimeButton.setImage(UIImage(named: "selectedTime"), for: .normal)
         selectedTimeButton.addTarget(self, action: #selector(selectedTimeButtonTapped), for: .touchUpInside)
         
-        datePicker.datePickerMode = .time
-        datePicker.preferredDatePickerStyle = .wheels
-        datePicker.locale = Locale(identifier: "en_US_POSIX")
+        setTimePicker()
         
-        let initialTime = "09:00 AM"
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "h:mm a"
-        if let date = dateFormatter.date(from: initialTime) {
-            datePicker.date = date
-        }
     }
     
     override func setupHierarchy() {
@@ -57,7 +52,7 @@ class TimePickerViewController: BaseViewController {
         deleteTimeButton.addSubview(deleteTimeImage)
         deleteTimeButton.addSubview(deleteTimeLabel)
         
-        timePickerOuterView.addSubview(datePicker)
+        timePickerOuterView.addSubview(timePicker)
         
         timePickerOuterView.addSubview(cancelButton)
         timePickerOuterView.addSubview(selectedTimeButton)
@@ -89,7 +84,7 @@ class TimePickerViewController: BaseViewController {
             $0.leading.equalTo(deleteTimeImage.snp.trailing).offset(2)
         }
         
-        datePicker.snp.makeConstraints {
+        timePicker.snp.makeConstraints {
             $0.top.equalTo(timePickerOuterView).offset(56)
             $0.centerX.equalTo(timePickerOuterView)
             $0.width.equalTo(192)
@@ -117,12 +112,37 @@ class TimePickerViewController: BaseViewController {
         dismiss(animated: false)
     }
     
+    func setTimePicker() {
+        timePicker.datePickerMode = .time
+        timePicker.preferredDatePickerStyle = .wheels
+        timePicker.locale = Locale(identifier: "en_US_POSIX")
+        timePicker.addTarget(self, action: #selector(timePickerValueDidChage), for: .valueChanged)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "h:mm a"
+        if let date = dateFormatter.date(from: selectedTime) {
+            timePicker.date = date
+        }
+    }
+    
     @objc func cancelButtonTapped(_ sender: UIButton) {
         dismiss(animated: false)
     }
     
     @objc func selectedTimeButtonTapped(_ sender: UIButton) {
+        delegate?.selectTime(selectedTime)
+        
         dismiss(animated: false)
     }
+    
+    @objc func timePickerValueDidChage(_ timePicker: UIDatePicker) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a"
+        formatter.locale = Locale(identifier: "ko_KR")
+        selectedTime = formatter.string(from: timePicker.date)
+    }
+}
 
+protocol SelectedTimeDelegate: AnyObject {
+    func selectTime(_ selectedTime: String)
 }

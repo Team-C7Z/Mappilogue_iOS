@@ -12,6 +12,8 @@ class LocationTimeCell: BaseTableViewCell {
     
     weak var delegate: TimeButtonDelegate?
     
+    private var index: Int?
+    
     private let locationLabel = UILabel()
     private let locationImage = UIImageView()
     private let timeButton = UIButton()
@@ -103,16 +105,18 @@ class LocationTimeCell: BaseTableViewCell {
         }
     }
     
-    func configure(_ location: String, time: String) {
+    func configure(_ index: Int, location: String, time: String) {
+        self.index = index
         locationLabel.text = location
         timeLabel.text = time
     }
     
     @objc func timeButtonTapped(_ sender: UIButton) {
-        delegate?.timeButtonTapped()
+        guard let index = index else { return }
+        delegate?.timeButtonTapped(index)
     }
 }
 
 protocol TimeButtonDelegate: AnyObject {
-    func timeButtonTapped()
+    func timeButtonTapped(_ index: Int)
 }
