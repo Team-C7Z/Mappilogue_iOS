@@ -394,11 +394,13 @@ extension AddScheduleViewController: SelectedLocationDelegate, TimeButtonDelegat
         
         let timePickerViewController = TimePickerViewController()
         timePickerViewController.delegate = self
+        timePickerViewController.selectedTime = locations[index].time
         timePickerViewController.modalPresentationStyle = .overFullScreen
         present(timePickerViewController, animated: false)
     }
     
-    func selectTime(_ selectedTime: String) {
+    func selectTime(_ selectedTime: String?) {
+        guard let selectedTime = selectedTime else { return }
         let time = selectedTime.replacingOccurrences(of: "오전", with: "AM").replacingOccurrences(of: "오후", with: "PM")
         guard let index = timeIndex else { return }
         locations[index].time = time
