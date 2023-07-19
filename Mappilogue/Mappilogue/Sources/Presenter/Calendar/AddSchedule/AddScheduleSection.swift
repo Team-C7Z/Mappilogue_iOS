@@ -110,7 +110,7 @@ enum AddScheduleSection: Int, CaseIterable {
         case .notificationRepeat:
             return 16
         case .locationTime:
-            return 8
+            return 12
         default:
             return 0
         }
