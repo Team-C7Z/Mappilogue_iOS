@@ -118,10 +118,10 @@ class LocationTimeCell: BaseTableViewCell {
         }
     }
     
-    func configure(_ index: Int, location: String, time: String, isDeleteMode: Bool) {
+    func configure(with index: Int, schedule: LocationTime, isDeleteMode: Bool) {
         self.index = index
-        locationLabel.text = location
-        timeLabel.text = time
+        locationLabel.text = schedule.location
+        timeLabel.text = schedule.time
         checkButton.isHidden = !isDeleteMode
         editImage.isHidden = isDeleteMode
     }
@@ -133,15 +133,15 @@ class LocationTimeCell: BaseTableViewCell {
     
     @objc func checkButtonTapped() {
         isCheck = !isCheck
-        
-        if isCheck {
-            checkButton.setImage(UIImage(named: "checkLocation"), for: .normal)
-        } else {
-            checkButton.setImage(UIImage(named: "unCheckLocation"), for: .normal)
-        }
+        updateCheckButtonImage()
         
         guard let index = index else { return }
         checkDelegate?.checkButtonTapped(index, isCheck: isCheck)
+    }
+    
+    private func updateCheckButtonImage() {
+        let imageName = isCheck ? "checkLocation" : "unCheckLocation"
+        checkButton.setImage(UIImage(named: imageName), for: .normal)
     }
 }
 

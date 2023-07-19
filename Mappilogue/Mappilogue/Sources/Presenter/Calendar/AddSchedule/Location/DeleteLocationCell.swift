@@ -111,21 +111,8 @@ class DeleteLocationCell: BaseTableViewCell {
     }
     
     func switchDeleteModel() {
-        if isDeleteMode {
-            setDeleteMode()
-        } else {
-            exitDeleteMode()
-        }
-    }
-    
-    func setDeleteMode() {
-        deleteSelectedLabel.text = "선택취소"
-        deleteButton.isHidden = false
-    }
-    
-    func exitDeleteMode() {
-        deleteSelectedLabel.text = "선택삭제"
-        deleteButton.isHidden = true
+        deleteSelectedLabel.text = isDeleteMode ? "선택취소" : "선택삭제"
+        deleteButton.isHidden = !isDeleteMode
     }
     
     @objc func deleteButtonTapped(_ sender: UIButton) {

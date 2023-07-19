@@ -13,15 +13,15 @@ enum AlertType {
 }
 
 class DeleteAlertViewController: BaseViewController {
+    var titleText: String?
+    var messageText: String?
+    var onDeleteTapped: (() -> Void)?
+    
     private let alertView = UIView()
     private let titleLabel = UILabel()
     private let messageLabel = UILabel()
     private let cancelButton = UIButton()
     private let deleteButton = UIButton()
-    
-    var titleText: String?
-    var messageText: String?
-    var onDeleteTapped: (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,11 +102,11 @@ class DeleteAlertViewController: BaseViewController {
         }
     }
     
-    @objc func cancelButtonTapped(_ sender: UIButton) {
+    @objc private func cancelButtonTapped(_ sender: UIButton) {
         dismiss(animated: false)
     }
     
-    @objc func deleteButtonTapped(_ sender: UIButton) {
+    @objc private func deleteButtonTapped(_ sender: UIButton) {
         dismiss(animated: false) {
             self.onDeleteTapped?()
         }
