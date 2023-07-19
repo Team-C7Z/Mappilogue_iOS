@@ -71,6 +71,7 @@
 		926999462A14F75F003DDAD2 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999452A14F75F003DDAD2 /* RecordViewController.swift */; };
 		926999482A14F76A003DDAD2 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999472A14F76A003DDAD2 /* MyViewController.swift */; };
 		927E7F212A66F64400E6A29F /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927E7F202A66F64400E6A29F /* Schedule.swift */; };
+		927E7F252A677D1A00E6A29F /* DeleteAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927E7F242A677D1A00E6A29F /* DeleteAlertViewController.swift */; };
 		929158222A2529660022BEF9 /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 929158192A2529660022BEF9 /* Pretendard-Regular.ttf */; };
 		929158242A2529660022BEF9 /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581B2A2529660022BEF9 /* Pretendard-Medium.ttf */; };
 		929158252A2529660022BEF9 /* Pretendard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */; };
@@ -181,6 +182,7 @@
 		926999452A14F75F003DDAD2 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		926999472A14F76A003DDAD2 /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
 		927E7F202A66F64400E6A29F /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		927E7F242A677D1A00E6A29F /* DeleteAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAlertViewController.swift; sourceTree = "<group>"; };
 		929158192A2529660022BEF9 /* Pretendard-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.ttf"; sourceTree = "<group>"; };
 		9291581B2A2529660022BEF9 /* Pretendard-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.ttf"; sourceTree = "<group>"; };
 		9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.ttf"; sourceTree = "<group>"; };
@@ -492,7 +494,7 @@
 				9269993C2A14F6BF003DDAD2 /* Gathering */,
 				9269993E2A14F71D003DDAD2 /* Record */,
 				9269993D2A14F6F9003DDAD2 /* My */,
-				92A7B64D2A4CCDB7009C9293 /* Resuable */,
+				92A7B64D2A4CCDB7009C9293 /* Reusable */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -567,13 +569,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		92A7B64D2A4CCDB7009C9293 /* Resuable */ = {
+		92A7B64D2A4CCDB7009C9293 /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
 				92A7B64E2A4CCE29009C9293 /* AddButton.swift */,
 				9224FCFA2A5FDD90000A56A6 /* AddScheduleButton.swift */,
+				927E7F242A677D1A00E6A29F /* DeleteAlertViewController.swift */,
 			);
-			path = Resuable;
+			path = Reusable;
 			sourceTree = "<group>";
 		};
 		92A7B6642A4E52A6009C9293 /* Model */ = {
@@ -773,6 +776,7 @@
 				9224FD372A653024000A56A6 /* SpacingButton.swift in Sources */,
 				9291582A2A252CC20022BEF9 /* UIColor.swift in Sources */,
 				926999382A14F4AA003DDAD2 /* TabBarControllerController.swift in Sources */,
+				927E7F252A677D1A00E6A29F /* DeleteAlertViewController.swift in Sources */,
 				92A7B65F2A4E07DB009C9293 /* TodayScheduleCell.swift in Sources */,
 				926999342A14F2A3003DDAD2 /* BaseViewController.swift in Sources */,
 				92459ED82A52494200493941 /* AddMarkedRecordCell.swift in Sources */,
