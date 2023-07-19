@@ -236,10 +236,8 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource,
             
             let location = locations[indexPath.row-1]
             let index = indexPath.row-1
-            let locationTitle = location.location
-            let time = location.time
-            
-            section.configureLocationTimeCell(locationTimeCell, index: index, location: locationTitle, time: time, isDeleteMode: isDeleteModel)
+
+            section.configureLocationTimeCell(locationTimeCell, index: index, schedule: location, isDeleteMode: isDeleteModel)
         
         case let addLocationButtonCell as AddLocationButtonCell:
             addLocationButtonCell.delegate = self
@@ -273,34 +271,35 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource,
         case 1:
             let repeatViewController = RepeatViewController()
             navigationController?.pushViewController(repeatViewController, animated: true)
-        
         default:
             break
         }
     }
     
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        if !locations.isEmpty && indexPath.section == 3 && indexPath.row > 0 {
-            return [UIDragItem(itemProvider: NSItemProvider())]
+        guard !locations.isEmpty && indexPath.section == 3 && indexPath.row > 0 else {
+            return []
         }
-        return []
+        return [UIDragItem(itemProvider: NSItemProvider())]
     }
     
     func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
-        if session.localDragSession != nil {
-            if !locations.isEmpty, let destinationIndexPath = destinationIndexPath, destinationIndexPath.section == 3 && destinationIndexPath.row > 0 {
-                return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
-            }
+        guard let destinationIndexPath = destinationIndexPath, session.localDragSession != nil, !locations.isEmpty, destinationIndexPath.section == 3 && destinationIndexPath.row > 0 else {
+            return UITableViewDropProposal(operation: .cancel, intent: .unspecified)
+            
         }
-        return UITableViewDropProposal(operation: .cancel, intent: .unspecified)
+        return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return indexPath.section == 3 && indexPath.row > 0
     }
 
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        if !locations.isEmpty && sourceIndexPath.section == 3 && destinationIndexPath.section == 3 && destinationIndexPath.row > 0 {
-            let moveCell = locations[sourceIndexPath.row-1]
-            locations.remove(at: sourceIndexPath.row-1)
-            locations.insert(moveCell, at: destinationIndexPath.row-1)
-        }
+        guard !locations.isEmpty && sourceIndexPath.section == 3 && sourceIndexPath.row > 0 && destinationIndexPath.section == 3 && destinationIndexPath.row > 0 else { return }
+        let moveCell = locations[sourceIndexPath.row-1]
+        locations.remove(at: sourceIndexPath.row-1)
+        locations.insert(moveCell, at: destinationIndexPath.row-1)
     }
     
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) { }
@@ -379,31 +378,27 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
     }
 }
 
-extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelegate, DatePickerStartDateDelegate, DatePickerEndDateDelegate, NotificationTimeDelegate, AddLocationDelegate {
+extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelegate, DatePickerStartDateDelegate, DatePickerEndDateDelegate, NotificationTimeDelegate, AddLocationDelegate, SelectedLocationDelegate, TimeButtonDelegate, SelectedTimeDelegate, DeleteModeDelegate, DeleteLocationDelegate, CheckLocationDelegate {
     func colorSelectionButtonTapped() {
         isColorSelection = !isColorSelection
-        
         tableView.reloadSections([0], with: .none)
     }
     
     func selectColor(_ color: UIColor) {
         selectedColor = color
-        
-        tableView.reloadData()
+        reloadTableView()
     }
     
     func startDateButtonTapped() {
         startDatePickerOuterView.isHidden = false
         endDatePickerOuterView.isHidden = true
-        
-        tableView.reloadData()
+        reloadTableView()
     }
     
     func endDateButtonTapped() {
         startDatePickerOuterView.isHidden = true
         endDatePickerOuterView.isHidden = false
-        
-        tableView.reloadData()
+        reloadTableView()
     }
     
     func selectedNotificationTime(_ selectedTime: [String]) {
@@ -416,23 +411,15 @@ extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelega
         addLocationViewController.modalPresentationStyle = .overFullScreen
         present(addLocationViewController, animated: false)
     }
-}
-
-extension AddScheduleViewController: SelectedLocationDelegate, TimeButtonDelegate, SelectedTimeDelegate, DeleteModeDelegate, DeleteLocationDelegate, CheckLocationDelegate {
+    
     func selectLocation(_ selectedLocation: String) {
         locations.append(LocationTime(location: selectedLocation, time: initialTime))
-        
-        tableView.reloadData()
+        reloadTableView()
     }
     
     func timeButtonTapped(_ index: Int) {
         timeIndex = index
-        
-        let timePickerViewController = TimePickerViewController()
-        timePickerViewController.delegate = self
-        timePickerViewController.selectedTime = locations[index].time
-        timePickerViewController.modalPresentationStyle = .overFullScreen
-        present(timePickerViewController, animated: false)
+        presentTimePicker(index)
     }
     
     func selectTime(_ selectedTime: String?) {
@@ -440,8 +427,7 @@ extension AddScheduleViewController: SelectedLocationDelegate, TimeButtonDelegat
         let time = formatTime(selectedTime)
         guard let index = timeIndex else { return }
         locations[index].time = time
-        
-        tableView.reloadData()
+        reloadTableView()
     }
     
     private func formatTime(_ time: String) -> String {
@@ -450,23 +436,19 @@ extension AddScheduleViewController: SelectedLocationDelegate, TimeButtonDelegat
     
     func switchDeleteMode(_ isDeleteMode: Bool) {
         self.isDeleteModel = isDeleteMode
-        
-        tableView.reloadData()
+        reloadTableView()
     }
     
     func deleteButtonTapped() {
-        if !selectedLocations.isEmpty {
-            let deleteAlertViewController = DeleteAlertViewController()
-            deleteAlertViewController.modalPresentationStyle = .overCurrentContext
-            deleteAlertViewController.onDeleteTapped = {
-                for index in self.selectedLocations.sorted(by: >) where index < self.locations.count {
-                    self.locations.remove(at: index)
-                }
-                self.selectedLocations = []
-                self.tableView.reloadData()
-            }
-            self.present(deleteAlertViewController, animated: false)
+        guard !selectedLocations.isEmpty else { return }
+        
+        let deleteAlertViewController = DeleteAlertViewController()
+        deleteAlertViewController.modalPresentationStyle = .overCurrentContext
+        deleteAlertViewController.onDeleteTapped = {
+            self.deleteSelectedLocations()
         }
+        self.present(deleteAlertViewController, animated: false)
+        
     }
     
     func checkButtonTapped(_ index: Int, isCheck: Bool) {
@@ -477,5 +459,27 @@ extension AddScheduleViewController: SelectedLocationDelegate, TimeButtonDelegat
                 selectedLocations.remove(at: index)
             }
         }
+    }
+    
+    private func reloadTableView() {
+        tableView.reloadData()
+    }
+    
+    private func presentTimePicker(_ index: Int) {
+        let timePickerViewController = TimePickerViewController()
+        timePickerViewController.delegate = self
+        timePickerViewController.selectedTime = locations[index].time
+        timePickerViewController.modalPresentationStyle = .overFullScreen
+        present(timePickerViewController, animated: false)
+    }
+    
+    private func deleteSelectedLocations() {
+        selectedLocations.sorted(by: >).forEach { index in
+            if index < locations.count {
+                locations.remove(at: index)
+            }
+        }
+        selectedLocations = []
+        reloadTableView()
     }
 }

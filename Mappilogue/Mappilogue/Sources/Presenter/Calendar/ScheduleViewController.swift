@@ -143,17 +143,25 @@ extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
-            let deleteAlertViewController = DeleteAlertViewController()
-            deleteAlertViewController.modalPresentationStyle = .overCurrentContext
-            deleteAlertViewController.onDeleteTapped = {
-                self.schedules.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .none)
-            }
-            self.present(deleteAlertViewController, animated: false)
+            self.presentDeleteAlert(at: indexPath)
         }
         deleteAction.backgroundColor = .colorF14C4C
         deleteAction.image = UIImage(named: "delete")
         return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+    
+    private func presentDeleteAlert(at indexPath: IndexPath) {
+         let deleteAlertViewController = DeleteAlertViewController()
+         deleteAlertViewController.modalPresentationStyle = .overCurrentContext
+         deleteAlertViewController.onDeleteTapped = {
+             self.deleteSchedule(at: indexPath)
+         }
+         present(deleteAlertViewController, animated: false)
+     }
+    
+    private func deleteSchedule(at indexPath: IndexPath) {
+        schedules.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .none)
     }
 }
 

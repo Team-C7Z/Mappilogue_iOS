@@ -74,8 +74,8 @@ enum AddScheduleSection: Int, CaseIterable {
         }
     }
     
-    func configureLocationTimeCell(_ cell: LocationTimeCell, index: Int, location: String, time: String, isDeleteMode: Bool) {
-        cell.configure(index, location: location, time: time, isDeleteMode: isDeleteMode)
+    func configureLocationTimeCell(_ cell: LocationTimeCell, index: Int, schedule: LocationTime, isDeleteMode: Bool) {
+        cell.configure(with: index, schedule: schedule, isDeleteMode: isDeleteMode)
     }
     
     func rowHeight(row: Int) -> CGFloat {
