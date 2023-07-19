@@ -11,7 +11,7 @@ class ScheduleViewController: BaseViewController {
     weak var dismissDelegate: DismissScheduleViewControllerDelegate?
     weak var presentDelegate: PresentAddScheduleViewControllerDelegate?
     
-    let dummySchedule = dummyScheduleData()
+    var dummySchedule = dummyScheduleData()
     let date: String = ""
     let lunarDate: String = ""
     
@@ -139,6 +139,15 @@ extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
+            print("ㅎㅎ")
+        }
+        deleteAction.backgroundColor = .colorF14C4C
+        deleteAction.image = UIImage(named: "delete")
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }
 
