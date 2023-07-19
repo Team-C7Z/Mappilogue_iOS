@@ -11,7 +11,7 @@ class ScheduleViewController: BaseViewController {
     weak var dismissDelegate: DismissScheduleViewControllerDelegate?
     weak var presentDelegate: PresentAddScheduleViewControllerDelegate?
     
-    var dummySchedule = dummyScheduleData()
+    var schedules = dummyScheduleData()
     let date: String = ""
     let lunarDate: String = ""
     
@@ -116,14 +116,14 @@ class ScheduleViewController: BaseViewController {
 
 extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dummySchedule.count
+        return schedules.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleCell.registerId, for: indexPath) as? ScheduleCell else { return UITableViewCell() }
         cell.selectionStyle = .none
         
-        let schedule = dummySchedule[indexPath.row]
+        let schedule = schedules[indexPath.row]
         let scheduleTitle = schedule.title
         let color = schedule.color
         let time = schedule.time
@@ -145,6 +145,10 @@ extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
             let deleteAlertViewController = DeleteAlertViewController()
             deleteAlertViewController.modalPresentationStyle = .overCurrentContext
+            deleteAlertViewController.onDeleteTapped = {
+                self.schedules.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .none)
+            }
             self.present(deleteAlertViewController, animated: false)
         }
         deleteAction.backgroundColor = .colorF14C4C
