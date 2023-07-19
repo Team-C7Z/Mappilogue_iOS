@@ -74,12 +74,8 @@ enum AddScheduleSection: Int, CaseIterable {
         }
     }
     
-    func configureDeleteLocationCell(_ cell: DeleteLocationCell) {
-        cell.backgroundColor = .orange
-    }
-    
-    func configureLocationTimeCell(_ cell: LocationTimeCell, index: Int, location: String, time: String) {
-        cell.configure(index, location: location, time: time)
+    func configureLocationTimeCell(_ cell: LocationTimeCell, index: Int, location: String, time: String, isDeleteMode: Bool) {
+        cell.configure(index, location: location, time: time, isDeleteMode: isDeleteMode)
     }
     
     func rowHeight(row: Int) -> CGFloat {

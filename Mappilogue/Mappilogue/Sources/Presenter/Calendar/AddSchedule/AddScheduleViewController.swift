@@ -22,6 +22,7 @@ class AddScheduleViewController: BaseViewController {
     var locations: [LocationTime] = []
     var timeIndex: Int?
     var initialTime: String = "9:00 AM"
+    var isDeleteModel: Bool = false
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -221,6 +222,9 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
         case let notificationRepeatCell as NotificationRepeatCell:
             section.configureNotificationRepeatCell(notificationRepeatCell, row: indexPath.row)
             
+        case let deleteLocationCell as DeleteLocationCell:
+            deleteLocationCell.delegate = self
+            
         case let locationTimeCell as LocationTimeCell:
             locationTimeCell.delegate = self
             
@@ -229,7 +233,7 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
             let locationTitle = location.location
             let time = location.time
             
-            section.configureLocationTimeCell(locationTimeCell, index: index, location: locationTitle, time: time)
+            section.configureLocationTimeCell(locationTimeCell, index: index, location: locationTitle, time: time, isDeleteMode: isDeleteModel)
         
         case let addLocationButtonCell as AddLocationButtonCell:
             addLocationButtonCell.delegate = self
@@ -382,7 +386,7 @@ extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelega
     }
 }
 
-extension AddScheduleViewController: SelectedLocationDelegate, TimeButtonDelegate, SelectedTimeDelegate {
+extension AddScheduleViewController: SelectedLocationDelegate, TimeButtonDelegate, SelectedTimeDelegate, DeleteModeDelegate {
     func selectLocation(_ selectedLocation: String) {
         locations.append(LocationTime(location: selectedLocation, time: initialTime))
         
@@ -410,5 +414,11 @@ extension AddScheduleViewController: SelectedLocationDelegate, TimeButtonDelegat
     
     private func formatTime(_ time: String) -> String {
         return time.replacingOccurrences(of: "오전", with: "AM").replacingOccurrences(of: "오후", with: "PM")
+    }
+    
+    func switchDeleteMode(_ isDeleteMode: Bool) {
+        self.isDeleteModel = isDeleteMode
+        
+        tableView.reloadData()
     }
 }
