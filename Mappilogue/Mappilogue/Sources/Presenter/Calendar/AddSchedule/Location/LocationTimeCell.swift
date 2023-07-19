@@ -10,9 +10,11 @@ import UIKit
 class LocationTimeCell: BaseTableViewCell {
     static let registerId = "\(LocationTimeCell.self)"
     
-    weak var delegate: TimeButtonDelegate?
+    weak var timeDelegate: TimeButtonDelegate?
+    weak var checkDelegate: CheckLocationDelegate?
     
     private var index: Int?
+    private var isCheck: Bool = false
     
     private let locationLabel = UILabel()
     private let locationImage = UIImageView()
@@ -21,11 +23,12 @@ class LocationTimeCell: BaseTableViewCell {
     private let timeLabel = UILabel()
     private let timeLineView = UIView()
     private let editImage = UIImageView()
+    private let checkButton = UIButton()
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 8, right: 16))
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16))
     }
     
     override func setupProperty() {
@@ -39,13 +42,16 @@ class LocationTimeCell: BaseTableViewCell {
         locationImage.image = UIImage(named: "location")
         
         timeButton.addTarget(self, action: #selector(timeButtonTapped), for: .touchUpInside)
-        
         timeImage.image = UIImage(named: "time")
         timeLabel.textColor = .color707070
         timeLabel.font = .body02
         timeLineView.backgroundColor = .color707070
         
         editImage.image = UIImage(named: "edit")
+        editImage.tintColor = .colorC9C6C2
+
+        checkButton.setImage(UIImage(named: "unCheckLocation"), for: .normal)
+        checkButton.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -58,6 +64,7 @@ class LocationTimeCell: BaseTableViewCell {
         timeButton.addSubview(timeLabel)
         timeButton.addSubview(timeLineView)
         contentView.addSubview(editImage)
+        contentView.addSubview(checkButton)
     }
     
     override func setupLayout() {
@@ -103,20 +110,45 @@ class LocationTimeCell: BaseTableViewCell {
             $0.trailing.equalTo(contentView).offset(-10)
             $0.width.height.equalTo(24)
         }
+        
+        checkButton.snp.makeConstraints {
+            $0.centerY.equalTo(contentView)
+            $0.trailing.equalTo(contentView).offset(-13)
+            $0.width.height.equalTo(24)
+        }
     }
     
-    func configure(_ index: Int, location: String, time: String) {
+    func configure(with index: Int, schedule: LocationTime, isDeleteMode: Bool) {
         self.index = index
-        locationLabel.text = location
-        timeLabel.text = time
+        locationLabel.text = schedule.location
+        timeLabel.text = schedule.time
+        checkButton.isHidden = !isDeleteMode
+        editImage.isHidden = isDeleteMode
     }
     
     @objc func timeButtonTapped(_ sender: UIButton) {
         guard let index = index else { return }
-        delegate?.timeButtonTapped(index)
+        timeDelegate?.timeButtonTapped(index)
+    }
+    
+    @objc func checkButtonTapped() {
+        isCheck = !isCheck
+        updateCheckButtonImage()
+        
+        guard let index = index else { return }
+        checkDelegate?.checkButtonTapped(index, isCheck: isCheck)
+    }
+    
+    private func updateCheckButtonImage() {
+        let imageName = isCheck ? "checkLocation" : "unCheckLocation"
+        checkButton.setImage(UIImage(named: imageName), for: .normal)
     }
 }
 
 protocol TimeButtonDelegate: AnyObject {
     func timeButtonTapped(_ index: Int)
+}
+
+protocol CheckLocationDelegate: AnyObject {
+    func checkButtonTapped(_ index: Int, isCheck: Bool)
 }

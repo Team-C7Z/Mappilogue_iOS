@@ -30,7 +30,8 @@ class TimePickerViewController: BaseViewController {
         
         deleteTimeButton.addTarget(self, action: #selector(deleteTimeButtonTapped), for: .touchUpInside)
         
-        deleteTimeImage.image = UIImage(named: "deleteTime")
+        deleteTimeImage.image = UIImage(named: "delete")
+        deleteTimeImage.tintColor = .colorF14C4C
         
         deleteTimeLabel.text = "시간삭제"
         deleteTimeLabel.textColor = .color707070
