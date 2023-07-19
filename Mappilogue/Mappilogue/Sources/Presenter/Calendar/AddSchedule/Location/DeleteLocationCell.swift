@@ -10,7 +10,9 @@ import UIKit
 class DeleteLocationCell: BaseTableViewCell {
     static let registerId = "\(DeleteLocationCell.self)"
     
-    weak var delegate: DeleteModeDelegate?
+    weak var deleteModelDelegate: DeleteModeDelegate?
+    weak var deleteLocationDelegate: DeleteLocationDelegate?
+
     private var isDeleteMode: Bool = false
     
     private let stackView = UIStackView()
@@ -44,6 +46,7 @@ class DeleteLocationCell: BaseTableViewCell {
         deleteLabel.text = "삭제하기"
         deleteLabel.textColor = .color707070
         deleteLabel.font = .body02
+        deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         
         switchDeleteModel()
     }
@@ -104,7 +107,7 @@ class DeleteLocationCell: BaseTableViewCell {
         isDeleteMode = !isDeleteMode
         switchDeleteModel()
      
-        delegate?.switchDeleteMode(isDeleteMode)
+        deleteModelDelegate?.switchDeleteMode(isDeleteMode)
     }
     
     func switchDeleteModel() {
@@ -124,8 +127,16 @@ class DeleteLocationCell: BaseTableViewCell {
         deleteSelectedLabel.text = "선택삭제"
         deleteButton.isHidden = true
     }
+    
+    @objc func deleteButtonTapped(_ sender: UIButton) {
+        deleteLocationDelegate?.deleteButtonTapped()
+    }
 }
 
 protocol DeleteModeDelegate: AnyObject {
     func switchDeleteMode(_ isDeleteMode: Bool)
+}
+
+protocol DeleteLocationDelegate: AnyObject {
+    func deleteButtonTapped()
 }

@@ -10,7 +10,8 @@ import UIKit
 class LocationTimeCell: BaseTableViewCell {
     static let registerId = "\(LocationTimeCell.self)"
     
-    weak var delegate: TimeButtonDelegate?
+    weak var timeDelegate: TimeButtonDelegate?
+    weak var checkDelegate: CheckLocationDelegate?
     
     private var index: Int?
     private var isCheck: Bool = false
@@ -127,7 +128,7 @@ class LocationTimeCell: BaseTableViewCell {
     
     @objc func timeButtonTapped(_ sender: UIButton) {
         guard let index = index else { return }
-        delegate?.timeButtonTapped(index)
+        timeDelegate?.timeButtonTapped(index)
     }
     
     @objc func checkButtonTapped() {
@@ -138,9 +139,16 @@ class LocationTimeCell: BaseTableViewCell {
         } else {
             checkButton.setImage(UIImage(named: "unCheckLocation"), for: .normal)
         }
+        
+        guard let index = index else { return }
+        checkDelegate?.checkButtonTapped(index, isCheck: isCheck)
     }
 }
 
 protocol TimeButtonDelegate: AnyObject {
     func timeButtonTapped(_ index: Int)
+}
+
+protocol CheckLocationDelegate: AnyObject {
+    func checkButtonTapped(_ index: Int, isCheck: Bool)
 }

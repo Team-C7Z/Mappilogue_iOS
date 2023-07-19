@@ -20,6 +20,7 @@ class AddScheduleViewController: BaseViewController {
     var days: [Int] = []
 
     var locations: [LocationTime] = []
+    var selectedLocations: [Int] = []
     var timeIndex: Int?
     var initialTime: String = "9:00 AM"
     var isDeleteModel: Bool = false
@@ -223,10 +224,12 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
             section.configureNotificationRepeatCell(notificationRepeatCell, row: indexPath.row)
             
         case let deleteLocationCell as DeleteLocationCell:
-            deleteLocationCell.delegate = self
+            deleteLocationCell.deleteModelDelegate = self
+            deleteLocationCell.deleteLocationDelegate = self
             
         case let locationTimeCell as LocationTimeCell:
-            locationTimeCell.delegate = self
+            locationTimeCell.timeDelegate = self
+            locationTimeCell.checkDelegate = self
             
             let location = locations[indexPath.row-1]
             let index = indexPath.row-1
@@ -386,7 +389,7 @@ extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelega
     }
 }
 
-extension AddScheduleViewController: SelectedLocationDelegate, TimeButtonDelegate, SelectedTimeDelegate, DeleteModeDelegate {
+extension AddScheduleViewController: SelectedLocationDelegate, TimeButtonDelegate, SelectedTimeDelegate, DeleteModeDelegate, DeleteLocationDelegate, CheckLocationDelegate {
     func selectLocation(_ selectedLocation: String) {
         locations.append(LocationTime(location: selectedLocation, time: initialTime))
         
@@ -420,5 +423,24 @@ extension AddScheduleViewController: SelectedLocationDelegate, TimeButtonDelegat
         self.isDeleteModel = isDeleteMode
         
         tableView.reloadData()
+    }
+    
+    func deleteButtonTapped() {
+        let deleteAlertViewController = DeleteAlertViewController()
+        deleteAlertViewController.modalPresentationStyle = .overCurrentContext
+        deleteAlertViewController.onDeleteTapped = {
+            print("아잉")
+        }
+        self.present(deleteAlertViewController, animated: false)
+    }
+    
+    func checkButtonTapped(_ index: Int, isCheck: Bool) {
+        if isCheck {
+            selectedLocations.append(index)
+        } else {
+            if let index = selectedLocations.firstIndex(of: index) {
+                selectedLocations.remove(at: index)
+            }
+        }
     }
 }
