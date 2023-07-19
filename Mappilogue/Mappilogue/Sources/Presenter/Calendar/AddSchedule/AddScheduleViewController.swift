@@ -40,6 +40,9 @@ class AddScheduleViewController: BaseViewController {
         tableView.register(AddLocationButtonCell.self, forCellReuseIdentifier: AddLocationButtonCell.registerId)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.dragInteractionEnabled = true
+        tableView.dragDelegate = self
+        tableView.dropDelegate = self
 
         return tableView
     }()
@@ -188,7 +191,7 @@ class AddScheduleViewController: BaseViewController {
     }
 }
 
-extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource {
+extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate, UITableViewDropDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return locations.isEmpty ? 4 : 5
     }
@@ -275,6 +278,32 @@ extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource 
             break
         }
     }
+    
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        if !locations.isEmpty && indexPath.section == 3 && indexPath.row > 0 {
+            return [UIDragItem(itemProvider: NSItemProvider())]
+        }
+        return []
+    }
+    
+    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+        if session.localDragSession != nil {
+            if !locations.isEmpty, let destinationIndexPath = destinationIndexPath, destinationIndexPath.section == 3 && destinationIndexPath.row > 0 {
+                return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+            }
+        }
+        return UITableViewDropProposal(operation: .cancel, intent: .unspecified)
+    }
+
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        if !locations.isEmpty && sourceIndexPath.section == 3 && destinationIndexPath.section == 3 && destinationIndexPath.row > 0 {
+            let moveCell = locations[sourceIndexPath.row-1]
+            locations.remove(at: sourceIndexPath.row-1)
+            locations.insert(moveCell, at: destinationIndexPath.row-1)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) { }
 }
 
 extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -426,12 +455,18 @@ extension AddScheduleViewController: SelectedLocationDelegate, TimeButtonDelegat
     }
     
     func deleteButtonTapped() {
-        let deleteAlertViewController = DeleteAlertViewController()
-        deleteAlertViewController.modalPresentationStyle = .overCurrentContext
-        deleteAlertViewController.onDeleteTapped = {
-            print("아잉")
+        if !selectedLocations.isEmpty {
+            let deleteAlertViewController = DeleteAlertViewController()
+            deleteAlertViewController.modalPresentationStyle = .overCurrentContext
+            deleteAlertViewController.onDeleteTapped = {
+                for index in self.selectedLocations.sorted(by: >) where index < self.locations.count {
+                    self.locations.remove(at: index)
+                }
+                self.selectedLocations = []
+                self.tableView.reloadData()
+            }
+            self.present(deleteAlertViewController, animated: false)
         }
-        self.present(deleteAlertViewController, animated: false)
     }
     
     func checkButtonTapped(_ index: Int, isCheck: Bool) {
