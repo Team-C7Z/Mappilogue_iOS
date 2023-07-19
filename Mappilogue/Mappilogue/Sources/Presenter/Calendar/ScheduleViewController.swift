@@ -143,7 +143,9 @@ extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
-            print("ㅎㅎ")
+            let deleteAlertViewController = DeleteAlertViewController()
+            deleteAlertViewController.modalPresentationStyle = .overCurrentContext
+            self.present(deleteAlertViewController, animated: false)
         }
         deleteAction.backgroundColor = .colorF14C4C
         deleteAction.image = UIImage(named: "delete")
