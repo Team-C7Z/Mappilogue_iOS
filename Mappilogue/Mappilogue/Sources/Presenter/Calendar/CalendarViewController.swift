@@ -41,9 +41,8 @@ class CalendarViewController: NavigationBarViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        let indexPath = IndexPath(item: currentPage, section: 0)
-        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+     
+        setCurrentPage()
     }
     
     override func setupProperty() {
@@ -107,6 +106,11 @@ class CalendarViewController: NavigationBarViewController {
         selectedDate = SelectedDate(year: monthlyCalendar.currentYear, month: monthlyCalendar.currentMonth)
     }
     
+    func setCurrentPage() {
+        let indexPath = IndexPath(item: currentPage, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+    }
+    
     @objc func changeDateButtonTapped(_ sender: UIButton) {
         let datePickerViewController = DatePickerViewController()
         datePickerViewController.selectedDate = selectedDate
@@ -147,21 +151,13 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         currentPage = Int(scrollView.contentOffset.x / scrollView.frame.width)
+        
         if currentPage == 0 {
-            if selectedDate.month == 1 {
-                selectedDate.year -= 1
-                selectedDate.month = 12
-            } else {
-                selectedDate.month -= 1
-            }
+            selectedDate = changePreviousMonth(selectedDate)
         } else if currentPage == 2 {
-            if selectedDate.month == 12 {
-                selectedDate.year += 1
-                selectedDate.month = 1
-            } else {
-                selectedDate.month += 1
-            }
+            selectedDate = changeNextMonth(selectedDate)
         }
+        
         currentPage = 1
         let indexPath = IndexPath(item: currentPage, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
@@ -169,19 +165,43 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
         
         collectionView.reloadData()
     }
+    
+    private func changePreviousMonth(_ date: SelectedDate) -> SelectedDate {
+        var newDate = date
+        if date.month == 1 {
+            newDate.year -= 1
+            newDate.month = 12
+        } else {
+            newDate.month -= 1
+        }
+        return newDate
+    }
+    
+    private func changeNextMonth(_ date: SelectedDate) -> SelectedDate {
+        var newDate = date
+        if date.month == 12 {
+            newDate.year += 1
+            newDate.month = 1
+        } else {
+            newDate.month += 1
+        }
+        return newDate
+    }
 }
 
 extension CalendarViewController: ChangedDateDelegate, DismissScheduleViewControllerDelegate, PresentAddScheduleViewControllerDelegate {
     func chagedDate(_ selectedDate: SelectedDate) {
         view.backgroundColor = .colorFFFFFF
-        
         self.selectedDate = selectedDate
-        
+        updateCurrentDateLabel()
+
+        collectionView.reloadData()
+    }
+    
+    private func updateCurrentDateLabel() {
         let year = selectedDate.year
         let month = selectedDate.month
         currentDateLabel.text = "\(year)년 \(month)월"
-        
-        collectionView.reloadData()
     }
     
     func dismissScheduleViewController() {

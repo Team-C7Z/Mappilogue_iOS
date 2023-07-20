@@ -107,30 +107,30 @@ extension CalendarCell: UICollectionViewDelegate, UICollectionViewDataSource, UI
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var width: CGFloat
-        var height: CGFloat
-        
         switch indexPath.section {
         case 0:
-            width = (collectionView.bounds.width - 32) / 7
-            height = 31
+            let width = (collectionView.bounds.width - 32) / 7
+            let height: CGFloat = 31
+            return CGSize(width: width, height: height)
         default:
             switch indexPath.row {
             case 0:
-                width = collectionView.bounds.width - 32
+                let width = collectionView.bounds.width - 32
                 let collectionViewHeight = collectionView.bounds.height - 31 - CGFloat(weekCount)
                 let cellHeight = CGFloat(weekCount)
-                height = collectionViewHeight / cellHeight
+                let height = collectionViewHeight / cellHeight
+                return CGSize(width: width, height: height)
             default:
-                width = collectionView.bounds.width
-                height = 1
+                let width = collectionView.bounds.width
+                let height: CGFloat = 1
+                return CGSize(width: width, height: height)
             }
         }
-        return CGSize(width: width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: section == 0 ? 16 : 0, bottom: 0, right: section == 0 ? 16 : 0)
+        let horizontalInset: CGFloat = section == 0 ? 16 : 0
+        return UIEdgeInsets(top: 0, left: horizontalInset, bottom: 0, right: horizontalInset)
     }
     
     // 수평 간격

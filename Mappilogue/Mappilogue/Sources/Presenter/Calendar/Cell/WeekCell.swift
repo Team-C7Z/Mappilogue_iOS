@@ -14,7 +14,7 @@ class WeekCell: BaseCollectionViewCell {
     
     private var monthlyCalendar = MonthlyCalendar()
     
-    var selectedDate: SelectedDate?
+    var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0)
     var weekIndex: Int = 0
     var week: [String] = []
     var isCurrentMonth: Bool = true
@@ -77,17 +77,14 @@ extension WeekCell: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             let day = week[indexPath.row]
             let isSaturday = indexPath.row == 6
             let isSunday = indexPath.row == 0
-            var isToday = false
-            if let year = selectedDate?.year, let month = selectedDate?.month {
-                isToday = monthlyCalendar.isToday(year: year, month: month, day: day)
-                
-                if weekIndex == 0 {
-                    isCurrentMonth = monthlyCalendar.isLastMonth(indexPath.row)
-                }
-                
-                if weekIndex == monthlyCalendar.getWeekCount(year: year, month: month) - 1 {
-                    isCurrentMonth = monthlyCalendar.isNextMonth(indexPath.row)
-                }
+            let isToday = monthlyCalendar.isToday(year: selectedDate.year, month: selectedDate.month, day: day)
+          
+            if weekIndex == 0 {
+                isCurrentMonth = monthlyCalendar.isLastMonth(indexPath.row)
+            }
+            
+            if weekIndex == monthlyCalendar.getWeekCount(year: selectedDate.year, month: selectedDate.month) - 1 {
+                isCurrentMonth = monthlyCalendar.isNextMonth(indexPath.row)
             }
             
             cell.configure(with: day, isCurrentMonth: isCurrentMonth, isSaturday: isSaturday, isSunday: isSunday, isToday: isToday)
@@ -103,7 +100,7 @@ extension WeekCell: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             return cell
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.bounds.width / 7
         let height: CGFloat

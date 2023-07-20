@@ -24,5 +24,4 @@ class LineCell: BaseCollectionViewCell {
         super.setupLayout()
         
     }
-    
 }
