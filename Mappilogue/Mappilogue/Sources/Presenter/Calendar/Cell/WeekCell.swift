@@ -14,7 +14,7 @@ class WeekCell: BaseCollectionViewCell {
     
     private var monthlyCalendar = MonthlyCalendar()
     
-    var selectedDate = SelectedDate(year: 0, month: 0)
+    var selectedDate: SelectedDate?
     var weekIndex: Int = 0
     var week: [String] = []
     var isCurrentMonth: Bool = true
@@ -32,42 +32,23 @@ class WeekCell: BaseCollectionViewCell {
        
         return collectionView
     }()
-
-    private let lineView = UILabel()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func setupProperty() {
         super.setupProperty()
         
-        lineView.backgroundColor = .colorEAE6E1
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
     
         contentView.addSubview(collectionView)
-        contentView.addSubview(lineView)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
         collectionView.snp.makeConstraints {
-            $0.top.leading.trailing.equalTo(contentView)
-            $0.bottom.equalTo(contentView).offset(-1)
-        }
-         
-        lineView.snp.makeConstraints {
-            $0.leading.bottom.trailing.equalTo(contentView)
-            $0.height.equalTo(1)
+            $0.top.leading.trailing.bottom.equalTo(contentView)
         }
     }
     
@@ -75,7 +56,6 @@ class WeekCell: BaseCollectionViewCell {
         selectedDate = SelectedDate(year: year, month: month)
         self.weekIndex = weekIndex
         week = monthlyCalendar.getWeek(year: year, month: month, weekIndex: weekIndex)
-        
         collectionView.reloadData()
     }
 }
@@ -97,14 +77,17 @@ extension WeekCell: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             let day = week[indexPath.row]
             let isSaturday = indexPath.row == 6
             let isSunday = indexPath.row == 0
-            let isToday = monthlyCalendar.isToday(year: selectedDate.year, month: selectedDate.month, day: day)
-            
-            if weekIndex == 0 {
-                isCurrentMonth = monthlyCalendar.isLastMonth(indexPath.row)
-            }
-            
-            if weekIndex == monthlyCalendar.getWeekCount(year: selectedDate.year, month: selectedDate.month) - 1 {
-                isCurrentMonth = monthlyCalendar.isNextMonth(indexPath.row)
+            var isToday = false
+            if let year = selectedDate?.year, let month = selectedDate?.month {
+                isToday = monthlyCalendar.isToday(year: year, month: month, day: day)
+                
+                if weekIndex == 0 {
+                    isCurrentMonth = monthlyCalendar.isLastMonth(indexPath.row)
+                }
+                
+                if weekIndex == monthlyCalendar.getWeekCount(year: year, month: month) - 1 {
+                    isCurrentMonth = monthlyCalendar.isNextMonth(indexPath.row)
+                }
             }
             
             cell.configure(with: day, isCurrentMonth: isCurrentMonth, isSaturday: isSaturday, isSunday: isSunday, isToday: isToday)
