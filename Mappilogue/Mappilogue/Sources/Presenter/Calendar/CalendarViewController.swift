@@ -17,6 +17,8 @@ class CalendarViewController: NavigationBarViewController {
     private var monthlyCalendar = MonthlyCalendar()
     private var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0)
     
+    private var currentPage = 1
+    
     private let currentDateButton = UIButton()
     private let currentDateLabel = UILabel()
     private let changeDateImage = UIImageView()
@@ -36,6 +38,13 @@ class CalendarViewController: NavigationBarViewController {
     }()
     
     private let addScheduleButton = AddScheduleButton()
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let indexPath = IndexPath(item: currentPage, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+    }
     
     override func setupProperty() {
         super.setupProperty()
@@ -68,16 +77,18 @@ class CalendarViewController: NavigationBarViewController {
     
         currentDateButton.snp.makeConstraints {
             $0.centerX.top.equalTo(view.safeAreaLayoutGuide)
-            $0.width.equalTo(118)
+            $0.leading.equalTo(currentDateLabel.snp.leading)
+            $0.trailing.equalTo(changeDateImage.snp.trailing)
             $0.height.equalTo(28)
         }
-        
+      
         currentDateLabel.snp.makeConstraints {
             $0.leading.centerY.equalTo(currentDateButton)
         }
         
         changeDateImage.snp.makeConstraints {
-            $0.trailing.centerY.equalTo(currentDateButton)
+            $0.leading.equalTo(currentDateLabel.snp.trailing).offset(3)
+            $0.centerY.equalTo(currentDateButton)
             $0.width.height.equalTo(24)
         }
         
@@ -135,7 +146,28 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let currentPage = Int(scrollView.contentOffset.x / scrollView.frame.width)
+        currentPage = Int(scrollView.contentOffset.x / scrollView.frame.width)
+        if currentPage == 0 {
+            if selectedDate.month == 1 {
+                selectedDate.year -= 1
+                selectedDate.month = 12
+            } else {
+                selectedDate.month -= 1
+            }
+        } else if currentPage == 2 {
+            if selectedDate.month == 12 {
+                selectedDate.year += 1
+                selectedDate.month = 1
+            } else {
+                selectedDate.month += 1
+            }
+        }
+        currentPage = 1
+        let indexPath = IndexPath(item: currentPage, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+        currentDateLabel.text = "\(selectedDate.year)년 \(selectedDate.month)월"
+        
+        collectionView.reloadData()
     }
 }
 
