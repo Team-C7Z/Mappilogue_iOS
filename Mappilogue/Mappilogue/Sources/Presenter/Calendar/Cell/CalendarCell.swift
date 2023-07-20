@@ -92,7 +92,7 @@ extension CalendarCell: UICollectionViewDelegate, UICollectionViewDataSource, UI
             case 0:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeekCell.registerId, for: indexPath) as? WeekCell else { return UICollectionViewCell() }
                 // cell.delegate = self
-                print(selectedDate)
+               
                 if let year = selectedDate?.year, let month = selectedDate?.month {
                     cell.configure(year: year, month: month, weekIndex: indexPath.section-1)
                 }
