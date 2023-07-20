@@ -14,7 +14,7 @@ class WeekCell: BaseCollectionViewCell {
     
     private var monthlyCalendar = MonthlyCalendar()
     
-    var selectedDate = SelectedDate(year: 0, month: 0)
+    var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0)
     var weekIndex: Int = 0
     var week: [String] = []
     var isCurrentMonth: Bool = true
@@ -32,42 +32,23 @@ class WeekCell: BaseCollectionViewCell {
        
         return collectionView
     }()
-
-    private let lineView = UILabel()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func setupProperty() {
         super.setupProperty()
         
-        lineView.backgroundColor = .colorEAE6E1
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
     
         contentView.addSubview(collectionView)
-        contentView.addSubview(lineView)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
         collectionView.snp.makeConstraints {
-            $0.top.leading.trailing.equalTo(contentView)
-            $0.bottom.equalTo(contentView).offset(-1)
-        }
-         
-        lineView.snp.makeConstraints {
-            $0.leading.bottom.trailing.equalTo(contentView)
-            $0.height.equalTo(1)
+            $0.top.leading.trailing.bottom.equalTo(contentView)
         }
     }
     
@@ -75,7 +56,6 @@ class WeekCell: BaseCollectionViewCell {
         selectedDate = SelectedDate(year: year, month: month)
         self.weekIndex = weekIndex
         week = monthlyCalendar.getWeek(year: year, month: month, weekIndex: weekIndex)
-        
         collectionView.reloadData()
     }
 }
@@ -98,7 +78,7 @@ extension WeekCell: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             let isSaturday = indexPath.row == 6
             let isSunday = indexPath.row == 0
             let isToday = monthlyCalendar.isToday(year: selectedDate.year, month: selectedDate.month, day: day)
-            
+          
             if weekIndex == 0 {
                 isCurrentMonth = monthlyCalendar.isLastMonth(indexPath.row)
             }
@@ -120,7 +100,7 @@ extension WeekCell: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             return cell
         }
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.bounds.width / 7
         let height: CGFloat

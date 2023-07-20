@@ -58,7 +58,7 @@ struct MonthlyCalendar {
             return []
         }
         
-        // 첫 번째 날 이전의 지난 달 날짜 출력
+        // 첫 번째 날 이전의 지난 달 날짜
         let firstWeekday = calendar.component(.weekday, from: startDate)
         let emptyFirstWeekRange = (firstWeekday - calendar.firstWeekday + 7) % 7
         lastMonthRange = emptyFirstWeekRange
@@ -70,7 +70,7 @@ struct MonthlyCalendar {
             previousMonthDate = calendar.date(byAdding: .day, value: -1, to: previousMonthDate)!
         }
         
-        // 이번 달 날짜 출력
+        // 이번 달 날짜
         var currentDate = startDate
         while currentDate <= endDate {
             let day = dateFormatter.string(from: currentDate)
@@ -96,9 +96,10 @@ struct MonthlyCalendar {
             days.append(day)
             nextMonthDate = calendar.date(byAdding: .day, value: 1, to: nextMonthDate)!
         }
-        
-        weeks.append(days)
-        
+
+        if !days.isEmpty {
+            weeks.append(days)
+        }
         return weeks
     }
     
