@@ -24,8 +24,6 @@ class ScheduleCell: BaseTableViewCell {
     override func setupProperty() {
         super.setupProperty()
         
-        backgroundColor = .colorF9F8F7
-        
         scheduleColorView.layer.cornerRadius = 4
         
         scheduleLabel.textColor = .color1C1C1C

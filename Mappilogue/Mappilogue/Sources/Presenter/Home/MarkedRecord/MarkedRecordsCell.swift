@@ -19,7 +19,7 @@ class MarkedRecordsCell: BaseTableViewCell {
         layout.scrollDirection = .horizontal
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .colorFFFFFF
+        collectionView.backgroundColor = .colorF9F8F7
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(MarkedRecordCell.self, forCellWithReuseIdentifier: MarkedRecordCell.registerId)
         collectionView.register(AddMarkedRecordCell.self, forCellWithReuseIdentifier: AddMarkedRecordCell.registerId)
@@ -36,6 +36,8 @@ class MarkedRecordsCell: BaseTableViewCell {
     override func setupProperty() {
         super.setupProperty()
 
+        contentView.backgroundColor = .colorF9F8F7
+        
         markedRecordsLabel.text = "마크한 기록"
         markedRecordsLabel.font = .title01
         markedRecordsLabel.textColor = .color1C1C1C

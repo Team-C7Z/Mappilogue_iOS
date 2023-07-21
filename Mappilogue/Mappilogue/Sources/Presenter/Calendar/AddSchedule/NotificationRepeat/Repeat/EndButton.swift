@@ -26,7 +26,7 @@ class EndButton: UIButton {
      }
     
     private func setupProperty() {
-        backgroundColor = .colorFFFFFF
+        backgroundColor = .colorF9F8F7
         
         endLabel.text = "종료"
         endLabel.textColor = .color707070

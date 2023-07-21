@@ -18,7 +18,7 @@ class HomeViewController: NavigationBarViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.separatorStyle = .none
-        tableView.backgroundColor = .colorFFFFFF
+        tableView.backgroundColor = .colorF9F8F7
         tableView.sectionHeaderHeight = 0
         tableView.sectionFooterHeight = 0
         tableView.register(EmptyScheduleCell.self, forCellReuseIdentifier: EmptyScheduleCell.registerId)
@@ -220,7 +220,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        let headerHeight: CGFloat = (section == 0) ? 48 : 0
+        let headerHeight: CGFloat = (section == 0) ? 58 : 0
         return headerHeight
     }
     

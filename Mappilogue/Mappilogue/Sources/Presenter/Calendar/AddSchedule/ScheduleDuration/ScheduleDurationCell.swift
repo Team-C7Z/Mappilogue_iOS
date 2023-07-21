@@ -33,16 +33,14 @@ class ScheduleDurationCell: BaseTableViewCell {
     override func setupProperty() {
         super.setupProperty()
         
-        contentView.backgroundColor = .colorEAE6E1
-        
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.spacing = 1
         
-        startDateButton.backgroundColor = .colorFFFFFF
+        startDateButton.backgroundColor = .colorF9F8F7
         startDateButton.addTarget(self, action: #selector(startDateButtonTapped), for: .touchUpInside)
         
-        endDateButton.backgroundColor = .colorFFFFFF
+        endDateButton.backgroundColor = .colorF9F8F7
         endDateButton.addTarget(self, action: #selector(endDateButtonTapped), for: .touchUpInside)
 
         startLabel.text = "시작"

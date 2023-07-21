@@ -29,6 +29,7 @@ class CalendarViewController: NavigationBarViewController {
         layout.minimumLineSpacing = 0
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .colorF9F8F7
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isPagingEnabled = true
         collectionView.register(CalendarCell.self, forCellWithReuseIdentifier: CalendarCell.registerId)
@@ -49,8 +50,6 @@ class CalendarViewController: NavigationBarViewController {
         super.setupProperty()
         
         setCalendarDate()
-        
-        view.backgroundColor = .colorFFFFFF
         
         currentDateButton.addTarget(self, action: #selector(changeDateButtonTapped), for: .touchUpInside)
         currentDateLabel.text = "\(selectedDate.year)년 \(selectedDate.month)월"
@@ -75,7 +74,8 @@ class CalendarViewController: NavigationBarViewController {
         super.setupLayout()
     
         currentDateButton.snp.makeConstraints {
-            $0.centerX.top.equalTo(view.safeAreaLayoutGuide)
+            $0.centerX.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
             $0.leading.equalTo(currentDateLabel.snp.leading)
             $0.trailing.equalTo(changeDateImage.snp.trailing)
             $0.height.equalTo(28)
@@ -191,7 +191,7 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
 
 extension CalendarViewController: ChangedDateDelegate, DismissScheduleViewControllerDelegate, PresentAddScheduleViewControllerDelegate {
     func chagedDate(_ selectedDate: SelectedDate) {
-        view.backgroundColor = .colorFFFFFF
+        view.backgroundColor = .colorF9F8F7
         self.selectedDate = selectedDate
         updateCurrentDateLabel()
 

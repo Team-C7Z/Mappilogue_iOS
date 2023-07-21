@@ -23,7 +23,7 @@ class WeekCell: BaseCollectionViewCell {
         let layout = UICollectionViewFlowLayout()
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .colorFFFFFF
+        collectionView.backgroundColor = .colorF9F8F7
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(DayCell.self, forCellWithReuseIdentifier: DayCell.registerId)
         collectionView.register(ScheduleTitleCell.self, forCellWithReuseIdentifier: ScheduleTitleCell.registerId)

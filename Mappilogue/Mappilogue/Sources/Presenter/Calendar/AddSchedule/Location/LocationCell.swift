@@ -32,7 +32,6 @@ class LocationCell: BaseTableViewCell {
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        backgroundColor = .colorF9F8F7
         contentView.addSubview(locationLabel)
         contentView.addSubview(addressLabel)
     }
