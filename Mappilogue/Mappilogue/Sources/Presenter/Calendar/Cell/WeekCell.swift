@@ -16,7 +16,7 @@ class WeekCell: BaseCollectionViewCell {
     private var dummySchedule = dummyScheduleData()
     
     private var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0)
-    private  var weekIndex: Int = 0
+    private var weekIndex: Int = 0
     private var week: [String] = []
     private var isCurrentMonth: Bool = true
     private var year: Int = 0
@@ -37,15 +37,23 @@ class WeekCell: BaseCollectionViewCell {
         return collectionView
     }()
     
+    private let stackView = UIStackView()
+    
     override func setupProperty() {
         super.setupProperty()
         
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.spacing = 0
+        
+        createdayButton()
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
     
         contentView.addSubview(collectionView)
+        contentView.addSubview(stackView)
     }
     
     override func setupLayout() {
@@ -53,6 +61,10 @@ class WeekCell: BaseCollectionViewCell {
         
         collectionView.snp.makeConstraints {
             $0.top.leading.trailing.bottom.equalTo(contentView)
+        }
+        
+        stackView.snp.makeConstraints {
+            $0.width.height.equalTo(contentView)
         }
     }
     
@@ -77,6 +89,25 @@ class WeekCell: BaseCollectionViewCell {
             return dummySchedule[index].schedules
         }
         return []
+    }
+    
+    private func createdayButton() {
+        for index in 0..<7 {
+            let button = createButton(index)
+            stackView.addArrangedSubview(button)
+        }
+    }
+    
+    private func createButton(_ index: Int) -> UIButton {
+        let button = UIButton()
+        button.tag = index
+        button.addTarget(self, action: #selector(dayButtonTapped), for: .touchUpInside)
+  
+        return button
+    }
+    
+    @objc private func dayButtonTapped(_ sender: UIButton) {
+        print(sender.tag)
     }
 }
 
