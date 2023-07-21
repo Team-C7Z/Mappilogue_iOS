@@ -123,14 +123,14 @@ extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleCell.registerId, for: indexPath) as? ScheduleCell else { return UITableViewCell() }
         cell.selectionStyle = .none
         
-        let schedule = schedules[indexPath.row]
-        let scheduleTitle = schedule.title
-        let color = schedule.color
-        let time = schedule.time
-        let location = schedule.location
-        
-        cell.configure(scheduleTitle, color: color, time: time, location: location)
-        
+//        let schedule = schedules[indexPath.row]
+//        let scheduleTitle = schedule.title
+//        let color = schedule.color
+//        let time = schedule.time
+//        let location = schedule.location
+//        
+//        cell.configure(scheduleTitle, color: color, time: time, location: location)
+//        
         return cell
     }
     

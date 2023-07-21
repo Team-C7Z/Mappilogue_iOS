@@ -13,11 +13,15 @@ class WeekCell: BaseCollectionViewCell {
     weak var delegate: ScheduleViewControllerDelegate?
     
     private var monthlyCalendar = MonthlyCalendar()
+    private var dummySchedule = dummyScheduleData()
     
-    var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0)
-    var weekIndex: Int = 0
-    var week: [String] = []
-    var isCurrentMonth: Bool = true
+    private var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0)
+    private  var weekIndex: Int = 0
+    private var week: [String] = []
+    private var isCurrentMonth: Bool = true
+    private var year: Int = 0
+    private var month: Int = 0
+    private var schedules: [Schedule] = []
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -54,9 +58,25 @@ class WeekCell: BaseCollectionViewCell {
     
     func configure(year: Int, month: Int, weekIndex: Int) {
         selectedDate = SelectedDate(year: year, month: month)
+        self.year = year
+        self.month = month
         self.weekIndex = weekIndex
         week = monthlyCalendar.getWeek(year: year, month: month, weekIndex: weekIndex)
         collectionView.reloadData()
+    }
+    
+    func getDaySchedule(year: Int, month: Int, day: Int) -> [Schedule] {
+        if let index = dummySchedule.firstIndex(where: {$0.year == year && $0.month == month && $0.day == day}) {
+            return dummySchedule[index].schedules
+        }
+        return []
+    }
+    
+    func getPreviousDaySchedule(year: Int, month: Int, day: Int) -> [Schedule] {
+        if week.contains(String(day-1)), let index = dummySchedule.firstIndex(where: {$0.year == year && $0.month == month && $0.day == day-1}) {
+            return dummySchedule[index].schedules
+        }
+        return []
     }
 }
 
@@ -94,9 +114,18 @@ extension WeekCell: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ScheduleTitleCell.registerId, for: indexPath) as? ScheduleTitleCell else { return UICollectionViewCell() }
             
             let day = week[indexPath.row]
-//                cell.configure(with: scheduleTitle, color: color, isScheduleContinuous: isScheduleContinuous, continuousDay: continuousDay)
-//
-            
+            schedules = getDaySchedule(year: year, month: month, day: Int(day) ?? 0)
+            if schedules.count > indexPath.section-1 {
+                var scheduleTitle = schedules[indexPath.section-1].title
+                let scheduleColor = schedules[indexPath.section-1].color
+                let previousDaySchedules = getPreviousDaySchedule(year: year, month: month, day: Int(day) ?? 0)
+                if let index = previousDaySchedules.firstIndex(where: {$0.title == scheduleTitle}) {
+                    scheduleTitle = ""
+                }
+                
+                cell.configure(with: scheduleTitle, color: scheduleColor)
+            }
+           
             return cell
         }
     }

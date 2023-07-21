@@ -47,11 +47,13 @@ class ScheduleTitleCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(with schedule: String, color: UIColor, isScheduleContinuous: Bool, continuousDay: Int) {
-        if !isScheduleContinuous {
-            scheduleLabel.text = schedule
-            scheduleColorView.backgroundColor = color
-            frame.size.width = contentView.bounds.width * CGFloat(continuousDay)
-        }
+    func configure(with schedule: String, color: UIColor) {
+//        if !isScheduleContinuous {
+//            scheduleLabel.text = schedule
+//            scheduleColorView.backgroundColor = color
+//            frame.size.width = contentView.bounds.width * CGFloat(continuousDay)
+//        }
+        scheduleLabel.text = schedule
+        scheduleColorView.backgroundColor = color
     }
 }
