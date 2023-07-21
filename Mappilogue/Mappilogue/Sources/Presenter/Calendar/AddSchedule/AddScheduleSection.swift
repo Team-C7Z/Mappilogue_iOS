@@ -83,7 +83,7 @@ enum AddScheduleSection: Int, CaseIterable {
         case .titleColor:
             switch row {
             case 0:
-                return 48
+                return 58
             case 1:
                 return 186
             default:

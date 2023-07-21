@@ -27,7 +27,7 @@ class SpacingButton: UIButton {
      }
     
     private func setupProperty() {
-        backgroundColor = .colorFFFFFF
+        backgroundColor = .colorF9F8F7
         
         spacingStackView.axis = .horizontal
         spacingStackView.distribution = .fillEqually

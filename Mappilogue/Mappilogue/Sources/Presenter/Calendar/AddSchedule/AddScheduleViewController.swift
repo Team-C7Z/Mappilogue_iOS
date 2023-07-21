@@ -27,7 +27,7 @@ class AddScheduleViewController: BaseViewController {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.backgroundColor = .colorFFFFFF
+        tableView.backgroundColor = .colorF9F8F7
         tableView.sectionHeaderHeight = 0
         tableView.sectionFooterHeight = 0
         tableView.separatorStyle = .none
@@ -97,8 +97,7 @@ class AddScheduleViewController: BaseViewController {
         super.setupLayout()
         
         tableView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(22)
-            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
     
         startDatePickerOuterView.snp.makeConstraints {

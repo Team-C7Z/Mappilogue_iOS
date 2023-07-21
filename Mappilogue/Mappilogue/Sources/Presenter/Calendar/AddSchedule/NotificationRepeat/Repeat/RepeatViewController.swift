@@ -56,7 +56,7 @@ class RepeatViewController: BaseViewController {
         super.setupLayout()
         
         stackView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(22)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
         }
         

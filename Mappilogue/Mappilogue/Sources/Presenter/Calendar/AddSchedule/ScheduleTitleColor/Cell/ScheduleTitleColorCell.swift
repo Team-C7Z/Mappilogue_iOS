@@ -41,13 +41,14 @@ class ScheduleTitleColorCell: BaseTableViewCell {
         super.setupLayout()
 
         scheduleNameTextField.snp.makeConstraints {
-            $0.top.leading.equalTo(contentView)
+            $0.top.equalTo(contentView).offset(10)
+            $0.leading.equalTo(contentView)
             $0.width.equalTo(275)
             $0.height.equalTo(48)
         }
         
         colorSelectionButton.snp.makeConstraints {
-            $0.top.equalTo(contentView).offset(9)
+            $0.centerY.equalTo(scheduleNameTextField)
             $0.trailing.equalTo(contentView)
             $0.width.equalTo(60)
             $0.height.equalTo(28)
