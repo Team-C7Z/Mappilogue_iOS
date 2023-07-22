@@ -67,7 +67,7 @@ class RepeatViewController: BaseViewController {
     }
     
     private func setNavigationBar() {
-        title = "알림"
+        title = "반복"
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: "back2"), for: .normal)
         button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)

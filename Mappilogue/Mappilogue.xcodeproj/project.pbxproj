@@ -34,8 +34,8 @@
 		9224FD312A6397BD000A56A6 /* CycleRepeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD302A6397BD000A56A6 /* CycleRepeatViewController.swift */; };
 		9224FD332A641B64000A56A6 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD322A641B64000A56A6 /* UIViewController.swift */; };
 		9224FD352A652A96000A56A6 /* WeekdayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD342A652A96000A56A6 /* WeekdayView.swift */; };
-		9224FD372A653024000A56A6 /* SpacingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD362A653024000A56A6 /* SpacingButton.swift */; };
-		9224FD3B2A6532E3000A56A6 /* EndButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD3A2A6532E3000A56A6 /* EndButton.swift */; };
+		9224FD372A653024000A56A6 /* SpacingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD362A653024000A56A6 /* SpacingView.swift */; };
+		9224FD3B2A6532E3000A56A6 /* EndView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD3A2A6532E3000A56A6 /* EndView.swift */; };
 		9224FD3D2A6559A0000A56A6 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD3C2A6559A0000A56A6 /* AddLocationViewController.swift */; };
 		9224FD3F2A6561CD000A56A6 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD3E2A6561CD000A56A6 /* UITextField.swift */; };
 		9224FD422A656407000A56A6 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD412A656407000A56A6 /* LocationCell.swift */; };
@@ -143,8 +143,8 @@
 		9224FD302A6397BD000A56A6 /* CycleRepeatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleRepeatViewController.swift; sourceTree = "<group>"; };
 		9224FD322A641B64000A56A6 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		9224FD342A652A96000A56A6 /* WeekdayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayView.swift; sourceTree = "<group>"; };
-		9224FD362A653024000A56A6 /* SpacingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacingButton.swift; sourceTree = "<group>"; };
-		9224FD3A2A6532E3000A56A6 /* EndButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndButton.swift; sourceTree = "<group>"; };
+		9224FD362A653024000A56A6 /* SpacingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacingView.swift; sourceTree = "<group>"; };
+		9224FD3A2A6532E3000A56A6 /* EndView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndView.swift; sourceTree = "<group>"; };
 		9224FD3C2A6559A0000A56A6 /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		9224FD3E2A6561CD000A56A6 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		9224FD412A656407000A56A6 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
@@ -335,8 +335,8 @@
 				9224FD242A638F01000A56A6 /* RepeatType.swift */,
 				9224FD262A6394A9000A56A6 /* WeekdayRepeatViewController.swift */,
 				9224FD342A652A96000A56A6 /* WeekdayView.swift */,
-				9224FD362A653024000A56A6 /* SpacingButton.swift */,
-				9224FD3A2A6532E3000A56A6 /* EndButton.swift */,
+				9224FD362A653024000A56A6 /* SpacingView.swift */,
+				9224FD3A2A6532E3000A56A6 /* EndView.swift */,
 				9224FD302A6397BD000A56A6 /* CycleRepeatViewController.swift */,
 			);
 			path = Repeat;
@@ -767,7 +767,7 @@
 				92FE26152A4B751000BCDB82 /* BaseCollectionReusableView.swift in Sources */,
 				92A7B6552A4CEA28009C9293 /* TodaySchedule.swift in Sources */,
 				9224FCF52A5D6C65000A56A6 /* DatePickerViewController.swift in Sources */,
-				9224FD3B2A6532E3000A56A6 /* EndButton.swift in Sources */,
+				9224FD3B2A6532E3000A56A6 /* EndView.swift in Sources */,
 				9230BE472A57FEB80053E535 /* DayCell.swift in Sources */,
 				9224FD422A656407000A56A6 /* LocationCell.swift in Sources */,
 				92FE26172A4B76B800BCDB82 /* UIFont.swift in Sources */,
@@ -779,7 +779,7 @@
 				9224FD3D2A6559A0000A56A6 /* AddLocationViewController.swift in Sources */,
 				924BE0CE2A51C4D4002C70FF /* MarkedRecordsCell.swift in Sources */,
 				9224FD1F2A62B4E9000A56A6 /* NotificationViewController.swift in Sources */,
-				9224FD372A653024000A56A6 /* SpacingButton.swift in Sources */,
+				9224FD372A653024000A56A6 /* SpacingView.swift in Sources */,
 				9291582A2A252CC20022BEF9 /* UIColor.swift in Sources */,
 				926999382A14F4AA003DDAD2 /* TabBarControllerController.swift in Sources */,
 				927E7F252A677D1A00E6A29F /* DeleteAlertViewController.swift in Sources */,
