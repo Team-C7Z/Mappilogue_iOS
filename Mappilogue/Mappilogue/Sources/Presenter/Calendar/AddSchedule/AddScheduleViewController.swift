@@ -359,6 +359,7 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
         }
 
         if !endDatePickerOuterView.isHidden {
+            
             switch componentType {
             case .year:
                 if endDate.year == years[row] {
@@ -405,12 +406,38 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
                 endDate.day = days[row]
             }
             updateDaysComponent(endDate, datePickerView: endDatePickerView)
+            
+            if daysBetween() < 0 {
+                endDate = .init(year: startDate.year, month: startDate.month, day: startDate.day ?? 0)
+            }
         }
+        
     }
     
     private func updateDaysComponent(_ selectedDate: SelectedDate, datePickerView: UIPickerView) {
         days = monthlyCalendar.getDays(year: selectedDate.year, month: selectedDate.month)
         datePickerView.reloadAllComponents()
+    }
+    
+    func daysBetween() -> Int {
+        let startDate = setDateFormatter(date: startDate)
+        let endDate = setDateFormatter(date: endDate)
+        if let start = startDate, let end = endDate, let daysDifference = daysBetweenDates(start: start, end: end) {
+            return daysDifference
+        }
+        return 0
+    }
+    
+    func setDateFormatter(date: SelectedDate) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMdd"
+        return dateFormatter.date(from: "\(date.year)\(String(format: "%02d", date.month))\(String(format: "%02d", date.day ?? 0))")
+    }
+    
+    func daysBetweenDates(start: Date, end: Date) -> Int? {
+        let calendar = Calendar.current
+        let dateComponents = calendar.dateComponents([.day], from: start, to: end)
+        return dateComponents.day
     }
 }
 
