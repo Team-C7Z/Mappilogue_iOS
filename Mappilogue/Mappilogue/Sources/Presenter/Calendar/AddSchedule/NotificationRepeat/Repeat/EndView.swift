@@ -1,5 +1,5 @@
 //
-//  EndButton.swift
+//  EndView.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/07/17.
@@ -7,10 +7,10 @@
 
 import UIKit
 
-class EndButton: UIButton {
+class EndView: UIView {
     private let endLabel = UILabel()
-    private let endDateLabel = UILabel()
     private let stackView = UIStackView()
+    let endDateButton = UIButton()
     let deleteEndDateButton = UIButton()
     
     init() {
@@ -38,9 +38,9 @@ class EndButton: UIButton {
         stackView.distribution = .equalSpacing
         stackView.spacing = 0
 
-        endDateLabel.text = "없음"
-        endDateLabel.textColor = .color1C1C1C
-        endDateLabel.font = .title02
+        endDateButton.setTitle("없음", for: .normal)
+        endDateButton.setTitleColor(.color1C1C1C, for: .normal)
+        endDateButton.titleLabel?.font = .title02
         
         deleteEndDateButton.setImage(UIImage(named: "deleteEndDate"), for: .normal)
         deleteEndDateButton.addTarget(self, action: #selector(deleteEndDateButtonTapped), for: .touchUpInside)
@@ -50,7 +50,7 @@ class EndButton: UIButton {
     private func setupHierarchy() {
         addSubview(endLabel)
         addSubview(stackView)
-        stackView.addArrangedSubview(endDateLabel)
+        stackView.addArrangedSubview(endDateButton)
         stackView.addArrangedSubview(deleteEndDateButton)
     }
     
@@ -64,18 +64,18 @@ class EndButton: UIButton {
             $0.top.equalToSuperview().offset(37)
             $0.centerX.equalTo(endLabel)
         }
-        
+
         deleteEndDateButton.snp.makeConstraints {
             $0.width.height.equalTo(32)
         }
     }
     
     func updateEndDateLabelText(_ title: String) {
-        endDateLabel.text = title
+        endDateButton.setTitle(title, for: .normal)
     }
     
     @objc func deleteEndDateButtonTapped(_ sender: UIButton) {
-        endDateLabel.text = "없음"
+        endDateButton.setTitle("없음", for: .normal)
         deleteEndDateButton.isHidden = true
     }
 }

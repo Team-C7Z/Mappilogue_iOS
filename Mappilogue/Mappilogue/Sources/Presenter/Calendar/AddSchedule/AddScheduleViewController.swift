@@ -359,7 +359,6 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
         }
 
         if !endDatePickerOuterView.isHidden {
-            
             switch componentType {
             case .year:
                 if endDate.year == years[row] {
