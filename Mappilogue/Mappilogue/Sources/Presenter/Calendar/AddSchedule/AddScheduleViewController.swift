@@ -55,6 +55,7 @@ class AddScheduleViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        hideKeyboardWhenTappedAround(tableView)
         setCurrentDate()
         setSelectedDate()
     }

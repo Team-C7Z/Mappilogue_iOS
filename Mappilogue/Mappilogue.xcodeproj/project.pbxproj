@@ -280,8 +280,8 @@
 			isa = PBXGroup;
 			children = (
 				9224FD002A600A86000A56A6 /* ScheduleTitleColorCell.swift */,
-				9224FD182A616EB1000A56A6 /* ColorCell.swift */,
 				9224FD162A6161B0000A56A6 /* ColorSelectionCell.swift */,
+				9224FD182A616EB1000A56A6 /* ColorCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";

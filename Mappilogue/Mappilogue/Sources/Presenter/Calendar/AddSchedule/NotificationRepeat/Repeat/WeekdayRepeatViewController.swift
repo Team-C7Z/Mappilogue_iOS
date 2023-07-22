@@ -29,7 +29,7 @@ class WeekdayRepeatViewController: BaseViewController {
         super.viewDidLoad()
         
         setupData()
-        hideKeyboardWhenTappedAround()
+        hideKeyboardWhenTappedAround(view)
     }
     
     override func setupProperty() {
