@@ -138,12 +138,14 @@ class CalendarViewController: NavigationBarViewController {
         navigationController?.pushViewController(addScheduleViewController, animated: false)
     }
     
-    @objc func presentScheduleViewContoller() {
+    @objc func presentScheduleViewContoller(_ notification: Notification) {
         addScheduleButton.isHidden = true
-        
-        let scheduleViewController = ScheduleViewController()
-        scheduleViewController.modalPresentationStyle = .overFullScreen
-        present(scheduleViewController, animated: false)
+        if let date = notification.object as? String {
+            let scheduleViewController = ScheduleViewController()
+            scheduleViewController.date = date
+            scheduleViewController.modalPresentationStyle = .overFullScreen
+            present(scheduleViewController, animated: false)
+        }
     }
     
     @objc func dismissScheduleViewController() {
@@ -223,11 +225,6 @@ extension CalendarViewController: ChangedDateDelegate, PresentAddScheduleViewCon
         let month = selectedDate.month
         currentDateLabel.text = "\(year)년 \(month)월"
     }
-    
-//    func dismissScheduleViewController() {
-//        print("졸려오")
-//        addScheduleButton.isHidden = false
-//    }
     
     func presentAddScheduleViewController() {
         let addScheduleViewController = AddScheduleViewController()

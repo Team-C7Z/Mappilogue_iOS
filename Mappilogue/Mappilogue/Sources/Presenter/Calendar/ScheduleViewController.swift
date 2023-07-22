@@ -12,7 +12,7 @@ class ScheduleViewController: BaseViewController {
     weak var presentDelegate: PresentAddScheduleViewControllerDelegate?
     
     var schedules = dummyScheduleData()
-    let date: String = ""
+    var date: String = ""
     let lunarDate: String = ""
     
     private let scheduleView = UIView()
@@ -36,6 +36,7 @@ class ScheduleViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        dateLabel.text = date
     }
     
     override func setupProperty() {
@@ -46,7 +47,6 @@ class ScheduleViewController: BaseViewController {
         scheduleView.layer.cornerRadius = 24
         scheduleView.backgroundColor = .colorF9F8F7
         
-        dateLabel.text = "5월 16일"
         dateLabel.font = .title01
         dateLabel.textColor = .color1C1C1C
         
@@ -103,7 +103,6 @@ class ScheduleViewController: BaseViewController {
         guard let touch = touches.first, !scheduleView.frame.contains(touch.location(in: view)) else { return }
         
         dismiss(animated: false) {
-            //self.dismissDelegate?.dismissScheduleViewController()
             NotificationCenter.default.post(name: Notification.Name("DismissScheduleViewController"), object: nil)
         }
     }
