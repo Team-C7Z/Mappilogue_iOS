@@ -54,8 +54,7 @@ class AddScheduleViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        hideKeyboardWhenTappedAround(tableView)
+    
         setCurrentDate()
         setSelectedDate()
     }
@@ -79,9 +78,15 @@ class AddScheduleViewController: BaseViewController {
         startDatePickerOuterView.isHidden = true
         endDatePickerOuterView.isHidden = true
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
-        tapGesture.cancelsTouchesInView = false
-        tableView.addGestureRecognizer(tapGesture)
+        let keyboardTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        keyboardTap.cancelsTouchesInView = false
+        keyboardTap.delegate = self
+        tableView.addGestureRecognizer(keyboardTap)
+        
+        let datePickerTap = UITapGestureRecognizer(target: self, action: #selector(dismissDatePicker))
+        datePickerTap.cancelsTouchesInView = false
+        datePickerTap.delegate = self
+        tableView.addGestureRecognizer(datePickerTap)
     }
     
     override func setupHierarchy() {
@@ -178,9 +183,8 @@ class AddScheduleViewController: BaseViewController {
         }
     }
     
-    @objc func viewTapped(_ gesture: UITapGestureRecognizer) {
+    @objc func dismissDatePicker(_ gesture: UITapGestureRecognizer) {
         let location = gesture.location(in: tableView)
-        
         if !startDatePickerOuterView.isHidden && location.y < startDatePickerOuterView.frame.minY {
             startDatePickerOuterView.isHidden = true
             tableView.reloadData()
@@ -517,5 +521,11 @@ extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelega
         }
         selectedLocations = []
         reloadTableView()
+    }
+}
+
+extension AddScheduleViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }
