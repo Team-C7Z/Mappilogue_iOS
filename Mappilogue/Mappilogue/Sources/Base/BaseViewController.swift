@@ -18,8 +18,8 @@ class BaseViewController: UIViewController, BaseViewControllerProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .white
+
+        view.backgroundColor = .colorF9F8F7
         
         setupProperty()
         setupHierarchy()

@@ -13,7 +13,8 @@ class DatePickerViewController: BaseViewController {
     
     let years = Array(1970...2050)
     let months = Array(1...12)
-
+    
+    let pickerOuterView = UIView()
     let pickerView = UIPickerView()
     
     override func viewDidLoad() {
@@ -22,12 +23,18 @@ class DatePickerViewController: BaseViewController {
         setDate()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        animateView()
+    }
+    
     override func setupProperty() {
         super.setupProperty()
     
         view.backgroundColor = .clear
         
-        pickerView.backgroundColor = .colorF5F3F0
+        pickerOuterView.backgroundColor = .colorF5F3F0
         pickerView.delegate = self
         pickerView.dataSource = self
     }
@@ -35,16 +42,23 @@ class DatePickerViewController: BaseViewController {
     override func setupHierarchy() {
         super.setupHierarchy()
 
-        view.addSubview(pickerView)
+        view.addSubview(pickerOuterView)
+        pickerOuterView.addSubview(pickerView)
     }
     
     override func setupLayout() {
         super.setupLayout()
 
-        pickerView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(88)
+        pickerOuterView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(-50)
             $0.leading.trailing.equalTo(view.safeAreaInsets)
-            $0.height.equalTo(226)
+            $0.height.equalTo(238)
+        }
+        
+        pickerView.snp.makeConstraints {
+            $0.top.centerX.equalTo(pickerOuterView)
+            $0.width.equalTo(245)
+            $0.height.equalTo(230)
         }
     }
     
@@ -53,10 +67,17 @@ class DatePickerViewController: BaseViewController {
             return
         }
         
-        dismiss(animated: false) {
-            guard let date = self.selectedDate else { return }
-            self.delegate?.chagedDate(date)
-        }
+        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
+            self.pickerOuterView.frame.origin.y = 20
+            self.view.layoutIfNeeded()
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
+                self.dismiss(animated: false) {
+                    guard let date = self.selectedDate else { return }
+                    self.delegate?.chagedDate(date)
+                }
+            }
+        })
     }
     
     func setDate() {
@@ -68,6 +89,13 @@ class DatePickerViewController: BaseViewController {
         if let month = selectedDate?.month, let currentMonthIndex = months.firstIndex(of: month) {
             pickerView.selectRow(currentMonthIndex, inComponent: 1, animated: false)
         }
+    }
+    
+    private func animateView() {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+            self.pickerOuterView.frame.origin.y = 90
+            self.view.layoutIfNeeded()
+        })
     }
 }
 
@@ -90,9 +118,15 @@ extension DatePickerViewController: UIPickerViewDelegate, UIPickerViewDataSource
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch component {
         case 0:
-            return "\(years[row]) 년"
+            if let selectedYear = selectedDate?.year, selectedYear == years[row] {
+                return "\(years[row]) 년"
+            }
+            return "\(years[row])"
         case 1:
-            return "\(months[row]) 월"
+            if let selectedMonth = selectedDate?.month, selectedMonth == months[row] {
+                return "\(months[row]) 월"
+            }
+            return "\(months[row])"
         default:
             return ""
         }
@@ -107,6 +141,7 @@ extension DatePickerViewController: UIPickerViewDelegate, UIPickerViewDataSource
         default:
             break
         }
+        pickerView.reloadComponent(component)
     }
 }
 

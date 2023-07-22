@@ -27,7 +27,7 @@ class AddScheduleViewController: BaseViewController {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.backgroundColor = .colorFFFFFF
+        tableView.backgroundColor = .colorF9F8F7
         tableView.sectionHeaderHeight = 0
         tableView.sectionFooterHeight = 0
         tableView.separatorStyle = .none
@@ -54,7 +54,7 @@ class AddScheduleViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         setCurrentDate()
         setSelectedDate()
     }
@@ -78,9 +78,15 @@ class AddScheduleViewController: BaseViewController {
         startDatePickerOuterView.isHidden = true
         endDatePickerOuterView.isHidden = true
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
-        tapGesture.cancelsTouchesInView = false
-        tableView.addGestureRecognizer(tapGesture)
+        let keyboardTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        keyboardTap.cancelsTouchesInView = false
+        keyboardTap.delegate = self
+        tableView.addGestureRecognizer(keyboardTap)
+        
+        let datePickerTap = UITapGestureRecognizer(target: self, action: #selector(dismissDatePicker))
+        datePickerTap.cancelsTouchesInView = false
+        datePickerTap.delegate = self
+        tableView.addGestureRecognizer(datePickerTap)
     }
     
     override func setupHierarchy() {
@@ -97,8 +103,7 @@ class AddScheduleViewController: BaseViewController {
         super.setupLayout()
         
         tableView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(22)
-            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
     
         startDatePickerOuterView.snp.makeConstraints {
@@ -113,15 +118,15 @@ class AddScheduleViewController: BaseViewController {
         
         startDatePickerView.snp.makeConstraints {
             $0.top.equalTo(startDatePickerOuterView).offset(5)
-            $0.leading.equalTo(startDatePickerOuterView).offset(40)
-            $0.trailing.equalTo(startDatePickerOuterView).offset(-40)
+            $0.leading.equalTo(startDatePickerOuterView).offset(35)
+            $0.trailing.equalTo(startDatePickerOuterView).offset(-33)
             $0.bottom.equalTo(startDatePickerOuterView).offset(-5)
         }
         
         endDatePickerView.snp.makeConstraints {
             $0.top.equalTo(endDatePickerOuterView).offset(5)
-            $0.leading.equalTo(endDatePickerOuterView).offset(40)
-            $0.trailing.equalTo(endDatePickerOuterView).offset(-40)
+            $0.leading.equalTo(endDatePickerOuterView).offset(35)
+            $0.trailing.equalTo(endDatePickerOuterView).offset(-33)
             $0.bottom.equalTo(endDatePickerOuterView).offset(-5)
         }
     }
@@ -178,9 +183,8 @@ class AddScheduleViewController: BaseViewController {
         }
     }
     
-    @objc func viewTapped(_ gesture: UITapGestureRecognizer) {
+    @objc func dismissDatePicker(_ gesture: UITapGestureRecognizer) {
         let location = gesture.location(in: tableView)
-        
         if !startDatePickerOuterView.isHidden && location.y < startDatePickerOuterView.frame.minY {
             startDatePickerOuterView.isHidden = true
             tableView.reloadData()
@@ -334,14 +338,46 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         guard let componentType = ComponentType(rawValue: component) else { return nil }
         
-        switch componentType {
-        case .year:
-            return "\(years[row])"
-        case .month:
-            return "\(months[row])"
-        case .day:
-            return "\(days[row])"
+        if !startDatePickerOuterView.isHidden {
+            switch componentType {
+            case .year:
+                if startDate.year == years[row] {
+                    return "\(years[row]) 년"
+                }
+                return "\(years[row])"
+            case .month:
+                if startDate.month == months[row] {
+                    return "\(months[row]) 월"
+                }
+                return "\(months[row])"
+            case .day:
+                if startDate.day == days[row] {
+                    return "\(days[row]) 일"
+                }
+                return "\(days[row])"
+            }
         }
+
+        if !endDatePickerOuterView.isHidden {
+            switch componentType {
+            case .year:
+                if endDate.year == years[row] {
+                    return "\(years[row]) 년"
+                }
+                return "\(years[row])"
+            case .month:
+                if endDate.month == months[row] {
+                    return "\(months[row]) 월"
+                }
+                return "\(months[row])"
+            case .day:
+                if endDate.day == days[row] {
+                    return "\(days[row]) 일"
+                }
+                return "\(days[row])"
+            }
+        }
+        return ""
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -369,12 +405,38 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
                 endDate.day = days[row]
             }
             updateDaysComponent(endDate, datePickerView: endDatePickerView)
+            
+            if daysBetween() < 0 {
+                endDate = .init(year: startDate.year, month: startDate.month, day: startDate.day ?? 0)
+            }
         }
+        
     }
     
     private func updateDaysComponent(_ selectedDate: SelectedDate, datePickerView: UIPickerView) {
         days = monthlyCalendar.getDays(year: selectedDate.year, month: selectedDate.month)
-        datePickerView.reloadComponent(ComponentType.day.rawValue)
+        datePickerView.reloadAllComponents()
+    }
+    
+    func daysBetween() -> Int {
+        let startDate = setDateFormatter(date: startDate)
+        let endDate = setDateFormatter(date: endDate)
+        if let start = startDate, let end = endDate, let daysDifference = daysBetweenDates(start: start, end: end) {
+            return daysDifference
+        }
+        return 0
+    }
+    
+    func setDateFormatter(date: SelectedDate) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMdd"
+        return dateFormatter.date(from: "\(date.year)\(String(format: "%02d", date.month))\(String(format: "%02d", date.day ?? 0))")
+    }
+    
+    func daysBetweenDates(start: Date, end: Date) -> Int? {
+        let calendar = Calendar.current
+        let dateComponents = calendar.dateComponents([.day], from: start, to: end)
+        return dateComponents.day
     }
 }
 
@@ -392,13 +454,17 @@ extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelega
     func startDateButtonTapped() {
         startDatePickerOuterView.isHidden = false
         endDatePickerOuterView.isHidden = true
+        
         reloadTableView()
+        startDatePickerView.reloadAllComponents()
     }
     
     func endDateButtonTapped() {
         startDatePickerOuterView.isHidden = true
         endDatePickerOuterView.isHidden = false
+ 
         reloadTableView()
+        endDatePickerView.reloadAllComponents()
     }
     
     func selectedNotificationTime(_ selectedTime: [String]) {
@@ -481,5 +547,11 @@ extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelega
         }
         selectedLocations = []
         reloadTableView()
+    }
+}
+
+extension AddScheduleViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }

@@ -27,7 +27,7 @@ class NotificationCell: BaseTableViewCell {
 
     override func setupProperty() {
         super.setupProperty()
-    
+        
         notificationTimeLabel.font = .body02
         notificationTimeLabel.textColor = .color1C1C1C
     }

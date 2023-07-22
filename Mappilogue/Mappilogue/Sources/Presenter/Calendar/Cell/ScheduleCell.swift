@@ -24,8 +24,6 @@ class ScheduleCell: BaseTableViewCell {
     override func setupProperty() {
         super.setupProperty()
         
-        backgroundColor = .colorF9F8F7
-        
         scheduleColorView.layer.cornerRadius = 4
         
         scheduleLabel.textColor = .color1C1C1C
@@ -72,10 +70,10 @@ class ScheduleCell: BaseTableViewCell {
         }
     }
     
-    func configure(_ title: String, color: UIColor, time: String, location: String) {
-        scheduleLabel.text = title
-        scheduleColorView.backgroundColor = color
-        scheduleTimeLabel.text = time
-        scheduleLocationLabel.text = ", \(location)"
+    func configure(with schedule: Schedule) {
+        scheduleLabel.text = schedule.title
+        scheduleColorView.backgroundColor = schedule.color
+        scheduleTimeLabel.text = schedule.time
+        scheduleLocationLabel.text = ", \(schedule.location)"
     }
 }

@@ -56,7 +56,7 @@ class RepeatViewController: BaseViewController {
         super.setupLayout()
         
         stackView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(22)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
         }
         
@@ -67,7 +67,7 @@ class RepeatViewController: BaseViewController {
     }
     
     private func setNavigationBar() {
-        title = "알림"
+        title = "반복"
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: "back2"), for: .normal)
         button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
