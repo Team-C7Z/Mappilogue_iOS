@@ -91,7 +91,6 @@ extension CalendarCell: UICollectionViewDelegate, UICollectionViewDataSource, UI
             switch indexPath.row {
             case 0:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeekCell.registerId, for: indexPath) as? WeekCell else { return UICollectionViewCell() }
-                // cell.delegate = self
                
                 if let year = selectedDate?.year, let month = selectedDate?.month {
                     cell.configure(year: year, month: month, weekIndex: indexPath.section-1)
@@ -143,15 +142,3 @@ extension CalendarCell: UICollectionViewDelegate, UICollectionViewDataSource, UI
         return 0
     }
 }
-//
-//extension CalendarCell: ScheduleViewControllerDelegate {
-//    func presentScheduleViewController(in cell: WeekCell) {
-//        addScheduleButton.isHidden = true
-//
-//        let scheduleViewController = ScheduleViewController()
-//        scheduleViewController.dismissDelegate = self
-//        scheduleViewController.presentDelegate = self
-//        scheduleViewController.modalPresentationStyle = .overFullScreen
-//        present(scheduleViewController, animated: false)
-//    }
-//}

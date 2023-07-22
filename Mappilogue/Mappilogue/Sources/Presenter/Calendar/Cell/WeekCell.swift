@@ -10,8 +10,6 @@ import UIKit
 class WeekCell: BaseCollectionViewCell {
     static let registerId = "\(WeekCell.self)"
     
-    weak var delegate: ScheduleViewControllerDelegate?
-    
     private var monthlyCalendar = MonthlyCalendar()
     private var dummySchedule = dummyScheduleData()
     
@@ -107,7 +105,7 @@ class WeekCell: BaseCollectionViewCell {
     }
     
     @objc private func dayButtonTapped(_ sender: UIButton) {
-        print(sender.tag)
+        NotificationCenter.default.post(name: Notification.Name("PresentScheduleViewController"), object: nil)
     }
 }
 
@@ -150,7 +148,7 @@ extension WeekCell: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
                 var scheduleTitle = schedules[indexPath.section-1].title
                 let scheduleColor = schedules[indexPath.section-1].color
                 let previousDaySchedules = getPreviousDaySchedule(year: year, month: month, day: Int(day) ?? 0)
-                if let index = previousDaySchedules.firstIndex(where: {$0.title == scheduleTitle}) {
+                if let _ = previousDaySchedules.firstIndex(where: {$0.title == scheduleTitle}) {
                     scheduleTitle = ""
                 }
                 
@@ -188,12 +186,4 @@ extension WeekCell: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: section == 0 ? 1 : 3, right: 0)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.presentScheduleViewController(in: self)
-    }
-}
-
-protocol ScheduleViewControllerDelegate: AnyObject {
-    func presentScheduleViewController(in cell: WeekCell)
 }

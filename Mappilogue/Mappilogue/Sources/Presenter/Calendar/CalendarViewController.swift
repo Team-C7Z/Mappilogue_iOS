@@ -39,6 +39,14 @@ class CalendarViewController: NavigationBarViewController {
     }()
     
     private let addScheduleButton = AddScheduleButton()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    
+        NotificationCenter.default.addObserver(self, selector: #selector(presentScheduleViewContoller), name: Notification.Name("PresentScheduleViewController"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(dismissScheduleViewController), name: Notification.Name("DismissScheduleViewController"), object: nil)
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -129,6 +137,18 @@ class CalendarViewController: NavigationBarViewController {
         let addScheduleViewController = AddScheduleViewController()
         navigationController?.pushViewController(addScheduleViewController, animated: false)
     }
+    
+    @objc func presentScheduleViewContoller() {
+        addScheduleButton.isHidden = true
+        
+        let scheduleViewController = ScheduleViewController()
+        scheduleViewController.modalPresentationStyle = .overFullScreen
+        present(scheduleViewController, animated: false)
+    }
+    
+    @objc func dismissScheduleViewController() {
+        addScheduleButton.isHidden = false
+    }
 }
 
 extension CalendarViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -189,7 +209,7 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
     }
 }
 
-extension CalendarViewController: ChangedDateDelegate, DismissScheduleViewControllerDelegate, PresentAddScheduleViewControllerDelegate {
+extension CalendarViewController: ChangedDateDelegate, PresentAddScheduleViewControllerDelegate {
     func chagedDate(_ selectedDate: SelectedDate) {
         view.backgroundColor = .colorF9F8F7
         self.selectedDate = selectedDate
@@ -204,9 +224,10 @@ extension CalendarViewController: ChangedDateDelegate, DismissScheduleViewContro
         currentDateLabel.text = "\(year)년 \(month)월"
     }
     
-    func dismissScheduleViewController() {
-        addScheduleButton.isHidden = false
-    }
+//    func dismissScheduleViewController() {
+//        print("졸려오")
+//        addScheduleButton.isHidden = false
+//    }
     
     func presentAddScheduleViewController() {
         let addScheduleViewController = AddScheduleViewController()
