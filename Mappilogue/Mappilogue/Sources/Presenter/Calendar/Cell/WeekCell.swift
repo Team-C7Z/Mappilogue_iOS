@@ -104,8 +104,9 @@ class WeekCell: BaseCollectionViewCell {
         return button
     }
     
-    @objc private func dayButtonTapped(_ sender: UIButton) {
-        NotificationCenter.default.post(name: Notification.Name("PresentScheduleViewController"), object: nil)
+    @objc private func dayButtonTapped(_ button: UIButton) {
+        let date = "\(month)월 \(week[button.tag])일"
+        NotificationCenter.default.post(name: Notification.Name("PresentScheduleViewController"), object: date)
     }
 }
 
