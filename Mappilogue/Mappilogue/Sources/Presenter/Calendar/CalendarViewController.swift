@@ -63,7 +63,7 @@ class CalendarViewController: NavigationBarViewController {
         currentDateButton.addTarget(self, action: #selector(changeDateButtonTapped), for: .touchUpInside)
         currentDateLabel.text = "\(selectedDate.year)년 \(selectedDate.month)월"
         currentDateLabel.font = .subtitle01
-        changeDateImage.image = UIImage(named: "checkDate")
+        changeDateImage.image = UIImage(named: "changeDate")
         
         addScheduleButton.addTarget(self, action: #selector(addScheduleButtonTapped), for: .touchUpInside)
     }

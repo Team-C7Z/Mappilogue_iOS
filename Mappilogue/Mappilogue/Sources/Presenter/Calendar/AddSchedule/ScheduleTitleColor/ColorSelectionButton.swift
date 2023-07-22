@@ -16,10 +16,20 @@ class ColorSelectionButton: UIButton {
 
         colorSelectionLabel.textColor = textColor
         backgroundColor = color
-        colorSelectionArrowImage.image = UIImage(named: isColorSelection ? "closedColorSelection" : "openColorSelection")
+        colorSelectionArrowImage.image = UIImage(named: isColorSelection ? "opendColorSelection" : "closedColorSelection" )
         colorSelectionArrowImage.tintColor = .colorFFFFFF
         colorSelectionArrowImage.tintColor = textColor
         
+        if isColorSelection {
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
+                self.colorSelectionArrowImage.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / (1/3))
+            })
+        } else {
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
+                self.colorSelectionArrowImage.transform = CGAffineTransform(rotationAngle: CGFloat.pi / (1/3))
+            })
+        }
+      
         setupProperty()
         setupHierarchy()
         setupLayout()
@@ -54,8 +64,8 @@ class ColorSelectionButton: UIButton {
         colorSelectionArrowImage.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().offset(-12)
-            $0.width.equalTo(11)
-            $0.height.equalTo(6)
+            $0.width.equalTo(10)
+            $0.height.equalTo(5)
         }
     }
 }
