@@ -24,7 +24,7 @@ class NotificationRepeatCell: BaseTableViewCell {
     override func setupProperty() {
         super.setupProperty()
 
-        backgroundColor = .colorF9F8F7
+        contentView.backgroundColor = .colorEAE6E1
         
         notificationRepeatView.backgroundColor = .colorF9F8F7
         

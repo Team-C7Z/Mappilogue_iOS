@@ -105,6 +105,7 @@ class WeekdayRepeatViewController: BaseViewController {
         
         if !datePickerOuterView.isHidden {
             datePickerOuterView.isHidden = true
+            endButton.deleteEndDateButton.isHidden = false
             endButton.updateEndDateLabelText("\(selectedDate.year)년 \(selectedDate.month)월 \(selectedDate.day ?? 1)일")
         }
     }

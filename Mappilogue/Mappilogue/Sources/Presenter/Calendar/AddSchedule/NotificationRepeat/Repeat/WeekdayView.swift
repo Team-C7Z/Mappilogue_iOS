@@ -77,7 +77,6 @@ class WeekdayView: BaseView {
     }
     
     func updateCycleButtonDesign(_ button: UIButton) {
-        button.backgroundColor = button.isSelected ? .color1C1C1C : .colorEAE6E1
-        button.setTitleColor(button.isSelected ? .colorFFFFFF : .color1C1C1C, for: .normal)
+        button.backgroundColor = button.isSelected ? .colorC9C6C2 : .colorEAE6E1
     }
 }
