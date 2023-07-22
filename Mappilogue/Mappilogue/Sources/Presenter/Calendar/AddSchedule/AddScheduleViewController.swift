@@ -113,15 +113,15 @@ class AddScheduleViewController: BaseViewController {
         
         startDatePickerView.snp.makeConstraints {
             $0.top.equalTo(startDatePickerOuterView).offset(5)
-            $0.leading.equalTo(startDatePickerOuterView).offset(40)
-            $0.trailing.equalTo(startDatePickerOuterView).offset(-40)
+            $0.leading.equalTo(startDatePickerOuterView).offset(35)
+            $0.trailing.equalTo(startDatePickerOuterView).offset(-33)
             $0.bottom.equalTo(startDatePickerOuterView).offset(-5)
         }
         
         endDatePickerView.snp.makeConstraints {
             $0.top.equalTo(endDatePickerOuterView).offset(5)
-            $0.leading.equalTo(endDatePickerOuterView).offset(40)
-            $0.trailing.equalTo(endDatePickerOuterView).offset(-40)
+            $0.leading.equalTo(endDatePickerOuterView).offset(35)
+            $0.trailing.equalTo(endDatePickerOuterView).offset(-33)
             $0.bottom.equalTo(endDatePickerOuterView).offset(-5)
         }
     }
@@ -334,14 +334,46 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         guard let componentType = ComponentType(rawValue: component) else { return nil }
         
-        switch componentType {
-        case .year:
-            return "\(years[row])"
-        case .month:
-            return "\(months[row])"
-        case .day:
-            return "\(days[row])"
+        if !startDatePickerOuterView.isHidden {
+            switch componentType {
+            case .year:
+                if startDate.year == years[row] {
+                    return "\(years[row]) 년"
+                }
+                return "\(years[row])"
+            case .month:
+                if startDate.month == months[row] {
+                    return "\(months[row]) 월"
+                }
+                return "\(months[row])"
+            case .day:
+                if startDate.day == days[row] {
+                    return "\(days[row]) 일"
+                }
+                return "\(days[row])"
+            }
         }
+
+        if !endDatePickerOuterView.isHidden {
+            switch componentType {
+            case .year:
+                if endDate.year == years[row] {
+                    return "\(years[row]) 년"
+                }
+                return "\(years[row])"
+            case .month:
+                if endDate.month == months[row] {
+                    return "\(months[row]) 월"
+                }
+                return "\(months[row])"
+            case .day:
+                if endDate.day == days[row] {
+                    return "\(days[row]) 일"
+                }
+                return "\(days[row])"
+            }
+        }
+        return ""
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -374,7 +406,7 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
     
     private func updateDaysComponent(_ selectedDate: SelectedDate, datePickerView: UIPickerView) {
         days = monthlyCalendar.getDays(year: selectedDate.year, month: selectedDate.month)
-        datePickerView.reloadComponent(ComponentType.day.rawValue)
+        datePickerView.reloadAllComponents()
     }
 }
 
@@ -392,13 +424,17 @@ extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelega
     func startDateButtonTapped() {
         startDatePickerOuterView.isHidden = false
         endDatePickerOuterView.isHidden = true
+        
         reloadTableView()
+        startDatePickerView.reloadAllComponents()
     }
     
     func endDateButtonTapped() {
         startDatePickerOuterView.isHidden = true
         endDatePickerOuterView.isHidden = false
+ 
         reloadTableView()
+        endDatePickerView.reloadAllComponents()
     }
     
     func selectedNotificationTime(_ selectedTime: [String]) {
