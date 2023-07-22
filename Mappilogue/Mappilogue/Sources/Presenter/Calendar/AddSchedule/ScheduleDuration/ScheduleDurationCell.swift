@@ -33,6 +33,8 @@ class ScheduleDurationCell: BaseTableViewCell {
     override func setupProperty() {
         super.setupProperty()
         
+        contentView.backgroundColor = .colorEAE6E1
+        
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.spacing = 1
