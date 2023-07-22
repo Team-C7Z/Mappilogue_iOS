@@ -31,7 +31,7 @@ class AddLocationViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        hideKeyboardWhenTappedAround(view)
+        hideKeyboardWhenTappedAround()
     }
     
     override func setupProperty() {
