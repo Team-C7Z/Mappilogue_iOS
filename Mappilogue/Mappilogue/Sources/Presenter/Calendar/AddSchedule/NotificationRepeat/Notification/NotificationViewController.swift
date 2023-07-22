@@ -16,7 +16,7 @@ class NotificationViewController: BaseViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.separatorStyle = .none
-        tableView.backgroundColor = .colorFFFFFF
+        tableView.backgroundColor = .colorF9F8F7
         tableView.sectionHeaderHeight = 0
         tableView.sectionFooterHeight = 0
         tableView.register(NotificationCell.self, forCellReuseIdentifier: NotificationCell.registerId)
@@ -88,11 +88,11 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 22
+        return 10
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 22
+        return 10
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -20,8 +20,8 @@ class WeekdayRepeatViewController: BaseViewController {
     private let weekdayView = WeekdayView()
     private let separatorView = UIView()
     private let spacingEndStackView = UIStackView()
-    private let spacingButton = SpacingButton()
-    private let endButton = EndButton()
+    private let spacingButton = SpacingView()
+    private let endView = EndView()
     private let datePickerOuterView = UIView()
     private let datePickerView = UIPickerView()
     
@@ -41,7 +41,7 @@ class WeekdayRepeatViewController: BaseViewController {
         spacingEndStackView.distribution = .fillEqually
         spacingEndStackView.spacing = 1
         
-        endButton.addTarget(self, action: #selector(endDateButtonTapped), for: .touchUpInside)
+        endView.endDateButton.addTarget(self, action: #selector(endDateButtonTapped), for: .touchUpInside)
         
         datePickerOuterView.backgroundColor = .colorF5F3F0
 
@@ -59,7 +59,7 @@ class WeekdayRepeatViewController: BaseViewController {
         view.addSubview(separatorView)
         separatorView.addSubview(spacingEndStackView)
         spacingEndStackView.addArrangedSubview(spacingButton)
-        spacingEndStackView.addArrangedSubview(endButton)
+        spacingEndStackView.addArrangedSubview(endView)
     
         view.addSubview(datePickerOuterView)
         datePickerOuterView.addSubview(datePickerView)
@@ -92,8 +92,8 @@ class WeekdayRepeatViewController: BaseViewController {
         
         datePickerView.snp.makeConstraints {
             $0.top.equalTo(datePickerOuterView).offset(5)
-            $0.leading.equalTo(datePickerOuterView).offset(40)
-            $0.trailing.equalTo(datePickerOuterView).offset(-40)
+            $0.leading.equalTo(datePickerOuterView).offset(33)
+            $0.trailing.equalTo(datePickerOuterView).offset(-33)
             $0.bottom.equalTo(datePickerOuterView).offset(-5)
         }
     }
@@ -105,7 +105,8 @@ class WeekdayRepeatViewController: BaseViewController {
         
         if !datePickerOuterView.isHidden {
             datePickerOuterView.isHidden = true
-            endButton.updateEndDateLabelText("\(selectedDate.year)년 \(selectedDate.month)월 \(selectedDate.day ?? 1)일")
+            endView.deleteEndDateButton.isHidden = false
+            endView.updateEndDateLabelText("\(selectedDate.year)년 \(selectedDate.month)월 \(selectedDate.day ?? 1)일")
         }
     }
     
@@ -164,10 +165,19 @@ extension WeekdayRepeatViewController: UIPickerViewDelegate, UIPickerViewDataSou
         
         switch componentType {
         case .year:
+            if selectedDate.year == years[row] {
+                return "\(years[row]) 년"
+            }
             return "\(years[row])"
         case .month:
+            if selectedDate.month == months[row] {
+                return "\(months[row]) 월"
+            }
             return "\(months[row])"
         case .day:
+            if selectedDate.day == days[row] {
+                return "\(days[row]) 일"
+            }
             return "\(days[row])"
         }
     }

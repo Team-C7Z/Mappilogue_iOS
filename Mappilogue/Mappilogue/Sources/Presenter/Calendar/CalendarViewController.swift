@@ -29,6 +29,7 @@ class CalendarViewController: NavigationBarViewController {
         layout.minimumLineSpacing = 0
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .colorF9F8F7
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isPagingEnabled = true
         collectionView.register(CalendarCell.self, forCellWithReuseIdentifier: CalendarCell.registerId)
@@ -37,7 +38,16 @@ class CalendarViewController: NavigationBarViewController {
         return collectionView
     }()
     
-    private let addScheduleButton = AddScheduleButton()
+    private var addScheduleButton = AddScheduleButton()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    
+        NotificationCenter.default.addObserver(self, selector: #selector(presentScheduleViewContoller), name: Notification.Name("PresentScheduleViewController"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(dismissScheduleViewController), name: Notification.Name("DismissScheduleViewController"), object: nil)
+        
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -50,12 +60,10 @@ class CalendarViewController: NavigationBarViewController {
         
         setCalendarDate()
         
-        view.backgroundColor = .colorFFFFFF
-        
         currentDateButton.addTarget(self, action: #selector(changeDateButtonTapped), for: .touchUpInside)
         currentDateLabel.text = "\(selectedDate.year)년 \(selectedDate.month)월"
         currentDateLabel.font = .subtitle01
-        changeDateImage.image = UIImage(named: "checkDate")
+        changeDateImage.image = UIImage(named: "changeDate")
         
         addScheduleButton.addTarget(self, action: #selector(addScheduleButtonTapped), for: .touchUpInside)
     }
@@ -75,7 +83,8 @@ class CalendarViewController: NavigationBarViewController {
         super.setupLayout()
     
         currentDateButton.snp.makeConstraints {
-            $0.centerX.top.equalTo(view.safeAreaLayoutGuide)
+            $0.centerX.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
             $0.leading.equalTo(currentDateLabel.snp.leading)
             $0.trailing.equalTo(changeDateImage.snp.trailing)
             $0.height.equalTo(28)
@@ -98,7 +107,7 @@ class CalendarViewController: NavigationBarViewController {
         
         addScheduleButton.snp.makeConstraints {
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-13)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-16)
         }
     }
     
@@ -127,7 +136,23 @@ class CalendarViewController: NavigationBarViewController {
     
     @objc func addScheduleButtonTapped(_ sender: UIButton) {
         let addScheduleViewController = AddScheduleViewController()
-        navigationController?.pushViewController(addScheduleViewController, animated: false)
+        navigationController?.pushViewController(addScheduleViewController, animated: true)
+    }
+    
+    @objc func presentScheduleViewContoller(_ notification: Notification) {
+        addScheduleButton.isHidden = true
+        if let calendarSchedule = notification.object as? CalendarSchedule {
+            let scheduleViewController = ScheduleViewController()
+            scheduleViewController.delegate = self
+            scheduleViewController.calendarSchedule = calendarSchedule
+            scheduleViewController.addButtonLocation = addScheduleButton.frame
+            scheduleViewController.modalPresentationStyle = .overFullScreen
+            present(scheduleViewController, animated: false)
+        }
+    }
+    
+    @objc func dismissScheduleViewController(_ notification: Notification) {
+        addScheduleButton.isHidden = false
     }
 }
 
@@ -189,9 +214,9 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
     }
 }
 
-extension CalendarViewController: ChangedDateDelegate, DismissScheduleViewControllerDelegate, PresentAddScheduleViewControllerDelegate {
+extension CalendarViewController: ChangedDateDelegate, PresentAddScheduleViewControllerDelegate {
     func chagedDate(_ selectedDate: SelectedDate) {
-        view.backgroundColor = .colorFFFFFF
+        view.backgroundColor = .colorF9F8F7
         self.selectedDate = selectedDate
         updateCurrentDateLabel()
 
@@ -204,12 +229,8 @@ extension CalendarViewController: ChangedDateDelegate, DismissScheduleViewContro
         currentDateLabel.text = "\(year)년 \(month)월"
     }
     
-    func dismissScheduleViewController() {
-        addScheduleButton.isHidden = false
-    }
-    
     func presentAddScheduleViewController() {
         let addScheduleViewController = AddScheduleViewController()
-        navigationController?.pushViewController(addScheduleViewController, animated: false)
+        navigationController?.pushViewController(addScheduleViewController, animated: true)
     }
 }

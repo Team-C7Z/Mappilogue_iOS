@@ -20,12 +20,13 @@ class ScheduleTitleColorCell: BaseTableViewCell {
         
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
     }
-    
+        
     override func setupProperty() {
         super.setupProperty()
 
         scheduleNameTextField.font = .title02
         scheduleNameTextField.placeholder = "일정 제목을 적어 주세요"
+        scheduleNameTextField.returnKeyType = .done
         
         colorSelectionButton.addTarget(self, action: #selector(colorSelectionButtonTapped), for: .touchUpInside)
     }
@@ -41,13 +42,14 @@ class ScheduleTitleColorCell: BaseTableViewCell {
         super.setupLayout()
 
         scheduleNameTextField.snp.makeConstraints {
-            $0.top.leading.equalTo(contentView)
+            $0.top.equalTo(contentView).offset(10)
+            $0.leading.equalTo(contentView)
             $0.width.equalTo(275)
             $0.height.equalTo(48)
         }
         
         colorSelectionButton.snp.makeConstraints {
-            $0.top.equalTo(contentView).offset(9)
+            $0.centerY.equalTo(scheduleNameTextField)
             $0.trailing.equalTo(contentView)
             $0.width.equalTo(60)
             $0.height.equalTo(28)
@@ -66,6 +68,14 @@ class ScheduleTitleColorCell: BaseTableViewCell {
         delegate?.colorSelectionButtonTapped()
     }
 }
+
+extension ScheduleTitleColorCell: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        scheduleNameTextField.resignFirstResponder()
+        return true
+    }
+}
+
 
 protocol ColorSelectionDelegate: AnyObject {
     func colorSelectionButtonTapped()

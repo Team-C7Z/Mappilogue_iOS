@@ -26,7 +26,7 @@ class NotificationRepeatCell: BaseTableViewCell {
 
         contentView.backgroundColor = .colorEAE6E1
         
-        notificationRepeatView.backgroundColor = .colorFFFFFF
+        notificationRepeatView.backgroundColor = .colorF9F8F7
         
         label.textColor = .color707070
         label.font = .body02

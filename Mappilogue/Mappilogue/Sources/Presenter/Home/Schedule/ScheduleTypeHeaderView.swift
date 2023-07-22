@@ -64,7 +64,8 @@ class ScheduleTypeHeaderView: BaseTableViewHeaderFooterView {
         super.setupLayout()
         
         stackView.snp.makeConstraints {
-            $0.top.leading.equalTo(contentView)
+            $0.top.equalTo(contentView).offset(10)
+            $0.leading.equalTo(contentView)
         }
     }
     

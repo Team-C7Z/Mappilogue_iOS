@@ -18,6 +18,8 @@ class BaseTableViewCell: UITableViewCell, BaseViewProtocol {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
+        backgroundColor = .colorF9F8F7
+        
         setupProperty()
         setupHierarchy()
         setupLayout()

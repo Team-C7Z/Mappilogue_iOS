@@ -15,7 +15,7 @@ class WeekdayCell: BaseCollectionViewCell {
     override func setupProperty() {
         super.setupProperty()
         
-        contentView.backgroundColor = .colorFFFFFF
+        contentView.backgroundColor = .colorF9F8F7
         weekdayLabel.font = .caption02
     }
     

@@ -1,5 +1,5 @@
 //
-//  SpacingButton.swift
+//  SpacingView.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/07/17.
@@ -7,27 +7,16 @@
 
 import UIKit
 
-class SpacingButton: UIButton {
+class SpacingView: BaseView {
     private let spacingLabel = UILabel()
     private let spacingStackView = UIStackView()
     private let spacingTextField = UITextField()
     private let spacingDateLabel = UILabel()
     
-    init() {
-        super.init(frame: .zero)
+    override func setupProperty() {
+        super.setupProperty()
         
-        setupProperty()
-        setupHierarchy()
-        setupLayout()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupProperty()
-     }
-    
-    private func setupProperty() {
-        backgroundColor = .colorFFFFFF
+        backgroundColor = .colorF9F8F7
         
         spacingStackView.axis = .horizontal
         spacingStackView.distribution = .fillEqually
@@ -44,7 +33,9 @@ class SpacingButton: UIButton {
         spacingTextField.font = .title02
     }
     
-    private func setupHierarchy() {
+    override func setupHierarchy() {
+        super.setupHierarchy()
+        
         addSubview(spacingStackView)
         addSubview(spacingLabel)
         
@@ -53,7 +44,9 @@ class SpacingButton: UIButton {
         }
     }
     
-    private func setupLayout() {
+    override func setupLayout() {
+        super.setupLayout()
+        
         spacingLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(15)
             $0.centerX.equalToSuperview()
@@ -79,7 +72,7 @@ class SpacingButton: UIButton {
 
 }
 
-extension SpacingButton: UITextFieldDelegate {
+extension SpacingView: UITextFieldDelegate {
     @objc func textFieldDidBeginEditing(_ textField: UITextField) {
         spacingTextField.text = ""
     }

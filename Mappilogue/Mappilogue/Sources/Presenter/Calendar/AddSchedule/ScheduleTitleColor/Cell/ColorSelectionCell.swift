@@ -19,7 +19,7 @@ class ColorSelectionCell: BaseTableViewCell {
         let layout = UICollectionViewFlowLayout()
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .colorFFFFFF
+        collectionView.backgroundColor = .colorF9F8F7
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(ColorCell.self, forCellWithReuseIdentifier: ColorCell.registerId)
         collectionView.delegate = self
