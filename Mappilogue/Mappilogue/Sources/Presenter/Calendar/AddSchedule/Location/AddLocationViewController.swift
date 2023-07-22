@@ -42,7 +42,7 @@ class AddLocationViewController: BaseViewController {
         addLocationView.layer.cornerRadius = 24
         addLocationView.backgroundColor = .colorF9F8F7
         
-        locationTextField.layer.cornerRadius = 8
+        locationTextField.layer.cornerRadius = 12
         locationTextField.backgroundColor = .colorF5F3F0
         locationTextField.placeholder = "장소 검색"
         locationTextField.font = .body01

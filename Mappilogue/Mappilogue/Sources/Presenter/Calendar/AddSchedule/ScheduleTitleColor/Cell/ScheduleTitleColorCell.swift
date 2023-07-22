@@ -26,6 +26,7 @@ class ScheduleTitleColorCell: BaseTableViewCell {
 
         scheduleNameTextField.font = .title02
         scheduleNameTextField.placeholder = "일정 제목을 적어 주세요"
+        scheduleNameTextField.returnKeyType = .done
         
         colorSelectionButton.addTarget(self, action: #selector(colorSelectionButtonTapped), for: .touchUpInside)
     }
@@ -67,6 +68,14 @@ class ScheduleTitleColorCell: BaseTableViewCell {
         delegate?.colorSelectionButtonTapped()
     }
 }
+
+extension ScheduleTitleColorCell: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        scheduleNameTextField.resignFirstResponder()
+        return true
+    }
+}
+
 
 protocol ColorSelectionDelegate: AnyObject {
     func colorSelectionButtonTapped()
