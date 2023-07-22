@@ -8,7 +8,7 @@
 import UIKit
 
 class ScheduleViewController: BaseViewController {
-    weak var dismissDelegate: DismissScheduleViewControllerDelegate?
+ //   weak var dismissDelegate: DismissScheduleViewControllerDelegate?
     weak var presentDelegate: PresentAddScheduleViewControllerDelegate?
     
     var schedules = dummyScheduleData()
@@ -103,7 +103,8 @@ class ScheduleViewController: BaseViewController {
         guard let touch = touches.first, !scheduleView.frame.contains(touch.location(in: view)) else { return }
         
         dismiss(animated: false) {
-            self.dismissDelegate?.dismissScheduleViewController()
+            //self.dismissDelegate?.dismissScheduleViewController()
+            NotificationCenter.default.post(name: Notification.Name("DismissScheduleViewController"), object: nil)
         }
     }
     
@@ -165,9 +166,9 @@ extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-protocol DismissScheduleViewControllerDelegate: AnyObject {
-    func dismissScheduleViewController()
-}
+//protocol DismissScheduleViewControllerDelegate: AnyObject {
+//    func dismissScheduleViewController()
+//}
 
 protocol PresentAddScheduleViewControllerDelegate: AnyObject {
     func presentAddScheduleViewController()
