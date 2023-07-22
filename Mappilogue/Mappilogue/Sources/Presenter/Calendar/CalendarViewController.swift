@@ -136,13 +136,14 @@ class CalendarViewController: NavigationBarViewController {
     
     @objc func addScheduleButtonTapped(_ sender: UIButton) {
         let addScheduleViewController = AddScheduleViewController()
-        navigationController?.pushViewController(addScheduleViewController, animated: false)
+        navigationController?.pushViewController(addScheduleViewController, animated: true)
     }
     
     @objc func presentScheduleViewContoller(_ notification: Notification) {
         addScheduleButton.isHidden = true
         if let calendarSchedule = notification.object as? CalendarSchedule {
             let scheduleViewController = ScheduleViewController()
+            scheduleViewController.delegate = self
             scheduleViewController.calendarSchedule = calendarSchedule
             scheduleViewController.addButtonLocation = addScheduleButton.frame
             scheduleViewController.modalPresentationStyle = .overFullScreen
@@ -152,21 +153,6 @@ class CalendarViewController: NavigationBarViewController {
     
     @objc func dismissScheduleViewController(_ notification: Notification) {
         addScheduleButton.isHidden = false
-        
-//        if let addButtonLocation = notification.object as? CGRect {
-//            addScheduleButton.frame.origin.x = addButtonLocation.minX
-//            addScheduleButton.frame.origin.y = addButtonLocation.minY
-//
-//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
-//                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
-//                    self.addScheduleButton.snp.makeConstraints {
-//                        $0.trailing.equalTo(self.view.safeAreaLayoutGuide).offset(-16)
-//                        $0.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-16)
-//                    }
-//                    self.view.layoutIfNeeded()
-//                })
-//            }
-//        }
     }
 }
 
@@ -245,6 +231,6 @@ extension CalendarViewController: ChangedDateDelegate, PresentAddScheduleViewCon
     
     func presentAddScheduleViewController() {
         let addScheduleViewController = AddScheduleViewController()
-        navigationController?.pushViewController(addScheduleViewController, animated: false)
+        navigationController?.pushViewController(addScheduleViewController, animated: true)
     }
 }
