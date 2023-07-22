@@ -8,8 +8,7 @@
 import UIKit
 
 class ScheduleViewController: BaseViewController {
- //   weak var dismissDelegate: DismissScheduleViewControllerDelegate?
-    weak var presentDelegate: PresentAddScheduleViewControllerDelegate?
+    weak var delegate: PresentAddScheduleViewControllerDelegate?
     
     var schedules = dummyScheduleData()
     var calendarSchedule: CalendarSchedule?
@@ -132,7 +131,7 @@ class ScheduleViewController: BaseViewController {
     
     @objc func addScheduleButtonTapped(_ sender: UIButton) {
         dismiss(animated: false) {
-            self.presentDelegate?.presentAddScheduleViewController()
+            self.delegate?.presentAddScheduleViewController()
         }
     }
 }
