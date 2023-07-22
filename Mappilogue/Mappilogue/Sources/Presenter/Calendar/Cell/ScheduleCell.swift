@@ -70,10 +70,10 @@ class ScheduleCell: BaseTableViewCell {
         }
     }
     
-    func configure(_ title: String, color: UIColor, time: String, location: String) {
-        scheduleLabel.text = title
-        scheduleColorView.backgroundColor = color
-        scheduleTimeLabel.text = time
-        scheduleLocationLabel.text = ", \(location)"
+    func configure(with schedule: Schedule) {
+        scheduleLabel.text = schedule.title
+        scheduleColorView.backgroundColor = schedule.color
+        scheduleTimeLabel.text = schedule.time
+        scheduleLocationLabel.text = ", \(schedule.location)"
     }
 }

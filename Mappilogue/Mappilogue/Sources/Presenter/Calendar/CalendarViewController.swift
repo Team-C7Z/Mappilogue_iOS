@@ -38,7 +38,7 @@ class CalendarViewController: NavigationBarViewController {
         return collectionView
     }()
     
-    private let addScheduleButton = AddScheduleButton()
+    private var addScheduleButton = AddScheduleButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +46,7 @@ class CalendarViewController: NavigationBarViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(presentScheduleViewContoller), name: Notification.Name("PresentScheduleViewController"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(dismissScheduleViewController), name: Notification.Name("DismissScheduleViewController"), object: nil)
+        
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -106,7 +107,7 @@ class CalendarViewController: NavigationBarViewController {
         
         addScheduleButton.snp.makeConstraints {
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-13)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-16)
         }
     }
     
@@ -140,16 +141,32 @@ class CalendarViewController: NavigationBarViewController {
     
     @objc func presentScheduleViewContoller(_ notification: Notification) {
         addScheduleButton.isHidden = true
-        if let date = notification.object as? String {
+        if let calendarSchedule = notification.object as? CalendarSchedule {
             let scheduleViewController = ScheduleViewController()
-            scheduleViewController.date = date
+            scheduleViewController.calendarSchedule = calendarSchedule
+            scheduleViewController.addButtonLocation = addScheduleButton.frame
             scheduleViewController.modalPresentationStyle = .overFullScreen
             present(scheduleViewController, animated: false)
         }
     }
     
-    @objc func dismissScheduleViewController() {
+    @objc func dismissScheduleViewController(_ notification: Notification) {
         addScheduleButton.isHidden = false
+        
+//        if let addButtonLocation = notification.object as? CGRect {
+//            addScheduleButton.frame.origin.x = addButtonLocation.minX
+//            addScheduleButton.frame.origin.y = addButtonLocation.minY
+//
+//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
+//                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+//                    self.addScheduleButton.snp.makeConstraints {
+//                        $0.trailing.equalTo(self.view.safeAreaLayoutGuide).offset(-16)
+//                        $0.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-16)
+//                    }
+//                    self.view.layoutIfNeeded()
+//                })
+//            }
+//        }
     }
 }
 

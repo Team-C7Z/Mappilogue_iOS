@@ -12,8 +12,10 @@ class ScheduleViewController: BaseViewController {
     weak var presentDelegate: PresentAddScheduleViewControllerDelegate?
     
     var schedules = dummyScheduleData()
-    var date: String = ""
+    var calendarSchedule: CalendarSchedule?
     let lunarDate: String = ""
+    
+    var addButtonLocation: CGRect?
     
     private let scheduleView = UIView()
     private let dateLabel = UILabel()
@@ -36,13 +38,25 @@ class ScheduleViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        dateLabel.text = date
+        if let month = calendarSchedule?.month, let day = calendarSchedule?.day {
+            dateLabel.text = "\(month)월 \(day)일"
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+       
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
+            self.addScheduleButton.frame.origin.x = self.scheduleView.frame.maxX - 56 - 20
+            self.addScheduleButton.frame.origin.y = self.scheduleView.frame.maxY - 56 - 20
+            self.view.layoutIfNeeded()
+        })
     }
     
     override func setupProperty() {
         super.setupProperty()
         
-        view.backgroundColor = .color000000.withAlphaComponent(0.4)
+        view.backgroundColor = .color404040.withAlphaComponent(0.1)
         
         scheduleView.layer.cornerRadius = 24
         scheduleView.backgroundColor = .colorF9F8F7
@@ -64,7 +78,7 @@ class ScheduleViewController: BaseViewController {
         scheduleView.addSubview(dateLabel)
         scheduleView.addSubview(lunarDateLabel)
         scheduleView.addSubview(tableView)
-        scheduleView.addSubview(addScheduleButton)
+        view.addSubview(addScheduleButton)
     }
     
     override func setupLayout() {
@@ -94,17 +108,26 @@ class ScheduleViewController: BaseViewController {
         }
         
         addScheduleButton.snp.makeConstraints {
-            $0.trailing.equalTo(scheduleView).offset(-20)
-            $0.bottom.equalTo(scheduleView).offset(-21)
+            $0.leading.equalTo(view).offset(addButtonLocation?.minX ?? 0)
+            $0.top.equalTo(view).offset(addButtonLocation?.minY ?? 0)
         }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first, !scheduleView.frame.contains(touch.location(in: view)) else { return }
         
-        dismiss(animated: false) {
-            NotificationCenter.default.post(name: Notification.Name("DismissScheduleViewController"), object: nil)
-        }
+        view.backgroundColor = .clear
+        scheduleView.isHidden = true
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseInOut, animations: {
+            self.addScheduleButton.frame.origin.x = self.addButtonLocation?.minX ?? 0
+            self.addScheduleButton.frame.origin.y = self.addButtonLocation?.minY ?? 0
+            self.view.layoutIfNeeded()
+        }, completion: { _ in
+            self.dismiss(animated: false) {
+                NotificationCenter.default.post(name: Notification.Name("DismissScheduleViewController"), object: nil)
+            }
+        })
     }
     
     @objc func addScheduleButtonTapped(_ sender: UIButton) {
@@ -123,14 +146,11 @@ extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleCell.registerId, for: indexPath) as? ScheduleCell else { return UITableViewCell() }
         cell.selectionStyle = .none
         
-//        let schedule = schedules[indexPath.row]
-//        let scheduleTitle = schedule.title
-//        let color = schedule.color
-//        let time = schedule.time
-//        let location = schedule.location
-//        
-//        cell.configure(scheduleTitle, color: color, time: time, location: location)
-//        
+        if let schedules = calendarSchedule?.schedules, schedules.count > indexPath.row {
+            let schedule = schedules[indexPath.row]
+            cell.configure(with: schedule)
+        }
+        
         return cell
     }
     
@@ -164,10 +184,6 @@ extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deleteRows(at: [indexPath], with: .none)
     }
 }
-
-//protocol DismissScheduleViewControllerDelegate: AnyObject {
-//    func dismissScheduleViewController()
-//}
 
 protocol PresentAddScheduleViewControllerDelegate: AnyObject {
     func presentAddScheduleViewController()
