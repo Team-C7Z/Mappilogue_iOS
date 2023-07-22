@@ -12,7 +12,7 @@ class AddScheduleButton: UIButton {
         super.init(frame: .zero)
         
         setImage(UIImage(named: "addSchedule"), for: .normal)
-        frame.size = .init(width: 55, height: 55)
+        frame.size = .init(width: 56, height: 56)
     }
     
     required init?(coder: NSCoder) {

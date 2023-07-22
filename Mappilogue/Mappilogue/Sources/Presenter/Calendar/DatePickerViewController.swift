@@ -67,10 +67,11 @@ class DatePickerViewController: BaseViewController {
             return
         }
         
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
-            self.pickerOuterView.frame.origin.y = -40
+        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut, animations: {
+            self.pickerOuterView.frame.origin.y = 20
+            self.view.layoutIfNeeded()
             
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
                 self.dismiss(animated: false) {
                     guard let date = self.selectedDate else { return }
                     self.delegate?.chagedDate(date)
