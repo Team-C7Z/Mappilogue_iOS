@@ -17,6 +17,7 @@ class ColorSelectionButton: UIButton {
         colorSelectionLabel.textColor = textColor
         backgroundColor = color
         colorSelectionArrowImage.image = UIImage(named: isColorSelection ? "closedColorSelection" : "openColorSelection")
+        colorSelectionArrowImage.tintColor = .colorFFFFFF
         colorSelectionArrowImage.tintColor = textColor
         
         setupProperty()
@@ -53,8 +54,8 @@ class ColorSelectionButton: UIButton {
         colorSelectionArrowImage.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().offset(-12)
-            $0.width.equalTo(10)
-            $0.height.equalTo(5)
+            $0.width.equalTo(11)
+            $0.height.equalTo(6)
         }
     }
 }
