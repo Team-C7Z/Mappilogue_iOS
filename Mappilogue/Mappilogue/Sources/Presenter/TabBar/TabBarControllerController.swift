@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TabBarController: UITabBarController {
+class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +18,8 @@ class TabBarController: UITabBarController {
         tabBar.unselectedItemTintColor = .color707070
         
         setTabBar()
+        
+        self.delegate = self
     }
     
     func setTabBar() {
@@ -37,5 +39,19 @@ class TabBarController: UITabBarController {
         viewController.title = title
         viewController.tabBarItem.image = UIImage(named: imageName)
         return navigationController
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        if viewController == self.viewControllers?[2] {
+            return false // 이동 불가
+        } else {
+            return true
+        }
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if tabBarController.selectedIndex == 2 {
+           
+        }
     }
 }
