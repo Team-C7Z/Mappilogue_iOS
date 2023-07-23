@@ -8,6 +8,7 @@
 import UIKit
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
+    let gatheringToastMessage = GatheringToastMessageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,15 +44,27 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         if viewController == self.viewControllers?[2] {
+            showGatheringToastMessage()
             return false // 이동 불가
         } else {
             return true
         }
     }
     
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        if tabBarController.selectedIndex == 2 {
-           
+    func setGatheringToastMessage() {
+        view.addSubview(gatheringToastMessage)
+        
+        gatheringToastMessage.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-52)
+            $0.centerX.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+    
+    func showGatheringToastMessage() {
+        setGatheringToastMessage()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.gatheringToastMessage.removeFromSuperview()
         }
     }
 }
