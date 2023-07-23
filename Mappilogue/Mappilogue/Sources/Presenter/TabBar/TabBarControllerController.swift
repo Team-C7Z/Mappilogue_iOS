@@ -8,7 +8,7 @@
 import UIKit
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
-    let gatheringToastMessage = GatheringToastMessageView()
+    var gatheringToastMessage = GatheringToastMessageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,10 +61,18 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     
     func showGatheringToastMessage() {
-        setGatheringToastMessage()
+        self.setGatheringToastMessage()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.gatheringToastMessage.removeFromSuperview()
-        }
+        UIView.animate(withDuration: 2, delay: 0, options: .curveLinear, animations: {
+            
+        }, completion: { (_) in
+            UIView.animate(withDuration: 0.3, delay: 1, options: .curveEaseIn, animations: {
+                self.gatheringToastMessage.alpha = 0.0
+            }, completion: { (_) in
+                self.gatheringToastMessage.alpha = 1.0
+                self.gatheringToastMessage.removeFromSuperview()
+                
+            })
+        })
     }
 }
