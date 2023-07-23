@@ -8,8 +8,8 @@
 import UIKit
 
 class HomeViewController: NavigationBarViewController {
-    let dummyTodayData = dummyTodayScheduleData(scheduleCount: 0)
-    let dummyUpcomingData = dummyUpcomingScheduleData(scheduleCount: 2)
+    let dummyTodayData = dummyTodayScheduleData(scheduleCount: 1)
+    let dummyUpcomingData = dummyUpcomingScheduleData(scheduleCount: 0)
     var isScheduleExpanded = [Bool]()
     
     var selectedScheduleType: ScheduleType = .today
@@ -118,6 +118,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 if let emptyScheduleCell = cell as? EmptyScheduleCell {
                     tableViewSection.configureCell(emptyScheduleCell)
                 }
+                
+                if let addScheduleButtonCell = cell as? AddScheduleButtonCell {
+                    addScheduleButtonCell.delegate = self
+                }
+                
                 return cell
                 
             } else if dummyTodayData.count > indexPath.section {
@@ -157,6 +162,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
                 cell.selectionStyle = .none
                 
+                if let addLocationButtonCell = cell as? AddLocationButtonCell {
+                    addLocationButtonCell.delegate = self
+                }
+                
                 return cell
             } else {
                 guard let tableViewSection = TodayScheduleSection(rawValue: 3) else { return UITableViewCell() }
@@ -179,6 +188,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 if let emptyScheduleCell = cell as? EmptyScheduleCell {
                     section.configureCell(emptyScheduleCell)
                 }
+                
+                if let addScheduleButtonCell = cell as? AddScheduleButtonCell {
+                    addScheduleButtonCell.delegate = self
+                }
+                
                 return cell
                 
             } else {
@@ -190,6 +204,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 if let upcomingScheduleCell = cell as? UpcomingScheduleCell {
                     section.configureCell(upcomingScheduleCell, row: indexPath.row, scheduleData: dummyUpcomingData)
                 }
+                
+                if let addScheduleButtonCell = cell as? AddScheduleButtonCell {
+                    addScheduleButtonCell.delegate = self
+                }
+                
                 return cell
             }
         }
@@ -253,7 +272,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension HomeViewController: ScheduleTypeDelegate, ExpandCellDelegate {
+extension HomeViewController: ScheduleTypeDelegate, ExpandCellDelegate, AddLocationDelegate, AddScheduleDelegate {
     func scheduleButtonTapped(scheduleType: ScheduleType) {
         self.selectedScheduleType = scheduleType
         
@@ -262,8 +281,19 @@ extension HomeViewController: ScheduleTypeDelegate, ExpandCellDelegate {
     
     func expandButtonTapped(in cell: UITableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
-        
         isScheduleExpanded[indexPath.section] = !isScheduleExpanded[indexPath.section]
         tableView.reloadSections([indexPath.section], with: .none)
+    }
+    
+    func addLocationButtonTapped() {
+        print("Df")
+        let addLocationViewController = AddLocationViewController()
+        addLocationViewController.modalPresentationStyle = .overFullScreen
+        present(addLocationViewController, animated: false)
+    }
+    
+    func addScheduleButtonTapped() {
+        let addScheduleViewController = AddScheduleViewController()
+        navigationController?.pushViewController(addScheduleViewController, animated: true)
     }
 }
