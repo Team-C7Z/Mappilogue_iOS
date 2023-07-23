@@ -7,7 +7,8 @@
 
 import UIKit
 
-class TabBarController: UITabBarController {
+class TabBarController: UITabBarController, UITabBarControllerDelegate {
+    var gatheringToastMessage = GatheringToastMessageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +19,8 @@ class TabBarController: UITabBarController {
         tabBar.unselectedItemTintColor = .color707070
         
         setTabBar()
+        
+        self.delegate = self
     }
     
     func setTabBar() {
@@ -37,5 +40,39 @@ class TabBarController: UITabBarController {
         viewController.title = title
         viewController.tabBarItem.image = UIImage(named: imageName)
         return navigationController
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        if viewController == self.viewControllers?[2] {
+            showGatheringToastMessage()
+            return false // 이동 불가
+        } else {
+            return true
+        }
+    }
+    
+    func setGatheringToastMessage() {
+        view.addSubview(gatheringToastMessage)
+        
+        gatheringToastMessage.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-52)
+            $0.centerX.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+    
+    func showGatheringToastMessage() {
+        self.setGatheringToastMessage()
+        
+        UIView.animate(withDuration: 2, delay: 0, options: .curveLinear, animations: {
+            
+        }, completion: { (_) in
+            UIView.animate(withDuration: 0.3, delay: 1, options: .curveEaseIn, animations: {
+                self.gatheringToastMessage.alpha = 0.0
+            }, completion: { (_) in
+                self.gatheringToastMessage.alpha = 1.0
+                self.gatheringToastMessage.removeFromSuperview()
+                
+            })
+        })
     }
 }
