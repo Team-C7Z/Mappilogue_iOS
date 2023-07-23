@@ -42,10 +42,8 @@ enum TodayScheduleSection: Int, CaseIterable {
     func configureTodayScheduleCell(_ cell: TodayScheduleCell, section: Int, scheduleData: [TodaySchedule], isExpand: Bool) {
         
         let schedule = scheduleData[section]
-        let title = schedule.title
-        let backgroundColor = schedule.color
         
-        cell.configure(with: title, backgroundColor: backgroundColor, isExpanded: isExpand)
+        cell.configure(with: schedule, isExpanded: isExpand)
     }
     
     func configureTodayScheduleInfoCell(_ cell: TodayScheduleInfoCell, indexPath: IndexPath, scheduleData: [TodaySchedule]) {

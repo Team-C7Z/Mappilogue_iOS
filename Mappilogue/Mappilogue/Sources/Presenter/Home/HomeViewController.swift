@@ -8,7 +8,7 @@
 import UIKit
 
 class HomeViewController: NavigationBarViewController {
-    let dummyTodayData = dummyTodayScheduleData(scheduleCount: 1)
+    let dummyTodayData = dummyTodayScheduleData(scheduleCount: 0)
     let dummyUpcomingData = dummyUpcomingScheduleData(scheduleCount: 2)
     var isScheduleExpanded = [Bool]()
     
@@ -101,7 +101,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 return tableViewSection.numberOfRows
             } else {
                 guard let tableViewSection = UpcomingScheduleSection(rawValue: section) else { return 0 }
-                return tableViewSection.numberOfRows(section: section, scheduleData: dummyTodayData, limitedUpcomingScheduleCount: limitedUpcomingScheduleCount)
+                return tableViewSection.numberOfRows(section: section, scheduleData: dummyUpcomingData, limitedUpcomingScheduleCount: limitedUpcomingScheduleCount)
             }
         }
     }
@@ -127,6 +127,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     
                     let cellIdentifier = tableViewSection.cellIdentifier
                     let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+                    cell.selectionStyle = .none
                     
                     if let todayScheduleCell = cell as? TodayScheduleCell {
                         todayScheduleCell.delegate = self
@@ -140,6 +141,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     
                     let cellIdentifier = tableViewSection.cellIdentifier
                     let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+                    cell.selectionStyle = .none
                     
                     if let todayScheduleInfoCell = cell as? TodayScheduleInfoCell {
                         tableViewSection.configureTodayScheduleInfoCell(todayScheduleInfoCell, indexPath: indexPath, scheduleData: dummyTodayData)
@@ -153,6 +155,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 let cellIdentifier = tableViewSection.cellIdentifier
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+                cell.selectionStyle = .none
                 
                 return cell
             } else {
@@ -160,6 +163,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 let cellIdentifier = tableViewSection.cellIdentifier
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+                cell.selectionStyle = .none
                 
                 return cell
             }
@@ -170,6 +174,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 
                 let cellIdentifier = section.cellIdentifier
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+                cell.selectionStyle = .none
                 
                 if let emptyScheduleCell = cell as? EmptyScheduleCell {
                     section.configureCell(emptyScheduleCell)
@@ -178,10 +183,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 
             } else {
                 guard let section = UpcomingScheduleSection(rawValue: indexPath.section) else { return UITableViewCell() }
-                
                 let cellIdentifier = section.cellIdentifier
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-                
+                cell.selectionStyle = .none
+          
                 if let upcomingScheduleCell = cell as? UpcomingScheduleCell {
                     section.configureCell(upcomingScheduleCell, row: indexPath.row, scheduleData: dummyUpcomingData)
                 }
