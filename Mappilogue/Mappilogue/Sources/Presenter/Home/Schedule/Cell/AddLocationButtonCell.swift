@@ -12,7 +12,7 @@ class AddLocationButtonCell: BaseTableViewCell {
     
     weak var delegate: AddLocationDelegate?
     
-    private let addScheduleButton = AddButton(text: "장소 추가하기", backgroundColor: .color1C1C1C)
+    private let addLocationButton = AddButton(text: "장소 추가하기", backgroundColor: .color1C1C1C)
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -23,19 +23,19 @@ class AddLocationButtonCell: BaseTableViewCell {
     override func setupProperty() {
         super.setupProperty()
         
-        addScheduleButton.addTarget(self, action: #selector(addLocationButtonTapped), for: .touchUpInside)
+        addLocationButton.addTarget(self, action: #selector(addLocationButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        contentView.addSubview(addScheduleButton)
+        contentView.addSubview(addLocationButton)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
-        addScheduleButton.snp.makeConstraints {
+        addLocationButton.snp.makeConstraints {
             $0.edges.equalTo(contentView)
             $0.height.equalTo(53)
         }
