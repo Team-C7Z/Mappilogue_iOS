@@ -1,18 +1,20 @@
 //
-//  RecordViewController.swift
+//  MarkViewController.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/05/17.
 //
 
 import UIKit
+import NMapsMap
 
-class RecordViewController: UIViewController {
+class MarkViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        let mapView = NMFMapView(frame: view.frame)
+             view.addSubview(mapView)
     }
     
     /*
