@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		520E9D02714F72A41E207B62 /* Pods_Mappilogue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 021CF7D6B8E435D26802F66A /* Pods_Mappilogue.framework */; };
 		9224FCEE2A5BEF80000A56A6 /* ScheduleTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */; };
 		9224FCF32A5C5E7A000A56A6 /* WeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */; };
 		9224FCF52A5D6C65000A56A6 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */; };
@@ -69,8 +70,9 @@
 		926999402A14F73C003DDAD2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9269993F2A14F73C003DDAD2 /* HomeViewController.swift */; };
 		926999422A14F74B003DDAD2 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999412A14F74B003DDAD2 /* CalendarViewController.swift */; };
 		926999442A14F756003DDAD2 /* GatheringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999432A14F756003DDAD2 /* GatheringViewController.swift */; };
-		926999462A14F75F003DDAD2 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999452A14F75F003DDAD2 /* RecordViewController.swift */; };
+		926999462A14F75F003DDAD2 /* MarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999452A14F75F003DDAD2 /* MarkViewController.swift */; };
 		926999482A14F76A003DDAD2 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999472A14F76A003DDAD2 /* MyViewController.swift */; };
+		927C144BD1C3E8536A8EC3A1 /* Pods_Mappilogue_MappilogueUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65FB9F97A7DA9BC190F4E1BF /* Pods_Mappilogue_MappilogueUITests.framework */; };
 		927E7F212A66F64400E6A29F /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927E7F202A66F64400E6A29F /* Schedule.swift */; };
 		927E7F252A677D1A00E6A29F /* DeleteAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927E7F242A677D1A00E6A29F /* DeleteAlertViewController.swift */; };
 		927E7F272A683DCD00E6A29F /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927E7F262A683DCD00E6A29F /* CalendarCell.swift */; };
@@ -97,6 +99,7 @@
 		92FE26132A4B74D800BCDB82 /* ScheduleTypeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FE26122A4B74D800BCDB82 /* ScheduleTypeHeaderView.swift */; };
 		92FE26152A4B751000BCDB82 /* BaseCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FE26142A4B751000BCDB82 /* BaseCollectionReusableView.swift */; };
 		92FE26172A4B76B800BCDB82 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FE26162A4B76B800BCDB82 /* UIFont.swift */; };
+		F37D62EC0B1A011ED13134F8 /* Pods_MappilogueTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A821757BF382206BE4FD7A /* Pods_MappilogueTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +120,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		021CF7D6B8E435D26802F66A /* Pods_Mappilogue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mappilogue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		076D30CCA1F490544C51AD3F /* Pods-Mappilogue-MappilogueUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mappilogue-MappilogueUITests.debug.xcconfig"; path = "Target Support Files/Pods-Mappilogue-MappilogueUITests/Pods-Mappilogue-MappilogueUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		55FC52669CA047D7BF96EAA6 /* Pods-Mappilogue-MappilogueUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mappilogue-MappilogueUITests.release.xcconfig"; path = "Target Support Files/Pods-Mappilogue-MappilogueUITests/Pods-Mappilogue-MappilogueUITests.release.xcconfig"; sourceTree = "<group>"; };
+		65FB9F97A7DA9BC190F4E1BF /* Pods_Mappilogue_MappilogueUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mappilogue_MappilogueUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		81704CFC2A84A47234E8C7D7 /* Pods-Mappilogue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mappilogue.release.xcconfig"; path = "Target Support Files/Pods-Mappilogue/Pods-Mappilogue.release.xcconfig"; sourceTree = "<group>"; };
+		81A821757BF382206BE4FD7A /* Pods_MappilogueTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MappilogueTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTitleCell.swift; sourceTree = "<group>"; };
 		9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCell.swift; sourceTree = "<group>"; };
 		9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
@@ -183,7 +192,7 @@
 		9269993F2A14F73C003DDAD2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		926999412A14F74B003DDAD2 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		926999432A14F756003DDAD2 /* GatheringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatheringViewController.swift; sourceTree = "<group>"; };
-		926999452A14F75F003DDAD2 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
+		926999452A14F75F003DDAD2 /* MarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkViewController.swift; sourceTree = "<group>"; };
 		926999472A14F76A003DDAD2 /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
 		927E7F202A66F64400E6A29F /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		927E7F242A677D1A00E6A29F /* DeleteAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAlertViewController.swift; sourceTree = "<group>"; };
@@ -210,6 +219,9 @@
 		92FE26122A4B74D800BCDB82 /* ScheduleTypeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTypeHeaderView.swift; sourceTree = "<group>"; };
 		92FE26142A4B751000BCDB82 /* BaseCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionReusableView.swift; sourceTree = "<group>"; };
 		92FE26162A4B76B800BCDB82 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
+		C335EE5D808E808B36CCF9CC /* Pods-Mappilogue.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mappilogue.debug.xcconfig"; path = "Target Support Files/Pods-Mappilogue/Pods-Mappilogue.debug.xcconfig"; sourceTree = "<group>"; };
+		C5CC701B6A8E2F772AEB8E9E /* Pods-MappilogueTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MappilogueTests.debug.xcconfig"; path = "Target Support Files/Pods-MappilogueTests/Pods-MappilogueTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DCCDD669BAF4514B461B20ED /* Pods-MappilogueTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MappilogueTests.release.xcconfig"; path = "Target Support Files/Pods-MappilogueTests/Pods-MappilogueTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				929158302A2537E40022BEF9 /* SnapKit in Frameworks */,
+				520E9D02714F72A41E207B62 /* Pods_Mappilogue.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +238,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F37D62EC0B1A011ED13134F8 /* Pods_MappilogueTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,12 +246,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				927C144BD1C3E8536A8EC3A1 /* Pods_Mappilogue_MappilogueUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E636426070BEF0C4E78A8CD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C335EE5D808E808B36CCF9CC /* Pods-Mappilogue.debug.xcconfig */,
+				81704CFC2A84A47234E8C7D7 /* Pods-Mappilogue.release.xcconfig */,
+				076D30CCA1F490544C51AD3F /* Pods-Mappilogue-MappilogueUITests.debug.xcconfig */,
+				55FC52669CA047D7BF96EAA6 /* Pods-Mappilogue-MappilogueUITests.release.xcconfig */,
+				C5CC701B6A8E2F772AEB8E9E /* Pods-MappilogueTests.debug.xcconfig */,
+				DCCDD669BAF4514B461B20ED /* Pods-MappilogueTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		9224FCFE2A5FF82F000A56A6 /* AddSchedule */ = {
 			isa = PBXGroup;
 			children = (
@@ -395,6 +423,8 @@
 				9269990C2A14EC09003DDAD2 /* MappilogueTests */,
 				926999162A14EC09003DDAD2 /* MappilogueUITests */,
 				926998F42A14EC07003DDAD2 /* Products */,
+				0E636426070BEF0C4E78A8CD /* Pods */,
+				AB9B24CC5D92D2660F4787DE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -500,7 +530,7 @@
 				9269993A2A14F689003DDAD2 /* Home */,
 				9269993B2A14F6A4003DDAD2 /* Calendar */,
 				9269993C2A14F6BF003DDAD2 /* Gathering */,
-				9269993E2A14F71D003DDAD2 /* Record */,
+				9269993E2A14F71D003DDAD2 /* Mark */,
 				9269993D2A14F6F9003DDAD2 /* My */,
 				92A7B64D2A4CCDB7009C9293 /* Reusable */,
 			);
@@ -559,12 +589,12 @@
 			path = My;
 			sourceTree = "<group>";
 		};
-		9269993E2A14F71D003DDAD2 /* Record */ = {
+		9269993E2A14F71D003DDAD2 /* Mark */ = {
 			isa = PBXGroup;
 			children = (
-				926999452A14F75F003DDAD2 /* RecordViewController.swift */,
+				926999452A14F75F003DDAD2 /* MarkViewController.swift */,
 			);
-			path = Record;
+			path = Mark;
 			sourceTree = "<group>";
 		};
 		929158162A25292A0022BEF9 /* Fonts */ = {
@@ -601,6 +631,16 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		AB9B24CC5D92D2660F4787DE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				021CF7D6B8E435D26802F66A /* Pods_Mappilogue.framework */,
+				65FB9F97A7DA9BC190F4E1BF /* Pods_Mappilogue_MappilogueUITests.framework */,
+				81A821757BF382206BE4FD7A /* Pods_MappilogueTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -608,10 +648,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9269991D2A14EC09003DDAD2 /* Build configuration list for PBXNativeTarget "Mappilogue" */;
 			buildPhases = (
+				6895D8DFFDC8CF87DC84B26D /* [CP] Check Pods Manifest.lock */,
 				924BE0C62A51AC60002C70FF /* SwiftLint Script */,
 				926998EF2A14EC07003DDAD2 /* Sources */,
 				926998F02A14EC07003DDAD2 /* Frameworks */,
 				926998F12A14EC07003DDAD2 /* Resources */,
+				95A751AE3E60A06AD2553209 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -629,6 +671,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 926999202A14EC09003DDAD2 /* Build configuration list for PBXNativeTarget "MappilogueTests" */;
 			buildPhases = (
+				B03E79C90C68D30FFC523867 /* [CP] Check Pods Manifest.lock */,
 				926999052A14EC09003DDAD2 /* Sources */,
 				926999062A14EC09003DDAD2 /* Frameworks */,
 				926999072A14EC09003DDAD2 /* Resources */,
@@ -647,9 +690,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 926999232A14EC09003DDAD2 /* Build configuration list for PBXNativeTarget "MappilogueUITests" */;
 			buildPhases = (
+				D6A8029318AD09F5FFC94F58 /* [CP] Check Pods Manifest.lock */,
 				9269990F2A14EC09003DDAD2 /* Sources */,
 				926999102A14EC09003DDAD2 /* Frameworks */,
 				926999112A14EC09003DDAD2 /* Resources */,
+				E3A67634A6EEF51E46DE51A5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -739,6 +784,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6895D8DFFDC8CF87DC84B26D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Mappilogue-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		924BE0C62A51AC60002C70FF /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -757,6 +824,84 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		95A751AE3E60A06AD2553209 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mappilogue/Pods-Mappilogue-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mappilogue/Pods-Mappilogue-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mappilogue/Pods-Mappilogue-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B03E79C90C68D30FFC523867 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MappilogueTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D6A8029318AD09F5FFC94F58 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Mappilogue-MappilogueUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E3A67634A6EEF51E46DE51A5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mappilogue-MappilogueUITests/Pods-Mappilogue-MappilogueUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Mappilogue-MappilogueUITests/Pods-Mappilogue-MappilogueUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Mappilogue-MappilogueUITests/Pods-Mappilogue-MappilogueUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -829,7 +974,7 @@
 				9224FD4A2A667F7E000A56A6 /* TimePickerViewController.swift in Sources */,
 				9224FD272A6394A9000A56A6 /* WeekdayRepeatViewController.swift in Sources */,
 				9224FD442A657150000A56A6 /* Location.swift in Sources */,
-				926999462A14F75F003DDAD2 /* RecordViewController.swift in Sources */,
+				926999462A14F75F003DDAD2 /* MarkViewController.swift in Sources */,
 				9224FCFB2A5FDD90000A56A6 /* AddScheduleButton.swift in Sources */,
 				926999402A14F73C003DDAD2 /* HomeViewController.swift in Sources */,
 				927E7F212A66F64400E6A29F /* Schedule.swift in Sources */,
@@ -1007,11 +1152,13 @@
 		};
 		9269991E2A14EC09003DDAD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C335EE5D808E808B36CCF9CC /* Pods-Mappilogue.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U4YRB4XYPR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mappilogue/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1023,7 +1170,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = hyem.Mappilogue;
+				PRODUCT_BUNDLE_IDENTIFIER = C7Z.Mappilogue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1033,11 +1180,13 @@
 		};
 		9269991F2A14EC09003DDAD2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 81704CFC2A84A47234E8C7D7 /* Pods-Mappilogue.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U4YRB4XYPR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mappilogue/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1049,7 +1198,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = hyem.Mappilogue;
+				PRODUCT_BUNDLE_IDENTIFIER = C7Z.Mappilogue;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1059,6 +1208,7 @@
 		};
 		926999212A14EC09003DDAD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5CC701B6A8E2F772AEB8E9E /* Pods-MappilogueTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1078,6 +1228,7 @@
 		};
 		926999222A14EC09003DDAD2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DCCDD669BAF4514B461B20ED /* Pods-MappilogueTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1097,6 +1248,7 @@
 		};
 		926999242A14EC09003DDAD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 076D30CCA1F490544C51AD3F /* Pods-Mappilogue-MappilogueUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1114,6 +1266,7 @@
 		};
 		926999252A14EC09003DDAD2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 55FC52669CA047D7BF96EAA6 /* Pods-Mappilogue-MappilogueUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

@@ -1,0 +1,6 @@
+framework module Pods_Mappilogue {
+  umbrella header "Pods-Mappilogue-umbrella.h"
+
+  export *
+  module * { export * }
+}
