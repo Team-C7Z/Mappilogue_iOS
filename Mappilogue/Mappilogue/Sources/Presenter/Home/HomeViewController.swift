@@ -286,7 +286,6 @@ extension HomeViewController: ScheduleTypeDelegate, ExpandCellDelegate, AddLocat
     }
     
     func addLocationButtonTapped() {
-        print("Df")
         let addLocationViewController = AddLocationViewController()
         addLocationViewController.modalPresentationStyle = .overFullScreen
         present(addLocationViewController, animated: false)
