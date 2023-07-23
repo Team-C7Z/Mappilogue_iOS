@@ -20,7 +20,7 @@ enum EmptyTodayScheduleSection: Int, CaseIterable {
     var cellIdentifier: String {
         switch self {
         case .emptySchedule:
-            return EmptyScheduleCell.registerId
+            return HomeEmptyScheduleCell.registerId
         case .addSchedule:
             return AddScheduleButtonCell.registerId
         case .markedRecord:
@@ -29,7 +29,7 @@ enum EmptyTodayScheduleSection: Int, CaseIterable {
     }
     
     func configureCell(_ cell: UITableViewCell) {
-        guard let emptyScheduleCell = cell as? EmptyScheduleCell else { return }
+        guard let emptyScheduleCell = cell as? HomeEmptyScheduleCell else { return }
         emptyScheduleCell.configure(scheduleType: .today)
     }
     

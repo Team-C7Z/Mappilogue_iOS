@@ -10,9 +10,9 @@ import UIKit
 class ScheduleViewController: BaseViewController {
     weak var delegate: PresentAddScheduleViewControllerDelegate?
     
-    var schedules = dummyScheduleData()
     var calendarSchedule: CalendarSchedule?
     let lunarDate: String = ""
+    var schedules = [Schedule]()
     
     var addButtonLocation: CGRect?
     
@@ -27,6 +27,7 @@ class ScheduleViewController: BaseViewController {
         tableView.sectionHeaderHeight = 0
         tableView.sectionFooterHeight = 0
         tableView.register(ScheduleCell.self, forCellReuseIdentifier: ScheduleCell.registerId)
+        tableView.register(CalendarEmptyScheduleCell.self, forCellReuseIdentifier: CalendarEmptyScheduleCell.registerId)
         tableView.delegate = self
         tableView.dataSource = self
         return tableView
@@ -40,6 +41,7 @@ class ScheduleViewController: BaseViewController {
         if let month = calendarSchedule?.month, let day = calendarSchedule?.day {
             dateLabel.text = "\(month)월 \(day)일"
         }
+        schedules = calendarSchedule?.schedules ?? []
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -138,23 +140,31 @@ class ScheduleViewController: BaseViewController {
 
 extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return schedules.count
+        return schedules.isEmpty ? 1 : schedules.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleCell.registerId, for: indexPath) as? ScheduleCell else { return UITableViewCell() }
-        cell.selectionStyle = .none
-        
-        if let schedules = calendarSchedule?.schedules, schedules.count > indexPath.row {
-            let schedule = schedules[indexPath.row]
-            cell.configure(with: schedule)
+        if schedules.isEmpty {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CalendarEmptyScheduleCell.registerId, for: indexPath) as? CalendarEmptyScheduleCell else { return UITableViewCell() }
+            cell.selectionStyle = .none
+
+            return cell
+            
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleCell.registerId, for: indexPath) as? ScheduleCell else { return UITableViewCell() }
+            cell.selectionStyle = .none
+            
+            if let schedules = calendarSchedule?.schedules, schedules.count > indexPath.row {
+                let schedule = schedules[indexPath.row]
+                cell.configure(with: schedule)
+            }
+            
+            return cell
         }
-        
-        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 52
+        return schedules.isEmpty ? tableView.frame.height : 52
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
