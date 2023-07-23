@@ -61,9 +61,9 @@ class TodayScheduleCell: BaseTableViewCell {
         }
     }
     
-    func configure(with title: String, backgroundColor: UIColor, isExpanded: Bool) {
-        todayScheduleLabel.text = title
-        contentView.backgroundColor = backgroundColor
+    func configure(with schedule: TodaySchedule, isExpanded: Bool) {
+        todayScheduleLabel.text = schedule.title
+        contentView.backgroundColor = schedule.color
         expandButton.setImage(UIImage(named: isExpanded ? "hideSchedule" : "openSchedule"), for: .normal)
     }
     
