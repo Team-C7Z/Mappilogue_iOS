@@ -8,7 +8,7 @@
 import UIKit
 
 class HomeViewController: NavigationBarViewController {
-    let dummyTodayData = dummyTodayScheduleData(scheduleCount: 2)
+    let dummyTodayData = dummyTodayScheduleData(scheduleCount: 1)
     let dummyUpcomingData = dummyUpcomingScheduleData(scheduleCount: 2)
     var isScheduleExpanded = [Bool]()
     
