@@ -8,7 +8,7 @@
 import UIKit
 import NMapsMap
 
-class MarkViewController: NavigationBarViewController, CLLocationManagerDelegate {
+class MarkViewController: NavigationBarViewController {
     let locationManager = CLLocationManager()
     
     let mapView = NMFMapView()
@@ -21,11 +21,32 @@ class MarkViewController: NavigationBarViewController, CLLocationManagerDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        locationManager.startUpdatingLocation()
+        
+        if let image = UIImage(named: "currentLocation") {
+            let locationOverlayIcon = NMFOverlayImage(image: image)
+            let locationOverlay = mapView.locationOverlay
+            locationOverlay.icon = locationOverlayIcon
+        }
+       
     }
     
     override func setupProperty() {
         super.setupProperty()
-        
+
+        mapView.logoInteractionEnabled = false
+        mapView.allowsZooming = true
+        mapView.allowsScrolling = true
+        mapView.positionMode = .compass
+    
         searchTextField.layer.cornerRadius = 12
         searchTextField.backgroundColor = .colorF9F8F7
         searchTextField.placeholder = "장소 또는 기록 검색"
@@ -35,7 +56,8 @@ class MarkViewController: NavigationBarViewController, CLLocationManagerDelegate
         
         searchButton.setImage(UIImage(named: "search"), for: .normal)
         
-        currentLocationButton.setImage(UIImage(named: "currentLocation"), for: .normal)
+        currentLocationButton.setImage(UIImage(named: "moveCurrentLocation"), for: .normal)
+        currentLocationButton.addTarget(self, action: #selector(currentLocationButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -45,8 +67,8 @@ class MarkViewController: NavigationBarViewController, CLLocationManagerDelegate
         mapView.addSubview(searchTextField)
         searchTextField.addSubview(searchButton)
         mapView.addSubview(addCategoryButton)
-        mapView.addSubview(currentLocationButton)
-        mapView.addSubview(writeMarkButton)
+        view.addSubview(currentLocationButton)
+        view.addSubview(writeMarkButton)
     }
     
     override func setupLayout() {
@@ -76,14 +98,14 @@ class MarkViewController: NavigationBarViewController, CLLocationManagerDelegate
         }
         
         currentLocationButton.snp.makeConstraints {
-            $0.bottom.equalTo(mapView).offset(-57)
-            $0.left.equalTo(mapView).offset(16)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-57)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
             $0.width.height.equalTo(48)
         }
         
         writeMarkButton.snp.makeConstraints {
-            $0.trailing.equalTo(mapView).offset(-16)
-            $0.bottom.equalTo(mapView).offset(-60)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-60)
         }
     }
     
@@ -94,4 +116,24 @@ class MarkViewController: NavigationBarViewController, CLLocationManagerDelegate
         searchTextField.layer.shadowOffset = CGSize(width: 0, height: 2)
         searchTextField.layer.masksToBounds = false
     }
+    
+    @objc func currentLocationButtonTapped(_ sender: UIButton) {
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: locationManager.location?.coordinate.latitude ?? 37.49794, lng: locationManager.location?.coordinate.longitude ?? 127.02759))
+        cameraUpdate.animation = .easeIn
+        mapView.moveCamera(cameraUpdate)
+    }
+}
+
+extension MarkViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let currentLocation = locations.last else { return }
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: currentLocation.coordinate.latitude, lng: currentLocation.coordinate.longitude))
+        mapView.moveCamera(cameraUpdate)
+
+        locationManager.stopUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+         print("Location Manager Error: \(error)")
+     }
 }
