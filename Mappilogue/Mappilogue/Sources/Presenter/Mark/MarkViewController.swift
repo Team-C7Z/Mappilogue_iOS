@@ -25,29 +25,16 @@ class MarkViewController: NavigationBarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-
-        addChild(bottomSheetViewController)
-        bottomSheetViewController.view.frame = containerView.bounds
-        containerView.addSubview(bottomSheetViewController.view)
-        bottomSheetViewController.didMove(toParent: self)
-        
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
-              containerView.addGestureRecognizer(panGesture)
+        setLocationManager()
+        setBottomSheetViewController()
+        setPanGesture()
     }
    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        locationManager.startUpdatingLocation()
-        
-        if let image = UIImage(named: "currentLocation") {
-            let locationOverlayIcon = NMFOverlayImage(image: image)
-            let locationOverlay = mapView.locationOverlay
-            locationOverlay.icon = locationOverlayIcon
-        }
+        startLocationManager()
+        setLocationOverlayIcon()
     }
     
     override func setupProperty() {
@@ -117,12 +104,42 @@ class MarkViewController: NavigationBarViewController {
         
         writeMarkButton.snp.makeConstraints {
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-60)
+            $0.bottom.equalTo(containerView.snp.top).offset(-16)
         }
         
         containerView.snp.makeConstraints {
             $0.bottom.leading.trailing.equalTo(mapView)
             $0.height.equalTo(44)
+        }
+    }
+    
+    private func setLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+    }
+    
+    private func setBottomSheetViewController() {
+        addChild(bottomSheetViewController)
+        bottomSheetViewController.view.frame = containerView.bounds
+        containerView.addSubview(bottomSheetViewController.view)
+        bottomSheetViewController.didMove(toParent: self)
+    }
+    
+    private func setPanGesture() {
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        containerView.addGestureRecognizer(panGesture)
+    }
+    
+    private func startLocationManager() {
+        locationManager.startUpdatingLocation()
+    }
+    
+    private func setLocationOverlayIcon() {
+        if let image = UIImage(named: "currentLocation") {
+            let locationOverlayIcon = NMFOverlayImage(image: image)
+            let locationOverlay = mapView.locationOverlay
+            locationOverlay.icon = locationOverlayIcon
         }
     }
     
@@ -169,20 +186,15 @@ class MarkViewController: NavigationBarViewController {
                 make.height.equalTo(nearestHeight)
             }
             
-            if nearestHeight == maxHeight {
-                bottomSheetViewController.emptyCellHeight = view.frame.height - 200
-                bottomSheetViewController.tableView.reloadData()
-            } else {
-                bottomSheetViewController.emptyCellHeight = 196
-                bottomSheetViewController.tableView.reloadData()
-            }
+            bottomSheetViewController.emptyCellHeight = nearestHeight == maxHeight ? view.frame.height - 200 : 196
+            bottomSheetViewController.tableView.reloadData()
 
             UIView.animate(withDuration: 0.3) {
                 self.view.layoutIfNeeded()
             }
         }
         
-        gesture.setTranslation(CGPoint.zero, in: containerView)
+        gesture.setTranslation(.zero, in: containerView)
     }
 }
 
@@ -198,6 +210,10 @@ extension MarkViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Location Manager Error: \(error)")
         
+        showLocationPermissionAlert()
+    }
+    
+    func showLocationPermissionAlert() {
         let alertViewController = AlertViewController()
         alertViewController.modalPresentationStyle = .overCurrentContext
         let alert = Alert(titleText: "위치 권한을 허용해 주세요",
