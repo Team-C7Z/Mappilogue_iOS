@@ -28,7 +28,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
             createViewController(HomeViewController(), title: "홈", imageName: "home"),
             createViewController(CalendarViewController(), title: "캘린더", imageName: "calendar"),
             createViewController(GatheringViewController(), title: "모임", imageName: "gathering"),
-            createViewController(RecordViewController(), title: "기록", imageName: "record"),
+            createViewController(MarkViewController(), title: "기록", imageName: "record"),
             createViewController(MyViewController(), title: "MY", imageName: "my")
         ]
 

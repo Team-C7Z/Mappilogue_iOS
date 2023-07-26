@@ -170,12 +170,19 @@ extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     private func presentDeleteAlert(at indexPath: IndexPath) {
-         let deleteAlertViewController = DeleteAlertViewController()
-         deleteAlertViewController.modalPresentationStyle = .overCurrentContext
-         deleteAlertViewController.onDeleteTapped = {
-             self.deleteSchedule(at: indexPath)
-         }
-         present(deleteAlertViewController, animated: false)
+        let alertViewController = AlertViewController()
+        alertViewController.modalPresentationStyle = .overCurrentContext
+        let alert = Alert(titleText: "이 일정을 삭제할까요?",
+                          messageText: nil,
+                          cancelText: "취소",
+                          doneText: "삭제",
+                          buttonColor: .colorF14C4C,
+                          alertHeight: 140)
+        alertViewController.configureAlert(with: alert)
+        alertViewController.onDeleteTapped = {
+            self.deleteSchedule(at: indexPath)
+        }
+         present(alertViewController, animated: false)
      }
     
     private func deleteSchedule(at indexPath: IndexPath) {
