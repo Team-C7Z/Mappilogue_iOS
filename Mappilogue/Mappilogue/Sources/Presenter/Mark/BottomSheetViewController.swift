@@ -8,10 +8,20 @@
 import UIKit
 
 class BottomSheetViewController: BaseViewController {
+    var emptyCellHeight: CGFloat = 196
+    
     private let barImage = UIImageView()
-    let stackView = UIStackView()
-    private let emptyMarkLabel = UILabel()
-    private let emptyMarkSubLabel = UILabel()
+    lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = .colorF9F8F7
+        tableView.sectionHeaderHeight = 0
+        tableView.sectionFooterHeight = 0
+        tableView.register(EmptyMarkCell.self, forCellReuseIdentifier: EmptyMarkCell.registerId)
+        tableView.delegate = self
+        tableView.dataSource = self
+        return tableView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,28 +36,13 @@ class BottomSheetViewController: BaseViewController {
         view.backgroundColor = .colorF9F8F7
         
         barImage.image = UIImage(named: "bottomSheetBar")
-        
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        stackView.distribution = .equalSpacing
-        stackView.spacing = 4
-        
-        emptyMarkLabel.text = "표시할 기록이 없어요"
-        emptyMarkLabel.textColor = .color707070
-        emptyMarkLabel.font = .title02
-        
-        emptyMarkSubLabel.text = "캘린더에 등록했던 일정에서 기록을 만들어 보세요"
-        emptyMarkSubLabel.textColor = .color707070
-        emptyMarkSubLabel.font = .caption01
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
         
         view.addSubview(barImage)
-        view.addSubview(stackView)
-        stackView.addArrangedSubview(emptyMarkLabel)
-        stackView.addArrangedSubview(emptyMarkSubLabel)
+        view.addSubview(tableView)
     }
     
     override func setupLayout() {
@@ -60,9 +55,29 @@ class BottomSheetViewController: BaseViewController {
             $0.height.equalTo(4)
         }
         
-        stackView.snp.makeConstraints {
-            $0.top.equalTo(view).offset(80)
-            $0.centerX.equalTo(view)
+        tableView.snp.makeConstraints {
+            $0.top.equalTo(view).offset(24)
+            $0.width.equalTo(view)
+            $0.height.equalTo(view.frame.height - 24)
         }
     }
 }
+
+extension BottomSheetViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: EmptyMarkCell.registerId, for: indexPath) as? EmptyMarkCell else { return UITableViewCell() }
+        cell.selectionStyle = .none
+        cell.backgroundColor = .blue
+    
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return emptyCellHeight - 56
+    }
+}
+
