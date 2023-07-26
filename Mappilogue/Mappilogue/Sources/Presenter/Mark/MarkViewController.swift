@@ -17,6 +17,8 @@ class MarkViewController: NavigationBarViewController {
     let addCategoryButton = AddCategoryButton()
     let currentLocationButton = UIButton()
     let writeMarkButton = WriteMarkButton()
+    let containerView = UIView()
+    let bottomSheetViewController = BottomSheetViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +26,16 @@ class MarkViewController: NavigationBarViewController {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
-    }
     
+        addChild(bottomSheetViewController)
+        bottomSheetViewController.view.frame = containerView.bounds
+        containerView.addSubview(bottomSheetViewController.view)
+        bottomSheetViewController.didMove(toParent: self)
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+              containerView.addGestureRecognizer(panGesture)
+    }
+   
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -36,7 +46,6 @@ class MarkViewController: NavigationBarViewController {
             let locationOverlay = mapView.locationOverlay
             locationOverlay.icon = locationOverlayIcon
         }
-       
     }
     
     override func setupProperty() {
@@ -69,6 +78,7 @@ class MarkViewController: NavigationBarViewController {
         mapView.addSubview(addCategoryButton)
         view.addSubview(currentLocationButton)
         view.addSubview(writeMarkButton)
+        view.addSubview(containerView)
     }
     
     override func setupLayout() {
@@ -107,6 +117,11 @@ class MarkViewController: NavigationBarViewController {
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-60)
         }
+        
+        containerView.snp.makeConstraints {
+            $0.bottom.leading.trailing.equalTo(mapView)
+            $0.height.equalTo(44)
+        }
     }
     
     private func applyShadow() {
@@ -121,6 +136,54 @@ class MarkViewController: NavigationBarViewController {
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: locationManager.location?.coordinate.latitude ?? 37.49794, lng: locationManager.location?.coordinate.longitude ?? 127.02759))
         cameraUpdate.animation = .easeIn
         mapView.moveCamera(cameraUpdate)
+    }
+ 
+    @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: containerView)
+        let newContainerHeight = containerView.frame.height - translation.y
+        
+        let minHeight: CGFloat = 44
+        let midHeight: CGFloat = 196
+        let maxHeight: CGFloat = view.frame.height - 200
+        
+        let clampedHeight = min(max(newContainerHeight, minHeight), maxHeight)
+        
+        containerView.snp.updateConstraints { make in
+            make.height.equalTo(clampedHeight)
+        }
+        
+        var nearestHeight: CGFloat = 44
+        
+        if clampedHeight <= (midHeight + minHeight) / 2 {
+            nearestHeight = minHeight
+        } else if clampedHeight <= (maxHeight) / 2 {
+            nearestHeight = midHeight
+        } else {
+            nearestHeight = maxHeight
+        }
+        
+        if gesture.state == .ended || gesture.state == .cancelled {
+            containerView.snp.updateConstraints { make in
+                make.height.equalTo(nearestHeight)
+            }
+            
+            if nearestHeight == maxHeight {
+                bottomSheetViewController.stackView.snp.remakeConstraints {
+                    $0.centerY.centerX.equalTo(bottomSheetViewController.view)
+                }
+            } else {
+                bottomSheetViewController.stackView.snp.remakeConstraints {
+                    $0.centerX.equalTo(bottomSheetViewController.view)
+                    $0.top.equalTo(bottomSheetViewController.view).offset(80)
+                }
+            }
+
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutIfNeeded()
+            }
+        }
+        
+        gesture.setTranslation(CGPoint.zero, in: containerView)
     }
 }
 
