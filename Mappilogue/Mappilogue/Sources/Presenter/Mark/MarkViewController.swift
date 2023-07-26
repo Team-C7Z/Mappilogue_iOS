@@ -28,7 +28,6 @@ class MarkViewController: NavigationBarViewController {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
-    
 
         addChild(bottomSheetViewController)
         bottomSheetViewController.view.frame = containerView.bounds
@@ -192,13 +191,29 @@ extension MarkViewController: CLLocationManagerDelegate {
         guard let currentLocation = locations.last else { return }
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: currentLocation.coordinate.latitude, lng: currentLocation.coordinate.longitude))
         mapView.moveCamera(cameraUpdate)
-
+        
         locationManager.stopUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-         print("Location Manager Error: \(error)")
-     }
+        print("Location Manager Error: \(error)")
+        
+        let alertViewController = AlertViewController()
+        alertViewController.modalPresentationStyle = .overCurrentContext
+        let alert = Alert(titleText: "위치 권한을 허용해 주세요",
+                          messageText: "위치 권한을 허용하지 않을 경우\n일부 기능을 사용할 수 없어요",
+                          cancelText: "닫기",
+                          doneText: "설정으로 이동",
+                          buttonColor: .color2EBD3D,
+                          alertHeight: 182)
+        alertViewController.configureAlert(with: alert)
+        alertViewController.onDeleteTapped = {
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+        present(alertViewController, animated: false)
+    }
 }
 protocol EmptyMarkDelegate: AnyObject {
     func setEmptyMarkCellHeight()

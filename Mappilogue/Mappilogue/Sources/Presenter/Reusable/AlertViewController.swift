@@ -46,8 +46,10 @@ class AlertViewController: BaseViewController {
         titleLabel.textColor = .color000000
         titleLabel.font = .title02
         
-        messageLabel.textColor = .color000000
+        messageLabel.textColor = .color707070
         messageLabel.font = .body02
+        messageLabel.numberOfLines = 0
+        messageLabel.textAlignment = .center
         
         cancelButton.layer.cornerRadius = 12
         cancelButton.backgroundColor = .colorF5F3F0
