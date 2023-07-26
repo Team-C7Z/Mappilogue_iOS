@@ -186,7 +186,13 @@ class MarkViewController: NavigationBarViewController {
                 make.height.equalTo(nearestHeight)
             }
             
-            bottomSheetViewController.emptyCellHeight = nearestHeight == maxHeight ? view.frame.height - 200 : 196
+            if nearestHeight == maxHeight {
+                bottomSheetViewController.emptyCellHeight = view.frame.height - 200
+                writeMarkButton.isHidden = true
+            } else {
+                bottomSheetViewController.emptyCellHeight = 196
+                writeMarkButton.isHidden = false
+            }
             bottomSheetViewController.tableView.reloadData()
 
             UIView.animate(withDuration: 0.3) {
