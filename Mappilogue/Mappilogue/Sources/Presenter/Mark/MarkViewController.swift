@@ -9,6 +9,8 @@ import UIKit
 import NMapsMap
 
 class MarkViewController: NavigationBarViewController {
+    var delegate: EmptyMarkDelegate?
+    
     let locationManager = CLLocationManager()
     
     let mapView = NMFMapView()
@@ -27,6 +29,7 @@ class MarkViewController: NavigationBarViewController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
     
+
         addChild(bottomSheetViewController)
         bottomSheetViewController.view.frame = containerView.bounds
         containerView.addSubview(bottomSheetViewController.view)
@@ -168,14 +171,11 @@ class MarkViewController: NavigationBarViewController {
             }
             
             if nearestHeight == maxHeight {
-                bottomSheetViewController.stackView.snp.remakeConstraints {
-                    $0.centerY.centerX.equalTo(bottomSheetViewController.view)
-                }
+                bottomSheetViewController.emptyCellHeight = view.frame.height - 200
+                bottomSheetViewController.tableView.reloadData()
             } else {
-                bottomSheetViewController.stackView.snp.remakeConstraints {
-                    $0.centerX.equalTo(bottomSheetViewController.view)
-                    $0.top.equalTo(bottomSheetViewController.view).offset(80)
-                }
+                bottomSheetViewController.emptyCellHeight = 196
+                bottomSheetViewController.tableView.reloadData()
             }
 
             UIView.animate(withDuration: 0.3) {
@@ -199,4 +199,7 @@ extension MarkViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
          print("Location Manager Error: \(error)")
      }
+}
+protocol EmptyMarkDelegate: AnyObject {
+    func setEmptyMarkCellHeight()
 }

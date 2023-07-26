@@ -11,6 +11,8 @@
 		92011B282A6E75F1009B047F /* WriteMarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B272A6E75F1009B047F /* WriteMarkButton.swift */; };
 		92011B2A2A6E7734009B047F /* AddCategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B292A6E7734009B047F /* AddCategoryButton.swift */; };
 		92011B702A70E7D8009B047F /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */; };
+		92011B722A7127FC009B047F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B712A7127FC009B047F /* AlertViewController.swift */; };
+		92011B752A7138B0009B047F /* EmptyMarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B742A7138B0009B047F /* EmptyMarkCell.swift */; };
 		9224FCEE2A5BEF80000A56A6 /* ScheduleTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */; };
 		9224FCF32A5C5E7A000A56A6 /* WeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */; };
 		9224FCF52A5D6C65000A56A6 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */; };
@@ -77,7 +79,6 @@
 		926999482A14F76A003DDAD2 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999472A14F76A003DDAD2 /* MyViewController.swift */; };
 		927C144BD1C3E8536A8EC3A1 /* Pods_Mappilogue_MappilogueUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65FB9F97A7DA9BC190F4E1BF /* Pods_Mappilogue_MappilogueUITests.framework */; };
 		927E7F212A66F64400E6A29F /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927E7F202A66F64400E6A29F /* Schedule.swift */; };
-		927E7F252A677D1A00E6A29F /* DeleteAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927E7F242A677D1A00E6A29F /* DeleteAlertViewController.swift */; };
 		927E7F272A683DCD00E6A29F /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927E7F262A683DCD00E6A29F /* CalendarCell.swift */; };
 		929158222A2529660022BEF9 /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 929158192A2529660022BEF9 /* Pretendard-Regular.ttf */; };
 		929158242A2529660022BEF9 /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581B2A2529660022BEF9 /* Pretendard-Medium.ttf */; };
@@ -132,6 +133,8 @@
 		92011B272A6E75F1009B047F /* WriteMarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteMarkButton.swift; sourceTree = "<group>"; };
 		92011B292A6E7734009B047F /* AddCategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryButton.swift; sourceTree = "<group>"; };
 		92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
+		92011B712A7127FC009B047F /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		92011B742A7138B0009B047F /* EmptyMarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMarkCell.swift; sourceTree = "<group>"; };
 		9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTitleCell.swift; sourceTree = "<group>"; };
 		9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCell.swift; sourceTree = "<group>"; };
 		9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
@@ -201,7 +204,6 @@
 		926999452A14F75F003DDAD2 /* MarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkViewController.swift; sourceTree = "<group>"; };
 		926999472A14F76A003DDAD2 /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
 		927E7F202A66F64400E6A29F /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
-		927E7F242A677D1A00E6A29F /* DeleteAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAlertViewController.swift; sourceTree = "<group>"; };
 		927E7F262A683DCD00E6A29F /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		929158192A2529660022BEF9 /* Pretendard-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.ttf"; sourceTree = "<group>"; };
 		9291581B2A2529660022BEF9 /* Pretendard-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.ttf"; sourceTree = "<group>"; };
@@ -270,6 +272,14 @@
 				DCCDD669BAF4514B461B20ED /* Pods-MappilogueTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		92011B732A71386F009B047F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				92011B742A7138B0009B047F /* EmptyMarkCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		9224FCFE2A5FF82F000A56A6 /* AddSchedule */ = {
@@ -600,6 +610,7 @@
 			children = (
 				926999452A14F75F003DDAD2 /* MarkViewController.swift */,
 				92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */,
+				92011B732A71386F009B047F /* Cell */,
 			);
 			path = Mark;
 			sourceTree = "<group>";
@@ -621,8 +632,8 @@
 				92A7B64E2A4CCE29009C9293 /* AddButton.swift */,
 				9224FCFA2A5FDD90000A56A6 /* AddScheduleButton.swift */,
 				92011B272A6E75F1009B047F /* WriteMarkButton.swift */,
-				927E7F242A677D1A00E6A29F /* DeleteAlertViewController.swift */,
 				92011B292A6E7734009B047F /* AddCategoryButton.swift */,
+				92011B712A7127FC009B047F /* AlertViewController.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -926,6 +937,7 @@
 				92A7B6552A4CEA28009C9293 /* TodaySchedule.swift in Sources */,
 				9224FCF52A5D6C65000A56A6 /* DatePickerViewController.swift in Sources */,
 				926382B42A6CC9760064C1A8 /* GatheringToastMessageView.swift in Sources */,
+				92011B752A7138B0009B047F /* EmptyMarkCell.swift in Sources */,
 				9224FD3B2A6532E3000A56A6 /* EndView.swift in Sources */,
 				9230BE472A57FEB80053E535 /* DayCell.swift in Sources */,
 				9224FD422A656407000A56A6 /* LocationCell.swift in Sources */,
@@ -941,7 +953,6 @@
 				9224FD372A653024000A56A6 /* SpacingView.swift in Sources */,
 				9291582A2A252CC20022BEF9 /* UIColor.swift in Sources */,
 				926999382A14F4AA003DDAD2 /* TabBarControllerController.swift in Sources */,
-				927E7F252A677D1A00E6A29F /* DeleteAlertViewController.swift in Sources */,
 				92C2EC612A6924B5002DB0E3 /* LineCell.swift in Sources */,
 				92A7B65F2A4E07DB009C9293 /* TodayScheduleCell.swift in Sources */,
 				926999342A14F2A3003DDAD2 /* BaseViewController.swift in Sources */,
@@ -968,6 +979,7 @@
 				926999442A14F756003DDAD2 /* GatheringViewController.swift in Sources */,
 				926378712A54E0E6004E5B6E /* OnboardingManager.swift in Sources */,
 				92A7B6512A4CD261009C9293 /* AddScheduleButtonCell.swift in Sources */,
+				92011B722A7127FC009B047F /* AlertViewController.swift in Sources */,
 				9224FCFD2A5FF185000A56A6 /* AddScheduleViewController.swift in Sources */,
 				9224FD252A638F01000A56A6 /* RepeatType.swift in Sources */,
 				9224FD192A616EB1000A56A6 /* ColorCell.swift in Sources */,
