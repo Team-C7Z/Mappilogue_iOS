@@ -71,7 +71,6 @@ extension BottomSheetViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: EmptyMarkCell.registerId, for: indexPath) as? EmptyMarkCell else { return UITableViewCell() }
         cell.selectionStyle = .none
-        cell.backgroundColor = .blue
     
         return cell
     }
@@ -80,4 +79,3 @@ extension BottomSheetViewController: UITableViewDelegate, UITableViewDataSource 
         return emptyCellHeight - 56
     }
 }
-
