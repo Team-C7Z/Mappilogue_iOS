@@ -56,6 +56,8 @@ class MarkViewController: NavigationBarViewController {
         
         currentLocationButton.setImage(UIImage(named: "moveCurrentLocation"), for: .normal)
         currentLocationButton.addTarget(self, action: #selector(currentLocationButtonTapped), for: .touchUpInside)
+        
+        writeMarkButton.addTarget(self, action: #selector(writeMarkButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -201,6 +203,11 @@ class MarkViewController: NavigationBarViewController {
         }
         
         gesture.setTranslation(.zero, in: containerView)
+    }
+    
+    @objc func writeMarkButtonTapped() {
+        let writeMarkViewController = WriteMarkViewController()
+        navigationController?.pushViewController(writeMarkViewController, animated: true)
     }
 }
 
