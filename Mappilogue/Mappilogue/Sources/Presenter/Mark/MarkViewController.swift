@@ -21,11 +21,12 @@ class MarkViewController: NavigationBarViewController {
     let writeMarkButton = WriteMarkButton()
     let containerView = UIView()
     let bottomSheetViewController = BottomSheetViewController()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setLocationManager()
+        checkUserCurrentLocationAuthorization()
         setBottomSheetViewController()
         setPanGesture()
     }
@@ -33,12 +34,12 @@ class MarkViewController: NavigationBarViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        startLocationManager()
+        setLocationOverlayIcon()
     }
     
     override func setupProperty() {
         super.setupProperty()
-
+        
         mapView.logoInteractionEnabled = false
         mapView.allowsZooming = true
         mapView.allowsScrolling = true
@@ -211,20 +212,35 @@ class MarkViewController: NavigationBarViewController {
 }
 
 extension MarkViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let currentLocation = locations.last else { return }
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: currentLocation.coordinate.latitude, lng: currentLocation.coordinate.longitude))
         mapView.moveCamera(cameraUpdate)
         
         locationManager.stopUpdatingLocation()
-        setLocationOverlayIcon()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Location Manager Error: \(error)")
-        
-        showLocationPermissionAlert()
+    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        checkUserCurrentLocationAuthorization()
+    }
+    
+    func checkUserCurrentLocationAuthorization() {
+        let authorizationStatus = locationManager.authorizationStatus
+        switch authorizationStatus {
+        case .denied, .restricted:
+            showLocationPermissionAlert()
+        case .authorizedAlways, .authorizedWhenInUse:
+            startLocationManager()
+        case .notDetermined:
+            print("설정 x")
+        default:
+            break
+        }
     }
     
     func showLocationPermissionAlert() {
