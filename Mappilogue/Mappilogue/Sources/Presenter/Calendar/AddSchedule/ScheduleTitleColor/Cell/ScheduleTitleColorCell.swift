@@ -76,7 +76,6 @@ extension ScheduleTitleColorCell: UITextFieldDelegate {
     }
 }
 
-
 protocol ColorSelectionDelegate: AnyObject {
     func colorSelectionButtonTapped()
 }

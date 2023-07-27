@@ -12,7 +12,7 @@ class ScheduleNameColorCell: BaseTableViewCell {
 
     private let lineView = UIView()
     private let scheduleTitleLabel = UILabel()
-    private let colorSelectionButton = ColorSelectionButton(textColor: .color1C1C1C, color: .colorCAEDA8, isColorSelection: false)
+    private var colorSelectionButton = ColorSelectionButton(textColor: .color1C1C1C, color: .colorCAEDA8, isColorSelection: false)
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -24,8 +24,7 @@ class ScheduleNameColorCell: BaseTableViewCell {
         super.setupProperty()
         
         lineView.backgroundColor = .colorEAE6E1
-        
-        scheduleTitleLabel.text = "제주 여행 🎁"
+
         scheduleTitleLabel.textColor = .colorC9C6C2
         scheduleTitleLabel.font = .title02
     }
@@ -55,7 +54,15 @@ class ScheduleNameColorCell: BaseTableViewCell {
             $0.centerY.equalTo(contentView)
             $0.width.equalTo(60)
             $0.height.equalTo(28)
-            
+        }
+    }
+    
+    func configure(with scheduleTitle: String, color: UIColor) {
+        scheduleTitleLabel.text = scheduleTitle
+        if color == .color1C1C1C || color == .color9B9791 || color == .color404040 {
+            colorSelectionButton = .init(textColor: .colorFFFFFF, color: color, isColorSelection: true)
+        } else {
+            colorSelectionButton = .init(textColor: .color1C1C1C, color: color, isColorSelection: true)
         }
     }
 }

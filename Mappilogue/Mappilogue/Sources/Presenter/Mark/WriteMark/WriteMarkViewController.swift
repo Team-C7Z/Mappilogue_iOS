@@ -8,6 +8,8 @@
 import UIKit
 
 class WriteMarkViewController: BaseViewController {
+    var schedule: Schedule?
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.backgroundColor = .colorF9F8F7
@@ -28,6 +30,7 @@ class WriteMarkViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        hideKeyboardWhenTappedAround()
     }
     
     override func setupProperty() {
@@ -89,6 +92,11 @@ extension WriteMarkViewController: UITableViewDelegate, UITableViewDataSource {
         case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleNameColorCell.registerId, for: indexPath) as? ScheduleNameColorCell else { return UITableViewCell() }
             cell.selectionStyle = .none
+            
+            if let schedule = schedule {
+                cell.configure(with: schedule.title, color: schedule.color)
+            }
+           
             return cell
         case 2:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: MainLocationCell.registerId, for: indexPath) as? MainLocationCell else { return UITableViewCell() }
