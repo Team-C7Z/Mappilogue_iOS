@@ -34,7 +34,6 @@ class MarkViewController: NavigationBarViewController {
         super.viewDidAppear(animated)
         
         startLocationManager()
-        setLocationOverlayIcon()
     }
     
     override func setupProperty() {
@@ -213,11 +212,13 @@ class MarkViewController: NavigationBarViewController {
 
 extension MarkViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    
         guard let currentLocation = locations.last else { return }
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: currentLocation.coordinate.latitude, lng: currentLocation.coordinate.longitude))
         mapView.moveCamera(cameraUpdate)
         
         locationManager.stopUpdatingLocation()
+        setLocationOverlayIcon()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
