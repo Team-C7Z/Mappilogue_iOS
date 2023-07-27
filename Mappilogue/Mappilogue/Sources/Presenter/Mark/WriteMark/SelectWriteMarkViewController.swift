@@ -23,6 +23,8 @@ class SelectWriteMarkViewController: BaseViewController {
         collectionView.dataSource = self
         return collectionView
     }()
+    
+    private let newWriteView = NewWriteView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,13 +42,22 @@ class SelectWriteMarkViewController: BaseViewController {
         super.setupHierarchy()
         
         view.addSubview(collectionView)
+        view.addSubview(newWriteView)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
         collectionView.snp.makeConstraints {
-            $0.top.leading.bottom.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(newWriteView.snp.top).offset(-12)
+        }
+        
+        newWriteView.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
+            $0.height.equalTo(48)
         }
     }
     
