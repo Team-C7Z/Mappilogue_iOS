@@ -22,6 +22,8 @@ class WriteMarkViewController: BaseViewController {
         tableView.dataSource = self
         return tableView
     }()
+    
+    private let saveMarkView = SaveMarkView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,13 +40,20 @@ class WriteMarkViewController: BaseViewController {
         super.setupHierarchy()
         
         view.addSubview(tableView)
+        view.addSubview(saveMarkView)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
         tableView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(saveMarkView.snp.top)
+        }
+        
+        saveMarkView.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(48)
         }
     }
     
