@@ -2,25 +2,22 @@
 //  WriteMarkViewController.swift
 //  Mappilogue
 //
-//  Created by hyemi on 2023/07/26.
+//  Created by hyemi on 2023/07/27.
 //
 
 import UIKit
 
 class WriteMarkViewController: BaseViewController {
-    var dummyData = dummyScheduleData()
-    
-    private lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .colorF9F8F7
-        collectionView.register(MarkCell.self, forCellWithReuseIdentifier: MarkCell.registerId)
-        collectionView.register(DateHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: DateHeaderView.registerId)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        return collectionView
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.backgroundColor = .colorF9F8F7
+        tableView.sectionHeaderHeight = 0
+        tableView.sectionFooterHeight = 0
+        tableView.separatorStyle = .none
+        tableView.register(CategoryCell.self, forCellReuseIdentifier: CategoryCell.registerId)
+        tableView.delegate = self
+        tableView.dataSource = self
+        return tableView
     }()
 
     override func viewDidLoad() {
@@ -37,15 +34,14 @@ class WriteMarkViewController: BaseViewController {
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        view.addSubview(collectionView)
+        view.addSubview(tableView)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
-        collectionView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            $0.leading.bottom.trailing.equalTo(view.safeAreaLayoutGuide)
+        tableView.snp.makeConstraints {
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
@@ -63,49 +59,23 @@ class WriteMarkViewController: BaseViewController {
     }
 }
 
-extension WriteMarkViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+extension WriteMarkViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MarkCell.registerId, for: indexPath) as? MarkCell else { return UICollectionViewCell() }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CategoryCell.registerId, for: indexPath) as? CategoryCell else { return UITableViewCell() }
+        cell.selectionStyle = .none
         return cell
     }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 16)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 32, height: 52)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: DateHeaderView.registerId, for: indexPath) as? DateHeaderView else { return UICollectionReusableView() }
-        
-        let month = dummyData[indexPath.section].month
-        let day = dummyData[indexPath.section].day
-        
-        headerView.configure(month: month, day: day)
-        return headerView
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 40)
-    }
     
-    // 수평 간격
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    
-    // 수직 간격
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
 }
+    
