@@ -17,6 +17,7 @@ class WriteMarkViewController: BaseViewController {
         tableView.register(CategoryCell.self, forCellReuseIdentifier: CategoryCell.registerId)
         tableView.register(ScheduleNameColorCell.self, forCellReuseIdentifier: ScheduleNameColorCell.registerId)
         tableView.register(MainLocationCell.self, forCellReuseIdentifier: MainLocationCell.registerId)
+        tableView.register(TextContentCell.self, forCellReuseIdentifier: TextContentCell.registerId)
         tableView.delegate = self
         tableView.dataSource = self
         return tableView
@@ -63,7 +64,7 @@ class WriteMarkViewController: BaseViewController {
 
 extension WriteMarkViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -84,6 +85,10 @@ extension WriteMarkViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: MainLocationCell.registerId, for: indexPath) as? MainLocationCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             return cell
+        case 3:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: TextContentCell.registerId, for: indexPath) as? TextContentCell else { return UITableViewCell() }
+            cell.selectionStyle = .none
+            return cell
         default:
             return UITableViewCell()
         }
@@ -97,6 +102,8 @@ extension WriteMarkViewController: UITableViewDelegate, UITableViewDataSource {
             return 48
         case 2:
             return 48
+        case 3:
+            return 100
         default:
             return 0
         }
