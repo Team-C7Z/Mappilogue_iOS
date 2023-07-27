@@ -46,7 +46,7 @@ class CategoryCell: BaseTableViewCell {
         }
         
         moveImage.snp.makeConstraints {
-            $0.trailing.equalTo(contentView)
+            $0.trailing.equalTo(contentView).offset(-1)
             $0.bottom.equalTo(contentView).offset(-13)
             $0.width.equalTo(7)
             $0.height.equalTo(14)
