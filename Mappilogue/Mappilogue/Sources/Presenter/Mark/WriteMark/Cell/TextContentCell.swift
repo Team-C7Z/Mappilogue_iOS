@@ -10,6 +10,8 @@ import UIKit
 class TextContentCell: BaseTableViewCell {
     static let registerId = "\(TextContentCell.self)"
     
+    let textViewPlaceHolder = "내용을 입력하세요"
+    
     private let lineView = UIView()
     private let contentTextView = UITextView()
     
@@ -24,10 +26,11 @@ class TextContentCell: BaseTableViewCell {
         
         lineView.backgroundColor = .colorEAE6E1
         
-        contentTextView.text = "내용을 입력하세요"
+        contentTextView.text = textViewPlaceHolder
         contentTextView.textColor = .colorC9C6C2
         contentTextView.font = .body01
         contentTextView.backgroundColor = .clear
+        contentTextView.delegate = self
     }
     
     override func setupHierarchy() {
@@ -49,6 +52,22 @@ class TextContentCell: BaseTableViewCell {
             $0.leading.trailing.equalTo(contentView)
             $0.top.equalTo(contentView).offset(16)
             $0.bottom.equalTo(contentView).offset(-16)
+        }
+    }
+}
+
+extension TextContentCell: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == textViewPlaceHolder {
+            textView.text = nil
+            textView.textColor = .color1C1C1C
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = textViewPlaceHolder
+            textView.textColor = .colorC9C6C2
         }
     }
 }

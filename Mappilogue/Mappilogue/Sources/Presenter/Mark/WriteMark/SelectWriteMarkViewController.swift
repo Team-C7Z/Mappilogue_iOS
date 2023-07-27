@@ -127,6 +127,7 @@ extension SelectWriteMarkViewController: UICollectionViewDelegate, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let writeMarkViewController = WriteMarkViewController()
+        writeMarkViewController.schedule = dummyData[indexPath.section].schedules[indexPath.row]
         navigationController?.pushViewController(writeMarkViewController, animated: true)
     }
 }
