@@ -8,7 +8,7 @@
 import UIKit
 
 class CategoryCell: BaseTableViewCell {
-    static let registerId = "\(EmptyMarkCell.self)"
+    static let registerId = "\(CategoryCell.self)"
 
     let cateogoryLabel = UILabel()
     private let moveImage = UIImageView()

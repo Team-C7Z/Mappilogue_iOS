@@ -15,6 +15,7 @@ class WriteMarkViewController: BaseViewController {
         tableView.sectionFooterHeight = 0
         tableView.separatorStyle = .none
         tableView.register(CategoryCell.self, forCellReuseIdentifier: CategoryCell.registerId)
+        tableView.register(ScheduleNameColorCell.self, forCellReuseIdentifier: ScheduleNameColorCell.registerId)
         tableView.delegate = self
         tableView.dataSource = self
         return tableView
@@ -61,7 +62,7 @@ class WriteMarkViewController: BaseViewController {
 
 extension WriteMarkViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -69,13 +70,29 @@ extension WriteMarkViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CategoryCell.registerId, for: indexPath) as? CategoryCell else { return UITableViewCell() }
-        cell.selectionStyle = .none
-        return cell
+        switch indexPath.section {
+        case 0:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CategoryCell.registerId, for: indexPath) as? CategoryCell else { return UITableViewCell() }
+            cell.selectionStyle = .none
+            return cell
+        case 1:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleNameColorCell.registerId, for: indexPath) as? ScheduleNameColorCell else { return UITableViewCell() }
+            cell.selectionStyle = .none
+            return cell
+        default:
+            return UITableViewCell()
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        switch indexPath.section {
+        case 0:
+            return 50
+        case 1:
+            return 48
+        default:
+            return 0
+        }
     }
 }
     
