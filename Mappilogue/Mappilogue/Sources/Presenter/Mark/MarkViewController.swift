@@ -206,8 +206,8 @@ class MarkViewController: NavigationBarViewController {
     }
     
     @objc func writeMarkButtonTapped() {
-        let writeMarkViewController = WriteMarkViewController()
-        navigationController?.pushViewController(writeMarkViewController, animated: true)
+        let selectWriteMarkViewController = SelectWriteMarkViewController()
+        navigationController?.pushViewController(selectWriteMarkViewController, animated: true)
     }
 }
 

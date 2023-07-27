@@ -1,5 +1,5 @@
 //
-//  MarkCell.swift
+//  SelectScheduleCell.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/07/27.
@@ -7,35 +7,36 @@
 
 import UIKit
 
-class MarkCell: BaseCollectionViewCell {
-    static let registerId = "\(MarkCell.self)"
+class SelectScheduleCell: BaseCollectionViewCell {
+    static let registerId = "\(SelectScheduleCell.self)"
     
     private let scheduleColorView = UIView()
     private let scheduleTitleLabel = UILabel()
     private let scheduleTimeLabel = UILabel()
+    private let separatorLabel = UILabel()
     private let scheduleLocationLabel = UILabel()
     private let writeButton = UIButton()
     
     override func prepareForReuse() {
         super.prepareForReuse()
-  
+        
     }
-
+    
     override func setupProperty() {
         super.setupProperty()
-   
+        
         scheduleColorView.layer.cornerRadius = 4
         scheduleColorView.backgroundColor = .orange
         
-        scheduleTitleLabel.text = "제주 여행 🍊"
         scheduleTitleLabel.textColor = .color1C1C1C
         scheduleTitleLabel.font = .body02
         
-        scheduleTimeLabel.text = "7:00 AM"
         scheduleTimeLabel.textColor = .color707070
         scheduleTimeLabel.font = .caption03
         
-        scheduleLocationLabel.text = ", 김포국제공항"
+        separatorLabel.textColor = .color707070
+        separatorLabel.font = .caption03
+        
         scheduleLocationLabel.textColor = .color707070
         scheduleLocationLabel.font = .caption03
         
@@ -48,10 +49,11 @@ class MarkCell: BaseCollectionViewCell {
         contentView.addSubview(scheduleColorView)
         contentView.addSubview(scheduleTitleLabel)
         contentView.addSubview(scheduleTimeLabel)
+        contentView.addSubview(separatorLabel)
         contentView.addSubview(scheduleLocationLabel)
         contentView.addSubview(writeButton)
     }
-
+    
     override func setupLayout() {
         super.setupLayout()
         
@@ -72,9 +74,14 @@ class MarkCell: BaseCollectionViewCell {
             $0.leading.equalTo(contentView).offset(28)
         }
         
-        scheduleLocationLabel.snp.makeConstraints {
+        separatorLabel.snp.makeConstraints {
             $0.centerY.equalTo(scheduleTimeLabel)
             $0.leading.equalTo(scheduleTimeLabel.snp.trailing)
+        }
+        
+        scheduleLocationLabel.snp.makeConstraints {
+            $0.centerY.equalTo(scheduleTimeLabel)
+            $0.leading.equalTo(separatorLabel.snp.trailing)
         }
         
         writeButton.snp.makeConstraints {
@@ -89,5 +96,9 @@ class MarkCell: BaseCollectionViewCell {
         scheduleTitleLabel.text = schedule.title
         scheduleTimeLabel.text = schedule.time
         scheduleLocationLabel.text = schedule.location
+        
+        if schedule.time != nil && schedule.location != nil {
+            separatorLabel.text = ", "
+        }
     }
 }
