@@ -207,6 +207,7 @@ class MarkViewController: NavigationBarViewController {
     
     @objc func writeMarkButtonTapped() {
         let selectWriteMarkViewController = SelectWriteMarkViewController()
+        selectWriteMarkViewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(selectWriteMarkViewController, animated: true)
     }
 }
