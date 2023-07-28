@@ -23,15 +23,9 @@ class WriteMarkViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-        if let schedule = schedule {
-            scheduleTitleColorView.configure(with: schedule.title, color: schedule.color, isColorSelection: false)
-        }
-        
-        scheduleTitleColorView.delegate = self
+    
+        setKeyboardObservers()
+        configureScheduleTitleColorView()
     }
     
     override func setupProperty() {
@@ -102,41 +96,46 @@ class WriteMarkViewController: BaseViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    @objc private func keyboardWillShow(_ notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardHeight = keyboardFrame.cgRectValue.height
-            stackView.snp.remakeConstraints {
-                $0.top.equalTo(contentView).offset(10)
-                $0.leading.equalTo(contentView).offset(16)
-                $0.trailing.equalTo(contentView).offset(-16)
-                $0.bottom.equalTo(contentView).offset(-keyboardHeight)
-            }
-            saveMarkView.snp.remakeConstraints {
-                $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-                $0.bottom.equalTo(view).offset(-keyboardHeight)
-                $0.height.equalTo(48)
-            }
-            saveMarkView.configure(true)
-            view.layoutIfNeeded()
+    private func setKeyboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func configureScheduleTitleColorView() {
+        if let schedule = schedule {
+            scheduleTitleColorView.configure(with: schedule.title, color: schedule.color, isColorSelection: false)
         }
+        scheduleTitleColorView.delegate = self
+    }
+    
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        keyboardWillChange(notification, isShowing: true)
     }
     
     @objc private func keyboardWillHide(_ notification: Notification) {
-        if notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue != nil {
-            stackView.snp.remakeConstraints {
-                $0.top.equalTo(contentView).offset(10)
-                $0.leading.equalTo(contentView).offset(16)
-                $0.trailing.equalTo(contentView).offset(-16)
-                $0.bottom.equalTo(contentView).offset(-58)
-            }
-            saveMarkView.snp.remakeConstraints {
-                $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-                $0.bottom.equalTo(view.safeAreaLayoutGuide)
-                $0.height.equalTo(48)
-            }
-            saveMarkView.configure(false)
-            view.layoutIfNeeded()
+        keyboardWillChange(notification, isShowing: false)
+    }
+    
+    private func keyboardWillChange(_ notification: Notification, isShowing: Bool) {
+        guard let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        let keyboardHeight = keyboardFrame.cgRectValue.height
+        
+        stackView.snp.remakeConstraints {
+            $0.top.equalTo(contentView).offset(10)
+            $0.leading.equalTo(contentView).offset(16)
+            $0.trailing.equalTo(contentView).offset(-16)
+            $0.bottom.equalTo(contentView).offset(isShowing ? -keyboardHeight : -58)
         }
+        
+        saveMarkView.snp.remakeConstraints {
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(view).offset(isShowing ? -keyboardHeight : -34)
+            $0.height.equalTo(48)
+        }
+        
+        saveMarkView.configure(true)
+        view.layoutIfNeeded()
     }
 }
 

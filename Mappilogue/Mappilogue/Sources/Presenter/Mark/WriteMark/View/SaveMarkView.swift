@@ -69,12 +69,7 @@ class SaveMarkView: BaseView {
     }
     
     func configure(_ showKeyboard: Bool) {
-        if !showKeyboard {
-            hideKeyboardButton.isHidden = true
-            saveMarkButton.isHidden = false
-        } else {
-            hideKeyboardButton.isHidden = false
-            saveMarkButton.isHidden = true
-        }
+        hideKeyboardButton.isHidden = showKeyboard ? false : true
+        saveMarkButton.isHidden = showKeyboard ? true : false
     }
 }
