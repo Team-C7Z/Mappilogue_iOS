@@ -7,7 +7,9 @@
 
 import UIKit
 
-class ScheduleTitleColorButton: BaseButton {
+class ScheduleTitleColorView: BaseView {
+    var delegate: ColorSelectionButtonDelegate?
+    
     private let lineView = UIView()
     private let scheduleTitleLabel = UILabel()
     private var colorSelectionButton = ColorSelectionButton(textColor: .color1C1C1C, color: .colorCAEDA8)
@@ -19,6 +21,8 @@ class ScheduleTitleColorButton: BaseButton {
 
         scheduleTitleLabel.textColor = .colorC9C6C2
         scheduleTitleLabel.font = .title02
+        
+        colorSelectionButton.addTarget(self, action: #selector(colorSelectionButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -53,12 +57,21 @@ class ScheduleTitleColorButton: BaseButton {
         }
     }
     
-    func configure(with scheduleTitle: String, color: UIColor) {
+    func configure(with scheduleTitle: String, color: UIColor, isColorSelection: Bool) {
         scheduleTitleLabel.text = scheduleTitle
         if color == .color1C1C1C || color == .color9B9791 || color == .color404040 {
-            colorSelectionButton.configure(textColor: .colorFFFFFF, color: color, isColorSelection: true)
+            colorSelectionButton.configure(textColor: .colorFFFFFF, color: color, isColorSelection: isColorSelection)
         } else {
-            colorSelectionButton.configure(textColor: .color1C1C1C, color: color, isColorSelection: true)
+            colorSelectionButton.configure(textColor: .color1C1C1C, color: color, isColorSelection: isColorSelection)
         }
     }
+    
+    @objc func colorSelectionButtonTapped(_ button: UIButton) {
+        button.isSelected = !button.isSelected
+        delegate?.colorSelectionButtonTapped(button.isSelected)
+    }
+}
+
+protocol ColorSelectionButtonDelegate: AnyObject {
+    func colorSelectionButtonTapped(_ isSelected: Bool)
 }

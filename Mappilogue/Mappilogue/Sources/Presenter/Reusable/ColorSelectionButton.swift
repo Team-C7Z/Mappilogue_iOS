@@ -62,7 +62,7 @@ class ColorSelectionButton: UIButton {
     func configure(textColor: UIColor, color: UIColor, isColorSelection: Bool) {
         colorSelectionLabel.textColor = textColor
         backgroundColor = color
-        colorSelectionArrowImage.image = UIImage(named: isColorSelection ? "opendColorSelection" : "closedColorSelection" )
+        colorSelectionArrowImage.image = UIImage(named: isColorSelection ? "closedColorSelection" : "opendColorSelection")
         colorSelectionArrowImage.tintColor = .colorFFFFFF
         colorSelectionArrowImage.tintColor = textColor
         

@@ -15,7 +15,8 @@ class WriteMarkViewController: BaseViewController {
     private let contentView = UIView()
     private let stackView = UIStackView()
     private let categoryButton = CategoryButton()
-    private let scheduleTitleColorButton = ScheduleTitleColorButton()
+    private let scheduleTitleColorView = ScheduleTitleColorView()
+    private let colorSelectionView = ColorSelectionView()
     private let mainLocationButton = MainLocationButton()
     private let textContentView = TextContentView()
     private let saveMarkView = SaveMarkView()
@@ -27,8 +28,10 @@ class WriteMarkViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         if let schedule = schedule {
-            scheduleTitleColorButton.configure(with: schedule.title, color: schedule.color)
+            scheduleTitleColorView.configure(with: schedule.title, color: schedule.color, isColorSelection: false)
         }
+        
+        scheduleTitleColorView.delegate = self
     }
     
     override func setupProperty() {
@@ -54,7 +57,8 @@ class WriteMarkViewController: BaseViewController {
         scrollView.addSubview(contentView)
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(categoryButton)
-        stackView.addArrangedSubview(scheduleTitleColorButton)
+        stackView.addArrangedSubview(scheduleTitleColorView)
+        stackView.addArrangedSubview(colorSelectionView)
         stackView.addArrangedSubview(mainLocationButton)
         stackView.addArrangedSubview(textContentView)
         view.addSubview(saveMarkView)
@@ -118,8 +122,7 @@ class WriteMarkViewController: BaseViewController {
     }
     
     @objc private func keyboardWillHide(_ notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keyboardHeight = keyboardFrame.cgRectValue.height
+        if notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue != nil {
             stackView.snp.remakeConstraints {
                 $0.top.equalTo(contentView).offset(10)
                 $0.leading.equalTo(contentView).offset(16)
@@ -133,6 +136,22 @@ class WriteMarkViewController: BaseViewController {
             }
             saveMarkView.configure(false)
             view.layoutIfNeeded()
+        }
+    }
+}
+
+extension WriteMarkViewController: ColorSelectionButtonDelegate {
+    func colorSelectionButtonTapped(_ isSelected: Bool) {
+        colorSelectionView.snp.remakeConstraints {
+            $0.height.equalTo(isSelected ? 186 : 0)
+        }
+        
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+        
+        if let schedule = schedule {
+            scheduleTitleColorView.configure(with: schedule.title, color: schedule.color, isColorSelection: isSelected)
         }
     }
 }
