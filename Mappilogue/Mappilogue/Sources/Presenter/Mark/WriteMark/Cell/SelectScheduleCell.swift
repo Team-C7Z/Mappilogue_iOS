@@ -17,11 +17,6 @@ class SelectScheduleCell: BaseCollectionViewCell {
     private let scheduleLocationLabel = UILabel()
     private let writeButton = UIButton()
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-    }
-    
     override func setupProperty() {
         super.setupProperty()
         

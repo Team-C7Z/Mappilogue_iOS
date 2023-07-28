@@ -106,8 +106,8 @@ extension SelectWriteMarkViewController: UICollectionViewDelegate, UICollectionV
         
         let month = dummyData[indexPath.section].month
         let day = dummyData[indexPath.section].day
-        
         headerView.configure(month: month, day: day)
+        
         return headerView
     }
 

@@ -51,12 +51,11 @@ extension ColorSelectionView: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ColorCell.registerId, for: indexPath) as? ColorCell else { return UICollectionViewCell() }
         
+        let colors = dummyColorData[indexPath.row]
         let isColorSelected = indexPath.row == selectedColorIndex
-        
-        cell.configure(with: dummyColorData[indexPath.row], isColorSelected: isColorSelected)
+        cell.configure(with: colors, isColorSelected: isColorSelected)
         
         return cell
-        
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
