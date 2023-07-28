@@ -11,24 +11,14 @@ class ColorSelectionButton: UIButton {
     private let colorSelectionLabel = UILabel()
     private let colorSelectionArrowImage = UIImageView()
     
-    init(textColor: UIColor, color: UIColor, isColorSelection: Bool) {
+    init(textColor: UIColor, color: UIColor) {
         super.init(frame: .zero)
 
         colorSelectionLabel.textColor = textColor
         backgroundColor = color
-        colorSelectionArrowImage.image = UIImage(named: isColorSelection ? "opendColorSelection" : "closedColorSelection" )
+        colorSelectionArrowImage.image = UIImage(named: "closedColorSelection")
         colorSelectionArrowImage.tintColor = .colorFFFFFF
         colorSelectionArrowImage.tintColor = textColor
-        
-//        if isColorSelection {
-//            UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
-//                self.colorSelectionArrowImage.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / (1/3))
-//            })
-//        } else {
-//            UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
-//                self.colorSelectionArrowImage.transform = CGAffineTransform(rotationAngle: CGFloat.pi / (1/3))
-//            })
-//        }
       
         setupProperty()
         setupHierarchy()
@@ -67,5 +57,23 @@ class ColorSelectionButton: UIButton {
             $0.width.equalTo(10)
             $0.height.equalTo(5)
         }
+    }
+    
+    func configure(textColor: UIColor, color: UIColor, isColorSelection: Bool) {
+        colorSelectionLabel.textColor = textColor
+        backgroundColor = color
+        colorSelectionArrowImage.image = UIImage(named: isColorSelection ? "opendColorSelection" : "closedColorSelection" )
+        colorSelectionArrowImage.tintColor = .colorFFFFFF
+        colorSelectionArrowImage.tintColor = textColor
+        
+//        if isColorSelection {
+//            UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
+//                self.colorSelectionArrowImage.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / (1/3))
+//            })
+//        } else {
+//            UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {
+//                self.colorSelectionArrowImage.transform = CGAffineTransform(rotationAngle: CGFloat.pi / (1/3))
+//            })
+//        }
     }
 }
