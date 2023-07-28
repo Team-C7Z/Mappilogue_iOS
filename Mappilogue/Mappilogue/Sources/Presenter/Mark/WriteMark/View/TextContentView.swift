@@ -7,20 +7,14 @@
 
 import UIKit
 
-class TextContentCell: BaseTableViewCell {
-    static let registerId = "\(TextContentCell.self)"
+class TextContentView: BaseView {
+    weak var delegate: ContentTextViewHeightDelegate?
     
     let textViewPlaceHolder = "내용을 입력하세요"
     
     private let lineView = UIView()
-    private let contentTextView = UITextView()
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
-    }
-    
+    let contentTextView = UITextView()
+
     override func setupProperty() {
         super.setupProperty()
         
@@ -29,35 +23,40 @@ class TextContentCell: BaseTableViewCell {
         contentTextView.text = textViewPlaceHolder
         contentTextView.textColor = .colorC9C6C2
         contentTextView.font = .body01
-        contentTextView.backgroundColor = .clear
+        contentTextView.backgroundColor = .gray
         contentTextView.returnKeyType = .done
+        contentTextView.isScrollEnabled = false
         contentTextView.delegate = self
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        contentView.addSubview(lineView)
-        contentView.addSubview(contentTextView)
+        addSubview(lineView)
+        addSubview(contentTextView)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
+        self.snp.makeConstraints {
+            $0.height.equalTo(200)
+        }
+        
         lineView.snp.makeConstraints {
-            $0.top.leading.trailing.equalTo(contentView)
+            $0.top.leading.trailing.equalTo(self)
             $0.height.equalTo(1)
         }
         
         contentTextView.snp.makeConstraints {
-            $0.leading.trailing.equalTo(contentView)
-            $0.top.equalTo(contentView).offset(16)
-            $0.bottom.equalTo(contentView).offset(-16)
+            $0.leading.trailing.equalTo(self)
+            $0.top.equalTo(self).offset(16)
+            $0.bottom.equalTo(self).offset(-16)
         }
     }
 }
 
-extension TextContentCell: UITextViewDelegate {
+extension TextContentView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == textViewPlaceHolder {
             textView.text = nil
@@ -71,4 +70,21 @@ extension TextContentCell: UITextViewDelegate {
             textView.textColor = .colorC9C6C2
         }
     }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        updateTextViewHeight()
+    }
+    
+    func updateTextViewHeight() {
+        let fixedWidth = contentTextView.frame.size.width
+        let newSize = contentTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+
+        contentTextView.frame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
+        
+        delegate?.updateContentTextViewHeight(newSize.height)
+    }
+}
+
+protocol ContentTextViewHeightDelegate: AnyObject {
+    func updateContentTextViewHeight(_ height: CGFloat)
 }

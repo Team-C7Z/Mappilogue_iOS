@@ -1,5 +1,5 @@
 //
-//  MainLocationCell.swift
+//  MainLocationButton.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/07/27.
@@ -7,19 +7,11 @@
 
 import UIKit
 
-class MainLocationCell: BaseTableViewCell {
-    static let registerId = "\(MainLocationCell.self)"
-    
+class MainLocationButton: BaseButton {
     private let lineView = UIView()
     private let mainLocationView = MainLocatonView()
     private let locationTitleLabel = UILabel()
     private let moveImage = UIImageView()
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
-    }
     
     override func setupProperty() {
         super.setupProperty()
@@ -36,32 +28,36 @@ class MainLocationCell: BaseTableViewCell {
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        contentView.addSubview(lineView)
-        contentView.addSubview(mainLocationView)
-        contentView.addSubview(locationTitleLabel)
-        contentView.addSubview(moveImage)
+        addSubview(lineView)
+        addSubview(mainLocationView)
+        addSubview(locationTitleLabel)
+        addSubview(moveImage)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
+        self.snp.makeConstraints {
+            $0.height.equalTo(48)
+        }
+        
         lineView.snp.makeConstraints {
-            $0.top.leading.trailing.equalTo(contentView)
+            $0.top.leading.trailing.equalTo(self)
             $0.height.equalTo(1)
         }
         
         mainLocationView.snp.makeConstraints {
-            $0.leading.centerY.equalTo(contentView)
+            $0.leading.centerY.equalTo(self)
         }
         
         locationTitleLabel.snp.makeConstraints {
-            $0.centerY.equalTo(contentView)
-            $0.trailing.equalTo(contentView).offset(-20)
+            $0.centerY.equalTo(self)
+            $0.trailing.equalTo(self).offset(-20)
         }
         
         moveImage.snp.makeConstraints {
-            $0.centerY.equalTo(contentView)
-            $0.trailing.equalTo(contentView).offset(-1)
+            $0.centerY.equalTo(self)
+            $0.trailing.equalTo(self).offset(-1)
             $0.width.equalTo(7)
             $0.height.equalTo(14)
         }
