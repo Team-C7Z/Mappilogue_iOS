@@ -31,6 +31,9 @@ class WriteMarkViewController: BaseViewController {
         super.viewDidLoad()
 
         hideKeyboardWhenTappedAround()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func setupProperty() {
@@ -71,6 +74,22 @@ class WriteMarkViewController: BaseViewController {
     
     @objc func backButtonTapped(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            saveMarkView.frame.origin.y -= keyboardHeight - 34
+            saveMarkView.configure(true)
+        }
+    }
+    
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardHeight = keyboardFrame.cgRectValue.height
+            saveMarkView.frame.origin.y += keyboardHeight - 34
+            saveMarkView.configure(false)
+        }
     }
 }
 

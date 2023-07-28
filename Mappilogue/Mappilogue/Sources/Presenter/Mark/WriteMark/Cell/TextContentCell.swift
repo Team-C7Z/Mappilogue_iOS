@@ -30,6 +30,7 @@ class TextContentCell: BaseTableViewCell {
         contentTextView.textColor = .colorC9C6C2
         contentTextView.font = .body01
         contentTextView.backgroundColor = .clear
+        contentTextView.returnKeyType = .done
         contentTextView.delegate = self
     }
     
