@@ -18,13 +18,10 @@ class WriteMarkViewController: BaseViewController {
     private let scheduleTitleColorButton = ScheduleTitleColorButton()
     private let mainLocationButton = MainLocationButton()
     private let textContentView = TextContentView()
-
     private let saveMarkView = SaveMarkView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        hideKeyboardWhenTappedAround()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -42,6 +39,12 @@ class WriteMarkViewController: BaseViewController {
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
         stackView.spacing = 0
+       
+        textContentView.stackViewHeightUpdated = { [weak self] in
+            self?.stackView.layoutIfNeeded()
+        }
+        
+        saveMarkView.hideKeyboardButton.addTarget(self, action: #selector(dismissKeyboard), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -54,24 +57,26 @@ class WriteMarkViewController: BaseViewController {
         stackView.addArrangedSubview(scheduleTitleColorButton)
         stackView.addArrangedSubview(mainLocationButton)
         stackView.addArrangedSubview(textContentView)
-        contentView.addSubview(saveMarkView)
+        view.addSubview(saveMarkView)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
         scrollView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
         
         contentView.snp.makeConstraints {
-            $0.width.height.equalTo(scrollView)
+            $0.edges.equalTo(scrollView)
+            $0.width.equalTo(scrollView)
         }
         
         stackView.snp.makeConstraints {
             $0.top.equalTo(contentView).offset(10)
             $0.leading.equalTo(contentView).offset(16)
             $0.trailing.equalTo(contentView).offset(-16)
+            $0.bottom.equalTo(contentView).offset(-58)
         }
         
         saveMarkView.snp.makeConstraints {
@@ -96,16 +101,38 @@ class WriteMarkViewController: BaseViewController {
     @objc private func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardHeight = keyboardFrame.cgRectValue.height
-            saveMarkView.frame.origin.y -= keyboardHeight - 34
+            stackView.snp.remakeConstraints {
+                $0.top.equalTo(contentView).offset(10)
+                $0.leading.equalTo(contentView).offset(16)
+                $0.trailing.equalTo(contentView).offset(-16)
+                $0.bottom.equalTo(contentView).offset(-keyboardHeight)
+            }
+            saveMarkView.snp.remakeConstraints {
+                $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+                $0.bottom.equalTo(view).offset(-keyboardHeight)
+                $0.height.equalTo(48)
+            }
             saveMarkView.configure(true)
+            view.layoutIfNeeded()
         }
     }
     
     @objc private func keyboardWillHide(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardHeight = keyboardFrame.cgRectValue.height
-            saveMarkView.frame.origin.y += keyboardHeight - 34
+            stackView.snp.remakeConstraints {
+                $0.top.equalTo(contentView).offset(10)
+                $0.leading.equalTo(contentView).offset(16)
+                $0.trailing.equalTo(contentView).offset(-16)
+                $0.bottom.equalTo(contentView).offset(-58)
+            }
+            saveMarkView.snp.remakeConstraints {
+                $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+                $0.bottom.equalTo(view.safeAreaLayoutGuide)
+                $0.height.equalTo(48)
+            }
             saveMarkView.configure(false)
+            view.layoutIfNeeded()
         }
     }
 }

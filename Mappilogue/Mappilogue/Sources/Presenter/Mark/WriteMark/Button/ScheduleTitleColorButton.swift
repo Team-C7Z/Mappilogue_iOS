@@ -54,7 +54,6 @@ class ScheduleTitleColorButton: BaseButton {
     }
     
     func configure(with scheduleTitle: String, color: UIColor) {
-        print(color)
         scheduleTitleLabel.text = scheduleTitle
         if color == .color1C1C1C || color == .color9B9791 || color == .color404040 {
             colorSelectionButton.configure(textColor: .colorFFFFFF, color: color, isColorSelection: true)

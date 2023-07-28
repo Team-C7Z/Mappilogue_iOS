@@ -8,9 +8,9 @@
 import UIKit
 
 class TextContentView: BaseView {
-    weak var delegate: ContentTextViewHeightDelegate?
-    
     let textViewPlaceHolder = "내용을 입력하세요"
+    var textViewHeight: CGFloat = 300
+    var stackViewHeightUpdated: (() -> Void)?
     
     private let lineView = UIView()
     let contentTextView = UITextView()
@@ -23,8 +23,7 @@ class TextContentView: BaseView {
         contentTextView.text = textViewPlaceHolder
         contentTextView.textColor = .colorC9C6C2
         contentTextView.font = .body01
-        contentTextView.backgroundColor = .gray
-        contentTextView.returnKeyType = .done
+        contentTextView.backgroundColor = .clear
         contentTextView.isScrollEnabled = false
         contentTextView.delegate = self
     }
@@ -40,7 +39,7 @@ class TextContentView: BaseView {
         super.setupLayout()
         
         self.snp.makeConstraints {
-            $0.height.equalTo(200)
+            $0.height.equalTo(textViewHeight)
         }
         
         lineView.snp.makeConstraints {
@@ -79,12 +78,16 @@ extension TextContentView: UITextViewDelegate {
         let fixedWidth = contentTextView.frame.size.width
         let newSize = contentTextView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
 
-        contentTextView.frame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
-        
-        delegate?.updateContentTextViewHeight(newSize.height)
+        self.snp.remakeConstraints {
+            $0.height.equalTo(max(textViewHeight, newSize.height + 50))
+        }
+        stackViewHeightUpdated?()
+        self.layoutIfNeeded()
     }
 }
 
-protocol ContentTextViewHeightDelegate: AnyObject {
-    func updateContentTextViewHeight(_ height: CGFloat)
+extension WriteMarkViewController: UITextViewDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return true
+    }
 }

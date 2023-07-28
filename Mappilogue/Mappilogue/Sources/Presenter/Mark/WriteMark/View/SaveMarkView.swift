@@ -10,14 +10,14 @@ import UIKit
 class SaveMarkView: BaseView {
     private let lineView = UIView()
     private let cameraButton = UIButton()
-    private let saveMarkButton = UIButton()
-    private let hideKeyboardButton = UIButton()
+    let saveMarkButton = UIButton()
+    let hideKeyboardButton = UIButton()
     
     override func setupProperty() {
         super.setupProperty()
         
+        backgroundColor = .colorF9F8F7
         lineView.backgroundColor = .colorEAE6E1
-        
         cameraButton.setImage(UIImage(named: "camera"), for: .normal)
         
         saveMarkButton.setTitle("기록 저장", for: .normal)
