@@ -93,7 +93,19 @@ class WriteMarkViewController: BaseViewController {
     }
     
     @objc func backButtonTapped(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
+        let alertViewController = AlertViewController()
+        alertViewController.modalPresentationStyle = .overCurrentContext
+        let alert = Alert(titleText: "이 기록을 임시저장할까요?",
+                          messageText: "쓰기 버튼을 다시 누르면 불러올 수 있어요",
+                          cancelText: "삭제",
+                          doneText: "임시저장",
+                          buttonColor: .color2EBD3D,
+                          alertHeight: 161)
+        alertViewController.configureAlert(with: alert)
+        alertViewController.onDeleteTapped = {
+            self.navigationController?.popViewController(animated: true)
+        }
+         present(alertViewController, animated: false)
     }
     
     private func setKeyboardObservers() {
