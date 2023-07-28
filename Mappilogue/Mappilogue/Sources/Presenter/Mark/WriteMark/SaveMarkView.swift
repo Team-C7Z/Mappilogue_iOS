@@ -11,6 +11,7 @@ class SaveMarkView: BaseView {
     private let lineView = UIView()
     private let cameraButton = UIButton()
     private let saveMarkButton = UIButton()
+    private let hideKeyboardButton = UIButton()
     
     override func setupProperty() {
         super.setupProperty()
@@ -24,6 +25,9 @@ class SaveMarkView: BaseView {
         saveMarkButton.titleLabel?.font = .body03
         saveMarkButton.layer.cornerRadius = 35 / 2
         saveMarkButton.backgroundColor = .color2EBD3D
+        
+        hideKeyboardButton.setImage(UIImage(named: "hideKeyboard"), for: .normal)
+        hideKeyboardButton.isHidden = true
     }
     
     override func setupHierarchy() {
@@ -32,6 +36,7 @@ class SaveMarkView: BaseView {
         addSubview(lineView)
         addSubview(cameraButton)
         addSubview(saveMarkButton)
+        addSubview(hideKeyboardButton)
     }
     
     override func setupLayout() {
@@ -54,6 +59,22 @@ class SaveMarkView: BaseView {
             $0.top.equalTo(7)
             $0.width.equalTo(70)
             $0.height.equalTo(35)
+        }
+        
+        hideKeyboardButton.snp.makeConstraints {
+            $0.top.equalTo(self).offset(4)
+            $0.trailing.equalTo(self).offset(-7)
+            $0.width.height.equalTo(40)
+        }
+    }
+    
+    func configure(_ showKeyboard: Bool) {
+        if !showKeyboard {
+            hideKeyboardButton.isHidden = true
+            saveMarkButton.isHidden = false
+        } else {
+            hideKeyboardButton.isHidden = false
+            saveMarkButton.isHidden = true
         }
     }
 }
