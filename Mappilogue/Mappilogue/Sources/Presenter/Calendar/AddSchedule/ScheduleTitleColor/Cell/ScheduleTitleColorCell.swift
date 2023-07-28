@@ -13,7 +13,7 @@ class ScheduleTitleColorCell: BaseTableViewCell {
     weak var delegate: ColorSelectionDelegate?
     
     private let scheduleNameTextField = UITextField()
-    private var colorSelectionButton = ColorSelectionButton(textColor: .colorFFFFFF, color: .color1C1C1C, isColorSelection: false)
+    private var colorSelectionButton = ColorSelectionButton(textColor: .colorFFFFFF, color: .color1C1C1C)
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -58,9 +58,9 @@ class ScheduleTitleColorCell: BaseTableViewCell {
     
     func configure(with color: UIColor, isColorSelection: Bool) {
         if color == .color1C1C1C || color == .color9B9791 || color == .color404040 {
-            colorSelectionButton = .init(textColor: .colorFFFFFF, color: color, isColorSelection: isColorSelection)
+            colorSelectionButton.configure(textColor: .colorFFFFFF, color: color, isColorSelection: isColorSelection)
         } else {
-            colorSelectionButton = .init(textColor: .color1C1C1C, color: color, isColorSelection: isColorSelection)
+            colorSelectionButton.configure(textColor: .color1C1C1C, color: color, isColorSelection: isColorSelection)
         }
     }
     
@@ -75,7 +75,6 @@ extension ScheduleTitleColorCell: UITextFieldDelegate {
         return true
     }
 }
-
 
 protocol ColorSelectionDelegate: AnyObject {
     func colorSelectionButtonTapped()

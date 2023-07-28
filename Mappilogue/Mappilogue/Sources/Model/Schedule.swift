@@ -18,8 +18,8 @@ struct CalendarSchedule {
 struct Schedule {
     let title: String
     let color: UIColor
-    let time: String
-    let location: String
+    let time: String?
+    let location: String?
 }
 
 func dummyScheduleData() -> [CalendarSchedule] {
@@ -35,13 +35,13 @@ func dummyScheduleData() -> [CalendarSchedule] {
         Schedule(title: "부산여행", color: .colorF0F1B0, time: "3:00 PM", location: "잠실역")
     ])
     let calendarSchedule4 = CalendarSchedule(year: 2023, month: 8, day: 26, schedules: [
-        Schedule(title: "부산여행", color: .colorF0F1B0, time: "", location: "잠실역")
+        Schedule(title: "부산여행", color: .colorF0F1B0, time: nil, location: "잠실역")
     ])
     let calendarSchedule5 = CalendarSchedule(year: 2023, month: 8, day: 27, schedules: [
-        Schedule(title: "부산여행", color: .colorF0F1B0, time: "", location: "잠실역")
+        Schedule(title: "부산여행", color: .colorF0F1B0, time: nil, location: "잠실역")
     ])
     let calendarSchedule6 = CalendarSchedule(year: 2023, month: 8, day: 28, schedules: [
-        Schedule(title: "부산여행", color: .colorF0F1B0, time: "", location: "잠실역")
+        Schedule(title: "부산여행", color: .colorF0F1B0, time: nil, location: "잠실역")
     ])
 
     return [calendarSchedule1, calendarSchedule2, calendarSchedule3, calendarSchedule4, calendarSchedule5, calendarSchedule6]

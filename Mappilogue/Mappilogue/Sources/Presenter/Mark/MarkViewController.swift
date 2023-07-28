@@ -21,11 +21,12 @@ class MarkViewController: NavigationBarViewController {
     let writeMarkButton = WriteMarkButton()
     let containerView = UIView()
     let bottomSheetViewController = BottomSheetViewController()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setLocationManager()
+        checkUserCurrentLocationAuthorization()
         setBottomSheetViewController()
         setPanGesture()
     }
@@ -33,13 +34,12 @@ class MarkViewController: NavigationBarViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        startLocationManager()
         setLocationOverlayIcon()
     }
     
     override func setupProperty() {
         super.setupProperty()
-
+        
         mapView.logoInteractionEnabled = false
         mapView.allowsZooming = true
         mapView.allowsScrolling = true
@@ -56,6 +56,8 @@ class MarkViewController: NavigationBarViewController {
         
         currentLocationButton.setImage(UIImage(named: "moveCurrentLocation"), for: .normal)
         currentLocationButton.addTarget(self, action: #selector(currentLocationButtonTapped), for: .touchUpInside)
+        
+        writeMarkButton.addTarget(self, action: #selector(writeMarkButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -202,9 +204,16 @@ class MarkViewController: NavigationBarViewController {
         
         gesture.setTranslation(.zero, in: containerView)
     }
+    
+    @objc func writeMarkButtonTapped() {
+        let selectWriteMarkViewController = SelectWriteMarkViewController()
+        selectWriteMarkViewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(selectWriteMarkViewController, animated: true)
+    }
 }
 
 extension MarkViewController: CLLocationManagerDelegate {
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let currentLocation = locations.last else { return }
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: currentLocation.coordinate.latitude, lng: currentLocation.coordinate.longitude))
@@ -215,8 +224,24 @@ extension MarkViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Location Manager Error: \(error)")
-        
-        showLocationPermissionAlert()
+    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        checkUserCurrentLocationAuthorization()
+    }
+    
+    func checkUserCurrentLocationAuthorization() {
+        let authorizationStatus = locationManager.authorizationStatus
+        switch authorizationStatus {
+        case .denied, .restricted:
+            showLocationPermissionAlert()
+        case .authorizedAlways, .authorizedWhenInUse:
+            startLocationManager()
+        case .notDetermined:
+            print("설정 x")
+        default:
+            break
+        }
     }
     
     func showLocationPermissionAlert() {
