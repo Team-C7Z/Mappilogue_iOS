@@ -37,6 +37,8 @@ class WriteMarkViewController: BaseViewController {
         stackView.distribution = .equalSpacing
         stackView.spacing = 0
        
+        categoryButton.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
+        
         textContentView.stackViewHeightUpdated = { [weak self] in
             self?.stackView.layoutIfNeeded()
         }
@@ -108,10 +110,9 @@ class WriteMarkViewController: BaseViewController {
          present(alertViewController, animated: false)
     }
     
-    private func setKeyboardObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    @objc func categoryButtonTapped() {
+        let selectCategoryViewController = SelectCategoryViewController()
+        navigationController?.pushViewController(selectCategoryViewController, animated: true)
     }
     
     private func configureScheduleTitleColorView() {
@@ -119,6 +120,12 @@ class WriteMarkViewController: BaseViewController {
             scheduleTitleColorView.configure(with: schedule.title, color: schedule.color, isColorSelection: false)
         }
         scheduleTitleColorView.delegate = self
+    }
+    
+    private func setKeyboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     @objc private func keyboardWillShow(_ notification: Notification) {
