@@ -8,8 +8,7 @@
 import UIKit
 
 class SearchResultViewController: BaseViewController {
-    //let dummyLocation = dummyLocationData()
-    let dummyLocation = [Location]()
+    let dummyLocation = dummyLocationData()
     let dummyMark = dummyMarkData()
     var keyboardHeight: CGFloat = 0
     
@@ -80,7 +79,6 @@ class SearchResultViewController: BaseViewController {
             $0.leading.trailing.equalTo(view)
             $0.bottom.equalTo(view)
         }
-        print(keyboardHeight)
     }
     
     private func createSearchButton(_ title: String) -> UIButton {
@@ -94,9 +92,17 @@ class SearchResultViewController: BaseViewController {
     }
     
     private func setSearchButtonDesign() {
+        setLocationButtonDesign()
+        setMarkButtonDesign()
+    }
+    
+    private func setLocationButtonDesign() {
         locationButton.setTitleColor(searchType == .location ? .colorFFFFFF : .color707070, for: .normal)
-        markButton.setTitleColor(searchType == .mark ? .colorFFFFFF : .color707070, for: .normal)
         locationButton.backgroundColor = searchType == .location ? .color2EBD3D : .colorF5F3F0
+    }
+    
+    private func setMarkButtonDesign() {
+        markButton.setTitleColor(searchType == .mark ? .colorFFFFFF : .color707070, for: .normal)
         markButton.backgroundColor = searchType == .mark ? .color2EBD3D : .colorF5F3F0
     }
     

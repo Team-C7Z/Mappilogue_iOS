@@ -46,7 +46,7 @@ class MarkViewController: NavigationBarViewController {
         mapView.positionMode = .compass
     
         searchTextField.delegate = self
-        applyShadow(searchTextField)
+        searchTextField.layer.applyShadow()
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(searchTextFieldTapped))
         searchTextField.addGestureRecognizer(tap)
@@ -150,14 +150,6 @@ class MarkViewController: NavigationBarViewController {
         navigationController?.pushViewController(searchViewController, animated: true)
     }
     
-    private func applyShadow(_ textField: UITextField) {
-        textField.layer.shadowColor = UIColor.color000000.cgColor
-        textField.layer.shadowOpacity = 0.1
-        textField.layer.shadowRadius = 4.0
-        textField.layer.shadowOffset = CGSize(width: 0, height: 2)
-        textField.layer.masksToBounds = false
-    }
-    
     @objc func currentLocationButtonTapped(_ sender: UIButton) {
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: locationManager.location?.coordinate.latitude ?? 37.49794, lng: locationManager.location?.coordinate.longitude ?? 127.02759))
         cameraUpdate.animation = .easeIn
@@ -218,7 +210,6 @@ class MarkViewController: NavigationBarViewController {
 }
 
 extension MarkViewController: CLLocationManagerDelegate {
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let currentLocation = locations.last else { return }
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: currentLocation.coordinate.latitude, lng: currentLocation.coordinate.longitude))

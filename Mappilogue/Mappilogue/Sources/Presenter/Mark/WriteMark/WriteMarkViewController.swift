@@ -31,7 +31,7 @@ class WriteMarkViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationBar()
+        setNavigationBar("기록 쓰기")
         
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
@@ -84,31 +84,22 @@ class WriteMarkViewController: BaseViewController {
             $0.height.equalTo(48)
         }
     }
-    
-    private func setNavigationBar() {
-        title = "기록 쓰기"
-        let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "back2"), for: .normal)
-        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        let barButtonItem = UIBarButtonItem(customView: button)
-        navigationItem.leftBarButtonItem = barButtonItem
-    }
-    
-    @objc func backButtonTapped(_ sender: UIButton) {
-        let alertViewController = AlertViewController()
-        alertViewController.modalPresentationStyle = .overCurrentContext
-        let alert = Alert(titleText: "이 기록을 임시저장할까요?",
-                          messageText: "쓰기 버튼을 다시 누르면 불러올 수 있어요",
-                          cancelText: "삭제",
-                          doneText: "임시저장",
-                          buttonColor: .color2EBD3D,
-                          alertHeight: 161)
-        alertViewController.configureAlert(with: alert)
-        alertViewController.onDeleteTapped = {
-            self.navigationController?.popViewController(animated: true)
-        }
-         present(alertViewController, animated: false)
-    }
+
+//    @objc func backButtonTapped(_ sender: UIButton) {
+//        let alertViewController = AlertViewController()
+//        alertViewController.modalPresentationStyle = .overCurrentContext
+//        let alert = Alert(titleText: "이 기록을 임시저장할까요?",
+//                          messageText: "쓰기 버튼을 다시 누르면 불러올 수 있어요",
+//                          cancelText: "삭제",
+//                          doneText: "임시저장",
+//                          buttonColor: .color2EBD3D,
+//                          alertHeight: 161)
+//        alertViewController.configureAlert(with: alert)
+//        alertViewController.onDeleteTapped = {
+//            self.navigationController?.popViewController(animated: true)
+//        }
+//         present(alertViewController, animated: false)
+//    }
     
     @objc func categoryButtonTapped() {
         let selectCategoryViewController = SelectCategoryViewController()

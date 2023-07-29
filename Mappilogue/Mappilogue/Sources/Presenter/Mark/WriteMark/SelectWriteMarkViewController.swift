@@ -35,7 +35,7 @@ class SelectWriteMarkViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationBar()
+        setNavigationBar("기록 쓰기")
     }
     
     override func setupHierarchy() {
@@ -59,19 +59,6 @@ class SelectWriteMarkViewController: BaseViewController {
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
             $0.height.equalTo(48)
         }
-    }
-    
-    private func setNavigationBar() {
-        title = "기록 쓰기"
-        let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "back2"), for: .normal)
-        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        let barButtonItem = UIBarButtonItem(customView: button)
-        navigationItem.leftBarButtonItem = barButtonItem
-    }
-    
-    @objc func backButtonTapped(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
     }
 }
 
