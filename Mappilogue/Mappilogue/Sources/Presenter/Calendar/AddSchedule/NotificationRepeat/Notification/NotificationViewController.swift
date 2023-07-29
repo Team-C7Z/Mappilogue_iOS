@@ -34,7 +34,7 @@ class NotificationViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationBar()
+        setNavigationBar("알림")
     }
     
     override func setupHierarchy() {
@@ -49,21 +49,6 @@ class NotificationViewController: BaseViewController {
         tableView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
-    }
-    
-    private func setNavigationBar() {
-        title = "알림"
-        let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "back2"), for: .normal)
-        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        let barButtonItem = UIBarButtonItem(customView: button)
-        navigationItem.leftBarButtonItem = barButtonItem
-    }
-    
-    @objc func backButtonTapped(_ sender: UIButton) {
-        delegate?.selectedNotificationTime([])
-        
-        navigationController?.popViewController(animated: true)
     }
 }
 
