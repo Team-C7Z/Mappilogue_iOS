@@ -8,8 +8,10 @@
 import UIKit
 
 class SearchResultViewController: BaseViewController {
-    let dummyLocation = dummyLocationData()
+    //let dummyLocation = dummyLocationData()
+    let dummyLocation = [Location]()
     let dummyMark = dummyMarkData()
+    var keyboardHeight: CGFloat = 0
     
     var searchType: SearchType = .location {
         didSet {
@@ -21,12 +23,13 @@ class SearchResultViewController: BaseViewController {
     private var locationButton = UIButton()
     private var markButton = UIButton()
     
-    private lazy var collectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .colorF9F8F7
+  
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         collectionView.register(EmptySearchCell.self, forCellWithReuseIdentifier: EmptySearchCell.registerId)
         collectionView.register(SearchLocationCell.self, forCellWithReuseIdentifier: SearchLocationCell.registerId)
@@ -74,8 +77,10 @@ class SearchResultViewController: BaseViewController {
         
         collectionView.snp.makeConstraints {
             $0.top.equalTo(stackView.snp.bottom).offset(16)
-            $0.leading.trailing.bottom.equalTo(view)
+            $0.leading.trailing.equalTo(view)
+            $0.bottom.equalTo(view)
         }
+        print(keyboardHeight)
     }
     
     private func createSearchButton(_ title: String) -> UIButton {
@@ -127,7 +132,7 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
                 
             } else {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchLocationCell.registerId, for: indexPath) as? SearchLocationCell else { return UICollectionViewCell() }
-                
+         
                 let location = dummyLocation[indexPath.row]
                 cell.configure(with: location)
                 
@@ -155,9 +160,9 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch searchType {
         case .location:
-            return CGSize(width: collectionView.frame.width - 32, height: dummyLocation.isEmpty ? collectionView.frame.height : 44)
+            return CGSize(width: collectionView.frame.width - 32, height: dummyLocation.isEmpty ? collectionView.frame.height - keyboardHeight : 44)
         case .mark:
-            return CGSize(width: collectionView.frame.width - 32, height: dummyMark.isEmpty ? collectionView.frame.height : 43)
+            return CGSize(width: collectionView.frame.width - 32, height: dummyMark.isEmpty ? collectionView.frame.height - keyboardHeight : 43)
         }
     }
     

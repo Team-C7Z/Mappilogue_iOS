@@ -15,6 +15,7 @@ class SearchViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setKeyboardObservers()
         hideKeyboardWhenTappedAround()
     }
     
@@ -73,6 +74,31 @@ class SearchViewController: BaseViewController {
             $0.edges.equalToSuperview()
         }
         viewController.didMove(toParent: self)
+    }
+    
+    private func setKeyboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        keyboardWillChange(notification, isShowing: true)
+    }
+    
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        keyboardWillChange(notification, isShowing: false)
+    }
+    
+    private func keyboardWillChange(_ notification: Notification, isShowing: Bool) {
+        guard let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        let keyboardHeight = keyboardFrame.cgRectValue.height
+        if isShowing {
+            searchResultViewController.keyboardHeight = keyboardHeight + 16
+        } else {
+            searchResultViewController.keyboardHeight = 44
+        }
+        searchResultViewController.collectionView.reloadData()
     }
 }
 
