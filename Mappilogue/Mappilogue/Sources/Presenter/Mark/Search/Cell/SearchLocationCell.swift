@@ -50,7 +50,7 @@ class SearchLocationCell: BaseCollectionViewCell {
         }
         
         addressLabel.snp.makeConstraints {
-            $0.top.equalTo(locationTitleLabel.snp.bottom).offset(2)
+            $0.top.equalTo(contentView).offset(26)
             $0.leading.equalTo(locationTitleLabel)
             $0.trailing.equalTo(contentView)
         }
