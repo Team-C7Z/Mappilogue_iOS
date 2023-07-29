@@ -10,6 +10,10 @@ import NMapsMap
 
 class MarkViewController: NavigationBarViewController {
     var delegate: EmptyMarkDelegate?
+    var locationOverlay: NMFLocationOverlay?
+    
+    let lat: Double = 0
+    let long: Double = 0
     
     let locationManager = CLLocationManager()
     
@@ -30,13 +34,7 @@ class MarkViewController: NavigationBarViewController {
         setBottomSheetViewController()
         setPanGesture()
     }
-   
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        setLocationOverlayIcon()
-    }
-    
+
     override func setupProperty() {
         super.setupProperty()
         
@@ -44,7 +42,9 @@ class MarkViewController: NavigationBarViewController {
         mapView.allowsZooming = true
         mapView.allowsScrolling = true
         mapView.positionMode = .compass
-    
+        
+        locationOverlay = mapView.locationOverlay
+        
         searchTextField.delegate = self
         searchTextField.layer.applyShadow()
         
@@ -57,6 +57,7 @@ class MarkViewController: NavigationBarViewController {
         currentLocationButton.addTarget(self, action: #selector(currentLocationButtonTapped), for: .touchUpInside)
         
         writeMarkButton.addTarget(self, action: #selector(writeMarkButtonTapped), for: .touchUpInside)
+        
     }
     
     override func setupHierarchy() {
@@ -136,12 +137,13 @@ class MarkViewController: NavigationBarViewController {
         locationManager.startUpdatingLocation()
     }
     
-    private func setLocationOverlayIcon() {
-        if let image = UIImage(named: "currentLocation") {
-            let locationOverlayIcon = NMFOverlayImage(image: image)
-            let locationOverlay = mapView.locationOverlay
-            locationOverlay.icon = locationOverlayIcon
-        }
+    private func setLocationOverlayIcon(latitude: Double, longitude: Double) {
+        guard let locationOverlay = locationOverlay else { return }
+        locationOverlay.hidden = false
+        locationOverlay.location = NMGLatLng(lat: latitude, lng: longitude)
+        locationOverlay.icon = NMFOverlayImage(name: "currentLocation")
+        locationOverlay.iconWidth = 20
+        locationOverlay.iconHeight = 20
     }
     
     @objc private func searchTextFieldTapped() {
@@ -213,7 +215,10 @@ extension MarkViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let currentLocation = locations.last else { return }
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: currentLocation.coordinate.latitude, lng: currentLocation.coordinate.longitude))
+        cameraUpdate.animation = .easeIn
         mapView.moveCamera(cameraUpdate)
+        
+        setLocationOverlayIcon(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
         
         locationManager.stopUpdatingLocation()
     }
