@@ -16,6 +16,7 @@ class SearchTextField: UITextField {
         placeholder = "장소 또는 기록 검색"
         font = .body01
         addLeftPadding()
+        returnKeyType = .search
     }
     
     required init?(coder: NSCoder) {

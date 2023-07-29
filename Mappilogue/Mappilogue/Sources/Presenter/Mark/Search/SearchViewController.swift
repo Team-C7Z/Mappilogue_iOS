@@ -13,6 +13,7 @@ class SearchViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        hideKeyboardWhenTappedAround()
     }
     
     override func setupProperty() {
@@ -20,6 +21,7 @@ class SearchViewController: BaseViewController {
         
         setNavigationBar()
         
+        searchTextField.becomeFirstResponder()
         searchTextField.delegate = self
     }
     
@@ -55,5 +57,8 @@ class SearchViewController: BaseViewController {
 }
 
 extension SearchViewController: UITextFieldDelegate {
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchTextField.resignFirstResponder()
+        return true
+    }
 }
