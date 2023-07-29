@@ -31,6 +31,8 @@
 		92011C042A740C16009B047F /* NewCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C032A740C16009B047F /* NewCategoryCell.swift */; };
 		92011C072A74AD97009B047F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C062A74AD97009B047F /* SearchViewController.swift */; };
 		92011C092A74AFCA009B047F /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C082A74AFCA009B047F /* SearchTextField.swift */; };
+		92011C0B2A74B837009B047F /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C0A2A74B837009B047F /* SearchResultViewController.swift */; };
+		92011C0E2A74C1FC009B047F /* EmptySearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C0D2A74C1FC009B047F /* EmptySearchCell.swift */; };
 		9224FCEE2A5BEF80000A56A6 /* ScheduleTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */; };
 		9224FCF32A5C5E7A000A56A6 /* WeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */; };
 		9224FCF52A5D6C65000A56A6 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */; };
@@ -171,6 +173,8 @@
 		92011C032A740C16009B047F /* NewCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCategoryCell.swift; sourceTree = "<group>"; };
 		92011C062A74AD97009B047F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		92011C082A74AFCA009B047F /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
+		92011C0A2A74B837009B047F /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
+		92011C0D2A74C1FC009B047F /* EmptySearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySearchCell.swift; sourceTree = "<group>"; };
 		9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTitleCell.swift; sourceTree = "<group>"; };
 		9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCell.swift; sourceTree = "<group>"; };
 		9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
@@ -392,8 +396,18 @@
 			isa = PBXGroup;
 			children = (
 				92011C062A74AD97009B047F /* SearchViewController.swift */,
+				92011C0A2A74B837009B047F /* SearchResultViewController.swift */,
+				92011C0C2A74C1DD009B047F /* Cell */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		92011C0C2A74C1DD009B047F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				92011C0D2A74C1FC009B047F /* EmptySearchCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		9224FCFE2A5FF82F000A56A6 /* AddSchedule */ = {
@@ -1092,6 +1106,7 @@
 				92A7B6532A4CDD4D009C9293 /* ScheduleType.swift in Sources */,
 				9224FD352A652A96000A56A6 /* WeekdayView.swift in Sources */,
 				926999362A14F443003DDAD2 /* BaseView.swift in Sources */,
+				92011C0E2A74C1FC009B047F /* EmptySearchCell.swift in Sources */,
 				92FE26132A4B74D800BCDB82 /* ScheduleTypeHeaderView.swift in Sources */,
 				9224FD212A62BBB7000A56A6 /* NotificationCell.swift in Sources */,
 				9224FD0D2A610134000A56A6 /* EmptyTodayScheduleSection.swift in Sources */,
@@ -1112,6 +1127,7 @@
 				9224FCFD2A5FF185000A56A6 /* AddScheduleViewController.swift in Sources */,
 				9224FD252A638F01000A56A6 /* RepeatType.swift in Sources */,
 				9224FD192A616EB1000A56A6 /* ColorCell.swift in Sources */,
+				92011C0B2A74B837009B047F /* SearchResultViewController.swift in Sources */,
 				92A7B6682A4E6154009C9293 /* UpcomingScheduleCell.swift in Sources */,
 				927E7F272A683DCD00E6A29F /* CalendarCell.swift in Sources */,
 				9224FD112A611218000A56A6 /* TodayScheduleSection.swift in Sources */,
