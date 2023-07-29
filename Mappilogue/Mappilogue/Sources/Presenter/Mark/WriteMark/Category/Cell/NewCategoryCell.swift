@@ -10,21 +10,24 @@ import UIKit
 class NewCategoryCell: BaseCollectionViewCell {
     static let registerId = "\(NewCategoryCell.self)"
     
-    private let newCategoryLabel = UILabel()
-    private let editImage = UIImageView()
+    private var isTextFiledEditMode: Bool = false
+    
+    private let categoryTextField = UITextField()
+    private let editButton = UIButton()
     private let categoryCountLabel = UILabel()
     private let checkCategoryImage = UIImageView()
   
     override func setupProperty() {
         super.setupProperty()
         
-        newCategoryLabel.text = "새로운 카테고리"
-        newCategoryLabel.textColor = .color1C1C1C
-        newCategoryLabel.font = .body02
+        categoryTextField.textColor = .color1C1C1C
+        categoryTextField.font = .body02
+        categoryTextField.returnKeyType = .done
+        categoryTextField.delegate = self
         
-        editImage.image = UIImage(named: "editCategory")
+        editButton.setImage(UIImage(named: "editCategory"), for: .normal)
+        editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
         
-        categoryCountLabel.text = "(0)"
         categoryCountLabel.textColor = .color9B9791
         categoryCountLabel.font = .body02
         
@@ -34,8 +37,8 @@ class NewCategoryCell: BaseCollectionViewCell {
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        contentView.addSubview(newCategoryLabel)
-        contentView.addSubview(editImage)
+        contentView.addSubview(categoryTextField)
+        contentView.addSubview(editButton)
         contentView.addSubview(categoryCountLabel)
         contentView.addSubview(checkCategoryImage)
     }
@@ -43,25 +46,46 @@ class NewCategoryCell: BaseCollectionViewCell {
     override func setupLayout() {
         super.setupLayout()
         
-        newCategoryLabel.snp.makeConstraints {
+        categoryTextField.snp.makeConstraints {
             $0.centerY.leading.equalTo(contentView)
         }
         
-        editImage.snp.makeConstraints {
+        editButton.snp.makeConstraints {
             $0.centerY.equalTo(contentView)
-            $0.leading.equalTo(newCategoryLabel.snp.trailing).offset(4)
+            $0.leading.equalTo(categoryTextField.snp.trailing).offset(4)
             $0.width.equalTo(12)
             $0.height.equalTo(11)
         }
         
         categoryCountLabel.snp.makeConstraints {
             $0.centerY.equalTo(contentView)
-            $0.leading.equalTo(editImage.snp.trailing).offset(8)
+            $0.leading.equalTo(editButton.snp.trailing).offset(8)
         }
         
         checkCategoryImage.snp.makeConstraints {
             $0.centerY.trailing.equalTo(contentView)
             $0.width.height.equalTo(24)
         }
+    }
+    
+    func configure(with category: CategoryData) {
+        categoryTextField.text = category.title
+        categoryCountLabel.text = "(\(category.count))"
+    }
+    
+    @objc func editButtonTapped(_ button: UIButton) {
+        isTextFiledEditMode = !isTextFiledEditMode
+        categoryTextField.becomeFirstResponder()
+    }
+}
+
+extension NewCategoryCell: UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        return isTextFiledEditMode ? true : false
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
