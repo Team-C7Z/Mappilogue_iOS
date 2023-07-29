@@ -15,7 +15,7 @@ class NewCategoryCell: BaseCollectionViewCell {
     private let categoryTextField = UITextField()
     private let editButton = UIButton()
     private let categoryCountLabel = UILabel()
-    private let checkCategoryImage = UIImageView()
+    private let checkCategoryButton = UIButton()
   
     override func setupProperty() {
         super.setupProperty()
@@ -31,7 +31,8 @@ class NewCategoryCell: BaseCollectionViewCell {
         categoryCountLabel.textColor = .color9B9791
         categoryCountLabel.font = .body02
         
-        checkCategoryImage.image = UIImage(named: "unCheck")
+        checkCategoryButton.setImage(UIImage(named: "unCheck"), for: .normal)
+        checkCategoryButton.addTarget(self, action: #selector(checkCategoryButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -40,7 +41,7 @@ class NewCategoryCell: BaseCollectionViewCell {
         contentView.addSubview(categoryTextField)
         contentView.addSubview(editButton)
         contentView.addSubview(categoryCountLabel)
-        contentView.addSubview(checkCategoryImage)
+        contentView.addSubview(checkCategoryButton)
     }
     
     override func setupLayout() {
@@ -62,7 +63,7 @@ class NewCategoryCell: BaseCollectionViewCell {
             $0.leading.equalTo(editButton.snp.trailing).offset(8)
         }
         
-        checkCategoryImage.snp.makeConstraints {
+        checkCategoryButton.snp.makeConstraints {
             $0.centerY.trailing.equalTo(contentView)
             $0.width.height.equalTo(24)
         }
@@ -76,6 +77,11 @@ class NewCategoryCell: BaseCollectionViewCell {
     @objc func editButtonTapped(_ button: UIButton) {
         isTextFiledEditMode = !isTextFiledEditMode
         categoryTextField.becomeFirstResponder()
+    }
+    
+    @objc func checkCategoryButtonTapped(_ button: UIButton) {
+        button.isSelected = !button.isSelected
+        button.setImage(UIImage(named: button.isSelected ? "check" : "unCheck"), for: .normal)
     }
 }
 
