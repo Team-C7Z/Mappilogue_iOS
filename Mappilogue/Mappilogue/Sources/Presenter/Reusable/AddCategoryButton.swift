@@ -27,14 +27,13 @@ class AddCategoryButton: UIButton {
     
     private func setupButton() {
         layer.cornerRadius = 16
+        layer.applyShadow()
         backgroundColor = .colorF9F8F7
         
         addCategoryImage.image = UIImage(named: "addCategory")
         addCategoryLabel.text = "카테고리 추가"
         addCategoryLabel.textColor = .color1C1C1C
         addCategoryLabel.font = .caption02
-        
-        applyShadow()
     }
     
     private func setupHierarchy() {
@@ -58,13 +57,5 @@ class AddCategoryButton: UIButton {
             $0.centerY.equalTo(self)
             $0.leading.equalTo(addCategoryImage.snp.trailing).offset(8)
         }
-    }
-    
-    private func applyShadow() {
-        layer.shadowColor = UIColor.color000000.cgColor
-        layer.shadowOpacity = 0.1
-        layer.shadowRadius = 4.0
-        layer.shadowOffset = CGSize(width: 0, height: 2)
-        layer.masksToBounds = false
     }
 }

@@ -10,18 +10,16 @@ import NMapsMap
 
 class MarkViewController: NavigationBarViewController {
     var delegate: EmptyMarkDelegate?
-    var locationOverlay: NMFLocationOverlay?
-    
-    let lat: Double = 0
-    let long: Double = 0
     
     let locationManager = CLLocationManager()
+    var locationOverlay: NMFLocationOverlay?
     
     let mapView = NMFMapView()
     let searchTextField = SearchTextField()
     let searchButton = UIButton()
     let addCategoryButton = AddCategoryButton()
     let currentLocationButton = UIButton()
+    let markListButton = MarkListButton()
     let writeMarkButton = WriteMarkButton()
     let containerView = UIView()
     let bottomSheetViewController = BottomSheetViewController()
@@ -29,6 +27,7 @@ class MarkViewController: NavigationBarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        locationOverlay = mapView.locationOverlay
         setLocationManager()
         checkUserCurrentLocationAuthorization()
         setBottomSheetViewController()
@@ -43,21 +42,17 @@ class MarkViewController: NavigationBarViewController {
         mapView.allowsScrolling = true
         mapView.positionMode = .compass
         
-        locationOverlay = mapView.locationOverlay
-        
         searchTextField.delegate = self
         searchTextField.layer.applyShadow()
-        
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(searchTextFieldTapped))
-        searchTextField.addGestureRecognizer(tap)
+        setSearchTextFieldTapGestue()
         
         searchButton.setImage(UIImage(named: "search"), for: .normal)
         
         currentLocationButton.setImage(UIImage(named: "moveCurrentLocation"), for: .normal)
+        currentLocationButton.layer.applyShadow()
         currentLocationButton.addTarget(self, action: #selector(currentLocationButtonTapped), for: .touchUpInside)
         
         writeMarkButton.addTarget(self, action: #selector(writeMarkButtonTapped), for: .touchUpInside)
-        
     }
     
     override func setupHierarchy() {
@@ -66,6 +61,7 @@ class MarkViewController: NavigationBarViewController {
         view.addSubview(mapView)
         mapView.addSubview(searchTextField)
         searchTextField.addSubview(searchButton)
+        mapView.addSubview(markListButton)
         mapView.addSubview(addCategoryButton)
         view.addSubview(currentLocationButton)
         view.addSubview(writeMarkButton)
@@ -104,6 +100,11 @@ class MarkViewController: NavigationBarViewController {
             $0.width.height.equalTo(48)
         }
         
+        markListButton.snp.makeConstraints {
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
+            $0.bottom.equalTo(writeMarkButton.snp.top).offset(-16)
+        }
+        
         writeMarkButton.snp.makeConstraints {
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
             $0.bottom.equalTo(containerView.snp.top).offset(-16)
@@ -119,18 +120,6 @@ class MarkViewController: NavigationBarViewController {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
-    }
-    
-    private func setBottomSheetViewController() {
-        addChild(bottomSheetViewController)
-        bottomSheetViewController.view.frame = containerView.bounds
-        containerView.addSubview(bottomSheetViewController.view)
-        bottomSheetViewController.didMove(toParent: self)
-    }
-    
-    private func setPanGesture() {
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-        containerView.addGestureRecognizer(panGesture)
     }
     
     private func startLocationManager() {
@@ -152,13 +141,36 @@ class MarkViewController: NavigationBarViewController {
         navigationController?.pushViewController(searchViewController, animated: true)
     }
     
-    @objc func currentLocationButtonTapped(_ sender: UIButton) {
+    private func setSearchTextFieldTapGestue() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(searchTextFieldTapped))
+        searchTextField.addGestureRecognizer(tap)
+    }
+    
+    @objc private func currentLocationButtonTapped(_ sender: UIButton) {
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: locationManager.location?.coordinate.latitude ?? 37.49794, lng: locationManager.location?.coordinate.longitude ?? 127.02759))
         cameraUpdate.animation = .easeIn
         mapView.moveCamera(cameraUpdate)
     }
- 
-    @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
+    
+    @objc private func writeMarkButtonTapped() {
+        let selectWriteMarkViewController = SelectWriteMarkViewController()
+        selectWriteMarkViewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(selectWriteMarkViewController, animated: true)
+    }
+    
+    private func setBottomSheetViewController() {
+        addChild(bottomSheetViewController)
+        bottomSheetViewController.view.frame = containerView.bounds
+        containerView.addSubview(bottomSheetViewController.view)
+        bottomSheetViewController.didMove(toParent: self)
+    }
+    
+    private func setPanGesture() {
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        containerView.addGestureRecognizer(panGesture)
+    }
+    
+    @objc private func handlePan(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: containerView)
         let newContainerHeight = containerView.frame.height - translation.y
         
@@ -203,19 +215,12 @@ class MarkViewController: NavigationBarViewController {
         
         gesture.setTranslation(.zero, in: containerView)
     }
-    
-    @objc func writeMarkButtonTapped() {
-        let selectWriteMarkViewController = SelectWriteMarkViewController()
-        selectWriteMarkViewController.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(selectWriteMarkViewController, animated: true)
-    }
 }
 
 extension MarkViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let currentLocation = locations.last else { return }
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: currentLocation.coordinate.latitude, lng: currentLocation.coordinate.longitude))
-        cameraUpdate.animation = .easeIn
         mapView.moveCamera(cameraUpdate)
         
         setLocationOverlayIcon(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
