@@ -154,10 +154,6 @@ class AddScheduleViewController: BaseViewController {
             navigationItem.rightBarButtonItem = barButtonItem
         }
     }
-
-    @objc func backButtonTapped(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
-    }
     
     @objc func completionButtonTapped(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)

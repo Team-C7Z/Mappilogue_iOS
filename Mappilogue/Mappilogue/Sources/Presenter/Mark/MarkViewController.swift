@@ -14,7 +14,7 @@ class MarkViewController: NavigationBarViewController {
     let locationManager = CLLocationManager()
     
     let mapView = NMFMapView()
-    let searchTextField = UITextField()
+    let searchTextField = SearchTextField()
     let searchButton = UIButton()
     let addCategoryButton = AddCategoryButton()
     let currentLocationButton = UIButton()
@@ -45,12 +45,11 @@ class MarkViewController: NavigationBarViewController {
         mapView.allowsScrolling = true
         mapView.positionMode = .compass
     
-        searchTextField.layer.cornerRadius = 12
-        searchTextField.backgroundColor = .colorF9F8F7
-        searchTextField.placeholder = "장소 또는 기록 검색"
-        searchTextField.font = .body01
-        searchTextField.addLeftPadding()
-        applyShadow()
+        searchTextField.delegate = self
+        searchTextField.layer.applyShadow()
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(searchTextFieldTapped))
+        searchTextField.addGestureRecognizer(tap)
         
         searchButton.setImage(UIImage(named: "search"), for: .normal)
         
@@ -145,12 +144,10 @@ class MarkViewController: NavigationBarViewController {
         }
     }
     
-    private func applyShadow() {
-        searchTextField.layer.shadowColor = UIColor.color000000.cgColor
-        searchTextField.layer.shadowOpacity = 0.1
-        searchTextField.layer.shadowRadius = 4.0
-        searchTextField.layer.shadowOffset = CGSize(width: 0, height: 2)
-        searchTextField.layer.masksToBounds = false
+    @objc private func searchTextFieldTapped() {
+        let searchViewController = SearchViewController()
+        searchViewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(searchViewController, animated: true)
     }
     
     @objc func currentLocationButtonTapped(_ sender: UIButton) {
@@ -213,7 +210,6 @@ class MarkViewController: NavigationBarViewController {
 }
 
 extension MarkViewController: CLLocationManagerDelegate {
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let currentLocation = locations.last else { return }
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: currentLocation.coordinate.latitude, lng: currentLocation.coordinate.longitude))
@@ -262,6 +258,13 @@ extension MarkViewController: CLLocationManagerDelegate {
         present(alertViewController, animated: false)
     }
 }
+
+extension MarkViewController: UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        return false
+    }
+}
+
 protocol EmptyMarkDelegate: AnyObject {
     func setEmptyMarkCellHeight()
 }
