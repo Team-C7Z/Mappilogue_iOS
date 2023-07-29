@@ -8,20 +8,31 @@
 import UIKit
 
 class SearchResultViewController: BaseViewController {
-    private let stackView = UIStackView()
-    private let locationButton = UIButton()
-    private let markButton = UIButton()
+    let dummyLocation = dummyLocationData()
+    let dummyMark = [String]()
     
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = .colorF9F8F7
-        tableView.sectionHeaderHeight = 0
-        tableView.sectionFooterHeight = 0
-        tableView.register(EmptySearchCell.self, forCellReuseIdentifier: EmptySearchCell.registerId)
-        tableView.delegate = self
-        tableView.dataSource = self
-        return tableView
+    var searchType: SearchType = .location {
+        didSet {
+            setSearchButtonDesign()
+        }
+    }
+    
+    private let stackView = UIStackView()
+    private var locationButton = UIButton()
+    private var markButton = UIButton()
+    
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .colorF9F8F7
+        collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        collectionView.register(SearchLocationCell.self, forCellWithReuseIdentifier: SearchLocationCell.registerId)
+        collectionView.register(SearchMarkCell.self, forCellWithReuseIdentifier: SearchMarkCell.registerId)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        return collectionView
     }()
     
     override func viewDidLoad() {
@@ -36,26 +47,18 @@ class SearchResultViewController: BaseViewController {
         stackView.distribution = .fillEqually
         stackView.spacing = 8
         
-        locationButton.layer.cornerRadius = 12
-        locationButton.backgroundColor = .color2EBD3D
-        locationButton.setTitle("장소", for: .normal)
-        locationButton.setTitleColor(.colorFFFFFF, for: .normal)
-        locationButton.titleLabel?.font = .body02
-        
-        markButton.layer.cornerRadius = 12
-        markButton.backgroundColor = .colorF5F3F0
-        markButton.setTitle("기록", for: .normal)
-        markButton.setTitleColor(.color707070, for: .normal)
-        markButton.titleLabel?.font = .body02
+        locationButton = createSearchButton("장소")
+        markButton = createSearchButton("기록")
+        setSearchButtonDesign()
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
-       
+        
         view.addSubview(stackView)
         stackView.addArrangedSubview(locationButton)
         stackView.addArrangedSubview(markButton)
-        view.addSubview(tableView)
+        view.addSubview(collectionView)
     }
     
     override func setupLayout() {
@@ -68,30 +71,82 @@ class SearchResultViewController: BaseViewController {
             $0.height.equalTo(40)
         }
         
-        tableView.snp.makeConstraints {
-            $0.top.equalTo(stackView.snp.bottom).offset(16)
+        collectionView.snp.makeConstraints {
+            $0.top.equalTo(stackView.snp.bottom)
             $0.leading.trailing.bottom.equalTo(view)
         }
     }
+    
+    private func createSearchButton(_ title: String) -> UIButton {
+        let button = UIButton()
+        button.layer.cornerRadius = 12
+        button.setTitle(title, for: .normal)
+        button.titleLabel?.font = .body03
+        button.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
+        
+        return button
+    }
+    
+    private func setSearchButtonDesign() {
+        locationButton.setTitleColor(searchType == .location ? .colorFFFFFF : .color707070, for: .normal)
+        markButton.setTitleColor(searchType == .mark ? .colorFFFFFF : .color707070, for: .normal)
+        locationButton.backgroundColor = searchType == .location ? .color2EBD3D : .colorF5F3F0
+        markButton.backgroundColor = searchType == .mark ? .color2EBD3D : .colorF5F3F0
+    }
+    
+    @objc func searchButtonTapped(_ button: UIButton) {
+        switch button {
+        case locationButton:
+            searchType = .location
+        case markButton:
+            searchType = .mark
+        default:
+            break
+        }
+        collectionView.reloadData()
+    }
 }
 
-extension SearchResultViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: EmptySearchCell.registerId, for: indexPath) as? EmptySearchCell else { return UITableViewCell() }
-        cell.selectionStyle = .none
-    
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.bounds.height - 44
+extension SearchResultViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch searchType {
+        case .location:
+            return dummyLocation.count
+        case .mark:
+            return dummyMark.count
+        }
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        switch searchType {
+        case .location:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchLocationCell.registerId, for: indexPath) as? SearchLocationCell else { return UICollectionViewCell() }
+            return cell
+        case .mark:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchMarkCell.registerId, for: indexPath) as? SearchMarkCell else { return UICollectionViewCell() }
+            return cell
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width - 32, height: searchType == .location ? 44 : 43)
+    }
+    
+    // 수평 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    // 수직 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 12
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
     }
 }
