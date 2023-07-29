@@ -9,7 +9,7 @@ import UIKit
 
 class SearchResultViewController: BaseViewController {
     let dummyLocation = dummyLocationData()
-    let dummyMark = [String]()
+    let dummyMark = dummyMarkData()
     
     var searchType: SearchType = .location {
         didSet {
@@ -73,7 +73,7 @@ class SearchResultViewController: BaseViewController {
         }
         
         collectionView.snp.makeConstraints {
-            $0.top.equalTo(stackView.snp.bottom)
+            $0.top.equalTo(stackView.snp.bottom).offset(16)
             $0.leading.trailing.bottom.equalTo(view)
         }
     }
@@ -124,25 +124,32 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
             if dummyLocation.isEmpty {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptySearchCell.registerId, for: indexPath) as? EmptySearchCell else { return UICollectionViewCell() }
                 return cell
+                
+            } else {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchLocationCell.registerId, for: indexPath) as? SearchLocationCell else { return UICollectionViewCell() }
+                
+                let location = dummyLocation[indexPath.row]
+                cell.configure(with: location)
+                
+                return cell
             }
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchLocationCell.registerId, for: indexPath) as? SearchLocationCell else { return UICollectionViewCell() }
-            
-            let location = dummyLocation[indexPath.row]
-            cell.configure(with: location)
-            
-            return cell
         case .mark:
             if dummyMark.isEmpty {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptySearchCell.registerId, for: indexPath) as? EmptySearchCell else { return UICollectionViewCell() }
                 return cell
+            } else {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchMarkCell.registerId, for: indexPath) as? SearchMarkCell else { return UICollectionViewCell() }
+                
+                let mark = dummyMark[indexPath.row]
+                cell.configure(with: mark)
+                    
+                return cell
             }
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchMarkCell.registerId, for: indexPath) as? SearchMarkCell else { return UICollectionViewCell() }
-            return cell
         }
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        return UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 16)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
