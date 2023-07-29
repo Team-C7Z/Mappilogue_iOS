@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EmptySearchCell: BaseTableViewCell {
+class EmptySearchCell: BaseCollectionViewCell {
     static let registerId = "\(EmptySearchCell.self)"
     
     let stackView = UIStackView()
