@@ -1,19 +1,19 @@
 //
-//  WriteMarkButton.swift
+//  MarkListButton.swift
 //  Mappilogue
 //
-//  Created by hyemi on 2023/07/24.
+//  Created by hyemi on 2023/07/29.
 //
 
 import UIKit
 
-class WriteMarkButton: UIButton {
+class MarkListButton: UIButton {
     init() {
         super.init(frame: .zero)
         
         layer.applyMainColorShadow()
-        setImage(UIImage(named: "writeMark"), for: .normal)
-        
+        setImage(UIImage(named: "markList"), for: .normal)
+    
         self.snp.makeConstraints {
             $0.width.height.equalTo(56)
         }
