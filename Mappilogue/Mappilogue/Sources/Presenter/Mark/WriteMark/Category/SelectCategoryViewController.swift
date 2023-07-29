@@ -7,7 +7,13 @@
 
 import UIKit
 
+struct CategoryData {
+    var title: String
+    var count: Int
+}
+
 class SelectCategoryViewController: BaseViewController {
+    var dummyCategory: [CategoryData] = [CategoryData(title: "여행", count: 1), CategoryData(title: "생일", count: 0)]
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -25,7 +31,8 @@ class SelectCategoryViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        hideKeyboardWhenTappedAround()
     }
     
     override func setupProperty() {
@@ -68,17 +75,24 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return section == 0 ? dummyCategory.count : 1
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == 0 {
+        switch indexPath.section {
+        case 0:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewCategoryCell.registerId, for: indexPath) as? NewCategoryCell else { return UICollectionViewCell() }
+            
+            let cateogry = dummyCategory[indexPath.row]
+            cell.configure(with: cateogry)
+            
             return cell
+        case 1:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddCategoryCell.registerId, for: indexPath) as? AddCategoryCell else { return UICollectionViewCell() }
+            return cell
+        default:
+            return UICollectionViewCell()
         }
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddCategoryCell.registerId, for: indexPath) as? AddCategoryCell else { return UICollectionViewCell() }
-        
-        return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -100,6 +114,9 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       
+        if indexPath.section == 1 {
+            dummyCategory.append(CategoryData(title: "새로운 카테고리", count: 0))
+            collectionView.reloadData()
+        }
     }
 }
