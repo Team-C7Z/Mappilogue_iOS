@@ -43,8 +43,7 @@ class EmptySearchCell: BaseCollectionViewCell {
         super.setupLayout()
         
         stackView.snp.makeConstraints {
-            $0.top.equalTo(contentView).offset(281)
-            $0.centerX.equalTo(contentView)
+            $0.centerY.centerX.equalTo(contentView)
         }
     }
 }
