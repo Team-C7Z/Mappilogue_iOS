@@ -28,6 +28,7 @@ class SearchResultViewController: BaseViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .colorF9F8F7
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        collectionView.register(EmptySearchCell.self, forCellWithReuseIdentifier: EmptySearchCell.registerId)
         collectionView.register(SearchLocationCell.self, forCellWithReuseIdentifier: SearchLocationCell.registerId)
         collectionView.register(SearchMarkCell.self, forCellWithReuseIdentifier: SearchMarkCell.registerId)
         collectionView.delegate = self
@@ -111,18 +112,30 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch searchType {
         case .location:
-            return dummyLocation.count
+            return dummyLocation.isEmpty ? 1 : dummyLocation.count
         case .mark:
-            return dummyMark.count
+            return dummyMark.isEmpty ? 1 : dummyMark.count
         }
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch searchType {
         case .location:
+            if dummyLocation.isEmpty {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptySearchCell.registerId, for: indexPath) as? EmptySearchCell else { return UICollectionViewCell() }
+                return cell
+            }
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchLocationCell.registerId, for: indexPath) as? SearchLocationCell else { return UICollectionViewCell() }
+            
+            let location = dummyLocation[indexPath.row]
+            cell.configure(with: location)
+            
             return cell
         case .mark:
+            if dummyMark.isEmpty {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptySearchCell.registerId, for: indexPath) as? EmptySearchCell else { return UICollectionViewCell() }
+                return cell
+            }
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchMarkCell.registerId, for: indexPath) as? SearchMarkCell else { return UICollectionViewCell() }
             return cell
         }
@@ -133,7 +146,12 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 32, height: searchType == .location ? 44 : 43)
+        switch searchType {
+        case .location:
+            return CGSize(width: collectionView.frame.width - 32, height: dummyLocation.isEmpty ? collectionView.frame.height : 44)
+        case .mark:
+            return CGSize(width: collectionView.frame.width - 32, height: dummyMark.isEmpty ? collectionView.frame.height : 43)
+        }
     }
     
     // 수평 간격
