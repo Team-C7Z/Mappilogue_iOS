@@ -22,7 +22,7 @@ class SearchViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationBar()
+        setNavigationBar("검색")
         
         searchTextField.becomeFirstResponder()
         searchTextField.delegate = self
@@ -52,19 +52,6 @@ class SearchViewController: BaseViewController {
         }
     }
     
-    private func setNavigationBar() {
-        title = "검색"
-        let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "back2"), for: .normal)
-        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        let barButtonItem = UIBarButtonItem(customView: button)
-        navigationItem.leftBarButtonItem = barButtonItem
-    }
-    
-    @objc func backButtonTapped(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
-    }
-    
     private func showViewController(_ viewController: UIViewController) {
         containerView.subviews.forEach { $0.removeFromSuperview() }
         addChild(viewController)
@@ -78,7 +65,6 @@ class SearchViewController: BaseViewController {
     
     private func setKeyboardObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
@@ -91,20 +77,16 @@ class SearchViewController: BaseViewController {
     }
     
     private func keyboardWillChange(_ notification: Notification, isShowing: Bool) {
-        guard let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         let keyboardHeight = keyboardFrame.cgRectValue.height
-        if isShowing {
-            searchResultViewController.keyboardHeight = keyboardHeight + 16
-        } else {
-            searchResultViewController.keyboardHeight = 44
-        }
+        searchResultViewController.keyboardHeight = isShowing ? keyboardHeight + 16 : 44
         searchResultViewController.collectionView.reloadData()
     }
 }
 
 extension SearchViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        searchTextField.resignFirstResponder()
+        textField.resignFirstResponder()
         return true
     }
     

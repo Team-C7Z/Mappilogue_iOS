@@ -22,7 +22,7 @@ class SearchMarkCell: BaseCollectionViewCell {
         
         markView.layer.cornerRadius = 19 / 2
         markImage.image = UIImage(named: "mark")
-        applyShadow(markView)
+        markImage.layer.applyShadow()
 
         markTitleLabel.textColor = .color1C1C1C
         markTitleLabel.font = .title02
@@ -88,13 +88,5 @@ class SearchMarkCell: BaseCollectionViewCell {
         markTitleLabel.text = mark.title
         markDateLabel.text = mark.date
         markLocationLabel.text = mark.location
-    }
-    
-    private func applyShadow(_ view: UIView) {
-        view.layer.shadowColor = UIColor.color000000.cgColor
-        view.layer.shadowOpacity = 0.1
-        view.layer.shadowRadius = 4.0
-        view.layer.shadowOffset = CGSize(width: 0, height: 2)
-        view.layer.masksToBounds = false
     }
 }
