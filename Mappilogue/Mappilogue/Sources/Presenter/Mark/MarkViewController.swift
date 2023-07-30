@@ -61,9 +61,9 @@ class MarkViewController: NavigationBarViewController {
         view.addSubview(mapView)
         mapView.addSubview(searchTextField)
         searchTextField.addSubview(searchButton)
-        mapView.addSubview(markListButton)
         mapView.addSubview(addCategoryButton)
         view.addSubview(currentLocationButton)
+        view.addSubview(markListButton)
         view.addSubview(writeMarkButton)
         view.addSubview(containerView)
     }
@@ -194,6 +194,14 @@ class MarkViewController: NavigationBarViewController {
             nearestHeight = maxHeight
         }
         
+        if clampedHeight > view.frame.height / 2 {
+            markListButton.isHidden = true
+            writeMarkButton.isHidden = true
+        } else {
+            markListButton.isHidden = false
+            writeMarkButton.isHidden = false
+        }
+     
         if gesture.state == .ended || gesture.state == .cancelled {
             containerView.snp.updateConstraints { make in
                 make.height.equalTo(nearestHeight)
@@ -201,10 +209,8 @@ class MarkViewController: NavigationBarViewController {
             
             if nearestHeight == maxHeight {
                 bottomSheetViewController.emptyCellHeight = view.frame.height - 200
-                writeMarkButton.isHidden = true
             } else {
                 bottomSheetViewController.emptyCellHeight = 196
-                writeMarkButton.isHidden = false
             }
             bottomSheetViewController.tableView.reloadData()
 
