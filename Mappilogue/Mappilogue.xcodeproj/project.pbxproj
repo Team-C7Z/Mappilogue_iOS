@@ -8,21 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		520E9D02714F72A41E207B62 /* Pods_Mappilogue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 021CF7D6B8E435D26802F66A /* Pods_Mappilogue.framework */; };
-		92011B282A6E75F1009B047F /* WriteMarkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B272A6E75F1009B047F /* WriteMarkButton.swift */; };
+		92011B282A6E75F1009B047F /* WriteRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B272A6E75F1009B047F /* WriteRecordButton.swift */; };
 		92011B2A2A6E7734009B047F /* AddCategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B292A6E7734009B047F /* AddCategoryButton.swift */; };
 		92011B702A70E7D8009B047F /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */; };
 		92011B722A7127FC009B047F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B712A7127FC009B047F /* AlertViewController.swift */; };
-		92011B752A7138B0009B047F /* EmptyMarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B742A7138B0009B047F /* EmptyMarkCell.swift */; };
-		92011B782A71683E009B047F /* SelectWriteMarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B772A71683E009B047F /* SelectWriteMarkViewController.swift */; };
+		92011B752A7138B0009B047F /* EmptyRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B742A7138B0009B047F /* EmptyRecordCell.swift */; };
+		92011B782A71683E009B047F /* SelectWriteRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B772A71683E009B047F /* SelectWriteRecordViewController.swift */; };
 		92011B7B2A716C9D009B047F /* SelectScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B7A2A716C9D009B047F /* SelectScheduleCell.swift */; };
 		92011B7D2A7174B6009B047F /* DateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B7C2A7174B6009B047F /* DateHeaderView.swift */; };
-		92011B7F2A726031009B047F /* WriteMarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B7E2A726031009B047F /* WriteMarkViewController.swift */; };
+		92011B7F2A726031009B047F /* WriteRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B7E2A726031009B047F /* WriteRecordViewController.swift */; };
 		92011B812A7271D0009B047F /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B802A7271D0009B047F /* CategoryButton.swift */; };
 		92011B832A72AA96009B047F /* ScheduleTitleColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B822A72AA96009B047F /* ScheduleTitleColorView.swift */; };
 		92011B872A72B0A7009B047F /* MainLocatonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B862A72B0A7009B047F /* MainLocatonView.swift */; };
 		92011B892A72B4BB009B047F /* TextContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B882A72B4BB009B047F /* TextContentView.swift */; };
 		92011B8B2A72B7DA009B047F /* NewWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B8A2A72B7DA009B047F /* NewWriteView.swift */; };
-		92011B8D2A72BBE8009B047F /* SaveMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B8C2A72BBE8009B047F /* SaveMarkView.swift */; };
+		92011B8D2A72BBE8009B047F /* SaveRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B8C2A72BBE8009B047F /* SaveRecordView.swift */; };
 		92011B902A7364D0009B047F /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B8F2A7364D0009B047F /* BaseButton.swift */; };
 		92011B922A7367E6009B047F /* MainLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B912A7367E5009B047F /* MainLocationButton.swift */; };
 		92011BF92A73D404009B047F /* ColorSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011BF82A73D404009B047F /* ColorSelectionView.swift */; };
@@ -34,11 +34,12 @@
 		92011C0B2A74B837009B047F /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C0A2A74B837009B047F /* SearchResultViewController.swift */; };
 		92011C0E2A74C1FC009B047F /* EmptySearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C0D2A74C1FC009B047F /* EmptySearchCell.swift */; };
 		92011C102A74F222009B047F /* SearchType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C0F2A74F222009B047F /* SearchType.swift */; };
-		92011C122A74F8E6009B047F /* SearchMarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C112A74F8E6009B047F /* SearchMarkCell.swift */; };
+		92011C122A74F8E6009B047F /* SearchRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C112A74F8E6009B047F /* SearchRecordCell.swift */; };
 		92011C142A74F9DE009B047F /* SearchLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C132A74F9DE009B047F /* SearchLocationCell.swift */; };
 		92011C162A7505F7009B047F /* Mark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C152A7505F7009B047F /* Mark.swift */; };
 		92011C182A753AEB009B047F /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C172A753AEB009B047F /* CALayer.swift */; };
-		92011C1A2A755D02009B047F /* MarkListButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C192A755D02009B047F /* MarkListButton.swift */; };
+		92011C1A2A755D02009B047F /* RecordListButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C192A755D02009B047F /* RecordListButton.swift */; };
+		92011C1C2A75E484009B047F /* MarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C1B2A75E484009B047F /* MarkCell.swift */; };
 		9224FCEE2A5BEF80000A56A6 /* ScheduleTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */; };
 		9224FCF32A5C5E7A000A56A6 /* WeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */; };
 		9224FCF52A5D6C65000A56A6 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */; };
@@ -101,7 +102,7 @@
 		926999402A14F73C003DDAD2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9269993F2A14F73C003DDAD2 /* HomeViewController.swift */; };
 		926999422A14F74B003DDAD2 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999412A14F74B003DDAD2 /* CalendarViewController.swift */; };
 		926999442A14F756003DDAD2 /* GatheringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999432A14F756003DDAD2 /* GatheringViewController.swift */; };
-		926999462A14F75F003DDAD2 /* MarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999452A14F75F003DDAD2 /* MarkViewController.swift */; };
+		926999462A14F75F003DDAD2 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999452A14F75F003DDAD2 /* RecordViewController.swift */; };
 		926999482A14F76A003DDAD2 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999472A14F76A003DDAD2 /* MyViewController.swift */; };
 		927C144BD1C3E8536A8EC3A1 /* Pods_Mappilogue_MappilogueUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65FB9F97A7DA9BC190F4E1BF /* Pods_Mappilogue_MappilogueUITests.framework */; };
 		927E7F212A66F64400E6A29F /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927E7F202A66F64400E6A29F /* Schedule.swift */; };
@@ -156,21 +157,21 @@
 		65FB9F97A7DA9BC190F4E1BF /* Pods_Mappilogue_MappilogueUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mappilogue_MappilogueUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81704CFC2A84A47234E8C7D7 /* Pods-Mappilogue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mappilogue.release.xcconfig"; path = "Target Support Files/Pods-Mappilogue/Pods-Mappilogue.release.xcconfig"; sourceTree = "<group>"; };
 		81A821757BF382206BE4FD7A /* Pods_MappilogueTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MappilogueTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		92011B272A6E75F1009B047F /* WriteMarkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteMarkButton.swift; sourceTree = "<group>"; };
+		92011B272A6E75F1009B047F /* WriteRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordButton.swift; sourceTree = "<group>"; };
 		92011B292A6E7734009B047F /* AddCategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryButton.swift; sourceTree = "<group>"; };
 		92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		92011B712A7127FC009B047F /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
-		92011B742A7138B0009B047F /* EmptyMarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyMarkCell.swift; sourceTree = "<group>"; };
-		92011B772A71683E009B047F /* SelectWriteMarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWriteMarkViewController.swift; sourceTree = "<group>"; };
+		92011B742A7138B0009B047F /* EmptyRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyRecordCell.swift; sourceTree = "<group>"; };
+		92011B772A71683E009B047F /* SelectWriteRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWriteRecordViewController.swift; sourceTree = "<group>"; };
 		92011B7A2A716C9D009B047F /* SelectScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectScheduleCell.swift; sourceTree = "<group>"; };
 		92011B7C2A7174B6009B047F /* DateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHeaderView.swift; sourceTree = "<group>"; };
-		92011B7E2A726031009B047F /* WriteMarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteMarkViewController.swift; sourceTree = "<group>"; };
+		92011B7E2A726031009B047F /* WriteRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordViewController.swift; sourceTree = "<group>"; };
 		92011B802A7271D0009B047F /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
 		92011B822A72AA96009B047F /* ScheduleTitleColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTitleColorView.swift; sourceTree = "<group>"; };
 		92011B862A72B0A7009B047F /* MainLocatonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLocatonView.swift; sourceTree = "<group>"; };
 		92011B882A72B4BB009B047F /* TextContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextContentView.swift; sourceTree = "<group>"; };
 		92011B8A2A72B7DA009B047F /* NewWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWriteView.swift; sourceTree = "<group>"; };
-		92011B8C2A72BBE8009B047F /* SaveMarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveMarkView.swift; sourceTree = "<group>"; };
+		92011B8C2A72BBE8009B047F /* SaveRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveRecordView.swift; sourceTree = "<group>"; };
 		92011B8F2A7364D0009B047F /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		92011B912A7367E5009B047F /* MainLocationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainLocationButton.swift; sourceTree = "<group>"; };
 		92011BF82A73D404009B047F /* ColorSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectionView.swift; sourceTree = "<group>"; };
@@ -182,11 +183,12 @@
 		92011C0A2A74B837009B047F /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		92011C0D2A74C1FC009B047F /* EmptySearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySearchCell.swift; sourceTree = "<group>"; };
 		92011C0F2A74F222009B047F /* SearchType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchType.swift; sourceTree = "<group>"; };
-		92011C112A74F8E6009B047F /* SearchMarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMarkCell.swift; sourceTree = "<group>"; };
+		92011C112A74F8E6009B047F /* SearchRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecordCell.swift; sourceTree = "<group>"; };
 		92011C132A74F9DE009B047F /* SearchLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationCell.swift; sourceTree = "<group>"; };
 		92011C152A7505F7009B047F /* Mark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mark.swift; sourceTree = "<group>"; };
 		92011C172A753AEB009B047F /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
-		92011C192A755D02009B047F /* MarkListButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkListButton.swift; sourceTree = "<group>"; };
+		92011C192A755D02009B047F /* RecordListButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordListButton.swift; sourceTree = "<group>"; };
+		92011C1B2A75E484009B047F /* MarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkCell.swift; sourceTree = "<group>"; };
 		9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTitleCell.swift; sourceTree = "<group>"; };
 		9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCell.swift; sourceTree = "<group>"; };
 		9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
@@ -253,7 +255,7 @@
 		9269993F2A14F73C003DDAD2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		926999412A14F74B003DDAD2 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		926999432A14F756003DDAD2 /* GatheringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatheringViewController.swift; sourceTree = "<group>"; };
-		926999452A14F75F003DDAD2 /* MarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkViewController.swift; sourceTree = "<group>"; };
+		926999452A14F75F003DDAD2 /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		926999472A14F76A003DDAD2 /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
 		927E7F202A66F64400E6A29F /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		927E7F262A683DCD00E6A29F /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
@@ -329,7 +331,8 @@
 		92011B732A71386F009B047F /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				92011B742A7138B0009B047F /* EmptyMarkCell.swift */,
+				92011B742A7138B0009B047F /* EmptyRecordCell.swift */,
+				92011C1B2A75E484009B047F /* MarkCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -337,11 +340,11 @@
 		92011B762A716801009B047F /* WriteMark */ = {
 			isa = PBXGroup;
 			children = (
-				92011B772A71683E009B047F /* SelectWriteMarkViewController.swift */,
+				92011B772A71683E009B047F /* SelectWriteRecordViewController.swift */,
 				92011B7C2A7174B6009B047F /* DateHeaderView.swift */,
 				92011B8A2A72B7DA009B047F /* NewWriteView.swift */,
-				92011B7E2A726031009B047F /* WriteMarkViewController.swift */,
-				92011B8C2A72BBE8009B047F /* SaveMarkView.swift */,
+				92011B7E2A726031009B047F /* WriteRecordViewController.swift */,
+				92011B8C2A72BBE8009B047F /* SaveRecordView.swift */,
 				92011B792A716C35009B047F /* Cell */,
 				92011BFA2A7402DD009B047F /* Category */,
 				92011BFB2A7402E5009B047F /* TitleColor */,
@@ -420,7 +423,7 @@
 			children = (
 				92011C0D2A74C1FC009B047F /* EmptySearchCell.swift */,
 				92011C132A74F9DE009B047F /* SearchLocationCell.swift */,
-				92011C112A74F8E6009B047F /* SearchMarkCell.swift */,
+				92011C112A74F8E6009B047F /* SearchRecordCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -690,7 +693,7 @@
 				9269993A2A14F689003DDAD2 /* Home */,
 				9269993B2A14F6A4003DDAD2 /* Calendar */,
 				9269993C2A14F6BF003DDAD2 /* Gathering */,
-				9269993E2A14F71D003DDAD2 /* Mark */,
+				9269993E2A14F71D003DDAD2 /* Record */,
 				9269993D2A14F6F9003DDAD2 /* My */,
 				92A7B64D2A4CCDB7009C9293 /* Reusable */,
 			);
@@ -749,16 +752,16 @@
 			path = My;
 			sourceTree = "<group>";
 		};
-		9269993E2A14F71D003DDAD2 /* Mark */ = {
+		9269993E2A14F71D003DDAD2 /* Record */ = {
 			isa = PBXGroup;
 			children = (
-				926999452A14F75F003DDAD2 /* MarkViewController.swift */,
+				926999452A14F75F003DDAD2 /* RecordViewController.swift */,
 				92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */,
 				92011B732A71386F009B047F /* Cell */,
 				92011C052A74A0FE009B047F /* Search */,
 				92011B762A716801009B047F /* WriteMark */,
 			);
-			path = Mark;
+			path = Record;
 			sourceTree = "<group>";
 		};
 		929158162A25292A0022BEF9 /* Fonts */ = {
@@ -779,8 +782,8 @@
 				9224FCFA2A5FDD90000A56A6 /* AddScheduleButton.swift */,
 				9224FD082A601B00000A56A6 /* ColorSelectionButton.swift */,
 				92011C082A74AFCA009B047F /* SearchTextField.swift */,
-				92011C192A755D02009B047F /* MarkListButton.swift */,
-				92011B272A6E75F1009B047F /* WriteMarkButton.swift */,
+				92011C192A755D02009B047F /* RecordListButton.swift */,
+				92011B272A6E75F1009B047F /* WriteRecordButton.swift */,
 				92011B292A6E7734009B047F /* AddCategoryButton.swift */,
 				92011B712A7127FC009B047F /* AlertViewController.swift */,
 			);
@@ -1093,7 +1096,7 @@
 				9224FCF52A5D6C65000A56A6 /* DatePickerViewController.swift in Sources */,
 				926382B42A6CC9760064C1A8 /* GatheringToastMessageView.swift in Sources */,
 				92011C012A740A08009B047F /* AddCategoryCell.swift in Sources */,
-				92011B752A7138B0009B047F /* EmptyMarkCell.swift in Sources */,
+				92011B752A7138B0009B047F /* EmptyRecordCell.swift in Sources */,
 				92011BFF2A7407D3009B047F /* SelectCategoryViewController.swift in Sources */,
 				9224FD3B2A6532E3000A56A6 /* EndView.swift in Sources */,
 				9230BE472A57FEB80053E535 /* DayCell.swift in Sources */,
@@ -1104,8 +1107,8 @@
 				92A7B6662A4E5B3A009C9293 /* UpcomingSchedule.swift in Sources */,
 				9224FD312A6397BD000A56A6 /* CycleRepeatViewController.swift in Sources */,
 				9224FCEE2A5BEF80000A56A6 /* ScheduleTitleCell.swift in Sources */,
-				92011B782A71683E009B047F /* SelectWriteMarkViewController.swift in Sources */,
-				92011C1A2A755D02009B047F /* MarkListButton.swift in Sources */,
+				92011B782A71683E009B047F /* SelectWriteRecordViewController.swift in Sources */,
+				92011C1A2A755D02009B047F /* RecordListButton.swift in Sources */,
 				9224FD3D2A6559A0000A56A6 /* AddLocationViewController.swift in Sources */,
 				924BE0CE2A51C4D4002C70FF /* MarkedRecordsCell.swift in Sources */,
 				9224FD1F2A62B4E9000A56A6 /* NotificationViewController.swift in Sources */,
@@ -1134,7 +1137,7 @@
 				9224FD032A600ACF000A56A6 /* ScheduleDurationCell.swift in Sources */,
 				92A7B6612A4E2039009C9293 /* BaseTableViewHeaderFooterView.swift in Sources */,
 				92011B812A7271D0009B047F /* CategoryButton.swift in Sources */,
-				92011C122A74F8E6009B047F /* SearchMarkCell.swift in Sources */,
+				92011C122A74F8E6009B047F /* SearchRecordCell.swift in Sources */,
 				92011B7D2A7174B6009B047F /* DateHeaderView.swift in Sources */,
 				9224FD482A6579ED000A56A6 /* LocationTimeCell.swift in Sources */,
 				926999482A14F76A003DDAD2 /* MyViewController.swift in Sources */,
@@ -1165,12 +1168,13 @@
 				9224FD4A2A667F7E000A56A6 /* TimePickerViewController.swift in Sources */,
 				9224FD272A6394A9000A56A6 /* WeekdayRepeatViewController.swift in Sources */,
 				9224FD442A657150000A56A6 /* Location.swift in Sources */,
-				926999462A14F75F003DDAD2 /* MarkViewController.swift in Sources */,
+				926999462A14F75F003DDAD2 /* RecordViewController.swift in Sources */,
 				92011B7B2A716C9D009B047F /* SelectScheduleCell.swift in Sources */,
 				92011B922A7367E6009B047F /* MainLocationButton.swift in Sources */,
 				9224FCFB2A5FDD90000A56A6 /* AddScheduleButton.swift in Sources */,
+				92011C1C2A75E484009B047F /* MarkCell.swift in Sources */,
 				926999402A14F73C003DDAD2 /* HomeViewController.swift in Sources */,
-				92011B8D2A72BBE8009B047F /* SaveMarkView.swift in Sources */,
+				92011B8D2A72BBE8009B047F /* SaveRecordView.swift in Sources */,
 				927E7F212A66F64400E6A29F /* Schedule.swift in Sources */,
 				9224FD152A613AB8000A56A6 /* UpcomingScheduleSection.swift in Sources */,
 				92011C142A74F9DE009B047F /* SearchLocationCell.swift in Sources */,
@@ -1184,11 +1188,11 @@
 				92A7B6632A4E20BF009C9293 /* BaseTableViewCell.swift in Sources */,
 				9224FD1B2A61705D000A56A6 /* ColorSelection.swift in Sources */,
 				9224FD232A62EC0B000A56A6 /* RepeatViewController.swift in Sources */,
-				92011B282A6E75F1009B047F /* WriteMarkButton.swift in Sources */,
+				92011B282A6E75F1009B047F /* WriteRecordButton.swift in Sources */,
 				92A7B64F2A4CCE29009C9293 /* AddButton.swift in Sources */,
 				92011C182A753AEB009B047F /* CALayer.swift in Sources */,
 				92011B702A70E7D8009B047F /* BottomSheetViewController.swift in Sources */,
-				92011B7F2A726031009B047F /* WriteMarkViewController.swift in Sources */,
+				92011B7F2A726031009B047F /* WriteRecordViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

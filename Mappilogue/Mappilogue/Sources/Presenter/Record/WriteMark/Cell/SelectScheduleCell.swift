@@ -35,7 +35,7 @@ class SelectScheduleCell: BaseCollectionViewCell {
         scheduleLocationLabel.textColor = .color707070
         scheduleLocationLabel.font = .caption03
         
-        writeButton.setImage(UIImage(named: "moveMark"), for: .normal)
+        writeButton.setImage(UIImage(named: "moveRecord"), for: .normal)
     }
     
     override func setupHierarchy() {

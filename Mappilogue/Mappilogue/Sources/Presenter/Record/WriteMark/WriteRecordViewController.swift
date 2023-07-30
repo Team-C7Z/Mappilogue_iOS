@@ -1,5 +1,5 @@
 //
-//  WriteMarkViewController.swift
+//  WriteRecordViewController.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/07/27.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WriteMarkViewController: BaseViewController {
+class WriteRecordViewController: BaseViewController {
     var schedule: Schedule?
     var textContentCellHeight: CGFloat = 80
     
@@ -19,7 +19,7 @@ class WriteMarkViewController: BaseViewController {
     private let colorSelectionView = ColorSelectionView()
     private let mainLocationButton = MainLocationButton()
     private let textContentView = TextContentView()
-    private let saveMarkView = SaveMarkView()
+    private let saveRecordView = SaveRecordView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +43,7 @@ class WriteMarkViewController: BaseViewController {
             self?.stackView.layoutIfNeeded()
         }
         
-        saveMarkView.hideKeyboardButton.addTarget(self, action: #selector(dismissKeyboard), for: .touchUpInside)
+        saveRecordView.hideKeyboardButton.addTarget(self, action: #selector(dismissKeyboard), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -57,7 +57,7 @@ class WriteMarkViewController: BaseViewController {
         stackView.addArrangedSubview(colorSelectionView)
         stackView.addArrangedSubview(mainLocationButton)
         stackView.addArrangedSubview(textContentView)
-        view.addSubview(saveMarkView)
+        view.addSubview(saveRecordView)
     }
     
     override func setupLayout() {
@@ -79,7 +79,7 @@ class WriteMarkViewController: BaseViewController {
             $0.bottom.equalTo(contentView).offset(-58)
         }
         
-        saveMarkView.snp.makeConstraints {
+        saveRecordView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(48)
         }
@@ -138,18 +138,18 @@ class WriteMarkViewController: BaseViewController {
             $0.bottom.equalTo(contentView).offset(isShowing ? -keyboardHeight : -58)
         }
         
-        saveMarkView.snp.remakeConstraints {
+        saveRecordView.snp.remakeConstraints {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(view).offset(isShowing ? -keyboardHeight : -34)
             $0.height.equalTo(48)
         }
         
-        saveMarkView.configure(true)
+        saveRecordView.configure(true)
         view.layoutIfNeeded()
     }
 }
 
-extension WriteMarkViewController: ColorSelectionButtonDelegate {
+extension WriteRecordViewController: ColorSelectionButtonDelegate {
     func colorSelectionButtonTapped(_ isSelected: Bool) {
         colorSelectionView.snp.remakeConstraints {
             $0.height.equalTo(isSelected ? 186 : 0)

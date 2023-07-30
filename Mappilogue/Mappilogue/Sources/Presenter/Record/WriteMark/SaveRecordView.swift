@@ -1,5 +1,5 @@
 //
-//  SaveMarkView.swift
+//  SaveRecordView.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/07/27.
@@ -7,10 +7,10 @@
 
 import UIKit
 
-class SaveMarkView: BaseView {
+class SaveRecordView: BaseView {
     private let lineView = UIView()
     private let cameraButton = UIButton()
-    let saveMarkButton = UIButton()
+    let saveRecordButton = UIButton()
     let hideKeyboardButton = UIButton()
     
     override func setupProperty() {
@@ -20,11 +20,11 @@ class SaveMarkView: BaseView {
         lineView.backgroundColor = .colorEAE6E1
         cameraButton.setImage(UIImage(named: "camera"), for: .normal)
         
-        saveMarkButton.setTitle("기록 저장", for: .normal)
-        saveMarkButton.setTitleColor(.colorFFFFFF, for: .normal)
-        saveMarkButton.titleLabel?.font = .body03
-        saveMarkButton.layer.cornerRadius = 35 / 2
-        saveMarkButton.backgroundColor = .color2EBD3D
+        saveRecordButton.setTitle("기록 저장", for: .normal)
+        saveRecordButton.setTitleColor(.colorFFFFFF, for: .normal)
+        saveRecordButton.titleLabel?.font = .body03
+        saveRecordButton.layer.cornerRadius = 35 / 2
+        saveRecordButton.backgroundColor = .color2EBD3D
         
         hideKeyboardButton.setImage(UIImage(named: "hideKeyboard"), for: .normal)
         hideKeyboardButton.isHidden = true
@@ -35,7 +35,7 @@ class SaveMarkView: BaseView {
 
         addSubview(lineView)
         addSubview(cameraButton)
-        addSubview(saveMarkButton)
+        addSubview(saveRecordButton)
         addSubview(hideKeyboardButton)
     }
     
@@ -54,7 +54,7 @@ class SaveMarkView: BaseView {
             $0.height.equalTo(40)
         }
         
-        saveMarkButton.snp.makeConstraints {
+        saveRecordButton.snp.makeConstraints {
             $0.trailing.equalTo(-16)
             $0.top.equalTo(7)
             $0.width.equalTo(70)
@@ -70,6 +70,6 @@ class SaveMarkView: BaseView {
     
     func configure(_ showKeyboard: Bool) {
         hideKeyboardButton.isHidden = showKeyboard ? false : true
-        saveMarkButton.isHidden = showKeyboard ? true : false
+        saveRecordButton.isHidden = showKeyboard ? true : false
     }
 }
