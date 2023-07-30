@@ -86,7 +86,7 @@ extension TextContentView: UITextViewDelegate {
     }
 }
 
-extension WriteMarkViewController: UITextViewDelegate {
+extension WriteRecordViewController: UITextViewDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return true
     }

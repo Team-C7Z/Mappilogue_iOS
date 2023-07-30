@@ -9,7 +9,7 @@ import UIKit
 
 class SearchResultViewController: BaseViewController {
     let dummyLocation = dummyLocationData()
-    let dummyMark = dummyMarkData()
+    let dummyRecord = dummyRecordData()
     var keyboardHeight: CGFloat = 0
     
     var searchType: SearchType = .location {
@@ -20,7 +20,7 @@ class SearchResultViewController: BaseViewController {
     
     private let stackView = UIStackView()
     private var locationButton = UIButton()
-    private var markButton = UIButton()
+    private var recordButton = UIButton()
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -32,7 +32,7 @@ class SearchResultViewController: BaseViewController {
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         collectionView.register(EmptySearchCell.self, forCellWithReuseIdentifier: EmptySearchCell.registerId)
         collectionView.register(SearchLocationCell.self, forCellWithReuseIdentifier: SearchLocationCell.registerId)
-        collectionView.register(SearchMarkCell.self, forCellWithReuseIdentifier: SearchMarkCell.registerId)
+        collectionView.register(SearchRecordCell.self, forCellWithReuseIdentifier: SearchRecordCell.registerId)
         collectionView.delegate = self
         collectionView.dataSource = self
         return collectionView
@@ -51,7 +51,7 @@ class SearchResultViewController: BaseViewController {
         stackView.spacing = 8
         
         locationButton = createSearchButton("장소")
-        markButton = createSearchButton("기록")
+        recordButton = createSearchButton("기록")
         setSearchButtonDesign()
     }
     
@@ -60,7 +60,7 @@ class SearchResultViewController: BaseViewController {
         
         view.addSubview(stackView)
         stackView.addArrangedSubview(locationButton)
-        stackView.addArrangedSubview(markButton)
+        stackView.addArrangedSubview(recordButton)
         view.addSubview(collectionView)
     }
     
@@ -93,7 +93,7 @@ class SearchResultViewController: BaseViewController {
     
     private func setSearchButtonDesign() {
         setLocationButtonDesign()
-        setMarkButtonDesign()
+        setRecordButtonDesign()
     }
     
     private func setLocationButtonDesign() {
@@ -101,17 +101,17 @@ class SearchResultViewController: BaseViewController {
         locationButton.backgroundColor = searchType == .location ? .color2EBD3D : .colorF5F3F0
     }
     
-    private func setMarkButtonDesign() {
-        markButton.setTitleColor(searchType == .mark ? .colorFFFFFF : .color707070, for: .normal)
-        markButton.backgroundColor = searchType == .mark ? .color2EBD3D : .colorF5F3F0
+    private func setRecordButtonDesign() {
+        recordButton.setTitleColor(searchType == .record ? .colorFFFFFF : .color707070, for: .normal)
+        recordButton.backgroundColor = searchType == .record ? .color2EBD3D : .colorF5F3F0
     }
     
     @objc func searchButtonTapped(_ button: UIButton) {
         switch button {
         case locationButton:
             searchType = .location
-        case markButton:
-            searchType = .mark
+        case recordButton:
+            searchType = .record
         default:
             break
         }
@@ -124,8 +124,8 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         switch searchType {
         case .location:
             return dummyLocation.isEmpty ? 1 : dummyLocation.count
-        case .mark:
-            return dummyMark.isEmpty ? 1 : dummyMark.count
+        case .record:
+            return dummyRecord.isEmpty ? 1 : dummyRecord.count
         }
     }
 
@@ -144,15 +144,15 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
                 
                 return cell
             }
-        case .mark:
-            if dummyMark.isEmpty {
+        case .record:
+            if dummyRecord.isEmpty {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptySearchCell.registerId, for: indexPath) as? EmptySearchCell else { return UICollectionViewCell() }
                 return cell
             } else {
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchMarkCell.registerId, for: indexPath) as? SearchMarkCell else { return UICollectionViewCell() }
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchRecordCell.registerId, for: indexPath) as? SearchRecordCell else { return UICollectionViewCell() }
                 
-                let mark = dummyMark[indexPath.row]
-                cell.configure(with: mark)
+                let record = dummyRecord[indexPath.row]
+                cell.configure(with: record)
                     
                 return cell
             }
@@ -167,8 +167,8 @@ extension SearchResultViewController: UICollectionViewDelegate, UICollectionView
         switch searchType {
         case .location:
             return CGSize(width: collectionView.frame.width - 32, height: dummyLocation.isEmpty ? collectionView.frame.height - keyboardHeight : 44)
-        case .mark:
-            return CGSize(width: collectionView.frame.width - 32, height: dummyMark.isEmpty ? collectionView.frame.height - keyboardHeight : 43)
+        case .record:
+            return CGSize(width: collectionView.frame.width - 32, height: dummyRecord.isEmpty ? collectionView.frame.height - keyboardHeight : 43)
         }
     }
     

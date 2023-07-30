@@ -17,7 +17,7 @@ class BottomSheetViewController: BaseViewController {
         tableView.backgroundColor = .colorF9F8F7
         tableView.sectionHeaderHeight = 0
         tableView.sectionFooterHeight = 0
-        tableView.register(EmptyMarkCell.self, forCellReuseIdentifier: EmptyMarkCell.registerId)
+        tableView.register(EmptyRecordCell.self, forCellReuseIdentifier: EmptyRecordCell.registerId)
         tableView.delegate = self
         tableView.dataSource = self
         return tableView
@@ -69,7 +69,7 @@ extension BottomSheetViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: EmptyMarkCell.registerId, for: indexPath) as? EmptyMarkCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: EmptyRecordCell.registerId, for: indexPath) as? EmptyRecordCell else { return UITableViewCell() }
         cell.selectionStyle = .none
     
         return cell

@@ -1,5 +1,5 @@
 //
-//  SelectWriteMarkViewController.swift
+//  SelectWriteRecordViewController.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/07/26.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SelectWriteMarkViewController: BaseViewController {
+class SelectWriteRecordViewController: BaseViewController {
     var dummyData = dummyScheduleData()
     
     private lazy var collectionView: UICollectionView = {
@@ -62,7 +62,7 @@ class SelectWriteMarkViewController: BaseViewController {
     }
 }
 
-extension SelectWriteMarkViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension SelectWriteRecordViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return dummyData.count
     }
@@ -113,8 +113,8 @@ extension SelectWriteMarkViewController: UICollectionViewDelegate, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let writeMarkViewController = WriteMarkViewController()
-        writeMarkViewController.schedule = dummyData[indexPath.section].schedules[indexPath.row]
-        navigationController?.pushViewController(writeMarkViewController, animated: true)
+        let writeRecordViewController = WriteRecordViewController()
+        writeRecordViewController.schedule = dummyData[indexPath.section].schedules[indexPath.row]
+        navigationController?.pushViewController(writeRecordViewController, animated: true)
     }
 }

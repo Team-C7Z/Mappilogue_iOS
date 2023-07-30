@@ -1,5 +1,5 @@
 //
-//  MarkViewController.swift
+//  RecordViewController.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/05/17.
@@ -8,8 +8,8 @@
 import UIKit
 import NMapsMap
 
-class MarkViewController: NavigationBarViewController {
-    var delegate: EmptyMarkDelegate?
+class RecordViewController: NavigationBarViewController {
+    var delegate: EmptyRecordDelegate?
     
     let locationManager = CLLocationManager()
     var locationOverlay: NMFLocationOverlay?
@@ -19,8 +19,8 @@ class MarkViewController: NavigationBarViewController {
     let searchButton = UIButton()
     let addCategoryButton = AddCategoryButton()
     let currentLocationButton = UIButton()
-    let markListButton = MarkListButton()
-    let writeMarkButton = WriteMarkButton()
+    let recordListButton = RecordListButton()
+    let writeRecordButton = WriteRecordButton()
     let containerView = UIView()
     let bottomSheetViewController = BottomSheetViewController()
 
@@ -52,7 +52,7 @@ class MarkViewController: NavigationBarViewController {
         currentLocationButton.layer.applyShadow()
         currentLocationButton.addTarget(self, action: #selector(currentLocationButtonTapped), for: .touchUpInside)
         
-        writeMarkButton.addTarget(self, action: #selector(writeMarkButtonTapped), for: .touchUpInside)
+        writeRecordButton.addTarget(self, action: #selector(writeRecordButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -63,8 +63,8 @@ class MarkViewController: NavigationBarViewController {
         searchTextField.addSubview(searchButton)
         mapView.addSubview(addCategoryButton)
         view.addSubview(currentLocationButton)
-        view.addSubview(markListButton)
-        view.addSubview(writeMarkButton)
+        view.addSubview(recordListButton)
+        view.addSubview(writeRecordButton)
         view.addSubview(containerView)
     }
     
@@ -100,12 +100,12 @@ class MarkViewController: NavigationBarViewController {
             $0.width.height.equalTo(48)
         }
         
-        markListButton.snp.makeConstraints {
+        recordListButton.snp.makeConstraints {
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
-            $0.bottom.equalTo(writeMarkButton.snp.top).offset(-16)
+            $0.bottom.equalTo(writeRecordButton.snp.top).offset(-16)
         }
         
-        writeMarkButton.snp.makeConstraints {
+        writeRecordButton.snp.makeConstraints {
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
             $0.bottom.equalTo(containerView.snp.top).offset(-16)
         }
@@ -152,10 +152,10 @@ class MarkViewController: NavigationBarViewController {
         mapView.moveCamera(cameraUpdate)
     }
     
-    @objc private func writeMarkButtonTapped() {
-        let selectWriteMarkViewController = SelectWriteMarkViewController()
-        selectWriteMarkViewController.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(selectWriteMarkViewController, animated: true)
+    @objc private func writeRecordButtonTapped() {
+        let selectWriteRecordViewController = SelectWriteRecordViewController()
+        selectWriteRecordViewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(selectWriteRecordViewController, animated: true)
     }
     
     private func setBottomSheetViewController() {
@@ -195,11 +195,11 @@ class MarkViewController: NavigationBarViewController {
         }
         
         if clampedHeight > view.frame.height / 2 {
-            markListButton.isHidden = true
-            writeMarkButton.isHidden = true
+            recordListButton.isHidden = true
+            writeRecordButton.isHidden = true
         } else {
-            markListButton.isHidden = false
-            writeMarkButton.isHidden = false
+            recordListButton.isHidden = false
+            writeRecordButton.isHidden = false
         }
      
         if gesture.state == .ended || gesture.state == .cancelled {
@@ -223,7 +223,7 @@ class MarkViewController: NavigationBarViewController {
     }
 }
 
-extension MarkViewController: CLLocationManagerDelegate {
+extension RecordViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let currentLocation = locations.last else { return }
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: currentLocation.coordinate.latitude, lng: currentLocation.coordinate.longitude))
@@ -275,12 +275,12 @@ extension MarkViewController: CLLocationManagerDelegate {
     }
 }
 
-extension MarkViewController: UITextFieldDelegate {
+extension RecordViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         return false
     }
 }
 
-protocol EmptyMarkDelegate: AnyObject {
-    func setEmptyMarkCellHeight()
+protocol EmptyRecordDelegate: AnyObject {
+    func setEmptyRecordCellHeight()
 }
