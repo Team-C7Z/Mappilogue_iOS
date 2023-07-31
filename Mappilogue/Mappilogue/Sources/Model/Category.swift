@@ -11,7 +11,9 @@ func dummyCategoryData() -> [String] {
     let category = [
         "유진이랑 논 날💕",
         "여행",
-        "회의"
+        "회의",
+        "부산여행 가는 날",
+        "전시회"
     ]
     
     return category

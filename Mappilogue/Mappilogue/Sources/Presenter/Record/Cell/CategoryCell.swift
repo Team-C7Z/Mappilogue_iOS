@@ -41,5 +41,10 @@ class CategoryCell: BaseCollectionViewCell {
     
     func configure(with title: String) {
         categoryLabel.text = title
+        
+//        let categoryLabelSize = categoryLabel.sizeThatFits(CGSize(width: categoryLabel.bounds.width, height: CGFloat.greatestFiniteMagnitude))
+//        let cellWidth = categoryLabelSize.width + 12 + 12
+//        frame.size.width = cellWidth
+//        frame.size.height = 32
     }
 }
