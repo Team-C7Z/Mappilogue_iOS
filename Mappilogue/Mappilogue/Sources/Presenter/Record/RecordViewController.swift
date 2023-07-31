@@ -212,7 +212,7 @@ class RecordViewController: NavigationBarViewController {
             } else {
                 bottomSheetViewController.emptyCellHeight = 196
             }
-            bottomSheetViewController.tableView.reloadData()
+            bottomSheetViewController.collectionView.reloadData()
 
             UIView.animate(withDuration: 0.3) {
                 self.view.layoutIfNeeded()
