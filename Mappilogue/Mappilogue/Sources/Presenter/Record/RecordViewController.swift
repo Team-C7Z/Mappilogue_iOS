@@ -71,6 +71,8 @@ class RecordViewController: NavigationBarViewController {
         mapView.allowsZooming = true
         mapView.allowsScrolling = true
         mapView.positionMode = .compass
+        mapView.minZoomLevel = 10.0
+        mapView.maxZoomLevel = 18.0
         
         searchTextField.delegate = self
         searchTextField.layer.applyShadow()
@@ -127,7 +129,7 @@ class RecordViewController: NavigationBarViewController {
         }
         
         currentLocationButton.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-57)
+            $0.bottom.equalTo(containerView.snp.top).offset(-16)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
             $0.width.height.equalTo(48)
         }
@@ -223,9 +225,11 @@ class RecordViewController: NavigationBarViewController {
         }
         
         if clampedHeight > view.frame.height / 2 {
+            currentLocationButton.isHidden = true
             recordListButton.isHidden = true
             writeRecordButton.isHidden = true
         } else {
+            currentLocationButton.isHidden = false
             recordListButton.isHidden = false
             writeRecordButton.isHidden = false
         }
@@ -237,10 +241,12 @@ class RecordViewController: NavigationBarViewController {
             
             if nearestHeight == maxHeight {
                 bottomSheetViewController.emptyCellHeight = view.frame.height - 200
+                currentLocationButton.isHidden = true
                 recordListButton.isHidden = true
                 writeRecordButton.isHidden = true
             } else {
                 bottomSheetViewController.emptyCellHeight = 196
+                currentLocationButton.isHidden = false
                 recordListButton.isHidden = false
                 writeRecordButton.isHidden = false
             }
@@ -258,7 +264,7 @@ class RecordViewController: NavigationBarViewController {
 extension RecordViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let currentLocation = locations.last else { return }
-        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: currentLocation.coordinate.latitude, lng: currentLocation.coordinate.longitude))
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: currentLocation.coordinate.latitude, lng: currentLocation.coordinate.longitude), zoomTo: 14)
         mapView.moveCamera(cameraUpdate)
         
         setLocationOverlayIcon(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
