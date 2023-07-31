@@ -18,7 +18,6 @@ class BottomSheetViewController: BaseViewController {
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .colorF9F8F7
-      //  collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         collectionView.register(EmptyRecordCell.self, forCellWithReuseIdentifier: EmptyRecordCell.registerId)
         collectionView.register(RecordCell.self, forCellWithReuseIdentifier: RecordCell.registerId)
         collectionView.register(SortHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SortHeaderView.registerId)
@@ -100,7 +99,7 @@ extension BottomSheetViewController: UICollectionViewDelegate, UICollectionViewD
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 32)
+        return CGSize(width: collectionView.bounds.width, height: dummyRecord.isEmpty ? 0 : 32)
     }
     
     // 수평 간격

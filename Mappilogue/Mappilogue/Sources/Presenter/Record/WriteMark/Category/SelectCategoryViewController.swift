@@ -22,7 +22,7 @@ class SelectCategoryViewController: BaseViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .colorF9F8F7
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
-        collectionView.register(AddCategoryCell.self, forCellWithReuseIdentifier: AddCategoryCell.registerId)
+        collectionView.register(AddNewCategoryCell.self, forCellWithReuseIdentifier: AddNewCategoryCell.registerId)
         collectionView.register(NewCategoryCell.self, forCellWithReuseIdentifier: NewCategoryCell.registerId)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -75,7 +75,7 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
             
             return cell
         case 1:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddCategoryCell.registerId, for: indexPath) as? AddCategoryCell else { return UICollectionViewCell() }
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddNewCategoryCell.registerId, for: indexPath) as? AddNewCategoryCell else { return UICollectionViewCell() }
             return cell
         default:
             return UICollectionViewCell()
