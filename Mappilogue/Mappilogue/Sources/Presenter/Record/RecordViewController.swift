@@ -9,15 +9,37 @@ import UIKit
 import NMapsMap
 
 class RecordViewController: NavigationBarViewController {
+    let dummyCategory = dummyCategoryData()
+    let dummyRecord = dummyRecordData()
+    
     var delegate: EmptyRecordDelegate?
     
     let locationManager = CLLocationManager()
     var locationOverlay: NMFLocationOverlay?
     
+    let minHeight: CGFloat = 44
+    let midHeight: CGFloat = 196
+    var maxHeight: CGFloat = 0
+    var bottomSheetHeight: CGFloat = 0
+    
     let mapView = NMFMapView()
     let searchTextField = SearchTextField()
     let searchButton = UIButton()
-    let addCategoryButton = AddCategoryButton()
+    
+    lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.registerId)
+        collectionView.register(AddCategoryCell.self, forCellWithReuseIdentifier: AddCategoryCell.registerId)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        return collectionView
+    }()
+
     let currentLocationButton = UIButton()
     let recordListButton = RecordListButton()
     let writeRecordButton = WriteRecordButton()
@@ -32,10 +54,18 @@ class RecordViewController: NavigationBarViewController {
         checkUserCurrentLocationAuthorization()
         setBottomSheetViewController()
         setPanGesture()
+        
+        maxHeight = view.frame.height - 200
     }
 
     override func setupProperty() {
         super.setupProperty()
+        
+        if dummyRecord.isEmpty {
+            bottomSheetHeight = minHeight
+        } else {
+            bottomSheetHeight = midHeight
+        }
         
         mapView.logoInteractionEnabled = false
         mapView.allowsZooming = true
@@ -61,7 +91,7 @@ class RecordViewController: NavigationBarViewController {
         view.addSubview(mapView)
         mapView.addSubview(searchTextField)
         searchTextField.addSubview(searchButton)
-        mapView.addSubview(addCategoryButton)
+        mapView.addSubview(collectionView)
         view.addSubview(currentLocationButton)
         view.addSubview(recordListButton)
         view.addSubview(writeRecordButton)
@@ -89,9 +119,11 @@ class RecordViewController: NavigationBarViewController {
             $0.width.height.equalTo(28)
         }
         
-        addCategoryButton.snp.makeConstraints {
+        collectionView.snp.makeConstraints {
             $0.top.equalTo(searchTextField.snp.bottom).offset(8)
-            $0.leading.equalTo(searchTextField)
+            $0.leading.equalTo(mapView)
+            $0.trailing.equalTo(mapView)
+            $0.height.equalTo(32)
         }
         
         currentLocationButton.snp.makeConstraints {
@@ -109,10 +141,10 @@ class RecordViewController: NavigationBarViewController {
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
             $0.bottom.equalTo(containerView.snp.top).offset(-16)
         }
-        
+  
         containerView.snp.makeConstraints {
             $0.bottom.leading.trailing.equalTo(mapView)
-            $0.height.equalTo(44)
+            $0.height.equalTo(bottomSheetHeight)
         }
     }
     
@@ -174,17 +206,13 @@ class RecordViewController: NavigationBarViewController {
         let translation = gesture.translation(in: containerView)
         let newContainerHeight = containerView.frame.height - translation.y
         
-        let minHeight: CGFloat = 44
-        let midHeight: CGFloat = 196
-        let maxHeight: CGFloat = view.frame.height - 200
-        
         let clampedHeight = min(max(newContainerHeight, minHeight), maxHeight)
         
         containerView.snp.updateConstraints { make in
             make.height.equalTo(clampedHeight)
         }
         
-        var nearestHeight: CGFloat = 44
+        var nearestHeight: CGFloat = minHeight
         
         if clampedHeight <= (midHeight + minHeight) / 2 {
             nearestHeight = minHeight
@@ -209,8 +237,12 @@ class RecordViewController: NavigationBarViewController {
             
             if nearestHeight == maxHeight {
                 bottomSheetViewController.emptyCellHeight = view.frame.height - 200
+                recordListButton.isHidden = true
+                writeRecordButton.isHidden = true
             } else {
                 bottomSheetViewController.emptyCellHeight = 196
+                recordListButton.isHidden = false
+                writeRecordButton.isHidden = false
             }
             bottomSheetViewController.collectionView.reloadData()
 
@@ -272,6 +304,55 @@ extension RecordViewController: CLLocationManagerDelegate {
             }
         }
         present(alertViewController, animated: false)
+    }
+}
+
+extension RecordViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return section == 0 ? dummyCategory.count : 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        switch indexPath.section {
+        case 0:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.registerId, for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
+            
+            let category = dummyCategory[indexPath.row]
+            cell.configure(with: category)
+            
+            return cell
+        case 1:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddCategoryCell.registerId, for: indexPath) as? AddCategoryCell else { return UICollectionViewCell() }
+            return cell
+        default:
+            return UICollectionViewCell()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: section == 0 ? 0 : 16)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 108, height: 32)
+    }
+    
+    // 수평 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    // 수직 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
     }
 }
 

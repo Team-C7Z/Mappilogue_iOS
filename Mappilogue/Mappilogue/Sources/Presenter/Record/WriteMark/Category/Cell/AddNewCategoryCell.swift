@@ -1,5 +1,5 @@
 //
-//  AddCategoryCell.swift
+//  AddNewCategoryCell.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/07/28.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-class AddCategoryCell: BaseCollectionViewCell {
-    static let registerId = "\(AddCategoryCell.self)"
+class AddNewCategoryCell: BaseCollectionViewCell {
+    static let registerId = "\(AddNewCategoryCell.self)"
     
     private let addCategoryLabel = UILabel()
     private let addCategoryImage = UIImageView()
