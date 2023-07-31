@@ -10,8 +10,7 @@ import UIKit
 class SearchRecordCell: BaseCollectionViewCell {
     static let registerId = "\(SearchRecordCell.self)"
     
-    private let recordView = UIView()
-    private let recordImage = UIImageView()
+    private let markView = MarkView(radius: 19 / 2, width: 11, height: 10.2)
     private let recordTitleLabel = UILabel()
     private let recordDateLabel = UILabel()
     private let separatorImage = UIImageView()
@@ -19,10 +18,6 @@ class SearchRecordCell: BaseCollectionViewCell {
     
     override func setupProperty() {
         super.setupProperty()
-        
-        recordView.layer.cornerRadius = 19 / 2
-        recordImage.image = UIImage(named: "record")
-        recordImage.layer.applyShadow()
 
         recordTitleLabel.textColor = .color1C1C1C
         recordTitleLabel.font = .title02
@@ -39,8 +34,7 @@ class SearchRecordCell: BaseCollectionViewCell {
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        contentView.addSubview(recordView)
-        recordView.addSubview(recordImage)
+        contentView.addSubview(markView)
         contentView.addSubview(recordTitleLabel)
         contentView.addSubview(recordDateLabel)
         contentView.addSubview(separatorImage)
@@ -50,20 +44,14 @@ class SearchRecordCell: BaseCollectionViewCell {
     override func setupLayout() {
         super.setupLayout()
 
-        recordView.snp.makeConstraints {
+        markView.snp.makeConstraints {
             $0.leading.centerY.equalTo(contentView)
             $0.width.height.equalTo(19)
         }
         
-        recordImage.snp.makeConstraints {
-            $0.centerX.centerY.equalTo(recordView)
-            $0.width.equalTo(11)
-            $0.height.equalTo(10.2)
-        }
-        
         recordTitleLabel.snp.makeConstraints {
             $0.top.trailing.equalTo(contentView)
-            $0.leading.equalTo(recordView.snp.trailing).offset(8)
+            $0.leading.equalTo(markView.snp.trailing).offset(8)
         }
         
         recordDateLabel.snp.makeConstraints {
@@ -84,7 +72,7 @@ class SearchRecordCell: BaseCollectionViewCell {
     }
     
     func configure(with record: Record) {
-        recordView.backgroundColor = record.color
+        markView.backgroundColor = record.color
         recordTitleLabel.text = record.title
         recordDateLabel.text = record.date
         recordLocationLabel.text = record.location

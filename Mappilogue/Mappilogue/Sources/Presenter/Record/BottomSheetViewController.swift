@@ -8,19 +8,23 @@
 import UIKit
 
 class BottomSheetViewController: BaseViewController {
+    let dummyRecord = dummyRecordData()
     var emptyCellHeight: CGFloat = 196
     
     private let barImage = UIImageView()
-    lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = .colorF9F8F7
-        tableView.sectionHeaderHeight = 0
-        tableView.sectionFooterHeight = 0
-        tableView.register(EmptyRecordCell.self, forCellReuseIdentifier: EmptyRecordCell.registerId)
-        tableView.delegate = self
-        tableView.dataSource = self
-        return tableView
+    lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .colorF9F8F7
+      //  collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        collectionView.register(EmptyRecordCell.self, forCellWithReuseIdentifier: EmptyRecordCell.registerId)
+        collectionView.register(RecordCell.self, forCellWithReuseIdentifier: RecordCell.registerId)
+        collectionView.register(SortHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SortHeaderView.registerId)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        return collectionView
     }()
     
     override func viewDidLoad() {
@@ -42,7 +46,7 @@ class BottomSheetViewController: BaseViewController {
         super.setupHierarchy()
         
         view.addSubview(barImage)
-        view.addSubview(tableView)
+        view.addSubview(collectionView)
     }
     
     override func setupLayout() {
@@ -55,7 +59,7 @@ class BottomSheetViewController: BaseViewController {
             $0.height.equalTo(4)
         }
         
-        tableView.snp.makeConstraints {
+        collectionView.snp.makeConstraints {
             $0.top.equalTo(view).offset(24)
             $0.width.equalTo(view)
             $0.height.equalTo(view.frame.height - 24)
@@ -63,19 +67,53 @@ class BottomSheetViewController: BaseViewController {
     }
 }
 
-extension BottomSheetViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+extension BottomSheetViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dummyRecord.isEmpty ? 1 : dummyRecord.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: EmptyRecordCell.registerId, for: indexPath) as? EmptyRecordCell else { return UITableViewCell() }
-        cell.selectionStyle = .none
-    
-        return cell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if dummyRecord.isEmpty {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyRecordCell.registerId, for: indexPath) as? EmptyRecordCell else { return UICollectionViewCell() }
+            return cell
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecordCell.registerId, for: indexPath) as? RecordCell else { return UICollectionViewCell() }
+            
+            let record = dummyRecord[indexPath.row]
+            cell.configure(with: record)
+            
+            return cell
+        }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return emptyCellHeight - 56
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width - 32, height: dummyRecord.isEmpty ? emptyCellHeight - 56 : 64)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SortHeaderView.registerId, for: indexPath) as? SortHeaderView else { return UICollectionReusableView() }
+        return headerView
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.bounds.width, height: 32)
+    }
+    
+    // 수평 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    // 수직 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 12
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
     }
 }
