@@ -22,7 +22,8 @@ struct Alert {
 }
 
 class AlertViewController: BaseViewController {
-    var onDeleteTapped: (() -> Void)?
+    var onCancelTapped: (() -> Void)?
+    var onDoneTapped: (() -> Void)?
     
     private let alertView = UIView()
     private let titleLabel = UILabel()
@@ -102,12 +103,14 @@ class AlertViewController: BaseViewController {
     }
     
     @objc private func cancelButtonTapped(_ sender: UIButton) {
-        dismiss(animated: false)
+        dismiss(animated: false) {
+            self.onCancelTapped?()
+        }
     }
     
     @objc private func deleteButtonTapped(_ sender: UIButton) {
         dismiss(animated: false) {
-            self.onDeleteTapped?()
+            self.onDoneTapped?()
         }
     }
     

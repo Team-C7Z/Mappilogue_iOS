@@ -22,7 +22,7 @@ class SearchViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationBar("검색")
+        setNavigationBar("검색", backButtonAction: #selector(backButtonTapped))
         
         searchTextField.becomeFirstResponder()
         searchTextField.delegate = self
