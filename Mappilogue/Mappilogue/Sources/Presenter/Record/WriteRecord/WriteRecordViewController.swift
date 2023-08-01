@@ -144,7 +144,7 @@ class WriteRecordViewController: BaseViewController {
             $0.height.equalTo(48)
         }
         
-        saveRecordView.configure(true)
+        saveRecordView.configure(isShowing)
         view.layoutIfNeeded()
     }
 }
