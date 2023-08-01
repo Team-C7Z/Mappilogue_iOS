@@ -351,7 +351,7 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		92011B762A716801009B047F /* WriteMark */ = {
+		92011B762A716801009B047F /* WriteRecord */ = {
 			isa = PBXGroup;
 			children = (
 				92011B772A71683E009B047F /* SelectWriteRecordViewController.swift */,
@@ -365,7 +365,7 @@
 				92011BFC2A740304009B047F /* MainLocation */,
 				92011BFD2A74031B009B047F /* Content */,
 			);
-			path = WriteMark;
+			path = WriteRecord;
 			sourceTree = "<group>";
 		};
 		92011B792A716C35009B047F /* Cell */ = {
@@ -776,7 +776,7 @@
 				92011C632A788FBF009B047F /* MarkerView.swift */,
 				92011B732A71386F009B047F /* Cell */,
 				92011C052A74A0FE009B047F /* Search */,
-				92011B762A716801009B047F /* WriteMark */,
+				92011B762A716801009B047F /* WriteRecord */,
 			);
 			path = Record;
 			sourceTree = "<group>";
