@@ -55,27 +55,14 @@ class RecordViewController: NavigationBarViewController {
         setMarker()
         setBottomSheetViewController()
         setPanGesture()
-        
-        maxHeight = view.frame.height - 200
-
     }
 
     override func setupProperty() {
         super.setupProperty()
         
-        if dummyRecord.isEmpty {
-            bottomSheetHeight = minHeight
-        } else {
-            bottomSheetHeight = midHeight
-        }
-        
-        mapView.logoInteractionEnabled = false
-        mapView.allowsZooming = true
-        mapView.allowsScrolling = true
-        mapView.positionMode = .compass
-        mapView.minZoomLevel = 10.0
-        mapView.maxZoomLevel = 18.0
-        
+        setMapView()
+        setBottomSheetHeight()
+     
         searchTextField.delegate = self
         searchTextField.layer.applyShadow()
         setSearchTextFieldTapGestue()
@@ -162,6 +149,15 @@ class RecordViewController: NavigationBarViewController {
         locationManager.startUpdatingLocation()
     }
     
+    private func setMapView() {
+        mapView.logoInteractionEnabled = false
+        mapView.allowsZooming = true
+        mapView.allowsScrolling = true
+        mapView.positionMode = .compass
+        mapView.minZoomLevel = 10.0
+        mapView.maxZoomLevel = 18.0
+    }
+    
     private func setLocationOverlayIcon(latitude: Double, longitude: Double) {
         guard let locationOverlay = locationOverlay else { return }
         locationOverlay.hidden = false
@@ -174,14 +170,26 @@ class RecordViewController: NavigationBarViewController {
     private func setMarker() {
         for record in dummyRecord {
             guard let lat = record.lat, let lng = record.lng else { return }
-            let markerView = MarkerView(frame: CGRect(x: 0, y: 0, width: 48, height: 64))
-            markerView.configure(image: "", color: record.color)
+            let markerView = createMarkerView(record: record)
+            let marker = createMarker(markerView: markerView, lat: lat, lng: lng)
             
-            let marker = NMFMarker()
-            marker.iconImage = NMFOverlayImage(image: markerView.asImage())
-            marker.position = NMGLatLng(lat: lat, lng: lng)
             marker.mapView = mapView
         }
+    }
+    
+    private func createMarkerView(record: Record) -> MarkerView {
+        let markerView = MarkerView(frame: CGRect(x: 0, y: 0, width: 48, height: 64))
+        markerView.configure(image: "", color: record.color)
+        
+        return markerView
+    }
+    
+    private func createMarker(markerView: MarkerView, lat: Double, lng: Double) -> NMFMarker {
+        let marker = NMFMarker()
+        marker.iconImage = NMFOverlayImage(image: markerView.asImage())
+        marker.position = NMGLatLng(lat: lat, lng: lng)
+        
+        return marker
     }
     
     @objc private func searchTextFieldTapped() {
@@ -214,6 +222,16 @@ class RecordViewController: NavigationBarViewController {
         bottomSheetViewController.didMove(toParent: self)
     }
     
+    private func setBottomSheetHeight() {
+        maxHeight = view.frame.height - 200
+
+        if dummyRecord.isEmpty {
+            bottomSheetHeight = minHeight
+        } else {
+            bottomSheetHeight = midHeight
+        }
+    }
+    
     private func setPanGesture() {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         containerView.addGestureRecognizer(panGesture)
@@ -222,7 +240,6 @@ class RecordViewController: NavigationBarViewController {
     @objc private func handlePan(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: containerView)
         let newContainerHeight = containerView.frame.height - translation.y
-        
         let clampedHeight = min(max(newContainerHeight, minHeight), maxHeight)
         
         containerView.snp.updateConstraints { make in
@@ -239,32 +256,15 @@ class RecordViewController: NavigationBarViewController {
             nearestHeight = maxHeight
         }
         
-        if clampedHeight > view.frame.height / 2 {
-            currentLocationButton.isHidden = true
-            recordListButton.isHidden = true
-            writeRecordButton.isHidden = true
-        } else {
-            currentLocationButton.isHidden = false
-            recordListButton.isHidden = false
-            writeRecordButton.isHidden = false
-        }
-     
+        setButtonsVisibility(isHidden: clampedHeight > view.frame.height / 2, height: clampedHeight)
+        
         if gesture.state == .ended || gesture.state == .cancelled {
             containerView.snp.updateConstraints { make in
                 make.height.equalTo(nearestHeight)
             }
             
-            if nearestHeight == maxHeight {
-                bottomSheetViewController.emptyCellHeight = view.frame.height - 200
-                currentLocationButton.isHidden = true
-                recordListButton.isHidden = true
-                writeRecordButton.isHidden = true
-            } else {
-                bottomSheetViewController.emptyCellHeight = 196
-                currentLocationButton.isHidden = false
-                recordListButton.isHidden = false
-                writeRecordButton.isHidden = false
-            }
+            updateBottomSheet(nearestHeight)
+            setButtonsVisibility(isHidden: nearestHeight == maxHeight, height: nearestHeight)
             bottomSheetViewController.collectionView.reloadData()
 
             UIView.animate(withDuration: 0.3) {
@@ -273,6 +273,20 @@ class RecordViewController: NavigationBarViewController {
         }
         
         gesture.setTranslation(.zero, in: containerView)
+    }
+    
+    private func setButtonsVisibility(isHidden: Bool, height clampedHeight: CGFloat) {
+        currentLocationButton.isHidden = isHidden
+        recordListButton.isHidden = isHidden
+        writeRecordButton.isHidden = isHidden
+    }
+    
+    private func updateBottomSheet(_ nearestHeight: CGFloat) {
+        if nearestHeight == maxHeight {
+            bottomSheetViewController.emptyCellHeight = view.frame.height - 200
+        } else {
+            bottomSheetViewController.emptyCellHeight = 196
+        }
     }
 }
 
