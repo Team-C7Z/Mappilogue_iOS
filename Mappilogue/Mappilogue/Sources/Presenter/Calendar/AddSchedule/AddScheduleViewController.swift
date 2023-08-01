@@ -512,7 +512,7 @@ extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelega
                           alertHeight: 140)
         alertViewController.configureAlert(with: alert)
         alertViewController.modalPresentationStyle = .overCurrentContext
-        alertViewController.onDeleteTapped = {
+        alertViewController.onDoneTapped = {
             self.deleteSelectedLocations()
         }
         self.present(alertViewController, animated: false)

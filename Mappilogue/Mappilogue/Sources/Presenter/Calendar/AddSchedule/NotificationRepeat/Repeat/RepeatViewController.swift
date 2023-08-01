@@ -32,7 +32,7 @@ class RepeatViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationBar("반복")
+        setNavigationBar("반복", backButtonAction: #selector(backButtonTapped))
         
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
