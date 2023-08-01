@@ -52,10 +52,12 @@ class RecordViewController: NavigationBarViewController {
         locationOverlay = mapView.locationOverlay
         setLocationManager()
         checkUserCurrentLocationAuthorization()
+        setMarker()
         setBottomSheetViewController()
         setPanGesture()
         
         maxHeight = view.frame.height - 200
+
     }
 
     override func setupProperty() {
@@ -169,6 +171,19 @@ class RecordViewController: NavigationBarViewController {
         locationOverlay.iconHeight = 20
     }
     
+    private func setMarker() {
+        for record in dummyRecord {
+            guard let lat = record.lat, let lng = record.lng else { return }
+            let markerView = MarkerView(frame: CGRect(x: 0, y: 0, width: 48, height: 64))
+            markerView.configure(image: "", color: record.color)
+            
+            let marker = NMFMarker()
+            marker.iconImage = NMFOverlayImage(image: markerView.asImage())
+            marker.position = NMGLatLng(lat: lat, lng: lng)
+            marker.mapView = mapView
+        }
+    }
+    
     @objc private func searchTextFieldTapped() {
         let searchViewController = SearchViewController()
         searchViewController.hidesBottomBarWhenPushed = true
@@ -279,7 +294,7 @@ extension RecordViewController: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkUserCurrentLocationAuthorization()
     }
-    
+
     func checkUserCurrentLocationAuthorization() {
         let authorizationStatus = locationManager.authorizationStatus
         switch authorizationStatus {
