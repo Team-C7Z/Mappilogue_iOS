@@ -10,6 +10,10 @@ import UIKit
 class MainLocationCell: BaseCollectionViewCell {
     static let registerId = "\(SearchLocationCell.self)"
     
+    weak var delegate: SelectMainLocationDelegate?
+    private var index: Int?
+    private var isSelect: Bool = false
+    
     private let locationImage = UIImageView()
     private let locationTitleLabel = UILabel()
     private let addressLabel = UILabel()
@@ -76,19 +80,29 @@ class MainLocationCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(with location: Location) {
+    func configure(_ index: Int, location: Location, isSelect: Bool) {
+        self.index = index
         locationTitleLabel.text = location.title
         addressLabel.text = location.address
+        self.isSelect = isSelect
+   
+        updateMainLocationDesign(isSelect)
     }
     
     @objc func mainLocationButtonTapped(button: UIButton) {
-        button.isSelected = !button.isSelected
-        updateMainLocationDesign(button)
+        button.isSelected = isSelect ? false : true
+        updateMainLocationDesign(button.isSelected)
+        delegate?.selectMainLocation(button.isSelected ? index : nil)
     }
     
-    private func updateMainLocationDesign(_ button: UIButton) {
-        button.setTitleColor(button.isSelected ? .colorFFFFFF : .colorC9C6C2, for: .normal)
-        button.backgroundColor = button.isSelected ? .color2EBD3D : .clear
-        button.layer.borderWidth = button.isSelected ? 0 : 2
+    private func updateMainLocationDesign(_ isSelect: Bool) {
+       
+        mainLocationButton.setTitleColor(isSelect ? .colorFFFFFF : .colorC9C6C2, for: .normal)
+        mainLocationButton.backgroundColor = isSelect ? .color2EBD3D : .clear
+        mainLocationButton.layer.borderWidth = isSelect ? 0 : 2
     }
+}
+
+protocol SelectMainLocationDelegate: AnyObject {
+    func selectMainLocation(_ index: Int?)
 }

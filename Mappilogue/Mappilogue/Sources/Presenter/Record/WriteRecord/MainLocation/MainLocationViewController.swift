@@ -9,6 +9,7 @@ import UIKit
 
 class MainLocationViewController: BaseViewController {
     let dummyLocation = dummyLocationData()
+    private var selectedLocationIndex: Int? = 0
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -60,9 +61,12 @@ extension MainLocationViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainLocationCell.registerId, for: indexPath) as? MainLocationCell else { return UICollectionViewCell() }
+        cell.delegate = self
         
         let location = dummyLocation[indexPath.row]
-        cell.configure(with: location)
+        let isSelect = indexPath.row == selectedLocationIndex ? true : false
+        cell.configure(indexPath.row, location: location, isSelect: isSelect)
+        
         return cell
     }
 
@@ -95,5 +99,12 @@ extension MainLocationViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
        
+    }
+}
+
+extension MainLocationViewController: SelectMainLocationDelegate {
+    func selectMainLocation(_ index: Int?) {
+        selectedLocationIndex = index
+        collectionView.reloadData()
     }
 }
