@@ -39,6 +39,8 @@ class WriteRecordViewController: BaseViewController {
        
         categoryButton.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
         
+        mainLocationButton.addTarget(self, action: #selector(mainLocationButtonTapped), for: .touchUpInside)
+        
         textContentView.stackViewHeightUpdated = { [weak self] in
             self?.stackView.layoutIfNeeded()
         }
@@ -114,6 +116,11 @@ class WriteRecordViewController: BaseViewController {
             scheduleTitleColorView.configure(with: schedule.title, color: schedule.color, isColorSelection: false)
         }
         scheduleTitleColorView.delegate = self
+    }
+    
+    @objc func mainLocationButtonTapped() {
+        let mainLocationViewController = MainLocationViewController()
+        navigationController?.pushViewController(mainLocationViewController, animated: true)
     }
     
     private func setKeyboardObservers() {
