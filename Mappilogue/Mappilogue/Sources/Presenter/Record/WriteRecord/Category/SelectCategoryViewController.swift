@@ -38,7 +38,7 @@ class SelectCategoryViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationBar("카테고리 선택")
+        setNavigationBar("카테고리 선택", backButtonAction: #selector(backButtonTapped))
     }
     
     override func setupHierarchy() {
@@ -102,8 +102,21 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 1 {
-            dummyCategory.append(CategoryData(title: "새로운 카테고리", count: 0))
+            self.dummyCategory.append(CategoryData(title: "새로운 카테고리", count: 0))
             collectionView.reloadData()
+            
+            let inputAlertViewController = InputAlertViewController()
+            inputAlertViewController.modalPresentationStyle = .overCurrentContext
+            inputAlertViewController.onCancelTapped = {
+                self.dummyCategory.removeLast()
+                collectionView.reloadData()
+            }
+            inputAlertViewController.onCompletionTapped = { inputText in
+                self.dummyCategory[self.dummyCategory.count-1].title = inputText
+                collectionView.reloadData()
+            }
+            present(inputAlertViewController, animated: false)
+            
         }
     }
 }

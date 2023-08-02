@@ -179,7 +179,7 @@ extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
                           buttonColor: .colorF14C4C,
                           alertHeight: 140)
         alertViewController.configureAlert(with: alert)
-        alertViewController.onDeleteTapped = {
+        alertViewController.onDoneTapped = {
             self.deleteSchedule(at: indexPath)
         }
          present(alertViewController, animated: false)

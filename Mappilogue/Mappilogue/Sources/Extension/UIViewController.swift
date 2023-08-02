@@ -9,11 +9,11 @@ import Foundation
 import UIKit
 
 extension UIViewController {
-    func setNavigationBar(_ title: String) {
+    func setNavigationBar(_ title: String, backButtonAction: Selector) {
         self.title = title
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: "back2"), for: .normal)
-        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: backButtonAction, for: .touchUpInside)
         let barButtonItem = UIBarButtonItem(customView: button)
         navigationItem.leftBarButtonItem = barButtonItem
     }
