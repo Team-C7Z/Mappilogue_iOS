@@ -46,6 +46,7 @@
 		92011C262A77A48B009B047F /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C252A77A48B009B047F /* Category.swift */; };
 		92011C642A788FBF009B047F /* MarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C632A788FBF009B047F /* MarkerView.swift */; };
 		92011C662A78980E009B047F /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C652A78980E009B047F /* UIView.swift */; };
+		92011C682A78CB24009B047F /* InputAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C672A78CB24009B047F /* InputAlertViewController.swift */; };
 		9224FCEE2A5BEF80000A56A6 /* ScheduleTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */; };
 		9224FCF32A5C5E7A000A56A6 /* WeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */; };
 		9224FCF52A5D6C65000A56A6 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */; };
@@ -201,6 +202,7 @@
 		92011C252A77A48B009B047F /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		92011C632A788FBF009B047F /* MarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerView.swift; sourceTree = "<group>"; };
 		92011C652A78980E009B047F /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		92011C672A78CB24009B047F /* InputAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAlertViewController.swift; sourceTree = "<group>"; };
 		9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTitleCell.swift; sourceTree = "<group>"; };
 		9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCell.swift; sourceTree = "<group>"; };
 		9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
@@ -351,7 +353,7 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		92011B762A716801009B047F /* WriteMark */ = {
+		92011B762A716801009B047F /* WriteRecord */ = {
 			isa = PBXGroup;
 			children = (
 				92011B772A71683E009B047F /* SelectWriteRecordViewController.swift */,
@@ -365,7 +367,7 @@
 				92011BFC2A740304009B047F /* MainLocation */,
 				92011BFD2A74031B009B047F /* Content */,
 			);
-			path = WriteMark;
+			path = WriteRecord;
 			sourceTree = "<group>";
 		};
 		92011B792A716C35009B047F /* Cell */ = {
@@ -776,7 +778,7 @@
 				92011C632A788FBF009B047F /* MarkerView.swift */,
 				92011B732A71386F009B047F /* Cell */,
 				92011C052A74A0FE009B047F /* Search */,
-				92011B762A716801009B047F /* WriteMark */,
+				92011B762A716801009B047F /* WriteRecord */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -803,6 +805,7 @@
 				92011B272A6E75F1009B047F /* WriteRecordButton.swift */,
 				92011C1D2A75EE79009B047F /* MarkView.swift */,
 				92011B712A7127FC009B047F /* AlertViewController.swift */,
+				92011C672A78CB24009B047F /* InputAlertViewController.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -1181,6 +1184,7 @@
 				92A7B65B2A4D0FD9009C9293 /* AddLocationButtonCell.swift in Sources */,
 				9230BE512A59B45D0053E535 /* MonthlyCalendar.swift in Sources */,
 				92011B902A7364D0009B047F /* BaseButton.swift in Sources */,
+				92011C682A78CB24009B047F /* InputAlertViewController.swift in Sources */,
 				9224FD3F2A6561CD000A56A6 /* UITextField.swift in Sources */,
 				9230BE452A57F01E0053E535 /* WeekdayCell.swift in Sources */,
 				92011C102A74F222009B047F /* SearchType.swift in Sources */,

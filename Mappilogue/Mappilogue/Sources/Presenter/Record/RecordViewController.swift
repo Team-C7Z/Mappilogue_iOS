@@ -333,7 +333,7 @@ extension RecordViewController: CLLocationManagerDelegate {
                           buttonColor: .color2EBD3D,
                           alertHeight: 182)
         alertViewController.configureAlert(with: alert)
-        alertViewController.onDeleteTapped = {
+        alertViewController.onDoneTapped = {
             if let url = URL(string: UIApplication.openSettingsURLString) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }

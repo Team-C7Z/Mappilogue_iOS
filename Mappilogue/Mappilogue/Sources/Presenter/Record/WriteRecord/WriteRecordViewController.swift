@@ -31,7 +31,7 @@ class WriteRecordViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationBar("기록 쓰기")
+        setNavigationBar("기록 쓰기", backButtonAction: #selector(presentAlert))
         
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
@@ -85,21 +85,24 @@ class WriteRecordViewController: BaseViewController {
         }
     }
 
-//    @objc func backButtonTapped(_ sender: UIButton) {
-//        let alertViewController = AlertViewController()
-//        alertViewController.modalPresentationStyle = .overCurrentContext
-//        let alert = Alert(titleText: "이 기록을 임시저장할까요?",
-//                          messageText: "쓰기 버튼을 다시 누르면 불러올 수 있어요",
-//                          cancelText: "삭제",
-//                          doneText: "임시저장",
-//                          buttonColor: .color2EBD3D,
-//                          alertHeight: 161)
-//        alertViewController.configureAlert(with: alert)
-//        alertViewController.onDeleteTapped = {
-//            self.navigationController?.popViewController(animated: true)
-//        }
-//         present(alertViewController, animated: false)
-//    }
+    @objc func presentAlert(_ sender: UIButton) {
+        let alertViewController = AlertViewController()
+        alertViewController.modalPresentationStyle = .overCurrentContext
+        let alert = Alert(titleText: "이 기록을 임시저장할까요?",
+                          messageText: "쓰기 버튼을 다시 누르면 불러올 수 있어요",
+                          cancelText: "삭제",
+                          doneText: "임시저장",
+                          buttonColor: .color2EBD3D,
+                          alertHeight: 161)
+        alertViewController.configureAlert(with: alert)
+        alertViewController.onCancelTapped = {
+            self.navigationController?.popViewController(animated: true)
+        }
+        alertViewController.onDoneTapped = {
+            self.navigationController?.popViewController(animated: true)
+        }
+         present(alertViewController, animated: false)
+    }
     
     @objc func categoryButtonTapped() {
         let selectCategoryViewController = SelectCategoryViewController()
@@ -144,7 +147,7 @@ class WriteRecordViewController: BaseViewController {
             $0.height.equalTo(48)
         }
         
-        saveRecordView.configure(true)
+        saveRecordView.configure(isShowing)
         view.layoutIfNeeded()
     }
 }

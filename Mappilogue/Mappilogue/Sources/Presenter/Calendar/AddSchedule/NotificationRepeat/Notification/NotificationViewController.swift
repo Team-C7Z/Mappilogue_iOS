@@ -34,7 +34,7 @@ class NotificationViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationBar("알림")
+        setNavigationBar("알림", backButtonAction: #selector(backButtonTapped))
     }
     
     override func setupHierarchy() {
