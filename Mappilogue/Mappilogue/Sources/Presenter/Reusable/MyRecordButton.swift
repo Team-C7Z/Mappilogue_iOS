@@ -1,5 +1,5 @@
 //
-//  RecordListButton.swift
+//  MyRecordButton.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/07/29.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RecordListButton: UIButton {
+class MyRecordButton: UIButton {
     init() {
         super.init(frame: .zero)
         
