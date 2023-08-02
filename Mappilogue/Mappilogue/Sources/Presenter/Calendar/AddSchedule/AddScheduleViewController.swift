@@ -516,7 +516,6 @@ extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelega
             self.deleteSelectedLocations()
         }
         self.present(alertViewController, animated: false)
-        
     }
     
     func checkButtonTapped(_ index: Int, isCheck: Bool) {
