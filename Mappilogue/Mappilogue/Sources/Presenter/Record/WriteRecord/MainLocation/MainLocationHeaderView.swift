@@ -10,7 +10,9 @@ import UIKit
 class MainLocationHeaderView: BaseCollectionReusableView {
     static let registerId = "\(MainLocationHeaderView.self)"
     
-    private let setButton = UIButton()
+    weak var delegate: SetLocationButtonDelegate?
+    
+    private let setLocationButton = UIButton()
     private let setLabel = UILabel()
     private let moveImage = UIImageView()
     private let locationHeaderLabel = UILabel()
@@ -23,6 +25,8 @@ class MainLocationHeaderView: BaseCollectionReusableView {
     
     override func setupProperty() {
         super.setupProperty()
+        
+        setLocationButton.addTarget(self, action: #selector(setLocationButtonTapped), for: .touchUpInside)
         
         setLabel.text = "지도에서 설정"
         setLabel.textColor = .color1C1C1C
@@ -38,26 +42,26 @@ class MainLocationHeaderView: BaseCollectionReusableView {
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        addSubview(setButton)
-        setButton.addSubview(setLabel)
-        setButton.addSubview(moveImage)
+        addSubview(setLocationButton)
+        setLocationButton.addSubview(setLabel)
+        setLocationButton.addSubview(moveImage)
         addSubview(locationHeaderLabel)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
-        setButton.snp.makeConstraints {
+        setLocationButton.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(self)
             $0.height.equalTo(40)
         }
         
         setLabel.snp.makeConstraints {
-            $0.leading.centerY.equalTo(setButton)
+            $0.leading.centerY.equalTo(setLocationButton)
         }
         
         moveImage.snp.makeConstraints {
-            $0.trailing.centerY.equalTo(setButton)
+            $0.trailing.centerY.equalTo(setLocationButton)
             $0.width.equalTo(7)
             $0.height.equalTo(14)
         }
@@ -66,4 +70,12 @@ class MainLocationHeaderView: BaseCollectionReusableView {
             $0.leading.bottom.equalTo(self)
         }
     }
+    
+    @objc func setLocationButtonTapped() {
+        delegate?.setLocationButtonTapped()
+    }
+}
+
+protocol SetLocationButtonDelegate: AnyObject {
+    func setLocationButtonTapped()
 }

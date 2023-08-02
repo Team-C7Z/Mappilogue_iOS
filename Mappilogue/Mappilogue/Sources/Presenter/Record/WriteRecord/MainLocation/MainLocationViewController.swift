@@ -80,6 +80,7 @@ extension MainLocationViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MainLocationHeaderView.registerId, for: indexPath) as? MainLocationHeaderView else { return UICollectionReusableView() }
+        headerView.delegate = self
         return headerView
     }
 
@@ -102,7 +103,12 @@ extension MainLocationViewController: UICollectionViewDelegate, UICollectionView
     }
 }
 
-extension MainLocationViewController: SelectMainLocationDelegate {
+extension MainLocationViewController: SetLocationButtonDelegate, SelectMainLocationDelegate {
+    func setLocationButtonTapped() {
+        let mapMainLocationViewController = MapMainLocationViewController()
+        navigationController?.pushViewController(mapMainLocationViewController, animated: true)
+    }
+    
     func selectMainLocation(_ index: Int?) {
         selectedLocationIndex = index
         collectionView.reloadData()
