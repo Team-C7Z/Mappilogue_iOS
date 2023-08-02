@@ -7,11 +7,6 @@
 
 import UIKit
 
-enum AlertType {
-    case cancel
-    case done
-}
-
 struct Alert {
     var titleText: String
     var messageText: String?
