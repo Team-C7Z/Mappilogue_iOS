@@ -8,7 +8,8 @@
 import UIKit
 
 class MyCategoryViewController: BaseViewController {
-    let dummyRecord = [Record]()
+   // let dummyRecord = [Record]()
+    let dummyRecord = dummyRecordData()
     var categoryName: String = ""
     
     private lazy var collectionView: UICollectionView = {
@@ -33,10 +34,7 @@ class MyCategoryViewController: BaseViewController {
         super.setupProperty()
         
         setNavigationBar(categoryName, backButtonAction: #selector(backButtonTapped))
-        
-        if categoryName != "전체" {
-            setMenuButtonItem()
-        }
+        setMenuButtonItem()
     }
     
     override func setupHierarchy() {
@@ -55,13 +53,17 @@ class MyCategoryViewController: BaseViewController {
     }
     
     func setMenuButtonItem() {
-        let menuButtonItem = UIBarButtonItem(image: UIImage(named: "menu"), style: .plain, target: self, action: #selector(rightBarButtonItemTapped))
-        menuButtonItem.tintColor = .color1C1C1C
-        navigationItem.rightBarButtonItem = menuButtonItem
+        if categoryName != "전체" {
+            let menuButtonItem = UIBarButtonItem(image: UIImage(named: "menu"), style: .plain, target: self, action: #selector(menuButtonItemTapped))
+            menuButtonItem.tintColor = .color1C1C1C
+            navigationItem.rightBarButtonItem = menuButtonItem
+        }
     }
     
-    @objc func rightBarButtonItemTapped() {
-        print("notification")
+    @objc func menuButtonItemTapped() {
+        let editCategoryViewController = EditCategoryViewController()
+        editCategoryViewController.modalPresentationStyle = .overFullScreen
+        present(editCategoryViewController, animated: false)
     }
 }
 
