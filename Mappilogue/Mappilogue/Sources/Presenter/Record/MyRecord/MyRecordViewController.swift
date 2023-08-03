@@ -8,7 +8,7 @@
 import UIKit
 
 class MyRecordViewController: BaseViewController {
-    let dummyCategory = dummyCategoryData()
+    var dummyCategory = dummyCategoryData()
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -99,6 +99,14 @@ extension MyRecordViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             let myCategoryViewController = MyCategoryViewController()
             myCategoryViewController.categoryName = indexPath.row == 0 ? "전체" : dummyCategory[indexPath.row-1].title
+            myCategoryViewController.onModifyCategory = { categoryName in
+                self.dummyCategory[indexPath.row-1].title = categoryName
+                self.tableView.reloadData()
+            }
+            myCategoryViewController.onDeleteCategory = {
+                self.dummyCategory.remove(at: indexPath.row-1)
+                self.tableView.reloadData()
+            }
             navigationController?.pushViewController(myCategoryViewController, animated: true)
         case 1:
             print("카테고리 설정")

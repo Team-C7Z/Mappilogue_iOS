@@ -8,8 +8,9 @@
 import UIKit
 
 class EditCategoryViewController: BaseViewController {
-    weak var modifyDelegate: ModifyCategoryNameDelegate?
     var categoryName: String = ""
+    var onModifyCategory: ((String) -> Void)?
+    var onDeleteCategory: (() -> Void)?
     
     private let modalView = UIView()
     private let barView = UIView()
@@ -43,6 +44,7 @@ class EditCategoryViewController: BaseViewController {
         deleteCategoryLabel.text = "카테고리 삭제하기"
         deleteCategoryLabel.textColor = .color1C1C1C
         deleteCategoryLabel.font = .title02
+        deleteCategoryButton.addTarget(self, action: #selector(deleteCategoryButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -118,13 +120,28 @@ class EditCategoryViewController: BaseViewController {
             self.dismiss(animated: false)
         }
         inputAlertViewController.onCompletionTapped = { inputText in
-            self.dismiss(animated: false)
-            self.modifyDelegate?.modifyCategoryName(inputText)
+            self.dismiss(animated: false) {
+                self.onModifyCategory?(inputText)
+            }
         }
         present(inputAlertViewController, animated: false)
     }
-}
-
-protocol ModifyCategoryNameDelegate: AnyObject {
-    func modifyCategoryName(_ name: String)
+    
+    @objc func deleteCategoryButtonTapped(_ button: UIButton) {
+        let alertViewController = AlertViewController()
+        alertViewController.modalPresentationStyle = .overCurrentContext
+        let alert = Alert(titleText: "이 카테고리를 삭제할까요?",
+                          messageText: nil,
+                          cancelText: "취소",
+                          doneText: "삭제",
+                          buttonColor: .colorF14C4C,
+                          alertHeight: 140)
+        alertViewController.configureAlert(with: alert)
+        alertViewController.onDoneTapped = {
+            self.dismiss(animated: false) {
+                self.onDeleteCategory?()
+           }
+        }
+        present(alertViewController, animated: false)
+    }
 }
