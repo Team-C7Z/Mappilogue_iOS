@@ -10,7 +10,7 @@ import NMapsMap
 
 class RecordViewController: NavigationBarViewController {
     let dummyCategory = dummyCategoryData()
-    let dummyRecord = dummyRecordData()
+    let dummyRecord: [Record] = dummyRecordData()
     
     var delegate: EmptyRecordDelegate?
     
