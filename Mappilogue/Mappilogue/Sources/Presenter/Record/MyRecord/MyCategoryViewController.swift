@@ -11,6 +11,8 @@ class MyCategoryViewController: BaseViewController {
    // let dummyRecord = [Record]()
     let dummyRecord = dummyRecordData()
     var categoryName: String = ""
+    var onModifyCategory: ((String) -> Void)?
+    var onDeleteCategory: (() -> Void)?
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -64,7 +66,14 @@ class MyCategoryViewController: BaseViewController {
         let editCategoryViewController = EditCategoryViewController()
         editCategoryViewController.modalPresentationStyle = .overFullScreen
         editCategoryViewController.categoryName = categoryName
-        editCategoryViewController.modifyDelegate = self
+        editCategoryViewController.onModifyCategory = { categoryName in
+            self.title = categoryName
+            self.onModifyCategory?(categoryName)
+        }
+        editCategoryViewController.onDeleteCategory = {
+            self.onDeleteCategory?()
+            self.navigationController?.popViewController(animated: false)
+        }
         present(editCategoryViewController, animated: false)
     }
 }
@@ -108,11 +117,5 @@ extension MyCategoryViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-    }
-}
-
-extension MyCategoryViewController: ModifyCategoryNameDelegate {
-    func modifyCategoryName(_ name: String) {
-        title = name
     }
 }
