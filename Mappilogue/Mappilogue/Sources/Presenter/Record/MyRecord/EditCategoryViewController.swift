@@ -8,6 +8,9 @@
 import UIKit
 
 class EditCategoryViewController: BaseViewController {
+    weak var modifyDelegate: ModifyCategoryNameDelegate?
+    var categoryName: String = ""
+    
     private let modalView = UIView()
     private let barView = UIView()
     private let modifyCategoryButton = UIButton()
@@ -33,6 +36,7 @@ class EditCategoryViewController: BaseViewController {
         modifyCategoryLabel.text = "카테고리 이름 바꾸기"
         modifyCategoryLabel.textColor = .color1C1C1C
         modifyCategoryLabel.font = .title02
+        modifyCategoryButton.addTarget(self, action: #selector(modifyCategoryButtonTapped), for: .touchUpInside)
         
         deleteCategoryImage.image = UIImage(named: "delete")
         deleteCategoryImage.tintColor = .colorF14C4C
@@ -105,4 +109,22 @@ class EditCategoryViewController: BaseViewController {
             $0.centerY.equalTo(deleteCategoryButton)
         }
     }
+    
+    @objc func modifyCategoryButtonTapped(_ button: UIButton) {
+        let inputAlertViewController = InputAlertViewController()
+        inputAlertViewController.modalPresentationStyle = .overCurrentContext
+        inputAlertViewController.configure(categoryName)
+        inputAlertViewController.onCancelTapped = {
+            self.dismiss(animated: false)
+        }
+        inputAlertViewController.onCompletionTapped = { inputText in
+            self.dismiss(animated: false)
+            self.modifyDelegate?.modifyCategoryName(inputText)
+        }
+        present(inputAlertViewController, animated: false)
+    }
+}
+
+protocol ModifyCategoryNameDelegate: AnyObject {
+    func modifyCategoryName(_ name: String)
 }
