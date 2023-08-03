@@ -8,7 +8,7 @@
 import UIKit
 
 class MyCategoryViewController: BaseViewController {
-    let dummyRecord = dummyRecordData()
+    let dummyRecord = [Record]()
     var categoryName: String = ""
     
     private lazy var collectionView: UICollectionView = {
@@ -34,6 +34,9 @@ class MyCategoryViewController: BaseViewController {
         
         setNavigationBar(categoryName, backButtonAction: #selector(backButtonTapped))
         
+        if categoryName != "전체" {
+            setMenuButtonItem()
+        }
     }
     
     override func setupHierarchy() {
@@ -46,8 +49,19 @@ class MyCategoryViewController: BaseViewController {
         super.setupLayout()
         
         collectionView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.top.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(view)
         }
+    }
+    
+    func setMenuButtonItem() {
+        let menuButtonItem = UIBarButtonItem(image: UIImage(named: "menu"), style: .plain, target: self, action: #selector(rightBarButtonItemTapped))
+        menuButtonItem.tintColor = .color1C1C1C
+        navigationItem.rightBarButtonItem = menuButtonItem
+    }
+    
+    @objc func rightBarButtonItemTapped() {
+        print("notification")
     }
 }
 
@@ -75,7 +89,7 @@ extension MyCategoryViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 32, height: dummyRecord.isEmpty ? collectionView.frame.height : 64)
+        return CGSize(width: collectionView.frame.width - 32, height: dummyRecord.isEmpty ? collectionView.frame.height - 110 : 64)
     }
     
     // 수평 간격
