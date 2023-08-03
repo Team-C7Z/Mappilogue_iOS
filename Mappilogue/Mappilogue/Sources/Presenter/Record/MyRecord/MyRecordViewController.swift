@@ -8,7 +8,7 @@
 import UIKit
 
 class MyRecordViewController: BaseViewController {
-    let dummyCateogry = dummyCategoryData()
+    let dummyCategory = dummyCategoryData()
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -59,7 +59,7 @@ extension MyRecordViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return dummyCateogry.count
+            return dummyCategory.count + 1
         case 1:
             return 1
         default:
@@ -73,8 +73,9 @@ extension MyRecordViewController: UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: MyRecordCategoryCell.registerId, for: indexPath) as? MyRecordCategoryCell else { return UITableViewCell() }
             cell.selectionStyle = .none
             
-            let category = dummyCateogry[indexPath.row]
-            let isLast = indexPath.row == dummyCateogry.count-1
+            let totalCateogry = CategoryData(title: "전체", count: dummyCategory.map {$0.count}.reduce(0, +))
+            let category = indexPath.row == 0 ? totalCateogry : dummyCategory[indexPath.row - 1]
+            let isLast = indexPath.row == dummyCategory.count
             cell.configure(with: category, isLast: isLast)
             
             return cell
@@ -92,16 +93,18 @@ extension MyRecordViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return indexPath.section == 0 ? 41 : 40
     }
-//    
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 10
-//    }
-//    
-//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        return 
-//    }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        switch indexPath.section {
+        case 0:
+            let myCategoryViewController = MyCategoryViewController()
+            myCategoryViewController.categoryName = indexPath.row == 0 ? "전체" : dummyCategory[indexPath.row-1].title
+            navigationController?.pushViewController(myCategoryViewController, animated: true)
+        case 1:
+            print("카테고리 설정")
+        default:
+            break
+        }
+       
     }
 }
