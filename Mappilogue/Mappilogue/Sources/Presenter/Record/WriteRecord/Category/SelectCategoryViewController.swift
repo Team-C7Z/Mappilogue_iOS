@@ -111,7 +111,6 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
                 collectionView.reloadData()
             }
             present(inputAlertViewController, animated: false)
-            
         }
     }
 }

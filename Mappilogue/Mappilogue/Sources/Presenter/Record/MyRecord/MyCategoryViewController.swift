@@ -63,6 +63,8 @@ class MyCategoryViewController: BaseViewController {
     @objc func menuButtonItemTapped() {
         let editCategoryViewController = EditCategoryViewController()
         editCategoryViewController.modalPresentationStyle = .overFullScreen
+        editCategoryViewController.categoryName = categoryName
+        editCategoryViewController.modifyDelegate = self
         present(editCategoryViewController, animated: false)
     }
 }
@@ -106,5 +108,11 @@ extension MyCategoryViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
+    }
+}
+
+extension MyCategoryViewController: ModifyCategoryNameDelegate {
+    func modifyCategoryName(_ name: String) {
+        title = name
     }
 }
