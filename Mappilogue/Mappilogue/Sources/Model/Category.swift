@@ -7,13 +7,18 @@
 
 import Foundation
 
-func dummyCategoryData() -> [String] {
+struct CategoryData {
+    var title: String
+    var count: Int
+}
+
+func dummyCategoryData() -> [CategoryData] {
     let category = [
-        "유진이랑 논 날💕",
-        "여행",
-        "회의",
-        "부산여행 가는 날",
-        "전시회"
+        CategoryData(title: "여행ㄷㅅㄷㅁ", count: 3),
+        CategoryData(title: "생일", count: 11),
+        CategoryData(title: "유진이랑 논 날💕", count: 6),
+        CategoryData(title: "전시회", count: 0),
+        CategoryData(title: "소풍", count: 2)
     ]
     
     return category
