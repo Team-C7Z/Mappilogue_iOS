@@ -1,4 +1,3 @@
-//
 //  CategorySettingCell.swift
 //  Mappilogue
 //

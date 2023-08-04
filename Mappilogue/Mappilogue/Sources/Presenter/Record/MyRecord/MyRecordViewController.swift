@@ -109,7 +109,8 @@ extension MyRecordViewController: UITableViewDelegate, UITableViewDataSource {
             }
             navigationController?.pushViewController(myCategoryViewController, animated: true)
         case 1:
-            print("카테고리 설정")
+            let categorySettingViewController = CategorySettingViewController()
+            navigationController?.pushViewController(categorySettingViewController, animated: true)
         default:
             break
         }
