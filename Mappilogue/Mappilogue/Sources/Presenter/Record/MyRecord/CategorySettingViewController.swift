@@ -11,12 +11,12 @@ class CategorySettingViewController: BaseViewController {
     var dummyCategory = dummyCategoryData()
     
     private lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
+        let layout = LeftAlignedCollectionViewFlowLayout()
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .colorF9F8F7
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        collectionView.contentInset = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
         collectionView.register(CategoryOrderCell.self, forCellWithReuseIdentifier: CategoryOrderCell.registerId)
         collectionView.register(AddNewCategoryCell.self, forCellWithReuseIdentifier: AddNewCategoryCell.registerId)
         collectionView.register(CategorySelectionLabelCell.self, forCellWithReuseIdentifier: CategorySelectionLabelCell.registerId)
@@ -105,7 +105,7 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 16, bottom: section == 0 ? 24 : 0, right: 16)
+        return UIEdgeInsets(top: 0, left: 0, bottom: section == 0 ? 24 : 0, right: 0)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -135,24 +135,24 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
     
 }
 
-//class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
-//    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-//        let attributes = super.layoutAttributesForElements(in: rect)
-//
-//        var leftMargin = sectionInset.left //
-//        var maxY: CGFloat = -1.0
-//        attributes?.forEach { layoutAttribute in
-//            if layoutAttribute.representedElementKind == nil {
-//                if layoutAttribute.frame.origin.y >= maxY {
-//                    leftMargin = sectionInset.left
-//                }
-//
-//                layoutAttribute.frame.origin.x = leftMargin
-//
-//                leftMargin += layoutAttribute.frame.width + minimumInteritemSpacing
-//                maxY = max(layoutAttribute.frame.maxY, maxY)
-//            }
-//        }
-//        return attributes
-//    }
-//}
+class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        let attributes = super.layoutAttributesForElements(in: rect)
+        
+        var leftMargin = sectionInset.left //
+        var maxY: CGFloat = -1.0
+        attributes?.forEach { layoutAttribute in
+            if layoutAttribute.representedElementKind == nil {
+                if layoutAttribute.frame.origin.y >= maxY {
+                    leftMargin = sectionInset.left
+                }
+                
+                layoutAttribute.frame.origin.x = leftMargin
+                
+                leftMargin += layoutAttribute.frame.width + minimumInteritemSpacing
+                maxY = max(layoutAttribute.frame.maxY, maxY)
+            }
+        }
+        return attributes
+    }
+}
