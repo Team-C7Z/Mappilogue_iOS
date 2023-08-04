@@ -112,6 +112,13 @@ class EditCategoryViewController: BaseViewController {
         }
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first, touch.location(in: view).y < modalView.frame.maxY else {
+            return
+        }
+        dismiss(animated: false)
+    }
+    
     @objc func modifyCategoryButtonTapped(_ button: UIButton) {
         let inputAlertViewController = InputAlertViewController()
         inputAlertViewController.modalPresentationStyle = .overCurrentContext
