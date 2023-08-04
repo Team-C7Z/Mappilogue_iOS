@@ -57,37 +57,43 @@ extension MyRecordViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return dummyCategory.count + 1
-        case 1:
-            return 1
-        default:
-            return 0
-        }
+        return section == 0 ? dummyCategory.count + 1 : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: MyRecordCategoryCell.registerId, for: indexPath) as? MyRecordCategoryCell else { return UITableViewCell() }
-            cell.selectionStyle = .none
-            
-            let totalCateogry = CategoryData(title: "전체", count: dummyCategory.map {$0.count}.reduce(0, +))
-            let category = indexPath.row == 0 ? totalCateogry : dummyCategory[indexPath.row - 1]
-            let isLast = indexPath.row == dummyCategory.count
-            cell.configure(with: category, isLast: isLast)
-            
+            let cell = configureMyRecordCategoryCell(for: indexPath, in: tableView)
             return cell
         case 1:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: CategorySettingCell.registerId, for: indexPath) as? CategorySettingCell else { return UITableViewCell() }
-            cell.selectionStyle = .none
-            
+            let cell = configureCategorySettingCell(for: indexPath, in: tableView)
             return cell
         default:
             return UITableViewCell()
         }
-     
+    }
+    
+    private func configureMyRecordCategoryCell(for indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MyRecordCategoryCell.registerId, for: indexPath) as? MyRecordCategoryCell else {
+            return UITableViewCell()
+        }
+        cell.selectionStyle = .none
+        
+        let totalCategory = CategoryData(title: "전체", count: dummyCategory.map { $0.count }.reduce(0, +))
+        let category = indexPath.row == 0 ? totalCategory : dummyCategory[indexPath.row - 1]
+        let isLast = indexPath.row == dummyCategory.count
+        cell.configure(with: category, isLast: isLast)
+        
+        return cell
+    }
+    
+    private func configureCategorySettingCell(for indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CategorySettingCell.registerId, for: indexPath) as? CategorySettingCell else {
+            return UITableViewCell()
+        }
+        cell.selectionStyle = .none
+        
+        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -97,23 +103,30 @@ extension MyRecordViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            let myCategoryViewController = MyCategoryViewController()
-            myCategoryViewController.categoryName = indexPath.row == 0 ? "전체" : dummyCategory[indexPath.row-1].title
-            myCategoryViewController.onModifyCategory = { categoryName in
-                self.dummyCategory[indexPath.row-1].title = categoryName
-                self.tableView.reloadData()
-            }
-            myCategoryViewController.onDeleteCategory = {
-                self.dummyCategory.remove(at: indexPath.row-1)
-                self.tableView.reloadData()
-            }
-            navigationController?.pushViewController(myCategoryViewController, animated: true)
+            didSelectMyRecordCategoryCell(indexPath)
         case 1:
-            let categorySettingViewController = CategorySettingViewController()
-            navigationController?.pushViewController(categorySettingViewController, animated: true)
+            didSelectCategorySettingCell()
         default:
             break
         }
-       
+    }
+    
+    func didSelectMyRecordCategoryCell(_ indexPath: IndexPath) {
+        let myCategoryViewController = MyCategoryViewController()
+        myCategoryViewController.categoryName = indexPath.row == 0 ? "전체" : dummyCategory[indexPath.row-1].title
+        myCategoryViewController.onModifyCategory = { categoryName in
+            self.dummyCategory[indexPath.row-1].title = categoryName
+            self.tableView.reloadData()
+        }
+        myCategoryViewController.onDeleteCategory = {
+            self.dummyCategory.remove(at: indexPath.row-1)
+            self.tableView.reloadData()
+        }
+        navigationController?.pushViewController(myCategoryViewController, animated: true)
+    }
+    
+    func didSelectCategorySettingCell() {
+        let categorySettingViewController = CategorySettingViewController()
+        navigationController?.pushViewController(categorySettingViewController, animated: true)
     }
 }

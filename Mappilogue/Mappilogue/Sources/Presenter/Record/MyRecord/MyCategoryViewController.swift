@@ -8,7 +8,6 @@
 import UIKit
 
 class MyCategoryViewController: BaseViewController {
-   // let dummyRecord = [Record]()
     let dummyRecord = dummyRecordData()
     var categoryName: String = ""
     var onModifyCategory: ((String) -> Void)?
@@ -85,16 +84,26 @@ extension MyCategoryViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if dummyRecord.isEmpty {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyRecordCell.registerId, for: indexPath) as? EmptyRecordCell else { return UICollectionViewCell() }
+            let cell = configureEmptyRecordCell(for: indexPath, in: collectionView)
             return cell
         } else {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecordCell.registerId, for: indexPath) as? RecordCell else { return UICollectionViewCell() }
-            
-            let record = dummyRecord[indexPath.row]
-            cell.configure(with: record)
-            
+            let cell = configureRecordCell(for: indexPath, in: collectionView)
             return cell
         }
+    }
+    
+    private func configureEmptyRecordCell(for indexPath: IndexPath, in collectionView: UICollectionView) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyRecordCell.registerId, for: indexPath) as? EmptyRecordCell else { return UICollectionViewCell() }
+        return cell
+    }
+    
+    private func configureRecordCell(for indexPath: IndexPath, in collectionView: UICollectionView) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecordCell.registerId, for: indexPath) as? RecordCell else { return UICollectionViewCell() }
+        
+        let record = dummyRecord[indexPath.row]
+        cell.configure(with: record)
+        
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
