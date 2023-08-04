@@ -25,8 +25,6 @@ class CategoryOrderCell: BaseCollectionViewCell {
 
         categoryCountLabel.textColor = .color9B9791
         categoryCountLabel.font = .body02
-        
-        editImage.image = UIImage(named: "editCategory")
     }
     
     override func setupHierarchy() {
@@ -63,8 +61,9 @@ class CategoryOrderCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(with category: CategoryData) {
+    func configure(with category: CategoryData, isTotal: Bool) {
         categoryLabel.text = category.title
         categoryCountLabel.text = "(\(category.count))"
+        editImage.image = isTotal ? nil : UIImage(named: "editCategory")
     }
 }

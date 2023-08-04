@@ -23,6 +23,8 @@ class CategorySettingViewController: BaseViewController {
         collectionView.register(CategorySelectionCell.self, forCellWithReuseIdentifier: CategorySelectionCell.registerId)
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.dragDelegate = self
+        collectionView.dropDelegate = self
        
         return collectionView
     }()
@@ -77,8 +79,9 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryOrderCell.registerId, for: indexPath) as? CategoryOrderCell else { return UICollectionViewCell() }
                 
                 let totalCateogry = CategoryData(title: "전체", count: dummyCategory.map {$0.count}.reduce(0, +))
+                let isTotal = indexPath.row == 0
                 let category = indexPath.row == 0 ? totalCateogry : dummyCategory[indexPath.row - 1]
-                cell.configure(with: category)
+                cell.configure(with: category, isTotal: isTotal)
 
                 return cell
             default:
@@ -149,6 +152,55 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
+        return true
+    }
+}
+
+extension CategorySettingViewController: UICollectionViewDragDelegate {
+    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        if indexPath.section == 0 && indexPath.row > 0 && indexPath.row <= dummyCategory.count {
+            return [UIDragItem(itemProvider: NSItemProvider())]
+        }
+        return []
+    }
+}
+
+extension CategorySettingViewController: UICollectionViewDropDelegate {
+    func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+        if let indexPath = destinationIndexPath {
+            if session.localDragSession != nil, indexPath.section == 0 && indexPath.row > 0 && indexPath.row <= dummyCategory.count {
+                return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+            }
+        }
+     
+        return UICollectionViewDropProposal(operation: .cancel, intent: .unspecified)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+        guard let destinationIndexPath = coordinator.destinationIndexPath else {
+            return
+        }
+        
+        if destinationIndexPath.section == 0 && destinationIndexPath .row > 0 && destinationIndexPath.row <= dummyCategory.count {
+            coordinator.items.forEach { dropItem in
+                guard let sourceIndexPath = dropItem.sourceIndexPath else { return }
+                let categoryCell = self.dummyCategory[sourceIndexPath.row-1]
+                
+                collectionView.performBatchUpdates({
+                    collectionView.deleteItems(at: [sourceIndexPath])
+                    collectionView.insertItems(at: [destinationIndexPath])
+                    self.dummyCategory.remove(at: sourceIndexPath.row-1)
+                    self.dummyCategory.insert(categoryCell, at: destinationIndexPath.row-1)
+                }, completion: { _ in
+                    coordinator.drop(dropItem.dragItem, toItemAt: destinationIndexPath)
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0) {
+                        collectionView.reloadData()
+                    }
+                })
+            }
+        }
+    }
 }
 
 class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
