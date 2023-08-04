@@ -74,37 +74,59 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
-            switch indexPath.row {
-            case 0...dummyCategory.count:
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryOrderCell.registerId, for: indexPath) as? CategoryOrderCell else { return UICollectionViewCell() }
-                
-                let totalCateogry = CategoryData(title: "전체", count: dummyCategory.map {$0.count}.reduce(0, +))
-                let isTotal = indexPath.row == 0
-                let category = indexPath.row == 0 ? totalCateogry : dummyCategory[indexPath.row - 1]
-                cell.configure(with: category, isTotal: isTotal)
-
-                return cell
-            default:
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddNewCategoryCell.registerId, for: indexPath) as? AddNewCategoryCell else { return UICollectionViewCell() }
-                return cell
+            if indexPath.row <= dummyCategory.count {
+                return configureCategoryOrderCell(for: indexPath, in: collectionView)
+            } else {
+                return configureAddNewCategoryCell(for: indexPath, in: collectionView)
             }
-         
+            
         case 1:
-            switch indexPath.row {
-            case 0:
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategorySelectionLabelCell.registerId, for: indexPath) as? CategorySelectionLabelCell else { return UICollectionViewCell() }
-                return cell
-            default:
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategorySelectionCell.registerId, for: indexPath) as? CategorySelectionCell else { return UICollectionViewCell() }
-                
-                let categoryTitle = dummyCategory[indexPath.row-1].title
-                cell.configure(categoryTitle)
-                
-                return cell
+            if indexPath.row == 0 {
+                return configureCategorySelectionLabelCell(for: indexPath, in: collectionView)
+            } else {
+                return configureCategorySelectionCell(for: indexPath, in: collectionView)
             }
         default:
             return UICollectionViewCell()
         }
+    }
+    
+    private func configureCategoryOrderCell(for indexPath: IndexPath, in collectionView: UICollectionView) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryOrderCell.registerId, for: indexPath) as? CategoryOrderCell else {
+            return UICollectionViewCell()
+        }
+        
+        let totalCategory = CategoryData(title: "전체", count: dummyCategory.map { $0.count }.reduce(0, +))
+        let isTotal = indexPath.row == 0
+        let category = isTotal ? totalCategory : dummyCategory[indexPath.row - 1]
+        cell.configure(with: category, isTotal: isTotal)
+
+        return cell
+    }
+    
+    private func configureAddNewCategoryCell(for indexPath: IndexPath, in collectionView: UICollectionView) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddNewCategoryCell.registerId, for: indexPath) as? AddNewCategoryCell else {
+            return UICollectionViewCell()
+        }
+        return cell
+    }
+    
+    private func configureCategorySelectionLabelCell(for indexPath: IndexPath, in collectionView: UICollectionView) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategorySelectionLabelCell.registerId, for: indexPath) as? CategorySelectionLabelCell else {
+            return UICollectionViewCell()
+        }
+        return cell
+    }
+
+    private func configureCategorySelectionCell(for indexPath: IndexPath, in collectionView: UICollectionView) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategorySelectionCell.registerId, for: indexPath) as? CategorySelectionCell else {
+            return UICollectionViewCell()
+        }
+        
+        let categoryTitle = dummyCategory[indexPath.row-1].title
+        cell.configure(categoryTitle)
+        
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -116,10 +138,9 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
         case 0:
             return CGSize(width: collectionView.frame.width - 32, height: 41)
         default:
-            switch indexPath.row {
-            case 0:
+            if indexPath.row == 0 {
                 return CGSize(width: collectionView.frame.width - 32, height: 18)
-            default:
+            } else {
                 let cateogoryTitle = dummyCategory[indexPath.row-1].title
                 return CGSize(width: cateogoryTitle.size(withAttributes: [NSAttributedString.Key.font: UIFont.caption02]).width + 12 + 28, height: 32)
             }
@@ -138,13 +159,7 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 0 && indexPath.row == dummyCategory.count + 1 {
-            let inputAlertViewController = InputAlertViewController()
-            inputAlertViewController.modalPresentationStyle = .overCurrentContext
-            inputAlertViewController.onCompletionTapped = { inputText in
-                self.dummyCategory.append(CategoryData(title: inputText, count: 0))
-                self.collectionView.reloadData()
-            }
-            present(inputAlertViewController, animated: false)
+            showInputAlertViewController()
         } else if indexPath.section == 1 && indexPath.row > 0 {
             if let cell = collectionView.cellForItem(at: indexPath) as? CategorySelectionCell {
                 cell.selectCateogry()
@@ -155,11 +170,25 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
         return true
     }
+    
+    private func showInputAlertViewController() {
+        let inputAlertViewController = InputAlertViewController()
+        inputAlertViewController.modalPresentationStyle = .overCurrentContext
+        inputAlertViewController.onCompletionTapped = { inputText in
+            self.dummyCategory.append(CategoryData(title: inputText, count: 0))
+            self.collectionView.reloadData()
+        }
+        present(inputAlertViewController, animated: false)
+    }
+    
+    private func isIndexPathValid(_ indexPath: IndexPath) -> Bool {
+        return indexPath.section == 0 && indexPath.row > 0 && indexPath.row <= dummyCategory.count
+    }
 }
 
 extension CategorySettingViewController: UICollectionViewDragDelegate {
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        if indexPath.section == 0 && indexPath.row > 0 && indexPath.row <= dummyCategory.count {
+        if isIndexPathValid(indexPath) {
             return [UIDragItem(itemProvider: NSItemProvider())]
         }
         return []
@@ -168,12 +197,14 @@ extension CategorySettingViewController: UICollectionViewDragDelegate {
 
 extension CategorySettingViewController: UICollectionViewDropDelegate {
     func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
-        if let indexPath = destinationIndexPath {
-            if session.localDragSession != nil, indexPath.section == 0 && indexPath.row > 0 && indexPath.row <= dummyCategory.count {
-                return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
-            }
+        guard let indexPath = destinationIndexPath else {
+            return UICollectionViewDropProposal(operation: .cancel, intent: .unspecified)
         }
-     
+        
+        if session.localDragSession != nil, isIndexPathValid(indexPath) {
+            return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+        }
+        
         return UICollectionViewDropProposal(operation: .cancel, intent: .unspecified)
     }
     
@@ -182,7 +213,7 @@ extension CategorySettingViewController: UICollectionViewDropDelegate {
             return
         }
         
-        if destinationIndexPath.section == 0 && destinationIndexPath .row > 0 && destinationIndexPath.row <= dummyCategory.count {
+        if isIndexPathValid(destinationIndexPath) {
             coordinator.items.forEach { dropItem in
                 guard let sourceIndexPath = dropItem.sourceIndexPath else { return }
                 let categoryCell = self.dummyCategory[sourceIndexPath.row-1]
@@ -207,7 +238,7 @@ class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         let attributes = super.layoutAttributesForElements(in: rect)
         
-        var leftMargin = sectionInset.left //
+        var leftMargin = sectionInset.left
         var maxY: CGFloat = -1.0
         attributes?.forEach { layoutAttribute in
             if layoutAttribute.representedElementKind == nil {
