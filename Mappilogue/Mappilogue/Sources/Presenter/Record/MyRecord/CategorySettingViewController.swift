@@ -133,6 +133,18 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
         return section == 0 ? 0 : 12
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 0 && indexPath.row == dummyCategory.count + 1 {
+            let inputAlertViewController = InputAlertViewController()
+            inputAlertViewController.modalPresentationStyle = .overCurrentContext
+            inputAlertViewController.onCompletionTapped = { inputText in
+                self.dummyCategory.append(CategoryData(title: inputText, count: 0))
+                self.collectionView.reloadData()
+            }
+            present(inputAlertViewController, animated: false)
+        }
+    }
+    
 }
 
 class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
