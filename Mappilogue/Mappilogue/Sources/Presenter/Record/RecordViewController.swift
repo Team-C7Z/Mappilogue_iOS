@@ -10,7 +10,7 @@ import NMapsMap
 
 class RecordViewController: NavigationBarViewController {
     let dummyCategory = dummyCategoryData()
-    let dummyRecord = dummyRecordData()
+    let dummyRecord: [Record] = dummyRecordData()
     
     var delegate: EmptyRecordDelegate?
     
@@ -41,7 +41,7 @@ class RecordViewController: NavigationBarViewController {
     }()
 
     let currentLocationButton = UIButton()
-    let recordListButton = RecordListButton()
+    let myRecordButton = MyRecordButton()
     let writeRecordButton = WriteRecordButton()
     let containerView = UIView()
     let bottomSheetViewController = BottomSheetViewController()
@@ -73,6 +73,7 @@ class RecordViewController: NavigationBarViewController {
         currentLocationButton.layer.applyShadow()
         currentLocationButton.addTarget(self, action: #selector(currentLocationButtonTapped), for: .touchUpInside)
         
+        myRecordButton.addTarget(self, action: #selector(myRecordButtonTapped), for: .touchUpInside)
         writeRecordButton.addTarget(self, action: #selector(writeRecordButtonTapped), for: .touchUpInside)
     }
     
@@ -84,7 +85,7 @@ class RecordViewController: NavigationBarViewController {
         searchTextField.addSubview(searchButton)
         mapView.addSubview(collectionView)
         view.addSubview(currentLocationButton)
-        view.addSubview(recordListButton)
+        view.addSubview(myRecordButton)
         view.addSubview(writeRecordButton)
         view.addSubview(containerView)
     }
@@ -123,7 +124,7 @@ class RecordViewController: NavigationBarViewController {
             $0.width.height.equalTo(48)
         }
         
-        recordListButton.snp.makeConstraints {
+        myRecordButton.snp.makeConstraints {
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
             $0.bottom.equalTo(writeRecordButton.snp.top).offset(-16)
         }
@@ -209,6 +210,12 @@ class RecordViewController: NavigationBarViewController {
         mapView.moveCamera(cameraUpdate)
     }
     
+    @objc private func myRecordButtonTapped(_ sender: UIButton) {
+        let myRecordViewController = MyRecordViewController()
+        myRecordViewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(myRecordViewController, animated: true)
+    }
+    
     @objc private func writeRecordButtonTapped() {
         let selectWriteRecordViewController = SelectWriteRecordViewController()
         selectWriteRecordViewController.hidesBottomBarWhenPushed = true
@@ -277,7 +284,7 @@ class RecordViewController: NavigationBarViewController {
     
     private func setButtonsVisibility(isHidden: Bool, height clampedHeight: CGFloat) {
         currentLocationButton.isHidden = isHidden
-        recordListButton.isHidden = isHidden
+        myRecordButton.isHidden = isHidden
         writeRecordButton.isHidden = isHidden
     }
     
@@ -356,7 +363,7 @@ extension RecordViewController: UICollectionViewDelegate, UICollectionViewDataSo
         case 0:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.registerId, for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
             
-            let category = dummyCategory[indexPath.row]
+            let category = dummyCategory[indexPath.row].title
             cell.configure(with: category)
             
             return cell
@@ -373,7 +380,8 @@ extension RecordViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: dummyCategory[indexPath.row].size(withAttributes: [NSAttributedString.Key.font: UIFont.caption02]).width + 24, height: 32)
+        let cateogoryTitle = dummyCategory[indexPath.row].title
+        return CGSize(width: cateogoryTitle.size(withAttributes: [NSAttributedString.Key.font: UIFont.caption02]).width + 24, height: 32)
     }
     
     // 수평 간격
