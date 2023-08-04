@@ -95,7 +95,7 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategorySelectionCell.registerId, for: indexPath) as? CategorySelectionCell else { return UICollectionViewCell() }
                 
                 let categoryTitle = dummyCategory[indexPath.row-1].title
-                cell.configure(categoryTitle, isSelection: false)
+                cell.configure(categoryTitle)
                 
                 return cell
             }
@@ -142,6 +142,10 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
                 self.collectionView.reloadData()
             }
             present(inputAlertViewController, animated: false)
+        } else if indexPath.section == 1 && indexPath.row > 0 {
+            if let cell = collectionView.cellForItem(at: indexPath) as? CategorySelectionCell {
+                cell.selectCateogry()
+            }
         }
     }
     
