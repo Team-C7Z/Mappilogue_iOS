@@ -103,6 +103,9 @@
 		925840B52A7F2D3B00997434 /* MyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840B42A7F2D3B00997434 /* MyCell.swift */; };
 		925840B72A7F2D5A00997434 /* VersionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840B62A7F2D5A00997434 /* VersionCell.swift */; };
 		925840B92A7F2DA300997434 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840B82A7F2DA300997434 /* ProfileCell.swift */; };
+		925840BB2A7F455D00997434 /* NotificationSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840BA2A7F455D00997434 /* NotificationSettingsViewController.swift */; };
+		925840BD2A7F459600997434 /* NotificationSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840BC2A7F459600997434 /* NotificationSettingCell.swift */; };
+		925840BF2A7F4D3900997434 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840BE2A7F4D3900997434 /* Notification.swift */; };
 		9263786B2A546BDE004E5B6E /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9263786A2A546BDE004E5B6E /* OnboardingViewController.swift */; };
 		9263786E2A5475AF004E5B6E /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9263786D2A5475AF004E5B6E /* OnboardingCell.swift */; };
 		926378712A54E0E6004E5B6E /* OnboardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926378702A54E0E6004E5B6E /* OnboardingManager.swift */; };
@@ -271,6 +274,9 @@
 		925840B42A7F2D3B00997434 /* MyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCell.swift; sourceTree = "<group>"; };
 		925840B62A7F2D5A00997434 /* VersionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCell.swift; sourceTree = "<group>"; };
 		925840B82A7F2DA300997434 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		925840BA2A7F455D00997434 /* NotificationSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewController.swift; sourceTree = "<group>"; };
+		925840BC2A7F459600997434 /* NotificationSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingCell.swift; sourceTree = "<group>"; };
+		925840BE2A7F4D3900997434 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		9263786A2A546BDE004E5B6E /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		9263786D2A5475AF004E5B6E /* OnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
 		926378702A54E0E6004E5B6E /* OnboardingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingManager.swift; sourceTree = "<group>"; };
@@ -629,6 +635,7 @@
 				925840B82A7F2DA300997434 /* ProfileCell.swift */,
 				925840B62A7F2D5A00997434 /* VersionCell.swift */,
 				925840B42A7F2D3B00997434 /* MyCell.swift */,
+				925840BC2A7F459600997434 /* NotificationSettingCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -823,6 +830,7 @@
 			isa = PBXGroup;
 			children = (
 				926999472A14F76A003DDAD2 /* MyViewController.swift */,
+				925840BA2A7F455D00997434 /* NotificationSettingsViewController.swift */,
 				925840B32A7F281A00997434 /* Cell */,
 			);
 			path = My;
@@ -881,6 +889,7 @@
 				927E7F202A66F64400E6A29F /* Schedule.swift */,
 				92011C152A7505F7009B047F /* Record.swift */,
 				92011C252A77A48B009B047F /* Category.swift */,
+				925840BE2A7F4D3900997434 /* Notification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1172,6 +1181,7 @@
 				92A7B64C2A4CC0E6009C9293 /* EmptyScheduleCell.swift in Sources */,
 				92011C092A74AFCA009B047F /* SearchTextField.swift in Sources */,
 				92011C162A7505F7009B047F /* Record.swift in Sources */,
+				925840BF2A7F4D3900997434 /* Notification.swift in Sources */,
 				92FE26152A4B751000BCDB82 /* BaseCollectionReusableView.swift in Sources */,
 				925840B52A7F2D3B00997434 /* MyCell.swift in Sources */,
 				92011C042A740C16009B047F /* NewCategoryCell.swift in Sources */,
@@ -1180,6 +1190,7 @@
 				9224FCF52A5D6C65000A56A6 /* DatePickerViewController.swift in Sources */,
 				926382B42A6CC9760064C1A8 /* GatheringToastMessageView.swift in Sources */,
 				925840A82A7CBF3B00997434 /* CategorySelectionLabelCell.swift in Sources */,
+				925840BB2A7F455D00997434 /* NotificationSettingsViewController.swift in Sources */,
 				92011C012A740A08009B047F /* AddNewCategoryCell.swift in Sources */,
 				92011B752A7138B0009B047F /* EmptyRecordCell.swift in Sources */,
 				92011BFF2A7407D3009B047F /* SelectCategoryViewController.swift in Sources */,
@@ -1273,6 +1284,7 @@
 				926999402A14F73C003DDAD2 /* HomeViewController.swift in Sources */,
 				92011B8D2A72BBE8009B047F /* SaveRecordView.swift in Sources */,
 				927E7F212A66F64400E6A29F /* Schedule.swift in Sources */,
+				925840BD2A7F459600997434 /* NotificationSettingCell.swift in Sources */,
 				9224FD152A613AB8000A56A6 /* UpcomingScheduleSection.swift in Sources */,
 				92011C142A74F9DE009B047F /* SearchLocationCell.swift in Sources */,
 				92459EDA2A530D1100493941 /* MarkedRecordCell.swift in Sources */,
