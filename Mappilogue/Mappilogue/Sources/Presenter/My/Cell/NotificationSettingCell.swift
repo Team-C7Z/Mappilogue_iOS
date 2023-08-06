@@ -11,7 +11,7 @@ class NotificationSettingCell: BaseCollectionViewCell {
     static let registerId = "\(NotificationCell.self)"
     
     private let notificationLabel = UILabel()
-    private let notificationSwitch = UISwitch()
+    private let notificationSwitch = NotificationSwitchButton()
     private let lineView = UIView()
     
     override func setupProperty() {
@@ -19,6 +19,7 @@ class NotificationSettingCell: BaseCollectionViewCell {
         
         notificationLabel.textColor = .color1C1C1C
         notificationLabel.font = .body02
+        
     }
     
     override func setupHierarchy() {
@@ -41,8 +42,6 @@ class NotificationSettingCell: BaseCollectionViewCell {
         notificationSwitch.snp.makeConstraints {
             $0.top.equalTo(contentView).offset(8)
             $0.trailing.equalTo(contentView)
-            $0.width.equalTo(64)
-            $0.height.equalTo(32)
         }
       
         lineView.snp.makeConstraints {
@@ -53,7 +52,6 @@ class NotificationSettingCell: BaseCollectionViewCell {
     
     func configure(title: String, isSwitch: Bool, isLast: Bool) {
         notificationLabel.text = title
-        notificationSwitch.isOn = isSwitch
         lineView.backgroundColor = isLast ? .clear : .colorEAE6E1
     }
 }
