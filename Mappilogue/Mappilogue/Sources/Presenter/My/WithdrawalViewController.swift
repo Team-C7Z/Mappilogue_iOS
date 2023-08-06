@@ -35,6 +35,7 @@ class WithdrawalViewController: BaseViewController {
         super.setupProperty()
         
         setNavigationBar("탈퇴하기", backButtonAction: #selector(backButtonTapped))
+        setSkipButtonItem()
         
         withdrawalTitleLabel.text = "탈퇴하는 이유가 있나요?"
         withdrawalTitleLabel.textColor = .color1C1C1C
@@ -89,6 +90,16 @@ class WithdrawalViewController: BaseViewController {
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
             $0.height.equalTo(53)
         }
+    }
+    
+    func setSkipButtonItem() {
+        let skipButtonItem = UIBarButtonItem(title: "건너뛰기", style: .plain, target: self, action: #selector(skipButtonItemTapped))
+        skipButtonItem.tintColor = .color9B9791
+        navigationItem.rightBarButtonItem = skipButtonItem
+    }
+    
+    @objc func skipButtonItemTapped() {
+        navigationController?.popViewController(animated: true)
     }
     
     private func createWithdrawalReasonView() {
