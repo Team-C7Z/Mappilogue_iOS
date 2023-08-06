@@ -161,7 +161,8 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
         let withdrawalAlertViewController = WithdrawalAlertViewController()
         withdrawalAlertViewController.modalPresentationStyle = .overCurrentContext
         withdrawalAlertViewController.onDoneTapped = {
-            print("탈퇴")
+            let withdrawalViewController = WithdrawalViewController()
+            self.navigationController?.pushViewController(withdrawalViewController, animated: true)
         }
         present(withdrawalAlertViewController, animated: false)
     }
