@@ -122,6 +122,12 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 2 {
+            if indexPath.row == 0 {
+                let notificationSettingsViewController = NotificationSettingsViewController()
+                navigationController?.pushViewController(notificationSettingsViewController, animated: true)
+            }
+        }
 
     }
 }
