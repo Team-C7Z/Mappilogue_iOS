@@ -24,6 +24,10 @@ class AddButton: UIButton {
         
         setupHierarchy()
         setupLayout()
+        
+        outerView.isUserInteractionEnabled = false
+        addImage.isUserInteractionEnabled = false
+        addLabel.isUserInteractionEnabled = false
     }
     
     required init?(coder: NSCoder) {
