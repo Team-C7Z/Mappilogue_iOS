@@ -84,18 +84,33 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileCell.registerId, for: indexPath) as? ProfileCell else { return UICollectionViewCell() }
+            let cell = configureProfileCell(for: indexPath, in: collectionView)
             return cell
         case 1:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VersionCell.registerId, for: indexPath) as? VersionCell else { return UICollectionViewCell() }
+            let cell = configureVersionCell(for: indexPath, in: collectionView)
             return cell
         default:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCell.registerId, for: indexPath) as? MyCell else { return UICollectionViewCell() }
-            let myInfo = myInfoData[indexPath.section-2][indexPath.row]
-            let isLast = indexPath.row == myInfoData[indexPath.section-2].count-1
-            cell.configure(myInfo: myInfo, isLast: isLast)
+            let cell = configureMyCell(for: indexPath, in: collectionView)
             return cell
         }
+    }
+    
+    private func configureProfileCell(for indexPath: IndexPath, in collectionView: UICollectionView) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileCell.registerId, for: indexPath) as? ProfileCell else { return UICollectionViewCell() }
+        return cell
+    }
+    
+    private func configureVersionCell(for indexPath: IndexPath, in collectionView: UICollectionView) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VersionCell.registerId, for: indexPath) as? VersionCell else { return UICollectionViewCell() }
+        return cell
+    }
+    
+    private func configureMyCell(for indexPath: IndexPath, in collectionView: UICollectionView) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCell.registerId, for: indexPath) as? MyCell else { return UICollectionViewCell() }
+        let myInfo = myInfoData[indexPath.section-2][indexPath.row]
+        let isLast = indexPath.row == myInfoData[indexPath.section-2].count-1
+        cell.configure(myInfo: myInfo, isLast: isLast)
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -103,12 +118,7 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        switch indexPath.section {
-        case 0:
-            return CGSize(width: collectionView.frame.width - 32, height: 72)
-        default:
-            return CGSize(width: collectionView.frame.width - 32, height: 48)
-        }
+        return CGSize(width: collectionView.frame.width - 32, height: indexPath.section == 0 ? 72 : 48)
     }
 
     // 수평 간격
@@ -122,22 +132,31 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.section == 2 {
-            if indexPath.row == 0 {
-                let notificationSettingsViewController = NotificationSettingsViewController()
-                navigationController?.pushViewController(notificationSettingsViewController, animated: true)
-            } else if indexPath.row == 2 {
-                let inquiryViewController = InquiryViewController()
-                navigationController?.pushViewController(inquiryViewController, animated: true)
-            }
+        switch indexPath.section {
+        case 2:
+            didSelect2Section(indexPath)
+        case 3:
+            didSelect3Section(indexPath)
+        default:
+            break
         }
-        
-        if indexPath.section == 3 {
-            if indexPath.row == 0 {
-                presentLogoutAlert()
-            } else if indexPath.row == 1 {
-                presentWithdrawalAlert()
-            }
+    }
+    
+    private func didSelect2Section(_ indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            let notificationSettingsViewController = NotificationSettingsViewController()
+            navigationController?.pushViewController(notificationSettingsViewController, animated: true)
+        } else if indexPath.row == 2 {
+            let inquiryViewController = InquiryViewController()
+            navigationController?.pushViewController(inquiryViewController, animated: true)
+        }
+    }
+    
+    private func didSelect3Section(_ indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            presentLogoutAlert()
+        } else if indexPath.row == 1 {
+            presentWithdrawalAlert()
         }
     }
     
