@@ -100,6 +100,9 @@
 		925840A82A7CBF3B00997434 /* CategorySelectionLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840A72A7CBF3B00997434 /* CategorySelectionLabelCell.swift */; };
 		925840AA2A7CC92E00997434 /* CategorySettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840A92A7CC92E00997434 /* CategorySettingCell.swift */; };
 		925840AE2A7CD17E00997434 /* EditCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840AD2A7CD17E00997434 /* EditCategoryViewController.swift */; };
+		925840B52A7F2D3B00997434 /* MyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840B42A7F2D3B00997434 /* MyCell.swift */; };
+		925840B72A7F2D5A00997434 /* VersionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840B62A7F2D5A00997434 /* VersionCell.swift */; };
+		925840B92A7F2DA300997434 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840B82A7F2DA300997434 /* ProfileCell.swift */; };
 		9263786B2A546BDE004E5B6E /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9263786A2A546BDE004E5B6E /* OnboardingViewController.swift */; };
 		9263786E2A5475AF004E5B6E /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9263786D2A5475AF004E5B6E /* OnboardingCell.swift */; };
 		926378712A54E0E6004E5B6E /* OnboardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926378702A54E0E6004E5B6E /* OnboardingManager.swift */; };
@@ -265,6 +268,9 @@
 		925840A72A7CBF3B00997434 /* CategorySelectionLabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionLabelCell.swift; sourceTree = "<group>"; };
 		925840A92A7CC92E00997434 /* CategorySettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingCell.swift; sourceTree = "<group>"; };
 		925840AD2A7CD17E00997434 /* EditCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCategoryViewController.swift; sourceTree = "<group>"; };
+		925840B42A7F2D3B00997434 /* MyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCell.swift; sourceTree = "<group>"; };
+		925840B62A7F2D5A00997434 /* VersionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCell.swift; sourceTree = "<group>"; };
+		925840B82A7F2DA300997434 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		9263786A2A546BDE004E5B6E /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		9263786D2A5475AF004E5B6E /* OnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
 		926378702A54E0E6004E5B6E /* OnboardingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingManager.swift; sourceTree = "<group>"; };
@@ -617,6 +623,16 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		925840B32A7F281A00997434 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				925840B82A7F2DA300997434 /* ProfileCell.swift */,
+				925840B62A7F2D5A00997434 /* VersionCell.swift */,
+				925840B42A7F2D3B00997434 /* MyCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		9263786C2A546BE3004E5B6E /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -807,6 +823,7 @@
 			isa = PBXGroup;
 			children = (
 				926999472A14F76A003DDAD2 /* MyViewController.swift */,
+				925840B32A7F281A00997434 /* Cell */,
 			);
 			path = My;
 			sourceTree = "<group>";
@@ -1156,6 +1173,7 @@
 				92011C092A74AFCA009B047F /* SearchTextField.swift in Sources */,
 				92011C162A7505F7009B047F /* Record.swift in Sources */,
 				92FE26152A4B751000BCDB82 /* BaseCollectionReusableView.swift in Sources */,
+				925840B52A7F2D3B00997434 /* MyCell.swift in Sources */,
 				92011C042A740C16009B047F /* NewCategoryCell.swift in Sources */,
 				92A7B6552A4CEA28009C9293 /* TodaySchedule.swift in Sources */,
 				92011B832A72AA96009B047F /* ScheduleTitleColorView.swift in Sources */,
@@ -1191,6 +1209,7 @@
 				92A7B65F2A4E07DB009C9293 /* TodayScheduleCell.swift in Sources */,
 				926999342A14F2A3003DDAD2 /* BaseViewController.swift in Sources */,
 				92459ED82A52494200493941 /* AddMarkedRecordCell.swift in Sources */,
+				925840B92A7F2DA300997434 /* ProfileCell.swift in Sources */,
 				9224FD0B2A60F2B5000A56A6 /* AddScheduleSection.swift in Sources */,
 				9224FD052A600F42000A56A6 /* NotificationRepeatCell.swift in Sources */,
 				9224FCF92A5FCF72000A56A6 /* ScheduleCell.swift in Sources */,
@@ -1228,6 +1247,7 @@
 				927E7F272A683DCD00E6A29F /* CalendarCell.swift in Sources */,
 				9224FD112A611218000A56A6 /* TodayScheduleSection.swift in Sources */,
 				92011B8B2A72B7DA009B047F /* NewWriteView.swift in Sources */,
+				925840B72A7F2D5A00997434 /* VersionCell.swift in Sources */,
 				92A7B65B2A4D0FD9009C9293 /* AddLocationButtonCell.swift in Sources */,
 				9230BE512A59B45D0053E535 /* MonthlyCalendar.swift in Sources */,
 				92011B902A7364D0009B047F /* BaseButton.swift in Sources */,
