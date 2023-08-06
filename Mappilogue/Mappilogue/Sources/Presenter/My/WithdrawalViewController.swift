@@ -16,6 +16,8 @@ class WithdrawalViewController: BaseViewController {
         "기능들이 마음에 들지 않거나 부족해요",
         "기타"
     ]
+    var selectedReasons: [Bool] = []
+    var isSelectedReason: Bool = false
     
     private let withdrawalTitleLabel = UILabel()
     private let withdrawalSubTitleLabel = UILabel()
@@ -25,6 +27,7 @@ class WithdrawalViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        selectedReasons = Array(repeating: false, count: withdrawalReasons.count)
         createWithdrawalReasonView()
     }
     
@@ -50,6 +53,7 @@ class WithdrawalViewController: BaseViewController {
         submitButton.setTitle("제출하기", for: .normal)
         submitButton.setTitleColor(.colorFFFFFF, for: .normal)
         submitButton.titleLabel?.font = .body03
+        submitButton.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -91,7 +95,22 @@ class WithdrawalViewController: BaseViewController {
         for (index, title) in withdrawalReasons.enumerated() {
             let withdrawalReasonView = WithdrawalReasonView()
             withdrawalReasonView.configure(title, index)
+            withdrawalReasonView.onReasonSelected = { index in
+                self.selectedReasons[index] = !self.selectedReasons[index]
+                self.isSelectedReason = self.selectedReasons.contains(true)
+                self.updateSubmitButtonDesign()
+            }
             stackView.addArrangedSubview(withdrawalReasonView)
+        }
+    }
+    
+    private func updateSubmitButtonDesign() {
+        submitButton.backgroundColor = isSelectedReason ? .color2EBD3D : .colorC9C6C2
+    }
+    
+    @objc func submitButtonTapped() {
+        if isSelectedReason {
+            navigationController?.popViewController(animated: true)
         }
     }
 }
