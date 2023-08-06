@@ -131,5 +131,27 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
                 navigationController?.pushViewController(inquiryViewController, animated: true)
             }
         }
+        
+        if indexPath.section == 3 {
+            if indexPath.row == 0 {
+                presentLogoutAlert()
+            }
+        }
     }
+    
+    private func presentLogoutAlert() {
+        let alertViewController = AlertViewController()
+        alertViewController.modalPresentationStyle = .overCurrentContext
+        let alert = Alert(titleText: "로그아웃 할까요?",
+                          messageText: nil,
+                          cancelText: "취소",
+                          doneText: "확인",
+                          buttonColor: .color2EBD3D,
+                          alertHeight: 140)
+        alertViewController.configureAlert(with: alert)
+        alertViewController.onDoneTapped = {
+            print("로그아웃")
+        }
+         present(alertViewController, animated: false)
+     }
 }
