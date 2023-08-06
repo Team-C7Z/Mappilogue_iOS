@@ -8,6 +8,8 @@
 import UIKit
 
 class WithdrawalReasonView: BaseView {
+    var onReasonSelected: ((Int) -> Void)?
+    
     private let withdrawalReasonLabel = UILabel()
     private let withdrawalReasonCheckButton = UIButton()
     
@@ -52,6 +54,7 @@ class WithdrawalReasonView: BaseView {
     @objc func withdrawalReasonCheckButtonTapped(_ button: UIButton) {
         button.isSelected = !button.isSelected
         updateCheckButtonDesign(button)
+        onReasonSelected?(button.tag)
     }
     
     private func updateCheckButtonDesign(_ button: UIButton) {
