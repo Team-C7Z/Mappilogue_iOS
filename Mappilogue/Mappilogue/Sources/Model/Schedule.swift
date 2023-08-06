@@ -16,10 +16,10 @@ struct CalendarSchedule {
 }
 
 struct Schedule {
-    let title: String
-    let color: UIColor
-    let time: String?
-    let location: String?
+    var title: String = ""
+    var color: UIColor?
+    var time: String?
+    var location: String?
 }
 
 func dummyScheduleData() -> [CalendarSchedule] {

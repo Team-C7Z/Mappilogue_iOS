@@ -49,6 +49,10 @@ class AddButton: UIButton {
     }
     
     private func setupLayout() {
+        self.snp.makeConstraints {
+            $0.height.equalTo(53)
+        }
+        
         outerView.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
             $0.width.equalTo(93)
