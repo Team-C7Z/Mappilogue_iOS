@@ -32,7 +32,7 @@ class RepeatViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationBar()
+        setNavigationBar("반복", backButtonAction: #selector(backButtonTapped))
         
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
@@ -64,19 +64,6 @@ class RepeatViewController: BaseViewController {
             $0.top.equalTo(stackView.snp.bottom)
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
-    }
-    
-    private func setNavigationBar() {
-        title = "반복"
-        let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "back2"), for: .normal)
-        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        let barButtonItem = UIBarButtonItem(customView: button)
-        navigationItem.leftBarButtonItem = barButtonItem
-    }
-    
-    @objc func backButtonTapped(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
     }
     
     private func createRepeatButton(_ title: String) -> UIButton {

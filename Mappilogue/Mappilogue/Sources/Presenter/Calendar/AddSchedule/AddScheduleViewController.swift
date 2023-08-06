@@ -154,10 +154,6 @@ class AddScheduleViewController: BaseViewController {
             navigationItem.rightBarButtonItem = barButtonItem
         }
     }
-
-    @objc func backButtonTapped(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
-    }
     
     @objc func completionButtonTapped(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
@@ -518,13 +514,18 @@ extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelega
     func deleteButtonTapped() {
         guard !selectedLocations.isEmpty else { return }
         
-        let deleteAlertViewController = DeleteAlertViewController()
-        deleteAlertViewController.modalPresentationStyle = .overCurrentContext
-        deleteAlertViewController.onDeleteTapped = {
+        let alertViewController = AlertViewController()
+        let alert = Alert(titleText: "선택한 장소를 삭제할까요?",
+                          cancelText: "취소",
+                          doneText: "삭제",
+                          buttonColor: .colorF14C4C,
+                          alertHeight: 140)
+        alertViewController.configureAlert(with: alert)
+        alertViewController.modalPresentationStyle = .overCurrentContext
+        alertViewController.onDoneTapped = {
             self.deleteSelectedLocations()
         }
-        self.present(deleteAlertViewController, animated: false)
-        
+        self.present(alertViewController, animated: false)
     }
     
     func checkButtonTapped(_ index: Int, isCheck: Bool) {
