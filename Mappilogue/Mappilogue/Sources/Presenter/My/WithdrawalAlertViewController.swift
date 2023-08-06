@@ -127,7 +127,7 @@ class WithdrawalAlertViewController: BaseViewController {
     
     @objc private func checkButtonTapped() {
         isChecked = !isChecked
-                
+        
         checkImage.image = UIImage(named: isChecked ? "check" : "unCheck")
         doneButton.backgroundColor = isChecked ? .colorF14C4C : .colorC9C6C2
     }
@@ -138,7 +138,9 @@ class WithdrawalAlertViewController: BaseViewController {
     
     @objc private func deleteButtonTapped(_ sender: UIButton) {
         if isChecked {
-            print("탈퇴")
+            dismiss(animated: false) {
+                self.onDoneTapped?()
+            }
         }
     }
 }

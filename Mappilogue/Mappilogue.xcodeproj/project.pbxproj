@@ -111,6 +111,8 @@
 		925840C52A7F71E600997434 /* EmailCopyToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C42A7F71E600997434 /* EmailCopyToastMessageView.swift */; };
 		925840C72A7F76A500997434 /* WithdrawalAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C62A7F76A500997434 /* WithdrawalAlertViewController.swift */; };
 		925840C92A7F805800997434 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C82A7F805800997434 /* UILabel.swift */; };
+		925840CB2A7F86F900997434 /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840CA2A7F86F900997434 /* WithdrawalViewController.swift */; };
+		925840CD2A7F8E1C00997434 /* WithdrawalReasonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840CC2A7F8E1C00997434 /* WithdrawalReasonView.swift */; };
 		9263786B2A546BDE004E5B6E /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9263786A2A546BDE004E5B6E /* OnboardingViewController.swift */; };
 		9263786E2A5475AF004E5B6E /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9263786D2A5475AF004E5B6E /* OnboardingCell.swift */; };
 		926378712A54E0E6004E5B6E /* OnboardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926378702A54E0E6004E5B6E /* OnboardingManager.swift */; };
@@ -287,6 +289,8 @@
 		925840C42A7F71E600997434 /* EmailCopyToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCopyToastMessageView.swift; sourceTree = "<group>"; };
 		925840C62A7F76A500997434 /* WithdrawalAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalAlertViewController.swift; sourceTree = "<group>"; };
 		925840C82A7F805800997434 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
+		925840CA2A7F86F900997434 /* WithdrawalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
+		925840CC2A7F8E1C00997434 /* WithdrawalReasonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalReasonView.swift; sourceTree = "<group>"; };
 		9263786A2A546BDE004E5B6E /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		9263786D2A5475AF004E5B6E /* OnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
 		926378702A54E0E6004E5B6E /* OnboardingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingManager.swift; sourceTree = "<group>"; };
@@ -846,6 +850,8 @@
 				925840C22A7F61E800997434 /* InquiryViewController.swift */,
 				925840C42A7F71E600997434 /* EmailCopyToastMessageView.swift */,
 				925840C62A7F76A500997434 /* WithdrawalAlertViewController.swift */,
+				925840CA2A7F86F900997434 /* WithdrawalViewController.swift */,
+				925840CC2A7F8E1C00997434 /* WithdrawalReasonView.swift */,
 				925840B32A7F281A00997434 /* Cell */,
 			);
 			path = My;
@@ -1213,6 +1219,7 @@
 				9224FD3B2A6532E3000A56A6 /* EndView.swift in Sources */,
 				9230BE472A57FEB80053E535 /* DayCell.swift in Sources */,
 				9224FD422A656407000A56A6 /* LocationCell.swift in Sources */,
+				925840CB2A7F86F900997434 /* WithdrawalViewController.swift in Sources */,
 				92FE26172A4B76B800BCDB82 /* UIFont.swift in Sources */,
 				926999422A14F74B003DDAD2 /* CalendarViewController.swift in Sources */,
 				92FE26112A4A6E1600BCDB82 /* BaseCollectionViewCell.swift in Sources */,
@@ -1229,6 +1236,7 @@
 				9224FD372A653024000A56A6 /* SpacingView.swift in Sources */,
 				925840AA2A7CC92E00997434 /* CategorySettingCell.swift in Sources */,
 				9291582A2A252CC20022BEF9 /* UIColor.swift in Sources */,
+				925840CD2A7F8E1C00997434 /* WithdrawalReasonView.swift in Sources */,
 				92011B872A72B0A7009B047F /* MainLocatonView.swift in Sources */,
 				926999382A14F4AA003DDAD2 /* TabBarControllerController.swift in Sources */,
 				9258409E2A7BD30700997434 /* CategorySettingViewController.swift in Sources */,
