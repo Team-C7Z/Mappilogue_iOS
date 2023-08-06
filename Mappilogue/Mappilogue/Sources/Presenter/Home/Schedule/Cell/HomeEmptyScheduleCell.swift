@@ -28,7 +28,7 @@ class HomeEmptyScheduleCell: BaseTableViewCell {
         
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
-        stackView.spacing = 1
+        stackView.spacing = 4
         
         emptyScheduleLabel.font = .title02
         emptyScheduleLabel.textColor = .color707070
