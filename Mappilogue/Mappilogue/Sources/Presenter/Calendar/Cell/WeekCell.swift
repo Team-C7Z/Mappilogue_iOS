@@ -148,13 +148,14 @@ extension WeekCell: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             schedules = getDaySchedule(year: year, month: month, day: Int(day) ?? 0)
             if schedules.count > indexPath.section-1 {
                 var scheduleTitle = schedules[indexPath.section-1].title
-                let scheduleColor = schedules[indexPath.section-1].color
                 let previousDaySchedules = getPreviousDaySchedule(year: year, month: month, day: Int(day) ?? 0)
-                if let _ = previousDaySchedules.firstIndex(where: {$0.title == scheduleTitle}) {
+                if previousDaySchedules.firstIndex(where: {$0.title == scheduleTitle}) != nil {
                     scheduleTitle = ""
                 }
                 
-                cell.configure(with: scheduleTitle, color: scheduleColor)
+                if let scheduleColor = schedules[indexPath.section-1].color {
+                    cell.configure(with: scheduleTitle, color: scheduleColor)
+                }
             }
            
             return cell

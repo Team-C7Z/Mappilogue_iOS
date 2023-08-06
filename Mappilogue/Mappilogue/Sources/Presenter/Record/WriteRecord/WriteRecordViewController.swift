@@ -8,14 +8,14 @@
 import UIKit
 
 class WriteRecordViewController: BaseViewController {
-    var schedule: Schedule?
+    var schedule: Schedule = Schedule()
     var textContentCellHeight: CGFloat = 80
     
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     private let stackView = UIStackView()
     private let categoryButton = CategoryButton()
-    private let scheduleTitleColorView = ScheduleTitleColorView()
+    private let scheduleTitleColorView = UpdateScheduleTitleColorView()
     private let colorSelectionView = ColorSelectionView()
     private let mainLocationButton = MainLocationButton()
     private let textContentView = TextContentView()
@@ -110,8 +110,8 @@ class WriteRecordViewController: BaseViewController {
     }
     
     private func configureScheduleTitleColorView() {
-        if let schedule = schedule {
-            scheduleTitleColorView.configure(with: schedule.title, color: schedule.color, isColorSelection: false)
+        if let color = schedule.color {
+            scheduleTitleColorView.configure(with: schedule.title, color: color, isColorSelection: false)
         }
         scheduleTitleColorView.delegate = self
     }
@@ -162,8 +162,8 @@ extension WriteRecordViewController: ColorSelectionButtonDelegate {
             self.view.layoutIfNeeded()
         }
         
-        if let schedule = schedule {
-            scheduleTitleColorView.configure(with: schedule.title, color: schedule.color, isColorSelection: isSelected)
+        if let color = schedule.color {
+            scheduleTitleColorView.configure(with: schedule.title, color: color, isColorSelection: isSelected)
         }
     }
 }

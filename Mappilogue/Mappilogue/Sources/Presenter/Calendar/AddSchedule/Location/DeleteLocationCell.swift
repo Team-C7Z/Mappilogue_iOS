@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DeleteLocationCell: BaseTableViewCell {
+class DeleteLocationCell: BaseCollectionViewCell {
     static let registerId = "\(DeleteLocationCell.self)"
     
     weak var deleteModelDelegate: DeleteModeDelegate?
