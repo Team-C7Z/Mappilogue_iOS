@@ -1,5 +1,5 @@
 //
-//  EmptyScheduleCell.swift
+//  HomeEmptyScheduleCell.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/06/29.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-class EmptyScheduleCell: BaseTableViewCell {
-    static let registerId = "\(EmptyScheduleCell.self)"
+class HomeEmptyScheduleCell: BaseTableViewCell {
+    static let registerId = "\(HomeEmptyScheduleCell.self)"
     
     private let stackView = UIStackView()
     private let emptyScheduleLabel = UILabel()

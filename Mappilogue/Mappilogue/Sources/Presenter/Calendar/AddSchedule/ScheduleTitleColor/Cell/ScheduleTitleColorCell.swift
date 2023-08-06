@@ -27,6 +27,7 @@ class ScheduleTitleColorCell: BaseTableViewCell {
         scheduleNameTextField.font = .title02
         scheduleNameTextField.placeholder = "일정 제목을 적어 주세요"
         scheduleNameTextField.returnKeyType = .done
+        scheduleNameTextField.delegate = self
         
         colorSelectionButton.addTarget(self, action: #selector(colorSelectionButtonTapped), for: .touchUpInside)
     }

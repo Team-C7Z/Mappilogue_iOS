@@ -21,7 +21,7 @@ class HomeViewController: NavigationBarViewController {
         tableView.backgroundColor = .colorF9F8F7
         tableView.sectionHeaderHeight = 0
         tableView.sectionFooterHeight = 0
-        tableView.register(EmptyScheduleCell.self, forCellReuseIdentifier: EmptyScheduleCell.registerId)
+        tableView.register(HomeEmptyScheduleCell.self, forCellReuseIdentifier: HomeEmptyScheduleCell.registerId)
         tableView.register(TodayScheduleCell.self, forCellReuseIdentifier: TodayScheduleCell.registerId)
         tableView.register(TodayScheduleInfoCell.self, forCellReuseIdentifier: TodayScheduleInfoCell.registerId)
         tableView.register(UpcomingScheduleCell.self, forCellReuseIdentifier: UpcomingScheduleCell.registerId)
@@ -115,7 +115,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 let cellIdentifier = tableViewSection.cellIdentifier
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
                 
-                if let emptyScheduleCell = cell as? EmptyScheduleCell {
+                if let emptyScheduleCell = cell as? HomeEmptyScheduleCell {
                     tableViewSection.configureCell(emptyScheduleCell)
                 }
                 return cell
@@ -171,7 +171,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 let cellIdentifier = section.cellIdentifier
                 let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
                 
-                if let emptyScheduleCell = cell as? EmptyScheduleCell {
+                if let emptyScheduleCell = cell as? HomeEmptyScheduleCell {
                     section.configureCell(emptyScheduleCell)
                 }
                 return cell

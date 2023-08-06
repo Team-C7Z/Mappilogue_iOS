@@ -10,6 +10,7 @@ import UIKit
 class LocationCell: BaseTableViewCell {
     static let registerId = "\(LocationCell.self)"
     
+    private let locationImage = UIImageView()
     private let locationLabel = UILabel()
     private let addressLabel = UILabel()
     
@@ -22,6 +23,8 @@ class LocationCell: BaseTableViewCell {
     override func setupProperty() {
         super.setupProperty()
         
+        locationImage.image = UIImage(named: "addLocation")
+        
         locationLabel.textColor = .color1C1C1C
         locationLabel.font = .title02
         
@@ -32,6 +35,7 @@ class LocationCell: BaseTableViewCell {
     override func setupHierarchy() {
         super.setupHierarchy()
         
+        contentView.addSubview(locationImage)
         contentView.addSubview(locationLabel)
         contentView.addSubview(addressLabel)
     }
@@ -39,13 +43,21 @@ class LocationCell: BaseTableViewCell {
     override func setupLayout() {
         super.setupLayout()
         
+        locationImage.snp.makeConstraints {
+            $0.leading.centerY.equalTo(contentView)
+            $0.width.equalTo(19)
+            $0.height.equalTo(24)
+        }
+        
         locationLabel.snp.makeConstraints {
-            $0.top.leading.trailing.equalTo(contentView)
+            $0.top.trailing.equalTo(contentView)
+            $0.leading.equalTo(contentView).offset(27)
         }
         
         addressLabel.snp.makeConstraints {
             $0.top.equalTo(contentView).offset(25)
-            $0.leading.trailing.equalTo(contentView)
+            $0.leading.equalTo(contentView).offset(27)
+            $0.trailing.equalTo(contentView)
         }
     }
     
