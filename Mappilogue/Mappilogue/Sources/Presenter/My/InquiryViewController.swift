@@ -14,6 +14,7 @@ class InquiryViewController: BaseViewController {
     private let emailImage = UIImageView()
     private let emailLabel = UILabel()
     private let emailCopyButton = UIButton()
+    private var emailCopyToastMessage = EmailCopyToastMessageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,7 @@ class InquiryViewController: BaseViewController {
         emailCopyButton.setTitle("복사하기", for: .normal)
         emailCopyButton.setTitleColor(.color2EBD3D, for: .normal)
         emailCopyButton.titleLabel?.font = .body03
+        emailCopyButton.addTarget(self, action: #selector(emailCopyButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -90,5 +92,33 @@ class InquiryViewController: BaseViewController {
             $0.trailing.equalTo(emailView).offset(-12)
             $0.centerY.equalTo(emailView)
         }
+    }
+    
+    @objc func emailCopyButtonTapped() {
+        showGatheringToastMessage()
+    }
+    
+    func setGatheringToastMessage() {
+        view.addSubview(emailCopyToastMessage)
+        
+        emailCopyToastMessage.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-16)
+            $0.centerX.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+    
+    func showGatheringToastMessage() {
+        self.setGatheringToastMessage()
+        
+        UIView.animate(withDuration: 2, delay: 0, options: .curveLinear, animations: {
+            
+        }, completion: { (_) in
+            UIView.animate(withDuration: 0.3, delay: 1, options: .curveEaseIn, animations: {
+                self.emailCopyToastMessage.alpha = 0.0
+            }, completion: { (_) in
+                self.emailCopyToastMessage.alpha = 1.0
+                self.emailCopyToastMessage.removeFromSuperview()
+            })
+        })
     }
 }
