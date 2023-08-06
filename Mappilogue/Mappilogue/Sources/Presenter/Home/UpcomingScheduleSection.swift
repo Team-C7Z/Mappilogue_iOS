@@ -8,22 +8,22 @@
 import Foundation
 
 enum UpcomingScheduleSection: Int, CaseIterable {
-    case todaySchedule
-    case addLocation
+    case upcomingSchedule
+    case addSchedule
     case markedRecord
     
     var cellIdentifier: String {
         switch self {
-        case .todaySchedule:
+        case .upcomingSchedule:
             return UpcomingScheduleCell.registerId
-        case .addLocation:
-            return AddLocationButtonCell.registerId
+        case .addSchedule:
+            return AddScheduleButtonCell.registerId
         case .markedRecord:
             return MarkedRecordsCell.registerId
         }
     }
     
-    func numberOfRows(section: Int, scheduleData: [TodaySchedule], limitedUpcomingScheduleCount: Int) -> Int {
+    func numberOfRows(section: Int, scheduleData: [UpcomingSchedule], limitedUpcomingScheduleCount: Int) -> Int {
         switch section {
         case 0:
             return min(scheduleData.count, limitedUpcomingScheduleCount)
