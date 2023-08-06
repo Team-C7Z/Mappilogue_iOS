@@ -108,6 +108,7 @@
 		925840BF2A7F4D3900997434 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840BE2A7F4D3900997434 /* Notification.swift */; };
 		925840C12A7F5B2200997434 /* NotificationSwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C02A7F5B2200997434 /* NotificationSwitchButton.swift */; };
 		925840C32A7F61E800997434 /* InquiryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C22A7F61E800997434 /* InquiryViewController.swift */; };
+		925840C52A7F71E600997434 /* EmailCopyToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C42A7F71E600997434 /* EmailCopyToastMessageView.swift */; };
 		9263786B2A546BDE004E5B6E /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9263786A2A546BDE004E5B6E /* OnboardingViewController.swift */; };
 		9263786E2A5475AF004E5B6E /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9263786D2A5475AF004E5B6E /* OnboardingCell.swift */; };
 		926378712A54E0E6004E5B6E /* OnboardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926378702A54E0E6004E5B6E /* OnboardingManager.swift */; };
@@ -281,6 +282,7 @@
 		925840BE2A7F4D3900997434 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		925840C02A7F5B2200997434 /* NotificationSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSwitchButton.swift; sourceTree = "<group>"; };
 		925840C22A7F61E800997434 /* InquiryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryViewController.swift; sourceTree = "<group>"; };
+		925840C42A7F71E600997434 /* EmailCopyToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCopyToastMessageView.swift; sourceTree = "<group>"; };
 		9263786A2A546BDE004E5B6E /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		9263786D2A5475AF004E5B6E /* OnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
 		926378702A54E0E6004E5B6E /* OnboardingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingManager.swift; sourceTree = "<group>"; };
@@ -837,6 +839,7 @@
 				925840BA2A7F455D00997434 /* NotificationSettingsViewController.swift */,
 				925840C02A7F5B2200997434 /* NotificationSwitchButton.swift */,
 				925840C22A7F61E800997434 /* InquiryViewController.swift */,
+				925840C42A7F71E600997434 /* EmailCopyToastMessageView.swift */,
 				925840B32A7F281A00997434 /* Cell */,
 			);
 			path = My;
@@ -1238,6 +1241,7 @@
 				9224FD352A652A96000A56A6 /* WeekdayView.swift in Sources */,
 				926999362A14F443003DDAD2 /* BaseView.swift in Sources */,
 				92011C0E2A74C1FC009B047F /* EmptySearchCell.swift in Sources */,
+				925840C52A7F71E600997434 /* EmailCopyToastMessageView.swift in Sources */,
 				92FE26132A4B74D800BCDB82 /* ScheduleTypeHeaderView.swift in Sources */,
 				9224FD212A62BBB7000A56A6 /* NotificationCell.swift in Sources */,
 				9224FD0D2A610134000A56A6 /* EmptyTodayScheduleSection.swift in Sources */,
