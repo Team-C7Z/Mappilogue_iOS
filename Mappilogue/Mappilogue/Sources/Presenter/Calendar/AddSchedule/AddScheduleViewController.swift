@@ -183,11 +183,22 @@ class AddScheduleViewController: BaseViewController {
         let location = gesture.location(in: tableView)
         if !startDatePickerOuterView.isHidden && location.y < startDatePickerOuterView.frame.minY {
             startDatePickerOuterView.isHidden = true
-            tableView.reloadData()
+            
+            if daysBetween() < 0 {
+                endDate = .init(year: startDate.year, month: startDate.month, day: startDate.day ?? 0)
+            }
+            
         } else if !endDatePickerOuterView.isHidden && location.y < endDatePickerOuterView.frame.minY {
             endDatePickerOuterView.isHidden = true
-            tableView.reloadData()
+            
+            if daysBetween() < 0 {
+                startDate = .init(year: endDate.year, month: endDate.month, day: endDate.day ?? 0)
+            }
         }
+        tableView.reloadData()
+        setSelectedDate()
+        startDatePickerView.reloadAllComponents()
+        endDatePickerView.reloadAllComponents()
     }
 }
 
@@ -406,7 +417,6 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
                 endDate = .init(year: startDate.year, month: startDate.month, day: startDate.day ?? 0)
             }
         }
-        
     }
     
     private func updateDaysComponent(_ selectedDate: SelectedDate, datePickerView: UIPickerView) {
@@ -450,7 +460,7 @@ extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelega
     func startDateButtonTapped() {
         startDatePickerOuterView.isHidden = false
         endDatePickerOuterView.isHidden = true
-        
+  
         reloadTableView()
         startDatePickerView.reloadAllComponents()
     }

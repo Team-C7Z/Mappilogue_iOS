@@ -117,6 +117,7 @@
 		9263786E2A5475AF004E5B6E /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9263786D2A5475AF004E5B6E /* OnboardingCell.swift */; };
 		926378712A54E0E6004E5B6E /* OnboardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926378702A54E0E6004E5B6E /* OnboardingManager.swift */; };
 		926382B42A6CC9760064C1A8 /* GatheringToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926382B32A6CC9760064C1A8 /* GatheringToastMessageView.swift */; };
+		926382B62A6D03850064C1A8 /* CalendarEmptyScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926382B52A6D03850064C1A8 /* CalendarEmptyScheduleCell.swift */; };
 		926998F72A14EC07003DDAD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926998F62A14EC07003DDAD2 /* AppDelegate.swift */; };
 		926998F92A14EC07003DDAD2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926998F82A14EC07003DDAD2 /* SceneDelegate.swift */; };
 		926999002A14EC09003DDAD2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 926998FF2A14EC09003DDAD2 /* Assets.xcassets */; };
@@ -141,7 +142,7 @@
 		929158272A2529660022BEF9 /* Pretendard-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581E2A2529660022BEF9 /* Pretendard-SemiBold.ttf */; };
 		9291582A2A252CC20022BEF9 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929158292A252CC20022BEF9 /* UIColor.swift */; };
 		929158302A2537E40022BEF9 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9291582F2A2537E40022BEF9 /* SnapKit */; };
-		92A7B64C2A4CC0E6009C9293 /* EmptyScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B64B2A4CC0E6009C9293 /* EmptyScheduleCell.swift */; };
+		92A7B64C2A4CC0E6009C9293 /* HomeEmptyScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B64B2A4CC0E6009C9293 /* HomeEmptyScheduleCell.swift */; };
 		92A7B64F2A4CCE29009C9293 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B64E2A4CCE29009C9293 /* AddButton.swift */; };
 		92A7B6512A4CD261009C9293 /* AddScheduleButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6502A4CD261009C9293 /* AddScheduleButtonCell.swift */; };
 		92A7B6532A4CDD4D009C9293 /* ScheduleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6522A4CDD4D009C9293 /* ScheduleType.swift */; };
@@ -295,6 +296,7 @@
 		9263786D2A5475AF004E5B6E /* OnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
 		926378702A54E0E6004E5B6E /* OnboardingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingManager.swift; sourceTree = "<group>"; };
 		926382B32A6CC9760064C1A8 /* GatheringToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatheringToastMessageView.swift; sourceTree = "<group>"; };
+		926382B52A6D03850064C1A8 /* CalendarEmptyScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEmptyScheduleCell.swift; sourceTree = "<group>"; };
 		926998F32A14EC07003DDAD2 /* Mappilogue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mappilogue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		926998F62A14EC07003DDAD2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		926998F82A14EC07003DDAD2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -321,7 +323,7 @@
 		9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.ttf"; sourceTree = "<group>"; };
 		9291581E2A2529660022BEF9 /* Pretendard-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.ttf"; sourceTree = "<group>"; };
 		929158292A252CC20022BEF9 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
-		92A7B64B2A4CC0E6009C9293 /* EmptyScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyScheduleCell.swift; sourceTree = "<group>"; };
+		92A7B64B2A4CC0E6009C9293 /* HomeEmptyScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEmptyScheduleCell.swift; sourceTree = "<group>"; };
 		92A7B64E2A4CCE29009C9293 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		92A7B6502A4CD261009C9293 /* AddScheduleButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleButtonCell.swift; sourceTree = "<group>"; };
 		92A7B6522A4CDD4D009C9293 /* ScheduleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScheduleType.swift; path = Mappilogue/Sources/Presenter/Home/Schedule/ScheduleType.swift; sourceTree = SOURCE_ROOT; };
@@ -584,7 +586,7 @@
 		9224FD2F2A639627000A56A6 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				92A7B64B2A4CC0E6009C9293 /* EmptyScheduleCell.swift */,
+				92A7B64B2A4CC0E6009C9293 /* HomeEmptyScheduleCell.swift */,
 				92A7B65E2A4E07DB009C9293 /* TodayScheduleCell.swift */,
 				92A7B6582A4D01B3009C9293 /* TodayScheduleInfoCell.swift */,
 				92A7B6672A4E6154009C9293 /* UpcomingScheduleCell.swift */,
@@ -637,8 +639,9 @@
 				9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */,
 				9230BE462A57FEB80053E535 /* DayCell.swift */,
 				9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */,
-				9224FCF82A5FCF72000A56A6 /* ScheduleCell.swift */,
 				92C2EC602A6924B5002DB0E3 /* LineCell.swift */,
+				9224FCF82A5FCF72000A56A6 /* ScheduleCell.swift */,
+				926382B52A6D03850064C1A8 /* CalendarEmptyScheduleCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1194,6 +1197,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				926382B62A6D03850064C1A8 /* CalendarEmptyScheduleCell.swift in Sources */,
+				92459EDC2A53158A00493941 /* MarkedRecord.swift in Sources */,
+				92A7B64C2A4CC0E6009C9293 /* HomeEmptyScheduleCell.swift in Sources */,
 				92011B892A72B4BB009B047F /* TextContentView.swift in Sources */,
 				92011C222A77907F009B047F /* CategoryCell.swift in Sources */,
 				92459EDC2A53158A00493941 /* MarkedRecord.swift in Sources */,
