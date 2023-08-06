@@ -50,7 +50,7 @@ class LocationTimeCell: BaseTableViewCell {
         editImage.image = UIImage(named: "edit")
         editImage.tintColor = .colorC9C6C2
 
-        checkButton.setImage(UIImage(named: "unCheckLocation"), for: .normal)
+        checkButton.setImage(UIImage(named: "unCheck"), for: .normal)
         checkButton.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
     }
     
@@ -140,7 +140,7 @@ class LocationTimeCell: BaseTableViewCell {
     }
     
     private func updateCheckButtonImage() {
-        let imageName = isCheck ? "checkLocation" : "unCheckLocation"
+        let imageName = isCheck ? "check" : "unCheck"
         checkButton.setImage(UIImage(named: imageName), for: .normal)
     }
 }
