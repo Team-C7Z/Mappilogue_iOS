@@ -17,7 +17,7 @@ class MyViewController: NavigationBarViewController {
         [
             MyInfo(image: "noti", title: "알림 설정"),
             MyInfo(image: "terms", title: "이용약관"),
-            MyInfo(image: "contact_us", title: "문의하기")
+            MyInfo(image: "inquiry", title: "문의하기")
         ],
         [
             MyInfo(image: "logout", title: "로그아웃"),
@@ -126,8 +126,10 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
             if indexPath.row == 0 {
                 let notificationSettingsViewController = NotificationSettingsViewController()
                 navigationController?.pushViewController(notificationSettingsViewController, animated: true)
+            } else if indexPath.row == 2 {
+                let inquiryViewController = InquiryViewController()
+                navigationController?.pushViewController(inquiryViewController, animated: true)
             }
         }
-
     }
 }
