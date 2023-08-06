@@ -21,7 +21,7 @@ class MyViewController: NavigationBarViewController {
         ],
         [
             MyInfo(image: "logout", title: "로그아웃"),
-            MyInfo(image: "delete_acount", title: "탈퇴하기")
+            MyInfo(image: "withdrawal", title: "탈퇴하기")
         ]
     ]
     
@@ -135,6 +135,8 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
         if indexPath.section == 3 {
             if indexPath.row == 0 {
                 presentLogoutAlert()
+            } else if indexPath.row == 1 {
+                presentWithdrawalAlert()
             }
         }
     }
@@ -152,6 +154,15 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
         alertViewController.onDoneTapped = {
             print("로그아웃")
         }
-         present(alertViewController, animated: false)
+        present(alertViewController, animated: false)
      }
+    
+    private func presentWithdrawalAlert() {
+        let withdrawalAlertViewController = WithdrawalAlertViewController()
+        withdrawalAlertViewController.modalPresentationStyle = .overCurrentContext
+        withdrawalAlertViewController.onDoneTapped = {
+            print("탈퇴")
+        }
+        present(withdrawalAlertViewController, animated: false)
+    }
 }

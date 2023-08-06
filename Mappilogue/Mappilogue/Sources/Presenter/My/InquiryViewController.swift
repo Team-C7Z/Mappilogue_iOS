@@ -29,10 +29,11 @@ class InquiryViewController: BaseViewController {
         inquiryTitleLabel.text = "여러분의 이야기를 기다려요"
         inquiryTitleLabel.textColor = .color1C1C1C
         inquiryTitleLabel.font = .title01
-        inquiryContentLabel.text = "맵필로그 팀은 여러분의 질문을 언제든지 기다리고 있어요.\n궁금한 점이나 건의할 점, 사소한 의견이라도 맵필로그 팀에게 전해 주세요."
+        inquiryContentLabel.setTextWithLineHeight(text: "맵필로그 팀은 여러분의 질문을 언제든지 기다리고 있어요.\n궁금한 점이나 건의할 점, 사소한 의견이라도 맵필로그 팀에게 전해 주세요.", lineHeight: 21)
         inquiryContentLabel.textColor = .color707070
         inquiryContentLabel.font = .body02
         inquiryContentLabel.numberOfLines = 0
+        inquiryContentLabel.lineBreakMode = .byWordWrapping
         
         emailView.layer.cornerRadius = 12
         emailView.backgroundColor = .colorF5F3F0
