@@ -107,12 +107,16 @@ class WithdrawalViewController: BaseViewController {
             let withdrawalReasonView = WithdrawalReasonView()
             withdrawalReasonView.configure(title, index)
             withdrawalReasonView.onReasonSelected = { index in
-                self.selectedReasons[index] = !self.selectedReasons[index]
-                self.isSelectedReason = self.selectedReasons.contains(true)
-                self.updateSubmitButtonDesign()
+                self.updateSelectedReasons(index)
             }
             stackView.addArrangedSubview(withdrawalReasonView)
         }
+    }
+    
+    private func updateSelectedReasons(_ index: Int) {
+        selectedReasons[index] = !selectedReasons[index]
+        isSelectedReason = selectedReasons.contains(true)
+        updateSubmitButtonDesign()
     }
     
     private func updateSubmitButtonDesign() {
