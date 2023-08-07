@@ -8,9 +8,10 @@
 import UIKit
 
 struct SelectedNotification {
-    var date: String
-    var hour: Int
-    var minute: Int
+    var date: String?
+    var hour: Int?
+    var minute: Int?
+    var timePeriod: String?
 }
 
 class NotificationViewController: BaseViewController {
@@ -19,9 +20,10 @@ class NotificationViewController: BaseViewController {
     var dates = ["7일 전", "3일 전", "이틀 전", "전날", "당일"]
     var beforDay = [7, 3, 2, 1, 0]
     let hours = Array(1...12)
-    let minutes = Array(0...59)
+    var minutes = Array(0...59).map {String(format: "%02d", $0)}
+    var timePeriod = ["AM", "PM"]
     var isDate: Bool = true
-    var selectedNotification: SelectedNotification?
+    var selectedNotification = SelectedNotification()
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -45,6 +47,9 @@ class NotificationViewController: BaseViewController {
         
         setDateList()
         setSelectedDate()
+        
+        let todayDate = "당일 (\(monthlyCalendar.currentMonth)월 \(monthlyCalendar.currentDay)일)"
+        selectedNotification = SelectedNotification(date: todayDate, hour: 9, minute: 0, timePeriod: "AM")
     }
     
     override func setupProperty() {
@@ -82,10 +87,10 @@ class NotificationViewController: BaseViewController {
         }
 
         pickerView.snp.makeConstraints {
-            $0.top.equalTo(pickerOuterView).offset(6)
-            $0.leading.equalTo(pickerOuterView).offset(40)
-            $0.trailing.equalTo(pickerOuterView).offset(-40)
+            $0.top.equalTo(pickerOuterView).offset(8)
             $0.bottom.equalTo(pickerOuterView).offset(-8)
+            $0.centerX.equalTo(pickerOuterView)
+            $0.width.equalTo(240)
         }
     }
     
@@ -96,19 +101,32 @@ class NotificationViewController: BaseViewController {
     }
     
     func setSelectedDate() {
+        pickerView.reloadAllComponents()
         if isDate {
-            pickerView.selectRow(dates.count-1, inComponent: 0, animated: true)
+            pickerView.selectRow(dates.count-1, inComponent: 0, animated: false)
+        } else {
+            pickerView.selectRow(8, inComponent: 0, animated: false)
+            pickerView.selectRow(0, inComponent: 1, animated: false)
+            pickerView.selectRow(0, inComponent: 2, animated: false)
         }
     }
     
+    func showPickerView() {
+        isDate = true
+        pickerOuterView.isHidden = false
+        setSelectedDate()
+    }
+    
     @objc func dismissDatePicker(_ gesture: UITapGestureRecognizer) {
-//        let location = gesture.location(in: collectionView)
-//        if location.y < pickerOuterView.frame.minY {
-//        }
-//        collectionView.reloadData()
-//        setSelectedDate()
-//        startDatePickerView.reloadAllComponents()
-//        endDatePickerView.reloadAllComponents()
+        let location = gesture.location(in: collectionView)
+        if location.y < pickerOuterView.frame.minY {
+            if isDate {
+                isDate = false
+                setSelectedDate()
+            } else {
+                pickerOuterView.isHidden = true
+            }
+        }
     }
 }
 
@@ -132,8 +150,9 @@ extension NotificationViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: NotificationHeaderView.registerId, for: indexPath) as? NotificationHeaderView else { return UICollectionReusableView() }
+        headerView.configure(selectedNotification)
         headerView.onAddNotificationButtonTapped = {
-            self.pickerOuterView.isHidden = false
+            self.showPickerView()
         }
         return headerView
     }
@@ -155,15 +174,17 @@ extension NotificationViewController: UICollectionViewDelegate, UICollectionView
 
 extension NotificationViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return isDate ? 1 : 2
+        return isDate ? 1 : 3
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch component {
         case 0:
             return isDate ? dates.count : hours.count
-        default:
+        case 1:
             return minutes.count
+        default:
+            return timePeriod.count
         }
     }
     
@@ -171,8 +192,10 @@ extension NotificationViewController: UIPickerViewDelegate, UIPickerViewDataSour
         switch component {
         case 0:
             return isDate ? "\(dates[row])" : "\(hours[row])"
-        default:
+        case 1:
             return "\(minutes[row])"
+        default:
+            return "\(timePeriod[row])"
         }
     }
     
@@ -180,12 +203,14 @@ extension NotificationViewController: UIPickerViewDelegate, UIPickerViewDataSour
         switch component {
         case 0:
             if isDate {
-                selectedNotification?.date = dates[row]
+                selectedNotification.date = dates[row]
             } else {
-                selectedNotification?.hour = hours[row]
+                selectedNotification.hour = hours[row]
             }
+        case 1:
+            selectedNotification.minute = Int(minutes[row]) ?? 0
         default:
-            selectedNotification?.minute = minutes[row]
+            selectedNotification.timePeriod = timePeriod[row]
         }
     }
 }

@@ -74,6 +74,6 @@ class ScheduleCell: BaseTableViewCell {
         scheduleLabel.text = schedule.title
         scheduleColorView.backgroundColor = schedule.color
         scheduleTimeLabel.text = schedule.time
-        scheduleLocationLabel.text = ", \(schedule.location)"
+        scheduleLocationLabel.text = ", \(schedule.location ?? "")"
     }
 }

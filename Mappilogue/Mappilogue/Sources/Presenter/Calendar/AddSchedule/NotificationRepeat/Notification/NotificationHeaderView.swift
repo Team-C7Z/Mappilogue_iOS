@@ -41,12 +41,10 @@ class NotificationHeaderView: BaseCollectionReusableView {
         stackView.backgroundColor = .colorEAE6E1
         
         startDateView.backgroundColor = .colorF9F8F7
-        startDateLabel.text = "당일 (5월 10일)"
         startDateLabel.textColor = .color1C1C1C
         startDateLabel.font = .title02
         
         startTimeView.backgroundColor = .colorF9F8F7
-        startTimeLabel.text = "9:00 AM"
         startTimeLabel.textColor = .color1C1C1C
         startTimeLabel.font = .title02
         
@@ -110,6 +108,12 @@ class NotificationHeaderView: BaseCollectionReusableView {
             $0.top.equalTo(stackView.snp.bottom).offset(36)
             $0.leading.equalTo(self)
         }
+    }
+    
+    func configure(_ selectedNotification: SelectedNotification) {
+        startDateLabel.text = selectedNotification.date
+        guard let hour = selectedNotification.hour, let minute = selectedNotification.minute, let timePeriod = selectedNotification.timePeriod else { return }
+        startTimeLabel.text = "\(hour):\(String(format: "%02d", minute)) \(timePeriod)"
     }
     
     @objc private func addNotificationButtonTapped() {
