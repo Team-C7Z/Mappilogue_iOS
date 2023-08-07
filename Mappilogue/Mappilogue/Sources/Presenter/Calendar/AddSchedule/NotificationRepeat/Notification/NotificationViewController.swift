@@ -22,8 +22,9 @@ class NotificationViewController: BaseViewController {
     let hours = Array(1...12)
     var minutes = Array(0...59).map {String(format: "%02d", $0)}
     var timePeriod = ["AM", "PM"]
-    var isDate: Bool = true
+    var isDate: Bool = false
     var selectedNotification = SelectedNotification()
+    var notificationList: [SelectedNotification] = []
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -125,18 +126,24 @@ class NotificationViewController: BaseViewController {
                 setSelectedDate()
             } else {
                 pickerOuterView.isHidden = true
+                notificationList.append(selectedNotification)
             }
+            collectionView.reloadData()
         }
     }
 }
 
 extension NotificationViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return notificationList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectedNotificationCell.registerId, for: indexPath) as? SelectedNotificationCell else { return UICollectionViewCell() }
+        
+        let date = notificationList[indexPath.row]
+        cell.configure(date)
+        
         return cell
     }
     
@@ -150,7 +157,9 @@ extension NotificationViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: NotificationHeaderView.registerId, for: indexPath) as? NotificationHeaderView else { return UICollectionReusableView() }
-        headerView.configure(selectedNotification)
+        if !isDate {
+            headerView.configure(selectedNotification)
+        }
         headerView.onAddNotificationButtonTapped = {
             self.showPickerView()
         }
@@ -158,7 +167,7 @@ extension NotificationViewController: UICollectionViewDelegate, UICollectionView
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 130)
+        return CGSize(width: collectionView.bounds.width, height: 140)
     }
     
     // 수평 간격
