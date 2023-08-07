@@ -22,12 +22,6 @@ class NotificationHeaderView: BaseCollectionReusableView {
     private let addNotificationImage = UIImageView()
     private let notificationListLabel = UILabel()
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        frame = frame.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
-    }
-    
     override func setupProperty() {
         super.setupProperty()
         
@@ -76,12 +70,14 @@ class NotificationHeaderView: BaseCollectionReusableView {
         super.setupLayout()
      
         startLabel.snp.makeConstraints {
-            $0.top.leading.equalTo(self)
+            $0.top.equalTo(self)
+            $0.leading.equalTo(self).offset(16)
         }
         
         stackView.snp.makeConstraints {
             $0.top.equalTo(self).offset(31)
-            $0.leading.trailing.equalTo(self)
+            $0.leading.equalTo(self).offset(16)
+            $0.trailing.equalTo(self).offset(-16)
             $0.height.equalTo(52)
         }
         
@@ -106,7 +102,7 @@ class NotificationHeaderView: BaseCollectionReusableView {
         
         notificationListLabel.snp.makeConstraints {
             $0.top.equalTo(stackView.snp.bottom).offset(36)
-            $0.leading.equalTo(self)
+            $0.leading.equalTo(self).offset(16)
         }
     }
     

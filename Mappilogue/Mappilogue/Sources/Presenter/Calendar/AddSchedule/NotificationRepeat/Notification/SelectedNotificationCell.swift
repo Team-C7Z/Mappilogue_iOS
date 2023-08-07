@@ -42,4 +42,8 @@ class SelectedNotificationCell: BaseCollectionViewCell {
             $0.width.height.equalTo(24)
         }
     }
+    
+    func configure(_ date: SelectedNotification) {
+        notificationLabel.text = "\(date.date ?? "") \(date.hour ?? 0):\(String(format: "%02d", date.minute ?? 0)) \(date.timePeriod ?? "")"
+    }
 }
