@@ -288,11 +288,7 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
     }
 }
 
-extension AddScheduleViewController: NotificationTimeDelegate, SelectedLocationDelegate, TimeButtonDelegate, SelectedTimeDelegate, DeleteModeDelegate, DeleteLocationDelegate, CheckLocationDelegate {
-    func selectedNotificationTime(_ selectedTime: [String]) {
-        print(selectedTime)
-    }
-    
+extension AddScheduleViewController: SelectedLocationDelegate, TimeButtonDelegate, SelectedTimeDelegate, DeleteModeDelegate, DeleteLocationDelegate, CheckLocationDelegate {
     func selectLocation(_ selectedLocation: String) {
         locations.append(LocationTime(location: selectedLocation, time: initialTime))
         reloadTableView()

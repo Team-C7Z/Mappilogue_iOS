@@ -8,7 +8,7 @@
 import UIKit
 
 class NotificationSettingCell: BaseCollectionViewCell {
-    static let registerId = "\(NotificationCell.self)"
+    static let registerId = "\(NotificationSettingCell.self)"
     
     private let notificationLabel = UILabel()
     private let notificationSwitch = NotificationSwitchButton()
