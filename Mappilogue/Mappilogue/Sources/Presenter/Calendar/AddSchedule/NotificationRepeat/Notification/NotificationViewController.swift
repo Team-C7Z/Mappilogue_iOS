@@ -7,86 +7,167 @@
 
 import UIKit
 
+struct SelectedNotification {
+    var date: String
+    var hour: Int
+    var minute: Int
+}
+
 class NotificationViewController: BaseViewController {
-    private let notificationTimes = ["10분 전", "30분 전", "1시간 30분 전", "2시간 전", "2시간 30분 전", "3시간 전", "4시간 전", "5시간 전", "6시간 전", "1일(24시간) 전", "2일(48시간) 전", "3일(72시간) 전", "일주일 전"]
-    var selectedTime: [Bool] = []
+    var dates = ["7일 전", "3일 전", "이틀 전", "전날", "당일"]
+    let hours = Array(1...12)
+    let minutes = Array(0...59)
+    var isDate: Bool = true
+    var selectedNotification: SelectedNotification?
     
-    weak var delegate: NotificationTimeDelegate?
-    
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = .colorF9F8F7
-        tableView.sectionHeaderHeight = 0
-        tableView.sectionFooterHeight = 0
-        tableView.register(NotificationCell.self, forCellReuseIdentifier: NotificationCell.registerId)
-        tableView.delegate = self
-        tableView.dataSource = self
-        return tableView
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        collectionView.backgroundColor = .colorF9F8F7
+        collectionView.register(SelectedNotificationCell.self, forCellWithReuseIdentifier: SelectedNotificationCell.registerId)
+        collectionView.register(NotificationHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: NotificationHeaderView.registerId)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        return collectionView
     }()
     
+    private let pickerOuterView = UIView()
+    private let pickerView = UIPickerView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        selectedTime = Array(repeating: false, count: notificationTimes.count)
     }
     
     override func setupProperty() {
         super.setupProperty()
         
         setNavigationBar("알림", backButtonAction: #selector(backButtonTapped))
+        
+        pickerOuterView.backgroundColor = .colorF5F3F0
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        pickerOuterView.isHidden = true
+        
+        let datePickerTap = UITapGestureRecognizer(target: self, action: #selector(dismissDatePicker))
+        view.addGestureRecognizer(datePickerTap)
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
-        
-        view.addSubview(tableView)
+ 
+        view.addSubview(collectionView)
+        view.addSubview(pickerOuterView)
+        pickerOuterView.addSubview(pickerView)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
-        tableView.snp.makeConstraints {
+        collectionView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
+        
+        pickerOuterView.snp.makeConstraints {
+            $0.leading.bottom.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(236)
+        }
+
+        pickerView.snp.makeConstraints {
+            $0.top.equalTo(pickerOuterView).offset(7)
+            $0.leading.equalTo(pickerOuterView).offset(40)
+            $0.trailing.equalTo(pickerOuterView).offset(-40)
+            $0.bottom.equalTo(pickerOuterView).offset(-10)
+        }
+    }
+    
+    @objc func dismissDatePicker(_ gesture: UITapGestureRecognizer) {
+//        let location = gesture.location(in: collectionView)
+//        if location.y < pickerOuterView.frame.minY {
+//        }
+//        collectionView.reloadData()
+//        setSelectedDate()
+//        startDatePickerView.reloadAllComponents()
+//        endDatePickerView.reloadAllComponents()
     }
 }
 
-extension NotificationViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return notificationTimes.count
+extension NotificationViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 0
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: NotificationCell.registerId, for: indexPath) as? NotificationCell else { return UITableViewCell() }
-        cell.selectionStyle = .none
-        
-        let notificationTime = notificationTimes[indexPath.row]
-        let isSelect = selectedTime[indexPath.row]
-        cell.configure(with: notificationTime, isSelect: isSelect)
-        
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectedNotificationCell.registerId, for: indexPath) as? SelectedNotificationCell else { return UICollectionViewCell() }
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 42
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width - 32, height: 56)
     }
     
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 10
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: NotificationHeaderView.registerId, for: indexPath) as? NotificationHeaderView else { return UICollectionReusableView() }
+        headerView.onAddNotificationButtonTapped = {
+            self.pickerOuterView.isHidden = false
+        }
+        return headerView
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.bounds.width, height: 130)
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedTime[indexPath.row] = !selectedTime[indexPath.row]
-        
-        tableView.reloadRows(at: [indexPath], with: .none)
+    // 수평 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    // 수직 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
     }
 }
 
-protocol NotificationTimeDelegate: AnyObject {
-    func selectedNotificationTime(_ selectedTime: [String])
+extension NotificationViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return isDate ? 1 : 2
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        switch component {
+        case 0:
+            return isDate ? dates.count : hours.count
+        default:
+            return minutes.count
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        switch component {
+        case 0:
+            return isDate ? "\(dates[row])" : "\(hours[row])"
+        default:
+            return "\(minutes[row])"
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        switch component {
+        case 0:
+            if isDate {
+                selectedNotification?.date = dates[row]
+            } else {
+                selectedNotification?.hour = hours[row]
+            }
+        default:
+            selectedNotification?.minute = minutes[row]
+        }
+    }
 }
