@@ -14,7 +14,10 @@ struct SelectedNotification {
 }
 
 class NotificationViewController: BaseViewController {
+    private var monthlyCalendar = MonthlyCalendar()
+    
     var dates = ["7일 전", "3일 전", "이틀 전", "전날", "당일"]
+    var beforDay = [7, 3, 2, 1, 0]
     let hours = Array(1...12)
     let minutes = Array(0...59)
     var isDate: Bool = true
@@ -39,6 +42,9 @@ class NotificationViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setDateList()
+        setSelectedDate()
     }
     
     override func setupProperty() {
@@ -76,10 +82,22 @@ class NotificationViewController: BaseViewController {
         }
 
         pickerView.snp.makeConstraints {
-            $0.top.equalTo(pickerOuterView).offset(7)
+            $0.top.equalTo(pickerOuterView).offset(6)
             $0.leading.equalTo(pickerOuterView).offset(40)
             $0.trailing.equalTo(pickerOuterView).offset(-40)
-            $0.bottom.equalTo(pickerOuterView).offset(-10)
+            $0.bottom.equalTo(pickerOuterView).offset(-8)
+        }
+    }
+    
+    func setDateList() {
+        for index in dates.indices {
+            dates[index] += " (\(monthlyCalendar.getDateBefore(beforeDay: beforDay[index])))"
+        }
+    }
+    
+    func setSelectedDate() {
+        if isDate {
+            pickerView.selectRow(dates.count-1, inComponent: 0, animated: true)
         }
     }
     
