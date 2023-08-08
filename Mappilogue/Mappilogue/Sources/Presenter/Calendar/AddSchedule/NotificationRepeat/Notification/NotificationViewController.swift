@@ -46,11 +46,9 @@ class NotificationViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setCurrentDate()
         setDateList()
         setSelectedDate()
-        
-        let todayDate = "당일 (\(monthlyCalendar.currentMonth)월 \(monthlyCalendar.currentDay)일)"
-        selectedNotification = SelectedNotification(date: todayDate, hour: 9, minute: 0, timePeriod: "AM")
     }
     
     override func setupProperty() {
@@ -95,6 +93,11 @@ class NotificationViewController: BaseViewController {
         }
     }
     
+    func setCurrentDate() {
+        let todayDate = "당일 (\(monthlyCalendar.currentMonth)월 \(monthlyCalendar.currentDay)일)"
+        selectedNotification = SelectedNotification(date: todayDate, hour: 9, minute: 0, timePeriod: "AM")
+    }
+    
     func setDateList() {
         for index in dates.indices {
             dates[index] += " (\(monthlyCalendar.getDateBefore(beforeDay: beforDay[index])))"
@@ -115,6 +118,7 @@ class NotificationViewController: BaseViewController {
     func showPickerView() {
         isDate = true
         pickerOuterView.isHidden = false
+        setCurrentDate()
         setSelectedDate()
     }
     
@@ -125,8 +129,10 @@ class NotificationViewController: BaseViewController {
                 isDate = false
                 setSelectedDate()
             } else {
+                if !pickerOuterView.isHidden {
+                    notificationList.append(selectedNotification)
+                }
                 pickerOuterView.isHidden = true
-                notificationList.append(selectedNotification)
             }
             collectionView.reloadData()
         }
