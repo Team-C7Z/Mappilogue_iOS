@@ -144,12 +144,22 @@ class CalendarViewController: NavigationBarViewController {
             let scheduleViewController = ScheduleViewController()
             scheduleViewController.calendarSchedule = calendarSchedule
             scheduleViewController.addButtonLocation = addScheduleButton.frame
+            scheduleViewController.onWriteRecordButtonTapped = { schedule in
+                self.presentWriteRecordViewController(schedule)
+            }
             scheduleViewController.onAddScheduleButtonTapped = {
                 self.presentAddScheduleViewController()
             }
             scheduleViewController.modalPresentationStyle = .overFullScreen
             present(scheduleViewController, animated: false)
         }
+    }
+    
+    func presentWriteRecordViewController(_ schedule: Schedule) {
+        let writeRecordViewController = WriteRecordViewController()
+        writeRecordViewController.hidesBottomBarWhenPushed = true
+        writeRecordViewController.schedule = schedule
+        navigationController?.pushViewController(writeRecordViewController, animated: true)
     }
     
     @objc func dismissScheduleViewController(_ notification: Notification) {

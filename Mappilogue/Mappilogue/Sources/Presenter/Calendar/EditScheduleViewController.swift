@@ -8,7 +8,7 @@
 import UIKit
 
 class EditScheduleViewController: BaseViewController {
-    var onModifyCategory: ((String) -> Void)?
+    var onModifyCategory: (() -> Void)?
     var onDeleteCategory: (() -> Void)?
     
     private let modalView = UIView()
@@ -119,7 +119,9 @@ class EditScheduleViewController: BaseViewController {
     }
     
     @objc func modifyCategoryButtonTapped(_ button: UIButton) {
-      
+        self.dismiss(animated: false) {
+            self.onModifyCategory?()
+        }
     }
     
     @objc func deleteCategoryButtonTapped(_ button: UIButton) {
