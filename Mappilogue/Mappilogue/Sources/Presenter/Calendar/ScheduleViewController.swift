@@ -11,6 +11,7 @@ class ScheduleViewController: BaseViewController {
     var calendarSchedule: CalendarSchedule?
     let lunarDate: String = ""
     var schedules = [Schedule]()
+    var selectedScheduleIndex: Int?
     var onAddScheduleButtonTapped: (() -> Void)?
     
     var addButtonLocation: CGRect?
@@ -140,7 +141,17 @@ class ScheduleViewController: BaseViewController {
     private func presentEditScheduleViewController() {
         let editScheduleViewController = EditScheduleViewController()
         editScheduleViewController.modalPresentationStyle = .overFullScreen
+        editScheduleViewController.onDeleteCategory = {
+            self.deleteSchedule()
+        }
         present(editScheduleViewController, animated: false)
+    }
+    
+    private func deleteSchedule() {
+        guard let index = selectedScheduleIndex else { return }
+        schedules.remove(at: index)
+        calendarSchedule?.schedules = schedules
+        collectionView.reloadData()
     }
 }
 
@@ -158,9 +169,10 @@ extension ScheduleViewController: UICollectionViewDelegate, UICollectionViewData
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ScheduleCell.registerId, for: indexPath) as? ScheduleCell else { return UICollectionViewCell() }
             if let schedules = calendarSchedule?.schedules, schedules.count > indexPath.row {
                 let schedule = schedules[indexPath.row]
-                cell.configure(with: schedule)
+                cell.configure(indexPath.row, schedule: schedule)
             }
-            cell.onEditButtonTapped = {
+            cell.onEditButtonTapped = { index in
+                self.selectedScheduleIndex = index
                 self.presentEditScheduleViewController()
             }
             return cell
