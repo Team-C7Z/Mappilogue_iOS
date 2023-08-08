@@ -144,6 +144,9 @@ class CalendarViewController: NavigationBarViewController {
             let scheduleViewController = ScheduleViewController()
             scheduleViewController.calendarSchedule = calendarSchedule
             scheduleViewController.addButtonLocation = addScheduleButton.frame
+            scheduleViewController.onAddScheduleButtonTapped = {
+                self.presentAddScheduleViewController()
+            }
             scheduleViewController.modalPresentationStyle = .overFullScreen
             present(scheduleViewController, animated: false)
         }
@@ -154,6 +157,7 @@ class CalendarViewController: NavigationBarViewController {
     }
     
     func presentAddScheduleViewController() {
+        addScheduleButton.isHidden = false
         let addScheduleViewController = AddScheduleViewController()
         navigationController?.pushViewController(addScheduleViewController, animated: true)
     }
