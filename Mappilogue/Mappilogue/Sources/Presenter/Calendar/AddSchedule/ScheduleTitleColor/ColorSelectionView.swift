@@ -9,7 +9,8 @@ import UIKit
 
 class ColorSelectionView: BaseView {
     private let dummyColorData = dummyColorSelectionData()
-    private var selectedColorIndex = Int.random(in: 0...14)
+    var selectedColorIndex = 0
+    var onSelectedColor: ((Int) -> Void)?
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -78,6 +79,7 @@ extension ColorSelectionView: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedColorIndex = indexPath.row
+        onSelectedColor?(indexPath.row)
         
         collectionView.reloadData()
     }

@@ -24,7 +24,7 @@ class InquiryViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationBar("문의하기", backButtonAction: #selector(backButtonTapped))
+        setNavigationTitleAndBackButton("문의하기", backButtonAction: #selector(backButtonTapped))
         
         inquiryTitleLabel.text = "여러분의 이야기를 기다려요"
         inquiryTitleLabel.textColor = .color1C1C1C
