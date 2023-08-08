@@ -11,6 +11,7 @@ class ScheduleViewController: BaseViewController {
     var calendarSchedule: CalendarSchedule?
     let lunarDate: String = ""
     var schedules = [Schedule]()
+    var onAddScheduleButtonTapped: (() -> Void)?
     
     var addButtonLocation: CGRect?
     
@@ -132,7 +133,7 @@ class ScheduleViewController: BaseViewController {
     
     @objc func addScheduleButtonTapped(_ sender: UIButton) {
         dismiss(animated: false) {
-            //
+            self.onAddScheduleButtonTapped?()
         }
     }
 }
