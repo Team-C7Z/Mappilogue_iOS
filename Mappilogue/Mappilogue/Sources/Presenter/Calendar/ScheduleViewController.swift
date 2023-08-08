@@ -12,6 +12,7 @@ class ScheduleViewController: BaseViewController {
     let lunarDate: String = ""
     var schedules = [Schedule]()
     var selectedScheduleIndex: Int?
+    var onWriteRecordButtonTapped: ((Schedule) -> Void)?
     var onAddScheduleButtonTapped: (() -> Void)?
     
     var addButtonLocation: CGRect?
@@ -141,10 +142,16 @@ class ScheduleViewController: BaseViewController {
     private func presentEditScheduleViewController() {
         let editScheduleViewController = EditScheduleViewController()
         editScheduleViewController.modalPresentationStyle = .overFullScreen
-        editScheduleViewController.onDeleteCategory = {
-            self.deleteSchedule()
-        }
+        editScheduleViewController.onModifyCategory = { self.presentWriteRecordViewController() }
+        editScheduleViewController.onDeleteCategory = { self.deleteSchedule() }
         present(editScheduleViewController, animated: false)
+    }
+    
+    private func presentWriteRecordViewController() {
+        dismiss(animated: false) {
+            guard let index = self.selectedScheduleIndex else { return }
+            self.onWriteRecordButtonTapped?(self.schedules[index])
+        }
     }
     
     private func deleteSchedule() {
