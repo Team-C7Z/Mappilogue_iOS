@@ -34,7 +34,7 @@ class MyCategoryViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationBar(categoryName, backButtonAction: #selector(backButtonTapped))
+        setNavigationTitleAndBackButton(categoryName, backButtonAction: #selector(backButtonTapped))
         setMenuButtonItem()
     }
     

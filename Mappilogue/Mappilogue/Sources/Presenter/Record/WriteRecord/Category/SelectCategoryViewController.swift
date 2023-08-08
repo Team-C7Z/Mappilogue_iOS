@@ -33,7 +33,7 @@ class SelectCategoryViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationBar("카테고리 선택", backButtonAction: #selector(backButtonTapped))
+        setNavigationTitleAndBackButton("카테고리 선택", backButtonAction: #selector(backButtonTapped))
     }
     
     override func setupHierarchy() {

@@ -46,7 +46,7 @@ class NotificationViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setCurrentDate()
+        selectedNotification = setCurrentDate()
         setDateList()
         setSelectedDate()
     }
@@ -54,15 +54,14 @@ class NotificationViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationBar("알림", backButtonAction: #selector(backButtonTapped))
+        setNavigationTitleAndBackButton("알림", backButtonAction: #selector(backButtonTapped))
         
         pickerOuterView.backgroundColor = .colorF5F3F0
         pickerView.delegate = self
         pickerView.dataSource = self
         pickerOuterView.isHidden = true
         
-        let datePickerTap = UITapGestureRecognizer(target: self, action: #selector(dismissDatePicker))
-        view.addGestureRecognizer(datePickerTap)
+        setDatePickerTapGesture()
     }
     
     override func setupHierarchy() {
@@ -93,9 +92,9 @@ class NotificationViewController: BaseViewController {
         }
     }
     
-    func setCurrentDate() {
+    func setCurrentDate() -> SelectedNotification {
         let todayDate = "당일 (\(monthlyCalendar.currentMonth)월 \(monthlyCalendar.currentDay)일)"
-        selectedNotification = SelectedNotification(date: todayDate, hour: 9, minute: 0, timePeriod: "AM")
+        return SelectedNotification(date: todayDate, hour: 9, minute: 0, timePeriod: "AM")
     }
     
     func setDateList() {
@@ -115,10 +114,15 @@ class NotificationViewController: BaseViewController {
         }
     }
     
+    func setDatePickerTapGesture() {
+        let datePickerTap = UITapGestureRecognizer(target: self, action: #selector(dismissDatePicker))
+        view.addGestureRecognizer(datePickerTap)
+    }
+    
     func showPickerView() {
         isDate = true
         pickerOuterView.isHidden = false
-        setCurrentDate()
+        selectedNotification = setCurrentDate()
         setSelectedDate()
     }
     
@@ -128,10 +132,8 @@ class NotificationViewController: BaseViewController {
             if isDate {
                 isDate = false
                 setSelectedDate()
-            } else {
-                if !pickerOuterView.isHidden {
-                    notificationList.append(selectedNotification)
-                }
+            } else if !pickerOuterView.isHidden {
+                notificationList.append(selectedNotification)
                 pickerOuterView.isHidden = true
             }
             collectionView.reloadData()
@@ -150,9 +152,8 @@ extension NotificationViewController: UICollectionViewDelegate, UICollectionView
         let date = notificationList[indexPath.row]
         cell.configure(indexPath.row, date: date)
         
-        cell.onDeleteButtonTapped = { [weak self] index in
-            guard let self = self else { return }
-            notificationList.remove(at: index)
+        cell.onDeleteButtonTapped = { index in
+            self.notificationList.remove(at: index)
             collectionView.reloadData()
         }
         
@@ -172,9 +173,7 @@ extension NotificationViewController: UICollectionViewDelegate, UICollectionView
         if !isDate {
             headerView.configure(selectedNotification)
         }
-        headerView.onAddNotificationButtonTapped = {
-            self.showPickerView()
-        }
+        headerView.onAddNotificationButtonTapped = { self.showPickerView() }
         return headerView
     }
 

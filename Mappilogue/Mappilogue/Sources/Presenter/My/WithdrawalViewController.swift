@@ -34,7 +34,7 @@ class WithdrawalViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationBar("탈퇴하기", backButtonAction: #selector(backButtonTapped))
+        setNavigationTitleAndBackButton("탈퇴하기", backButtonAction: #selector(backButtonTapped))
         setSkipButtonItem()
         
         withdrawalTitleLabel.text = "탈퇴하는 이유가 있나요?"

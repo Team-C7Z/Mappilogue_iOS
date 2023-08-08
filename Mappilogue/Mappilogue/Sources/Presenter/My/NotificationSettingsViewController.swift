@@ -31,7 +31,7 @@ class NotificationSettingsViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationBar("My", backButtonAction: #selector(backButtonTapped))
+        setNavigationTitleAndBackButton("My", backButtonAction: #selector(backButtonTapped))
     }
     
     override func setupHierarchy() {
