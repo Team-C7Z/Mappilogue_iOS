@@ -125,7 +125,7 @@ class EditScheduleViewController: BaseViewController {
     @objc func deleteCategoryButtonTapped(_ button: UIButton) {
         let alertViewController = AlertViewController()
         alertViewController.modalPresentationStyle = .overCurrentContext
-        let alert = Alert(titleText: "이 카테고리를 삭제할까요?",
+        let alert = Alert(titleText: "이 일정을 삭제할까요?",
                           messageText: nil,
                           cancelText: "취소",
                           doneText: "삭제",

@@ -10,7 +10,8 @@ import UIKit
 class ScheduleCell: BaseCollectionViewCell {
     static let registerId = "\(ScheduleCell.self)"
     
-    var onEditButtonTapped: (() -> Void)?
+    var index: Int = 0
+    var onEditButtonTapped: ((Int) -> Void)?
     
     private let scheduleColorView = UIView()
     private let scheduleLabel = UILabel()
@@ -77,7 +78,8 @@ class ScheduleCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(with schedule: Schedule) {
+    func configure(_ index: Int, schedule: Schedule) {
+        self.index = index
         scheduleLabel.text = schedule.title
         scheduleColorView.backgroundColor = schedule.color
         scheduleTimeLabel.text = schedule.time
@@ -85,6 +87,6 @@ class ScheduleCell: BaseCollectionViewCell {
     }
     
     @objc func editButtonTapped() {
-        onEditButtonTapped?()
+        onEditButtonTapped?(index)
     }
 }
