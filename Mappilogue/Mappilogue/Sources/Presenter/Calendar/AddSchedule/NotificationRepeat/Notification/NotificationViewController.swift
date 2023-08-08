@@ -148,7 +148,13 @@ extension NotificationViewController: UICollectionViewDelegate, UICollectionView
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectedNotificationCell.registerId, for: indexPath) as? SelectedNotificationCell else { return UICollectionViewCell() }
         
         let date = notificationList[indexPath.row]
-        cell.configure(date)
+        cell.configure(indexPath.row, date: date)
+        
+        cell.onDeleteButtonTapped = { [weak self] index in
+            guard let self = self else { return }
+            notificationList.remove(at: index)
+            collectionView.reloadData()
+        }
         
         return cell
     }

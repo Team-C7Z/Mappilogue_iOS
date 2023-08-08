@@ -9,6 +9,9 @@ import UIKit
 
 class SelectedNotificationCell: BaseCollectionViewCell {
     static let registerId = "\(SelectedNotificationCell.self)"
+    
+    var index: Int = 0
+    var onDeleteButtonTapped: ((Int) -> Void)?
 
     private let notificationLabel = UILabel()
     private let deletButton = UIButton()
@@ -19,6 +22,7 @@ class SelectedNotificationCell: BaseCollectionViewCell {
         contentView.backgroundColor = .colorF5F3F0
         contentView.layer.cornerRadius = 12
         deletButton.setImage(UIImage(named: "deleteNotification"), for: .normal)
+        deletButton.addTarget(self, action: #selector(deletButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -43,7 +47,12 @@ class SelectedNotificationCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(_ date: SelectedNotification) {
+    func configure(_ index: Int, date: SelectedNotification) {
+        self.index = index
         notificationLabel.text = "\(date.date ?? "") \(date.hour ?? 0):\(String(format: "%02d", date.minute ?? 0)) \(date.timePeriod ?? "")"
+    }
+    
+    @objc func deletButtonTapped() {
+        onDeleteButtonTapped?(index)
     }
 }
