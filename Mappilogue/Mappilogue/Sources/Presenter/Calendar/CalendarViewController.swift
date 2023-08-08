@@ -46,7 +46,6 @@ class CalendarViewController: NavigationBarViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(presentScheduleViewContoller), name: Notification.Name("PresentScheduleViewController"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(dismissScheduleViewController), name: Notification.Name("DismissScheduleViewController"), object: nil)
-        
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -143,7 +142,6 @@ class CalendarViewController: NavigationBarViewController {
         addScheduleButton.isHidden = true
         if let calendarSchedule = notification.object as? CalendarSchedule {
             let scheduleViewController = ScheduleViewController()
-            scheduleViewController.delegate = self
             scheduleViewController.calendarSchedule = calendarSchedule
             scheduleViewController.addButtonLocation = addScheduleButton.frame
             scheduleViewController.modalPresentationStyle = .overFullScreen
@@ -153,6 +151,11 @@ class CalendarViewController: NavigationBarViewController {
     
     @objc func dismissScheduleViewController(_ notification: Notification) {
         addScheduleButton.isHidden = false
+    }
+    
+    func presentAddScheduleViewController() {
+        let addScheduleViewController = AddScheduleViewController()
+        navigationController?.pushViewController(addScheduleViewController, animated: true)
     }
 }
 
@@ -214,7 +217,7 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
     }
 }
 
-extension CalendarViewController: ChangedDateDelegate, PresentAddScheduleViewControllerDelegate {
+extension CalendarViewController: ChangedDateDelegate {
     func chagedDate(_ selectedDate: SelectedDate) {
         view.backgroundColor = .colorF9F8F7
         self.selectedDate = selectedDate
@@ -227,10 +230,5 @@ extension CalendarViewController: ChangedDateDelegate, PresentAddScheduleViewCon
         let year = selectedDate.year
         let month = selectedDate.month
         currentDateLabel.text = "\(year)년 \(month)월"
-    }
-    
-    func presentAddScheduleViewController() {
-        let addScheduleViewController = AddScheduleViewController()
-        navigationController?.pushViewController(addScheduleViewController, animated: true)
     }
 }

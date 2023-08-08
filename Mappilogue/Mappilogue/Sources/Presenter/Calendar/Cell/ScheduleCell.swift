@@ -7,19 +7,13 @@
 
 import UIKit
 
-class ScheduleCell: BaseTableViewCell {
+class ScheduleCell: BaseCollectionViewCell {
     static let registerId = "\(ScheduleCell.self)"
     
     private let scheduleColorView = UIView()
     private let scheduleLabel = UILabel()
     private let scheduleTimeLabel = UILabel()
     private let scheduleLocationLabel = UILabel()
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20))
-    }
     
     override func setupProperty() {
         super.setupProperty()

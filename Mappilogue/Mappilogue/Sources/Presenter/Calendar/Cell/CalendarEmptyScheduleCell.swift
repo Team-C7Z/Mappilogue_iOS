@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CalendarEmptyScheduleCell: BaseTableViewCell {
+class CalendarEmptyScheduleCell: BaseCollectionViewCell {
     static let registerId = "\(CalendarEmptyScheduleCell.self)"
     
     private let stackView = UIStackView()
