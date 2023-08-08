@@ -10,13 +10,15 @@ import UIKit
 class NotificationHeaderView: BaseCollectionReusableView {
     static let registerId = "\(NotificationHeaderView.self)"
     
+    var onStartDateButtonTapped: (() -> Void)?
+    var onStartTimeButtonTapped: (() -> Void)?
     var onAddNotificationButtonTapped: (() -> Void)?
     
     private let startLabel = UILabel()
     private let stackView = UIStackView()
-    private let startDateView = UIView()
+    private let startDateButton = UIButton()
     private let startDateLabel = UILabel()
-    private let startTimeView = UIView()
+    private let startTimeButton = UIButton()
     private let startTimeLabel = UILabel()
     private let addNotificationButton = UIButton()
     private let addNotificationImage = UIImageView()
@@ -34,13 +36,15 @@ class NotificationHeaderView: BaseCollectionReusableView {
         stackView.spacing = 1
         stackView.backgroundColor = .colorEAE6E1
         
-        startDateView.backgroundColor = .colorF9F8F7
+        startDateButton.backgroundColor = .colorF9F8F7
         startDateLabel.textColor = .color1C1C1C
         startDateLabel.font = .title02
+        startDateButton.addTarget(self, action: #selector(startDateButtonTapped), for: .touchUpInside)
         
-        startTimeView.backgroundColor = .colorF9F8F7
+        startTimeButton.backgroundColor = .colorF9F8F7
         startTimeLabel.textColor = .color1C1C1C
         startTimeLabel.font = .title02
+        startTimeButton.addTarget(self, action: #selector(startTimeButtonTapped), for: .touchUpInside)
         
         addNotificationButton.layer.cornerRadius = 12
         addNotificationButton.backgroundColor = .colorEAE6E1
@@ -57,11 +61,11 @@ class NotificationHeaderView: BaseCollectionReusableView {
         
         addSubview(startLabel)
         addSubview(stackView)
-        stackView.addArrangedSubview(startDateView)
-        startDateView.addSubview(startDateLabel)
-        stackView.addArrangedSubview(startTimeView)
-        startTimeView.addSubview(startTimeLabel)
-        startTimeView.addSubview(addNotificationButton)
+        stackView.addArrangedSubview(startDateButton)
+        startDateButton.addSubview(startDateLabel)
+        stackView.addArrangedSubview(startTimeButton)
+        startTimeButton.addSubview(startTimeLabel)
+        startTimeButton.addSubview(addNotificationButton)
         addNotificationButton.addSubview(addNotificationImage)
         addSubview(notificationListLabel)
     }
@@ -82,16 +86,16 @@ class NotificationHeaderView: BaseCollectionReusableView {
         }
         
         startDateLabel.snp.makeConstraints {
-            $0.centerX.centerY.equalTo(startDateView)
+            $0.centerX.centerY.equalTo(startDateButton)
         }
         
         startTimeLabel.snp.makeConstraints {
-            $0.centerY.equalTo(startTimeView)
-            $0.centerX.equalTo(startTimeView).offset(-37/2)
+            $0.centerY.equalTo(startTimeButton)
+            $0.centerX.equalTo(startTimeButton).offset(-37/2)
         }
         
         addNotificationButton.snp.makeConstraints {
-            $0.trailing.centerY.equalTo(startTimeView)
+            $0.trailing.centerY.equalTo(startTimeButton)
             $0.width.height.equalTo(32)
         }
         
@@ -110,6 +114,14 @@ class NotificationHeaderView: BaseCollectionReusableView {
         startDateLabel.text = selectedNotification.date
         guard let hour = selectedNotification.hour, let minute = selectedNotification.minute, let timePeriod = selectedNotification.timePeriod else { return }
         startTimeLabel.text = "\(hour):\(String(format: "%02d", minute)) \(timePeriod)"
+    }
+    
+    @objc private func startDateButtonTapped() {
+        onStartDateButtonTapped?()
+    }
+    
+    @objc private func startTimeButtonTapped() {
+        onStartTimeButtonTapped?()
     }
     
     @objc private func addNotificationButtonTapped() {

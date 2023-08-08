@@ -164,7 +164,7 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
         if indexPath.section == 0 && indexPath.row == dummyCategory.count + 1 {
             showInputAlertViewController()
         } else if indexPath.section == 1 && indexPath.row > 0 {
-            if let cell = collectionView.cellForItem(at: indexPath) as? CategorySelectionCell {
+            if collectionView.cellForItem(at: indexPath) is CategorySelectionCell {
                 selectedCateogry[indexPath.row-1] = !selectedCateogry[indexPath.row-1]
                 collectionView.reloadData()
             }
