@@ -32,7 +32,7 @@ class MyRecordViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationBar("나의 기록", backButtonAction: #selector(backButtonTapped))
+        setNavigationTitleAndBackButton("나의 기록", backButtonAction: #selector(backButtonTapped))
     }
     
     override func setupHierarchy() {

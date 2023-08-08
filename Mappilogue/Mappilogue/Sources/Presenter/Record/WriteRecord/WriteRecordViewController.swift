@@ -31,7 +31,7 @@ class WriteRecordViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationBar("기록 쓰기", backButtonAction: #selector(presentAlert))
+        setNavigationTitleAndBackButton("기록 쓰기", backButtonAction: #selector(presentAlert))
         
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
