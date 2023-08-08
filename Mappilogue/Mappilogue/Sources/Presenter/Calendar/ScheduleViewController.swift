@@ -136,6 +136,12 @@ class ScheduleViewController: BaseViewController {
             self.onAddScheduleButtonTapped?()
         }
     }
+    
+    private func presentEditScheduleViewController() {
+        let editScheduleViewController = EditScheduleViewController()
+        editScheduleViewController.modalPresentationStyle = .overFullScreen
+        present(editScheduleViewController, animated: false)
+    }
 }
 
 extension ScheduleViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -154,12 +160,15 @@ extension ScheduleViewController: UICollectionViewDelegate, UICollectionViewData
                 let schedule = schedules[indexPath.row]
                 cell.configure(with: schedule)
             }
+            cell.onEditButtonTapped = {
+                self.presentEditScheduleViewController()
+            }
             return cell
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
