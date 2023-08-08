@@ -35,7 +35,7 @@ class SelectWriteRecordViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationBar("기록 쓰기", backButtonAction: #selector(backButtonTapped))
+        setNavigationTitleAndBackButton("기록 쓰기", backButtonAction: #selector(backButtonTapped))
     }
     
     override func setupHierarchy() {
