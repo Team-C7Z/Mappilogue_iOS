@@ -1,5 +1,5 @@
 //
-//  AddLocationFooterView.swift
+//  AddLocationCell.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/08/07.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-class AddLocationFooterView: BaseCollectionReusableView {
-    static let registerId = "\(AddLocationFooterView.self)"
+class AddLocationCell: BaseCollectionViewCell {
+    static let registerId = "\(AddLocationCell.self)"
     
     var onAddLocationButtonTapped: (() -> Void)?
     

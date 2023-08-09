@@ -112,7 +112,7 @@
 		925840D12A7FCE6800997434 /* AddScheduleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840D02A7FCE6800997434 /* AddScheduleHeaderView.swift */; };
 		925840D22A7FF34000997434 /* MarkedRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92459EDB2A53158A00493941 /* MarkedRecord.swift */; };
 		925840D32A7FF39B00997434 /* HomeEmptyScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B64B2A4CC0E6009C9293 /* HomeEmptyScheduleCell.swift */; };
-		925840D52A80957900997434 /* AddLocationFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840D42A80957900997434 /* AddLocationFooterView.swift */; };
+		925840D52A80957900997434 /* AddLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840D42A80957900997434 /* AddLocationCell.swift */; };
 		925840D72A80D4BD00997434 /* NotificationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840D62A80D4BD00997434 /* NotificationHeaderView.swift */; };
 		925840D92A80D84300997434 /* SelectedNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840D82A80D84300997434 /* SelectedNotificationCell.swift */; };
 		925840DB2A82144A00997434 /* EditScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840DA2A82144A00997434 /* EditScheduleViewController.swift */; };
@@ -292,7 +292,7 @@
 		925840CC2A7F8E1C00997434 /* WithdrawalReasonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalReasonView.swift; sourceTree = "<group>"; };
 		925840CE2A7FCB5400997434 /* AddScheduleTitleColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleTitleColorView.swift; sourceTree = "<group>"; };
 		925840D02A7FCE6800997434 /* AddScheduleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleHeaderView.swift; sourceTree = "<group>"; };
-		925840D42A80957900997434 /* AddLocationFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationFooterView.swift; sourceTree = "<group>"; };
+		925840D42A80957900997434 /* AddLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationCell.swift; sourceTree = "<group>"; };
 		925840D62A80D4BD00997434 /* NotificationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHeaderView.swift; sourceTree = "<group>"; };
 		925840D82A80D84300997434 /* SelectedNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedNotificationCell.swift; sourceTree = "<group>"; };
 		925840DA2A82144A00997434 /* EditScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScheduleViewController.swift; sourceTree = "<group>"; };
@@ -522,7 +522,7 @@
 			children = (
 				9224FCFC2A5FF185000A56A6 /* AddScheduleViewController.swift */,
 				925840D02A7FCE6800997434 /* AddScheduleHeaderView.swift */,
-				925840D42A80957900997434 /* AddLocationFooterView.swift */,
+				925840D42A80957900997434 /* AddLocationCell.swift */,
 				9224FD282A6394B0000A56A6 /* ScheduleTitleColor */,
 				9224FD292A639508000A56A6 /* ScheduleDuration */,
 				9224FD2A2A639547000A56A6 /* NotificationRepeat */,
@@ -1225,7 +1225,7 @@
 				925840BB2A7F455D00997434 /* NotificationSettingsViewController.swift in Sources */,
 				92011C012A740A08009B047F /* AddNewCategoryCell.swift in Sources */,
 				92011B752A7138B0009B047F /* EmptyRecordCell.swift in Sources */,
-				925840D52A80957900997434 /* AddLocationFooterView.swift in Sources */,
+				925840D52A80957900997434 /* AddLocationCell.swift in Sources */,
 				92011BFF2A7407D3009B047F /* SelectCategoryViewController.swift in Sources */,
 				925840AE2A7CD17E00997434 /* EditCategoryViewController.swift in Sources */,
 				9224FD3B2A6532E3000A56A6 /* EndView.swift in Sources */,

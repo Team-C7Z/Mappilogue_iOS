@@ -34,8 +34,9 @@ class AddScheduleViewController: BaseViewController {
         collectionView.backgroundColor = .colorF9F8F7
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         collectionView.register(DeleteLocationCell.self, forCellWithReuseIdentifier: DeleteLocationCell.registerId)
+        collectionView.register(AddLocationCell.self, forCellWithReuseIdentifier: AddLocationCell.registerId)
         collectionView.register(AddScheduleHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: AddScheduleHeaderView.registerId)
-        collectionView.register(AddLocationFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: AddLocationFooterView.registerId)
+       
         collectionView.delegate = self
         collectionView.dataSource = self
         return collectionView
@@ -193,7 +194,7 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DeleteLocationCell.registerId, for: indexPath) as? DeleteLocationCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddLocationCell.registerId, for: indexPath) as? AddLocationCell else { return UICollectionViewCell() }
         return cell
     }
     
@@ -202,7 +203,7 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 32, height: locations.isEmpty ? 0 : 32)
+        return CGSize(width: collectionView.frame.width - 32, height: 53)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -210,10 +211,11 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: AddScheduleHeaderView.registerId, for: indexPath) as! AddScheduleHeaderView
             configureHeaderView(headerView)
             return headerView
-        } else if kind == UICollectionView.elementKindSectionFooter {
-            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: AddLocationFooterView.registerId, for: indexPath) as! AddLocationFooterView
-            return footerView
         }
+//        } else if kind == UICollectionView.elementKindSectionFooter {
+//            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: .registerId, for: indexPath) as!
+//            return footerView
+//        }
         return UICollectionReusableView()
     }
     
@@ -224,6 +226,11 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
             self.validateDateRange()
             self.isStartDate = isStartDate
             self.datePickerButtonTapped()
+        }
+        
+        headerView.onColorSelectionButtonTapped = {
+            self.isColorSelection.toggle()
+            self.collectionView.reloadData()
         }
         
         headerView.onStartDateButtonTapped = {
@@ -239,12 +246,12 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: (isColorSelection ? 186 : 0) + 225)
+        return CGSize(width: collectionView.bounds.width, height: isColorSelection ? 411 : 225)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 53)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+//        return CGSize(width: collectionView.bounds.width, height: 53)
+//    }
     
     // 수평 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
