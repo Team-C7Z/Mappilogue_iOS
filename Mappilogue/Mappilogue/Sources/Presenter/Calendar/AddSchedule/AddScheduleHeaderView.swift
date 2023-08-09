@@ -60,6 +60,8 @@ class AddScheduleHeaderView: BaseCollectionReusableView {
         stackView.addArrangedSubview(scheduleDurationView)
         stackView.addArrangedSubview(notificationButton)
         stackView.addArrangedSubview(repeatButton)
+        stackView.isUserInteractionEnabled = true
+        colorSelectionView.isUserInteractionEnabled = true
     }
     
     override func setupLayout() {
@@ -145,6 +147,7 @@ extension AddScheduleHeaderView {
             guard let self = self else { return }
             
             schedule.color = colorList[selectedColorIndex]
+            configureScheduleTitleColorView()
         }
     }
 }

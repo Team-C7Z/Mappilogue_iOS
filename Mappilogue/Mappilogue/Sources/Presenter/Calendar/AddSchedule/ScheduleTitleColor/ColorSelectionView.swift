@@ -21,6 +21,7 @@ class ColorSelectionView: BaseView {
         collectionView.register(ColorCell.self, forCellWithReuseIdentifier: ColorCell.registerId)
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.isUserInteractionEnabled = true
        
         return collectionView
     }()
@@ -55,6 +56,7 @@ extension ColorSelectionView: UICollectionViewDelegate, UICollectionViewDataSour
         let colors = dummyColorData[indexPath.row]
         let isColorSelected = indexPath.row == selectedColorIndex
         cell.configure(with: colors, isColorSelected: isColorSelected)
+        cell.isUserInteractionEnabled = true
         
         return cell
     }
