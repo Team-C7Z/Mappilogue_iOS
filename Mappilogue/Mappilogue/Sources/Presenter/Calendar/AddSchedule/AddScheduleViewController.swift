@@ -14,7 +14,7 @@ class AddScheduleViewController: BaseViewController {
 
     var isColorSelection: Bool = false
     var selectedColor: UIColor = .color1C1C1C
-    
+
     var isStartDate: Bool = false
     let years: [Int] = Array(1970...2050)
     let months: [Int] = Array(1...12)
@@ -44,11 +44,17 @@ class AddScheduleViewController: BaseViewController {
     private let datePickerOuterView = UIView()
     private let datePickerView = UIPickerView()
     
+    var keyboardTap = UITapGestureRecognizer()
+    var datePickerTap = UITapGestureRecognizer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
         setCurrentDate()
         setSelectedDate()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     override func setupProperty() {
@@ -57,14 +63,12 @@ class AddScheduleViewController: BaseViewController {
         setNavigationBar()
         
         datePickerOuterView.backgroundColor = .colorF5F3F0
-        
+        datePickerOuterView.isHidden = true
         datePickerView.backgroundColor = .colorF5F3F0
         datePickerView.delegate = self
         datePickerView.dataSource = self
-        
-        datePickerOuterView.isHidden = true
-        
-        setDismissTapGesture()
+        datePickerTap = UITapGestureRecognizer(target: self, action: #selector(dismissDatePicker))
+        keyboardTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
     }
     
     override func setupHierarchy() {
@@ -124,12 +128,16 @@ class AddScheduleViewController: BaseViewController {
         }
     }
     
-    func setDismissTapGesture() {
-        let keyboardTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        collectionView.addGestureRecognizer(keyboardTap)
-        
-        let datePickerTap = UITapGestureRecognizer(target: self, action: #selector(dismissDatePicker))
-        collectionView.addGestureRecognizer(datePickerTap)
+    @objc func keyboardWillShow(_ notification: Notification) {
+        view.addGestureRecognizer(keyboardTap)
+     }
+     
+     @objc func keyboardWillHide(_ notification: Notification) {
+         view.removeGestureRecognizer(keyboardTap)
+     }
+    
+    func addDatePickerTapGesture() {
+        view.addGestureRecognizer(datePickerTap)
     }
     
     func datePickerButtonTapped() {
@@ -142,10 +150,14 @@ class AddScheduleViewController: BaseViewController {
     @objc func dismissDatePicker(_ gesture: UITapGestureRecognizer) {
         let location = gesture.location(in: collectionView)
         if location.y < datePickerOuterView.frame.minY {
+            if !datePickerOuterView.isHidden {
+                
+            }
             datePickerOuterView.isHidden = true
             validateDateRange()
         }
         collectionView.reloadData()
+        view.removeGestureRecognizer(datePickerTap)
     }
     
     func validateDateRange() {
@@ -214,14 +226,20 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
             self.datePickerButtonTapped()
         }
         
-        headerView.onStartDateButtonTapped = { dateButtonConfiguration(true) }
-        headerView.onEndDateButtonTapped = { dateButtonConfiguration(false) }
+        headerView.onStartDateButtonTapped = {
+            dateButtonConfiguration(true)
+            self.addDatePickerTapGesture()
+        }
+        headerView.onEndDateButtonTapped = {
+            dateButtonConfiguration(false)
+            self.addDatePickerTapGesture()
+        }
         headerView.onNotificationButtonTapped = { self.showNotificationViewController()}
         headerView.onRepeatButtonTapped = { self.showRepeatViewController() }
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 225)
+        return CGSize(width: collectionView.bounds.width, height: (isColorSelection ? 186 : 0) + 225)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
