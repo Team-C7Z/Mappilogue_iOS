@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddScheduleHeaderView: BaseCollectionReusableView {
+class AddScheduleHeaderView: BaseTableViewHeaderFooterView {
     static let registerId = "\(AddScheduleHeaderView.self)"
     
     private var schedule: Schedule = Schedule()
@@ -26,8 +26,8 @@ class AddScheduleHeaderView: BaseCollectionReusableView {
     private let notificationButton = NotificationRepeatButton()
     private let repeatButton = NotificationRepeatButton()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
         
         enterNameTextField()
         toggleColorSelectionView()
@@ -37,7 +37,7 @@ class AddScheduleHeaderView: BaseCollectionReusableView {
         setNotificationRepeatButtonAction()
     }
     
-    required init?(coder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     

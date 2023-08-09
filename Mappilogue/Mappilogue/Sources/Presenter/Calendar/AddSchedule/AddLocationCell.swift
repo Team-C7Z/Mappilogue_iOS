@@ -7,21 +7,13 @@
 
 import UIKit
 
-class AddLocationCell: BaseCollectionViewCell {
+class AddLocationCell: BaseTableViewCell {
     static let registerId = "\(AddLocationCell.self)"
     
     var onAddLocationButtonTapped: (() -> Void)?
     
     private let addLocationButton = AddButton(text: "장소 추가하기", backgroundColor: .color1C1C1C)
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func setupProperty() {
         super.setupProperty()
 
