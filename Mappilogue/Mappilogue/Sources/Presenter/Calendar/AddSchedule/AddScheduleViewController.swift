@@ -192,21 +192,13 @@ class AddScheduleViewController: BaseViewController {
     func showAddLocationController() {
         let addLocationViewController = AddLocationViewController()
         addLocationViewController.modalPresentationStyle = .overFullScreen
-        addLocationViewController.onLocationSelected = { location in
-            self.addLocation(location)
-        }
+        addLocationViewController.delegate = self
         present(addLocationViewController, animated: false)
     }
     
     func addLocation(_ location: Location) {
-        let date = "\(startDate.month)월 \(startDate.day ?? 0)일"
-        let locationTime = LocationTimeDetail(location: location.title, time: initialTime)
-        if let index = locations.firstIndex(where: {$0.date == date}) {
-            locations[index].locationDetail.append(locationTime)
-        } else {
-            locations.append(LocationTime(date: date, locationDetail: [locationTime]))
-        }
-        collectionView.reloadData()
+        
+       
     }
 }
 
@@ -352,16 +344,54 @@ extension AddScheduleViewController: UICollectionViewDropDelegate {
                 destinationLocation.locationDetail.insert(moveLocation, at: destinationIndexPath.row)
             }, completion: { _ in
                 coordinator.drop(dropItem.dragItem, toItemAt: destinationIndexPath)
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0) {
+          //      DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0) {
                     collectionView.reloadData()
                 }
-            })
+          //  }
+            )
         }
         
     }
 }
 
-extension AddScheduleViewController: TimeButtonDelegate, SelectedTimeDelegate, DeleteModeDelegate, DeleteLocationDelegate, CheckLocationDelegate {
+extension AddScheduleViewController: SelectedLocationDelegate, TimeButtonDelegate, SelectedTimeDelegate, DeleteModeDelegate, DeleteLocationDelegate, CheckLocationDelegate {
+    func selectLocation(_ location: Location) {
+        guard let startDate = setDateFormatter(date: startDate), let endDate = setDateFormatter(date: endDate) else { return }
+        var dates: [String] = []
+        var currentDate = startDate
+        dates.append(currentDate.formatDateToString())
+   
+        while currentDate.formatDateToString() != endDate.formatDateToString() {
+            guard let newDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate) else { return }
+            currentDate = newDate
+            dates.append(currentDate.formatDateToString())
+        }
+        
+        for date in dates {
+            let locationTime = LocationTimeDetail(location: location.title, time: initialTime)
+            if let index = locations.firstIndex(where: {$0.date == date}) {
+                locations[index].locationDetail.append(locationTime)
+            } else {
+                locations.append(LocationTime(date: date, locationDetail: [locationTime]))
+            }
+        }
+  
+        collectionView.reloadData()
+    }
+    
+    func getDateBetween(startDate: Date, endDate: Date) {
+        var dates: [Date] = []
+        var currentDate = startDate
+        
+        while startDate <= endDate {
+            dates.append(currentDate)
+            
+            guard let newDate = Calendar.current.date(bySetting: .day, value: 1, of: currentDate) else { break }
+            currentDate = newDate
+        }
+        
+       print(dates)
+    }
     
     func timeButtonTapped(_ index: Int) {
         timeIndex = index
