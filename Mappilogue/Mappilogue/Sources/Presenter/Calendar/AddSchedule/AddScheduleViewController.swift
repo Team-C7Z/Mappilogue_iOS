@@ -32,10 +32,11 @@ class AddScheduleViewController: BaseViewController {
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .colorF9F8F7
-        collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
-        collectionView.register(DeleteLocationCell.self, forCellWithReuseIdentifier: DeleteLocationCell.registerId)
+        collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         collectionView.register(LocationTimeCell.self, forCellWithReuseIdentifier: LocationTimeCell.registerId)
         collectionView.register(AddScheduleHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: AddScheduleHeaderView.registerId)
+        collectionView.register(ScheduleDateHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ScheduleDateHeaderView.registerId)
+        collectionView.register(DeleteLocationFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: DeleteLocationFooterView.registerId)
         collectionView.register(AddLocationFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: AddLocationFooterView.registerId)
        
         collectionView.delegate = self
@@ -195,29 +196,33 @@ class AddScheduleViewController: BaseViewController {
     }
     
     func addLocation(_ location: Location) {
-        locations.append(LocationTime(location: location.title, time: initialTime))
+        let date = "\(startDate.month)월 \(startDate.day ?? 0)일"
+        let locationTime = LocationTimeDetail(location: location.title, time: initialTime)
+        if let index = locations.firstIndex(where: {$0.date == date}) {
+            locations[index].locationDetail.append(locationTime)
+        } else {
+            locations.append(LocationTime(date: date, locationDetail: [locationTime]))
+        }
         collectionView.reloadData()
     }
 }
 
 extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return locations.isEmpty ? 1 : locations.count + 1
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return locations.isEmpty ? 0 : locations.count + 1
+        return locations.isEmpty ? 0 : section == 0 ? 0 : locations[section-1].locationDetail.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch indexPath.row {
-        case 0:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DeleteLocationCell.registerId, for: indexPath) as? DeleteLocationCell else { return UICollectionViewCell() }
-            return cell
-        default:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LocationTimeCell.registerId, for: indexPath) as? LocationTimeCell else { return UICollectionViewCell() }
-            
-            let location = locations[indexPath.row-1]
-            cell.configure(indexPath.row, schedule: location, isDeleteMode: isDeleteMode)
-            
-            return cell
-        }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LocationTimeCell.registerId, for: indexPath) as? LocationTimeCell else { return UICollectionViewCell() }
+        
+        let location = locations[indexPath.section-1].locationDetail[indexPath.row]
+        cell.configure(indexPath.row, schedule: location, isDeleteMode: isDeleteMode)
+        
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -225,15 +230,27 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 32, height: indexPath.row == 0 ? 32 : 96)
+        return CGSize(width: collectionView.frame.width - 32, height: 96)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: AddScheduleHeaderView.registerId, for: indexPath) as! AddScheduleHeaderView
-            configureHeaderView(headerView)
-            return headerView
+            switch indexPath.section {
+            case 0:
+                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: AddScheduleHeaderView.registerId, for: indexPath) as! AddScheduleHeaderView
+                configureHeaderView(headerView)
+                return headerView
+            default:
+                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ScheduleDateHeaderView.registerId, for: indexPath) as! ScheduleDateHeaderView
+                let date = locations[indexPath.section-1].date
+                headerView.configure(date)
+                return headerView
+            }
         } else if kind == UICollectionView.elementKindSectionFooter {
+            if !locations.isEmpty && indexPath.section == 0 {
+                let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: DeleteLocationFooterView.registerId, for: indexPath) as! DeleteLocationFooterView
+                return footerView
+            }
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: AddLocationFooterView.registerId, for: indexPath) as! AddLocationFooterView
             footerView.onAddLocationButtonTapped = {
                 self.showAddLocationController()
@@ -269,11 +286,11 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: isColorSelection ? 411 : 225)
+        return CGSize(width: collectionView.bounds.width, height: section == 0 ? (isColorSelection ? 411 : 225) : locations.count > 1 ? 32 : 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 53)
+        return CGSize(width: collectionView.bounds.width, height: !locations.isEmpty && section == 0 ? 32 : 53 + 16)
     }
     
     // 수평 간격
@@ -298,7 +315,7 @@ extension AddScheduleViewController: TimeButtonDelegate, SelectedTimeDelegate, D
         guard let selectedTime = selectedTime else { return }
         let time = formatTime(selectedTime)
         guard let index = timeIndex else { return }
-        locations[index].time = time
+     //   locations[index].time = time
         reloadTableView()
     }
     
@@ -343,11 +360,11 @@ extension AddScheduleViewController: TimeButtonDelegate, SelectedTimeDelegate, D
     }
     
     private func presentTimePicker(_ index: Int) {
-        let timePickerViewController = TimePickerViewController()
-        timePickerViewController.delegate = self
-        timePickerViewController.selectedTime = locations[index].time
-        timePickerViewController.modalPresentationStyle = .overFullScreen
-        present(timePickerViewController, animated: false)
+//        let timePickerViewController = TimePickerViewController()
+//        timePickerViewController.delegate = self
+//        timePickerViewController.selectedTime = locations[index].time
+//        timePickerViewController.modalPresentationStyle = .overFullScreen
+//        present(timePickerViewController, animated: false)
     }
     
     private func deleteSelectedLocations() {
