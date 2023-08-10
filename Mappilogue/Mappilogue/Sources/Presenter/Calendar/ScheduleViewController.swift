@@ -40,20 +40,14 @@ class ScheduleViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        if let month = calendarSchedule?.month, let day = calendarSchedule?.day {
-            dateLabel.text = "\(month)월 \(day)일"
-        }
-        schedules = calendarSchedule?.schedules ?? []
+        setDateLabel()
+        setschedules()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
        
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
-            self.addScheduleButton.frame.origin.x = self.scheduleView.frame.maxX - 56 - 20
-            self.addScheduleButton.frame.origin.y = self.scheduleView.frame.maxY - 56 - 20
-            self.view.layoutIfNeeded()
-        })
+        animateAddScheduleButton()
     }
     
     override func setupProperty() {
@@ -130,6 +124,26 @@ class ScheduleViewController: BaseViewController {
             self.dismiss(animated: false) {
                 NotificationCenter.default.post(name: Notification.Name("DismissScheduleViewController"), object: nil)
             }
+        })
+    }
+    
+    func setDateLabel() {
+        if let month = calendarSchedule?.month, let day = calendarSchedule?.day {
+            dateLabel.text = "\(month)월 \(day)일"
+        }
+    }
+    
+    func setschedules() {
+        schedules = calendarSchedule?.schedules ?? []
+    }
+    
+    func animateAddScheduleButton() {
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
+            let maxX = self.scheduleView.frame.maxX
+            let maxY = self.scheduleView.frame.maxY
+            self.addScheduleButton.frame.origin.x = maxX - 56 - 20
+            self.addScheduleButton.frame.origin.y = maxY - 56 - 20
+            self.view.layoutIfNeeded()
         })
     }
     

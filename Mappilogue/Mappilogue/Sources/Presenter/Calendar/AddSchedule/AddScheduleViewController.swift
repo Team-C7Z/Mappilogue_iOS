@@ -34,8 +34,8 @@ class AddScheduleViewController: BaseViewController {
         collectionView.backgroundColor = .colorF9F8F7
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         collectionView.register(DeleteLocationCell.self, forCellWithReuseIdentifier: DeleteLocationCell.registerId)
-        collectionView.register(AddLocationCell.self, forCellWithReuseIdentifier: AddLocationCell.registerId)
         collectionView.register(AddScheduleHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: AddScheduleHeaderView.registerId)
+        collectionView.register(AddLocationFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: AddLocationFooterView.registerId)
        
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -53,9 +53,7 @@ class AddScheduleViewController: BaseViewController {
     
         setCurrentDate()
         setSelectedDate()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        setKeyboardTap()
     }
 
     override func setupProperty() {
@@ -129,6 +127,11 @@ class AddScheduleViewController: BaseViewController {
         }
     }
     
+    func setKeyboardTap() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     @objc func keyboardWillShow(_ notification: Notification) {
         view.addGestureRecognizer(keyboardTap)
      }
@@ -190,11 +193,11 @@ class AddScheduleViewController: BaseViewController {
 
 extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return locations.isEmpty ? 0 : locations.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddLocationCell.registerId, for: indexPath) as? AddLocationCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DeleteLocationCell.registerId, for: indexPath) as? DeleteLocationCell else { return UICollectionViewCell() }
         return cell
     }
     
@@ -211,11 +214,11 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: AddScheduleHeaderView.registerId, for: indexPath) as! AddScheduleHeaderView
             configureHeaderView(headerView)
             return headerView
+        } else if kind == UICollectionView.elementKindSectionFooter {
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: AddLocationFooterView.registerId, for: indexPath) as!
+            AddLocationFooterView
+            return footerView
         }
-//        } else if kind == UICollectionView.elementKindSectionFooter {
-//            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: .registerId, for: indexPath) as!
-//            return footerView
-//        }
         return UICollectionReusableView()
     }
     
@@ -230,9 +233,8 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
         
         headerView.onColorSelectionButtonTapped = {
             self.isColorSelection.toggle()
-            self.collectionView.reloadData()
+            self.collectionView.performBatchUpdates(nil, completion: nil)
         }
-        
         headerView.onStartDateButtonTapped = {
             dateButtonConfiguration(true)
             self.addDatePickerTapGesture()
@@ -249,9 +251,9 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
         return CGSize(width: collectionView.bounds.width, height: isColorSelection ? 411 : 225)
     }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-//        return CGSize(width: collectionView.bounds.width, height: 53)
-//    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.bounds.width, height: 53)
+    }
     
     // 수평 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

@@ -7,8 +7,8 @@
 
 import UIKit
 
-class AddLocationCell: BaseCollectionViewCell {
-    static let registerId = "\(AddLocationCell.self)"
+class AddLocationFooterView: BaseCollectionReusableView {
+    static let registerId = "\(AddLocationFooterView.self)"
     
     var onAddLocationButtonTapped: (() -> Void)?
     
