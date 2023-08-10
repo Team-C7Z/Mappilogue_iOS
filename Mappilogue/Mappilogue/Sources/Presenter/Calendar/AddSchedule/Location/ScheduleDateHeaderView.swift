@@ -15,7 +15,6 @@ class ScheduleDateHeaderView: BaseCollectionReusableView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        frame = frame.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
     }
     
     override func setupProperty() {
@@ -33,7 +32,8 @@ class ScheduleDateHeaderView: BaseCollectionReusableView {
     
     override func setupLayout() {
         dateLabel.snp.makeConstraints {
-            $0.leading.centerY.equalTo(self)
+            $0.leading.equalTo(self).offset(16)
+            $0.centerY.equalTo(self)
         }
     }
     

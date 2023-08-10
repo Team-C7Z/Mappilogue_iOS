@@ -10,8 +10,8 @@ import UIKit
 class DeleteLocationFooterView: BaseCollectionReusableView {
     static let registerId = "\(DeleteLocationFooterView.self)"
     
-    weak var deleteModelDelegate: DeleteModeDelegate?
-    weak var deleteLocationDelegate: DeleteLocationDelegate?
+    var onDeleteMode: (() -> Void)?
+    var onDeleteLocation: (() -> Void)?
 
     private var isDeleteMode: Bool = false
     
@@ -22,12 +22,6 @@ class DeleteLocationFooterView: BaseCollectionReusableView {
     private let deleteButton = UIButton()
     private let deleteImage = UIImageView()
     private let deleteLabel = UILabel()
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-       frame = frame.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
-    }
     
     override func setupProperty() {
         super.setupProperty()
@@ -41,7 +35,7 @@ class DeleteLocationFooterView: BaseCollectionReusableView {
         deleteSelectedLabel.font = .body02
         deleteSelectedButton.addTarget(self, action: #selector(deleteSelectedButtonTapped), for: .touchUpInside)
         
-        deleteImage.image = UIImage(named: "delete")
+        deleteImage.image = UIImage(named: "common_delete")
         deleteImage.tintColor = .colorF14C4C
         deleteLabel.text = "삭제하기"
         deleteLabel.textColor = .color707070
@@ -69,7 +63,8 @@ class DeleteLocationFooterView: BaseCollectionReusableView {
         super.setupLayout()
         
         stackView.snp.makeConstraints {
-            $0.centerY.trailing.equalTo(self)
+            $0.centerY.equalTo(self)
+            $0.trailing.equalTo(self).offset(-16)
         }
         
         deleteSelectedButton.snp.makeConstraints {
@@ -107,7 +102,7 @@ class DeleteLocationFooterView: BaseCollectionReusableView {
         isDeleteMode = !isDeleteMode
         switchDeleteModel()
      
-        deleteModelDelegate?.switchDeleteMode(isDeleteMode)
+        onDeleteMode?()
     }
     
     func switchDeleteModel() {
@@ -116,14 +111,6 @@ class DeleteLocationFooterView: BaseCollectionReusableView {
     }
     
     @objc func deleteButtonTapped(_ sender: UIButton) {
-        deleteLocationDelegate?.deleteButtonTapped()
+        onDeleteLocation?()
     }
-}
-
-protocol DeleteModeDelegate: AnyObject {
-    func switchDeleteMode(_ isDeleteMode: Bool)
-}
-
-protocol DeleteLocationDelegate: AnyObject {
-    func deleteButtonTapped()
 }

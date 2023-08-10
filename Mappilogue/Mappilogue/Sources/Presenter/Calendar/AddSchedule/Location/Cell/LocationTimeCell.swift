@@ -10,10 +10,10 @@ import UIKit
 class LocationTimeCell: BaseCollectionViewCell {
     static let registerId = "\(LocationTimeCell.self)"
     
+    var onSelectedLocation: ((IndexPath) -> Void)?
     weak var timeDelegate: TimeButtonDelegate?
-    weak var checkDelegate: CheckLocationDelegate?
-    
-    private var index: Int?
+
+    private var indexPath: IndexPath?
     private var isCheck: Bool = false
     
     private let locationLabel = UILabel()
@@ -24,6 +24,12 @@ class LocationTimeCell: BaseCollectionViewCell {
     private let timeLineView = UIView()
     private let editImage = UIImageView()
     private let checkButton = UIButton()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+  
+        checkButton.setImage(UIImage(named: "unCheck"), for: .normal)
+    }
     
     override func setupProperty() {
         super.setupProperty()
@@ -112,8 +118,8 @@ class LocationTimeCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(_ index: Int, schedule: LocationTimeDetail, isDeleteMode: Bool) {
-        self.index = index
+    func configure(_ indexPath: IndexPath, schedule: LocationTimeDetail, isDeleteMode: Bool) {
+        self.indexPath = indexPath
         locationLabel.text = schedule.location
         timeLabel.text = schedule.time
         checkButton.isHidden = !isDeleteMode
@@ -121,16 +127,16 @@ class LocationTimeCell: BaseCollectionViewCell {
     }
     
     @objc func timeButtonTapped(_ sender: UIButton) {
-        guard let index = index else { return }
-        timeDelegate?.timeButtonTapped(index)
+//        guard let index = index else { return }
+//        timeDelegate?.timeButtonTapped(index)
     }
     
     @objc func checkButtonTapped() {
         isCheck = !isCheck
         updateCheckButtonImage()
         
-        guard let index = index else { return }
-        checkDelegate?.checkButtonTapped(index, isCheck: isCheck)
+        guard let indexPath = indexPath else { return }
+        onSelectedLocation?(indexPath)
     }
     
     private func updateCheckButtonImage() {
@@ -141,8 +147,4 @@ class LocationTimeCell: BaseCollectionViewCell {
 
 protocol TimeButtonDelegate: AnyObject {
     func timeButtonTapped(_ index: Int)
-}
-
-protocol CheckLocationDelegate: AnyObject {
-    func checkButtonTapped(_ index: Int, isCheck: Bool)
 }
