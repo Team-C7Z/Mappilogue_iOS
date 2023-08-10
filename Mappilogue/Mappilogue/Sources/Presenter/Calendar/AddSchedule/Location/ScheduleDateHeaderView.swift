@@ -12,11 +12,6 @@ class ScheduleDateHeaderView: BaseCollectionReusableView {
     
     private let dateLabel = UILabel()
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-    }
-    
     override func setupProperty() {
         super.setupProperty()
 
