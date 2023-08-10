@@ -12,7 +12,7 @@ extension UIViewController {
     func setNavigationTitleAndBackButton(_ title: String, backButtonAction: Selector) {
         self.title = title
         let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "back2"), for: .normal)
+        button.setImage(UIImage(named: "back"), for: .normal)
         button.addTarget(self, action: backButtonAction, for: .touchUpInside)
         let barButtonItem = UIBarButtonItem(customView: button)
         navigationItem.leftBarButtonItem = barButtonItem
