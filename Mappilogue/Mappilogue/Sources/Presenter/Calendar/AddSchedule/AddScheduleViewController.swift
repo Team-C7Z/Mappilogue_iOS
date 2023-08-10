@@ -26,6 +26,8 @@ class AddScheduleViewController: BaseViewController {
     var initialTime: String = "9:00 AM"
     var isDeleteMode: Bool = false
     
+    var dragSectionIndex: Int = 0
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -38,9 +40,10 @@ class AddScheduleViewController: BaseViewController {
         collectionView.register(ScheduleDateHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ScheduleDateHeaderView.registerId)
         collectionView.register(DeleteLocationFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: DeleteLocationFooterView.registerId)
         collectionView.register(AddLocationFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: AddLocationFooterView.registerId)
-       
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.dragDelegate = self
+        collectionView.dropDelegate = self
         return collectionView
     }()
     
@@ -301,6 +304,60 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
     // 수직 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 8
+    }
+
+    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) { }
+}
+
+extension AddScheduleViewController: UICollectionViewDragDelegate {
+    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        dragSectionIndex = indexPath.section
+        return [UIDragItem(itemProvider: NSItemProvider())]
+    }
+}
+
+extension AddScheduleViewController: UICollectionViewDropDelegate {
+    func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+        if session.localDragSession != nil && destinationIndexPath?.section == dragSectionIndex {
+            return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+        }
+        return UICollectionViewDropProposal(operation: .cancel, intent: .unspecified)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+        guard let destinationIndexPath = coordinator.destinationIndexPath else {
+            return
+        }
+        
+        coordinator.items.forEach { dropItem in
+            guard let sourceIndexPath = dropItem.sourceIndexPath else { return }
+            
+            if sourceIndexPath.section != destinationIndexPath.section {
+                return
+            }
+                    
+            var sourceLocation = self.locations[sourceIndexPath.section-1]
+            var destinationLocation = self.locations[sourceIndexPath.section-1]
+            
+            collectionView.performBatchUpdates({
+                collectionView.deleteItems(at: [sourceIndexPath])
+                collectionView.insertItems(at: [destinationIndexPath])
+                
+                let moveLocation = sourceLocation.locationDetail[sourceIndexPath.row]
+                sourceLocation.locationDetail.remove(at: sourceIndexPath.row)
+                destinationLocation.locationDetail.insert(moveLocation, at: destinationIndexPath.row)
+            }, completion: { _ in
+                coordinator.drop(dropItem.dragItem, toItemAt: destinationIndexPath)
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0) {
+                    collectionView.reloadData()
+                }
+            })
+        }
+        
     }
 }
 
