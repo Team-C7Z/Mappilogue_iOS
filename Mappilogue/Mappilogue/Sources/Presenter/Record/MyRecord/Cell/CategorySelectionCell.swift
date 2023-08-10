@@ -9,8 +9,6 @@ import UIKit
 
 class CategorySelectionCell: BaseCollectionViewCell {
     static let registerId = "\(CategorySelectionCell.self)"
-
-    private var isSelection: Bool = false
     
     private let categoryLabel = UILabel()
     private let categoryImage = UIImageView()
@@ -50,12 +48,8 @@ class CategorySelectionCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(_ title: String) {
+    func configure(_ title: String, isSelection: Bool) {
         categoryLabel.text = title
-    }
-    
-    func selectCateogry() {
-        isSelection = !isSelection
         categoryImage.image = UIImage(named: isSelection ? "deleteCategory" : "addCategory")
         contentView.backgroundColor = isSelection ? .colorF9F8F7 : .colorEAE6E1
         

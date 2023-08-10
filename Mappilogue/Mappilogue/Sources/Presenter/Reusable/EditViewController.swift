@@ -1,5 +1,5 @@
 //
-//  EditCategoryViewController.swift
+//  EditViewController.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/08/03.
@@ -7,19 +7,19 @@
 
 import UIKit
 
-class EditCategoryViewController: BaseViewController {
+class EditViewController: BaseViewController {
     var categoryName: String = ""
-    var onModifyCategory: ((String) -> Void)?
-    var onDeleteCategory: (() -> Void)?
+    var onModifyButtonTapped: ((String) -> Void)?
+    var onDeleteButtonTapped: (() -> Void)?
     
     private let modalView = UIView()
     private let barView = UIView()
-    private let modifyCategoryButton = UIButton()
-    private let modifyCategoryImage = UIImageView()
-    private let modifyCategoryLabel = UILabel()
-    private let deleteCategoryButton = UIButton()
-    private let deleteCategoryImage = UIImageView()
-    private let deleteCategoryLabel = UILabel()
+    private let modifyButton = UIButton()
+    private let modifyImage = UIImageView()
+    private let modifyLabel = UILabel()
+    private let deleteButton = UIButton()
+    private let deleteImage = UIImageView()
+    private let deleteLabel = UILabel()
 
     override func setupProperty() {
         super.setupProperty()
@@ -33,6 +33,7 @@ class EditCategoryViewController: BaseViewController {
         
         barView.backgroundColor = .colorC9C6C2
         
+<<<<<<< Updated upstream:Mappilogue/Mappilogue/Sources/Presenter/Record/MyRecord/EditCategoryViewController.swift
         modifyCategoryImage.image = UIImage(named: "common_modify")
         modifyCategoryLabel.text = "카테고리 이름 바꾸기"
         modifyCategoryLabel.textColor = .color1C1C1C
@@ -45,6 +46,18 @@ class EditCategoryViewController: BaseViewController {
         deleteCategoryLabel.textColor = .color1C1C1C
         deleteCategoryLabel.font = .title02
         deleteCategoryButton.addTarget(self, action: #selector(deleteCategoryButtonTapped), for: .touchUpInside)
+=======
+        modifyImage.image = UIImage(named: "common_modify")
+        modifyLabel.textColor = .color1C1C1C
+        modifyLabel.font = .title02
+        modifyButton.addTarget(self, action: #selector(modifyCategoryButtonTapped), for: .touchUpInside)
+        
+        deleteImage.image = UIImage(named: "common_delete")
+        deleteImage.tintColor = .colorF14C4C
+        deleteLabel.textColor = .color1C1C1C
+        deleteLabel.font = .title02
+        deleteButton.addTarget(self, action: #selector(deleteCategoryButtonTapped), for: .touchUpInside)
+>>>>>>> Stashed changes:Mappilogue/Mappilogue/Sources/Presenter/Reusable/EditViewController.swift
     }
     
     override func setupHierarchy() {
@@ -52,12 +65,12 @@ class EditCategoryViewController: BaseViewController {
         
         view.addSubview(modalView)
         modalView.addSubview(barView)
-        modalView.addSubview(modifyCategoryButton)
-        modifyCategoryButton.addSubview(modifyCategoryImage)
-        modifyCategoryButton.addSubview(modifyCategoryLabel)
-        modalView.addSubview(deleteCategoryButton)
-        deleteCategoryButton.addSubview(deleteCategoryImage)
-        deleteCategoryButton.addSubview(deleteCategoryLabel)
+        modalView.addSubview(modifyButton)
+        modifyButton.addSubview(modifyImage)
+        modifyButton.addSubview(modifyLabel)
+        modalView.addSubview(deleteButton)
+        deleteButton.addSubview(deleteImage)
+        deleteButton.addSubview(deleteLabel)
     }
     
     override func setupLayout() {
@@ -75,41 +88,46 @@ class EditCategoryViewController: BaseViewController {
             $0.height.equalTo(4)
         }
         
-        modifyCategoryButton.snp.makeConstraints {
+        modifyButton.snp.makeConstraints {
             $0.top.equalTo(modalView).offset(42)
             $0.leading.equalTo(modalView).offset(16)
             $0.trailing.equalTo(modalView).offset(16)
             $0.height.equalTo(56)
         }
         
-        modifyCategoryImage.snp.makeConstraints {
-            $0.leading.centerY.equalTo(modifyCategoryButton)
+        modifyImage.snp.makeConstraints {
+            $0.leading.centerY.equalTo(modifyButton)
             $0.width.equalTo(18)
             $0.height.equalTo(17)
         }
         
-        modifyCategoryLabel.snp.makeConstraints {
-            $0.leading.equalTo(modifyCategoryImage.snp.trailing).offset(16)
-            $0.centerY.equalTo(modifyCategoryButton)
+        modifyLabel.snp.makeConstraints {
+            $0.leading.equalTo(modifyImage.snp.trailing).offset(16)
+            $0.centerY.equalTo(modifyButton)
         }
         
-        deleteCategoryButton.snp.makeConstraints {
-            $0.top.equalTo(modifyCategoryButton.snp.bottom)
+        deleteButton.snp.makeConstraints {
+            $0.top.equalTo(modifyButton.snp.bottom)
             $0.leading.equalTo(modalView).offset(16)
             $0.trailing.equalTo(modalView).offset(-16)
             $0.height.equalTo(56)
         }
         
-        deleteCategoryImage.snp.makeConstraints {
-            $0.leading.centerY.equalTo(deleteCategoryButton)
+        deleteImage.snp.makeConstraints {
+            $0.leading.centerY.equalTo(deleteButton)
             $0.width.equalTo(18)
             $0.height.equalTo(20)
         }
         
-        deleteCategoryLabel.snp.makeConstraints {
-            $0.leading.equalTo(deleteCategoryImage.snp.trailing).offset(15)
-            $0.centerY.equalTo(deleteCategoryButton)
+        deleteLabel.snp.makeConstraints {
+            $0.leading.equalTo(deleteImage.snp.trailing).offset(15)
+            $0.centerY.equalTo(deleteButton)
         }
+    }
+    
+    func configure(modifyTitle: String, deleteTitle: String) {
+        modifyLabel.text = modifyTitle
+        deleteLabel.text = deleteTitle
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -119,7 +137,7 @@ class EditCategoryViewController: BaseViewController {
         dismiss(animated: false)
     }
     
-    @objc func modifyCategoryButtonTapped(_ button: UIButton) {
+    @objc func modifyButtonTapped(_ button: UIButton) {
         let inputAlertViewController = InputAlertViewController()
         inputAlertViewController.modalPresentationStyle = .overCurrentContext
         inputAlertViewController.configure(categoryName)
@@ -128,7 +146,7 @@ class EditCategoryViewController: BaseViewController {
         }
         inputAlertViewController.onCompletionTapped = { inputText in
             self.dismiss(animated: false) {
-                self.onModifyCategory?(inputText)
+                self.onModifyButtonTapped?(inputText)
             }
         }
         present(inputAlertViewController, animated: false)
@@ -146,7 +164,7 @@ class EditCategoryViewController: BaseViewController {
         alertViewController.configureAlert(with: alert)
         alertViewController.onDoneTapped = {
             self.dismiss(animated: false) {
-                self.onDeleteCategory?()
+                self.onDeleteButtonTapped?()
            }
         }
         present(alertViewController, animated: false)

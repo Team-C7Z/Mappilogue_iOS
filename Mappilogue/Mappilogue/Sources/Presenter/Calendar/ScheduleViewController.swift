@@ -8,11 +8,12 @@
 import UIKit
 
 class ScheduleViewController: BaseViewController {
-    weak var delegate: PresentAddScheduleViewControllerDelegate?
-    
     var calendarSchedule: CalendarSchedule?
     let lunarDate: String = ""
     var schedules = [Schedule]()
+    var selectedScheduleIndex: Int?
+    var onWriteRecordButtonTapped: ((Schedule) -> Void)?
+    var onAddScheduleButtonTapped: (() -> Void)?
     
     var addButtonLocation: CGRect?
     
@@ -20,17 +21,18 @@ class ScheduleViewController: BaseViewController {
     private let dateLabel = UILabel()
     private let lunarDateLabel = UILabel()
     
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = .colorF9F8F7
-        tableView.sectionHeaderHeight = 0
-        tableView.sectionFooterHeight = 0
-        tableView.register(ScheduleCell.self, forCellReuseIdentifier: ScheduleCell.registerId)
-        tableView.register(CalendarEmptyScheduleCell.self, forCellReuseIdentifier: CalendarEmptyScheduleCell.registerId)
-        tableView.delegate = self
-        tableView.dataSource = self
-        return tableView
+    lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.register(CalendarEmptyScheduleCell.self, forCellWithReuseIdentifier: CalendarEmptyScheduleCell.registerId)
+        collectionView.register(ScheduleCell.self, forCellWithReuseIdentifier: ScheduleCell.registerId)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        return collectionView
     }()
     
     private let addScheduleButton = AddScheduleButton()
@@ -38,20 +40,14 @@ class ScheduleViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        if let month = calendarSchedule?.month, let day = calendarSchedule?.day {
-            dateLabel.text = "\(month)월 \(day)일"
-        }
-        schedules = calendarSchedule?.schedules ?? []
+        setDateLabel()
+        setschedules()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
        
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
-            self.addScheduleButton.frame.origin.x = self.scheduleView.frame.maxX - 56 - 20
-            self.addScheduleButton.frame.origin.y = self.scheduleView.frame.maxY - 56 - 20
-            self.view.layoutIfNeeded()
-        })
+        animateAddScheduleButton()
     }
     
     override func setupProperty() {
@@ -78,7 +74,7 @@ class ScheduleViewController: BaseViewController {
         view.addSubview(scheduleView)
         scheduleView.addSubview(dateLabel)
         scheduleView.addSubview(lunarDateLabel)
-        scheduleView.addSubview(tableView)
+        scheduleView.addSubview(collectionView)
         view.addSubview(addScheduleButton)
     }
     
@@ -102,7 +98,7 @@ class ScheduleViewController: BaseViewController {
             $0.leading.equalTo(dateLabel.snp.trailing).offset(6)
         }
         
-        tableView.snp.makeConstraints {
+        collectionView.snp.makeConstraints {
             $0.top.equalTo(scheduleView).offset(78)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(scheduleView).offset(-18)
@@ -131,76 +127,98 @@ class ScheduleViewController: BaseViewController {
         })
     }
     
+    func setDateLabel() {
+        if let month = calendarSchedule?.month, let day = calendarSchedule?.day {
+            dateLabel.text = "\(month)월 \(day)일"
+        }
+    }
+    
+    func setschedules() {
+        schedules = calendarSchedule?.schedules ?? []
+    }
+    
+    func animateAddScheduleButton() {
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
+            let maxX = self.scheduleView.frame.maxX
+            let maxY = self.scheduleView.frame.maxY
+            self.addScheduleButton.frame.origin.x = maxX - 56 - 20
+            self.addScheduleButton.frame.origin.y = maxY - 56 - 20
+            self.view.layoutIfNeeded()
+        })
+    }
+    
     @objc func addScheduleButtonTapped(_ sender: UIButton) {
         dismiss(animated: false) {
-            self.delegate?.presentAddScheduleViewController()
+            self.onAddScheduleButtonTapped?()
         }
+    }
+    
+    private func presentEditScheduleViewController() {
+        let editScheduleViewController = EditScheduleViewController()
+        editScheduleViewController.modalPresentationStyle = .overFullScreen
+        editScheduleViewController.onModifyCategory = { self.presentWriteRecordViewController() }
+        editScheduleViewController.onDeleteCategory = { self.deleteSchedule() }
+        present(editScheduleViewController, animated: false)
+    }
+    
+    private func presentWriteRecordViewController() {
+        dismiss(animated: false) {
+            guard let index = self.selectedScheduleIndex else { return }
+            self.onWriteRecordButtonTapped?(self.schedules[index])
+        }
+    }
+    
+    private func deleteSchedule() {
+        guard let index = selectedScheduleIndex else { return }
+        schedules.remove(at: index)
+        calendarSchedule?.schedules = schedules
+        collectionView.reloadData()
     }
 }
 
-extension ScheduleViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension ScheduleViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return schedules.isEmpty ? 1 : schedules.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if schedules.isEmpty {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: CalendarEmptyScheduleCell.registerId, for: indexPath) as? CalendarEmptyScheduleCell else { return UITableViewCell() }
-            cell.selectionStyle = .none
-
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarEmptyScheduleCell.registerId, for: indexPath) as? CalendarEmptyScheduleCell else { return UICollectionViewCell() }
             return cell
             
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleCell.registerId, for: indexPath) as? ScheduleCell else { return UITableViewCell() }
-            cell.selectionStyle = .none
-            
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ScheduleCell.registerId, for: indexPath) as? ScheduleCell else { return UICollectionViewCell() }
             if let schedules = calendarSchedule?.schedules, schedules.count > indexPath.row {
                 let schedule = schedules[indexPath.row]
-                cell.configure(with: schedule)
+                cell.configure(indexPath.row, schedule: schedule)
             }
-            
+            cell.onEditButtonTapped = { index in
+                self.selectedScheduleIndex = index
+                self.presentEditScheduleViewController()
+            }
             return cell
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return schedules.isEmpty ? tableView.frame.height : 52
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width - 40, height: schedules.isEmpty ? collectionView.frame.height : 52)
+    }
+  
+    // 수평 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    // 수직 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
-    
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
-            self.presentDeleteAlert(at: indexPath)
-        }
-        deleteAction.backgroundColor = .colorF14C4C
-        deleteAction.image = UIImage(named: "delete")
-        return UISwipeActionsConfiguration(actions: [deleteAction])
-    }
-    
-    private func presentDeleteAlert(at indexPath: IndexPath) {
-        let alertViewController = AlertViewController()
-        alertViewController.modalPresentationStyle = .overCurrentContext
-        let alert = Alert(titleText: "이 일정을 삭제할까요?",
-                          messageText: nil,
-                          cancelText: "취소",
-                          doneText: "삭제",
-                          buttonColor: .colorF14C4C,
-                          alertHeight: 140)
-        alertViewController.configureAlert(with: alert)
-        alertViewController.onDoneTapped = {
-            self.deleteSchedule(at: indexPath)
-        }
-         present(alertViewController, animated: false)
-     }
-    
-    private func deleteSchedule(at indexPath: IndexPath) {
-        schedules.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .none)
-    }
-}
-
-protocol PresentAddScheduleViewControllerDelegate: AnyObject {
-    func presentAddScheduleViewController()
 }

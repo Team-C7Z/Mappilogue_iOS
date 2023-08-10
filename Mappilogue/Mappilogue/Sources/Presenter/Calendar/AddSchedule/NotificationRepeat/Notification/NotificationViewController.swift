@@ -19,9 +19,11 @@ class NotificationViewController: BaseViewController {
     
     var dates = ["7일 전", "3일 전", "이틀 전", "전날", "당일"]
     var beforDay = [7, 3, 2, 1, 0]
+    var selectedBeforeDayIndex: Int = 0
     let hours = Array(1...12)
     var minutes = Array(0...59).map {String(format: "%02d", $0)}
     var timePeriod = ["AM", "PM"]
+    var selectedTimePeriodIndex: Int = 0
     var isDate: Bool = false
     var selectedNotification = SelectedNotification()
     var notificationList: [SelectedNotification] = []
@@ -98,6 +100,7 @@ class NotificationViewController: BaseViewController {
     }
     
     func setDateList() {
+        selectedBeforeDayIndex = dates.count-1
         for index in dates.indices {
             dates[index] += " (\(monthlyCalendar.getDateBefore(beforeDay: beforDay[index])))"
         }
@@ -106,11 +109,14 @@ class NotificationViewController: BaseViewController {
     func setSelectedDate() {
         pickerView.reloadAllComponents()
         if isDate {
-            pickerView.selectRow(dates.count-1, inComponent: 0, animated: false)
+            pickerView.selectRow(selectedBeforeDayIndex, inComponent: 0, animated: false)
         } else {
-            pickerView.selectRow(8, inComponent: 0, animated: false)
-            pickerView.selectRow(0, inComponent: 1, animated: false)
-            pickerView.selectRow(0, inComponent: 2, animated: false)
+            guard let hour = selectedNotification.hour else { return }
+            guard let minute = selectedNotification.minute else { return }
+            
+            pickerView.selectRow(hour-1, inComponent: 0, animated: false)
+            pickerView.selectRow(minute, inComponent: 1, animated: false)
+            pickerView.selectRow(selectedTimePeriodIndex, inComponent: 2, animated: false)
         }
     }
     
@@ -119,25 +125,23 @@ class NotificationViewController: BaseViewController {
         view.addGestureRecognizer(datePickerTap)
     }
     
-    func showPickerView() {
-        isDate = true
+    func showPickerView(_ isDate: Bool) {
+        self.isDate = isDate
         pickerOuterView.isHidden = false
-        selectedNotification = setCurrentDate()
         setSelectedDate()
     }
     
     @objc func dismissDatePicker(_ gesture: UITapGestureRecognizer) {
         let location = gesture.location(in: collectionView)
         if location.y < pickerOuterView.frame.minY {
-            if isDate {
-                isDate = false
-                setSelectedDate()
-            } else if !pickerOuterView.isHidden {
-                notificationList.append(selectedNotification)
-                pickerOuterView.isHidden = true
-            }
+            pickerOuterView.isHidden = true
             collectionView.reloadData()
         }
+    }
+    
+    func addNotification() {
+        notificationList.append(selectedNotification)
+        collectionView.reloadData()
     }
 }
 
@@ -170,10 +174,11 @@ extension NotificationViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: NotificationHeaderView.registerId, for: indexPath) as? NotificationHeaderView else { return UICollectionReusableView() }
-        if !isDate {
-            headerView.configure(selectedNotification)
-        }
-        headerView.onAddNotificationButtonTapped = { self.showPickerView() }
+    
+        headerView.configure(selectedNotification)
+        headerView.onStartDateButtonTapped = { self.showPickerView(true) }
+        headerView.onStartTimeButtonTapped = { self.showPickerView(false) }
+        headerView.onAddNotificationButtonTapped = { self.addNotification() }
         return headerView
     }
 
@@ -224,6 +229,7 @@ extension NotificationViewController: UIPickerViewDelegate, UIPickerViewDataSour
         case 0:
             if isDate {
                 selectedNotification.date = dates[row]
+                selectedBeforeDayIndex = row
             } else {
                 selectedNotification.hour = hours[row]
             }
@@ -231,6 +237,7 @@ extension NotificationViewController: UIPickerViewDelegate, UIPickerViewDataSour
             selectedNotification.minute = Int(minutes[row]) ?? 0
         default:
             selectedNotification.timePeriod = timePeriod[row]
+            selectedTimePeriodIndex = row
         }
     }
 }
