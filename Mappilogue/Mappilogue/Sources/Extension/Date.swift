@@ -8,9 +8,16 @@
 import Foundation
 
 extension Date {
-    func formatDateToString() -> String {
+    func formatToMMddDateString() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM월 dd일"
         return dateFormatter.string(from: self)
+    }
+
+    func formatTohmmaDateToString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a"
+        formatter.locale = Locale(identifier: "ko_KR")
+        return formatter.string(from: self)
     }
 }
