@@ -292,6 +292,9 @@ class AddScheduleViewController: BaseViewController {
         selectedLocations.sorted(by: >).forEach { indexPath in
             if indexPath.section < locations.count && indexPath.row < locations[indexPath.section].locationDetail.count {
                 locations[indexPath.section].locationDetail.remove(at: indexPath.row)
+                if locations[indexPath.section].locationDetail.isEmpty {
+                    locations.remove(at: indexPath.section)
+                }
             }
         }
         selectedLocations = []
