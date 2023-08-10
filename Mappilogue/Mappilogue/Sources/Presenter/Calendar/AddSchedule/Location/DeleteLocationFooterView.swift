@@ -1,5 +1,5 @@
 //
-//  DeleteLocationCell.swift
+//  DeleteLocationFooterView.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/07/17.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-class DeleteLocationCell: BaseCollectionViewCell {
-    static let registerId = "\(DeleteLocationCell.self)"
+class DeleteLocationFooterView: BaseCollectionReusableView {
+    static let registerId = "\(DeleteLocationFooterView.self)"
     
     weak var deleteModelDelegate: DeleteModeDelegate?
     weak var deleteLocationDelegate: DeleteLocationDelegate?
@@ -22,6 +22,12 @@ class DeleteLocationCell: BaseCollectionViewCell {
     private let deleteButton = UIButton()
     private let deleteImage = UIImageView()
     private let deleteLabel = UILabel()
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+       frame = frame.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
+    }
     
     override func setupProperty() {
         super.setupProperty()
@@ -48,7 +54,7 @@ class DeleteLocationCell: BaseCollectionViewCell {
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        contentView.addSubview(stackView)
+        addSubview(stackView)
         stackView.addArrangedSubview(deleteSelectedButton)
         stackView.addArrangedSubview(deleteButton)
       
@@ -63,7 +69,7 @@ class DeleteLocationCell: BaseCollectionViewCell {
         super.setupLayout()
         
         stackView.snp.makeConstraints {
-            $0.centerY.trailing.equalTo(contentView)
+            $0.centerY.trailing.equalTo(self)
         }
         
         deleteSelectedButton.snp.makeConstraints {

@@ -112,7 +112,7 @@ class LocationTimeCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(_ index: Int, schedule: LocationTime, isDeleteMode: Bool) {
+    func configure(_ index: Int, schedule: LocationTimeDetail, isDeleteMode: Bool) {
         self.index = index
         locationLabel.text = schedule.location
         timeLabel.text = schedule.time
