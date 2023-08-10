@@ -112,12 +112,7 @@ class TimePickerViewController: BaseViewController {
         timePicker.locale = Locale(identifier: "en_US_POSIX")
         timePicker.addTarget(self, action: #selector(timePickerValueDidChange), for: .valueChanged)
 
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "h:mm a"
-        if let date = dateFormatter.date(from: selectedTime) {
-            timePicker.date = date
-        } else {
-        }
+        timePicker.date = selectedTime.formatTohmmaStringToDate()
     }
     
     @objc private func deleteTimeButtonTapped(_ sender: UIButton) {

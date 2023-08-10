@@ -116,6 +116,10 @@ class AddScheduleViewController: BaseViewController {
     }
     
     @objc func xButtonTapped() {
+        showAlert()
+    }
+    
+    private func showAlert() {
         let alertViewController = AlertViewController()
         alertViewController.modalPresentationStyle = .overCurrentContext
         let alert = Alert(titleText: "일정 작성을 중단할까요?",
@@ -141,7 +145,6 @@ class AddScheduleViewController: BaseViewController {
         func selectedRow(_ value: Int, component: Int) {
             datePickerView.selectRow(value, inComponent: component, animated: false)
         }
-        
         selectedRow(years.firstIndex(of: isStartDate ? startDate.year : endDate.year) ?? 0, component: ComponentType.year.rawValue)
         selectedRow(months.firstIndex(of: isStartDate ? startDate.month : endDate.month) ?? 0, component: ComponentType.month.rawValue)
 
@@ -177,9 +180,6 @@ class AddScheduleViewController: BaseViewController {
     @objc func dismissDatePicker(_ gesture: UITapGestureRecognizer) {
         let location = gesture.location(in: collectionView)
         if location.y < datePickerOuterView.frame.minY {
-            if !datePickerOuterView.isHidden {
-                
-            }
             datePickerOuterView.isHidden = true
             validateDateRange()
         }
@@ -292,9 +292,9 @@ class AddScheduleViewController: BaseViewController {
         selectedLocations.sorted(by: >).forEach { indexPath in
             if indexPath.section < locations.count && indexPath.row < locations[indexPath.section].locationDetail.count {
                 locations[indexPath.section].locationDetail.remove(at: indexPath.row)
-                if locations[indexPath.section].locationDetail.isEmpty {
-                    locations.remove(at: indexPath.section)
-                }
+            }
+            if locations[indexPath.section].locationDetail.isEmpty {
+                locations.remove(at: indexPath.section)
             }
         }
         selectedLocations = []
@@ -340,7 +340,7 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
             switch indexPath.section {
             case 0:
                 let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: AddScheduleHeaderView.registerId, for: indexPath) as! AddScheduleHeaderView
-                configureHeaderView(headerView)
+                configureAddScheduleHeaderView(headerView)
                 return headerView
             default:
                 let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ScheduleDateHeaderView.registerId, for: indexPath) as! ScheduleDateHeaderView
@@ -351,13 +351,7 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
         } else if kind == UICollectionView.elementKindSectionFooter {
             if !locations.isEmpty && indexPath.section == 0 {
                 let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: DeleteLocationFooterView.registerId, for: indexPath) as! DeleteLocationFooterView
-                footerView.onDeleteMode = {
-                    self.isDeleteMode.toggle()
-                    collectionView.reloadData()
-                }
-                footerView.onDeleteLocation = {
-                    self.showDeleteLocationAlert()
-                }
+                configureDeleteLocationFooterView(footerView)
                 return footerView
             }
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: AddLocationFooterView.registerId, for: indexPath) as! AddLocationFooterView
@@ -368,8 +362,8 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
         }
         return UICollectionReusableView()
     }
-    
-    func configureHeaderView(_ headerView: AddScheduleHeaderView) {
+
+    func configureAddScheduleHeaderView(_ headerView: AddScheduleHeaderView) {
         headerView.configureDate(startDate: startDate, endDate: endDate)
         
         let dateButtonConfiguration = { isStartDate in
@@ -393,7 +387,17 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
         headerView.onNotificationButtonTapped = { self.showNotificationViewController()}
         headerView.onRepeatButtonTapped = { self.showRepeatViewController() }
     }
-
+    
+    func configureDeleteLocationFooterView(_ footerView: DeleteLocationFooterView) {
+        footerView.onDeleteMode = {
+            self.isDeleteMode.toggle()
+            self.collectionView.reloadData()
+        }
+        footerView.onDeleteLocation = {
+            self.showDeleteLocationAlert()
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.bounds.width, height: section == 0 ? (isColorSelection ? 411 : 225) : locations.count > 1 ? 32 : 0)
     }
@@ -415,8 +419,6 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
-    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) { }
 }
 
 extension AddScheduleViewController: UICollectionViewDragDelegate {
@@ -462,7 +464,6 @@ extension AddScheduleViewController: UICollectionViewDropDelegate {
                 }
             )
         }
-        
     }
 }
 
