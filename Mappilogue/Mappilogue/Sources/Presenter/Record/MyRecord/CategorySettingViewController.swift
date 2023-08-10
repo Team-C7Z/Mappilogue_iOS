@@ -9,6 +9,7 @@ import UIKit
 
 class CategorySettingViewController: BaseViewController {
     var dummyCategory = dummyCategoryData()
+    var selectedCateogry: [Bool] = []
     
     private lazy var collectionView: UICollectionView = {
         let layout = LeftAlignedCollectionViewFlowLayout()
@@ -32,6 +33,7 @@ class CategorySettingViewController: BaseViewController {
      override func viewDidLoad() {
          super.viewDidLoad()
          
+         selectedCateogry = Array(repeating: false, count: dummyCategory.count)
      }
      
      override func setupProperty() {
@@ -124,7 +126,8 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
         }
         
         let categoryTitle = dummyCategory[indexPath.row-1].title
-        cell.configure(categoryTitle)
+        let isSelection = selectedCateogry[indexPath.row-1]
+        cell.configure(categoryTitle, isSelection: isSelection)
         
         return cell
     }
@@ -161,8 +164,9 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
         if indexPath.section == 0 && indexPath.row == dummyCategory.count + 1 {
             showInputAlertViewController()
         } else if indexPath.section == 1 && indexPath.row > 0 {
-            if let cell = collectionView.cellForItem(at: indexPath) as? CategorySelectionCell {
-                cell.selectCateogry()
+            if collectionView.cellForItem(at: indexPath) is CategorySelectionCell {
+                selectedCateogry[indexPath.row-1] = !selectedCateogry[indexPath.row-1]
+                collectionView.reloadData()
             }
         }
     }
@@ -176,6 +180,7 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
         inputAlertViewController.modalPresentationStyle = .overCurrentContext
         inputAlertViewController.onCompletionTapped = { inputText in
             self.dummyCategory.append(CategoryData(title: inputText, count: 0))
+            self.selectedCateogry.append(false)
             self.collectionView.reloadData()
         }
         present(inputAlertViewController, animated: false)
@@ -217,12 +222,15 @@ extension CategorySettingViewController: UICollectionViewDropDelegate {
             coordinator.items.forEach { dropItem in
                 guard let sourceIndexPath = dropItem.sourceIndexPath else { return }
                 let categoryCell = self.dummyCategory[sourceIndexPath.row-1]
+                let selectedCell = self.selectedCateogry[sourceIndexPath.row-1]
                 
                 collectionView.performBatchUpdates({
                     collectionView.deleteItems(at: [sourceIndexPath])
                     collectionView.insertItems(at: [destinationIndexPath])
                     self.dummyCategory.remove(at: sourceIndexPath.row-1)
                     self.dummyCategory.insert(categoryCell, at: destinationIndexPath.row-1)
+                    self.selectedCateogry.remove(at: sourceIndexPath.row-1)
+                    self.selectedCateogry.insert(selectedCell, at: destinationIndexPath.row-1)
                 }, completion: { _ in
                     coordinator.drop(dropItem.dragItem, toItemAt: destinationIndexPath)
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0) {

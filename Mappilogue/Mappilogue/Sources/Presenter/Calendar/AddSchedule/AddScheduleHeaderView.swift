@@ -12,11 +12,13 @@ class AddScheduleHeaderView: BaseCollectionReusableView {
     
     private var schedule: Schedule = Schedule()
     private var colorList = dummyColorSelectionData()
+    var onColorSelectionButtonTapped: (() -> Void)?
     var onStartDateButtonTapped: (() -> Void)?
     var onEndDateButtonTapped: (() -> Void)?
     var onNotificationButtonTapped: (() -> Void)?
     var onRepeatButtonTapped: (() -> Void)?
     
+    private let titleColorStackView = UIStackView()
     private let stackView = UIStackView()
     private let scheduleTitleColorView = AddScheduleTitleColorView()
     private let colorSelectionView = ColorSelectionView()
@@ -42,6 +44,10 @@ class AddScheduleHeaderView: BaseCollectionReusableView {
     override func setupProperty() {
         super.setupProperty()
         
+        titleColorStackView.axis = .vertical
+        titleColorStackView.distribution = .equalSpacing
+        titleColorStackView.spacing = 0
+        
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
         stackView.spacing = 1
@@ -55,8 +61,9 @@ class AddScheduleHeaderView: BaseCollectionReusableView {
         super.setupHierarchy()
         
         addSubview(stackView)
-        stackView.addArrangedSubview(scheduleTitleColorView)
-        stackView.addArrangedSubview(colorSelectionView)
+        stackView.addArrangedSubview(titleColorStackView)
+        titleColorStackView.addArrangedSubview(scheduleTitleColorView)
+        titleColorStackView.addArrangedSubview(colorSelectionView)
         stackView.addArrangedSubview(scheduleDurationView)
         stackView.addArrangedSubview(notificationButton)
         stackView.addArrangedSubview(repeatButton)
@@ -137,6 +144,8 @@ extension AddScheduleHeaderView {
             if let color = schedule.color {
                 scheduleTitleColorView.configure(with: schedule.title, color: color, isColorSelection: isSelected)
             }
+            
+            onColorSelectionButtonTapped?()
         }
     }
     
@@ -145,6 +154,7 @@ extension AddScheduleHeaderView {
             guard let self = self else { return }
             
             schedule.color = colorList[selectedColorIndex]
+            configureScheduleTitleColorView()
         }
     }
 }

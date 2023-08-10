@@ -1,5 +1,5 @@
 //
-//  AddLocationFooterView.swift
+//  AddLocationCell.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/08/07.
