@@ -9,8 +9,8 @@ import UIKit
 
 class AddLocationViewController: BaseViewController {
     let dummyLocation = dummyLocationData()
-    weak var delegate: SelectedLocationDelegate?
-    
+    var onLocationSelected: ((Location) -> Void)?
+
     private let addLocationView = UIView()
     private let locationTextField = UITextField()
     
@@ -127,8 +127,9 @@ extension AddLocationViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let location = dummyLocation[indexPath.row]
-        dismiss(animated: false)
-        delegate?.selectLocation(location)
+        dismiss(animated: false) {
+            self.onLocationSelected?(location)
+        }
     }
 }
 
@@ -137,8 +138,4 @@ extension AddLocationViewController: UITextFieldDelegate {
         locationTextField.resignFirstResponder()
         return true
     }
-}
-
-protocol SelectedLocationDelegate: AnyObject {
-    func selectLocation(_ location: Location)
 }
