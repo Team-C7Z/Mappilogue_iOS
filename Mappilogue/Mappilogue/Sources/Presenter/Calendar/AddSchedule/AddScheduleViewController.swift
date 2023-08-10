@@ -34,6 +34,7 @@ class AddScheduleViewController: BaseViewController {
         collectionView.backgroundColor = .colorF9F8F7
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         collectionView.register(DeleteLocationCell.self, forCellWithReuseIdentifier: DeleteLocationCell.registerId)
+        collectionView.register(LocationTimeCell.self, forCellWithReuseIdentifier: LocationTimeCell.registerId)
         collectionView.register(AddScheduleHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: AddScheduleHeaderView.registerId)
         collectionView.register(AddLocationFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: AddLocationFooterView.registerId)
        
@@ -187,26 +188,44 @@ class AddScheduleViewController: BaseViewController {
     func showAddLocationController() {
         let addLocationViewController = AddLocationViewController()
         addLocationViewController.modalPresentationStyle = .overFullScreen
+        addLocationViewController.onLocationSelected = { location in
+            self.addLocation(location)
+        }
         present(addLocationViewController, animated: false)
+    }
+    
+    func addLocation(_ location: Location) {
+        locations.append(LocationTime(location: location.title, time: initialTime))
+        collectionView.reloadData()
     }
 }
 
 extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return locations.isEmpty ? 0 : locations.count
+        return locations.isEmpty ? 0 : locations.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DeleteLocationCell.registerId, for: indexPath) as? DeleteLocationCell else { return UICollectionViewCell() }
-        return cell
+        switch indexPath.row {
+        case 0:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DeleteLocationCell.registerId, for: indexPath) as? DeleteLocationCell else { return UICollectionViewCell() }
+            return cell
+        default:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LocationTimeCell.registerId, for: indexPath) as? LocationTimeCell else { return UICollectionViewCell() }
+            
+            let location = locations[indexPath.row-1]
+            cell.configure(indexPath.row, schedule: location, isDeleteMode: isDeleteMode)
+            
+            return cell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16)
+        return UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 16)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 32, height: 53)
+        return CGSize(width: collectionView.frame.width - 32, height: indexPath.row == 0 ? 32 : 96)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -215,8 +234,10 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
             configureHeaderView(headerView)
             return headerView
         } else if kind == UICollectionView.elementKindSectionFooter {
-            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: AddLocationFooterView.registerId, for: indexPath) as!
-            AddLocationFooterView
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: AddLocationFooterView.registerId, for: indexPath) as! AddLocationFooterView
+            footerView.onAddLocationButtonTapped = {
+                self.showAddLocationController()
+            }
             return footerView
         }
         return UICollectionReusableView()
@@ -262,15 +283,11 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
     
     // 수직 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return 8
     }
 }
 
-extension AddScheduleViewController: SelectedLocationDelegate, TimeButtonDelegate, SelectedTimeDelegate, DeleteModeDelegate, DeleteLocationDelegate, CheckLocationDelegate {
-    func selectLocation(_ selectedLocation: String) {
-        locations.append(LocationTime(location: selectedLocation, time: initialTime))
-        reloadTableView()
-    }
+extension AddScheduleViewController: TimeButtonDelegate, SelectedTimeDelegate, DeleteModeDelegate, DeleteLocationDelegate, CheckLocationDelegate {
     
     func timeButtonTapped(_ index: Int) {
         timeIndex = index

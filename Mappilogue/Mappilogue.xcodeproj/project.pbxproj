@@ -521,8 +521,6 @@
 			isa = PBXGroup;
 			children = (
 				9224FCFC2A5FF185000A56A6 /* AddScheduleViewController.swift */,
-				925840D02A7FCE6800997434 /* AddScheduleHeaderView.swift */,
-				925840D42A80957900997434 /* AddLocationFooterView.swift */,
 				9224FD282A6394B0000A56A6 /* ScheduleTitleColor */,
 				9224FD292A639508000A56A6 /* ScheduleDuration */,
 				9224FD2A2A639547000A56A6 /* NotificationRepeat */,
@@ -628,10 +626,10 @@
 			isa = PBXGroup;
 			children = (
 				9224FD3C2A6559A0000A56A6 /* AddLocationViewController.swift */,
-				9224FD412A656407000A56A6 /* LocationCell.swift */,
-				9224FD452A6579A7000A56A6 /* DeleteLocationCell.swift */,
-				9224FD472A6579ED000A56A6 /* LocationTimeCell.swift */,
+				925840D02A7FCE6800997434 /* AddScheduleHeaderView.swift */,
+				925840D42A80957900997434 /* AddLocationFooterView.swift */,
 				9224FD492A667F7E000A56A6 /* TimePickerViewController.swift */,
+				92E7814A2A849AB9000DAACD /* Cell */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -922,6 +920,16 @@
 				925840BE2A7F4D3900997434 /* Notification.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		92E7814A2A849AB9000DAACD /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				9224FD452A6579A7000A56A6 /* DeleteLocationCell.swift */,
+				9224FD412A656407000A56A6 /* LocationCell.swift */,
+				9224FD472A6579ED000A56A6 /* LocationTimeCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		AB9B24CC5D92D2660F4787DE /* Frameworks */ = {
