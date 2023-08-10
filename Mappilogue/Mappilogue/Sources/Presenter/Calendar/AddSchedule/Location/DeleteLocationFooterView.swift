@@ -42,7 +42,7 @@ class DeleteLocationFooterView: BaseCollectionReusableView {
         deleteLabel.font = .body02
         deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         
-        switchDeleteModel()
+        switchDeleteMode()
     }
     
     override func setupHierarchy() {
@@ -100,14 +100,18 @@ class DeleteLocationFooterView: BaseCollectionReusableView {
     
     @objc func deleteSelectedButtonTapped(_ sender: UIButton) {
         isDeleteMode = !isDeleteMode
-        switchDeleteModel()
+        switchDeleteMode()
      
         onDeleteMode?()
     }
     
-    func switchDeleteModel() {
+    func switchDeleteMode() {
         deleteSelectedLabel.text = isDeleteMode ? "선택취소" : "선택삭제"
         deleteButton.isHidden = !isDeleteMode
+        
+        UIView.animate(withDuration: 0.3) {
+            self.stackView.layoutIfNeeded()
+        }
     }
     
     @objc func deleteButtonTapped(_ sender: UIButton) {
