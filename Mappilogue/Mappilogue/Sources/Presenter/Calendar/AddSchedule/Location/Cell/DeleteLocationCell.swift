@@ -23,12 +23,6 @@ class DeleteLocationCell: BaseCollectionViewCell {
     private let deleteImage = UIImageView()
     private let deleteLabel = UILabel()
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
-    }
-    
     override func setupProperty() {
         super.setupProperty()
         

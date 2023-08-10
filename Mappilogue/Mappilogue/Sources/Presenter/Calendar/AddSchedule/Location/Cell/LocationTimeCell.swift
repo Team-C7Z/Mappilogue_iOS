@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LocationTimeCell: BaseTableViewCell {
+class LocationTimeCell: BaseCollectionViewCell {
     static let registerId = "\(LocationTimeCell.self)"
     
     weak var timeDelegate: TimeButtonDelegate?
@@ -24,12 +24,6 @@ class LocationTimeCell: BaseTableViewCell {
     private let timeLineView = UIView()
     private let editImage = UIImageView()
     private let checkButton = UIButton()
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16))
-    }
     
     override func setupProperty() {
         super.setupProperty()
@@ -118,7 +112,7 @@ class LocationTimeCell: BaseTableViewCell {
         }
     }
     
-    func configure(with index: Int, schedule: LocationTime, isDeleteMode: Bool) {
+    func configure(_ index: Int, schedule: LocationTime, isDeleteMode: Bool) {
         self.index = index
         locationLabel.text = schedule.location
         timeLabel.text = schedule.time
