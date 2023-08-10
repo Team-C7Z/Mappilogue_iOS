@@ -40,7 +40,7 @@ class WithdrawalAlertViewController: BaseViewController {
         messageLabel.lineBreakMode = .byWordWrapping
         
         checkButton.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
-        checkImage.image = UIImage(named: "unCheck")
+        checkImage.image = UIImage(named: "common_unCheck")
         checkLabel.text = "주의사항을 확인했어요"
         checkLabel.textColor = .color707070
         checkLabel.font = .body02
@@ -128,7 +128,7 @@ class WithdrawalAlertViewController: BaseViewController {
     @objc private func checkButtonTapped() {
         isChecked = !isChecked
         
-        checkImage.image = UIImage(named: isChecked ? "check" : "unCheck")
+        checkImage.image = UIImage(named: isChecked ? "common_check" : "common_unCheck")
         doneButton.backgroundColor = isChecked ? .colorF14C4C : .colorC9C6C2
     }
     

@@ -15,13 +15,13 @@ struct MyInfo {
 class MyViewController: NavigationBarViewController {
     var myInfoData: [[MyInfo]] = [
         [
-            MyInfo(image: "noti", title: "알림 설정"),
-            MyInfo(image: "terms", title: "이용약관"),
-            MyInfo(image: "inquiry", title: "문의하기")
+            MyInfo(image: "my_notification", title: "알림 설정"),
+            MyInfo(image: "my_terms", title: "이용약관"),
+            MyInfo(image: "my_inquiry", title: "문의하기")
         ],
         [
-            MyInfo(image: "logout", title: "로그아웃"),
-            MyInfo(image: "withdrawal", title: "탈퇴하기")
+            MyInfo(image: "my_logout", title: "로그아웃"),
+            MyInfo(image: "my_withdrawal", title: "탈퇴하기")
         ]
     ]
     
