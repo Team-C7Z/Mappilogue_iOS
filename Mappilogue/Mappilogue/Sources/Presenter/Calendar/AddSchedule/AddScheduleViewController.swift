@@ -22,7 +22,7 @@ class AddScheduleViewController: BaseViewController {
     var days: [Int] = []
 
     var locations: [LocationTime] = []
-    var selectedLocations: [Int] = []
+    var selectedLocations: [IndexPath] = []
     var timeIndex: Int?
     var initialTime: String = "9:00 AM"
     var isDeleteMode: Bool = false
@@ -247,6 +247,42 @@ class AddScheduleViewController: BaseViewController {
         
         return dates
     }
+    
+    private func checkButtonTapped(_ indexPath: IndexPath) {
+        if let indexPath = selectedLocations.firstIndex(of: indexPath) {
+            selectedLocations.remove(at: indexPath)
+        } else {
+            selectedLocations.append(indexPath)
+        }
+    }
+    
+    func showDeleteLocationAlert() {
+        guard !selectedLocations.isEmpty else { return }
+        
+        let alertViewController = AlertViewController()
+        let alert = Alert(titleText: "선택한 장소를 삭제할까요?",
+                          cancelText: "취소",
+                          doneText: "삭제",
+                          buttonColor: .colorF14C4C,
+                          alertHeight: 140)
+        alertViewController.configureAlert(with: alert)
+        alertViewController.modalPresentationStyle = .overCurrentContext
+        alertViewController.onDoneTapped = {
+            self.deleteSelectedLocations()
+        }
+        self.present(alertViewController, animated: false)
+    }
+    
+    private func deleteSelectedLocations() {
+        let xxxx = selectedLocations.sorted(by: >)
+        selectedLocations.sorted(by: >).forEach { indexPath in
+            if indexPath.section < locations.count && indexPath.row < locations[indexPath.section].locationDetail.count {
+                locations[indexPath.section].locationDetail.remove(at: indexPath.row)
+            }
+        }
+        selectedLocations = []
+        collectionView.reloadData()
+    }
 }
 
 extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -262,7 +298,11 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LocationTimeCell.registerId, for: indexPath) as? LocationTimeCell else { return UICollectionViewCell() }
         
         let location = locations[indexPath.section-1].locationDetail[indexPath.row]
-        cell.configure(indexPath.row, schedule: location, isDeleteMode: isDeleteMode)
+        cell.configure([indexPath.section-1, indexPath.row], schedule: location, isDeleteMode: isDeleteMode)
+        
+        cell.onSelectedLocation = { indexPath in
+            self.checkButtonTapped(indexPath)
+        }
         
         return cell
     }
@@ -291,6 +331,13 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
         } else if kind == UICollectionView.elementKindSectionFooter {
             if !locations.isEmpty && indexPath.section == 0 {
                 let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: DeleteLocationFooterView.registerId, for: indexPath) as! DeleteLocationFooterView
+                footerView.onDeleteMode = {
+                    self.isDeleteMode.toggle()
+                    collectionView.reloadData()
+                }
+                footerView.onDeleteLocation = {
+                    self.showDeleteLocationAlert()
+                }
                 return footerView
             }
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: AddLocationFooterView.registerId, for: indexPath) as! AddLocationFooterView
@@ -354,6 +401,9 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
 
 extension AddScheduleViewController: UICollectionViewDragDelegate {
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        if isDeleteMode {
+            return []
+        }
         dragSectionIndex = indexPath.section
         return [UIDragItem(itemProvider: NSItemProvider())]
     }
@@ -378,17 +428,14 @@ extension AddScheduleViewController: UICollectionViewDropDelegate {
             if sourceIndexPath.section != destinationIndexPath.section {
                 return
             }
-                    
-            var sourceLocation = self.locations[sourceIndexPath.section-1]
-            var destinationLocation = self.locations[sourceIndexPath.section-1]
             
             collectionView.performBatchUpdates({
                 collectionView.deleteItems(at: [sourceIndexPath])
                 collectionView.insertItems(at: [destinationIndexPath])
                 
-                let moveLocation = sourceLocation.locationDetail[sourceIndexPath.row]
-                sourceLocation.locationDetail.remove(at: sourceIndexPath.row)
-                destinationLocation.locationDetail.insert(moveLocation, at: destinationIndexPath.row)
+                let moveLocation = locations[sourceIndexPath.section-1].locationDetail[sourceIndexPath.row]
+                locations[sourceIndexPath.section-1].locationDetail.remove(at: sourceIndexPath.row)
+                locations[destinationIndexPath.section-1].locationDetail.insert(moveLocation, at: destinationIndexPath.row)
             }, completion: { _ in
                 coordinator.drop(dropItem.dragItem, toItemAt: destinationIndexPath)
                     collectionView.reloadData()
@@ -399,22 +446,7 @@ extension AddScheduleViewController: UICollectionViewDropDelegate {
     }
 }
 
-extension AddScheduleViewController: TimeButtonDelegate, SelectedTimeDelegate, DeleteModeDelegate, DeleteLocationDelegate, CheckLocationDelegate {
-   
-    func getDateBetween(startDate: Date, endDate: Date) {
-        var dates: [Date] = []
-        var currentDate = startDate
-        
-        while startDate <= endDate {
-            dates.append(currentDate)
-            
-            guard let newDate = Calendar.current.date(bySetting: .day, value: 1, of: currentDate) else { break }
-            currentDate = newDate
-        }
-        
-       print(dates)
-    }
-    
+extension AddScheduleViewController: TimeButtonDelegate, SelectedTimeDelegate {
     func timeButtonTapped(_ index: Int) {
         timeIndex = index
         presentTimePicker(index)
@@ -425,49 +457,13 @@ extension AddScheduleViewController: TimeButtonDelegate, SelectedTimeDelegate, D
         let time = formatTime(selectedTime)
         guard let index = timeIndex else { return }
      //   locations[index].time = time
-        reloadTableView()
     }
     
     private func formatTime(_ time: String) -> String {
         return time.replacingOccurrences(of: "오전", with: "AM").replacingOccurrences(of: "오후", with: "PM")
     }
     
-    func switchDeleteMode(_ isDeleteMode: Bool) {
-        self.isDeleteMode = isDeleteMode
-        reloadTableView()
-    }
-    
-    func deleteButtonTapped() {
-        guard !selectedLocations.isEmpty else { return }
-        
-        let alertViewController = AlertViewController()
-        let alert = Alert(titleText: "선택한 장소를 삭제할까요?",
-                          cancelText: "취소",
-                          doneText: "삭제",
-                          buttonColor: .colorF14C4C,
-                          alertHeight: 140)
-        alertViewController.configureAlert(with: alert)
-        alertViewController.modalPresentationStyle = .overCurrentContext
-        alertViewController.onDoneTapped = {
-            self.deleteSelectedLocations()
-        }
-        self.present(alertViewController, animated: false)
-    }
-    
-    func checkButtonTapped(_ index: Int, isCheck: Bool) {
-        if isCheck {
-            selectedLocations.append(index)
-        } else {
-            if let index = selectedLocations.firstIndex(of: index) {
-                selectedLocations.remove(at: index)
-            }
-        }
-    }
-    
-    private func reloadTableView() {
-       
-    }
-    
+   
     private func presentTimePicker(_ index: Int) {
 //        let timePickerViewController = TimePickerViewController()
 //        timePickerViewController.delegate = self
@@ -476,15 +472,7 @@ extension AddScheduleViewController: TimeButtonDelegate, SelectedTimeDelegate, D
 //        present(timePickerViewController, animated: false)
     }
     
-    private func deleteSelectedLocations() {
-        selectedLocations.sorted(by: >).forEach { index in
-            if index < locations.count {
-                locations.remove(at: index)
-            }
-        }
-        selectedLocations = []
-        reloadTableView()
-    }
+   
 }
 
 extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSource {
