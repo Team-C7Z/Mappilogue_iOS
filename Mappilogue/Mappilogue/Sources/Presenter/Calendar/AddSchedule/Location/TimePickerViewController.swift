@@ -8,9 +8,8 @@
 import UIKit
 
 class TimePickerViewController: BaseViewController {
-    weak var delegate: SelectedTimeDelegate?
-    
-    var selectedTime: String?
+    var selectedTime: String = ""
+    var onSelectedTime: ((String) -> Void)?
     
     private let timePickerOuterView = UIView()
     private let deleteTimeButton = UIButton()
@@ -30,7 +29,7 @@ class TimePickerViewController: BaseViewController {
         
         deleteTimeButton.addTarget(self, action: #selector(deleteTimeButtonTapped), for: .touchUpInside)
         
-        deleteTimeImage.image = UIImage(named: "delete")
+        deleteTimeImage.image = UIImage(named: "common_delete")
         deleteTimeImage.tintColor = .colorF14C4C
         
         deleteTimeLabel.text = "시간삭제"
@@ -111,20 +110,21 @@ class TimePickerViewController: BaseViewController {
         timePicker.datePickerMode = .time
         timePicker.preferredDatePickerStyle = .wheels
         timePicker.locale = Locale(identifier: "en_US_POSIX")
-        timePicker.addTarget(self, action: #selector(timePickerValueDidChage), for: .valueChanged)
-        
+        timePicker.addTarget(self, action: #selector(timePickerValueDidChange), for: .valueChanged)
+
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "h:mm a"
-        if let time = selectedTime, let date = dateFormatter.date(from: time) {
+        if let date = dateFormatter.date(from: selectedTime) {
             timePicker.date = date
+        } else {
         }
     }
     
     @objc private func deleteTimeButtonTapped(_ sender: UIButton) {
         selectedTime = "설정 안 함"
-        delegate?.selectTime(selectedTime)
-        
-        dismiss(animated: false)
+        dismiss(animated: false) {
+            self.onSelectedTime?(self.selectedTime)
+        }
     }
     
     @objc private func cancelButtonTapped(_ sender: UIButton) {
@@ -132,19 +132,12 @@ class TimePickerViewController: BaseViewController {
     }
     
     @objc private func selectedTimeButtonTapped(_ sender: UIButton) {
-        delegate?.selectTime(selectedTime)
-        
-        dismiss(animated: false)
+        dismiss(animated: false) {
+            self.onSelectedTime?(self.selectedTime)
+        }
     }
     
-    @objc private func timePickerValueDidChage(_ timePicker: UIDatePicker) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "h:mm a"
-        formatter.locale = Locale(identifier: "ko_KR")
-        selectedTime = formatter.string(from: timePicker.date)
+    @objc private func timePickerValueDidChange(_ timePicker: UIDatePicker) {
+        selectedTime = timePicker.date.formatTohmmaDateToString()
     }
-}
-
-protocol SelectedTimeDelegate: AnyObject {
-    func selectTime(_ selectedTime: String?)
 }

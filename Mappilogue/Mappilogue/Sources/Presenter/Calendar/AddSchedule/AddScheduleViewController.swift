@@ -23,7 +23,6 @@ class AddScheduleViewController: BaseViewController {
 
     var locations: [LocationTime] = []
     var selectedLocations: [IndexPath] = []
-    var timeIndex: Int?
     var initialTime: String = "9:00 AM"
     var isDeleteMode: Bool = false
     
@@ -219,7 +218,7 @@ class AddScheduleViewController: BaseViewController {
     
     func selectLocation(_ location: Location) {
         guard let selectedDate = setDateFormatter(date: startDate) else { return }
-        let date = selectedDate.formatDateToString()
+        let date = selectedDate.formatToMMddDateString()
         addLocation(date: date, location: location)
         collectionView.reloadData()
     }
@@ -237,15 +236,31 @@ class AddScheduleViewController: BaseViewController {
         guard let startDate = setDateFormatter(date: startDate), let endDate = setDateFormatter(date: endDate) else { return [] }
         var dates: [String] = []
         var currentDate = startDate
-        dates.append(currentDate.formatDateToString())
+        dates.append(currentDate.formatToMMddDateString())
    
-        while currentDate.formatDateToString() != endDate.formatDateToString() {
+        while currentDate.formatToMMddDateString() != endDate.formatToMMddDateString() {
             guard let newDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate) else { return [] }
             currentDate = newDate
-            dates.append(currentDate.formatDateToString())
+            dates.append(currentDate.formatToMMddDateString())
         }
         
         return dates
+    }
+    
+    func showTimePicker(indexPath: IndexPath) {
+        let timePickerViewController = TimePickerViewController()
+        let selectedTime = locations[indexPath.section].locationDetail[indexPath.row].time
+        timePickerViewController.selectedTime = selectedTime == "설정 안 함" ? initialTime : selectedTime
+        timePickerViewController.modalPresentationStyle = .overFullScreen
+        timePickerViewController.onSelectedTime = { selectedTime in
+            self.locations[indexPath.section].locationDetail[indexPath.row].time = self.formatTime(selectedTime)
+            self.collectionView.reloadData()
+        }
+        present(timePickerViewController, animated: false)
+    }
+    
+    private func formatTime(_ time: String) -> String {
+        return time.replacingOccurrences(of: "오전", with: "AM").replacingOccurrences(of: "오후", with: "PM")
     }
     
     private func checkButtonTapped(_ indexPath: IndexPath) {
@@ -274,7 +289,6 @@ class AddScheduleViewController: BaseViewController {
     }
     
     private func deleteSelectedLocations() {
-        let xxxx = selectedLocations.sorted(by: >)
         selectedLocations.sorted(by: >).forEach { indexPath in
             if indexPath.section < locations.count && indexPath.row < locations[indexPath.section].locationDetail.count {
                 locations[indexPath.section].locationDetail.remove(at: indexPath.row)
@@ -302,6 +316,9 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
         
         cell.onSelectedLocation = { indexPath in
             self.checkButtonTapped(indexPath)
+        }
+        cell.onSelectedTime = { indexPath in
+            self.showTimePicker(indexPath: indexPath)
         }
         
         return cell
@@ -444,35 +461,6 @@ extension AddScheduleViewController: UICollectionViewDropDelegate {
         }
         
     }
-}
-
-extension AddScheduleViewController: TimeButtonDelegate, SelectedTimeDelegate {
-    func timeButtonTapped(_ index: Int) {
-        timeIndex = index
-        presentTimePicker(index)
-    }
-    
-    func selectTime(_ selectedTime: String?) {
-        guard let selectedTime = selectedTime else { return }
-        let time = formatTime(selectedTime)
-        guard let index = timeIndex else { return }
-     //   locations[index].time = time
-    }
-    
-    private func formatTime(_ time: String) -> String {
-        return time.replacingOccurrences(of: "오전", with: "AM").replacingOccurrences(of: "오후", with: "PM")
-    }
-    
-   
-    private func presentTimePicker(_ index: Int) {
-//        let timePickerViewController = TimePickerViewController()
-//        timePickerViewController.delegate = self
-//        timePickerViewController.selectedTime = locations[index].time
-//        timePickerViewController.modalPresentationStyle = .overFullScreen
-//        present(timePickerViewController, animated: false)
-    }
-    
-   
 }
 
 extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSource {

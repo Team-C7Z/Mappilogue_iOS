@@ -11,7 +11,7 @@ class LocationTimeCell: BaseCollectionViewCell {
     static let registerId = "\(LocationTimeCell.self)"
     
     var onSelectedLocation: ((IndexPath) -> Void)?
-    weak var timeDelegate: TimeButtonDelegate?
+    var onSelectedTime: ((IndexPath) -> Void)?
 
     private var indexPath: IndexPath?
     private var isCheck: Bool = false
@@ -127,8 +127,8 @@ class LocationTimeCell: BaseCollectionViewCell {
     }
     
     @objc func timeButtonTapped(_ sender: UIButton) {
-//        guard let index = index else { return }
-//        timeDelegate?.timeButtonTapped(index)
+        guard let indexPath = indexPath else { return }
+        onSelectedTime?(indexPath)
     }
     
     @objc func checkButtonTapped() {
@@ -143,8 +143,4 @@ class LocationTimeCell: BaseCollectionViewCell {
         let imageName = isCheck ? "check" : "unCheck"
         checkButton.setImage(UIImage(named: imageName), for: .normal)
     }
-}
-
-protocol TimeButtonDelegate: AnyObject {
-    func timeButtonTapped(_ index: Int)
 }
