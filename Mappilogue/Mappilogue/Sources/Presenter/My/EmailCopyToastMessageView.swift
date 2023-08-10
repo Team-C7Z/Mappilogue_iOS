@@ -16,7 +16,7 @@ class EmailCopyToastMessageView: BaseView {
         
         layer.cornerRadius = 12
         backgroundColor = .color404040
-        toastMessageImage.image = UIImage(named: "emailCopy")
+        toastMessageImage.image = UIImage(named: "my_emailCopy")
         toastMessageLabel.text = "이메일이 복사되었어요"
         toastMessageLabel.textColor = .colorFFFFFF
         toastMessageLabel.font = .body02
