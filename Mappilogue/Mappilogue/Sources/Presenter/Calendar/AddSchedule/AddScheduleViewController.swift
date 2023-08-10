@@ -9,6 +9,7 @@ import UIKit
 
 class AddScheduleViewController: BaseViewController {
     private var monthlyCalendar = MonthlyCalendar()
+    private var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0, day: 0)
     private var startDate: SelectedDate = SelectedDate(year: 0, month: 0, day: 0)
     private var endDate: SelectedDate  = SelectedDate(year: 0, month: 0, day: 0)
 
@@ -111,8 +112,26 @@ class AddScheduleViewController: BaseViewController {
     
     func setNavigationBar() {
         title = "일정"
-        setNavigationBarItems(imageName: "back", action: #selector(backButtonTapped), isLeft: true)
+        setNavigationBarItems(imageName: "x", action: #selector(xButtonTapped), isLeft: true)
         setNavigationBarItems(imageName: "completion", action: #selector(completionButtonTapped), isLeft: false)
+    }
+    
+    @objc func xButtonTapped() {
+        let alertViewController = AlertViewController()
+        alertViewController.modalPresentationStyle = .overCurrentContext
+        let alert = Alert(titleText: "일정 작성을 중단할까요?",
+                          messageText: "저장하지 않은 일정은 사라져요",
+                          cancelText: "취소",
+                          doneText: "삭제",
+                          buttonColor: .colorF14C4C,
+                          alertHeight: 160)
+        alertViewController.configureAlert(with: alert)
+        alertViewController.onDoneTapped = {
+            self.dismiss(animated: false) {
+                self.navigationController?.popViewController(animated: true)
+           }
+        }
+        present(alertViewController, animated: false)
     }
     
     @objc func completionButtonTapped(_ sender: UIButton) {
@@ -192,13 +211,41 @@ class AddScheduleViewController: BaseViewController {
     func showAddLocationController() {
         let addLocationViewController = AddLocationViewController()
         addLocationViewController.modalPresentationStyle = .overFullScreen
-        addLocationViewController.delegate = self
+        addLocationViewController.onLocationSelected = { location in
+            self.selectLocation(location)
+        }
         present(addLocationViewController, animated: false)
     }
     
-    func addLocation(_ location: Location) {
+    func selectLocation(_ location: Location) {
+        guard let selectedDate = setDateFormatter(date: startDate) else { return }
+        let date = selectedDate.formatDateToString()
+        addLocation(date: date, location: location)
+        collectionView.reloadData()
+    }
+    
+    func addLocation(date: String, location: Location) {
+        let locationTime = LocationTimeDetail(location: location.title, time: initialTime)
+        if let index = locations.firstIndex(where: {$0.date == date}) {
+            locations[index].locationDetail.append(locationTime)
+        } else {
+            locations.append(LocationTime(date: date, locationDetail: [locationTime]))
+        }
+    }
+    
+    func getDatesInRange(startDate: SelectedDate, endDate: SelectedDate) -> [String] {
+        guard let startDate = setDateFormatter(date: startDate), let endDate = setDateFormatter(date: endDate) else { return [] }
+        var dates: [String] = []
+        var currentDate = startDate
+        dates.append(currentDate.formatDateToString())
+   
+        while currentDate.formatDateToString() != endDate.formatDateToString() {
+            guard let newDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate) else { return [] }
+            currentDate = newDate
+            dates.append(currentDate.formatDateToString())
+        }
         
-       
+        return dates
     }
 }
 
@@ -344,41 +391,16 @@ extension AddScheduleViewController: UICollectionViewDropDelegate {
                 destinationLocation.locationDetail.insert(moveLocation, at: destinationIndexPath.row)
             }, completion: { _ in
                 coordinator.drop(dropItem.dragItem, toItemAt: destinationIndexPath)
-          //      DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0) {
                     collectionView.reloadData()
                 }
-          //  }
             )
         }
         
     }
 }
 
-extension AddScheduleViewController: SelectedLocationDelegate, TimeButtonDelegate, SelectedTimeDelegate, DeleteModeDelegate, DeleteLocationDelegate, CheckLocationDelegate {
-    func selectLocation(_ location: Location) {
-        guard let startDate = setDateFormatter(date: startDate), let endDate = setDateFormatter(date: endDate) else { return }
-        var dates: [String] = []
-        var currentDate = startDate
-        dates.append(currentDate.formatDateToString())
+extension AddScheduleViewController: TimeButtonDelegate, SelectedTimeDelegate, DeleteModeDelegate, DeleteLocationDelegate, CheckLocationDelegate {
    
-        while currentDate.formatDateToString() != endDate.formatDateToString() {
-            guard let newDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate) else { return }
-            currentDate = newDate
-            dates.append(currentDate.formatDateToString())
-        }
-        
-        for date in dates {
-            let locationTime = LocationTimeDetail(location: location.title, time: initialTime)
-            if let index = locations.firstIndex(where: {$0.date == date}) {
-                locations[index].locationDetail.append(locationTime)
-            } else {
-                locations.append(LocationTime(date: date, locationDetail: [locationTime]))
-            }
-        }
-  
-        collectionView.reloadData()
-    }
-    
     func getDateBetween(startDate: Date, endDate: Date) {
         var dates: [Date] = []
         var currentDate = startDate
