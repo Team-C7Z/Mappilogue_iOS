@@ -1,5 +1,5 @@
 //
-//  DeleteLocationCell.swift
+//  DeleteLocationFooterView.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/07/17.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-class DeleteLocationCell: BaseCollectionViewCell {
-    static let registerId = "\(DeleteLocationCell.self)"
+class DeleteLocationFooterView: BaseCollectionReusableView {
+    static let registerId = "\(DeleteLocationFooterView.self)"
     
-    weak var deleteModelDelegate: DeleteModeDelegate?
-    weak var deleteLocationDelegate: DeleteLocationDelegate?
+    var onDeleteMode: (() -> Void)?
+    var onDeleteLocation: (() -> Void)?
 
     private var isDeleteMode: Bool = false
     
@@ -22,12 +22,6 @@ class DeleteLocationCell: BaseCollectionViewCell {
     private let deleteButton = UIButton()
     private let deleteImage = UIImageView()
     private let deleteLabel = UILabel()
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
-    }
     
     override func setupProperty() {
         super.setupProperty()
@@ -41,20 +35,20 @@ class DeleteLocationCell: BaseCollectionViewCell {
         deleteSelectedLabel.font = .body02
         deleteSelectedButton.addTarget(self, action: #selector(deleteSelectedButtonTapped), for: .touchUpInside)
         
-        deleteImage.image = UIImage(named: "delete")
+        deleteImage.image = UIImage(named: "common_delete")
         deleteImage.tintColor = .colorF14C4C
         deleteLabel.text = "삭제하기"
         deleteLabel.textColor = .color707070
         deleteLabel.font = .body02
         deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         
-        switchDeleteModel()
+        switchDeleteMode()
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        contentView.addSubview(stackView)
+        addSubview(stackView)
         stackView.addArrangedSubview(deleteSelectedButton)
         stackView.addArrangedSubview(deleteButton)
       
@@ -69,7 +63,8 @@ class DeleteLocationCell: BaseCollectionViewCell {
         super.setupLayout()
         
         stackView.snp.makeConstraints {
-            $0.centerY.trailing.equalTo(contentView)
+            $0.centerY.equalTo(self)
+            $0.trailing.equalTo(self).offset(-16)
         }
         
         deleteSelectedButton.snp.makeConstraints {
@@ -105,25 +100,21 @@ class DeleteLocationCell: BaseCollectionViewCell {
     
     @objc func deleteSelectedButtonTapped(_ sender: UIButton) {
         isDeleteMode = !isDeleteMode
-        switchDeleteModel()
+        switchDeleteMode()
      
-        deleteModelDelegate?.switchDeleteMode(isDeleteMode)
+        onDeleteMode?()
     }
     
-    func switchDeleteModel() {
+    func switchDeleteMode() {
         deleteSelectedLabel.text = isDeleteMode ? "선택취소" : "선택삭제"
         deleteButton.isHidden = !isDeleteMode
+        
+        UIView.animate(withDuration: 0.3) {
+            self.stackView.layoutIfNeeded()
+        }
     }
     
     @objc func deleteButtonTapped(_ sender: UIButton) {
-        deleteLocationDelegate?.deleteButtonTapped()
+        onDeleteLocation?()
     }
-}
-
-protocol DeleteModeDelegate: AnyObject {
-    func switchDeleteMode(_ isDeleteMode: Bool)
-}
-
-protocol DeleteLocationDelegate: AnyObject {
-    func deleteButtonTapped()
 }

@@ -7,19 +7,13 @@
 
 import UIKit
 
-class LocationCell: BaseTableViewCell {
+class LocationCell: BaseCollectionViewCell {
     static let registerId = "\(LocationCell.self)"
     
     private let locationImage = UIImageView()
     private let locationLabel = UILabel()
     private let addressLabel = UILabel()
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 6, left: 20, bottom: 6, right: 20))
-    }
-    
+
     override func setupProperty() {
         super.setupProperty()
         

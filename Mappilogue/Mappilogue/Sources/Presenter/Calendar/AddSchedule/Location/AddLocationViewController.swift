@@ -9,23 +9,21 @@ import UIKit
 
 class AddLocationViewController: BaseViewController {
     let dummyLocation = dummyLocationData()
-    var selectedLocation: String?
-    
-    weak var delegate: SelectedLocationDelegate?
-    
+    var onLocationSelected: ((Location) -> Void)?
+
     private let addLocationView = UIView()
     private let locationTextField = UITextField()
     
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = .colorF9F8F7
-        tableView.sectionHeaderHeight = 0
-        tableView.sectionFooterHeight = 0
-        tableView.register(LocationCell.self, forCellReuseIdentifier: LocationCell.registerId)
-        tableView.delegate = self
-        tableView.dataSource = self
-        return tableView
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .colorF9F8F7
+        collectionView.register(LocationCell.self, forCellWithReuseIdentifier: LocationCell.registerId)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        return collectionView
     }()
     
     override func viewDidLoad() {
@@ -56,7 +54,7 @@ class AddLocationViewController: BaseViewController {
         
         view.addSubview(addLocationView)
         addLocationView.addSubview(locationTextField)
-        addLocationView.addSubview(tableView)
+        addLocationView.addSubview(collectionView)
     }
     
     override func setupLayout() {
@@ -76,10 +74,10 @@ class AddLocationViewController: BaseViewController {
             $0.height.equalTo(40)
         }
         
-        tableView.snp.makeConstraints {
-            $0.top.equalTo(locationTextField.snp.bottom).offset(12)
+        collectionView.snp.makeConstraints {
+            $0.top.equalTo(locationTextField.snp.bottom).offset(18)
             $0.leading.trailing.equalTo(addLocationView)
-            $0.bottom.equalTo(addLocationView).offset(-25)
+            $0.bottom.equalTo(addLocationView).offset(-31)
         }
     }
     
@@ -92,14 +90,13 @@ class AddLocationViewController: BaseViewController {
     }
 }
 
-extension AddLocationViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension AddLocationViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dummyLocation.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: LocationCell.registerId, for: indexPath) as? LocationCell else { return UITableViewCell() }
-        cell.selectionStyle = .none
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LocationCell.registerId, for: indexPath) as? LocationCell else { return UICollectionViewCell() }
         
         let location = dummyLocation[indexPath.row]
         let title = location.title
@@ -109,17 +106,30 @@ extension AddLocationViewController: UITableViewDelegate, UITableViewDataSource 
         
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 55
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 16)
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let location = dummyLocation[indexPath.row].title
-        selectedLocation = location
-        
-        delegate?.selectLocation(location)
-        dismiss(animated: false)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width - 32, height: 43)
+    }
+    
+    // 수평 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    // 수직 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 12
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let location = dummyLocation[indexPath.row]
+        dismiss(animated: false) {
+            self.onLocationSelected?(location)
+        }
     }
 }
 
@@ -128,8 +138,4 @@ extension AddLocationViewController: UITextFieldDelegate {
         locationTextField.resignFirstResponder()
         return true
     }
-}
-
-protocol SelectedLocationDelegate: AnyObject {
-    func selectLocation(_ selectedLocation: String)
 }

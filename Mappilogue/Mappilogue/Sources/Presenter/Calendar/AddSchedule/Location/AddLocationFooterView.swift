@@ -13,14 +13,6 @@ class AddLocationFooterView: BaseCollectionReusableView {
     var onAddLocationButtonTapped: (() -> Void)?
     
     private let addLocationButton = AddButton(text: "장소 추가하기", backgroundColor: .color1C1C1C)
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func setupProperty() {
         super.setupProperty()
@@ -38,7 +30,7 @@ class AddLocationFooterView: BaseCollectionReusableView {
         super.setupLayout()
         
         addLocationButton.snp.makeConstraints {
-            $0.centerY.equalTo(self)
+            $0.top.equalTo(self)
             $0.leading.equalTo(self).offset(16)
             $0.trailing.equalTo(self).offset(-16)
         }
