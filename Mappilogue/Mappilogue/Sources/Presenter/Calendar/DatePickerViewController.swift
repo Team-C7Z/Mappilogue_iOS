@@ -91,8 +91,8 @@ class DatePickerViewController: BaseViewController {
     private func animateDatePickerView() {
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
             self.datePickerOuterView.frame.origin.y = 88
+            self.view.layoutIfNeeded()
         })
-        self.view.layoutIfNeeded()
     }
 }
 
