@@ -83,7 +83,7 @@ class MainLocationCell: BaseCollectionViewCell {
     func configure(_ index: Int, location: Location, isSelect: Bool) {
         self.index = index
         locationTitleLabel.text = location.title
-        addressLabel.text = location.address
+        addressLabel.text = location.address == "" ? "사용자 지정 위치" : location.address
         self.isSelect = isSelect
    
         updateMainLocationDesign(isSelect)

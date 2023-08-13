@@ -9,7 +9,7 @@ import UIKit
 
 class MainLocationViewController: BaseViewController {
     let dummyLocation = dummyMainLocationData()
-    private var selectedLocationIndex: Int? = 0
+    private var selectedLocationIndex: Int?
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -29,7 +29,8 @@ class MainLocationViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        selectedLocationIndex = dummyLocation[0].address.isEmpty ? 1 : 0
     }
     
     override func setupProperty() {

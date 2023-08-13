@@ -42,7 +42,7 @@ func dummyLocationTimeData(_ locationCount: Int) -> [LocationTime] {
 }
 
 func dummyMainLocationData() -> [Location] {
-    let mainLocation1 = Location(title: "제주도", address: "사용자 지청 위치")
+    let mainLocation1 = Location(title: "제주도", address: "")
     let mainLocation2 = Location(title: "카멜리아힐", address: "제주 서귀포시 안덕면 병악로 166")
     let mainLocation3 = Location(title: "동관분교인디이스트", address: "제주 서귀포시 안덕면 동광로 107 서광초등학교동…")
     let mainLocation4 = Location(title: "오셜록 티 뮤지엄", address: "제주 서귀포시 안덕면 병악로 166")
