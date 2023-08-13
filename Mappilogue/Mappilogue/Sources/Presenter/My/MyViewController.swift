@@ -15,13 +15,13 @@ struct MyInfo {
 class MyViewController: NavigationBarViewController {
     var myInfoData: [[MyInfo]] = [
         [
-            MyInfo(image: "noti", title: "알림 설정"),
-            MyInfo(image: "terms", title: "이용약관"),
-            MyInfo(image: "inquiry", title: "문의하기")
+            MyInfo(image: "my_notification", title: "알림 설정"),
+            MyInfo(image: "my_terms", title: "이용약관"),
+            MyInfo(image: "my_inquiry", title: "문의하기")
         ],
         [
-            MyInfo(image: "logout", title: "로그아웃"),
-            MyInfo(image: "withdrawal", title: "탈퇴하기")
+            MyInfo(image: "my_logout", title: "로그아웃"),
+            MyInfo(image: "my_withdrawal", title: "탈퇴하기")
         ]
     ]
     
@@ -42,8 +42,14 @@ class MyViewController: NavigationBarViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+     
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
+
     override func setupProperty() {
         super.setupProperty()
     }
@@ -60,6 +66,19 @@ class MyViewController: NavigationBarViewController {
         collectionView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
+    }
+    
+    @objc func checkWithdrawalStatus(_ notification: Notification) {
+        showWithdrawalConfirmationAlert()
+    }
+    
+    @objc func showWithdrawalConfirmationAlert() {
+        let withdrawalCompletedAlertViewController = WithdrawalCompletedAlertViewController()
+        withdrawalCompletedAlertViewController.modalPresentationStyle = .overCurrentContext
+        withdrawalCompletedAlertViewController.onDoneTapped = {
+            print("로그인 페이지로 이동")
+        }
+        present(withdrawalCompletedAlertViewController, animated: false)
     }
 }
 

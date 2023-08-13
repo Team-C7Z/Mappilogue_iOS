@@ -8,20 +8,17 @@
 import UIKit
 
 class NotificationSettingsViewController: BaseViewController {
-    let notificationInfo = notificationInfoData()
+    var isNotificationControl: Bool = false
+    var isNoti: Bool = false
+    var isEvent: Bool = false
+    var isMarketing: Bool = false
     
-    private lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.contentInset = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
-        collectionView.backgroundColor = .colorF9F8F7
-        collectionView.register(NotificationSettingCell.self, forCellWithReuseIdentifier: NotificationSettingCell.registerId)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        return collectionView
-    }()
+    private let notificationControlView = NotificationSettingView()
+    private var stackView = UIStackView()
+    private let noticeNotificationView = NotificationSettingView()
+    private let eventReminderView = NotificationSettingView()
+    private let marketingAlertView = NotificationSettingView()
+    private let notificationControlOffView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,62 +29,70 @@ class NotificationSettingsViewController: BaseViewController {
         super.setupProperty()
         
         setNavigationTitleAndBackButton("My", backButtonAction: #selector(backButtonTapped))
+        
+        stackView.axis = .vertical
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 1
+        stackView.backgroundColor = .colorEAE6E1
+        
+        notificationControlView.configure(title: "알림 받기", isSwitch: isNotificationControl)
+        noticeNotificationView.configure(title: "공지사항 알림", isSwitch: isNoti)
+        eventReminderView.configure(title: "일정 미리 알림", isSwitch: isEvent)
+        marketingAlertView.configure(title: "마케팅 알림", isSwitch: isMarketing)
+        
+        notificationControlView.onSwitchTapped = {
+            self.isNotificationControl.toggle()
+            self.setNotificationControl()
+        }
+        
+        noticeNotificationView.onSwitchTapped = {
+            self.isNoti.toggle()
+        }
+        
+        eventReminderView.onSwitchTapped = {
+            self.isEvent.toggle()
+        }
+        
+        marketingAlertView.onSwitchTapped = {
+            self.isMarketing.toggle()
+        }
+        
+        notificationControlOffView.backgroundColor = .colorF9F8F7.withAlphaComponent(0.4)
+        setNotificationControl()
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        view.addSubview(collectionView)
+        view.addSubview(notificationControlView)
+        view.addSubview(stackView)
+        stackView.addArrangedSubview(noticeNotificationView)
+        stackView.addArrangedSubview(eventReminderView)
+        stackView.addArrangedSubview(marketingAlertView)
+        stackView.addSubview(notificationControlOffView)
     }
     
     override func setupLayout() {
         super.setupLayout()
     
-        collectionView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+        notificationControlView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
+        }
+        
+        stackView.snp.makeConstraints {
+            $0.top.equalTo(notificationControlView.snp.bottom).offset(16)
+            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
+        }
+        
+        notificationControlOffView.snp.makeConstraints {
+            $0.width.height.equalTo(stackView)
         }
     }
-}
-
-extension NotificationSettingsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
-    }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 ? 1 : 3
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NotificationSettingCell.registerId, for: indexPath) as? NotificationSettingCell else { return UICollectionViewCell() }
-        let title = indexPath.section == 0 ? "전체 알림" : notificationInfo[indexPath.row].title
-        let isSwitch = indexPath.section == 0 ? false : notificationInfo[indexPath.row].isSwitch
-        let isLast = indexPath.section == 0 || indexPath.row == notificationInfo.count-1
-        
-        cell.configure(title: title, isSwitch: isSwitch, isLast: isLast)
-        
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 16, right: 0)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 32, height: 49)
-    }
-
-    // 수평 간격
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-
-    // 수직 간격
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+    func setNotificationControl() {
+        notificationControlOffView.isHidden = isNotificationControl
     }
 }

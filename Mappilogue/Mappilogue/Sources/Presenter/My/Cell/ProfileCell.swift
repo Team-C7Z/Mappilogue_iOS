@@ -20,7 +20,7 @@ class ProfileCell: BaseCollectionViewCell {
         
         profileImage.layer.cornerRadius = 56 / 2
         profileImage.backgroundColor = .colorF5F3F0
-        profileImage.image = UIImage(named: "profile")
+        profileImage.image = UIImage(named: "my_profile")
         
         profileName.text = "맵필로그 님"
         profileName.textColor = .color000000

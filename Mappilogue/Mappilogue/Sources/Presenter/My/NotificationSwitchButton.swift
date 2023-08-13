@@ -8,6 +8,8 @@
 import UIKit
 
 class NotificationSwitchButton: BaseButton {
+    var onSwitchTapped: (() -> Void)?
+    
     private let thumbView = UIView()
     
     override func setupProperty() {
@@ -46,7 +48,12 @@ class NotificationSwitchButton: BaseButton {
     }
     
     @objc func updateSwitchDesign() {
-        isSelected = !isSelected
+        isSelected.toggle()
+        configure(isSelected)
+        onSwitchTapped?()
+    }
+    
+    func configure(_ isSelected: Bool) {
         backgroundColor = isSelected ? .color2EBD3D : .colorEAE6E1
         thumbView.backgroundColor = isSelected ? .colorFFFFFF : .color9B9791
         
