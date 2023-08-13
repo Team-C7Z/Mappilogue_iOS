@@ -54,6 +54,19 @@ class MainLocationViewController: BaseViewController {
         }
     }
     
+    func selectMainLocation(_ index: Int?) {
+        selectedLocationIndex = index
+        collectionView.reloadData()
+    }
+    
+    private func showMainLocationAlert() {
+        let mainLocationAlertViewController = MainLocationAlertViewController()
+        mainLocationAlertViewController.modalPresentationStyle = .overCurrentContext
+        mainLocationAlertViewController.onCanelTapped = {
+            self.selectMainLocation(1)
+        }
+        present(mainLocationAlertViewController, animated: false)
+     }
 }
 
 extension MainLocationViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -67,11 +80,19 @@ extension MainLocationViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainLocationCell.registerId, for: indexPath) as? MainLocationCell else { return UICollectionViewCell() }
-        cell.delegate = self
-        
+    
         let location = dummyLocation[indexPath.row]
-        let isSelect = indexPath.row == selectedLocationIndex ? true : false
+        let isSelect = indexPath.row == selectedLocationIndex
         cell.configure(indexPath.row, location: location, isSelect: isSelect)
+        
+        cell.onMainLocationSelection = { index in
+            self.selectMainLocation(index)
+            if let index = index {
+                if index == 0 && self.dummyLocation[index].address.isEmpty {
+                    self.showMainLocationAlert()
+                }
+            }
+        }
         
         return cell
     }
@@ -113,14 +134,10 @@ extension MainLocationViewController: UICollectionViewDelegate, UICollectionView
     }
 }
 
-extension MainLocationViewController: SelectMainLocationDelegate {
+extension MainLocationViewController {
     func setLocationButtonTapped() {
         let mapMainLocationViewController = MapMainLocationViewController()
         navigationController?.pushViewController(mapMainLocationViewController, animated: true)
     }
     
-    func selectMainLocation(_ index: Int?) {
-        selectedLocationIndex = index
-        collectionView.reloadData()
-    }
 }

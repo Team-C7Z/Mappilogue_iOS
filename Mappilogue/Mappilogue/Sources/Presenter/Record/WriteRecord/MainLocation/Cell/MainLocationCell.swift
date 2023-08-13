@@ -9,10 +9,10 @@ import UIKit
 
 class MainLocationCell: BaseCollectionViewCell {
     static let registerId = "\(SearchLocationCell.self)"
-    
-    weak var delegate: SelectMainLocationDelegate?
+
     private var index: Int?
     private var isSelect: Bool = false
+    var onMainLocationSelection: ((Int?) -> Void)?
     
     private let locationImage = UIImageView()
     private let locationTitleLabel = UILabel()
@@ -83,7 +83,7 @@ class MainLocationCell: BaseCollectionViewCell {
     func configure(_ index: Int, location: Location, isSelect: Bool) {
         self.index = index
         locationTitleLabel.text = location.title
-        addressLabel.text = location.address == "" ? "사용자 지정 위치" : location.address
+        addressLabel.text = location.address.isEmpty ? "사용자 지정 위치" : location.address
         self.isSelect = isSelect
    
         updateMainLocationDesign(isSelect)
@@ -92,7 +92,7 @@ class MainLocationCell: BaseCollectionViewCell {
     @objc func mainLocationButtonTapped(button: UIButton) {
         button.isSelected = isSelect ? false : true
         updateMainLocationDesign(button.isSelected)
-        delegate?.selectMainLocation(button.isSelected ? index : nil)
+        onMainLocationSelection?(button.isSelected ? index : nil)
     }
     
     private func updateMainLocationDesign(_ isSelect: Bool) {
@@ -100,8 +100,4 @@ class MainLocationCell: BaseCollectionViewCell {
         mainLocationButton.backgroundColor = isSelect ? .color2EBD3D : .clear
         mainLocationButton.layer.borderWidth = isSelect ? 0 : 2
     }
-}
-
-protocol SelectMainLocationDelegate: AnyObject {
-    func selectMainLocation(_ index: Int?)
 }
