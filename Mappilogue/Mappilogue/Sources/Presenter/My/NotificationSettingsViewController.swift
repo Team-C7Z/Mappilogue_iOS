@@ -66,7 +66,9 @@ class NotificationSettingsViewController: BaseViewController {
         
         view.addSubview(notificationControlView)
         view.addSubview(stackView)
-        stackView = UIStackView(arrangedSubviews: [noticeNotificationView, eventReminderView, marketingAlertView])
+        stackView.addArrangedSubview(noticeNotificationView)
+        stackView.addArrangedSubview(eventReminderView)
+        stackView.addArrangedSubview(marketingAlertView)
         stackView.addSubview(notificationControlOffView)
     }
     

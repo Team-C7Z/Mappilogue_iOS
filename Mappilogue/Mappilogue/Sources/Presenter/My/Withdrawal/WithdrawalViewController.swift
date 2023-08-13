@@ -93,13 +93,9 @@ class WithdrawalViewController: BaseViewController {
     }
     
     func setSkipButtonItem() {
-        let skipButtonItem = UIBarButtonItem(title: "건너뛰기", style: .plain, target: self, action: #selector(skipButtonItemTapped))
+        let skipButtonItem = UIBarButtonItem(title: "건너뛰기", style: .plain, target: self, action: #selector(completeWithdrawal))
         skipButtonItem.tintColor = .color9B9791
         navigationItem.rightBarButtonItem = skipButtonItem
-    }
-    
-    @objc func skipButtonItemTapped() {
-        navigationController?.popViewController(animated: true)
     }
     
     private func createWithdrawalReasonView() {
@@ -125,7 +121,13 @@ class WithdrawalViewController: BaseViewController {
     
     @objc func submitButtonTapped() {
         if isSelectedReason {
-            navigationController?.popViewController(animated: true)
+            completeWithdrawal()
+        }
+    }
+
+    @objc func completeWithdrawal() {
+        if let navigationController = self.navigationController {
+            navigationController.popToRootViewController(animated: false)
         }
     }
 }
