@@ -8,7 +8,7 @@
 import UIKit
 
 class MainLocationViewController: BaseViewController {
-    let dummyLocation = dummyLocationData()
+    let dummyLocation = dummyMainLocationData()
     private var selectedLocationIndex: Int? = 0
     
     private lazy var collectionView: UICollectionView = {
@@ -20,7 +20,8 @@ class MainLocationViewController: BaseViewController {
   
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         collectionView.register(MainLocationCell.self, forCellWithReuseIdentifier: MainLocationCell.registerId)
-        collectionView.register(MainLocationHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MainLocationHeaderView.registerId)
+        collectionView.register(MapSettingsHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MapSettingsHeaderView.registerId)
+        collectionView.register(AddedLocationsHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: AddedLocationsHeaderView.registerId)
         collectionView.delegate = self
         collectionView.dataSource = self
         return collectionView
@@ -55,8 +56,12 @@ class MainLocationViewController: BaseViewController {
 }
 
 extension MainLocationViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dummyLocation.count
+        return section == 0 ? 0 : dummyLocation.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -71,7 +76,7 @@ extension MainLocationViewController: UICollectionViewDelegate, UICollectionView
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 8, left: 16, bottom: 0, right: 16)
+        return UIEdgeInsets(top: section == 0 ? 0 : 8, left: 16, bottom: 0, right: 16)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -79,13 +84,17 @@ extension MainLocationViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MainLocationHeaderView.registerId, for: indexPath) as? MainLocationHeaderView else { return UICollectionReusableView() }
-        headerView.delegate = self
-        return headerView
+        if indexPath.section == 0 {
+            guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MapSettingsHeaderView.registerId, for: indexPath) as? MapSettingsHeaderView else { return UICollectionReusableView() }
+            return headerView
+        } else {
+            guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: AddedLocationsHeaderView.registerId, for: indexPath) as? AddedLocationsHeaderView else { return UICollectionReusableView() }
+            return headerView
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 74)
+        return CGSize(width: collectionView.bounds.width, height: section == 0 ? 40 : 18 + 16)
     }
     
     // 수평 간격
@@ -103,7 +112,7 @@ extension MainLocationViewController: UICollectionViewDelegate, UICollectionView
     }
 }
 
-extension MainLocationViewController: SetLocationButtonDelegate, SelectMainLocationDelegate {
+extension MainLocationViewController: SelectMainLocationDelegate {
     func setLocationButtonTapped() {
         let mapMainLocationViewController = MapMainLocationViewController()
         navigationController?.pushViewController(mapMainLocationViewController, animated: true)

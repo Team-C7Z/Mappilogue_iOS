@@ -96,7 +96,6 @@ class MainLocationCell: BaseCollectionViewCell {
     }
     
     private func updateMainLocationDesign(_ isSelect: Bool) {
-       
         mainLocationButton.setTitleColor(isSelect ? .colorFFFFFF : .colorC9C6C2, for: .normal)
         mainLocationButton.backgroundColor = isSelect ? .color2EBD3D : .clear
         mainLocationButton.layer.borderWidth = isSelect ? 0 : 2

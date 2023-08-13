@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		520E9D02714F72A41E207B62 /* Pods_Mappilogue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 021CF7D6B8E435D26802F66A /* Pods_Mappilogue.framework */; };
+		920031922A88DF3A00E3170D /* MapSettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031912A88DF3A00E3170D /* MapSettingsHeaderView.swift */; };
 		92011B282A6E75F1009B047F /* WriteRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B272A6E75F1009B047F /* WriteRecordButton.swift */; };
 		92011B702A70E7D8009B047F /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */; };
 		92011B722A7127FC009B047F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B712A7127FC009B047F /* AlertViewController.swift */; };
@@ -48,7 +49,7 @@
 		92011C662A78980E009B047F /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C652A78980E009B047F /* UIView.swift */; };
 		92011C682A78CB24009B047F /* InputAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C672A78CB24009B047F /* InputAlertViewController.swift */; };
 		92011CAD2A79EEB9009B047F /* MainLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011CAC2A79EEB9009B047F /* MainLocationViewController.swift */; };
-		92011CB22A79F7C6009B047F /* MainLocationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011CB12A79F7C6009B047F /* MainLocationHeaderView.swift */; };
+		92011CB22A79F7C6009B047F /* AddedLocationsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011CB12A79F7C6009B047F /* AddedLocationsHeaderView.swift */; };
 		92011CB42A79FAF4009B047F /* MainLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011CB32A79FAF4009B047F /* MainLocationCell.swift */; };
 		92011CC02A7A3E14009B047F /* MapMainLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011CBF2A7A3E14009B047F /* MapMainLocationViewController.swift */; };
 		9224FCEE2A5BEF80000A56A6 /* ScheduleTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */; };
@@ -169,6 +170,7 @@
 		65FB9F97A7DA9BC190F4E1BF /* Pods_Mappilogue_MappilogueUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mappilogue_MappilogueUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81704CFC2A84A47234E8C7D7 /* Pods-Mappilogue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mappilogue.release.xcconfig"; path = "Target Support Files/Pods-Mappilogue/Pods-Mappilogue.release.xcconfig"; sourceTree = "<group>"; };
 		81A821757BF382206BE4FD7A /* Pods_MappilogueTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MappilogueTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		920031912A88DF3A00E3170D /* MapSettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSettingsHeaderView.swift; sourceTree = "<group>"; };
 		92011B272A6E75F1009B047F /* WriteRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordButton.swift; sourceTree = "<group>"; };
 		92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		92011B712A7127FC009B047F /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
@@ -209,7 +211,7 @@
 		92011C652A78980E009B047F /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		92011C672A78CB24009B047F /* InputAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAlertViewController.swift; sourceTree = "<group>"; };
 		92011CAC2A79EEB9009B047F /* MainLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLocationViewController.swift; sourceTree = "<group>"; };
-		92011CB12A79F7C6009B047F /* MainLocationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLocationHeaderView.swift; sourceTree = "<group>"; };
+		92011CB12A79F7C6009B047F /* AddedLocationsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedLocationsHeaderView.swift; sourceTree = "<group>"; };
 		92011CB32A79FAF4009B047F /* MainLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLocationCell.swift; sourceTree = "<group>"; };
 		92011CBF2A7A3E14009B047F /* MapMainLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMainLocationViewController.swift; sourceTree = "<group>"; };
 		9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTitleCell.swift; sourceTree = "<group>"; };
@@ -413,7 +415,8 @@
 				92011B912A7367E5009B047F /* MainLocationButton.swift */,
 				92011B862A72B0A7009B047F /* MainLocatonView.swift */,
 				92011CAC2A79EEB9009B047F /* MainLocationViewController.swift */,
-				92011CB12A79F7C6009B047F /* MainLocationHeaderView.swift */,
+				920031912A88DF3A00E3170D /* MapSettingsHeaderView.swift */,
+				92011CB12A79F7C6009B047F /* AddedLocationsHeaderView.swift */,
 				92011CBF2A7A3E14009B047F /* MapMainLocationViewController.swift */,
 				92CD36FB2A7B98C400768B61 /* SetLocationView.swift */,
 				92011CAE2A79F305009B047F /* Cell */,
@@ -1157,6 +1160,7 @@
 				92011C1A2A755D02009B047F /* RecordListButton.swift in Sources */,
 				9224FD3D2A6559A0000A56A6 /* AddLocationViewController.swift in Sources */,
 				924BE0CE2A51C4D4002C70FF /* MarkedRecordsCell.swift in Sources */,
+				920031922A88DF3A00E3170D /* MapSettingsHeaderView.swift in Sources */,
 				9224FD1F2A62B4E9000A56A6 /* NotificationViewController.swift in Sources */,
 				92011C1E2A75EE79009B047F /* MarkView.swift in Sources */,
 				9224FD372A653024000A56A6 /* SpacingView.swift in Sources */,
@@ -1229,7 +1233,7 @@
 				926999402A14F73C003DDAD2 /* HomeViewController.swift in Sources */,
 				92011B8D2A72BBE8009B047F /* SaveRecordView.swift in Sources */,
 				927E7F212A66F64400E6A29F /* Schedule.swift in Sources */,
-				92011CB22A79F7C6009B047F /* MainLocationHeaderView.swift in Sources */,
+				92011CB22A79F7C6009B047F /* AddedLocationsHeaderView.swift in Sources */,
 				9224FD152A613AB8000A56A6 /* UpcomingScheduleSection.swift in Sources */,
 				92011C142A74F9DE009B047F /* SearchLocationCell.swift in Sources */,
 				92459EDA2A530D1100493941 /* MarkedRecordCell.swift in Sources */,
