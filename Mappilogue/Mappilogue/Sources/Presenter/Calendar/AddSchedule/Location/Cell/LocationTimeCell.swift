@@ -28,7 +28,7 @@ class LocationTimeCell: BaseCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
   
-        checkButton.setImage(UIImage(named: "unCheck"), for: .normal)
+        checkButton.setImage(UIImage(named: "common_unCheck"), for: .normal)
     }
     
     override func setupProperty() {
@@ -50,7 +50,7 @@ class LocationTimeCell: BaseCollectionViewCell {
         editImage.image = UIImage(named: "edit")
         editImage.tintColor = .colorC9C6C2
 
-        checkButton.setImage(UIImage(named: "unCheck"), for: .normal)
+        checkButton.setImage(UIImage(named: "common_unCheck"), for: .normal)
         checkButton.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
     }
     
@@ -140,7 +140,7 @@ class LocationTimeCell: BaseCollectionViewCell {
     }
     
     private func updateCheckButtonImage() {
-        let imageName = isCheck ? "check" : "unCheck"
+        let imageName = isCheck ? "common_check" : "common_unCheck"
         checkButton.setImage(UIImage(named: imageName), for: .normal)
     }
 }

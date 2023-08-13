@@ -70,7 +70,6 @@ class VersionCell: BaseCollectionViewCell {
             $0.width.equalTo(7)
             $0.height.equalTo(14)
         }
-        
     }
     
     func configure() {

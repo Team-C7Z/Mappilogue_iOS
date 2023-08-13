@@ -37,7 +37,7 @@ class InquiryViewController: BaseViewController {
         
         emailView.layer.cornerRadius = 12
         emailView.backgroundColor = .colorF5F3F0
-        emailImage.image = UIImage(named: "email")
+        emailImage.image = UIImage(named: "my_email")
         emailLabel.text = "mappilogue@naver.com"
         emailCopyButton.setTitle("복사하기", for: .normal)
         emailCopyButton.setTitleColor(.color2EBD3D, for: .normal)

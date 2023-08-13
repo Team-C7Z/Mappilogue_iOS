@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		520E9D02714F72A41E207B62 /* Pods_Mappilogue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 021CF7D6B8E435D26802F66A /* Pods_Mappilogue.framework */; };
+		9200318F2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9200318E2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift */; };
 		92011B282A6E75F1009B047F /* WriteRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B272A6E75F1009B047F /* WriteRecordButton.swift */; };
 		92011B702A70E7D8009B047F /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */; };
 		92011B722A7127FC009B047F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B712A7127FC009B047F /* AlertViewController.swift */; };
@@ -99,8 +100,7 @@
 		925840B72A7F2D5A00997434 /* VersionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840B62A7F2D5A00997434 /* VersionCell.swift */; };
 		925840B92A7F2DA300997434 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840B82A7F2DA300997434 /* ProfileCell.swift */; };
 		925840BB2A7F455D00997434 /* NotificationSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840BA2A7F455D00997434 /* NotificationSettingsViewController.swift */; };
-		925840BD2A7F459600997434 /* NotificationSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840BC2A7F459600997434 /* NotificationSettingCell.swift */; };
-		925840BF2A7F4D3900997434 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840BE2A7F4D3900997434 /* Notification.swift */; };
+		925840BD2A7F459600997434 /* NotificationSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840BC2A7F459600997434 /* NotificationSettingView.swift */; };
 		925840C12A7F5B2200997434 /* NotificationSwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C02A7F5B2200997434 /* NotificationSwitchButton.swift */; };
 		925840C32A7F61E800997434 /* InquiryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C22A7F61E800997434 /* InquiryViewController.swift */; };
 		925840C52A7F71E600997434 /* EmailCopyToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C42A7F71E600997434 /* EmailCopyToastMessageView.swift */; };
@@ -192,6 +192,7 @@
 		65FB9F97A7DA9BC190F4E1BF /* Pods_Mappilogue_MappilogueUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mappilogue_MappilogueUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81704CFC2A84A47234E8C7D7 /* Pods-Mappilogue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mappilogue.release.xcconfig"; path = "Target Support Files/Pods-Mappilogue/Pods-Mappilogue.release.xcconfig"; sourceTree = "<group>"; };
 		81A821757BF382206BE4FD7A /* Pods_MappilogueTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MappilogueTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9200318E2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalCompletedAlertViewController.swift; sourceTree = "<group>"; };
 		92011B272A6E75F1009B047F /* WriteRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordButton.swift; sourceTree = "<group>"; };
 		92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		92011B712A7127FC009B047F /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
@@ -284,8 +285,7 @@
 		925840B62A7F2D5A00997434 /* VersionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCell.swift; sourceTree = "<group>"; };
 		925840B82A7F2DA300997434 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		925840BA2A7F455D00997434 /* NotificationSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewController.swift; sourceTree = "<group>"; };
-		925840BC2A7F459600997434 /* NotificationSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingCell.swift; sourceTree = "<group>"; };
-		925840BE2A7F4D3900997434 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		925840BC2A7F459600997434 /* NotificationSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingView.swift; sourceTree = "<group>"; };
 		925840C02A7F5B2200997434 /* NotificationSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSwitchButton.swift; sourceTree = "<group>"; };
 		925840C22A7F61E800997434 /* InquiryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryViewController.swift; sourceTree = "<group>"; };
 		925840C42A7F71E600997434 /* EmailCopyToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCopyToastMessageView.swift; sourceTree = "<group>"; };
@@ -396,6 +396,17 @@
 				DCCDD669BAF4514B461B20ED /* Pods-MappilogueTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		920031902A85FAF700E3170D /* Withdrawal */ = {
+			isa = PBXGroup;
+			children = (
+				925840CA2A7F86F900997434 /* WithdrawalViewController.swift */,
+				925840CC2A7F8E1C00997434 /* WithdrawalReasonView.swift */,
+				9200318E2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift */,
+				925840C62A7F76A500997434 /* WithdrawalAlertViewController.swift */,
+			);
+			path = Withdrawal;
 			sourceTree = "<group>";
 		};
 		92011B732A71386F009B047F /* Cell */ = {
@@ -663,7 +674,6 @@
 				925840B82A7F2DA300997434 /* ProfileCell.swift */,
 				925840B62A7F2D5A00997434 /* VersionCell.swift */,
 				925840B42A7F2D3B00997434 /* MyCell.swift */,
-				925840BC2A7F459600997434 /* NotificationSettingCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -863,12 +873,11 @@
 			children = (
 				926999472A14F76A003DDAD2 /* MyViewController.swift */,
 				925840BA2A7F455D00997434 /* NotificationSettingsViewController.swift */,
+				925840BC2A7F459600997434 /* NotificationSettingView.swift */,
 				925840C02A7F5B2200997434 /* NotificationSwitchButton.swift */,
 				925840C22A7F61E800997434 /* InquiryViewController.swift */,
 				925840C42A7F71E600997434 /* EmailCopyToastMessageView.swift */,
-				925840C62A7F76A500997434 /* WithdrawalAlertViewController.swift */,
-				925840CA2A7F86F900997434 /* WithdrawalViewController.swift */,
-				925840CC2A7F8E1C00997434 /* WithdrawalReasonView.swift */,
+				920031902A85FAF700E3170D /* Withdrawal */,
 				925840B32A7F281A00997434 /* Cell */,
 			);
 			path = My;
@@ -927,7 +936,6 @@
 				927E7F202A66F64400E6A29F /* Schedule.swift */,
 				92011C152A7505F7009B047F /* Record.swift */,
 				92011C252A77A48B009B047F /* Category.swift */,
-				925840BE2A7F4D3900997434 /* Notification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1229,7 +1237,6 @@
 				92011C662A78980E009B047F /* UIView.swift in Sources */,
 				92011C092A74AFCA009B047F /* SearchTextField.swift in Sources */,
 				92011C162A7505F7009B047F /* Record.swift in Sources */,
-				925840BF2A7F4D3900997434 /* Notification.swift in Sources */,
 				92FE26152A4B751000BCDB82 /* BaseCollectionReusableView.swift in Sources */,
 				925840B52A7F2D3B00997434 /* MyCell.swift in Sources */,
 				92011C042A740C16009B047F /* NewCategoryCell.swift in Sources */,
@@ -1245,6 +1252,7 @@
 				925840D52A80957900997434 /* AddLocationFooterView.swift in Sources */,
 				92011BFF2A7407D3009B047F /* SelectCategoryViewController.swift in Sources */,
 				925840AE2A7CD17E00997434 /* EditCategoryViewController.swift in Sources */,
+				9200318F2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift in Sources */,
 				9224FD3B2A6532E3000A56A6 /* EndView.swift in Sources */,
 				9230BE472A57FEB80053E535 /* DayCell.swift in Sources */,
 				9224FD422A656407000A56A6 /* LocationCell.swift in Sources */,
@@ -1343,7 +1351,7 @@
 				926999402A14F73C003DDAD2 /* HomeViewController.swift in Sources */,
 				92011B8D2A72BBE8009B047F /* SaveRecordView.swift in Sources */,
 				927E7F212A66F64400E6A29F /* Schedule.swift in Sources */,
-				925840BD2A7F459600997434 /* NotificationSettingCell.swift in Sources */,
+				925840BD2A7F459600997434 /* NotificationSettingView.swift in Sources */,
 				9224FD152A613AB8000A56A6 /* UpcomingScheduleSection.swift in Sources */,
 				92011C142A74F9DE009B047F /* SearchLocationCell.swift in Sources */,
 				92459EDA2A530D1100493941 /* MarkedRecordCell.swift in Sources */,
