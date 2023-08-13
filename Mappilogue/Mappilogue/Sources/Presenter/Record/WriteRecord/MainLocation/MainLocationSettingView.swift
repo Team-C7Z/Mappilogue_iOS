@@ -1,5 +1,5 @@
 //
-//  SetLocationView.swift
+//  MainLocationSettingView.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/08/03.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SetLocationView: BaseView {
+class MainLocationSettingView: BaseView {
     private let addressLabel = UILabel()
     private let setLocationButton = UIButton()
     

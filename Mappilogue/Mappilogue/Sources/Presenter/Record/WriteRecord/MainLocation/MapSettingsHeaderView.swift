@@ -9,6 +9,8 @@ import UIKit
 
 class MapSettingsHeaderView: BaseCollectionReusableView {
     static let registerId = "\(MapSettingsHeaderView.self)"
+    
+    var onMapSetting: (() -> Void)?
 
     private let mapSettingsButton = UIButton()
     private let mapSettingsLabel = UILabel()
@@ -60,6 +62,6 @@ class MapSettingsHeaderView: BaseCollectionReusableView {
     }
     
     @objc func setLocationButtonTapped() {
-        print("클릭")
+        onMapSetting?()
     }
 }

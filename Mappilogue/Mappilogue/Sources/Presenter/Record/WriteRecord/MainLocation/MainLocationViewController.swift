@@ -54,6 +54,11 @@ class MainLocationViewController: BaseViewController {
         }
     }
     
+    func setLocationButtonTapped() {
+        let mapMainLocationViewController = MapMainLocationViewController()
+        navigationController?.pushViewController(mapMainLocationViewController, animated: true)
+    }
+    
     func selectMainLocation(_ index: Int?) {
         selectedLocationIndex = index
         collectionView.reloadData()
@@ -66,7 +71,7 @@ class MainLocationViewController: BaseViewController {
             self.selectMainLocation(1)
         }
         present(mainLocationAlertViewController, animated: false)
-     }
+    }
 }
 
 extension MainLocationViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -108,6 +113,9 @@ extension MainLocationViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if indexPath.section == 0 {
             guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MapSettingsHeaderView.registerId, for: indexPath) as? MapSettingsHeaderView else { return UICollectionReusableView() }
+            headerView.onMapSetting = {
+                self.setLocationButtonTapped()
+            }
             return headerView
         } else {
             guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: AddedLocationsHeaderView.registerId, for: indexPath) as? AddedLocationsHeaderView else { return UICollectionReusableView() }
@@ -128,16 +136,4 @@ extension MainLocationViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 12
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       
-    }
-}
-
-extension MainLocationViewController {
-    func setLocationButtonTapped() {
-        let mapMainLocationViewController = MapMainLocationViewController()
-        navigationController?.pushViewController(mapMainLocationViewController, animated: true)
-    }
-    
 }

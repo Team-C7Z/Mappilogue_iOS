@@ -17,11 +17,6 @@ class MainLocationAlertViewController: BaseViewController {
     private let cancelButton = UIButton()
     private let doneButton = UIButton()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-    }
-    
     override func setupProperty() {
         super.setupProperty()
         

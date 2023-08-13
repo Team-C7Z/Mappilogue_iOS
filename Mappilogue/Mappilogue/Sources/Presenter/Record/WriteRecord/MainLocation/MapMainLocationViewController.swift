@@ -10,9 +10,10 @@ import NMapsMap
 
 class MapMainLocationViewController: BaseViewController {
     let locationManager = CLLocationManager()
+    let marker = NMFMarker()
     
     let mapView = NMFMapView()
-    let setLocationView = SetLocationView()
+    let mainLocationSettingView = MainLocationSettingView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,24 +28,24 @@ class MapMainLocationViewController: BaseViewController {
         setMapView()
         
         setNavigationBar("대표 위치 설정", backButtonAction: #selector(backButtonTapped))
-        
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
         
         view.addSubview(mapView)
-        view.addSubview(setLocationView)
+        view.addSubview(mainLocationSettingView)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
         mapView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.top.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(mainLocationSettingView.snp.top).offset(15)
         }
         
-        setLocationView.snp.makeConstraints {
+        mainLocationSettingView.snp.makeConstraints {
             $0.leading.bottom.trailing.equalTo(view)
         }
     }
@@ -66,8 +67,8 @@ class MapMainLocationViewController: BaseViewController {
         mapView.positionMode = .compass
         mapView.minZoomLevel = 10.0
         mapView.maxZoomLevel = 18.0
+        mapView.addCameraDelegate(delegate: self)
     }
-
 }
 
 extension MapMainLocationViewController: CLLocationManagerDelegate {
@@ -117,5 +118,17 @@ extension MapMainLocationViewController: CLLocationManagerDelegate {
             }
         }
         present(alertViewController, animated: false)
+    }
+}
+
+extension MapMainLocationViewController: NMFMapViewCameraDelegate {
+    func mapView(_ mapView: NMFMapView, cameraDidChangeByReason reason: Int, animated: Bool) {
+        let projection = mapView.projection
+        let coord = projection.latlng(from: CGPoint(x: mapView.frame.width / 2, y: mapView.frame.height / 2))
+        marker.position = NMGLatLng(lat: coord.lat, lng: coord.lng)
+        marker.iconImage = NMFOverlayImage(name: "record_mainLocation")
+        marker.width = 65
+        marker.height = 36
+        marker.mapView = mapView
     }
 }
