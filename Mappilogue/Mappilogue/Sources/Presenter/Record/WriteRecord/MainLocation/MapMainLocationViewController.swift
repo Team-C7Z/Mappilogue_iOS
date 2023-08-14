@@ -11,6 +11,7 @@ import NMapsMap
 class MapMainLocationViewController: BaseViewController {
     let locationManager = CLLocationManager()
     let marker = NMFMarker()
+    let addressManager = AddressManager()
     
     let mapView = NMFMapView()
     let mainLocationSettingView = MainLocationSettingView()
@@ -130,5 +131,9 @@ extension MapMainLocationViewController: NMFMapViewCameraDelegate {
         marker.width = 65
         marker.height = 36
         marker.mapView = mapView
+    }
+   
+    func mapViewCameraIdle(_ mapView: NMFMapView) {
+        addressManager.getAddress(long: mapView.longitude, lat: mapView.latitude)
     }
 }
