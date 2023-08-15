@@ -12,7 +12,7 @@ class AddressManager {
     private let provider = MoyaProvider<AddressAPI>()
     
     func getAddress(long: Double, lat: Double, completion: @escaping (String?) -> Void) {
-        provider.request(.address(long: long, lat: lat)) { result in
+        provider.request(.getAddress(long: long, lat: lat)) { result in
             switch result {
             case .success(let response):
                 do {

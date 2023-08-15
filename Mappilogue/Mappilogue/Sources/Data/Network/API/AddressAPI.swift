@@ -9,41 +9,34 @@ import Foundation
 import Moya
 
 enum AddressAPI {
-    case address(long: Double, lat: Double)
-    
-    var endPoint: APIEndPoint {
-        switch self {
-        case .address:
-            return .address
-        }
-    }
+    case getAddress(long: Double, lat: Double)
 }
 
 extension AddressAPI: TargetType {
     var baseURL: URL {
-        return URL(string: NetworkService.shared.kakaoBaseURL)!
+        return URL(string: Environment.kakaoAPI)!
     }
     
     var path: String {
-        return endPoint.path
+        return "/v2/local/geo/coord2address"
     }
     
     var method: Moya.Method {
         switch self {
-        case .address:
+        case .getAddress:
             return .get
         }
     }
     
     var task: Task {
         switch self {
-        case let .address(long, lat):
+        case let .getAddress(long, lat):
             let requestParameters: [String: Any] = ["x": long, "y": lat]
             return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
         }
     }
     
     var headers: [String: String]? {
-        ["Authorization": "KakaoAK \(NetworkService.shared.kakaoRestKey)"]
+        return ["Authorization": "KakaoAK \(Environment.kakaoRestKey)"]
     }
 }

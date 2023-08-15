@@ -18,8 +18,7 @@ class MainLocationSettingView: BaseView {
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         layer.masksToBounds = true
         backgroundColor = .colorF9F8F7
-        
-
+    
         addressLabel.textColor = .color000000
         addressLabel.font = .title02
         
