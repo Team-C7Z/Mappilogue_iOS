@@ -2,7 +2,7 @@
 //  UILabel.swift
 //  Mappilogue
 //
-//  Created by hyemi on 2023/08/13.
+//  Created by hyemi on 2023/08/06.
 //
 
 import Foundation

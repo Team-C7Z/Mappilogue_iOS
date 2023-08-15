@@ -18,6 +18,7 @@
 		920031A72A8B33D600E3170D /* API.plist in Resources */ = {isa = PBXBuildFile; fileRef = 920031A62A8B33D600E3170D /* API.plist */; };
 		920031A92A8B34D100E3170D /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031A82A8B34D100E3170D /* Bundle.swift */; };
 		920031AC2A8B369400E3170D /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031AB2A8B369400E3170D /* Environment.swift */; };
+		9200318F2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9200318E2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift */; };
 		92011B282A6E75F1009B047F /* WriteRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B272A6E75F1009B047F /* WriteRecordButton.swift */; };
 		92011B702A70E7D8009B047F /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */; };
 		92011B722A7127FC009B047F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B712A7127FC009B047F /* AlertViewController.swift */; };
@@ -27,7 +28,7 @@
 		92011B7D2A7174B6009B047F /* DateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B7C2A7174B6009B047F /* DateHeaderView.swift */; };
 		92011B7F2A726031009B047F /* WriteRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B7E2A726031009B047F /* WriteRecordViewController.swift */; };
 		92011B812A7271D0009B047F /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B802A7271D0009B047F /* CategoryButton.swift */; };
-		92011B832A72AA96009B047F /* ScheduleTitleColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B822A72AA96009B047F /* ScheduleTitleColorView.swift */; };
+		92011B832A72AA96009B047F /* UpdateScheduleTitleColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B822A72AA96009B047F /* UpdateScheduleTitleColorView.swift */; };
 		92011B872A72B0A7009B047F /* MainLocatonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B862A72B0A7009B047F /* MainLocatonView.swift */; };
 		92011B892A72B4BB009B047F /* TextContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B882A72B4BB009B047F /* TextContentView.swift */; };
 		92011B8B2A72B7DA009B047F /* NewWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B8A2A72B7DA009B047F /* NewWriteView.swift */; };
@@ -47,7 +48,7 @@
 		92011C142A74F9DE009B047F /* SearchLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C132A74F9DE009B047F /* SearchLocationCell.swift */; };
 		92011C162A7505F7009B047F /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C152A7505F7009B047F /* Record.swift */; };
 		92011C182A753AEB009B047F /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C172A753AEB009B047F /* CALayer.swift */; };
-		92011C1A2A755D02009B047F /* RecordListButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C192A755D02009B047F /* RecordListButton.swift */; };
+		92011C1A2A755D02009B047F /* MyRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C192A755D02009B047F /* MyRecordButton.swift */; };
 		92011C1C2A75E484009B047F /* RecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C1B2A75E484009B047F /* RecordCell.swift */; };
 		92011C1E2A75EE79009B047F /* MarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C1D2A75EE79009B047F /* MarkView.swift */; };
 		92011C202A769C12009B047F /* SortHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C1F2A769C12009B047F /* SortHeaderView.swift */; };
@@ -61,6 +62,8 @@
 		92011CB22A79F7C6009B047F /* AddedLocationsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011CB12A79F7C6009B047F /* AddedLocationsHeaderView.swift */; };
 		92011CB42A79FAF4009B047F /* MainLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011CB32A79FAF4009B047F /* MainLocationCell.swift */; };
 		92011CC02A7A3E14009B047F /* MapMainLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011CBF2A7A3E14009B047F /* MapMainLocationViewController.swift */; };
+		92011CB92A7A1718009B047F /* MyRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011CB82A7A1718009B047F /* MyRecordViewController.swift */; };
+		92011CBC2A7A19CA009B047F /* MyRecordCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011CBB2A7A19CA009B047F /* MyRecordCategoryCell.swift */; };
 		9224FCEE2A5BEF80000A56A6 /* ScheduleTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */; };
 		9224FCF32A5C5E7A000A56A6 /* WeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */; };
 		9224FCF52A5D6C65000A56A6 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */; };
@@ -68,20 +71,16 @@
 		9224FCF92A5FCF72000A56A6 /* ScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF82A5FCF72000A56A6 /* ScheduleCell.swift */; };
 		9224FCFB2A5FDD90000A56A6 /* AddScheduleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCFA2A5FDD90000A56A6 /* AddScheduleButton.swift */; };
 		9224FCFD2A5FF185000A56A6 /* AddScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCFC2A5FF185000A56A6 /* AddScheduleViewController.swift */; };
-		9224FD012A600A86000A56A6 /* ScheduleTitleColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD002A600A86000A56A6 /* ScheduleTitleColorCell.swift */; };
-		9224FD032A600ACF000A56A6 /* ScheduleDurationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD022A600ACF000A56A6 /* ScheduleDurationCell.swift */; };
-		9224FD052A600F42000A56A6 /* NotificationRepeatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD042A600F42000A56A6 /* NotificationRepeatCell.swift */; };
+		9224FD032A600ACF000A56A6 /* ScheduleDurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD022A600ACF000A56A6 /* ScheduleDurationView.swift */; };
+		9224FD052A600F42000A56A6 /* NotificationRepeatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD042A600F42000A56A6 /* NotificationRepeatButton.swift */; };
 		9224FD092A601B00000A56A6 /* ColorSelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD082A601B00000A56A6 /* ColorSelectionButton.swift */; };
-		9224FD0B2A60F2B5000A56A6 /* AddScheduleSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD0A2A60F2B5000A56A6 /* AddScheduleSection.swift */; };
 		9224FD0D2A610134000A56A6 /* EmptyTodayScheduleSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD0C2A610134000A56A6 /* EmptyTodayScheduleSection.swift */; };
 		9224FD0F2A610E64000A56A6 /* EmptyUpcomingScheduleSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD0E2A610E64000A56A6 /* EmptyUpcomingScheduleSection.swift */; };
 		9224FD112A611218000A56A6 /* TodayScheduleSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD102A611218000A56A6 /* TodayScheduleSection.swift */; };
 		9224FD152A613AB8000A56A6 /* UpcomingScheduleSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD142A613AB8000A56A6 /* UpcomingScheduleSection.swift */; };
-		9224FD172A6161B0000A56A6 /* ColorSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD162A6161B0000A56A6 /* ColorSelectionCell.swift */; };
 		9224FD192A616EB1000A56A6 /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD182A616EB1000A56A6 /* ColorCell.swift */; };
 		9224FD1B2A61705D000A56A6 /* ColorSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD1A2A61705D000A56A6 /* ColorSelection.swift */; };
 		9224FD1F2A62B4E9000A56A6 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD1E2A62B4E9000A56A6 /* NotificationViewController.swift */; };
-		9224FD212A62BBB7000A56A6 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD202A62BBB6000A56A6 /* NotificationCell.swift */; };
 		9224FD232A62EC0B000A56A6 /* RepeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD222A62EC0B000A56A6 /* RepeatViewController.swift */; };
 		9224FD252A638F01000A56A6 /* RepeatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD242A638F01000A56A6 /* RepeatType.swift */; };
 		9224FD272A6394A9000A56A6 /* WeekdayRepeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD262A6394A9000A56A6 /* WeekdayRepeatViewController.swift */; };
@@ -94,7 +93,7 @@
 		9224FD3F2A6561CD000A56A6 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD3E2A6561CD000A56A6 /* UITextField.swift */; };
 		9224FD422A656407000A56A6 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD412A656407000A56A6 /* LocationCell.swift */; };
 		9224FD442A657150000A56A6 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD432A657150000A56A6 /* Location.swift */; };
-		9224FD462A6579A7000A56A6 /* DeleteLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD452A6579A7000A56A6 /* DeleteLocationCell.swift */; };
+		9224FD462A6579A7000A56A6 /* DeleteLocationFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD452A6579A7000A56A6 /* DeleteLocationFooterView.swift */; };
 		9224FD482A6579ED000A56A6 /* LocationTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD472A6579ED000A56A6 /* LocationTimeCell.swift */; };
 		9224FD4A2A667F7E000A56A6 /* TimePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD492A667F7E000A56A6 /* TimePickerViewController.swift */; };
 		9230BE452A57F01E0053E535 /* WeekdayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BE442A57F01E0053E535 /* WeekdayCell.swift */; };
@@ -103,13 +102,39 @@
 		9230BE512A59B45D0053E535 /* MonthlyCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BE502A59B45D0053E535 /* MonthlyCalendar.swift */; };
 		92459ED82A52494200493941 /* AddMarkedRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92459ED72A52494200493941 /* AddMarkedRecordCell.swift */; };
 		92459EDA2A530D1100493941 /* MarkedRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92459ED92A530D1100493941 /* MarkedRecordCell.swift */; };
-		92459EDC2A53158A00493941 /* MarkedRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92459EDB2A53158A00493941 /* MarkedRecord.swift */; };
 		924BE0CA2A51AE25002C70FF /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 924BE0C92A51AE25002C70FF /* .swiftlint.yml */; };
 		924BE0CE2A51C4D4002C70FF /* MarkedRecordsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BE0CD2A51C4D4002C70FF /* MarkedRecordsCell.swift */; };
+		9258409E2A7BD30700997434 /* CategorySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258409D2A7BD30700997434 /* CategorySettingViewController.swift */; };
+		925840A02A7BD4D700997434 /* CategoryOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258409F2A7BD4D700997434 /* CategoryOrderCell.swift */; };
+		925840A42A7C890100997434 /* CategorySelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840A32A7C890100997434 /* CategorySelectionCell.swift */; };
+		925840A82A7CBF3B00997434 /* CategorySelectionLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840A72A7CBF3B00997434 /* CategorySelectionLabelCell.swift */; };
+		925840AA2A7CC92E00997434 /* CategorySettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840A92A7CC92E00997434 /* CategorySettingCell.swift */; };
+		925840AE2A7CD17E00997434 /* EditCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840AD2A7CD17E00997434 /* EditCategoryViewController.swift */; };
+		925840B52A7F2D3B00997434 /* MyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840B42A7F2D3B00997434 /* MyCell.swift */; };
+		925840B72A7F2D5A00997434 /* VersionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840B62A7F2D5A00997434 /* VersionCell.swift */; };
+		925840B92A7F2DA300997434 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840B82A7F2DA300997434 /* ProfileCell.swift */; };
+		925840BB2A7F455D00997434 /* NotificationSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840BA2A7F455D00997434 /* NotificationSettingsViewController.swift */; };
+		925840BD2A7F459600997434 /* NotificationSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840BC2A7F459600997434 /* NotificationSettingView.swift */; };
+		925840C12A7F5B2200997434 /* NotificationSwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C02A7F5B2200997434 /* NotificationSwitchButton.swift */; };
+		925840C32A7F61E800997434 /* InquiryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C22A7F61E800997434 /* InquiryViewController.swift */; };
+		925840C52A7F71E600997434 /* EmailCopyToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C42A7F71E600997434 /* EmailCopyToastMessageView.swift */; };
+		925840C72A7F76A500997434 /* WithdrawalAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C62A7F76A500997434 /* WithdrawalAlertViewController.swift */; };
+		925840C92A7F805800997434 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C82A7F805800997434 /* UILabel.swift */; };
+		925840CB2A7F86F900997434 /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840CA2A7F86F900997434 /* WithdrawalViewController.swift */; };
+		925840CD2A7F8E1C00997434 /* WithdrawalReasonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840CC2A7F8E1C00997434 /* WithdrawalReasonView.swift */; };
+		925840CF2A7FCB5400997434 /* AddScheduleTitleColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840CE2A7FCB5400997434 /* AddScheduleTitleColorView.swift */; };
+		925840D12A7FCE6800997434 /* AddScheduleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840D02A7FCE6800997434 /* AddScheduleHeaderView.swift */; };
+		925840D22A7FF34000997434 /* MarkedRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92459EDB2A53158A00493941 /* MarkedRecord.swift */; };
+		925840D32A7FF39B00997434 /* HomeEmptyScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B64B2A4CC0E6009C9293 /* HomeEmptyScheduleCell.swift */; };
+		925840D52A80957900997434 /* AddLocationFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840D42A80957900997434 /* AddLocationFooterView.swift */; };
+		925840D72A80D4BD00997434 /* NotificationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840D62A80D4BD00997434 /* NotificationHeaderView.swift */; };
+		925840D92A80D84300997434 /* SelectedNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840D82A80D84300997434 /* SelectedNotificationCell.swift */; };
+		925840DB2A82144A00997434 /* EditScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840DA2A82144A00997434 /* EditScheduleViewController.swift */; };
 		9263786B2A546BDE004E5B6E /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9263786A2A546BDE004E5B6E /* OnboardingViewController.swift */; };
 		9263786E2A5475AF004E5B6E /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9263786D2A5475AF004E5B6E /* OnboardingCell.swift */; };
 		926378712A54E0E6004E5B6E /* OnboardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926378702A54E0E6004E5B6E /* OnboardingManager.swift */; };
 		926382B42A6CC9760064C1A8 /* GatheringToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926382B32A6CC9760064C1A8 /* GatheringToastMessageView.swift */; };
+		926382B62A6D03850064C1A8 /* CalendarEmptyScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926382B52A6D03850064C1A8 /* CalendarEmptyScheduleCell.swift */; };
 		926998F72A14EC07003DDAD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926998F62A14EC07003DDAD2 /* AppDelegate.swift */; };
 		926998F92A14EC07003DDAD2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926998F82A14EC07003DDAD2 /* SceneDelegate.swift */; };
 		926999002A14EC09003DDAD2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 926998FF2A14EC09003DDAD2 /* Assets.xcassets */; };
@@ -134,7 +159,6 @@
 		929158272A2529660022BEF9 /* Pretendard-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581E2A2529660022BEF9 /* Pretendard-SemiBold.ttf */; };
 		9291582A2A252CC20022BEF9 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929158292A252CC20022BEF9 /* UIColor.swift */; };
 		929158302A2537E40022BEF9 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9291582F2A2537E40022BEF9 /* SnapKit */; };
-		92A7B64C2A4CC0E6009C9293 /* EmptyScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B64B2A4CC0E6009C9293 /* EmptyScheduleCell.swift */; };
 		92A7B64F2A4CCE29009C9293 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B64E2A4CCE29009C9293 /* AddButton.swift */; };
 		92A7B6512A4CD261009C9293 /* AddScheduleButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6502A4CD261009C9293 /* AddScheduleButtonCell.swift */; };
 		92A7B6532A4CDD4D009C9293 /* ScheduleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6522A4CDD4D009C9293 /* ScheduleType.swift */; };
@@ -148,6 +172,10 @@
 		92A7B6682A4E6154009C9293 /* UpcomingScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6672A4E6154009C9293 /* UpcomingScheduleCell.swift */; };
 		92C2EC612A6924B5002DB0E3 /* LineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2EC602A6924B5002DB0E3 /* LineCell.swift */; };
 		92CD36FC2A7B98C400768B61 /* MainLocationSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CD36FB2A7B98C400768B61 /* MainLocationSettingView.swift */; };
+		92CD36FA2A7B505900768B61 /* MyCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CD36F92A7B505900768B61 /* MyCategoryViewController.swift */; };
+		92E7814C2A84B9B3000DAACD /* ScheduleDateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7814B2A84B9B3000DAACD /* ScheduleDateHeaderView.swift */; };
+		92E7814E2A850316000DAACD /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7814D2A850316000DAACD /* Date.swift */; };
+		92E781522A85381D000DAACD /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E781512A85381D000DAACD /* String.swift */; };
 		92FE26112A4A6E1600BCDB82 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FE26102A4A6E1600BCDB82 /* BaseCollectionViewCell.swift */; };
 		92FE26132A4B74D800BCDB82 /* ScheduleTypeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FE26122A4B74D800BCDB82 /* ScheduleTypeHeaderView.swift */; };
 		92FE26152A4B751000BCDB82 /* BaseCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FE26142A4B751000BCDB82 /* BaseCollectionReusableView.swift */; };
@@ -188,6 +216,7 @@
 		920031A62A8B33D600E3170D /* API.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = API.plist; sourceTree = "<group>"; };
 		920031A82A8B34D100E3170D /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		920031AB2A8B369400E3170D /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		9200318E2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalCompletedAlertViewController.swift; sourceTree = "<group>"; };
 		92011B272A6E75F1009B047F /* WriteRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordButton.swift; sourceTree = "<group>"; };
 		92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		92011B712A7127FC009B047F /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
@@ -197,7 +226,7 @@
 		92011B7C2A7174B6009B047F /* DateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHeaderView.swift; sourceTree = "<group>"; };
 		92011B7E2A726031009B047F /* WriteRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordViewController.swift; sourceTree = "<group>"; };
 		92011B802A7271D0009B047F /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
-		92011B822A72AA96009B047F /* ScheduleTitleColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTitleColorView.swift; sourceTree = "<group>"; };
+		92011B822A72AA96009B047F /* UpdateScheduleTitleColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateScheduleTitleColorView.swift; sourceTree = "<group>"; };
 		92011B862A72B0A7009B047F /* MainLocatonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLocatonView.swift; sourceTree = "<group>"; };
 		92011B882A72B4BB009B047F /* TextContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextContentView.swift; sourceTree = "<group>"; };
 		92011B8A2A72B7DA009B047F /* NewWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWriteView.swift; sourceTree = "<group>"; };
@@ -217,7 +246,7 @@
 		92011C132A74F9DE009B047F /* SearchLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationCell.swift; sourceTree = "<group>"; };
 		92011C152A7505F7009B047F /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		92011C172A753AEB009B047F /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
-		92011C192A755D02009B047F /* RecordListButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordListButton.swift; sourceTree = "<group>"; };
+		92011C192A755D02009B047F /* MyRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordButton.swift; sourceTree = "<group>"; };
 		92011C1B2A75E484009B047F /* RecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCell.swift; sourceTree = "<group>"; };
 		92011C1D2A75EE79009B047F /* MarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkView.swift; sourceTree = "<group>"; };
 		92011C1F2A769C12009B047F /* SortHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortHeaderView.swift; sourceTree = "<group>"; };
@@ -231,6 +260,8 @@
 		92011CB12A79F7C6009B047F /* AddedLocationsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedLocationsHeaderView.swift; sourceTree = "<group>"; };
 		92011CB32A79FAF4009B047F /* MainLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLocationCell.swift; sourceTree = "<group>"; };
 		92011CBF2A7A3E14009B047F /* MapMainLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMainLocationViewController.swift; sourceTree = "<group>"; };
+		92011CB82A7A1718009B047F /* MyRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordViewController.swift; sourceTree = "<group>"; };
+		92011CBB2A7A19CA009B047F /* MyRecordCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordCategoryCell.swift; sourceTree = "<group>"; };
 		9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTitleCell.swift; sourceTree = "<group>"; };
 		9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCell.swift; sourceTree = "<group>"; };
 		9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
@@ -238,20 +269,16 @@
 		9224FCF82A5FCF72000A56A6 /* ScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCell.swift; sourceTree = "<group>"; };
 		9224FCFA2A5FDD90000A56A6 /* AddScheduleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleButton.swift; sourceTree = "<group>"; };
 		9224FCFC2A5FF185000A56A6 /* AddScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleViewController.swift; sourceTree = "<group>"; };
-		9224FD002A600A86000A56A6 /* ScheduleTitleColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTitleColorCell.swift; sourceTree = "<group>"; };
-		9224FD022A600ACF000A56A6 /* ScheduleDurationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDurationCell.swift; sourceTree = "<group>"; };
-		9224FD042A600F42000A56A6 /* NotificationRepeatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRepeatCell.swift; sourceTree = "<group>"; };
+		9224FD022A600ACF000A56A6 /* ScheduleDurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDurationView.swift; sourceTree = "<group>"; };
+		9224FD042A600F42000A56A6 /* NotificationRepeatButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRepeatButton.swift; sourceTree = "<group>"; };
 		9224FD082A601B00000A56A6 /* ColorSelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectionButton.swift; sourceTree = "<group>"; };
-		9224FD0A2A60F2B5000A56A6 /* AddScheduleSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleSection.swift; sourceTree = "<group>"; };
 		9224FD0C2A610134000A56A6 /* EmptyTodayScheduleSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTodayScheduleSection.swift; sourceTree = "<group>"; };
 		9224FD0E2A610E64000A56A6 /* EmptyUpcomingScheduleSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyUpcomingScheduleSection.swift; sourceTree = "<group>"; };
 		9224FD102A611218000A56A6 /* TodayScheduleSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayScheduleSection.swift; sourceTree = "<group>"; };
 		9224FD142A613AB8000A56A6 /* UpcomingScheduleSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingScheduleSection.swift; sourceTree = "<group>"; };
-		9224FD162A6161B0000A56A6 /* ColorSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectionCell.swift; sourceTree = "<group>"; };
 		9224FD182A616EB1000A56A6 /* ColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
 		9224FD1A2A61705D000A56A6 /* ColorSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelection.swift; sourceTree = "<group>"; };
 		9224FD1E2A62B4E9000A56A6 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
-		9224FD202A62BBB6000A56A6 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		9224FD222A62EC0B000A56A6 /* RepeatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatViewController.swift; sourceTree = "<group>"; };
 		9224FD242A638F01000A56A6 /* RepeatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatType.swift; sourceTree = "<group>"; };
 		9224FD262A6394A9000A56A6 /* WeekdayRepeatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayRepeatViewController.swift; sourceTree = "<group>"; };
@@ -264,7 +291,7 @@
 		9224FD3E2A6561CD000A56A6 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		9224FD412A656407000A56A6 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		9224FD432A657150000A56A6 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		9224FD452A6579A7000A56A6 /* DeleteLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteLocationCell.swift; sourceTree = "<group>"; };
+		9224FD452A6579A7000A56A6 /* DeleteLocationFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteLocationFooterView.swift; sourceTree = "<group>"; };
 		9224FD472A6579ED000A56A6 /* LocationTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTimeCell.swift; sourceTree = "<group>"; };
 		9224FD492A667F7E000A56A6 /* TimePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerViewController.swift; sourceTree = "<group>"; };
 		9230BE442A57F01E0053E535 /* WeekdayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayCell.swift; sourceTree = "<group>"; };
@@ -276,10 +303,35 @@
 		92459EDB2A53158A00493941 /* MarkedRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkedRecord.swift; sourceTree = "<group>"; };
 		924BE0C92A51AE25002C70FF /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		924BE0CD2A51C4D4002C70FF /* MarkedRecordsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkedRecordsCell.swift; sourceTree = "<group>"; };
+		9258409D2A7BD30700997434 /* CategorySettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingViewController.swift; sourceTree = "<group>"; };
+		9258409F2A7BD4D700997434 /* CategoryOrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryOrderCell.swift; sourceTree = "<group>"; };
+		925840A32A7C890100997434 /* CategorySelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionCell.swift; sourceTree = "<group>"; };
+		925840A72A7CBF3B00997434 /* CategorySelectionLabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionLabelCell.swift; sourceTree = "<group>"; };
+		925840A92A7CC92E00997434 /* CategorySettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingCell.swift; sourceTree = "<group>"; };
+		925840AD2A7CD17E00997434 /* EditCategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCategoryViewController.swift; sourceTree = "<group>"; };
+		925840B42A7F2D3B00997434 /* MyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCell.swift; sourceTree = "<group>"; };
+		925840B62A7F2D5A00997434 /* VersionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCell.swift; sourceTree = "<group>"; };
+		925840B82A7F2DA300997434 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		925840BA2A7F455D00997434 /* NotificationSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewController.swift; sourceTree = "<group>"; };
+		925840BC2A7F459600997434 /* NotificationSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingView.swift; sourceTree = "<group>"; };
+		925840C02A7F5B2200997434 /* NotificationSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSwitchButton.swift; sourceTree = "<group>"; };
+		925840C22A7F61E800997434 /* InquiryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryViewController.swift; sourceTree = "<group>"; };
+		925840C42A7F71E600997434 /* EmailCopyToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCopyToastMessageView.swift; sourceTree = "<group>"; };
+		925840C62A7F76A500997434 /* WithdrawalAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalAlertViewController.swift; sourceTree = "<group>"; };
+		925840C82A7F805800997434 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
+		925840CA2A7F86F900997434 /* WithdrawalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
+		925840CC2A7F8E1C00997434 /* WithdrawalReasonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalReasonView.swift; sourceTree = "<group>"; };
+		925840CE2A7FCB5400997434 /* AddScheduleTitleColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleTitleColorView.swift; sourceTree = "<group>"; };
+		925840D02A7FCE6800997434 /* AddScheduleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleHeaderView.swift; sourceTree = "<group>"; };
+		925840D42A80957900997434 /* AddLocationFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationFooterView.swift; sourceTree = "<group>"; };
+		925840D62A80D4BD00997434 /* NotificationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHeaderView.swift; sourceTree = "<group>"; };
+		925840D82A80D84300997434 /* SelectedNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedNotificationCell.swift; sourceTree = "<group>"; };
+		925840DA2A82144A00997434 /* EditScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScheduleViewController.swift; sourceTree = "<group>"; };
 		9263786A2A546BDE004E5B6E /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		9263786D2A5475AF004E5B6E /* OnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
 		926378702A54E0E6004E5B6E /* OnboardingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingManager.swift; sourceTree = "<group>"; };
 		926382B32A6CC9760064C1A8 /* GatheringToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatheringToastMessageView.swift; sourceTree = "<group>"; };
+		926382B52A6D03850064C1A8 /* CalendarEmptyScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEmptyScheduleCell.swift; sourceTree = "<group>"; };
 		926998F32A14EC07003DDAD2 /* Mappilogue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mappilogue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		926998F62A14EC07003DDAD2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		926998F82A14EC07003DDAD2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -306,7 +358,7 @@
 		9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.ttf"; sourceTree = "<group>"; };
 		9291581E2A2529660022BEF9 /* Pretendard-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.ttf"; sourceTree = "<group>"; };
 		929158292A252CC20022BEF9 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
-		92A7B64B2A4CC0E6009C9293 /* EmptyScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyScheduleCell.swift; sourceTree = "<group>"; };
+		92A7B64B2A4CC0E6009C9293 /* HomeEmptyScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEmptyScheduleCell.swift; sourceTree = "<group>"; };
 		92A7B64E2A4CCE29009C9293 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		92A7B6502A4CD261009C9293 /* AddScheduleButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleButtonCell.swift; sourceTree = "<group>"; };
 		92A7B6522A4CDD4D009C9293 /* ScheduleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScheduleType.swift; path = Mappilogue/Sources/Presenter/Home/Schedule/ScheduleType.swift; sourceTree = SOURCE_ROOT; };
@@ -320,6 +372,10 @@
 		92A7B6672A4E6154009C9293 /* UpcomingScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingScheduleCell.swift; sourceTree = "<group>"; };
 		92C2EC602A6924B5002DB0E3 /* LineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineCell.swift; sourceTree = "<group>"; };
 		92CD36FB2A7B98C400768B61 /* MainLocationSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLocationSettingView.swift; sourceTree = "<group>"; };
+		92CD36F92A7B505900768B61 /* MyCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCategoryViewController.swift; sourceTree = "<group>"; };
+		92E7814B2A84B9B3000DAACD /* ScheduleDateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDateHeaderView.swift; sourceTree = "<group>"; };
+		92E7814D2A850316000DAACD /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		92E781512A85381D000DAACD /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		92FE26102A4A6E1600BCDB82 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		92FE26122A4B74D800BCDB82 /* ScheduleTypeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTypeHeaderView.swift; sourceTree = "<group>"; };
 		92FE26142A4B751000BCDB82 /* BaseCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -412,6 +468,15 @@
 				920031AB2A8B369400E3170D /* Environment.swift */,
 			);
 			path = Global;
+		920031902A85FAF700E3170D /* Withdrawal */ = {
+			isa = PBXGroup;
+			children = (
+				925840CA2A7F86F900997434 /* WithdrawalViewController.swift */,
+				925840CC2A7F8E1C00997434 /* WithdrawalReasonView.swift */,
+				9200318E2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift */,
+				925840C62A7F76A500997434 /* WithdrawalAlertViewController.swift */,
+			);
+			path = Withdrawal;
 			sourceTree = "<group>";
 		};
 		92011B732A71386F009B047F /* Cell */ = {
@@ -463,8 +528,7 @@
 		92011BFB2A7402E5009B047F /* TitleColor */ = {
 			isa = PBXGroup;
 			children = (
-				92011B822A72AA96009B047F /* ScheduleTitleColorView.swift */,
-				92011BF82A73D404009B047F /* ColorSelectionView.swift */,
+				92011B822A72AA96009B047F /* UpdateScheduleTitleColorView.swift */,
 			);
 			path = TitleColor;
 			sourceTree = "<group>";
@@ -496,8 +560,8 @@
 		92011C022A740A0B009B047F /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				92011C002A740A08009B047F /* AddNewCategoryCell.swift */,
 				92011C032A740C16009B047F /* NewCategoryCell.swift */,
+				92011C002A740A08009B047F /* AddNewCategoryCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -527,6 +591,26 @@
 			isa = PBXGroup;
 			children = (
 				92011CB32A79FAF4009B047F /* MainLocationCell.swift */,
+		92011CB72A7A16F8009B047F /* MyRecord */ = {
+			isa = PBXGroup;
+			children = (
+				92011CB82A7A1718009B047F /* MyRecordViewController.swift */,
+				92CD36F92A7B505900768B61 /* MyCategoryViewController.swift */,
+				925840AD2A7CD17E00997434 /* EditCategoryViewController.swift */,
+				9258409D2A7BD30700997434 /* CategorySettingViewController.swift */,
+				92011CBA2A7A199F009B047F /* Cell */,
+			);
+			path = MyRecord;
+			sourceTree = "<group>";
+		};
+		92011CBA2A7A199F009B047F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				92011CBB2A7A19CA009B047F /* MyRecordCategoryCell.swift */,
+				925840A92A7CC92E00997434 /* CategorySettingCell.swift */,
+				9258409F2A7BD4D700997434 /* CategoryOrderCell.swift */,
+				925840A72A7CBF3B00997434 /* CategorySelectionLabelCell.swift */,
+				925840A32A7C890100997434 /* CategorySelectionCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -535,7 +619,6 @@
 			isa = PBXGroup;
 			children = (
 				9224FCFC2A5FF185000A56A6 /* AddScheduleViewController.swift */,
-				9224FD0A2A60F2B5000A56A6 /* AddScheduleSection.swift */,
 				9224FD282A6394B0000A56A6 /* ScheduleTitleColor */,
 				9224FD292A639508000A56A6 /* ScheduleDuration */,
 				9224FD2A2A639547000A56A6 /* NotificationRepeat */,
@@ -547,6 +630,8 @@
 		9224FD282A6394B0000A56A6 /* ScheduleTitleColor */ = {
 			isa = PBXGroup;
 			children = (
+				925840CE2A7FCB5400997434 /* AddScheduleTitleColorView.swift */,
+				92011BF82A73D404009B047F /* ColorSelectionView.swift */,
 				9224FD2B2A639593000A56A6 /* Cell */,
 			);
 			path = ScheduleTitleColor;
@@ -555,7 +640,7 @@
 		9224FD292A639508000A56A6 /* ScheduleDuration */ = {
 			isa = PBXGroup;
 			children = (
-				9224FD022A600ACF000A56A6 /* ScheduleDurationCell.swift */,
+				9224FD022A600ACF000A56A6 /* ScheduleDurationView.swift */,
 			);
 			path = ScheduleDuration;
 			sourceTree = "<group>";
@@ -563,7 +648,7 @@
 		9224FD2A2A639547000A56A6 /* NotificationRepeat */ = {
 			isa = PBXGroup;
 			children = (
-				9224FD042A600F42000A56A6 /* NotificationRepeatCell.swift */,
+				9224FD042A600F42000A56A6 /* NotificationRepeatButton.swift */,
 				9224FD382A653038000A56A6 /* Notification */,
 				9224FD392A65304A000A56A6 /* Repeat */,
 			);
@@ -573,8 +658,6 @@
 		9224FD2B2A639593000A56A6 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				9224FD002A600A86000A56A6 /* ScheduleTitleColorCell.swift */,
-				9224FD162A6161B0000A56A6 /* ColorSelectionCell.swift */,
 				9224FD182A616EB1000A56A6 /* ColorCell.swift */,
 			);
 			path = Cell;
@@ -603,7 +686,7 @@
 		9224FD2F2A639627000A56A6 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				92A7B64B2A4CC0E6009C9293 /* EmptyScheduleCell.swift */,
+				92A7B64B2A4CC0E6009C9293 /* HomeEmptyScheduleCell.swift */,
 				92A7B65E2A4E07DB009C9293 /* TodayScheduleCell.swift */,
 				92A7B6582A4D01B3009C9293 /* TodayScheduleInfoCell.swift */,
 				92A7B6672A4E6154009C9293 /* UpcomingScheduleCell.swift */,
@@ -617,7 +700,8 @@
 			isa = PBXGroup;
 			children = (
 				9224FD1E2A62B4E9000A56A6 /* NotificationViewController.swift */,
-				9224FD202A62BBB6000A56A6 /* NotificationCell.swift */,
+				925840D62A80D4BD00997434 /* NotificationHeaderView.swift */,
+				925840D82A80D84300997434 /* SelectedNotificationCell.swift */,
 			);
 			path = Notification;
 			sourceTree = "<group>";
@@ -640,10 +724,12 @@
 			isa = PBXGroup;
 			children = (
 				9224FD3C2A6559A0000A56A6 /* AddLocationViewController.swift */,
-				9224FD412A656407000A56A6 /* LocationCell.swift */,
-				9224FD452A6579A7000A56A6 /* DeleteLocationCell.swift */,
-				9224FD472A6579ED000A56A6 /* LocationTimeCell.swift */,
+				925840D02A7FCE6800997434 /* AddScheduleHeaderView.swift */,
+				92E7814B2A84B9B3000DAACD /* ScheduleDateHeaderView.swift */,
+				925840D42A80957900997434 /* AddLocationFooterView.swift */,
+				9224FD452A6579A7000A56A6 /* DeleteLocationFooterView.swift */,
 				9224FD492A667F7E000A56A6 /* TimePickerViewController.swift */,
+				92E7814A2A849AB9000DAACD /* Cell */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -656,8 +742,19 @@
 				9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */,
 				9230BE462A57FEB80053E535 /* DayCell.swift */,
 				9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */,
-				9224FCF82A5FCF72000A56A6 /* ScheduleCell.swift */,
 				92C2EC602A6924B5002DB0E3 /* LineCell.swift */,
+				9224FCF82A5FCF72000A56A6 /* ScheduleCell.swift */,
+				926382B52A6D03850064C1A8 /* CalendarEmptyScheduleCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		925840B32A7F281A00997434 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				925840B82A7F2DA300997434 /* ProfileCell.swift */,
+				925840B62A7F2D5A00997434 /* VersionCell.swift */,
+				925840B42A7F2D3B00997434 /* MyCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -779,7 +876,9 @@
 				9224FD3E2A6561CD000A56A6 /* UITextField.swift */,
 				92011C172A753AEB009B047F /* CALayer.swift */,
 				92011C652A78980E009B047F /* UIView.swift */,
-				920031952A88FA1700E3170D /* UILabel.swift */,
+				925840C82A7F805800997434 /* UILabel.swift */,
+				92E7814D2A850316000DAACD /* Date.swift */,
+				92E781512A85381D000DAACD /* String.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -836,6 +935,7 @@
 				926999412A14F74B003DDAD2 /* CalendarViewController.swift */,
 				9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */,
 				9224FCF62A5FC4CA000A56A6 /* ScheduleViewController.swift */,
+				925840DA2A82144A00997434 /* EditScheduleViewController.swift */,
 				9230BE502A59B45D0053E535 /* MonthlyCalendar.swift */,
 				9230BE432A57EFF10053E535 /* Cell */,
 				9224FCFE2A5FF82F000A56A6 /* AddSchedule */,
@@ -856,6 +956,13 @@
 			isa = PBXGroup;
 			children = (
 				926999472A14F76A003DDAD2 /* MyViewController.swift */,
+				925840BA2A7F455D00997434 /* NotificationSettingsViewController.swift */,
+				925840BC2A7F459600997434 /* NotificationSettingView.swift */,
+				925840C02A7F5B2200997434 /* NotificationSwitchButton.swift */,
+				925840C22A7F61E800997434 /* InquiryViewController.swift */,
+				925840C42A7F71E600997434 /* EmailCopyToastMessageView.swift */,
+				920031902A85FAF700E3170D /* Withdrawal */,
+				925840B32A7F281A00997434 /* Cell */,
 			);
 			path = My;
 			sourceTree = "<group>";
@@ -868,6 +975,7 @@
 				92011C1F2A769C12009B047F /* SortHeaderView.swift */,
 				92011C632A788FBF009B047F /* MarkerView.swift */,
 				92011B732A71386F009B047F /* Cell */,
+				92011CB72A7A16F8009B047F /* MyRecord */,
 				92011C052A74A0FE009B047F /* Search */,
 				92011B762A716801009B047F /* WriteRecord */,
 			);
@@ -892,7 +1000,7 @@
 				9224FCFA2A5FDD90000A56A6 /* AddScheduleButton.swift */,
 				9224FD082A601B00000A56A6 /* ColorSelectionButton.swift */,
 				92011C082A74AFCA009B047F /* SearchTextField.swift */,
-				92011C192A755D02009B047F /* RecordListButton.swift */,
+				92011C192A755D02009B047F /* MyRecordButton.swift */,
 				92011B272A6E75F1009B047F /* WriteRecordButton.swift */,
 				92011C1D2A75EE79009B047F /* MarkView.swift */,
 				92011B712A7127FC009B047F /* AlertViewController.swift */,
@@ -915,6 +1023,15 @@
 				92011C252A77A48B009B047F /* Category.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		92E7814A2A849AB9000DAACD /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				9224FD412A656407000A56A6 /* LocationCell.swift */,
+				9224FD472A6579ED000A56A6 /* LocationTimeCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		AB9B24CC5D92D2660F4787DE /* Frameworks */ = {
@@ -1199,34 +1316,45 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				925840D32A7FF39B00997434 /* HomeEmptyScheduleCell.swift in Sources */,
+				925840D22A7FF34000997434 /* MarkedRecord.swift in Sources */,
+				926382B62A6D03850064C1A8 /* CalendarEmptyScheduleCell.swift in Sources */,
 				92011B892A72B4BB009B047F /* TextContentView.swift in Sources */,
 				92011C222A77907F009B047F /* CategoryCell.swift in Sources */,
-				92459EDC2A53158A00493941 /* MarkedRecord.swift in Sources */,
 				92011C242A77A329009B047F /* AddCategoryCell.swift in Sources */,
 				92011C662A78980E009B047F /* UIView.swift in Sources */,
-				92A7B64C2A4CC0E6009C9293 /* EmptyScheduleCell.swift in Sources */,
 				92011C092A74AFCA009B047F /* SearchTextField.swift in Sources */,
 				92011C162A7505F7009B047F /* Record.swift in Sources */,
 				92FE26152A4B751000BCDB82 /* BaseCollectionReusableView.swift in Sources */,
+				925840B52A7F2D3B00997434 /* MyCell.swift in Sources */,
 				92011C042A740C16009B047F /* NewCategoryCell.swift in Sources */,
 				92A7B6552A4CEA28009C9293 /* TodaySchedule.swift in Sources */,
-				92011B832A72AA96009B047F /* ScheduleTitleColorView.swift in Sources */,
+				92011B832A72AA96009B047F /* UpdateScheduleTitleColorView.swift in Sources */,
 				9224FCF52A5D6C65000A56A6 /* DatePickerViewController.swift in Sources */,
 				926382B42A6CC9760064C1A8 /* GatheringToastMessageView.swift in Sources */,
+				925840D12A7FCE6800997434 /* AddScheduleHeaderView.swift in Sources */,
+				925840A82A7CBF3B00997434 /* CategorySelectionLabelCell.swift in Sources */,
+				925840BB2A7F455D00997434 /* NotificationSettingsViewController.swift in Sources */,
 				92011C012A740A08009B047F /* AddNewCategoryCell.swift in Sources */,
 				92011B752A7138B0009B047F /* EmptyRecordCell.swift in Sources */,
+				925840D52A80957900997434 /* AddLocationFooterView.swift in Sources */,
 				92011BFF2A7407D3009B047F /* SelectCategoryViewController.swift in Sources */,
+				925840AE2A7CD17E00997434 /* EditCategoryViewController.swift in Sources */,
+				9200318F2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift in Sources */,
 				9224FD3B2A6532E3000A56A6 /* EndView.swift in Sources */,
 				9230BE472A57FEB80053E535 /* DayCell.swift in Sources */,
 				9224FD422A656407000A56A6 /* LocationCell.swift in Sources */,
+				925840CB2A7F86F900997434 /* WithdrawalViewController.swift in Sources */,
 				92FE26172A4B76B800BCDB82 /* UIFont.swift in Sources */,
 				926999422A14F74B003DDAD2 /* CalendarViewController.swift in Sources */,
 				92FE26112A4A6E1600BCDB82 /* BaseCollectionViewCell.swift in Sources */,
 				92A7B6662A4E5B3A009C9293 /* UpcomingSchedule.swift in Sources */,
 				9224FD312A6397BD000A56A6 /* CycleRepeatViewController.swift in Sources */,
+				925840DB2A82144A00997434 /* EditScheduleViewController.swift in Sources */,
 				9224FCEE2A5BEF80000A56A6 /* ScheduleTitleCell.swift in Sources */,
+				925840C72A7F76A500997434 /* WithdrawalAlertViewController.swift in Sources */,
 				92011B782A71683E009B047F /* SelectWriteRecordViewController.swift in Sources */,
-				92011C1A2A755D02009B047F /* RecordListButton.swift in Sources */,
+				92011C1A2A755D02009B047F /* MyRecordButton.swift in Sources */,
 				9224FD3D2A6559A0000A56A6 /* AddLocationViewController.swift in Sources */,
 				924BE0CE2A51C4D4002C70FF /* MarkedRecordsCell.swift in Sources */,
 				920031962A88FA1700E3170D /* UILabel.swift in Sources */,
@@ -1234,30 +1362,35 @@
 				9224FD1F2A62B4E9000A56A6 /* NotificationViewController.swift in Sources */,
 				92011C1E2A75EE79009B047F /* MarkView.swift in Sources */,
 				9224FD372A653024000A56A6 /* SpacingView.swift in Sources */,
+				925840AA2A7CC92E00997434 /* CategorySettingCell.swift in Sources */,
 				9291582A2A252CC20022BEF9 /* UIColor.swift in Sources */,
+				925840CD2A7F8E1C00997434 /* WithdrawalReasonView.swift in Sources */,
 				92011B872A72B0A7009B047F /* MainLocatonView.swift in Sources */,
 				926999382A14F4AA003DDAD2 /* TabBarControllerController.swift in Sources */,
+				9258409E2A7BD30700997434 /* CategorySettingViewController.swift in Sources */,
 				92C2EC612A6924B5002DB0E3 /* LineCell.swift in Sources */,
 				92A7B65F2A4E07DB009C9293 /* TodayScheduleCell.swift in Sources */,
 				926999342A14F2A3003DDAD2 /* BaseViewController.swift in Sources */,
 				92459ED82A52494200493941 /* AddMarkedRecordCell.swift in Sources */,
-				9224FD0B2A60F2B5000A56A6 /* AddScheduleSection.swift in Sources */,
-				9224FD052A600F42000A56A6 /* NotificationRepeatCell.swift in Sources */,
+				925840B92A7F2DA300997434 /* ProfileCell.swift in Sources */,
+				925840C32A7F61E800997434 /* InquiryViewController.swift in Sources */,
+				9224FD052A600F42000A56A6 /* NotificationRepeatButton.swift in Sources */,
 				9224FCF92A5FCF72000A56A6 /* ScheduleCell.swift in Sources */,
 				9224FD0F2A610E64000A56A6 /* EmptyUpcomingScheduleSection.swift in Sources */,
 				9263786E2A5475AF004E5B6E /* OnboardingCell.swift in Sources */,
-				9224FD012A600A86000A56A6 /* ScheduleTitleColorCell.swift in Sources */,
 				92A7B6532A4CDD4D009C9293 /* ScheduleType.swift in Sources */,
 				9224FD352A652A96000A56A6 /* WeekdayView.swift in Sources */,
 				926999362A14F443003DDAD2 /* BaseView.swift in Sources */,
 				92011C0E2A74C1FC009B047F /* EmptySearchCell.swift in Sources */,
+				925840C52A7F71E600997434 /* EmailCopyToastMessageView.swift in Sources */,
+				925840D92A80D84300997434 /* SelectedNotificationCell.swift in Sources */,
 				92FE26132A4B74D800BCDB82 /* ScheduleTypeHeaderView.swift in Sources */,
 				920031AC2A8B369400E3170D /* Environment.swift in Sources */,
 				9224FD212A62BBB7000A56A6 /* NotificationCell.swift in Sources */,
 				92CD36FC2A7B98C400768B61 /* MainLocationSettingView.swift in Sources */,
 				9224FD0D2A610134000A56A6 /* EmptyTodayScheduleSection.swift in Sources */,
 				926998F72A14EC07003DDAD2 /* AppDelegate.swift in Sources */,
-				9224FD032A600ACF000A56A6 /* ScheduleDurationCell.swift in Sources */,
+				9224FD032A600ACF000A56A6 /* ScheduleDurationView.swift in Sources */,
 				92A7B6612A4E2039009C9293 /* BaseTableViewHeaderFooterView.swift in Sources */,
 				92011B812A7271D0009B047F /* CategoryButton.swift in Sources */,
 				92011C122A74F8E6009B047F /* SearchRecordCell.swift in Sources */,
@@ -1265,23 +1398,28 @@
 				9224FD482A6579ED000A56A6 /* LocationTimeCell.swift in Sources */,
 				92011C262A77A48B009B047F /* Category.swift in Sources */,
 				926999482A14F76A003DDAD2 /* MyViewController.swift in Sources */,
-				9224FD172A6161B0000A56A6 /* ColorSelectionCell.swift in Sources */,
 				92011BF92A73D404009B047F /* ColorSelectionView.swift in Sources */,
 				9230BE492A58D23B0053E535 /* NavigationBarViewController.swift in Sources */,
 				926999442A14F756003DDAD2 /* GatheringViewController.swift in Sources */,
+				92E7814C2A84B9B3000DAACD /* ScheduleDateHeaderView.swift in Sources */,
 				926378712A54E0E6004E5B6E /* OnboardingManager.swift in Sources */,
 				92011CC02A7A3E14009B047F /* MapMainLocationViewController.swift in Sources */,
+				925840CF2A7FCB5400997434 /* AddScheduleTitleColorView.swift in Sources */,
 				92A7B6512A4CD261009C9293 /* AddScheduleButtonCell.swift in Sources */,
 				92011B722A7127FC009B047F /* AlertViewController.swift in Sources */,
 				9224FCFD2A5FF185000A56A6 /* AddScheduleViewController.swift in Sources */,
 				9224FD252A638F01000A56A6 /* RepeatType.swift in Sources */,
+				92E781522A85381D000DAACD /* String.swift in Sources */,
 				9224FD192A616EB1000A56A6 /* ColorCell.swift in Sources */,
 				92011C0B2A74B837009B047F /* SearchResultViewController.swift in Sources */,
 				92A7B6682A4E6154009C9293 /* UpcomingScheduleCell.swift in Sources */,
 				927E7F272A683DCD00E6A29F /* CalendarCell.swift in Sources */,
+				925840C12A7F5B2200997434 /* NotificationSwitchButton.swift in Sources */,
 				9224FD112A611218000A56A6 /* TodayScheduleSection.swift in Sources */,
 				92011B8B2A72B7DA009B047F /* NewWriteView.swift in Sources */,
+				925840B72A7F2D5A00997434 /* VersionCell.swift in Sources */,
 				92A7B65B2A4D0FD9009C9293 /* AddLocationButtonCell.swift in Sources */,
+				925840D72A80D4BD00997434 /* NotificationHeaderView.swift in Sources */,
 				9230BE512A59B45D0053E535 /* MonthlyCalendar.swift in Sources */,
 				92011B902A7364D0009B047F /* BaseButton.swift in Sources */,
 				92011C682A78CB24009B047F /* InputAlertViewController.swift in Sources */,
@@ -1289,6 +1427,7 @@
 				9230BE452A57F01E0053E535 /* WeekdayCell.swift in Sources */,
 				92011C102A74F222009B047F /* SearchType.swift in Sources */,
 				92A7B6592A4D01B3009C9293 /* TodayScheduleInfoCell.swift in Sources */,
+				925840A02A7BD4D700997434 /* CategoryOrderCell.swift in Sources */,
 				9224FCF32A5C5E7A000A56A6 /* WeekCell.swift in Sources */,
 				9224FD092A601B00000A56A6 /* ColorSelectionButton.swift in Sources */,
 				9224FD4A2A667F7E000A56A6 /* TimePickerViewController.swift in Sources */,
@@ -1300,11 +1439,15 @@
 				92011B7B2A716C9D009B047F /* SelectScheduleCell.swift in Sources */,
 				92011B922A7367E6009B047F /* MainLocationButton.swift in Sources */,
 				9224FCFB2A5FDD90000A56A6 /* AddScheduleButton.swift in Sources */,
+				92E7814E2A850316000DAACD /* Date.swift in Sources */,
+				92011CB92A7A1718009B047F /* MyRecordViewController.swift in Sources */,
+				925840A42A7C890100997434 /* CategorySelectionCell.swift in Sources */,
 				92011C1C2A75E484009B047F /* RecordCell.swift in Sources */,
 				926999402A14F73C003DDAD2 /* HomeViewController.swift in Sources */,
 				92011B8D2A72BBE8009B047F /* SaveRecordView.swift in Sources */,
 				927E7F212A66F64400E6A29F /* Schedule.swift in Sources */,
 				92011CB22A79F7C6009B047F /* AddedLocationsHeaderView.swift in Sources */,
+				925840BD2A7F459600997434 /* NotificationSettingView.swift in Sources */,
 				9224FD152A613AB8000A56A6 /* UpcomingScheduleSection.swift in Sources */,
 				920031942A88F07100E3170D /* MainLocationAlertViewController.swift in Sources */,
 				92011C142A74F9DE009B047F /* SearchLocationCell.swift in Sources */,
@@ -1315,13 +1458,17 @@
 				9200319C2A89E5B500E3170D /* AddressAPI.swift in Sources */,
 				9224FD462A6579A7000A56A6 /* DeleteLocationCell.swift in Sources */,
 				920031A32A8A601500E3170D /* KakaoAddressResponse.swift in Sources */,
+				9224FD462A6579A7000A56A6 /* DeleteLocationFooterView.swift in Sources */,
 				92011C072A74AD97009B047F /* SearchViewController.swift in Sources */,
 				9224FD332A641B64000A56A6 /* UIViewController.swift in Sources */,
+				925840C92A7F805800997434 /* UILabel.swift in Sources */,
 				9263786B2A546BDE004E5B6E /* OnboardingViewController.swift in Sources */,
 				92A7B6632A4E20BF009C9293 /* BaseTableViewCell.swift in Sources */,
+				92CD36FA2A7B505900768B61 /* MyCategoryViewController.swift in Sources */,
 				9224FD1B2A61705D000A56A6 /* ColorSelection.swift in Sources */,
 				92011C642A788FBF009B047F /* MarkerView.swift in Sources */,
 				920031A02A8A5E2C00E3170D /* AddressManager.swift in Sources */,
+				92011CBC2A7A19CA009B047F /* MyRecordCategoryCell.swift in Sources */,
 				9224FD232A62EC0B000A56A6 /* RepeatViewController.swift in Sources */,
 				92011B282A6E75F1009B047F /* WriteRecordButton.swift in Sources */,
 				92A7B64F2A4CCE29009C9293 /* AddButton.swift in Sources */,

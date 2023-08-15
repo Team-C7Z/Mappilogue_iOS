@@ -26,19 +26,13 @@ func dummyLocationData() -> [Location] {
 }
 
 struct LocationTime {
-    let location: String
-    var time: String
+    var date: String
+    var locationDetail: [LocationTimeDetail]
 }
 
-func dummyLocationTimeData(_ locationCount: Int) -> [LocationTime] {
-    if locationCount == 0 {
-        return []
-    } else {
-        let locationTime1 = LocationTime(location: "한강", time: "1:00 PM")
-        let locationTime2 = LocationTime(location: "선릉역", time: "4:00 PM")
-        
-        return [locationTime1, locationTime2]
-    }
+struct LocationTimeDetail {
+    var location: String
+    var time: String
 }
 
 func dummyMainLocationData() -> [Location] {

@@ -9,125 +9,97 @@ import UIKit
 
 class AddScheduleViewController: BaseViewController {
     private var monthlyCalendar = MonthlyCalendar()
+    private var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0, day: 0)
     private var startDate: SelectedDate = SelectedDate(year: 0, month: 0, day: 0)
     private var endDate: SelectedDate  = SelectedDate(year: 0, month: 0, day: 0)
 
     var isColorSelection: Bool = false
     var selectedColor: UIColor = .color1C1C1C
-    
+
+    var isStartDate: Bool = false
     let years: [Int] = Array(1970...2050)
     let months: [Int] = Array(1...12)
     var days: [Int] = []
 
     var locations: [LocationTime] = []
-    var selectedLocations: [Int] = []
-    var timeIndex: Int?
+    var selectedLocations: [IndexPath] = []
     var initialTime: String = "9:00 AM"
-    var isDeleteModel: Bool = false
+    var isDeleteMode: Bool = false
     
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.backgroundColor = .colorF9F8F7
-        tableView.sectionHeaderHeight = 0
-        tableView.sectionFooterHeight = 0
-        tableView.separatorStyle = .none
-        tableView.register(ScheduleTitleColorCell.self, forCellReuseIdentifier: ScheduleTitleColorCell.registerId)
-        tableView.register(ColorSelectionCell.self, forCellReuseIdentifier: ColorSelectionCell.registerId)
-        tableView.register(ScheduleDurationCell.self, forCellReuseIdentifier: ScheduleDurationCell.registerId)
-        tableView.register(NotificationRepeatCell.self, forCellReuseIdentifier: NotificationRepeatCell.registerId)
-        tableView.register(DeleteLocationCell.self, forCellReuseIdentifier: DeleteLocationCell.registerId)
-        tableView.register(LocationTimeCell.self, forCellReuseIdentifier: LocationTimeCell.registerId)
-        tableView.register(AddLocationButtonCell.self, forCellReuseIdentifier: AddLocationButtonCell.registerId)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.dragInteractionEnabled = true
-        tableView.dragDelegate = self
-        tableView.dropDelegate = self
+    var dragSectionIndex: Int = 0
+    
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
 
-        return tableView
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .colorF9F8F7
+        collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+        collectionView.register(LocationTimeCell.self, forCellWithReuseIdentifier: LocationTimeCell.registerId)
+        collectionView.register(AddScheduleHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: AddScheduleHeaderView.registerId)
+        collectionView.register(ScheduleDateHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ScheduleDateHeaderView.registerId)
+        collectionView.register(DeleteLocationFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: DeleteLocationFooterView.registerId)
+        collectionView.register(AddLocationFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: AddLocationFooterView.registerId)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.dragDelegate = self
+        collectionView.dropDelegate = self
+        return collectionView
     }()
     
-    private let startDatePickerOuterView = UIView()
-    private let startDatePickerView = UIPickerView()
-    private let endDatePickerOuterView = UIView()
-    private let endDatePickerView = UIPickerView()
+    private let datePickerOuterView = UIView()
+    private let datePickerView = UIPickerView()
+    
+    var keyboardTap = UITapGestureRecognizer()
+    var datePickerTap = UITapGestureRecognizer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
         setCurrentDate()
         setSelectedDate()
+        setKeyboardTap()
     }
-    
+
     override func setupProperty() {
         super.setupProperty()
         
         setNavigationBar()
         
-        startDatePickerOuterView.backgroundColor = .colorF5F3F0
-        endDatePickerOuterView.backgroundColor = .colorF5F3F0
-        
-        startDatePickerView.backgroundColor = .colorF5F3F0
-        startDatePickerView.delegate = self
-        startDatePickerView.dataSource = self
-
-        endDatePickerView.backgroundColor = .colorF5F3F0
-        endDatePickerView.delegate = self
-        endDatePickerView.dataSource = self
-        
-        startDatePickerOuterView.isHidden = true
-        endDatePickerOuterView.isHidden = true
-        
-        let keyboardTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        keyboardTap.cancelsTouchesInView = false
-        keyboardTap.delegate = self
-        tableView.addGestureRecognizer(keyboardTap)
-        
-        let datePickerTap = UITapGestureRecognizer(target: self, action: #selector(dismissDatePicker))
-        datePickerTap.cancelsTouchesInView = false
-        datePickerTap.delegate = self
-        tableView.addGestureRecognizer(datePickerTap)
+        datePickerOuterView.backgroundColor = .colorF5F3F0
+        datePickerOuterView.isHidden = true
+        datePickerView.backgroundColor = .colorF5F3F0
+        datePickerView.delegate = self
+        datePickerView.dataSource = self
+        datePickerTap = UITapGestureRecognizer(target: self, action: #selector(dismissDatePicker))
+        keyboardTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        view.addSubview(tableView)
-        view.addSubview(startDatePickerOuterView)
-        view.addSubview(endDatePickerOuterView)
-        startDatePickerOuterView.addSubview(startDatePickerView)
-        endDatePickerOuterView.addSubview(endDatePickerView)
+        view.addSubview(collectionView)
+        view.addSubview(datePickerOuterView)
+        datePickerOuterView.addSubview(datePickerView)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
-        tableView.snp.makeConstraints {
+        collectionView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
     
-        startDatePickerOuterView.snp.makeConstraints {
+        datePickerOuterView.snp.makeConstraints {
             $0.leading.bottom.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(236)
         }
         
-        endDatePickerOuterView.snp.makeConstraints {
-            $0.leading.bottom.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(236)
-        }
-        
-        startDatePickerView.snp.makeConstraints {
-            $0.top.equalTo(startDatePickerOuterView).offset(5)
-            $0.leading.equalTo(startDatePickerOuterView).offset(35)
-            $0.trailing.equalTo(startDatePickerOuterView).offset(-33)
-            $0.bottom.equalTo(startDatePickerOuterView).offset(-5)
-        }
-        
-        endDatePickerView.snp.makeConstraints {
-            $0.top.equalTo(endDatePickerOuterView).offset(5)
-            $0.leading.equalTo(endDatePickerOuterView).offset(35)
-            $0.trailing.equalTo(endDatePickerOuterView).offset(-33)
-            $0.bottom.equalTo(endDatePickerOuterView).offset(-5)
+        datePickerView.snp.makeConstraints {
+            $0.top.equalTo(datePickerOuterView).offset(5)
+            $0.leading.equalTo(datePickerOuterView).offset(35)
+            $0.trailing.equalTo(datePickerOuterView).offset(-33)
+            $0.bottom.equalTo(datePickerOuterView).offset(-5)
         }
     }
     
@@ -139,20 +111,30 @@ class AddScheduleViewController: BaseViewController {
     
     func setNavigationBar() {
         title = "일정"
-        setNavigationButton(imageName: "back", action: #selector(backButtonTapped), isLeft: true)
-        setNavigationButton(imageName: "completion", action: #selector(completionButtonTapped), isLeft: false)
+        setNavigationBarItems(imageName: "x", action: #selector(xButtonTapped), isLeft: true)
+        setNavigationBarItems(imageName: "completion", action: #selector(completionButtonTapped), isLeft: false)
     }
     
-    func setNavigationButton(imageName: String, action: Selector, isLeft: Bool) {
-        let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: imageName), for: .normal)
-        button.addTarget(self, action: action, for: .touchUpInside)
-        let barButtonItem = UIBarButtonItem(customView: button)
-        if isLeft {
-            navigationItem.leftBarButtonItem = barButtonItem
-        } else {
-            navigationItem.rightBarButtonItem = barButtonItem
+    @objc func xButtonTapped() {
+        showAlert()
+    }
+    
+    private func showAlert() {
+        let alertViewController = AlertViewController()
+        alertViewController.modalPresentationStyle = .overCurrentContext
+        let alert = Alert(titleText: "일정 작성을 중단할까요?",
+                          messageText: "저장하지 않은 일정은 사라져요",
+                          cancelText: "취소",
+                          doneText: "삭제",
+                          buttonColor: .colorF14C4C,
+                          alertHeight: 160)
+        alertViewController.configureAlert(with: alert)
+        alertViewController.onDoneTapped = {
+            self.dismiss(animated: false) {
+                self.navigationController?.popViewController(animated: true)
+           }
         }
+        present(alertViewController, animated: false)
     }
     
     @objc func completionButtonTapped(_ sender: UIButton) {
@@ -160,149 +142,329 @@ class AddScheduleViewController: BaseViewController {
     }
     
     func setSelectedDate() {
-        func selectedRow(for pickerView: UIPickerView, withValue value: Int, isComponent component: Int) {
-            pickerView.selectRow(value, inComponent: component, animated: true)
+        func selectedRow(_ value: Int, component: Int) {
+            datePickerView.selectRow(value, inComponent: component, animated: false)
         }
-        
-        selectedRow(for: startDatePickerView, withValue: years.firstIndex(of: startDate.year) ?? 0, isComponent: ComponentType.year.rawValue)
-        selectedRow(for: startDatePickerView, withValue: months.firstIndex(of: startDate.month) ?? 0, isComponent: ComponentType.month.rawValue)
+        selectedRow(years.firstIndex(of: isStartDate ? startDate.year : endDate.year) ?? 0, component: ComponentType.year.rawValue)
+        selectedRow(months.firstIndex(of: isStartDate ? startDate.month : endDate.month) ?? 0, component: ComponentType.month.rawValue)
 
-        if let day = startDate.day, let currentDayIndex = days.firstIndex(of: day) {
-            selectedRow(for: startDatePickerView, withValue: currentDayIndex, isComponent: ComponentType.day.rawValue)
+        if let day = isStartDate ? startDate.day : endDate.day, let currentDayIndex = days.firstIndex(of: day) {
+            selectedRow(currentDayIndex, component: ComponentType.day.rawValue)
         }
-        
-        selectedRow(for: endDatePickerView, withValue: years.firstIndex(of: endDate.year) ?? 0, isComponent: ComponentType.year.rawValue)
-        selectedRow(for: endDatePickerView, withValue: months.firstIndex(of: endDate.month) ?? 0, isComponent: ComponentType.month.rawValue)
-
-        if let day = endDate.day, let currentDayIndex = days.firstIndex(of: day) {
-            selectedRow(for: endDatePickerView, withValue: currentDayIndex, isComponent: ComponentType.day.rawValue)
-        }
+    }
+    
+    func setKeyboardTap() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        view.addGestureRecognizer(keyboardTap)
+     }
+     
+     @objc func keyboardWillHide(_ notification: Notification) {
+         view.removeGestureRecognizer(keyboardTap)
+     }
+    
+    func addDatePickerTapGesture() {
+        view.addGestureRecognizer(datePickerTap)
+    }
+    
+    func datePickerButtonTapped() {
+        setSelectedDate()
+        datePickerOuterView.isHidden = false
+        datePickerView.reloadAllComponents()
+        collectionView.reloadData()
     }
     
     @objc func dismissDatePicker(_ gesture: UITapGestureRecognizer) {
-        let location = gesture.location(in: tableView)
-        if !startDatePickerOuterView.isHidden && location.y < startDatePickerOuterView.frame.minY {
-            startDatePickerOuterView.isHidden = true
-            tableView.reloadData()
-        } else if !endDatePickerOuterView.isHidden && location.y < endDatePickerOuterView.frame.minY {
-            endDatePickerOuterView.isHidden = true
-            tableView.reloadData()
+        let location = gesture.location(in: collectionView)
+        if location.y < datePickerOuterView.frame.minY {
+            datePickerOuterView.isHidden = true
+            validateDateRange()
         }
+        collectionView.reloadData()
+        view.removeGestureRecognizer(datePickerTap)
+    }
+    
+    func validateDateRange() {
+        if daysBetween() < 0 {
+            if isStartDate {
+                endDate = SelectedDate(year: startDate.year, month: startDate.month, day: startDate.day ?? 0)
+            } else {
+                startDate = SelectedDate(year: endDate.year, month: endDate.month, day: endDate.day ?? 0)
+            }
+        }
+    }
+
+    func showNotificationViewController() {
+        let notificationViewController = NotificationViewController()
+        navigationController?.pushViewController(notificationViewController, animated: true)
+    }
+    
+    func showRepeatViewController() {
+        let repeatViewController = RepeatViewController()
+        navigationController?.pushViewController(repeatViewController, animated: true)
+    }
+    
+    func showAddLocationController() {
+        let addLocationViewController = AddLocationViewController()
+        addLocationViewController.modalPresentationStyle = .overFullScreen
+        addLocationViewController.onLocationSelected = { location in
+            self.selectLocation(location)
+        }
+        present(addLocationViewController, animated: false)
+    }
+    
+    func selectLocation(_ location: Location) {
+        guard let selectedDate = setDateFormatter(date: startDate) else { return }
+        let date = selectedDate.formatToMMddDateString()
+        addLocation(date: date, location: location)
+        collectionView.reloadData()
+    }
+    
+    func addLocation(date: String, location: Location) {
+        let locationTime = LocationTimeDetail(location: location.title, time: initialTime)
+        if let index = locations.firstIndex(where: {$0.date == date}) {
+            locations[index].locationDetail.append(locationTime)
+        } else {
+            locations.append(LocationTime(date: date, locationDetail: [locationTime]))
+        }
+    }
+    
+    func getDatesInRange(startDate: SelectedDate, endDate: SelectedDate) -> [String] {
+        guard let startDate = setDateFormatter(date: startDate), let endDate = setDateFormatter(date: endDate) else { return [] }
+        var dates: [String] = []
+        var currentDate = startDate
+        dates.append(currentDate.formatToMMddDateString())
+   
+        while currentDate.formatToMMddDateString() != endDate.formatToMMddDateString() {
+            guard let newDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate) else { return [] }
+            currentDate = newDate
+            dates.append(currentDate.formatToMMddDateString())
+        }
+        
+        return dates
+    }
+    
+    func showTimePicker(indexPath: IndexPath) {
+        let timePickerViewController = TimePickerViewController()
+        let selectedTime = locations[indexPath.section].locationDetail[indexPath.row].time
+        timePickerViewController.selectedTime = selectedTime == "설정 안 함" ? initialTime : selectedTime
+        timePickerViewController.modalPresentationStyle = .overFullScreen
+        timePickerViewController.onSelectedTime = { selectedTime in
+            self.locations[indexPath.section].locationDetail[indexPath.row].time = self.formatTime(selectedTime)
+            self.collectionView.reloadData()
+        }
+        present(timePickerViewController, animated: false)
+    }
+    
+    private func formatTime(_ time: String) -> String {
+        return time.replacingOccurrences(of: "오전", with: "AM").replacingOccurrences(of: "오후", with: "PM")
+    }
+    
+    private func checkButtonTapped(_ indexPath: IndexPath) {
+        if let indexPath = selectedLocations.firstIndex(of: indexPath) {
+            selectedLocations.remove(at: indexPath)
+        } else {
+            selectedLocations.append(indexPath)
+        }
+    }
+    
+    func showDeleteLocationAlert() {
+        guard !selectedLocations.isEmpty else { return }
+        
+        let alertViewController = AlertViewController()
+        let alert = Alert(titleText: "선택한 장소를 삭제할까요?",
+                          cancelText: "취소",
+                          doneText: "삭제",
+                          buttonColor: .colorF14C4C,
+                          alertHeight: 140)
+        alertViewController.configureAlert(with: alert)
+        alertViewController.modalPresentationStyle = .overCurrentContext
+        alertViewController.onDoneTapped = {
+            self.deleteSelectedLocations()
+        }
+        self.present(alertViewController, animated: false)
+    }
+    
+    private func deleteSelectedLocations() {
+        selectedLocations.sorted(by: >).forEach { indexPath in
+            if indexPath.section < locations.count && indexPath.row < locations[indexPath.section].locationDetail.count {
+                locations[indexPath.section].locationDetail.remove(at: indexPath.row)
+            }
+            if locations[indexPath.section].locationDetail.isEmpty {
+                locations.remove(at: indexPath.section)
+            }
+        }
+        selectedLocations = []
+        collectionView.reloadData()
     }
 }
 
-extension AddScheduleViewController: UITableViewDelegate, UITableViewDataSource, UITableViewDragDelegate, UITableViewDropDelegate {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return locations.isEmpty ? 4 : 5
+extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return locations.isEmpty ? 1 : locations.count + 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let adjustedSection = locations.isEmpty && section == 3 ? 4 : section
-        guard let section = AddScheduleSection(rawValue: adjustedSection) else { return 0 }
-        return section.numberOfRows(isColorSelection: isColorSelection, locationCount: locations.count)
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return locations.isEmpty ? 0 : section == 0 ? 0 : locations[section-1].locationDetail.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let adjustedSection = locations.isEmpty && indexPath.section == 3 ? 4 : indexPath.section
-        guard let section = AddScheduleSection(rawValue: adjustedSection) else { return UITableViewCell() }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LocationTimeCell.registerId, for: indexPath) as? LocationTimeCell else { return UICollectionViewCell() }
         
-        let cellIdentifier = section.cellIdentifier(isColorSelection, row: indexPath.row)
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        cell.selectionStyle = .none
+        let location = locations[indexPath.section-1].locationDetail[indexPath.row]
+        cell.configure([indexPath.section-1, indexPath.row], schedule: location, isDeleteMode: isDeleteMode)
         
-        switch cell {
-        case let scheduleTitleColorCell as ScheduleTitleColorCell:
-            scheduleTitleColorCell.delegate = self
-            scheduleTitleColorCell.configure(with: selectedColor, isColorSelection: isColorSelection)
-        
-        case let colorSelectionCell as ColorSelectionCell:
-            colorSelectionCell.delegate = self
-        
-        case let scheduleDurationCell as ScheduleDurationCell:
-            scheduleDurationCell.startDateDelegate = self
-            scheduleDurationCell.endDateDelegate = self
-            scheduleDurationCell.configure(startDate: startDate, endDate: endDate)
-        
-        case let notificationRepeatCell as NotificationRepeatCell:
-            section.configureNotificationRepeatCell(notificationRepeatCell, row: indexPath.row)
-            
-        case let deleteLocationCell as DeleteLocationCell:
-            deleteLocationCell.deleteModelDelegate = self
-            deleteLocationCell.deleteLocationDelegate = self
-            
-        case let locationTimeCell as LocationTimeCell:
-            locationTimeCell.timeDelegate = self
-            locationTimeCell.checkDelegate = self
-            
-            let location = locations[indexPath.row-1]
-            let index = indexPath.row-1
-
-            section.configureLocationTimeCell(locationTimeCell, index: index, schedule: location, isDeleteMode: isDeleteModel)
-        
-        case let addLocationButtonCell as AddLocationButtonCell:
-            addLocationButtonCell.delegate = self
-            
-        default:
-            break
+        cell.onSelectedLocation = { indexPath in
+            self.checkButtonTapped(indexPath)
+        }
+        cell.onSelectedTime = { indexPath in
+            self.showTimePicker(indexPath: indexPath)
         }
         
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let adjustedSection = locations.isEmpty && indexPath.section == 3 ? 4 : indexPath.section
-        guard let section = AddScheduleSection(rawValue: adjustedSection) else { return 0 }
-        return section.rowHeight(row: indexPath.row)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 16)
     }
     
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        guard let section = AddScheduleSection(rawValue: section) else { return 0 }
-        return section.footerHeight
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width - 32, height: 96)
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard indexPath.section == 2 else { return }
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+            switch indexPath.section {
+            case 0:
+                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: AddScheduleHeaderView.registerId, for: indexPath) as! AddScheduleHeaderView
+                configureAddScheduleHeaderView(headerView)
+                return headerView
+            default:
+                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ScheduleDateHeaderView.registerId, for: indexPath) as! ScheduleDateHeaderView
+                let date = locations[indexPath.section-1].date
+                headerView.configure(date)
+                return headerView
+            }
+        } else if kind == UICollectionView.elementKindSectionFooter {
+            if !locations.isEmpty && indexPath.section == 0 {
+                let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: DeleteLocationFooterView.registerId, for: indexPath) as! DeleteLocationFooterView
+                configureDeleteLocationFooterView(footerView)
+                return footerView
+            }
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: AddLocationFooterView.registerId, for: indexPath) as! AddLocationFooterView
+            footerView.onAddLocationButtonTapped = {
+                self.showAddLocationController()
+            }
+            return footerView
+        }
+        return UICollectionReusableView()
+    }
 
-        switch indexPath.row {
-        case 0:
-            let notificationViewController = NotificationViewController()
-            notificationViewController.delegate = self
-            navigationController?.pushViewController(notificationViewController, animated: true)
-        case 1:
-            let repeatViewController = RepeatViewController()
-            navigationController?.pushViewController(repeatViewController, animated: true)
-        default:
-            break
+    func configureAddScheduleHeaderView(_ headerView: AddScheduleHeaderView) {
+        headerView.configureDate(startDate: startDate, endDate: endDate)
+        
+        let dateButtonConfiguration = { isStartDate in
+            self.validateDateRange()
+            self.isStartDate = isStartDate
+            self.datePickerButtonTapped()
+        }
+        
+        headerView.onColorSelectionButtonTapped = {
+            self.isColorSelection.toggle()
+            self.collectionView.performBatchUpdates(nil, completion: nil)
+        }
+        headerView.onStartDateButtonTapped = {
+            dateButtonConfiguration(true)
+            self.addDatePickerTapGesture()
+        }
+        headerView.onEndDateButtonTapped = {
+            dateButtonConfiguration(false)
+            self.addDatePickerTapGesture()
+        }
+        headerView.onNotificationButtonTapped = { self.showNotificationViewController()}
+        headerView.onRepeatButtonTapped = { self.showRepeatViewController() }
+    }
+    
+    func configureDeleteLocationFooterView(_ footerView: DeleteLocationFooterView) {
+        footerView.onDeleteMode = {
+            self.isDeleteMode.toggle()
+            self.collectionView.reloadData()
+        }
+        footerView.onDeleteLocation = {
+            self.showDeleteLocationAlert()
         }
     }
     
-    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        guard !locations.isEmpty && indexPath.section == 3 && indexPath.row > 0 else {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.bounds.width, height: section == 0 ? (isColorSelection ? 411 : 225) : locations.count > 1 ? 32 : 0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.bounds.width, height: !locations.isEmpty && section == 0 ? 32 : 53 + 16)
+    }
+    
+    // 수평 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    // 수직 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
+    }
+
+    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+}
+
+extension AddScheduleViewController: UICollectionViewDragDelegate {
+    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        if isDeleteMode {
             return []
         }
+        dragSectionIndex = indexPath.section
         return [UIDragItem(itemProvider: NSItemProvider())]
     }
-    
-    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
-        guard let destinationIndexPath = destinationIndexPath, session.localDragSession != nil, !locations.isEmpty, destinationIndexPath.section == 3 && destinationIndexPath.row > 0 else {
-            return UITableViewDropProposal(operation: .cancel, intent: .unspecified)
-            
-        }
-        return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
-    }
-    
-    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return indexPath.section == 3 && indexPath.row > 0
-    }
+}
 
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        guard !locations.isEmpty && sourceIndexPath.section == 3 && sourceIndexPath.row > 0 && destinationIndexPath.section == 3 && destinationIndexPath.row > 0 else { return }
-        let moveCell = locations[sourceIndexPath.row-1]
-        locations.remove(at: sourceIndexPath.row-1)
-        locations.insert(moveCell, at: destinationIndexPath.row-1)
+extension AddScheduleViewController: UICollectionViewDropDelegate {
+    func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+        if session.localDragSession != nil && destinationIndexPath?.section == dragSectionIndex {
+            return UICollectionViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+        }
+        return UICollectionViewDropProposal(operation: .cancel, intent: .unspecified)
     }
     
-    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) { }
+    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+        guard let destinationIndexPath = coordinator.destinationIndexPath else {
+            return
+        }
+        
+        coordinator.items.forEach { dropItem in
+            guard let sourceIndexPath = dropItem.sourceIndexPath else { return }
+            
+            if sourceIndexPath.section != destinationIndexPath.section {
+                return
+            }
+            
+            collectionView.performBatchUpdates({
+                collectionView.deleteItems(at: [sourceIndexPath])
+                collectionView.insertItems(at: [destinationIndexPath])
+                
+                let moveLocation = locations[sourceIndexPath.section-1].locationDetail[sourceIndexPath.row]
+                locations[sourceIndexPath.section-1].locationDetail.remove(at: sourceIndexPath.row)
+                locations[destinationIndexPath.section-1].locationDetail.insert(moveLocation, at: destinationIndexPath.row)
+            }, completion: { _ in
+                coordinator.drop(dropItem.dragItem, toItemAt: destinationIndexPath)
+                    collectionView.reloadData()
+                }
+            )
+        }
+    }
 }
 
 extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -317,9 +479,7 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        guard let componentType = ComponentType(rawValue: component) else {
-            return 0
-        }
+        guard let componentType = ComponentType(rawValue: component) else { return 0 }
         
         switch componentType {
         case .year:
@@ -333,83 +493,56 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         guard let componentType = ComponentType(rawValue: component) else { return nil }
-        
-        if !startDatePickerOuterView.isHidden {
-            switch componentType {
-            case .year:
-                if startDate.year == years[row] {
-                    return "\(years[row]) 년"
-                }
-                return "\(years[row])"
-            case .month:
-                if startDate.month == months[row] {
-                    return "\(months[row]) 월"
-                }
-                return "\(months[row])"
-            case .day:
-                if startDate.day == days[row] {
-                    return "\(days[row]) 일"
-                }
-                return "\(days[row])"
+        switch componentType {
+        case .year:
+            if isStartDate {
+                if startDate.year == years[row] { return "\(years[row]) 년" }
+            } else {
+                if endDate.year == years[row] { return "\(years[row]) 년" }
             }
-        }
-
-        if !endDatePickerOuterView.isHidden {
-            switch componentType {
-            case .year:
-                if endDate.year == years[row] {
-                    return "\(years[row]) 년"
-                }
-                return "\(years[row])"
-            case .month:
-                if endDate.month == months[row] {
-                    return "\(months[row]) 월"
-                }
-                return "\(months[row])"
-            case .day:
-                if endDate.day == days[row] {
-                    return "\(days[row]) 일"
-                }
-                return "\(days[row])"
+            return "\(years[row])"
+            
+        case .month:
+            if isStartDate {
+                if startDate.month == months[row] { return "\(months[row]) 월" }
+            } else {
+                if endDate.month == months[row] { return "\(months[row]) 월" }
             }
+            return "\(months[row])"
+   
+        case .day:
+            if isStartDate {
+                if startDate.day == days[row] { return "\(days[row]) 일" }
+            } else {
+                if endDate.day == days[row] { return "\(days[row]) 일" }
+            }
+            return "\(days[row])"
         }
-        return ""
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         guard let componentType = ComponentType(rawValue: component) else { return }
-        
-        if !startDatePickerOuterView.isHidden {
-            switch componentType {
-            case .year:
+        switch componentType {
+        case .year:
+            if isStartDate {
                 startDate.year = years[row]
-            case .month:
-                startDate.month = months[row]
-            case .day:
-                startDate.day = days[row]
-            }
-            updateDaysComponent(startDate, datePickerView: startDatePickerView)
-        }
-        
-        if !endDatePickerOuterView.isHidden {
-            switch componentType {
-            case .year:
-                endDate.year = years[row]
-            case .month:
-                endDate.month = months[row]
-            case .day:
-                endDate.day = days[row]
-            }
-            updateDaysComponent(endDate, datePickerView: endDatePickerView)
+            } else { endDate.year = years[row] }
             
-            if daysBetween() < 0 {
-                endDate = .init(year: startDate.year, month: startDate.month, day: startDate.day ?? 0)
-            }
+        case .month:
+            if isStartDate {
+                startDate.month = months[row]
+            } else { endDate.month = months[row] }
+        
+        case .day:
+            if isStartDate {
+                startDate.day = days[row]
+            } else { endDate.day = days[row] }
         }
         
+        updateDaysComponent(isStartDate ? startDate : endDate)
     }
     
-    private func updateDaysComponent(_ selectedDate: SelectedDate, datePickerView: UIPickerView) {
+    private func updateDaysComponent(_ selectedDate: SelectedDate) {
         days = monthlyCalendar.getDays(year: selectedDate.year, month: selectedDate.month)
         datePickerView.reloadAllComponents()
     }
@@ -433,126 +566,5 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
         let calendar = Calendar.current
         let dateComponents = calendar.dateComponents([.day], from: start, to: end)
         return dateComponents.day
-    }
-}
-
-extension AddScheduleViewController: ColorSelectionDelegate, SelectedColorDelegate, DatePickerStartDateDelegate, DatePickerEndDateDelegate, NotificationTimeDelegate, AddLocationDelegate, SelectedLocationDelegate, TimeButtonDelegate, SelectedTimeDelegate, DeleteModeDelegate, DeleteLocationDelegate, CheckLocationDelegate {
-    func colorSelectionButtonTapped() {
-        isColorSelection = !isColorSelection
-        tableView.reloadSections([0], with: .none)
-    }
-    
-    func selectColor(_ color: UIColor) {
-        selectedColor = color
-        reloadTableView()
-    }
-    
-    func startDateButtonTapped() {
-        startDatePickerOuterView.isHidden = false
-        endDatePickerOuterView.isHidden = true
-        
-        reloadTableView()
-        startDatePickerView.reloadAllComponents()
-    }
-    
-    func endDateButtonTapped() {
-        startDatePickerOuterView.isHidden = true
-        endDatePickerOuterView.isHidden = false
- 
-        reloadTableView()
-        endDatePickerView.reloadAllComponents()
-    }
-    
-    func selectedNotificationTime(_ selectedTime: [String]) {
-        print(selectedTime)
-    }
-    
-    func addLocationButtonTapped() {
-        let addLocationViewController = AddLocationViewController()
-        addLocationViewController.delegate = self
-        addLocationViewController.modalPresentationStyle = .overFullScreen
-        present(addLocationViewController, animated: false)
-    }
-    
-    func selectLocation(_ selectedLocation: String) {
-        locations.append(LocationTime(location: selectedLocation, time: initialTime))
-        reloadTableView()
-    }
-    
-    func timeButtonTapped(_ index: Int) {
-        timeIndex = index
-        presentTimePicker(index)
-    }
-    
-    func selectTime(_ selectedTime: String?) {
-        guard let selectedTime = selectedTime else { return }
-        let time = formatTime(selectedTime)
-        guard let index = timeIndex else { return }
-        locations[index].time = time
-        reloadTableView()
-    }
-    
-    private func formatTime(_ time: String) -> String {
-        return time.replacingOccurrences(of: "오전", with: "AM").replacingOccurrences(of: "오후", with: "PM")
-    }
-    
-    func switchDeleteMode(_ isDeleteMode: Bool) {
-        self.isDeleteModel = isDeleteMode
-        reloadTableView()
-    }
-    
-    func deleteButtonTapped() {
-        guard !selectedLocations.isEmpty else { return }
-        
-        let alertViewController = AlertViewController()
-        let alert = Alert(titleText: "선택한 장소를 삭제할까요?",
-                          cancelText: "취소",
-                          doneText: "삭제",
-                          buttonColor: .colorF14C4C,
-                          alertHeight: 140)
-        alertViewController.configureAlert(with: alert)
-        alertViewController.modalPresentationStyle = .overCurrentContext
-        alertViewController.onDoneTapped = {
-            self.deleteSelectedLocations()
-        }
-        self.present(alertViewController, animated: false)
-    }
-    
-    func checkButtonTapped(_ index: Int, isCheck: Bool) {
-        if isCheck {
-            selectedLocations.append(index)
-        } else {
-            if let index = selectedLocations.firstIndex(of: index) {
-                selectedLocations.remove(at: index)
-            }
-        }
-    }
-    
-    private func reloadTableView() {
-        tableView.reloadData()
-    }
-    
-    private func presentTimePicker(_ index: Int) {
-        let timePickerViewController = TimePickerViewController()
-        timePickerViewController.delegate = self
-        timePickerViewController.selectedTime = locations[index].time
-        timePickerViewController.modalPresentationStyle = .overFullScreen
-        present(timePickerViewController, animated: false)
-    }
-    
-    private func deleteSelectedLocations() {
-        selectedLocations.sorted(by: >).forEach { index in
-            if index < locations.count {
-                locations.remove(at: index)
-            }
-        }
-        selectedLocations = []
-        reloadTableView()
-    }
-}
-
-extension AddScheduleViewController: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
     }
 }
