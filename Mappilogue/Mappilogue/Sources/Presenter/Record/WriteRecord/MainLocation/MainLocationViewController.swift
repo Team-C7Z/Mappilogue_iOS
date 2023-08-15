@@ -8,7 +8,8 @@
 import UIKit
 
 class MainLocationViewController: BaseViewController {
-    let dummyLocation = dummyMainLocationData()
+    private var selectedMapLocation: Location?
+    private let dummyLocation = dummyMainLocationData()
     private var selectedLocationIndex: Int?
     
     private lazy var collectionView: UICollectionView = {
@@ -56,7 +57,16 @@ class MainLocationViewController: BaseViewController {
     
     func setLocationButtonTapped() {
         let mapMainLocationViewController = MapMainLocationViewController()
+        mapMainLocationViewController.onSelectedMapLocation = { address in
+            self.selectMapLocation(address)
+        }
         navigationController?.pushViewController(mapMainLocationViewController, animated: true)
+    }
+    
+    func selectMapLocation(_ address: String) {
+        selectedMapLocation = Location(title: address, address: address)
+        selectedLocationIndex = -1
+        collectionView.reloadData()
     }
     
     func selectMainLocation(_ index: Int?) {
@@ -80,25 +90,33 @@ extension MainLocationViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 ? 0 : dummyLocation.count
+        return section == 0 ? (selectedMapLocation == nil ? 0 : 1) : dummyLocation.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainLocationCell.registerId, for: indexPath) as? MainLocationCell else { return UICollectionViewCell() }
     
-        let location = dummyLocation[indexPath.row]
-        let isSelect = indexPath.row == selectedLocationIndex
-        cell.configure(indexPath.row, location: location, isSelect: isSelect)
-        
-        cell.onMainLocationSelection = { index in
-            self.selectMainLocation(index)
-            if let index = index {
-                if index == 0 && self.dummyLocation[index].address.isEmpty {
-                    self.showMainLocationAlert()
+        if indexPath.section == 0 {
+            if let location = selectedMapLocation {
+                let isSelect = selectedLocationIndex == -1
+                cell.configure(-1, location: location, isSelect: isSelect)
+            }
+        } else {
+            let location = dummyLocation[indexPath.row]
+            let isSelect = indexPath.row == selectedLocationIndex
+            cell.configure(indexPath.row, location: location, isSelect: isSelect)
+            
+            cell.onMainLocationSelection = { index in
+                self.selectMainLocation(index)
+                if let index = index {
+                    if index == 0 && self.dummyLocation[index].address.isEmpty {
+                        self.showMainLocationAlert()
+                    }
                 }
             }
+            
         }
-        
+       
         return cell
     }
 

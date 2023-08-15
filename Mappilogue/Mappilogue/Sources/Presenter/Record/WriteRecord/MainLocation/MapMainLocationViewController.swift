@@ -9,6 +9,8 @@ import UIKit
 import NMapsMap
 
 class MapMainLocationViewController: BaseViewController {
+    var onSelectedMapLocation: ((String) -> Void)?
+    
     let locationManager = CLLocationManager()
     let marker = NMFMarker()
     let addressManager = AddressManager()
@@ -29,6 +31,9 @@ class MapMainLocationViewController: BaseViewController {
         setMapView()
         
         setNavigationBar("대표 위치 설정", backButtonAction: #selector(backButtonTapped))
+        mainLocationSettingView.onSelectedMapLocation = { address in
+            self.selectMapLocation(address)
+        }
     }
     
     override func setupHierarchy() {
@@ -69,6 +74,11 @@ class MapMainLocationViewController: BaseViewController {
         mapView.minZoomLevel = 10.0
         mapView.maxZoomLevel = 18.0
         mapView.addCameraDelegate(delegate: self)
+    }
+    
+    func selectMapLocation(_ address: String) {
+        self.onSelectedMapLocation?(address)
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

@@ -8,6 +8,9 @@
 import UIKit
 
 class MainLocationSettingView: BaseView {
+    var address: String = ""
+    var onSelectedMapLocation: ((String) -> Void)?
+    
     private let addressLabel = UILabel()
     private let setLocationButton = UIButton()
     
@@ -27,6 +30,7 @@ class MainLocationSettingView: BaseView {
         setLocationButton.setTitle("이 위치로 설정하기", for: .normal)
         setLocationButton.setTitleColor(.colorFFFFFF, for: .normal)
         setLocationButton.titleLabel?.font = .body03
+        setLocationButton.addTarget(self, action: #selector(setLocationButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -58,5 +62,10 @@ class MainLocationSettingView: BaseView {
     
     func configure(_ title: String) {
         addressLabel.text = title
+        address = title
+    }
+    
+    @objc func setLocationButtonTapped() {
+        onSelectedMapLocation?(address)
     }
 }
