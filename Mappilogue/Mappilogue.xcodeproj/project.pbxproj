@@ -45,7 +45,6 @@
 		92011C042A740C16009B047F /* NewCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C032A740C16009B047F /* NewCategoryCell.swift */; };
 		92011C072A74AD97009B047F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C062A74AD97009B047F /* SearchViewController.swift */; };
 		92011C092A74AFCA009B047F /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C082A74AFCA009B047F /* SearchTextField.swift */; };
-		92011C0B2A74B837009B047F /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C0A2A74B837009B047F /* SearchResultViewController.swift */; };
 		92011C0E2A74C1FC009B047F /* EmptySearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C0D2A74C1FC009B047F /* EmptySearchCell.swift */; };
 		92011C102A74F222009B047F /* SearchType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C0F2A74F222009B047F /* SearchType.swift */; };
 		92011C122A74F8E6009B047F /* SearchRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C112A74F8E6009B047F /* SearchRecordCell.swift */; };
@@ -242,7 +241,6 @@
 		92011C032A740C16009B047F /* NewCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCategoryCell.swift; sourceTree = "<group>"; };
 		92011C062A74AD97009B047F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		92011C082A74AFCA009B047F /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
-		92011C0A2A74B837009B047F /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		92011C0D2A74C1FC009B047F /* EmptySearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySearchCell.swift; sourceTree = "<group>"; };
 		92011C0F2A74F222009B047F /* SearchType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchType.swift; sourceTree = "<group>"; };
 		92011C112A74F8E6009B047F /* SearchRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecordCell.swift; sourceTree = "<group>"; };
@@ -569,7 +567,6 @@
 			isa = PBXGroup;
 			children = (
 				92011C062A74AD97009B047F /* SearchViewController.swift */,
-				92011C0A2A74B837009B047F /* SearchResultViewController.swift */,
 				92011C0F2A74F222009B047F /* SearchType.swift */,
 				92011C0C2A74C1DD009B047F /* Cell */,
 			);
@@ -1407,7 +1404,6 @@
 				9224FD252A638F01000A56A6 /* RepeatType.swift in Sources */,
 				92E781522A85381D000DAACD /* String.swift in Sources */,
 				9224FD192A616EB1000A56A6 /* ColorCell.swift in Sources */,
-				92011C0B2A74B837009B047F /* SearchResultViewController.swift in Sources */,
 				92A7B6682A4E6154009C9293 /* UpcomingScheduleCell.swift in Sources */,
 				927E7F272A683DCD00E6A29F /* CalendarCell.swift in Sources */,
 				925840C12A7F5B2200997434 /* NotificationSwitchButton.swift in Sources */,
