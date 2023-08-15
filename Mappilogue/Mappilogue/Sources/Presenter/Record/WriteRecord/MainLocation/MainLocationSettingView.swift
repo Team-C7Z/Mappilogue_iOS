@@ -19,7 +19,7 @@ class MainLocationSettingView: BaseView {
         layer.masksToBounds = true
         backgroundColor = .colorF9F8F7
         
-        addressLabel.text = "제주특별자치도"
+
         addressLabel.textColor = .color000000
         addressLabel.font = .title02
         
@@ -55,5 +55,9 @@ class MainLocationSettingView: BaseView {
             $0.trailing.equalTo(self).offset(-16)
             $0.height.equalTo(53)
         }
+    }
+    
+    func configure(_ title: String) {
+        addressLabel.text = title
     }
 }

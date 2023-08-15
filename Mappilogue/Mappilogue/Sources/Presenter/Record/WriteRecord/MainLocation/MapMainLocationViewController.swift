@@ -134,6 +134,8 @@ extension MapMainLocationViewController: NMFMapViewCameraDelegate {
     }
    
     func mapViewCameraIdle(_ mapView: NMFMapView) {
-        addressManager.getAddress(long: mapView.longitude, lat: mapView.latitude)
+       addressManager.getAddress(long: mapView.longitude, lat: mapView.latitude) { address in
+           self.mainLocationSettingView.configure(address ?? "")
+       }
     }
 }
