@@ -20,10 +20,10 @@ class WriteRecordViewController: BaseViewController {
     private let mainLocationButton = MainLocationButton()
     private let textContentView = TextContentView()
     private let saveRecordView = SaveRecordView()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         setKeyboardObservers()
         configureScheduleTitleColorView()
     }
@@ -36,8 +36,10 @@ class WriteRecordViewController: BaseViewController {
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
         stackView.spacing = 0
-       
+        
         categoryButton.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
+        
+        mainLocationButton.addTarget(self, action: #selector(mainLocationButtonTapped), for: .touchUpInside)
         
         textContentView.stackViewHeightUpdated = { [weak self] in
             self?.stackView.layoutIfNeeded()
@@ -84,7 +86,7 @@ class WriteRecordViewController: BaseViewController {
             $0.height.equalTo(48)
         }
     }
-
+    
     @objc func presentAlert(_ sender: UIButton) {
         let alertViewController = AlertViewController()
         alertViewController.modalPresentationStyle = .overCurrentContext
@@ -101,7 +103,7 @@ class WriteRecordViewController: BaseViewController {
         alertViewController.onDoneTapped = {
             self.navigationController?.popViewController(animated: true)
         }
-         present(alertViewController, animated: false)
+        present(alertViewController, animated: false)
     }
     
     @objc func categoryButtonTapped() {
@@ -114,6 +116,11 @@ class WriteRecordViewController: BaseViewController {
             scheduleTitleColorView.configure(with: schedule.title, color: color, isColorSelection: false)
         }
         scheduleTitleColorView.delegate = self
+    }
+    
+    @objc func mainLocationButtonTapped() {
+        let mainLocationViewController = MainLocationViewController()
+        navigationController?.pushViewController(mainLocationViewController, animated: true)
     }
     
     private func setKeyboardObservers() {

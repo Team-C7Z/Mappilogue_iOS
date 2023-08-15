@@ -9,6 +9,20 @@
 /* Begin PBXBuildFile section */
 		520E9D02714F72A41E207B62 /* Pods_Mappilogue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 021CF7D6B8E435D26802F66A /* Pods_Mappilogue.framework */; };
 		9200318F2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9200318E2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift */; };
+		920031AF2A8B5AF600E3170D /* AddressAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031AE2A8B5AF600E3170D /* AddressAPI.swift */; };
+		920031B22A8B5B4C00E3170D /* AddressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031B12A8B5B4C00E3170D /* AddressManager.swift */; };
+		920031B52A8B5B9100E3170D /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031B42A8B5B9100E3170D /* Environment.swift */; };
+		920031B82A8B5BC700E3170D /* KakaoAddressResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031B72A8B5BC700E3170D /* KakaoAddressResponse.swift */; };
+		920031BA2A8B5C3000E3170D /* AddedLocationsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031B92A8B5C3000E3170D /* AddedLocationsHeaderView.swift */; };
+		920031BD2A8B5C8E00E3170D /* MainLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031BC2A8B5C8E00E3170D /* MainLocationCell.swift */; };
+		920031BF2A8B5CD600E3170D /* MainLocationAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031BE2A8B5CD600E3170D /* MainLocationAlertViewController.swift */; };
+		920031C12A8B5D0800E3170D /* MainLocationSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031C02A8B5D0800E3170D /* MainLocationSettingView.swift */; };
+		920031C32A8B5D2F00E3170D /* MainLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031C22A8B5D2F00E3170D /* MainLocationViewController.swift */; };
+		920031C52A8B5D7D00E3170D /* MapMainLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031C42A8B5D7D00E3170D /* MapMainLocationViewController.swift */; };
+		920031C72A8B5DB700E3170D /* MapSettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031C62A8B5DB700E3170D /* MapSettingsHeaderView.swift */; };
+		920031CD2A8B626B00E3170D /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 920031CC2A8B626B00E3170D /* Moya */; };
+		920031CF2A8B654F00E3170D /* SecureAPIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 920031CE2A8B654F00E3170D /* SecureAPIKeys.plist */; };
+		920031D12A8B65F000E3170D /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D02A8B65F000E3170D /* Bundle.swift */; };
 		92011B282A6E75F1009B047F /* WriteRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B272A6E75F1009B047F /* WriteRecordButton.swift */; };
 		92011B702A70E7D8009B047F /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */; };
 		92011B722A7127FC009B047F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B712A7127FC009B047F /* AlertViewController.swift */; };
@@ -193,6 +207,19 @@
 		81704CFC2A84A47234E8C7D7 /* Pods-Mappilogue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mappilogue.release.xcconfig"; path = "Target Support Files/Pods-Mappilogue/Pods-Mappilogue.release.xcconfig"; sourceTree = "<group>"; };
 		81A821757BF382206BE4FD7A /* Pods_MappilogueTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MappilogueTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9200318E2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalCompletedAlertViewController.swift; sourceTree = "<group>"; };
+		920031AE2A8B5AF600E3170D /* AddressAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressAPI.swift; sourceTree = "<group>"; };
+		920031B12A8B5B4C00E3170D /* AddressManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressManager.swift; sourceTree = "<group>"; };
+		920031B42A8B5B9100E3170D /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		920031B72A8B5BC700E3170D /* KakaoAddressResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoAddressResponse.swift; sourceTree = "<group>"; };
+		920031B92A8B5C3000E3170D /* AddedLocationsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedLocationsHeaderView.swift; sourceTree = "<group>"; };
+		920031BC2A8B5C8E00E3170D /* MainLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLocationCell.swift; sourceTree = "<group>"; };
+		920031BE2A8B5CD600E3170D /* MainLocationAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLocationAlertViewController.swift; sourceTree = "<group>"; };
+		920031C02A8B5D0800E3170D /* MainLocationSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLocationSettingView.swift; sourceTree = "<group>"; };
+		920031C22A8B5D2F00E3170D /* MainLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLocationViewController.swift; sourceTree = "<group>"; };
+		920031C42A8B5D7D00E3170D /* MapMainLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMainLocationViewController.swift; sourceTree = "<group>"; };
+		920031C62A8B5DB700E3170D /* MapSettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSettingsHeaderView.swift; sourceTree = "<group>"; };
+		920031CE2A8B654F00E3170D /* SecureAPIKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = SecureAPIKeys.plist; sourceTree = "<group>"; };
+		920031D02A8B65F000E3170D /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		92011B272A6E75F1009B047F /* WriteRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordButton.swift; sourceTree = "<group>"; };
 		92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		92011B712A7127FC009B047F /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
@@ -363,6 +390,7 @@
 			files = (
 				929158302A2537E40022BEF9 /* SnapKit in Frameworks */,
 				520E9D02714F72A41E207B62 /* Pods_Mappilogue.framework in Frameworks */,
+				920031CD2A8B626B00E3170D /* Moya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +435,47 @@
 				925840C62A7F76A500997434 /* WithdrawalAlertViewController.swift */,
 			);
 			path = Withdrawal;
+			sourceTree = "<group>";
+		};
+		920031AD2A8B5AD700E3170D /* API */ = {
+			isa = PBXGroup;
+			children = (
+				920031AE2A8B5AF600E3170D /* AddressAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		920031B02A8B5B2A00E3170D /* APIManager */ = {
+			isa = PBXGroup;
+			children = (
+				920031B12A8B5B4C00E3170D /* AddressManager.swift */,
+			);
+			path = APIManager;
+			sourceTree = "<group>";
+		};
+		920031B32A8B5B7D00E3170D /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				920031B42A8B5B9100E3170D /* Environment.swift */,
+				920031D02A8B65F000E3170D /* Bundle.swift */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		920031B62A8B5BB000E3170D /* Dto */ = {
+			isa = PBXGroup;
+			children = (
+				920031B72A8B5BC700E3170D /* KakaoAddressResponse.swift */,
+			);
+			path = Dto;
+			sourceTree = "<group>";
+		};
+		920031BB2A8B5C5300E3170D /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				920031BC2A8B5C8E00E3170D /* MainLocationCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		92011B732A71386F009B047F /* Cell */ = {
@@ -468,6 +537,13 @@
 			children = (
 				92011B912A7367E5009B047F /* MainLocationButton.swift */,
 				92011B862A72B0A7009B047F /* MainLocatonView.swift */,
+				920031C22A8B5D2F00E3170D /* MainLocationViewController.swift */,
+				920031C62A8B5DB700E3170D /* MapSettingsHeaderView.swift */,
+				920031B92A8B5C3000E3170D /* AddedLocationsHeaderView.swift */,
+				920031C42A8B5D7D00E3170D /* MapMainLocationViewController.swift */,
+				920031C02A8B5D0800E3170D /* MainLocationSettingView.swift */,
+				920031BE2A8B5CD600E3170D /* MainLocationAlertViewController.swift */,
+				920031BB2A8B5C5300E3170D /* Cell */,
 			);
 			path = MainLocation;
 			sourceTree = "<group>";
@@ -724,6 +800,7 @@
 				926999272A14F0FA003DDAD2 /* Resources */,
 				926999262A14F0ED003DDAD2 /* Sources */,
 				926999042A14EC09003DDAD2 /* Info.plist */,
+				920031CE2A8B654F00E3170D /* SecureAPIKeys.plist */,
 			);
 			path = Mappilogue;
 			sourceTree = "<group>";
@@ -754,6 +831,7 @@
 				926999292A14F11B003DDAD2 /* Extension */,
 				92A7B6642A4E52A6009C9293 /* Model */,
 				9269992B2A14F157003DDAD2 /* Data */,
+				920031B32A8B5B7D00E3170D /* Global */,
 				9269992C2A14F164003DDAD2 /* Presenter */,
 			);
 			path = Sources;
@@ -803,6 +881,8 @@
 		9269992B2A14F157003DDAD2 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				920031AD2A8B5AD700E3170D /* API */,
+				920031B02A8B5B2A00E3170D /* APIManager */,
 				9263786F2A54E0CB004E5B6E /* UserDefaults */,
 			);
 			path = Data;
@@ -928,6 +1008,7 @@
 		92A7B6642A4E52A6009C9293 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				920031B62A8B5BB000E3170D /* Dto */,
 				92A7B6542A4CEA28009C9293 /* TodaySchedule.swift */,
 				92A7B6652A4E5B3A009C9293 /* UpcomingSchedule.swift */,
 				92459EDB2A53158A00493941 /* MarkedRecord.swift */,
@@ -980,6 +1061,7 @@
 			name = Mappilogue;
 			packageProductDependencies = (
 				9291582F2A2537E40022BEF9 /* SnapKit */,
+				920031CC2A8B626B00E3170D /* Moya */,
 			);
 			productName = Mappilogue;
 			productReference = 926998F32A14EC07003DDAD2 /* Mappilogue.app */;
@@ -1058,6 +1140,7 @@
 			mainGroup = 926998EA2A14EC07003DDAD2;
 			packageReferences = (
 				9291582E2A2537E40022BEF9 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				920031CB2A8B626B00E3170D /* XCRemoteSwiftPackageReference "Moya" */,
 			);
 			productRefGroup = 926998F42A14EC07003DDAD2 /* Products */;
 			projectDirPath = "";
@@ -1077,6 +1160,7 @@
 			files = (
 				929158272A2529660022BEF9 /* Pretendard-SemiBold.ttf in Resources */,
 				929158222A2529660022BEF9 /* Pretendard-Regular.ttf in Resources */,
+				920031CF2A8B654F00E3170D /* SecureAPIKeys.plist in Resources */,
 				926999032A14EC09003DDAD2 /* LaunchScreen.storyboard in Resources */,
 				924BE0CA2A51AE25002C70FF /* .swiftlint.yml in Resources */,
 				929158242A2529660022BEF9 /* Pretendard-Medium.ttf in Resources */,
@@ -1241,6 +1325,7 @@
 				925840B52A7F2D3B00997434 /* MyCell.swift in Sources */,
 				92011C042A740C16009B047F /* NewCategoryCell.swift in Sources */,
 				92A7B6552A4CEA28009C9293 /* TodaySchedule.swift in Sources */,
+				920031BF2A8B5CD600E3170D /* MainLocationAlertViewController.swift in Sources */,
 				92011B832A72AA96009B047F /* UpdateScheduleTitleColorView.swift in Sources */,
 				9224FCF52A5D6C65000A56A6 /* DatePickerViewController.swift in Sources */,
 				926382B42A6CC9760064C1A8 /* GatheringToastMessageView.swift in Sources */,
@@ -1257,6 +1342,8 @@
 				9230BE472A57FEB80053E535 /* DayCell.swift in Sources */,
 				9224FD422A656407000A56A6 /* LocationCell.swift in Sources */,
 				925840CB2A7F86F900997434 /* WithdrawalViewController.swift in Sources */,
+				920031AF2A8B5AF600E3170D /* AddressAPI.swift in Sources */,
+				920031B22A8B5B4C00E3170D /* AddressManager.swift in Sources */,
 				92FE26172A4B76B800BCDB82 /* UIFont.swift in Sources */,
 				926999422A14F74B003DDAD2 /* CalendarViewController.swift in Sources */,
 				92FE26112A4A6E1600BCDB82 /* BaseCollectionViewCell.swift in Sources */,
@@ -1265,6 +1352,7 @@
 				925840DB2A82144A00997434 /* EditScheduleViewController.swift in Sources */,
 				9224FCEE2A5BEF80000A56A6 /* ScheduleTitleCell.swift in Sources */,
 				925840C72A7F76A500997434 /* WithdrawalAlertViewController.swift in Sources */,
+				920031B82A8B5BC700E3170D /* KakaoAddressResponse.swift in Sources */,
 				92011B782A71683E009B047F /* SelectWriteRecordViewController.swift in Sources */,
 				92011C1A2A755D02009B047F /* MyRecordButton.swift in Sources */,
 				9224FD3D2A6559A0000A56A6 /* AddLocationViewController.swift in Sources */,
@@ -1305,7 +1393,9 @@
 				9224FD482A6579ED000A56A6 /* LocationTimeCell.swift in Sources */,
 				92011C262A77A48B009B047F /* Category.swift in Sources */,
 				926999482A14F76A003DDAD2 /* MyViewController.swift in Sources */,
+				920031C72A8B5DB700E3170D /* MapSettingsHeaderView.swift in Sources */,
 				92011BF92A73D404009B047F /* ColorSelectionView.swift in Sources */,
+				920031C52A8B5D7D00E3170D /* MapMainLocationViewController.swift in Sources */,
 				9230BE492A58D23B0053E535 /* NavigationBarViewController.swift in Sources */,
 				926999442A14F756003DDAD2 /* GatheringViewController.swift in Sources */,
 				92E7814C2A84B9B3000DAACD /* ScheduleDateHeaderView.swift in Sources */,
@@ -1338,10 +1428,12 @@
 				9224FD092A601B00000A56A6 /* ColorSelectionButton.swift in Sources */,
 				9224FD4A2A667F7E000A56A6 /* TimePickerViewController.swift in Sources */,
 				9224FD272A6394A9000A56A6 /* WeekdayRepeatViewController.swift in Sources */,
+				920031D12A8B65F000E3170D /* Bundle.swift in Sources */,
 				9224FD442A657150000A56A6 /* Location.swift in Sources */,
 				926999462A14F75F003DDAD2 /* RecordViewController.swift in Sources */,
 				92011C202A769C12009B047F /* SortHeaderView.swift in Sources */,
 				92011B7B2A716C9D009B047F /* SelectScheduleCell.swift in Sources */,
+				920031C12A8B5D0800E3170D /* MainLocationSettingView.swift in Sources */,
 				92011B922A7367E6009B047F /* MainLocationButton.swift in Sources */,
 				9224FCFB2A5FDD90000A56A6 /* AddScheduleButton.swift in Sources */,
 				92E7814E2A850316000DAACD /* Date.swift in Sources */,
@@ -1355,8 +1447,11 @@
 				9224FD152A613AB8000A56A6 /* UpcomingScheduleSection.swift in Sources */,
 				92011C142A74F9DE009B047F /* SearchLocationCell.swift in Sources */,
 				92459EDA2A530D1100493941 /* MarkedRecordCell.swift in Sources */,
+				920031C32A8B5D2F00E3170D /* MainLocationViewController.swift in Sources */,
 				9224FCF72A5FC4CA000A56A6 /* ScheduleViewController.swift in Sources */,
+				920031BA2A8B5C3000E3170D /* AddedLocationsHeaderView.swift in Sources */,
 				926998F92A14EC07003DDAD2 /* SceneDelegate.swift in Sources */,
+				920031BD2A8B5C8E00E3170D /* MainLocationCell.swift in Sources */,
 				9224FD462A6579A7000A56A6 /* DeleteLocationFooterView.swift in Sources */,
 				92011C072A74AD97009B047F /* SearchViewController.swift in Sources */,
 				9224FD332A641B64000A56A6 /* UIViewController.swift in Sources */,
@@ -1367,6 +1462,7 @@
 				9224FD1B2A61705D000A56A6 /* ColorSelection.swift in Sources */,
 				92011C642A788FBF009B047F /* MarkerView.swift in Sources */,
 				92011CBC2A7A19CA009B047F /* MyRecordCategoryCell.swift in Sources */,
+				920031B52A8B5B9100E3170D /* Environment.swift in Sources */,
 				9224FD232A62EC0B000A56A6 /* RepeatViewController.swift in Sources */,
 				92011B282A6E75F1009B047F /* WriteRecordButton.swift in Sources */,
 				92A7B64F2A4CCE29009C9293 /* AddButton.swift in Sources */,
@@ -1592,7 +1688,7 @@
 		};
 		926999212A14EC09003DDAD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C5CC701B6A8E2F772AEB8E9E /* Pods-MappilogueTests.debug.xcconfig */;
+			baseConfigurationReference = C335EE5D808E808B36CCF9CC /* Pods-Mappilogue.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1632,7 +1728,7 @@
 		};
 		926999242A14EC09003DDAD2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 076D30CCA1F490544C51AD3F /* Pods-Mappilogue-MappilogueUITests.debug.xcconfig */;
+			baseConfigurationReference = C335EE5D808E808B36CCF9CC /* Pods-Mappilogue.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1708,6 +1804,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		920031CB2A8B626B00E3170D /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.0;
+			};
+		};
 		9291582E2A2537E40022BEF9 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -1719,6 +1823,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		920031CC2A8B626B00E3170D /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 920031CB2A8B626B00E3170D /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
 		9291582F2A2537E40022BEF9 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9291582E2A2537E40022BEF9 /* XCRemoteSwiftPackageReference "SnapKit" */;
