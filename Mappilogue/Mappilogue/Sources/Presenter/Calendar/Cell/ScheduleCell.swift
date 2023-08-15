@@ -7,19 +7,17 @@
 
 import UIKit
 
-class ScheduleCell: BaseTableViewCell {
+class ScheduleCell: BaseCollectionViewCell {
     static let registerId = "\(ScheduleCell.self)"
+    
+    var index: Int = 0
+    var onEditButtonTapped: ((Int) -> Void)?
     
     private let scheduleColorView = UIView()
     private let scheduleLabel = UILabel()
     private let scheduleTimeLabel = UILabel()
     private let scheduleLocationLabel = UILabel()
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20))
-    }
+    private let editButton = UIButton()
     
     override func setupProperty() {
         super.setupProperty()
@@ -34,6 +32,9 @@ class ScheduleCell: BaseTableViewCell {
         
         scheduleLocationLabel.textColor = .color707070
         scheduleLocationLabel.font = .caption03
+        
+        editButton.setImage(UIImage(named: "common_edit"), for: .normal)
+        editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -43,6 +44,7 @@ class ScheduleCell: BaseTableViewCell {
         contentView.addSubview(scheduleLabel)
         contentView.addSubview(scheduleTimeLabel)
         contentView.addSubview(scheduleLocationLabel)
+        contentView.addSubview(editButton)
     }
     
     override func setupLayout() {
@@ -68,12 +70,23 @@ class ScheduleCell: BaseTableViewCell {
             $0.centerY.equalTo(scheduleTimeLabel)
             $0.leading.equalTo(scheduleTimeLabel.snp.trailing)
         }
+        
+        editButton.snp.makeConstraints {
+            $0.centerY.trailing.equalTo(contentView)
+            $0.width.equalTo(44)
+            $0.height.equalTo(52)
+        }
     }
     
-    func configure(with schedule: Schedule) {
+    func configure(_ index: Int, schedule: Schedule) {
+        self.index = index
         scheduleLabel.text = schedule.title
         scheduleColorView.backgroundColor = schedule.color
         scheduleTimeLabel.text = schedule.time
-        scheduleLocationLabel.text = ", \(schedule.location)"
+        scheduleLocationLabel.text = ", \(schedule.location ?? "")"
+    }
+    
+    @objc func editButtonTapped() {
+        onEditButtonTapped?(index)
     }
 }

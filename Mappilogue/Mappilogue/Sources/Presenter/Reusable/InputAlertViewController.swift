@@ -105,6 +105,10 @@ class InputAlertViewController: BaseViewController {
         }
     }
     
+    func configure(_ textFieldText: String) {
+        inputTextField.text = textFieldText
+    }
+    
     @objc private func cancelButtonTapped(_ sender: UIButton) {
         dismiss(animated: false) {
             self.onCancelTapped?()

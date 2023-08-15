@@ -61,15 +61,10 @@ class TodayScheduleCell: BaseTableViewCell {
         }
     }
     
-    func configure(with title: String, backgroundColor: UIColor, isExpandable: Bool, isExpanded: Bool) {
-        todayScheduleLabel.text = title
-        contentView.backgroundColor = backgroundColor
-        
-        if isExpandable {
-            expandButton.setImage(UIImage(named: isExpanded ? "hideSchedule" : "openSchedule"), for: .normal)
-        } else {
-            expandButton.isEnabled = false
-        }
+    func configure(with schedule: TodaySchedule, isExpanded: Bool) {
+        todayScheduleLabel.text = schedule.title
+        contentView.backgroundColor = schedule.color
+        expandButton.setImage(UIImage(named: isExpanded ? "hideSchedule" : "openSchedule"), for: .normal)
     }
     
     @objc private func expandButtonTapped(_ sender: UIButton) {

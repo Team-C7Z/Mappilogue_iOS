@@ -164,4 +164,13 @@ struct MonthlyCalendar {
     
         return currentMonthDays.compactMap {Int($0)}
     }
+    
+    func getDateBefore(beforeDay: Int) -> String {
+        let calendar = Calendar.current
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM월 d일"
+    
+        let date = calendar.date(byAdding: .day, value: -beforeDay, to: Date())
+        return dateFormatter.string(from: date!)
+    }
 }

@@ -31,10 +31,8 @@ class RecordCell: BaseCollectionViewCell {
     override func setupProperty() {
         super.setupProperty()
         
-        recordImage.backgroundColor = .yellow
         recordImage.layer.cornerRadius = 12
-        
-        markView.backgroundColor = .red
+        recordImage.clipsToBounds = true
         
         recordTitleLabel.textColor = .color000000
         recordTitleLabel.font = .title02
@@ -119,6 +117,9 @@ class RecordCell: BaseCollectionViewCell {
     }
     
     func configure(with record: Record) {
+        if let imageName = record.image {
+            recordImage.image = UIImage(named: imageName)
+        }
         markView.backgroundColor = record.color
         recordTitleLabel.text = record.title
         recordDateLabel.text = record.date

@@ -7,13 +7,8 @@
 
 import UIKit
 
-struct CategoryData {
-    var title: String
-    var count: Int
-}
-
 class SelectCategoryViewController: BaseViewController {
-    var dummyCategory: [CategoryData] = [CategoryData(title: "여행", count: 1), CategoryData(title: "생일", count: 0)]
+    var dummyCategory: [CategoryData] = []
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -38,7 +33,7 @@ class SelectCategoryViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationBar("카테고리 선택", backButtonAction: #selector(backButtonTapped))
+        setNavigationTitleAndBackButton("카테고리 선택", backButtonAction: #selector(backButtonTapped))
     }
     
     override func setupHierarchy() {
@@ -116,7 +111,6 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
                 collectionView.reloadData()
             }
             present(inputAlertViewController, animated: false)
-            
         }
     }
 }

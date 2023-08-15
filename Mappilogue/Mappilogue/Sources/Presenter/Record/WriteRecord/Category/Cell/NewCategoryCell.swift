@@ -26,7 +26,7 @@ class NewCategoryCell: BaseCollectionViewCell {
         categoryCountLabel.textColor = .color9B9791
         categoryCountLabel.font = .body02
         
-        checkCategoryButton.setImage(UIImage(named: "unCheck"), for: .normal)
+        checkCategoryButton.setImage(UIImage(named: "common_unCheck"), for: .normal)
         checkCategoryButton.addTarget(self, action: #selector(checkCategoryButtonTapped), for: .touchUpInside)
     }
     
@@ -63,6 +63,6 @@ class NewCategoryCell: BaseCollectionViewCell {
     
     @objc func checkCategoryButtonTapped(_ button: UIButton) {
         button.isSelected = !button.isSelected
-        button.setImage(UIImage(named: button.isSelected ? "check" : "unCheck"), for: .normal)
+        button.setImage(UIImage(named: button.isSelected ? "common_check" : "common_unCheck"), for: .normal)
     }
 }
