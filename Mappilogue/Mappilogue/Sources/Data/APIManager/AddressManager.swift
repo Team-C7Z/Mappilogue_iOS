@@ -11,14 +11,14 @@ import Moya
 class AddressManager {
     private let provider = MoyaProvider<AddressAPI>()
 
-    func getAddress(long: Double, lat: Double, completion: @escaping (String?) -> Void) {
+    func getAddress(long: Double, lat: Double, completion: @escaping (AddressDocuments?) -> Void) {
         provider.request(.getAddress(long: long, lat: lat)) { result in
             switch result {
             case .success(let response):
                 do {
                     let kakaoAddress = try response.map(KakaoAddressResponse.self)
                     if let address = kakaoAddress.documents.first {
-                        completion(address.address.addressName)
+                        completion(address)
                     }
                 } catch {
                     print("Mapping error: \(error)")

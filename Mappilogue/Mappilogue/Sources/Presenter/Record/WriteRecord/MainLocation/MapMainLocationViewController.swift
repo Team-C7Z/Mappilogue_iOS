@@ -135,7 +135,7 @@ extension MapMainLocationViewController: CLLocationManagerDelegate {
 extension MapMainLocationViewController: NMFMapViewCameraDelegate {
     func mapView(_ mapView: NMFMapView, cameraDidChangeByReason reason: Int, animated: Bool) {
         let projection = mapView.projection
-        let coord = projection.latlng(from: CGPoint(x: mapView.frame.width / 2, y: mapView.frame.height / 2))
+        let coord = projection.latlng(from: CGPoint(x: mapView.frame.width / 2, y: mapView.frame.height / 2 + 18))
         marker.position = NMGLatLng(lat: coord.lat, lng: coord.lng)
         marker.iconImage = NMFOverlayImage(name: "record_mainLocation")
         marker.width = 65
@@ -145,7 +145,12 @@ extension MapMainLocationViewController: NMFMapViewCameraDelegate {
 
     func mapViewCameraIdle(_ mapView: NMFMapView) {
        addressManager.getAddress(long: mapView.longitude, lat: mapView.latitude) { address in
-           self.mainLocationSettingView.configure(address ?? "")
+           guard let address = address else { return }
+           if let roadAddress = address.roadAddress {
+               self.mainLocationSettingView.configure(roadAddress.addressName)
+           } else {
+               self.mainLocationSettingView.configure(address.address.addressName ?? "")
+           }
        }
     }
 }
