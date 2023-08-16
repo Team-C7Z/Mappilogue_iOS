@@ -13,7 +13,7 @@ class MapMainLocationViewController: BaseViewController {
 
     let locationManager = CLLocationManager()
     let marker = NMFMarker()
-    let addressManager = AddressManager()
+    let addressManager = LocationManager()
 
     let mapView = NMFMapView()
     let mainLocationSettingView = MainLocationSettingView()
