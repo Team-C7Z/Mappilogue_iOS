@@ -8,11 +8,16 @@
 import UIKit
 
 class AddLocationViewController: BaseViewController {
-    let dummyLocation = dummyLocationData()
-    var onLocationSelected: ((Location) -> Void)?
+    var searchKeyword: String = ""
+    var searchPlaces: [KakaoSearchPlaces] = []
+    let searchManager = LocationManager()
+    var currentPage = 1
+    var totalPage = 10
+    var isLoading = false
+    var onLocationSelected: ((KakaoSearchPlaces) -> Void)?
 
     private let addLocationView = UIView()
-    private let locationTextField = UITextField()
+    private let searchBar = SearchBar()
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -40,20 +45,15 @@ class AddLocationViewController: BaseViewController {
         addLocationView.layer.cornerRadius = 24
         addLocationView.backgroundColor = .colorF9F8F7
         
-        locationTextField.layer.cornerRadius = 12
-        locationTextField.backgroundColor = .colorF5F3F0
-        locationTextField.placeholder = "장소 검색"
-        locationTextField.font = .body01
-        locationTextField.addLeftPadding()
-        locationTextField.returnKeyType = .search
-        locationTextField.delegate = self
+        searchBar.configure("장소 검색")
+        searchBar.delegate = self
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
         
         view.addSubview(addLocationView)
-        addLocationView.addSubview(locationTextField)
+        addLocationView.addSubview(searchBar)
         addLocationView.addSubview(collectionView)
     }
     
@@ -67,15 +67,15 @@ class AddLocationViewController: BaseViewController {
             $0.height.equalTo(500)
         }
         
-        locationTextField.snp.makeConstraints {
+        searchBar.snp.makeConstraints {
             $0.top.equalTo(addLocationView).offset(30)
-            $0.leading.equalTo(addLocationView).offset(20)
-            $0.trailing.equalTo(addLocationView).offset(-20)
+            $0.leading.equalTo(addLocationView).offset(4)
+            $0.trailing.equalTo(addLocationView).offset(4)
             $0.height.equalTo(40)
         }
         
         collectionView.snp.makeConstraints {
-            $0.top.equalTo(locationTextField.snp.bottom).offset(18)
+            $0.top.equalTo(searchBar.snp.bottom).offset(18)
             $0.leading.trailing.equalTo(addLocationView)
             $0.bottom.equalTo(addLocationView).offset(-31)
         }
@@ -88,19 +88,42 @@ class AddLocationViewController: BaseViewController {
 
         dismiss(animated: false)
     }
+    
+    func addUserDefinedPlace(_ search: String) {
+        let userDefinedPlace = KakaoSearchPlaces(placeName: search, addressName: "사용자 지정 위치", long: "", lat: "")
+        searchPlaces.insert(userDefinedPlace, at: 0)
+        searchKeyword = search
+    }
+    
+    func loadSearchPlace(_ search: String) {
+        guard !isLoading && currentPage <= totalPage else { return }
+        
+        isLoading = true
+        
+        searchManager.getSearchResults(keyword: search, page: currentPage) { places in
+            guard let places = places else { return }
+            
+            self.isLoading = false
+            self.searchPlaces += places
+            self.currentPage += 1
+            self.collectionView.reloadData()
+        }
+        
+        searchBar.resignFirstResponder()
+    }
 }
 
 extension AddLocationViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dummyLocation.count
+        return searchPlaces.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LocationCell.registerId, for: indexPath) as? LocationCell else { return UICollectionViewCell() }
         
-        let location = dummyLocation[indexPath.row]
-        let title = location.title
-        let address = location.address
+        let place = searchPlaces[indexPath.row]
+        let title = place.placeName
+        let address = place.addressName
         
         cell.configure(with: title, address: address)
         
@@ -108,11 +131,11 @@ extension AddLocationViewController: UICollectionViewDelegate, UICollectionViewD
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 16)
+        return UIEdgeInsets(top: 0, left: 20, bottom: 16, right: 20)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 32, height: 43)
+        return CGSize(width: collectionView.frame.width - 40, height: 43)
     }
     
     // 수평 간격
@@ -125,17 +148,25 @@ extension AddLocationViewController: UICollectionViewDelegate, UICollectionViewD
         return 12
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == searchPlaces.count - 1 {
+            print(indexPath.row, searchPlaces.count-1, "호출")
+            loadSearchPlace(searchKeyword)
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let location = dummyLocation[indexPath.row]
+        let location = searchPlaces[indexPath.row]
         dismiss(animated: false) {
             self.onLocationSelected?(location)
         }
     }
 }
 
-extension AddLocationViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        locationTextField.resignFirstResponder()
-        return true
+extension AddLocationViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let search = searchBar.text else { return }
+        addUserDefinedPlace(search)
+        loadSearchPlace(search)
     }
 }
