@@ -8,8 +8,12 @@
 import UIKit
 
 class AddLocationViewController: BaseViewController {
+    var searchKeyword: String = ""
     var searchPlaces: [KakaoSearchPlaces] = []
     let searchManager = LocationManager()
+    var currentPage = 1
+    var totalPage = 10
+    var isLoading = false
     var onLocationSelected: ((KakaoSearchPlaces) -> Void)?
 
     private let addLocationView = UIView()
@@ -84,6 +88,29 @@ class AddLocationViewController: BaseViewController {
 
         dismiss(animated: false)
     }
+    
+    func addUserDefinedPlace(_ search: String) {
+        let userDefinedPlace = KakaoSearchPlaces(placeName: search, addressName: "사용자 지정 위치", long: "", lat: "")
+        searchPlaces.insert(userDefinedPlace, at: 0)
+        searchKeyword = search
+    }
+    
+    func loadSearchPlace(_ search: String) {
+        guard !isLoading && currentPage <= totalPage else { return }
+        
+        isLoading = true
+        
+        searchManager.getSearchResults(keyword: search, page: currentPage) { places in
+            guard let places = places else { return }
+            
+            self.isLoading = false
+            self.searchPlaces += places
+            self.currentPage += 1
+            self.collectionView.reloadData()
+        }
+        
+        searchBar.resignFirstResponder()
+    }
 }
 
 extension AddLocationViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -121,6 +148,13 @@ extension AddLocationViewController: UICollectionViewDelegate, UICollectionViewD
         return 12
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == searchPlaces.count - 1 {
+            print(indexPath.row, searchPlaces.count-1, "호출")
+            loadSearchPlace(searchKeyword)
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let location = searchPlaces[indexPath.row]
         dismiss(animated: false) {
@@ -132,11 +166,7 @@ extension AddLocationViewController: UICollectionViewDelegate, UICollectionViewD
 extension AddLocationViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let search = searchBar.text else { return }
-        searchManager.getSearchResults(keyword: search, page: 1) { places in
-            guard let places = places else { return }
-            self.searchPlaces = places
-            self.collectionView.reloadData()
-        }
-        searchBar.resignFirstResponder()
+        addUserDefinedPlace(search)
+        loadSearchPlace(search)
     }
 }
