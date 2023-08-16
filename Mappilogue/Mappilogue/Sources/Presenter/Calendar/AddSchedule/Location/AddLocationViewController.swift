@@ -12,7 +12,7 @@ class AddLocationViewController: BaseViewController {
     var onLocationSelected: ((Location) -> Void)?
 
     private let addLocationView = UIView()
-    private let locationTextField = UITextField()
+    private let searchBar = SearchBar()
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -40,20 +40,15 @@ class AddLocationViewController: BaseViewController {
         addLocationView.layer.cornerRadius = 24
         addLocationView.backgroundColor = .colorF9F8F7
         
-        locationTextField.layer.cornerRadius = 12
-        locationTextField.backgroundColor = .colorF5F3F0
-        locationTextField.placeholder = "장소 검색"
-        locationTextField.font = .body01
-        locationTextField.addLeftPadding()
-        locationTextField.returnKeyType = .search
-        locationTextField.delegate = self
+        searchBar.configure("장소 검색")
+        searchBar.delegate = self
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
         
         view.addSubview(addLocationView)
-        addLocationView.addSubview(locationTextField)
+        addLocationView.addSubview(searchBar)
         addLocationView.addSubview(collectionView)
     }
     
@@ -67,15 +62,15 @@ class AddLocationViewController: BaseViewController {
             $0.height.equalTo(500)
         }
         
-        locationTextField.snp.makeConstraints {
+        searchBar.snp.makeConstraints {
             $0.top.equalTo(addLocationView).offset(30)
-            $0.leading.equalTo(addLocationView).offset(20)
-            $0.trailing.equalTo(addLocationView).offset(-20)
+            $0.leading.equalTo(addLocationView).offset(4)
+            $0.trailing.equalTo(addLocationView).offset(4)
             $0.height.equalTo(40)
         }
         
         collectionView.snp.makeConstraints {
-            $0.top.equalTo(locationTextField.snp.bottom).offset(18)
+            $0.top.equalTo(searchBar.snp.bottom).offset(18)
             $0.leading.trailing.equalTo(addLocationView)
             $0.bottom.equalTo(addLocationView).offset(-31)
         }
@@ -108,11 +103,11 @@ extension AddLocationViewController: UICollectionViewDelegate, UICollectionViewD
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 16)
+        return UIEdgeInsets(top: 0, left: 20, bottom: 16, right: 20)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 32, height: 43)
+        return CGSize(width: collectionView.frame.width - 40, height: 43)
     }
     
     // 수평 간격
@@ -133,9 +128,8 @@ extension AddLocationViewController: UICollectionViewDelegate, UICollectionViewD
     }
 }
 
-extension AddLocationViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        locationTextField.resignFirstResponder()
-        return true
+extension AddLocationViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }
