@@ -8,8 +8,9 @@
 import UIKit
 
 class AddLocationViewController: BaseViewController {
-    let dummyLocation = dummyLocationData()
-    var onLocationSelected: ((Location) -> Void)?
+    var searchPlaces: [KakaoSearchPlaces] = []
+    let searchManager = LocationManager()
+    var onLocationSelected: ((KakaoSearchPlaces) -> Void)?
 
     private let addLocationView = UIView()
     private let searchBar = SearchBar()
@@ -87,15 +88,15 @@ class AddLocationViewController: BaseViewController {
 
 extension AddLocationViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dummyLocation.count
+        return searchPlaces.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LocationCell.registerId, for: indexPath) as? LocationCell else { return UICollectionViewCell() }
         
-        let location = dummyLocation[indexPath.row]
-        let title = location.title
-        let address = location.address
+        let place = searchPlaces[indexPath.row]
+        let title = place.placeName
+        let address = place.addressName
         
         cell.configure(with: title, address: address)
         
@@ -121,7 +122,7 @@ extension AddLocationViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let location = dummyLocation[indexPath.row]
+        let location = searchPlaces[indexPath.row]
         dismiss(animated: false) {
             self.onLocationSelected?(location)
         }
@@ -130,6 +131,12 @@ extension AddLocationViewController: UICollectionViewDelegate, UICollectionViewD
 
 extension AddLocationViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let search = searchBar.text else { return }
+        searchManager.getSearchResults(keyword: search, page: 1) { places in
+            guard let places = places else { return }
+            self.searchPlaces = places
+            self.collectionView.reloadData()
+        }
         searchBar.resignFirstResponder()
     }
 }

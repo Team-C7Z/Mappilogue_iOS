@@ -107,7 +107,7 @@ class SearchViewController: BaseViewController {
     @objc private func keyboardWillHide(_ notification: Notification) {
         keyboardWillChange(notification, isShowing: false)
     }
-    
+
     private func keyboardWillChange(_ notification: Notification, isShowing: Bool) {
         guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         keyboardHeight = isShowing ? keyboardFrame.cgRectValue.height + 16 : 42
