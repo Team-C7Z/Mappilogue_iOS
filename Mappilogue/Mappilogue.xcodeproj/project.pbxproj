@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		520E9D02714F72A41E207B62 /* Pods_Mappilogue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 021CF7D6B8E435D26802F66A /* Pods_Mappilogue.framework */; };
 		9200318F2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9200318E2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift */; };
-		920031AF2A8B5AF600E3170D /* AddressAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031AE2A8B5AF600E3170D /* AddressAPI.swift */; };
-		920031B22A8B5B4C00E3170D /* AddressManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031B12A8B5B4C00E3170D /* AddressManager.swift */; };
+		920031AF2A8B5AF600E3170D /* LocationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031AE2A8B5AF600E3170D /* LocationAPI.swift */; };
+		920031B22A8B5B4C00E3170D /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031B12A8B5B4C00E3170D /* LocationManager.swift */; };
 		920031B52A8B5B9100E3170D /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031B42A8B5B9100E3170D /* Environment.swift */; };
 		920031B82A8B5BC700E3170D /* KakaoAddressResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031B72A8B5BC700E3170D /* KakaoAddressResponse.swift */; };
 		920031BA2A8B5C3000E3170D /* AddedLocationsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031B92A8B5C3000E3170D /* AddedLocationsHeaderView.swift */; };
@@ -23,6 +23,8 @@
 		920031CD2A8B626B00E3170D /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 920031CC2A8B626B00E3170D /* Moya */; };
 		920031CF2A8B654F00E3170D /* SecureAPIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 920031CE2A8B654F00E3170D /* SecureAPIKeys.plist */; };
 		920031D12A8B65F000E3170D /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D02A8B65F000E3170D /* Bundle.swift */; };
+		920031D32A8C832300E3170D /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D22A8C832300E3170D /* SearchBar.swift */; };
+		920031D52A8D021000E3170D /* KakaoSerachResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D42A8D021000E3170D /* KakaoSerachResponse.swift */; };
 		92011B282A6E75F1009B047F /* WriteRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B272A6E75F1009B047F /* WriteRecordButton.swift */; };
 		92011B702A70E7D8009B047F /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */; };
 		92011B722A7127FC009B047F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B712A7127FC009B047F /* AlertViewController.swift */; };
@@ -45,7 +47,6 @@
 		92011C042A740C16009B047F /* NewCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C032A740C16009B047F /* NewCategoryCell.swift */; };
 		92011C072A74AD97009B047F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C062A74AD97009B047F /* SearchViewController.swift */; };
 		92011C092A74AFCA009B047F /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C082A74AFCA009B047F /* SearchTextField.swift */; };
-		92011C0B2A74B837009B047F /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C0A2A74B837009B047F /* SearchResultViewController.swift */; };
 		92011C0E2A74C1FC009B047F /* EmptySearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C0D2A74C1FC009B047F /* EmptySearchCell.swift */; };
 		92011C102A74F222009B047F /* SearchType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C0F2A74F222009B047F /* SearchType.swift */; };
 		92011C122A74F8E6009B047F /* SearchRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C112A74F8E6009B047F /* SearchRecordCell.swift */; };
@@ -207,8 +208,8 @@
 		81704CFC2A84A47234E8C7D7 /* Pods-Mappilogue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mappilogue.release.xcconfig"; path = "Target Support Files/Pods-Mappilogue/Pods-Mappilogue.release.xcconfig"; sourceTree = "<group>"; };
 		81A821757BF382206BE4FD7A /* Pods_MappilogueTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MappilogueTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9200318E2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalCompletedAlertViewController.swift; sourceTree = "<group>"; };
-		920031AE2A8B5AF600E3170D /* AddressAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressAPI.swift; sourceTree = "<group>"; };
-		920031B12A8B5B4C00E3170D /* AddressManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressManager.swift; sourceTree = "<group>"; };
+		920031AE2A8B5AF600E3170D /* LocationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAPI.swift; sourceTree = "<group>"; };
+		920031B12A8B5B4C00E3170D /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		920031B42A8B5B9100E3170D /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		920031B72A8B5BC700E3170D /* KakaoAddressResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoAddressResponse.swift; sourceTree = "<group>"; };
 		920031B92A8B5C3000E3170D /* AddedLocationsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedLocationsHeaderView.swift; sourceTree = "<group>"; };
@@ -220,6 +221,8 @@
 		920031C62A8B5DB700E3170D /* MapSettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSettingsHeaderView.swift; sourceTree = "<group>"; };
 		920031CE2A8B654F00E3170D /* SecureAPIKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = SecureAPIKeys.plist; sourceTree = "<group>"; };
 		920031D02A8B65F000E3170D /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
+		920031D22A8C832300E3170D /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		920031D42A8D021000E3170D /* KakaoSerachResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSerachResponse.swift; sourceTree = "<group>"; };
 		92011B272A6E75F1009B047F /* WriteRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordButton.swift; sourceTree = "<group>"; };
 		92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		92011B712A7127FC009B047F /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
@@ -242,7 +245,6 @@
 		92011C032A740C16009B047F /* NewCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCategoryCell.swift; sourceTree = "<group>"; };
 		92011C062A74AD97009B047F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		92011C082A74AFCA009B047F /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
-		92011C0A2A74B837009B047F /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		92011C0D2A74C1FC009B047F /* EmptySearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySearchCell.swift; sourceTree = "<group>"; };
 		92011C0F2A74F222009B047F /* SearchType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchType.swift; sourceTree = "<group>"; };
 		92011C112A74F8E6009B047F /* SearchRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecordCell.swift; sourceTree = "<group>"; };
@@ -440,7 +442,7 @@
 		920031AD2A8B5AD700E3170D /* API */ = {
 			isa = PBXGroup;
 			children = (
-				920031AE2A8B5AF600E3170D /* AddressAPI.swift */,
+				920031AE2A8B5AF600E3170D /* LocationAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -448,7 +450,7 @@
 		920031B02A8B5B2A00E3170D /* APIManager */ = {
 			isa = PBXGroup;
 			children = (
-				920031B12A8B5B4C00E3170D /* AddressManager.swift */,
+				920031B12A8B5B4C00E3170D /* LocationManager.swift */,
 			);
 			path = APIManager;
 			sourceTree = "<group>";
@@ -466,6 +468,7 @@
 			isa = PBXGroup;
 			children = (
 				920031B72A8B5BC700E3170D /* KakaoAddressResponse.swift */,
+				920031D42A8D021000E3170D /* KakaoSerachResponse.swift */,
 			);
 			path = Dto;
 			sourceTree = "<group>";
@@ -569,7 +572,6 @@
 			isa = PBXGroup;
 			children = (
 				92011C062A74AD97009B047F /* SearchViewController.swift */,
-				92011C0A2A74B837009B047F /* SearchResultViewController.swift */,
 				92011C0F2A74F222009B047F /* SearchType.swift */,
 				92011C0C2A74C1DD009B047F /* Cell */,
 			);
@@ -967,6 +969,7 @@
 			isa = PBXGroup;
 			children = (
 				926999452A14F75F003DDAD2 /* RecordViewController.swift */,
+				92011C082A74AFCA009B047F /* SearchTextField.swift */,
 				92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */,
 				92011C1F2A769C12009B047F /* SortHeaderView.swift */,
 				92011C632A788FBF009B047F /* MarkerView.swift */,
@@ -995,10 +998,10 @@
 				92A7B64E2A4CCE29009C9293 /* AddButton.swift */,
 				9224FCFA2A5FDD90000A56A6 /* AddScheduleButton.swift */,
 				9224FD082A601B00000A56A6 /* ColorSelectionButton.swift */,
-				92011C082A74AFCA009B047F /* SearchTextField.swift */,
 				92011C192A755D02009B047F /* MyRecordButton.swift */,
 				92011B272A6E75F1009B047F /* WriteRecordButton.swift */,
 				92011C1D2A75EE79009B047F /* MarkView.swift */,
+				920031D22A8C832300E3170D /* SearchBar.swift */,
 				92011B712A7127FC009B047F /* AlertViewController.swift */,
 				92011C672A78CB24009B047F /* InputAlertViewController.swift */,
 			);
@@ -1342,8 +1345,8 @@
 				9230BE472A57FEB80053E535 /* DayCell.swift in Sources */,
 				9224FD422A656407000A56A6 /* LocationCell.swift in Sources */,
 				925840CB2A7F86F900997434 /* WithdrawalViewController.swift in Sources */,
-				920031AF2A8B5AF600E3170D /* AddressAPI.swift in Sources */,
-				920031B22A8B5B4C00E3170D /* AddressManager.swift in Sources */,
+				920031AF2A8B5AF600E3170D /* LocationAPI.swift in Sources */,
+				920031B22A8B5B4C00E3170D /* LocationManager.swift in Sources */,
 				92FE26172A4B76B800BCDB82 /* UIFont.swift in Sources */,
 				926999422A14F74B003DDAD2 /* CalendarViewController.swift in Sources */,
 				92FE26112A4A6E1600BCDB82 /* BaseCollectionViewCell.swift in Sources */,
@@ -1407,7 +1410,6 @@
 				9224FD252A638F01000A56A6 /* RepeatType.swift in Sources */,
 				92E781522A85381D000DAACD /* String.swift in Sources */,
 				9224FD192A616EB1000A56A6 /* ColorCell.swift in Sources */,
-				92011C0B2A74B837009B047F /* SearchResultViewController.swift in Sources */,
 				92A7B6682A4E6154009C9293 /* UpcomingScheduleCell.swift in Sources */,
 				927E7F272A683DCD00E6A29F /* CalendarCell.swift in Sources */,
 				925840C12A7F5B2200997434 /* NotificationSwitchButton.swift in Sources */,
@@ -1460,10 +1462,12 @@
 				92A7B6632A4E20BF009C9293 /* BaseTableViewCell.swift in Sources */,
 				92CD36FA2A7B505900768B61 /* MyCategoryViewController.swift in Sources */,
 				9224FD1B2A61705D000A56A6 /* ColorSelection.swift in Sources */,
+				920031D32A8C832300E3170D /* SearchBar.swift in Sources */,
 				92011C642A788FBF009B047F /* MarkerView.swift in Sources */,
 				92011CBC2A7A19CA009B047F /* MyRecordCategoryCell.swift in Sources */,
 				920031B52A8B5B9100E3170D /* Environment.swift in Sources */,
 				9224FD232A62EC0B000A56A6 /* RepeatViewController.swift in Sources */,
+				920031D52A8D021000E3170D /* KakaoSerachResponse.swift in Sources */,
 				92011B282A6E75F1009B047F /* WriteRecordButton.swift in Sources */,
 				92A7B64F2A4CCE29009C9293 /* AddButton.swift in Sources */,
 				92011C182A753AEB009B047F /* CALayer.swift in Sources */,

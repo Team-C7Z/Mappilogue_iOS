@@ -19,8 +19,14 @@ func dummyLocationData() -> [Location] {
     let location4 = Location(title: "동대문디자인플라자", address: "서울특별시 중구 을지로 281")
     let location5 = Location(title: "여의도 한강공원", address: "서울특별시 영등포구 여의동로 330 한강사업본부 여의도 한강 여의도안내센터")
     let location6 = Location(title: "덕수궁", address: "서울특별시 중구 세종대로 99 덕수궁")
+    let location7 = Location(title: "코엑스", address: "서울특별시 중구 세종대로 110 서울특별시청")
+    let location8 = Location(title: "서울숲", address: "서울특별시 중구 서소문로 124")
+    let location9 = Location(title: "서울아산병원", address: "서울특별시 송파구 올림픽로 240")
+    let location10 = Location(title: "서울남부터미널", address: "서울특별시 중구 을지로 281")
+    let location11 = Location(title: "서울시립미술관", address: "서울특별시 영등포구 여의동로 330 한강사업본부 여의도 한강 여의도안내센터")
+    let location12 = Location(title: "서울어딘가", address: "서울특별시 중구 세종대로 99 덕수궁")
     
-    let locations = [location1, location2, location3, location4, location5, location6]
+    let locations = [location1, location2, location3, location4, location5, location6, location7, location8, location9, location10, location11, location12]
     
     return locations
 }

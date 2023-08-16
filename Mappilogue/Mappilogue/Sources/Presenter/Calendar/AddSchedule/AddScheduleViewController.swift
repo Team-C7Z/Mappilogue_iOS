@@ -216,15 +216,15 @@ class AddScheduleViewController: BaseViewController {
         present(addLocationViewController, animated: false)
     }
     
-    func selectLocation(_ location: Location) {
+    func selectLocation(_ location: KakaoSearchPlaces) {
         guard let selectedDate = setDateFormatter(date: startDate) else { return }
         let date = selectedDate.formatToMMddDateString()
-        addLocation(date: date, location: location)
+        addLocation(date: date, place: location)
         collectionView.reloadData()
     }
     
-    func addLocation(date: String, location: Location) {
-        let locationTime = LocationTimeDetail(location: location.title, time: initialTime)
+    func addLocation(date: String, place: KakaoSearchPlaces) {
+        let locationTime = LocationTimeDetail(location: place.placeName, time: initialTime)
         if let index = locations.firstIndex(where: {$0.date == date}) {
             locations[index].locationDetail.append(locationTime)
         } else {
