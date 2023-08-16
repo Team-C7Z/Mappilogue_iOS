@@ -8,7 +8,7 @@
 import UIKit
 
 class SearchViewController: BaseViewController {
-    let dummyLocation = [Location]()
+    let dummyLocation = dummyLocationData()
     let dummyRecord = dummyRecordData()
     var keyboardHeight: CGFloat = 0
     
@@ -18,7 +18,7 @@ class SearchViewController: BaseViewController {
         }
     }
     
-    private let searchTextField = SearchTextField()
+    private let searchBar = SearchBar()
     private let stackView = UIStackView()
     private var locationButton = UIButton()
     private var recordButton = UIButton()
@@ -50,22 +50,23 @@ class SearchViewController: BaseViewController {
         
         setNavigationTitleAndBackButton("검색", backButtonAction: #selector(backButtonTapped))
         
-        searchTextField.becomeFirstResponder()
-        searchTextField.delegate = self
+        searchBar.configure("장소 또는 기록 검색")
+        searchBar.becomeFirstResponder()
+        searchBar.delegate = self
         
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.spacing = 8
         
-        locationButton = createSearchButton("장소")
-        recordButton = createSearchButton("기록")
+        locationButton = createCategoryButton("장소")
+        recordButton = createCategoryButton("기록")
         setSearchButtonDesign()
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
        
-        view.addSubview(searchTextField)
+        view.addSubview(searchBar)
         view.addSubview(stackView)
         stackView.addArrangedSubview(locationButton)
         stackView.addArrangedSubview(recordButton)
@@ -75,15 +76,14 @@ class SearchViewController: BaseViewController {
     override func setupLayout() {
         super.setupLayout()
         
-        searchTextField.snp.makeConstraints {
+        searchBar.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(40)
         }
         
         stackView.snp.makeConstraints {
-            $0.top.equalTo(searchTextField.snp.bottom).offset(12)
+            $0.top.equalTo(searchBar.snp.bottom).offset(12)
             $0.leading.equalTo(view).offset(16)
             $0.trailing.equalTo(view).offset(-16)
             $0.height.equalTo(40)
@@ -93,8 +93,6 @@ class SearchViewController: BaseViewController {
             $0.top.equalTo(stackView.snp.bottom).offset(16)
             $0.leading.trailing.bottom.equalTo(view)
         }
-        
-        collectionView.backgroundColor = .orange
     }
     
     private func setKeyboardObservers() {
@@ -116,17 +114,17 @@ class SearchViewController: BaseViewController {
         collectionView.reloadData()
     }
     
-    private func createSearchButton(_ title: String) -> UIButton {
+    private func createCategoryButton(_ title: String) -> UIButton {
         let button = UIButton()
         button.layer.cornerRadius = 12
         button.setTitle(title, for: .normal)
         button.titleLabel?.font = .body03
-        button.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
         
         return button
     }
     
-    @objc func searchButtonTapped(_ button: UIButton) {
+    @objc func categoryButtonTapped(_ button: UIButton) {
         switch button {
         case locationButton:
             searchType = .location
@@ -154,10 +152,9 @@ class SearchViewController: BaseViewController {
     }
 }
 
-extension SearchViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+extension SearchViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }
 

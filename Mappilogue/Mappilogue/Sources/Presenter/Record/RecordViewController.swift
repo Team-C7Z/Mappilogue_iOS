@@ -12,8 +12,6 @@ class RecordViewController: NavigationBarViewController {
     let dummyCategory = dummyCategoryData()
     let dummyRecord: [Record] = dummyRecordData()
     
-    var delegate: EmptyRecordDelegate?
-    
     let locationManager = CLLocationManager()
     var locationOverlay: NMFLocationOverlay?
     
@@ -24,7 +22,6 @@ class RecordViewController: NavigationBarViewController {
     
     let mapView = NMFMapView()
     let searchTextField = SearchTextField()
-    let searchButton = UIButton()
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -64,10 +61,7 @@ class RecordViewController: NavigationBarViewController {
         setBottomSheetHeight()
      
         searchTextField.delegate = self
-        searchTextField.layer.applyShadow()
         setSearchTextFieldTapGestue()
-        
-        searchButton.setImage(UIImage(named: "search"), for: .normal)
         
         currentLocationButton.setImage(UIImage(named: "moveCurrentLocation"), for: .normal)
         currentLocationButton.layer.applyShadow()
@@ -82,7 +76,6 @@ class RecordViewController: NavigationBarViewController {
         
         view.addSubview(mapView)
         mapView.addSubview(searchTextField)
-        searchTextField.addSubview(searchButton)
         mapView.addSubview(collectionView)
         view.addSubview(currentLocationButton)
         view.addSubview(myRecordButton)
@@ -104,13 +97,7 @@ class RecordViewController: NavigationBarViewController {
             $0.trailing.equalTo(mapView).offset(-16)
             $0.height.equalTo(40)
         }
-        
-        searchButton.snp.makeConstraints {
-            $0.trailing.equalTo(searchTextField).offset(-7)
-            $0.centerY.equalTo(searchTextField)
-            $0.width.height.equalTo(28)
-        }
-        
+    
         collectionView.snp.makeConstraints {
             $0.top.equalTo(searchTextField.snp.bottom).offset(8)
             $0.leading.equalTo(mapView)
@@ -403,8 +390,4 @@ extension RecordViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         return false
     }
-}
-
-protocol EmptyRecordDelegate: AnyObject {
-    func setEmptyRecordCellHeight()
 }
