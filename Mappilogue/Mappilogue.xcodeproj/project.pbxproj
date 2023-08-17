@@ -27,6 +27,9 @@
 		920031D52A8D021000E3170D /* KakaoSerachResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D42A8D021000E3170D /* KakaoSerachResponse.swift */; };
 		920031D72A8DAFD800E3170D /* RecordContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D62A8DAFD800E3170D /* RecordContentViewController.swift */; };
 		920031D92A8DB50600E3170D /* RecordContentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D82A8DB50600E3170D /* RecordContentHeaderView.swift */; };
+		920031DB2A8DD29700E3170D /* SavingRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031DA2A8DD29700E3170D /* SavingRecordViewController.swift */; };
+		920031DE2A8DF62A00E3170D /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 920031DD2A8DF62A00E3170D /* Lottie */; };
+		920031E02A8DF6F800E3170D /* saving.json in Resources */ = {isa = PBXBuildFile; fileRef = 920031DF2A8DF6F800E3170D /* saving.json */; };
 		92011B282A6E75F1009B047F /* WriteRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B272A6E75F1009B047F /* WriteRecordButton.swift */; };
 		92011B702A70E7D8009B047F /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */; };
 		92011B722A7127FC009B047F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B712A7127FC009B047F /* AlertViewController.swift */; };
@@ -227,6 +230,8 @@
 		920031D42A8D021000E3170D /* KakaoSerachResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSerachResponse.swift; sourceTree = "<group>"; };
 		920031D62A8DAFD800E3170D /* RecordContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordContentViewController.swift; sourceTree = "<group>"; };
 		920031D82A8DB50600E3170D /* RecordContentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordContentHeaderView.swift; sourceTree = "<group>"; };
+		920031DA2A8DD29700E3170D /* SavingRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingRecordViewController.swift; sourceTree = "<group>"; };
+		920031DF2A8DF6F800E3170D /* saving.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = saving.json; sourceTree = "<group>"; };
 		92011B272A6E75F1009B047F /* WriteRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordButton.swift; sourceTree = "<group>"; };
 		92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		92011B712A7127FC009B047F /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
@@ -397,6 +402,7 @@
 				929158302A2537E40022BEF9 /* SnapKit in Frameworks */,
 				520E9D02714F72A41E207B62 /* Pods_Mappilogue.framework in Frameworks */,
 				920031CD2A8B626B00E3170D /* Moya in Frameworks */,
+				920031DE2A8DF62A00E3170D /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,6 +510,7 @@
 				92011B8A2A72B7DA009B047F /* NewWriteView.swift */,
 				92011B7E2A726031009B047F /* WriteRecordViewController.swift */,
 				92011B8C2A72BBE8009B047F /* SaveRecordView.swift */,
+				920031DA2A8DD29700E3170D /* SavingRecordViewController.swift */,
 				92011B792A716C35009B047F /* Cell */,
 				92011BFA2A7402DD009B047F /* Category */,
 				92011BFB2A7402E5009B047F /* TitleColor */,
@@ -849,6 +856,7 @@
 				929158162A25292A0022BEF9 /* Fonts */,
 				926998FF2A14EC09003DDAD2 /* Assets.xcassets */,
 				926999012A14EC09003DDAD2 /* LaunchScreen.storyboard */,
+				920031DF2A8DF6F800E3170D /* saving.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1071,6 +1079,7 @@
 			packageProductDependencies = (
 				9291582F2A2537E40022BEF9 /* SnapKit */,
 				920031CC2A8B626B00E3170D /* Moya */,
+				920031DD2A8DF62A00E3170D /* Lottie */,
 			);
 			productName = Mappilogue;
 			productReference = 926998F32A14EC07003DDAD2 /* Mappilogue.app */;
@@ -1150,6 +1159,7 @@
 			packageReferences = (
 				9291582E2A2537E40022BEF9 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				920031CB2A8B626B00E3170D /* XCRemoteSwiftPackageReference "Moya" */,
+				920031DC2A8DF62A00E3170D /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			productRefGroup = 926998F42A14EC07003DDAD2 /* Products */;
 			projectDirPath = "";
@@ -1172,6 +1182,7 @@
 				920031CF2A8B654F00E3170D /* SecureAPIKeys.plist in Resources */,
 				926999032A14EC09003DDAD2 /* LaunchScreen.storyboard in Resources */,
 				924BE0CA2A51AE25002C70FF /* .swiftlint.yml in Resources */,
+				920031E02A8DF6F800E3170D /* saving.json in Resources */,
 				929158242A2529660022BEF9 /* Pretendard-Medium.ttf in Resources */,
 				929158252A2529660022BEF9 /* Pretendard-Bold.ttf in Resources */,
 				926999002A14EC09003DDAD2 /* Assets.xcassets in Resources */,
@@ -1383,6 +1394,7 @@
 				925840B92A7F2DA300997434 /* ProfileCell.swift in Sources */,
 				925840C32A7F61E800997434 /* InquiryViewController.swift in Sources */,
 				9224FD052A600F42000A56A6 /* NotificationRepeatButton.swift in Sources */,
+				920031DB2A8DD29700E3170D /* SavingRecordViewController.swift in Sources */,
 				9224FCF92A5FCF72000A56A6 /* ScheduleCell.swift in Sources */,
 				9224FD0F2A610E64000A56A6 /* EmptyUpcomingScheduleSection.swift in Sources */,
 				9263786E2A5475AF004E5B6E /* OnboardingCell.swift in Sources */,
@@ -1824,6 +1836,14 @@
 				minimumVersion = 15.0.0;
 			};
 		};
+		920031DC2A8DF62A00E3170D /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		9291582E2A2537E40022BEF9 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -1839,6 +1859,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 920031CB2A8B626B00E3170D /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		920031DD2A8DF62A00E3170D /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 920031DC2A8DF62A00E3170D /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
 		};
 		9291582F2A2537E40022BEF9 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

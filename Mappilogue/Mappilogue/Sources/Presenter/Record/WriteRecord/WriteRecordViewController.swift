@@ -160,8 +160,12 @@ class WriteRecordViewController: BaseViewController {
     }
     
     @objc func saveRecordButtonTapped() {
-        let recordContentViewController = RecordContentViewController()
-        navigationController?.pushViewController(recordContentViewController, animated: true)
+        let savingRecordViewController = SavingRecordViewController()
+        savingRecordViewController.modalPresentationStyle = .overFullScreen
+        savingRecordViewController.onSaveComplete = {
+            self.navigationController?.popViewController(animated: false)
+        }
+        present(savingRecordViewController, animated: false)
     }
 }
 
