@@ -10,7 +10,7 @@ import NMapsMap
 
 class RecordViewController: NavigationBarViewController {
     let dummyCategory = dummyCategoryData()
-    let dummyRecord: [Record] = []
+    let dummyRecord: [Record] = dummyRecordData()
     
     let locationManager = CLLocationManager()
     var locationOverlay: NMFLocationOverlay?
@@ -215,6 +215,8 @@ class RecordViewController: NavigationBarViewController {
         bottomSheetViewController.view.frame = containerView.bounds
         containerView.addSubview(bottomSheetViewController.view)
         bottomSheetViewController.didMove(toParent: self)
+        
+        bottomSheetViewController.dummyRecord = dummyRecord
     }
     
     private func setBottomSheetHeight() {

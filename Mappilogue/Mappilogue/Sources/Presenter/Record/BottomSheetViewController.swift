@@ -8,7 +8,7 @@
 import UIKit
 
 class BottomSheetViewController: BaseViewController {
-    let dummyRecord: [Record] = dummyRecordData()
+    var dummyRecord: [Record] = []
     var emptyCellHeight: CGFloat = 196
     
     private let barImage = UIImageView()
