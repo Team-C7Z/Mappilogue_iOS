@@ -65,7 +65,19 @@ class RecordContentViewController: BaseViewController {
     }
     
     @objc func menuButtonTapped() {
-        
+        let editViewController = EditViewController()
+        editViewController.modalPresentationStyle = .overFullScreen
+        editViewController.configure(modifyTitle: "수정하기",
+                                             deleteTitle: "삭제하기",
+                                             alert: Alert(titleText: "이 기록을 삭제할까요?",
+                                                          messageText: nil,
+                                                          cancelText: "취소",
+                                                          doneText: "삭제",
+                                                          buttonColor: .colorF14C4C,
+                                                          alertHeight: 140))
+        editViewController.onModify = { }
+        editViewController.onDelete = { }
+        present(editViewController, animated: false)
     }
 
 }
