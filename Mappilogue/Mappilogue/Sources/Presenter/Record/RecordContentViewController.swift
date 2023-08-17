@@ -74,10 +74,20 @@ class RecordContentViewController: BaseViewController {
                                                           cancelText: "취소",
                                                           doneText: "삭제",
                                                           buttonColor: .colorF14C4C,
-                                                          alertHeight: 140))
-        editViewController.onModify = { }
-        editViewController.onDelete = { }
+                                                          alertHeight: 140)
+        )
+        editViewController.onModify = { self.modifyRecord() }
+        editViewController.onDelete = { self.deleteRecord() }
         present(editViewController, animated: false)
+    }
+    
+    private func modifyRecord() {
+        let writeRecordViewController = WriteRecordViewController()
+        navigationController?.pushViewController(writeRecordViewController, animated: true)
+    }
+    
+    private func deleteRecord() {
+        self.navigationController?.popViewController(animated: false)
     }
 
 }
