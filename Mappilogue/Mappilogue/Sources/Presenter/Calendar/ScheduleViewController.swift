@@ -154,11 +154,19 @@ class ScheduleViewController: BaseViewController {
     }
     
     private func presentEditScheduleViewController() {
-        let editScheduleViewController = EditScheduleViewController()
-        editScheduleViewController.modalPresentationStyle = .overFullScreen
-        editScheduleViewController.onModifyCategory = { self.presentWriteRecordViewController() }
-        editScheduleViewController.onDeleteCategory = { self.deleteSchedule() }
-        present(editScheduleViewController, animated: false)
+        let editViewController = EditViewController()
+        editViewController.modalPresentationStyle = .overFullScreen
+        editViewController.configure(modifyTitle: "기록 작성하기",
+                                             deleteTitle: "일정 삭제하기",
+                                             alert: Alert(titleText: "이 일정을 삭제할까요?",
+                                                          messageText: nil,
+                                                          cancelText: "취소",
+                                                          doneText: "삭제",
+                                                          buttonColor: .colorF14C4C,
+                                                          alertHeight: 140))
+        editViewController.onModify = { self.presentWriteRecordViewController() }
+        editViewController.onDelete = { self.deleteSchedule() }
+        present(editViewController, animated: false)
     }
     
     private func presentWriteRecordViewController() {

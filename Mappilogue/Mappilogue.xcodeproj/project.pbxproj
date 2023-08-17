@@ -132,7 +132,7 @@
 		925840D52A80957900997434 /* AddLocationFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840D42A80957900997434 /* AddLocationFooterView.swift */; };
 		925840D72A80D4BD00997434 /* NotificationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840D62A80D4BD00997434 /* NotificationHeaderView.swift */; };
 		925840D92A80D84300997434 /* SelectedNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840D82A80D84300997434 /* SelectedNotificationCell.swift */; };
-		925840DB2A82144A00997434 /* EditScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840DA2A82144A00997434 /* EditScheduleViewController.swift */; };
+		925840DB2A82144A00997434 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840DA2A82144A00997434 /* EditViewController.swift */; };
 		9263786B2A546BDE004E5B6E /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9263786A2A546BDE004E5B6E /* OnboardingViewController.swift */; };
 		9263786E2A5475AF004E5B6E /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9263786D2A5475AF004E5B6E /* OnboardingCell.swift */; };
 		926378712A54E0E6004E5B6E /* OnboardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926378702A54E0E6004E5B6E /* OnboardingManager.swift */; };
@@ -331,7 +331,7 @@
 		925840D42A80957900997434 /* AddLocationFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationFooterView.swift; sourceTree = "<group>"; };
 		925840D62A80D4BD00997434 /* NotificationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHeaderView.swift; sourceTree = "<group>"; };
 		925840D82A80D84300997434 /* SelectedNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedNotificationCell.swift; sourceTree = "<group>"; };
-		925840DA2A82144A00997434 /* EditScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditScheduleViewController.swift; sourceTree = "<group>"; };
+		925840DA2A82144A00997434 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		9263786A2A546BDE004E5B6E /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		9263786D2A5475AF004E5B6E /* OnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
 		926378702A54E0E6004E5B6E /* OnboardingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingManager.swift; sourceTree = "<group>"; };
@@ -937,7 +937,6 @@
 				926999412A14F74B003DDAD2 /* CalendarViewController.swift */,
 				9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */,
 				9224FCF62A5FC4CA000A56A6 /* ScheduleViewController.swift */,
-				925840DA2A82144A00997434 /* EditScheduleViewController.swift */,
 				9230BE502A59B45D0053E535 /* MonthlyCalendar.swift */,
 				9230BE432A57EFF10053E535 /* Cell */,
 				9224FCFE2A5FF82F000A56A6 /* AddSchedule */,
@@ -1010,6 +1009,7 @@
 				920031D22A8C832300E3170D /* SearchBar.swift */,
 				92011B712A7127FC009B047F /* AlertViewController.swift */,
 				92011C672A78CB24009B047F /* InputAlertViewController.swift */,
+				925840DA2A82144A00997434 /* EditViewController.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -1359,7 +1359,7 @@
 				92FE26112A4A6E1600BCDB82 /* BaseCollectionViewCell.swift in Sources */,
 				92A7B6662A4E5B3A009C9293 /* UpcomingSchedule.swift in Sources */,
 				9224FD312A6397BD000A56A6 /* CycleRepeatViewController.swift in Sources */,
-				925840DB2A82144A00997434 /* EditScheduleViewController.swift in Sources */,
+				925840DB2A82144A00997434 /* EditViewController.swift in Sources */,
 				9224FCEE2A5BEF80000A56A6 /* ScheduleTitleCell.swift in Sources */,
 				925840C72A7F76A500997434 /* WithdrawalAlertViewController.swift in Sources */,
 				920031B82A8B5BC700E3170D /* KakaoAddressResponse.swift in Sources */,
