@@ -15,6 +15,8 @@ class RecordViewController: NavigationBarViewController {
     let locationManager = CLLocationManager()
     var locationOverlay: NMFLocationOverlay?
     
+    var moveCamera: Bool = false
+    
     let minHeight: CGFloat = 44
     let midHeight: CGFloat = 196
     var maxHeight: CGFloat = 0
@@ -40,6 +42,7 @@ class RecordViewController: NavigationBarViewController {
     let currentLocationButton = UIButton()
     let myRecordButton = MyRecordButton()
     let writeRecordButton = WriteRecordButton()
+    let findMarkersButton = FindMarkersButton()
     let containerView = UIView()
     let bottomSheetViewController = BottomSheetViewController()
 
@@ -67,6 +70,8 @@ class RecordViewController: NavigationBarViewController {
         currentLocationButton.layer.applyShadow()
         currentLocationButton.addTarget(self, action: #selector(currentLocationButtonTapped), for: .touchUpInside)
         
+        findMarkersButton.isHidden = true
+        findMarkersButton.addTarget(self, action: #selector(findMarkersButtonTapped), for: .touchUpInside)
         myRecordButton.addTarget(self, action: #selector(myRecordButtonTapped), for: .touchUpInside)
         writeRecordButton.addTarget(self, action: #selector(writeRecordButtonTapped), for: .touchUpInside)
     }
@@ -79,6 +84,7 @@ class RecordViewController: NavigationBarViewController {
         mapView.addSubview(collectionView)
         view.addSubview(currentLocationButton)
         view.addSubview(myRecordButton)
+        view.addSubview(findMarkersButton)
         view.addSubview(writeRecordButton)
         view.addSubview(containerView)
     }
@@ -116,6 +122,11 @@ class RecordViewController: NavigationBarViewController {
             $0.bottom.equalTo(writeRecordButton.snp.top).offset(-16)
         }
         
+        findMarkersButton.snp.makeConstraints {
+            $0.centerX.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(containerView.snp.top).offset(-16)
+        }
+        
         writeRecordButton.snp.makeConstraints {
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
             $0.bottom.equalTo(containerView.snp.top).offset(-16)
@@ -145,6 +156,7 @@ class RecordViewController: NavigationBarViewController {
         mapView.maxZoomLevel = 18.0
         mapView.logoInteractionEnabled = false
         mapView.logoMargin = UIEdgeInsets(top: 0, left: 16, bottom: 45, right: 0)
+        mapView.addCameraDelegate(delegate: self)
     }
     
     private func setLocationOverlayIcon(latitude: Double, longitude: Double) {
@@ -196,6 +208,10 @@ class RecordViewController: NavigationBarViewController {
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: locationManager.location?.coordinate.latitude ?? 37.49794, lng: locationManager.location?.coordinate.longitude ?? 127.02759))
         cameraUpdate.animation = .easeIn
         mapView.moveCamera(cameraUpdate)
+    }
+    
+    @objc private func findMarkersButtonTapped() {
+        
     }
     
     @objc private func myRecordButtonTapped(_ sender: UIButton) {
@@ -275,6 +291,8 @@ class RecordViewController: NavigationBarViewController {
         currentLocationButton.isHidden = isHidden
         myRecordButton.isHidden = isHidden
         writeRecordButton.isHidden = isHidden
+    
+        findMarkersButton.isHidden = moveCamera && !isHidden ? false : true
     }
     
     private func updateBottomSheet(_ nearestHeight: CGFloat) {
@@ -335,6 +353,13 @@ extension RecordViewController: CLLocationManagerDelegate {
             }
         }
         present(alertViewController, animated: false)
+    }
+}
+
+extension RecordViewController: NMFMapViewCameraDelegate {
+    func mapView(_ mapView: NMFMapView, cameraIsChangingByReason reason: Int) {
+        moveCamera = true
+        findMarkersButton.isHidden = false
     }
 }
 
