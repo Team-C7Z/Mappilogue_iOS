@@ -2,15 +2,15 @@
 //  EditViewController.swift
 //  Mappilogue
 //
-//  Created by hyemi on 2023/08/03.
+//  Created by hyemi on 2023/08/08.
 //
 
 import UIKit
 
 class EditViewController: BaseViewController {
-    var categoryName: String = ""
-    var onModifyButtonTapped: ((String) -> Void)?
-    var onDeleteButtonTapped: (() -> Void)?
+    var alert: Alert?
+    var onModify: (() -> Void)?
+    var onDelete: (() -> Void)?
     
     private let modalView = UIView()
     private let barView = UIView()
@@ -33,31 +33,16 @@ class EditViewController: BaseViewController {
         
         barView.backgroundColor = .colorC9C6C2
         
-<<<<<<< Updated upstream:Mappilogue/Mappilogue/Sources/Presenter/Record/MyRecord/EditCategoryViewController.swift
-        modifyCategoryImage.image = UIImage(named: "common_modify")
-        modifyCategoryLabel.text = "카테고리 이름 바꾸기"
-        modifyCategoryLabel.textColor = .color1C1C1C
-        modifyCategoryLabel.font = .title02
-        modifyCategoryButton.addTarget(self, action: #selector(modifyCategoryButtonTapped), for: .touchUpInside)
-        
-        deleteCategoryImage.image = UIImage(named: "common_delete")
-        deleteCategoryImage.tintColor = .colorF14C4C
-        deleteCategoryLabel.text = "카테고리 삭제하기"
-        deleteCategoryLabel.textColor = .color1C1C1C
-        deleteCategoryLabel.font = .title02
-        deleteCategoryButton.addTarget(self, action: #selector(deleteCategoryButtonTapped), for: .touchUpInside)
-=======
         modifyImage.image = UIImage(named: "common_modify")
         modifyLabel.textColor = .color1C1C1C
         modifyLabel.font = .title02
-        modifyButton.addTarget(self, action: #selector(modifyCategoryButtonTapped), for: .touchUpInside)
+        modifyButton.addTarget(self, action: #selector(modifyButtonTapped), for: .touchUpInside)
         
         deleteImage.image = UIImage(named: "common_delete")
         deleteImage.tintColor = .colorF14C4C
         deleteLabel.textColor = .color1C1C1C
         deleteLabel.font = .title02
-        deleteButton.addTarget(self, action: #selector(deleteCategoryButtonTapped), for: .touchUpInside)
->>>>>>> Stashed changes:Mappilogue/Mappilogue/Sources/Presenter/Reusable/EditViewController.swift
+        deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -125,11 +110,6 @@ class EditViewController: BaseViewController {
         }
     }
     
-    func configure(modifyTitle: String, deleteTitle: String) {
-        modifyLabel.text = modifyTitle
-        deleteLabel.text = deleteTitle
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first, touch.location(in: view).y < modalView.frame.maxY else {
             return
@@ -137,34 +117,27 @@ class EditViewController: BaseViewController {
         dismiss(animated: false)
     }
     
-    @objc func modifyButtonTapped(_ button: UIButton) {
-        let inputAlertViewController = InputAlertViewController()
-        inputAlertViewController.modalPresentationStyle = .overCurrentContext
-        inputAlertViewController.configure(categoryName)
-        inputAlertViewController.onCancelTapped = {
-            self.dismiss(animated: false)
-        }
-        inputAlertViewController.onCompletionTapped = { inputText in
-            self.dismiss(animated: false) {
-                self.onModifyButtonTapped?(inputText)
-            }
-        }
-        present(inputAlertViewController, animated: false)
+    func configure(modifyTitle: String, deleteTitle: String, alert: Alert) {
+        modifyLabel.text = modifyTitle
+        deleteLabel.text = deleteTitle
+        self.alert = alert
     }
     
-    @objc func deleteCategoryButtonTapped(_ button: UIButton) {
+    @objc func modifyButtonTapped(_ button: UIButton) {
+        self.dismiss(animated: false) {
+            self.onModify?()
+        }
+    }
+    
+    @objc func deleteButtonTapped(_ button: UIButton) {
+        guard let alert = alert else { return }
+        
         let alertViewController = AlertViewController()
         alertViewController.modalPresentationStyle = .overCurrentContext
-        let alert = Alert(titleText: "이 카테고리를 삭제할까요?",
-                          messageText: nil,
-                          cancelText: "취소",
-                          doneText: "삭제",
-                          buttonColor: .colorF14C4C,
-                          alertHeight: 140)
         alertViewController.configureAlert(with: alert)
         alertViewController.onDoneTapped = {
             self.dismiss(animated: false) {
-                self.onDeleteButtonTapped?()
+                self.onDelete?()
            }
         }
         present(alertViewController, animated: false)

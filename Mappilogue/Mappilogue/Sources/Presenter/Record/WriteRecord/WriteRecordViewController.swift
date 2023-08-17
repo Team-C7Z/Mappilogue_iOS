@@ -18,7 +18,7 @@ class WriteRecordViewController: BaseViewController {
     private let scheduleTitleColorView = UpdateScheduleTitleColorView()
     private let colorSelectionView = ColorSelectionView()
     private let mainLocationButton = MainLocationButton()
-    private let textContentView = TextContentView()
+    private let textContentView = ContentView()
     private let saveRecordView = SaveRecordView()
     
     override func viewDidLoad() {
@@ -46,6 +46,7 @@ class WriteRecordViewController: BaseViewController {
         }
         
         saveRecordView.hideKeyboardButton.addTarget(self, action: #selector(dismissKeyboard), for: .touchUpInside)
+        saveRecordView.saveRecordButton.addTarget(self, action: #selector(saveRecordButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -156,6 +157,11 @@ class WriteRecordViewController: BaseViewController {
         
         saveRecordView.configure(isShowing)
         view.layoutIfNeeded()
+    }
+    
+    @objc func saveRecordButtonTapped() {
+        let recordContentViewController = RecordContentViewController()
+        navigationController?.pushViewController(recordContentViewController, animated: true)
     }
 }
 
