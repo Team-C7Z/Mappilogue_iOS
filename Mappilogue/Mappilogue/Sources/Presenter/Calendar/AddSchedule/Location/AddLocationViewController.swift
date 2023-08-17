@@ -150,7 +150,6 @@ extension AddLocationViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == searchPlaces.count - 1 {
-            print(indexPath.row, searchPlaces.count-1, "호출")
             loadSearchPlace(searchKeyword)
         }
     }

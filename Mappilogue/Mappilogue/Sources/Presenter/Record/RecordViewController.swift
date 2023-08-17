@@ -10,7 +10,7 @@ import NMapsMap
 
 class RecordViewController: NavigationBarViewController {
     let dummyCategory = dummyCategoryData()
-    let dummyRecord: [Record] = dummyRecordData()
+    let dummyRecord: [Record] = []
     
     let locationManager = CLLocationManager()
     var locationOverlay: NMFLocationOverlay?
@@ -138,12 +138,13 @@ class RecordViewController: NavigationBarViewController {
     }
     
     private func setMapView() {
-        mapView.logoInteractionEnabled = false
         mapView.allowsZooming = true
         mapView.allowsScrolling = true
         mapView.positionMode = .compass
         mapView.minZoomLevel = 10.0
         mapView.maxZoomLevel = 18.0
+        mapView.logoInteractionEnabled = false
+        mapView.logoMargin = UIEdgeInsets(top: 0, left: 16, bottom: 45, right: 0)
     }
     
     private func setLocationOverlayIcon(latitude: Double, longitude: Double) {
@@ -235,7 +236,6 @@ class RecordViewController: NavigationBarViewController {
         let translation = gesture.translation(in: containerView)
         let newContainerHeight = containerView.frame.height - translation.y
         let clampedHeight = min(max(newContainerHeight, minHeight), maxHeight)
-        
         containerView.snp.updateConstraints { make in
             make.height.equalTo(clampedHeight)
         }
