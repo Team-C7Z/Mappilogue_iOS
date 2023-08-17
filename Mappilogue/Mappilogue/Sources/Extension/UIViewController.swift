@@ -18,7 +18,7 @@ extension UIViewController {
         navigationItem.leftBarButtonItem = barButtonItem
     }
     
-    func setNavigationBarItems(imageName: String, action: Selector, isLeft: Bool) {
+    func setNavigationTitleAndItems(imageName: String, action: Selector, isLeft: Bool) {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: imageName), for: .normal)
         button.addTarget(self, action: action, for: .touchUpInside)
