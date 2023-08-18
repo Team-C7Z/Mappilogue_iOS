@@ -1040,11 +1040,11 @@
 				9224FD082A601B00000A56A6 /* ColorSelectionButton.swift */,
 				92011C192A755D02009B047F /* MyRecordButton.swift */,
 				92011B272A6E75F1009B047F /* WriteRecordButton.swift */,
+				925840DA2A82144A00997434 /* EditViewController.swift */,
 				92011C1D2A75EE79009B047F /* MarkView.swift */,
 				920031D22A8C832300E3170D /* SearchBar.swift */,
 				92011B712A7127FC009B047F /* AlertViewController.swift */,
 				92011C672A78CB24009B047F /* InputAlertViewController.swift */,
-				925840DA2A82144A00997434 /* EditViewController.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
