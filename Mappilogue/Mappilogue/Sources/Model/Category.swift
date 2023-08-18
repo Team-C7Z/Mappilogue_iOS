@@ -14,7 +14,7 @@ struct CategoryData {
 
 func dummyCategoryData() -> [CategoryData] {
     let category = [
-        CategoryData(title: "여행ㄷㅅㄷㅁ", count: 3),
+        CategoryData(title: "휴가", count: 3),
         CategoryData(title: "생일", count: 11),
         CategoryData(title: "유진이랑 논 날💕", count: 6),
         CategoryData(title: "전시회", count: 0),

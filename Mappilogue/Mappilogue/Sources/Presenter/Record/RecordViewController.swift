@@ -17,6 +17,9 @@ class RecordViewController: NavigationBarViewController {
     
     var moveCamera: Bool = false
     
+    var topLeftCoord: NMGLatLng?
+    var bottomRightCoord: NMGLatLng?
+    
     let minHeight: CGFloat = 44
     let midHeight: CGFloat = 196
     var maxHeight: CGFloat = 0
@@ -46,17 +49,21 @@ class RecordViewController: NavigationBarViewController {
     let containerView = UIView()
     let bottomSheetViewController = BottomSheetViewController()
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         locationOverlay = mapView.locationOverlay
         setLocationManager()
         checkUserCurrentLocationAuthorization()
-        setMarker()
         setBottomSheetViewController()
         setPanGesture()
     }
-
+    
     override func setupProperty() {
         super.setupProperty()
         
@@ -94,7 +101,8 @@ class RecordViewController: NavigationBarViewController {
         
         mapView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-40)
         }
         
         searchTextField.snp.makeConstraints {
@@ -168,13 +176,25 @@ class RecordViewController: NavigationBarViewController {
         locationOverlay.iconHeight = 20
     }
     
+    private func getMapLatitudeLongitude() {
+        let projection = mapView.projection
+        topLeftCoord = projection.latlng(from: CGPoint(x: mapView.frame.minX, y: mapView.frame.minY))
+        bottomRightCoord = projection.latlng(from: CGPoint(x: mapView.frame.maxX, y: mapView.frame.maxY))
+        setMarker()
+    }
+    
     private func setMarker() {
+        guard let topLeftCoord = topLeftCoord else { return }
+        guard let bottomRightCoord = bottomRightCoord else { return }
+       
         for record in dummyRecord {
             guard let lat = record.lat, let lng = record.lng else { return }
-            let markerView = createMarkerView(record: record)
-            let marker = createMarker(markerView: markerView, lat: lat, lng: lng)
-            
-            marker.mapView = mapView
+            if lat <= topLeftCoord.lat && lat >= bottomRightCoord.lat && lng >= topLeftCoord.lng && lng <= bottomRightCoord.lng {
+                let markerView = createMarkerView(record: record)
+                let marker = createMarker(markerView: markerView, lat: lat, lng: lng)
+                
+                marker.mapView = mapView
+            }
         }
     }
     
@@ -311,8 +331,9 @@ extension RecordViewController: CLLocationManagerDelegate {
         mapView.moveCamera(cameraUpdate)
         
         setLocationOverlayIcon(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
-        
         locationManager.stopUpdatingLocation()
+        
+        getMapLatitudeLongitude()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
