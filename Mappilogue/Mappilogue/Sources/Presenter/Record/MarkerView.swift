@@ -17,7 +17,7 @@ class MarkerView: BaseView {
         markerImage = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
         addSubview(markerImage)
         
-        recordImage = UIImageView(frame: CGRect(x: (frame.width - 32) / 2, y: 8, width: 32, height: 32))
+        recordImage = UIImageView(frame: CGRect(x: (frame.width - 31) / 2, y: 8.5, width: 31, height: 31))
         markerImage.addSubview(recordImage)
         
         setupView()
@@ -28,13 +28,18 @@ class MarkerView: BaseView {
     }
     
     func setupView() {
-        markerImage.image = UIImage(named: "marker")
+        markerImage.image = UIImage(named: "record_marker")
         
-        recordImage.image = UIImage(named: "marker_logo")
         recordImage.layer.cornerRadius = 16
+        recordImage.layer.masksToBounds = true
     }
     
-    func configure(image: String, color: UIColor) {
+    func configure(image: String?, color: UIColor) {
+        if let image = image {
+            recordImage.image = UIImage(named: image)
+        } else {
+            recordImage.image = UIImage(named: "record_marker_logo")
+        }
         markerImage.tintColor = color
     }
 }

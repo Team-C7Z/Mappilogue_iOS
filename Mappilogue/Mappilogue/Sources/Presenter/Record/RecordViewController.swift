@@ -208,7 +208,7 @@ class RecordViewController: NavigationBarViewController {
     
     private func createMarkerView(record: Record) -> MarkerView {
         let markerView = MarkerView(frame: CGRect(x: 0, y: 0, width: 48, height: 64))
-        markerView.configure(image: "", color: record.color)
+        markerView.configure(image: record.image, color: record.color)
         
         return markerView
     }
@@ -444,7 +444,12 @@ extension RecordViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        switch indexPath.section {
+        case 0:
+            print(indexPath.row)
+        default:
+            print("카테고리 추가")
+        }
     }
 }
 
