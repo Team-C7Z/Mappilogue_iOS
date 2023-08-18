@@ -424,8 +424,13 @@ extension RecordViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cateogoryTitle = dummyCategory[indexPath.row].title
-        return CGSize(width: cateogoryTitle.size(withAttributes: [NSAttributedString.Key.font: UIFont.caption02]).width + 24, height: 32)
+        switch indexPath.section {
+        case 0:
+            let cateogoryTitle = dummyCategory[indexPath.row].title
+            return CGSize(width: cateogoryTitle.size(withAttributes: [NSAttributedString.Key.font: UIFont.caption02]).width + 24, height: 32)
+        default:
+            return CGSize(width: 108, height: 32)
+        }
     }
     
     // 수평 간격
