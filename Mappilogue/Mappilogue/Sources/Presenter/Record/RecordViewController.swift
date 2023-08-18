@@ -19,6 +19,7 @@ class RecordViewController: NavigationBarViewController {
     
     var topLeftCoord: NMGLatLng?
     var bottomRightCoord: NMGLatLng?
+    var markers: [NMFMarker] = []
     
     let minHeight: CGFloat = 44
     let midHeight: CGFloat = 196
@@ -192,9 +193,16 @@ class RecordViewController: NavigationBarViewController {
             if lat <= topLeftCoord.lat && lat >= bottomRightCoord.lat && lng >= topLeftCoord.lng && lng <= bottomRightCoord.lng {
                 let markerView = createMarkerView(record: record)
                 let marker = createMarker(markerView: markerView, lat: lat, lng: lng)
+                markers.append(marker)
                 
                 marker.mapView = mapView
             }
+        }
+    }
+    
+    private func clearMarker() {
+        for marker in markers {
+            marker.mapView = nil
         }
     }
     
@@ -231,7 +239,8 @@ class RecordViewController: NavigationBarViewController {
     }
     
     @objc private func findMarkersButtonTapped() {
-        
+        clearMarker()
+        getMapLatitudeLongitude()
     }
     
     @objc private func myRecordButtonTapped(_ sender: UIButton) {
