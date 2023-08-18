@@ -21,6 +21,7 @@ class RecordViewController: NavigationBarViewController {
     var bottomRightCoord: NMGLatLng?
     var markers: [NMFMarker] = []
     var selectedCategory: String?
+    var isZoomOut: Bool = false
     
     let minHeight: CGFloat = 44
     let midHeight: CGFloat = 196
@@ -51,11 +52,7 @@ class RecordViewController: NavigationBarViewController {
     let containerView = UIView()
     let bottomSheetViewController = BottomSheetViewController()
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -162,7 +159,7 @@ class RecordViewController: NavigationBarViewController {
         mapView.allowsZooming = true
         mapView.allowsScrolling = true
         mapView.positionMode = .compass
-        mapView.minZoomLevel = 10.0
+        mapView.minZoomLevel = 9.0
         mapView.maxZoomLevel = 18.0
         mapView.logoInteractionEnabled = false
         mapView.logoMargin = UIEdgeInsets(top: 0, left: 16, bottom: 45, right: 0)
@@ -197,33 +194,41 @@ class RecordViewController: NavigationBarViewController {
             if isWithinLatBounds && isWithinLngBounds {
                 if let selectedCategory {
                     if record.category == selectedCategory {
-                        createAndShowMarker(record: record, lat: lat, lng: lng)
+                        createAndShowMarker(record: record, lat: lat, lng: lng, isZoomOut: isZoomOut)
                     }
                 } else {
-                    createAndShowMarker(record: record, lat: lat, lng: lng)
+                    createAndShowMarker(record: record, lat: lat, lng: lng, isZoomOut: isZoomOut)
                 }
             }
         }
     }
     
-    private func createAndShowMarker(record: Record, lat: Double, lng: Double) {
-        let markerView = createMarkerView(record: record)
-        let marker = createMarker(markerView: markerView, lat: lat, lng: lng)
-        markers.append(marker)
-        marker.mapView = mapView
-    }
-    
-    private func clearMarker() {
-        for marker in markers {
-            marker.mapView = nil
+    private func createAndShowMarker(record: Record, lat: Double, lng: Double, isZoomOut: Bool) {
+        if isZoomOut {
+            let markerView = createZoomOutMarkerView(record: record)
+            let marker = createZoomOutMarker(markerView: markerView, lat: lat, lng: lng)
+            markers.append(marker)
+            marker.mapView = mapView
+        } else {
+            let markerView = createMarkerView(record: record)
+            let marker = createMarker(markerView: markerView, lat: lat, lng: lng)
+            markers.append(marker)
+            marker.mapView = mapView
         }
     }
-    
+
     private func createMarkerView(record: Record) -> MarkerView {
         let markerView = MarkerView(frame: CGRect(x: 0, y: 0, width: 48, height: 64))
         markerView.configure(image: record.image, color: record.color)
         
         return markerView
+    }
+    
+    private func createZoomOutMarkerView(record: Record) -> MarkView {
+        let markView = MarkView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
+        markView.configure(heartWidth: 14, heartHeight: 13)
+        markView.backgroundColor = record.color
+        return markView
     }
     
     private func createMarker(markerView: MarkerView, lat: Double, lng: Double) -> NMFMarker {
@@ -232,6 +237,21 @@ class RecordViewController: NavigationBarViewController {
         marker.position = NMGLatLng(lat: lat, lng: lng)
         
         return marker
+    }
+    
+    private func createZoomOutMarker(markerView: MarkView, lat: Double, lng: Double) -> NMFMarker {
+        let marker = NMFMarker()
+        marker.iconImage = NMFOverlayImage(image: markerView.asImage())
+        marker.position = NMGLatLng(lat: lat, lng: lng)
+        
+        return marker
+    }
+    
+    private func clearMarker() {
+        for marker in markers {
+            marker.mapView = nil
+        }
+        markers = []
     }
     
     @objc private func searchTextFieldTapped() {
@@ -403,6 +423,22 @@ extension RecordViewController: NMFMapViewCameraDelegate {
     func mapView(_ mapView: NMFMapView, cameraIsChangingByReason reason: Int) {
         moveCamera = true
         findMarkersButton.isHidden = false
+    }
+    
+    func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
+        if mapView.zoomLevel <= 12.9 {
+            if !isZoomOut {
+                isZoomOut = true
+                clearMarker()
+                setMarker()
+            }
+        } else {
+            if isZoomOut {
+                isZoomOut = false
+                clearMarker()
+                setMarker()
+            }
+        }
     }
 }
 

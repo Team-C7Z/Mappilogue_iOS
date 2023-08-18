@@ -8,30 +8,25 @@
 import UIKit
 
 class MarkView: BaseView {
-    private let markImage = UIImageView()
+    private var markImage = UIImageView()
     
-    convenience init(radius: CGFloat, width: CGFloat, height: CGFloat) {
-        self.init(frame: .zero)
-        
-        self.layer.cornerRadius = radius
-        self.layer.applyShadow()
-        
-        markImage.snp.makeConstraints {
-            $0.width.equalTo(width)
-            $0.height.equalTo(height)
-            $0.centerX.centerY.equalTo(self)
-        }
-    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
     
-    override func setupProperty() {
-        super.setupProperty()
-        
-        markImage.image = UIImage(named: "mark")
-    }
-    
-    override func setupHierarchy() {
-        super.setupHierarchy()
+        layer.cornerRadius = frame.height / 2
+        layer.applyShadow()
         
         addSubview(markImage)
+        markImage.image = UIImage(named: "common_mark")
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure(heartWidth: CGFloat, heartHeight: CGFloat) {
+        markImage.frame.size.width = heartWidth
+        markImage.frame.size.height = heartHeight
+        markImage.center = CGPoint(x: frame.width / 2, y: frame.height / 2)
     }
 }
