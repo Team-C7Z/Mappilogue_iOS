@@ -10,7 +10,7 @@ import UIKit
 class SearchRecordCell: BaseCollectionViewCell {
     static let registerId = "\(SearchRecordCell.self)"
     
-    private let markView = MarkView(radius: 19 / 2, width: 11, height: 10.2)
+    private let markView = MarkView(frame: CGRect(x: 0, y: 0, width: 19, height: 19))
     private let recordTitleLabel = UILabel()
     private let recordDateLabel = UILabel()
     private let separatorImage = UIImageView()
@@ -19,6 +19,8 @@ class SearchRecordCell: BaseCollectionViewCell {
     override func setupProperty() {
         super.setupProperty()
 
+        markView.configure(heartWidth: 11.08, heartHeight: 10.29)
+        
         recordTitleLabel.textColor = .color1C1C1C
         recordTitleLabel.font = .title02
         

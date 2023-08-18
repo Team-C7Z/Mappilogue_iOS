@@ -15,6 +15,14 @@ class RecordViewController: NavigationBarViewController {
     let locationManager = CLLocationManager()
     var locationOverlay: NMFLocationOverlay?
     
+    var moveCamera: Bool = false
+    
+    var topLeftCoord: NMGLatLng?
+    var bottomRightCoord: NMGLatLng?
+    var markers: [NMFMarker] = []
+    var selectedCategory: String?
+    var isZoomOut: Bool = false
+    
     let minHeight: CGFloat = 44
     let midHeight: CGFloat = 196
     var maxHeight: CGFloat = 0
@@ -40,20 +48,21 @@ class RecordViewController: NavigationBarViewController {
     let currentLocationButton = UIButton()
     let myRecordButton = MyRecordButton()
     let writeRecordButton = WriteRecordButton()
+    let findMarkersButton = FindMarkersButton()
     let containerView = UIView()
     let bottomSheetViewController = BottomSheetViewController()
 
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         locationOverlay = mapView.locationOverlay
         setLocationManager()
         checkUserCurrentLocationAuthorization()
-        setMarker()
         setBottomSheetViewController()
         setPanGesture()
     }
-
+    
     override func setupProperty() {
         super.setupProperty()
         
@@ -67,6 +76,8 @@ class RecordViewController: NavigationBarViewController {
         currentLocationButton.layer.applyShadow()
         currentLocationButton.addTarget(self, action: #selector(currentLocationButtonTapped), for: .touchUpInside)
         
+        findMarkersButton.isHidden = true
+        findMarkersButton.addTarget(self, action: #selector(findMarkersButtonTapped), for: .touchUpInside)
         myRecordButton.addTarget(self, action: #selector(myRecordButtonTapped), for: .touchUpInside)
         writeRecordButton.addTarget(self, action: #selector(writeRecordButtonTapped), for: .touchUpInside)
     }
@@ -79,6 +90,7 @@ class RecordViewController: NavigationBarViewController {
         mapView.addSubview(collectionView)
         view.addSubview(currentLocationButton)
         view.addSubview(myRecordButton)
+        view.addSubview(findMarkersButton)
         view.addSubview(writeRecordButton)
         view.addSubview(containerView)
     }
@@ -88,7 +100,8 @@ class RecordViewController: NavigationBarViewController {
         
         mapView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-40)
         }
         
         searchTextField.snp.makeConstraints {
@@ -116,6 +129,11 @@ class RecordViewController: NavigationBarViewController {
             $0.bottom.equalTo(writeRecordButton.snp.top).offset(-16)
         }
         
+        findMarkersButton.snp.makeConstraints {
+            $0.centerX.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(containerView.snp.top).offset(-16)
+        }
+        
         writeRecordButton.snp.makeConstraints {
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
             $0.bottom.equalTo(containerView.snp.top).offset(-16)
@@ -138,12 +156,14 @@ class RecordViewController: NavigationBarViewController {
     }
     
     private func setMapView() {
-        mapView.logoInteractionEnabled = false
         mapView.allowsZooming = true
         mapView.allowsScrolling = true
         mapView.positionMode = .compass
-        mapView.minZoomLevel = 10.0
+        mapView.minZoomLevel = 9.0
         mapView.maxZoomLevel = 18.0
+        mapView.logoInteractionEnabled = false
+        mapView.logoMargin = UIEdgeInsets(top: 0, left: 16, bottom: 45, right: 0)
+        mapView.addCameraDelegate(delegate: self)
     }
     
     private func setLocationOverlayIcon(latitude: Double, longitude: Double) {
@@ -155,21 +175,60 @@ class RecordViewController: NavigationBarViewController {
         locationOverlay.iconHeight = 20
     }
     
+    private func getMapLatitudeLongitude() {
+        let projection = mapView.projection
+        topLeftCoord = projection.latlng(from: CGPoint(x: mapView.frame.minX, y: mapView.frame.minY))
+        bottomRightCoord = projection.latlng(from: CGPoint(x: mapView.frame.maxX, y: mapView.frame.maxY))
+        setMarker()
+    }
+    
     private func setMarker() {
+        guard let topLeftCoord = topLeftCoord, let bottomRightCoord = bottomRightCoord else { return }
+       
         for record in dummyRecord {
-            guard let lat = record.lat, let lng = record.lng else { return }
-            let markerView = createMarkerView(record: record)
-            let marker = createMarker(markerView: markerView, lat: lat, lng: lng)
+            guard let lat = record.lat, let lng = record.lng else { continue }
             
-            marker.mapView = mapView
+            let isWithinLatBounds = (lat <= topLeftCoord.lat) && (lat >= bottomRightCoord.lat)
+            let isWithinLngBounds = (lng >= topLeftCoord.lng) && (lng <= bottomRightCoord.lng)
+            
+            if isWithinLatBounds && isWithinLngBounds {
+                if let selectedCategory {
+                    if record.category == selectedCategory {
+                        createAndShowMarker(record: record, lat: lat, lng: lng, isZoomOut: isZoomOut)
+                    }
+                } else {
+                    createAndShowMarker(record: record, lat: lat, lng: lng, isZoomOut: isZoomOut)
+                }
+            }
         }
     }
     
+    private func createAndShowMarker(record: Record, lat: Double, lng: Double, isZoomOut: Bool) {
+        if isZoomOut {
+            let markerView = createZoomOutMarkerView(record: record)
+            let marker = createZoomOutMarker(markerView: markerView, lat: lat, lng: lng)
+            markers.append(marker)
+            marker.mapView = mapView
+        } else {
+            let markerView = createMarkerView(record: record)
+            let marker = createMarker(markerView: markerView, lat: lat, lng: lng)
+            markers.append(marker)
+            marker.mapView = mapView
+        }
+    }
+
     private func createMarkerView(record: Record) -> MarkerView {
         let markerView = MarkerView(frame: CGRect(x: 0, y: 0, width: 48, height: 64))
-        markerView.configure(image: "", color: record.color)
+        markerView.configure(image: record.image, color: record.color)
         
         return markerView
+    }
+    
+    private func createZoomOutMarkerView(record: Record) -> MarkView {
+        let markView = MarkView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
+        markView.configure(heartWidth: 14, heartHeight: 13)
+        markView.backgroundColor = record.color
+        return markView
     }
     
     private func createMarker(markerView: MarkerView, lat: Double, lng: Double) -> NMFMarker {
@@ -178,6 +237,21 @@ class RecordViewController: NavigationBarViewController {
         marker.position = NMGLatLng(lat: lat, lng: lng)
         
         return marker
+    }
+    
+    private func createZoomOutMarker(markerView: MarkView, lat: Double, lng: Double) -> NMFMarker {
+        let marker = NMFMarker()
+        marker.iconImage = NMFOverlayImage(image: markerView.asImage())
+        marker.position = NMGLatLng(lat: lat, lng: lng)
+        
+        return marker
+    }
+    
+    private func clearMarker() {
+        for marker in markers {
+            marker.mapView = nil
+        }
+        markers = []
     }
     
     @objc private func searchTextFieldTapped() {
@@ -197,6 +271,11 @@ class RecordViewController: NavigationBarViewController {
         mapView.moveCamera(cameraUpdate)
     }
     
+    @objc private func findMarkersButtonTapped() {
+        clearMarker()
+        getMapLatitudeLongitude()
+    }
+    
     @objc private func myRecordButtonTapped(_ sender: UIButton) {
         let myRecordViewController = MyRecordViewController()
         myRecordViewController.hidesBottomBarWhenPushed = true
@@ -214,6 +293,8 @@ class RecordViewController: NavigationBarViewController {
         bottomSheetViewController.view.frame = containerView.bounds
         containerView.addSubview(bottomSheetViewController.view)
         bottomSheetViewController.didMove(toParent: self)
+        
+        bottomSheetViewController.dummyRecord = dummyRecord
     }
     
     private func setBottomSheetHeight() {
@@ -235,7 +316,6 @@ class RecordViewController: NavigationBarViewController {
         let translation = gesture.translation(in: containerView)
         let newContainerHeight = containerView.frame.height - translation.y
         let clampedHeight = min(max(newContainerHeight, minHeight), maxHeight)
-        
         containerView.snp.updateConstraints { make in
             make.height.equalTo(clampedHeight)
         }
@@ -273,6 +353,8 @@ class RecordViewController: NavigationBarViewController {
         currentLocationButton.isHidden = isHidden
         myRecordButton.isHidden = isHidden
         writeRecordButton.isHidden = isHidden
+    
+        findMarkersButton.isHidden = moveCamera && !isHidden ? false : true
     }
     
     private func updateBottomSheet(_ nearestHeight: CGFloat) {
@@ -291,8 +373,9 @@ extension RecordViewController: CLLocationManagerDelegate {
         mapView.moveCamera(cameraUpdate)
         
         setLocationOverlayIcon(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
-        
         locationManager.stopUpdatingLocation()
+        
+        getMapLatitudeLongitude()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -336,6 +419,29 @@ extension RecordViewController: CLLocationManagerDelegate {
     }
 }
 
+extension RecordViewController: NMFMapViewCameraDelegate {
+    func mapView(_ mapView: NMFMapView, cameraIsChangingByReason reason: Int) {
+        moveCamera = true
+        findMarkersButton.isHidden = false
+    }
+    
+    func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
+        if mapView.zoomLevel <= 12.9 {
+            if !isZoomOut {
+                isZoomOut = true
+                clearMarker()
+                setMarker()
+            }
+        } else {
+            if isZoomOut {
+                isZoomOut = false
+                clearMarker()
+                setMarker()
+            }
+        }
+    }
+}
+
 extension RecordViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
@@ -367,8 +473,13 @@ extension RecordViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cateogoryTitle = dummyCategory[indexPath.row].title
-        return CGSize(width: cateogoryTitle.size(withAttributes: [NSAttributedString.Key.font: UIFont.caption02]).width + 24, height: 32)
+        switch indexPath.section {
+        case 0:
+            let cateogoryTitle = dummyCategory[indexPath.row].title
+            return CGSize(width: cateogoryTitle.size(withAttributes: [NSAttributedString.Key.font: UIFont.caption02]).width + 24, height: 32)
+        default:
+            return CGSize(width: 108, height: 32)
+        }
     }
     
     // 수평 간격
@@ -382,7 +493,14 @@ extension RecordViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        switch indexPath.section {
+        case 0:
+            selectedCategory = dummyCategory[indexPath.row].title
+            clearMarker()
+            setMarker()
+        default:
+            selectedCategory = nil
+        }
     }
 }
 
