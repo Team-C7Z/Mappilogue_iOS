@@ -28,7 +28,8 @@ func dummyRecordData() -> [Record] {
     let record6 = Record(title: "여의도 공원", image: nil, color: .colorB2EBE7, date: "9월 12일", location: "여의도 공원", category: "전시회", lat: 37.5250892160129, lng: 126.947545050571)
     let record7 = Record(title: "경북궁", image: "recordTest3", color: .colorCAEDA8, date: "12월 7일", location: "경북궁", category: "휴가", lat: 37.577613288258206, lng: 126.97689786832184)
     let record8 = Record(title: "남산 서울 타워", image: "recordTest2", color: .colorC9C6C2, date: "1월 17일", location: "남산 서울 타워", category: "휴가", lat: 37.55127433407266, lng: 126.98820799353979)
-    let record9 = Record(title: "서울숲", image: nil, color: .colorF5DC82, date: "2월 23일", location: "서울숲", category: "휴가", lat: 37.5443222301513, lng: 127.037617759165)
+    let record9 = Record(title: "서울숲", image: nil, color: .colorF5DC82, date: "2월 23일", location: "서울숲", category: "여행", lat: 37.5443222301513, lng: 127.037617759165)
+    let record10 = Record(title: "영화", image: nil, color: .colorF5DC82, date: "2월 23일", location: "메가박스 강남", category: "휴가", lat: 37.4979560555237, lng: 127.026417015264)
     
-    return [record1, record2, record3, record4, record5, record6, record7, record8, record9]
+    return [record1, record2, record3, record4, record5, record6, record7, record8, record9, record10]
 }
