@@ -11,7 +11,7 @@ class RecordCell: BaseCollectionViewCell {
     static let registerId = "\(RecordCell.self)"
     
     private let recordImage = UIImageView()
-    private let markView = MarkView(radius: 12, width: 14, height: 13)
+    private let markView = MarkView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
     
     private let textView = UIView()
     private let recordTitleLabel = UILabel()
@@ -121,6 +121,7 @@ class RecordCell: BaseCollectionViewCell {
             recordImage.image = UIImage(named: imageName)
         }
         markView.backgroundColor = record.color
+        markView.configure(heartWidth: 14, heartHeight: 13)
         recordTitleLabel.text = record.title
         recordDateLabel.text = record.date
         recordLocationLabel.text = record.location
