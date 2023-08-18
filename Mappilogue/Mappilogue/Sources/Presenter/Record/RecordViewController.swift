@@ -20,6 +20,7 @@ class RecordViewController: NavigationBarViewController {
     var topLeftCoord: NMGLatLng?
     var bottomRightCoord: NMGLatLng?
     var markers: [NMFMarker] = []
+    var selectedCategory: String?
     
     let minHeight: CGFloat = 44
     let midHeight: CGFloat = 196
@@ -185,19 +186,31 @@ class RecordViewController: NavigationBarViewController {
     }
     
     private func setMarker() {
-        guard let topLeftCoord = topLeftCoord else { return }
-        guard let bottomRightCoord = bottomRightCoord else { return }
+        guard let topLeftCoord = topLeftCoord, let bottomRightCoord = bottomRightCoord else { return }
        
         for record in dummyRecord {
-            guard let lat = record.lat, let lng = record.lng else { return }
-            if lat <= topLeftCoord.lat && lat >= bottomRightCoord.lat && lng >= topLeftCoord.lng && lng <= bottomRightCoord.lng {
-                let markerView = createMarkerView(record: record)
-                let marker = createMarker(markerView: markerView, lat: lat, lng: lng)
-                markers.append(marker)
-                
-                marker.mapView = mapView
+            guard let lat = record.lat, let lng = record.lng else { continue }
+            
+            let isWithinLatBounds = (lat <= topLeftCoord.lat) && (lat >= bottomRightCoord.lat)
+            let isWithinLngBounds = (lng >= topLeftCoord.lng) && (lng <= bottomRightCoord.lng)
+            
+            if isWithinLatBounds && isWithinLngBounds {
+                if let selectedCategory {
+                    if record.category == selectedCategory {
+                        createAndShowMarker(record: record, lat: lat, lng: lng)
+                    }
+                } else {
+                    createAndShowMarker(record: record, lat: lat, lng: lng)
+                }
             }
         }
+    }
+    
+    private func createAndShowMarker(record: Record, lat: Double, lng: Double) {
+        let markerView = createMarkerView(record: record)
+        let marker = createMarker(markerView: markerView, lat: lat, lng: lng)
+        markers.append(marker)
+        marker.mapView = mapView
     }
     
     private func clearMarker() {
@@ -446,9 +459,11 @@ extension RecordViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            print(indexPath.row)
+            selectedCategory = dummyCategory[indexPath.row].title
+            clearMarker()
+            setMarker()
         default:
-            print("카테고리 추가")
+            selectedCategory = nil
         }
     }
 }
