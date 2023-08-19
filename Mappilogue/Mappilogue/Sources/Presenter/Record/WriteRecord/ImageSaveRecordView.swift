@@ -1,5 +1,5 @@
 //
-//  SaveRecordView.swift
+//  ImageSaveRecordView.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/07/27.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-class SaveRecordView: BaseView {
+class ImageSaveRecordView: BaseView {
     private let lineView = UIView()
-    private let cameraButton = UIButton()
+    let galleryButton = UIButton()
     let saveRecordButton = UIButton()
     let hideKeyboardButton = UIButton()
     
@@ -17,8 +17,10 @@ class SaveRecordView: BaseView {
         super.setupProperty()
         
         backgroundColor = .colorF9F8F7
+        
         lineView.backgroundColor = .colorEAE6E1
-        cameraButton.setImage(UIImage(named: "camera"), for: .normal)
+        
+        galleryButton.setImage(UIImage(named: "camera"), for: .normal)
         
         saveRecordButton.setTitle("기록 저장", for: .normal)
         saveRecordButton.setTitleColor(.colorFFFFFF, for: .normal)
@@ -34,7 +36,7 @@ class SaveRecordView: BaseView {
         super.setupHierarchy()
 
         addSubview(lineView)
-        addSubview(cameraButton)
+        addSubview(galleryButton)
         addSubview(saveRecordButton)
         addSubview(hideKeyboardButton)
     }
@@ -47,7 +49,7 @@ class SaveRecordView: BaseView {
             $0.height.equalTo(2)
         }
         
-        cameraButton.snp.makeConstraints {
+        galleryButton.snp.makeConstraints {
             $0.top.equalTo(self).offset(4)
             $0.leading.equalTo(self).offset(6)
             $0.width.equalTo(48)
@@ -71,5 +73,5 @@ class SaveRecordView: BaseView {
     func configure(_ showKeyboard: Bool) {
         hideKeyboardButton.isHidden = showKeyboard ? false : true
         saveRecordButton.isHidden = showKeyboard ? true : false
-    }
+    }   
 }
