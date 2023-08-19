@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Photos
 
 class WriteRecordViewController: BaseViewController {
     var schedule: Schedule = Schedule()
@@ -22,7 +23,7 @@ class WriteRecordViewController: BaseViewController {
     private let colorSelectionView = ColorSelectionView()
     private let mainLocationButton = MainLocationButton()
     private let recordContentView = ContentView()
-    private let saveRecordView = SaveRecordView()
+    private let saveRecordView = ImageSaveRecordView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +61,7 @@ class WriteRecordViewController: BaseViewController {
         
         saveRecordView.hideKeyboardButton.addTarget(self, action: #selector(dismissKeyboard), for: .touchUpInside)
         saveRecordView.saveRecordButton.addTarget(self, action: #selector(saveRecordButtonTapped), for: .touchUpInside)
+        saveRecordView.galleryButton.addTarget(self, action: #selector(galleryButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -191,6 +193,45 @@ class WriteRecordViewController: BaseViewController {
         
         saveRecordView.configure(isShowing)
         view.layoutIfNeeded()
+    }
+    
+    @objc func galleryButtonTapped() {
+        checkAlbumPermission()
+    }
+    
+    private func checkAlbumPermission() {
+        PHPhotoLibrary.requestAuthorization({ status in
+            DispatchQueue.main.async {
+                switch status {
+                case .authorized:
+                    print("Album: 권한 허용")
+                case .denied:
+                    self.showGalleyPermissionAlert()
+                case .notDetermined:
+                    print("Album: 선택하지 않음")
+                default:
+                    break
+                }
+            }
+        })
+    }
+    
+    func showGalleyPermissionAlert() {
+        let alertViewController = AlertViewController()
+        alertViewController.modalPresentationStyle = .overCurrentContext
+        let alert = Alert(titleText: "사진 접근 권한을 허용해 주세요",
+                          messageText: "사진 접근 권한을 허용하지 않을 경우\n일부 기능을 사용할 수 없어요",
+                          cancelText: "닫기",
+                          doneText: "설정으로 이동",
+                          buttonColor: .color2EBD3D,
+                          alertHeight: 182)
+        alertViewController.configureAlert(with: alert)
+        alertViewController.onDoneTapped = {
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+        present(alertViewController, animated: false)
     }
     
     @objc func saveRecordButtonTapped() {
