@@ -12,7 +12,7 @@ class UpdateScheduleTitleColorView: BaseView {
     
     private let lineView = UIView()
     private let scheduleTitleLabel = UILabel()
-    private var colorSelectionButton = ColorSelectionButton(textColor: .color1C1C1C, color: .colorCAEDA8)
+    private var colorSelectionButton = ColorSelectionButton(textColor: .colorFFFFFF, color: .color1C1C1C)
     
     override func setupProperty() {
         super.setupProperty()

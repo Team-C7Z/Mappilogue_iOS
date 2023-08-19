@@ -43,7 +43,7 @@
 		92011B832A72AA96009B047F /* UpdateScheduleTitleColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B822A72AA96009B047F /* UpdateScheduleTitleColorView.swift */; };
 		92011B872A72B0A7009B047F /* MainLocatonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B862A72B0A7009B047F /* MainLocatonView.swift */; };
 		92011B892A72B4BB009B047F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B882A72B4BB009B047F /* ContentView.swift */; };
-		92011B8B2A72B7DA009B047F /* NewWriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B8A2A72B7DA009B047F /* NewWriteView.swift */; };
+		92011B8B2A72B7DA009B047F /* NewWriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B8A2A72B7DA009B047F /* NewWriteButton.swift */; };
 		92011B8D2A72BBE8009B047F /* SaveRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B8C2A72BBE8009B047F /* SaveRecordView.swift */; };
 		92011B902A7364D0009B047F /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B8F2A7364D0009B047F /* BaseButton.swift */; };
 		92011B922A7367E6009B047F /* MainLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B912A7367E5009B047F /* MainLocationButton.swift */; };
@@ -246,7 +246,7 @@
 		92011B822A72AA96009B047F /* UpdateScheduleTitleColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateScheduleTitleColorView.swift; sourceTree = "<group>"; };
 		92011B862A72B0A7009B047F /* MainLocatonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLocatonView.swift; sourceTree = "<group>"; };
 		92011B882A72B4BB009B047F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		92011B8A2A72B7DA009B047F /* NewWriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWriteView.swift; sourceTree = "<group>"; };
+		92011B8A2A72B7DA009B047F /* NewWriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWriteButton.swift; sourceTree = "<group>"; };
 		92011B8C2A72BBE8009B047F /* SaveRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveRecordView.swift; sourceTree = "<group>"; };
 		92011B8F2A7364D0009B047F /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		92011B912A7367E5009B047F /* MainLocationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainLocationButton.swift; sourceTree = "<group>"; };
@@ -535,7 +535,7 @@
 			children = (
 				92011B772A71683E009B047F /* SelectWriteRecordViewController.swift */,
 				92011B7C2A7174B6009B047F /* DateHeaderView.swift */,
-				92011B8A2A72B7DA009B047F /* NewWriteView.swift */,
+				92011B8A2A72B7DA009B047F /* NewWriteButton.swift */,
 				92011B7E2A726031009B047F /* WriteRecordViewController.swift */,
 				92011B8C2A72BBE8009B047F /* SaveRecordView.swift */,
 				920031DA2A8DD29700E3170D /* SavingRecordViewController.swift */,
@@ -1462,7 +1462,7 @@
 				927E7F272A683DCD00E6A29F /* CalendarCell.swift in Sources */,
 				925840C12A7F5B2200997434 /* NotificationSwitchButton.swift in Sources */,
 				9224FD112A611218000A56A6 /* TodayScheduleSection.swift in Sources */,
-				92011B8B2A72B7DA009B047F /* NewWriteView.swift in Sources */,
+				92011B8B2A72B7DA009B047F /* NewWriteButton.swift in Sources */,
 				925840B72A7F2D5A00997434 /* VersionCell.swift in Sources */,
 				92A7B65B2A4D0FD9009C9293 /* AddLocationButtonCell.swift in Sources */,
 				925840D72A80D4BD00997434 /* NotificationHeaderView.swift in Sources */,
