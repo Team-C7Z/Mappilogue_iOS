@@ -18,7 +18,7 @@ class ContentView: BaseView {
         super.setupProperty()
         
         backgroundColor = .colorF9F8F7
-        
+       
         contentView.text = textViewPlaceHolder
         contentView.textColor = .colorC9C6C2
         contentView.font = .body01
@@ -43,7 +43,7 @@ class ContentView: BaseView {
         contentView.snp.makeConstraints {
             $0.leading.trailing.equalTo(self)
             $0.top.equalTo(self).offset(16)
-            $0.bottom.equalTo(self).offset(-16)
+            $0.bottom.equalTo(self).offset(-100)
         }
     }
 }
@@ -72,7 +72,7 @@ extension ContentView: UITextViewDelegate {
         let newSize = contentView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
 
         self.snp.remakeConstraints {
-            $0.height.equalTo(max(textViewHeight, newSize.height + 50))
+            $0.height.equalTo(max(textViewHeight, newSize.height + 150))
         }
         stackViewHeightUpdated?()
         self.layoutIfNeeded()
