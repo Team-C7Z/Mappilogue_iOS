@@ -21,7 +21,7 @@ class WriteRecordViewController: BaseViewController {
     private let scheduleTitleColorView = ScheduleTitleColorView()
     private let colorSelectionView = ColorSelectionView()
     private let mainLocationButton = MainLocationButton()
-    private let textContentView = ContentView()
+    private let recordContentView = ContentView()
     private let saveRecordView = SaveRecordView()
     
     override func viewDidLoad() {
@@ -39,7 +39,7 @@ class WriteRecordViewController: BaseViewController {
         super.setupProperty()
         
         setNavigationTitleAndBackButton("기록 쓰기", backButtonAction: #selector(presentAlert))
-        
+
         titleColorStackView.axis = .vertical
         titleColorStackView.distribution = .equalSpacing
         titleColorStackView.spacing = 0
@@ -53,8 +53,9 @@ class WriteRecordViewController: BaseViewController {
         
         mainLocationButton.addTarget(self, action: #selector(mainLocationButtonTapped), for: .touchUpInside)
         
-        textContentView.stackViewHeightUpdated = { [weak self] in
-            self?.stackView.layoutIfNeeded()
+        recordContentView.stackViewHeightUpdated = {
+            self.stackView.layoutIfNeeded()
+            self.scrollToBottom()
         }
         
         saveRecordView.hideKeyboardButton.addTarget(self, action: #selector(dismissKeyboard), for: .touchUpInside)
@@ -72,7 +73,7 @@ class WriteRecordViewController: BaseViewController {
         titleColorStackView.addArrangedSubview(scheduleTitleColorView)
         titleColorStackView.addArrangedSubview(colorSelectionView)
         stackView.addArrangedSubview(mainLocationButton)
-        stackView.addArrangedSubview(textContentView)
+        stackView.addArrangedSubview(recordContentView)
         view.addSubview(saveRecordView)
     }
     
@@ -150,6 +151,11 @@ class WriteRecordViewController: BaseViewController {
     @objc func mainLocationButtonTapped() {
         let mainLocationViewController = MainLocationViewController()
         navigationController?.pushViewController(mainLocationViewController, animated: true)
+    }
+    
+    private func scrollToBottom() {
+        let bottomOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - scrollView.bounds.size.height)
+        scrollView.setContentOffset(bottomOffset, animated: true)
     }
     
     private func setKeyboardObservers() {
