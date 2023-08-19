@@ -17,7 +17,6 @@ class MainLocationButton: BaseButton {
         
         backgroundColor = .colorF9F8F7
         
-        locationTitleLabel.text = "카멜리아힐"
         locationTitleLabel.textColor = .color707070
         locationTitleLabel.font = .body02
         
@@ -54,5 +53,9 @@ class MainLocationButton: BaseButton {
             $0.width.equalTo(7)
             $0.height.equalTo(14)
         }
+    }
+    
+    func configure(_ title: String) {
+        locationTitleLabel.text = title
     }
 }

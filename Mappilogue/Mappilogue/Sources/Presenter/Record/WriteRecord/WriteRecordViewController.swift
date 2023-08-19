@@ -32,6 +32,7 @@ class WriteRecordViewController: BaseViewController {
         configureColorSelectionView()
         toggleColorSelectionView()
         selectColor()
+        configureMainLocationButton()
     }
     
     override func setupProperty() {
@@ -138,6 +139,12 @@ class WriteRecordViewController: BaseViewController {
         if let index = colorList.firstIndex(where: { $0 == schedule.color }) {
             colorSelectionView.configure(index)
         }
+    }
+    
+    private func configureMainLocationButton() {
+        guard let location = schedule.location else { return }
+        
+        mainLocationButton.configure(location)
     }
     
     @objc func mainLocationButtonTapped() {
