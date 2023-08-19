@@ -12,13 +12,12 @@ class ContentView: BaseView {
     var textViewHeight: CGFloat = 300
     var stackViewHeightUpdated: (() -> Void)?
     
-    private let lineView = UIView()
     let contentView = UITextView()
 
     override func setupProperty() {
         super.setupProperty()
         
-        lineView.backgroundColor = .colorEAE6E1
+        backgroundColor = .colorF9F8F7
         
         contentView.text = textViewPlaceHolder
         contentView.textColor = .colorC9C6C2
@@ -31,7 +30,6 @@ class ContentView: BaseView {
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        addSubview(lineView)
         addSubview(contentView)
     }
     
@@ -40,11 +38,6 @@ class ContentView: BaseView {
         
         self.snp.makeConstraints {
             $0.height.equalTo(textViewHeight)
-        }
-        
-        lineView.snp.makeConstraints {
-            $0.top.leading.trailing.equalTo(self)
-            $0.height.equalTo(1)
         }
         
         contentView.snp.makeConstraints {
