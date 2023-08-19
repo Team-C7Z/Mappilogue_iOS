@@ -11,7 +11,7 @@ class UpdateScheduleTitleColorView: BaseView {
     var delegate: ColorSelectionButtonDelegate?
     
     private let lineView = UIView()
-    private let scheduleTitleLabel = UILabel()
+    private let scheduleTitleTextField = UITextField()
     private var colorSelectionButton = ColorSelectionButton(textColor: .colorFFFFFF, color: .color1C1C1C)
     
     override func setupProperty() {
@@ -19,8 +19,11 @@ class UpdateScheduleTitleColorView: BaseView {
         
         lineView.backgroundColor = .colorEAE6E1
 
-        scheduleTitleLabel.textColor = .colorC9C6C2
-        scheduleTitleLabel.font = .title02
+        scheduleTitleTextField.textColor = .colorC9C6C2
+        scheduleTitleTextField.font = .title02
+        scheduleTitleTextField.placeholder = "일정 제목을 적어 주세요"
+        scheduleTitleTextField.returnKeyType = .done
+        scheduleTitleTextField.delegate = self
         
         colorSelectionButton.addTarget(self, action: #selector(colorSelectionButtonTapped), for: .touchUpInside)
     }
@@ -29,7 +32,7 @@ class UpdateScheduleTitleColorView: BaseView {
         super.setupHierarchy()
         
         addSubview(lineView)
-        addSubview(scheduleTitleLabel)
+        addSubview(scheduleTitleTextField)
         addSubview(colorSelectionButton)
     }
     
@@ -45,8 +48,9 @@ class UpdateScheduleTitleColorView: BaseView {
             $0.height.equalTo(1)
         }
 
-        scheduleTitleLabel.snp.makeConstraints {
+        scheduleTitleTextField.snp.makeConstraints {
             $0.leading.centerY.equalTo(self)
+            $0.height.equalTo(48)
         }
         
         colorSelectionButton.snp.makeConstraints {
@@ -58,7 +62,7 @@ class UpdateScheduleTitleColorView: BaseView {
     }
     
     func configure(with scheduleTitle: String, color: UIColor, isColorSelection: Bool) {
-        scheduleTitleLabel.text = scheduleTitle
+        scheduleTitleTextField.text = scheduleTitle
         if color == .color1C1C1C || color == .color9B9791 || color == .color404040 {
             colorSelectionButton.configure(textColor: .colorFFFFFF, color: color, isColorSelection: isColorSelection)
         } else {
@@ -69,6 +73,13 @@ class UpdateScheduleTitleColorView: BaseView {
     @objc func colorSelectionButtonTapped(_ button: UIButton) {
         button.isSelected = !button.isSelected
         delegate?.colorSelectionButtonTapped(button.isSelected)
+    }
+}
+
+extension UpdateScheduleTitleColorView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        scheduleTitleTextField.resignFirstResponder()
+        return true
     }
 }
 
