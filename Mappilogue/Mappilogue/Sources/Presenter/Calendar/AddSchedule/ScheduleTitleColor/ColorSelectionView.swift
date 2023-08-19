@@ -28,6 +28,8 @@ class ColorSelectionView: BaseView {
     
     override func setupProperty() {
         super.setupProperty()
+        
+        backgroundColor = .colorF9F8F7
     }
     
     override func setupHierarchy() {
@@ -42,6 +44,10 @@ class ColorSelectionView: BaseView {
         collectionView.snp.makeConstraints {
             $0.edges.equalTo(self)
         }
+    }
+    
+    func configure(_ selectedColorIndex: Int) {
+        self.selectedColorIndex = selectedColorIndex
     }
 }
 

@@ -8,7 +8,6 @@
 import UIKit
 
 class MainLocationButton: BaseButton {
-    private let lineView = UIView()
     private let mainLocationView = MainLocatonView()
     private let locationTitleLabel = UILabel()
     private let moveImage = UIImageView()
@@ -16,7 +15,7 @@ class MainLocationButton: BaseButton {
     override func setupProperty() {
         super.setupProperty()
         
-        lineView.backgroundColor = .colorEAE6E1
+        backgroundColor = .colorF9F8F7
         
         locationTitleLabel.text = "카멜리아힐"
         locationTitleLabel.textColor = .color707070
@@ -27,8 +26,7 @@ class MainLocationButton: BaseButton {
     
     override func setupHierarchy() {
         super.setupHierarchy()
-        
-        addSubview(lineView)
+
         addSubview(mainLocationView)
         addSubview(locationTitleLabel)
         addSubview(moveImage)
@@ -40,12 +38,7 @@ class MainLocationButton: BaseButton {
         self.snp.makeConstraints {
             $0.height.equalTo(48)
         }
-        
-        lineView.snp.makeConstraints {
-            $0.top.leading.trailing.equalTo(self)
-            $0.height.equalTo(1)
-        }
-        
+
         mainLocationView.snp.makeConstraints {
             $0.leading.centerY.equalTo(self)
         }

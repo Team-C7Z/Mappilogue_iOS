@@ -18,6 +18,8 @@ class CategoryButton: BaseButton {
     override func setupProperty() {
         super.setupProperty()
         
+        backgroundColor = .colorF9F8F7
+        
         cateogoryLabel.text = "카테고리"
         cateogoryLabel.textColor = .color1C1C1C
         cateogoryLabel.font = .body02

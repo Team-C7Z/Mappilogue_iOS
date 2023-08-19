@@ -9,13 +9,16 @@ import UIKit
 
 class WriteRecordViewController: BaseViewController {
     var schedule: Schedule = Schedule()
-    var textContentCellHeight: CGFloat = 80
+    var onColorSelectionButtonTapped: (() -> Void)?
+    private var colorList = dummyColorSelectionData()
+    private var textContentCellHeight: CGFloat = 80
     
+    private let titleColorStackView = UIStackView()
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     private let stackView = UIStackView()
     private let categoryButton = CategoryButton()
-    private let scheduleTitleColorView = UpdateScheduleTitleColorView()
+    private let scheduleTitleColorView = ScheduleTitleColorView()
     private let colorSelectionView = ColorSelectionView()
     private let mainLocationButton = MainLocationButton()
     private let textContentView = ContentView()
@@ -26,6 +29,9 @@ class WriteRecordViewController: BaseViewController {
         
         setKeyboardObservers()
         configureScheduleTitleColorView()
+        configureColorSelectionView()
+        toggleColorSelectionView()
+        selectColor()
     }
     
     override func setupProperty() {
@@ -33,9 +39,14 @@ class WriteRecordViewController: BaseViewController {
         
         setNavigationTitleAndBackButton("기록 쓰기", backButtonAction: #selector(presentAlert))
         
+        titleColorStackView.axis = .vertical
+        titleColorStackView.distribution = .equalSpacing
+        titleColorStackView.spacing = 0
+        
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
-        stackView.spacing = 0
+        stackView.spacing = 1
+        stackView.backgroundColor = .colorEAE6E1
         
         categoryButton.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
         
@@ -56,8 +67,9 @@ class WriteRecordViewController: BaseViewController {
         scrollView.addSubview(contentView)
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(categoryButton)
-        stackView.addArrangedSubview(scheduleTitleColorView)
-        stackView.addArrangedSubview(colorSelectionView)
+        stackView.addArrangedSubview(titleColorStackView)
+        titleColorStackView.addArrangedSubview(scheduleTitleColorView)
+        titleColorStackView.addArrangedSubview(colorSelectionView)
         stackView.addArrangedSubview(mainLocationButton)
         stackView.addArrangedSubview(textContentView)
         view.addSubview(saveRecordView)
@@ -114,9 +126,18 @@ class WriteRecordViewController: BaseViewController {
     
     private func configureScheduleTitleColorView() {
         if let color = schedule.color {
-            scheduleTitleColorView.configure(with: schedule.title, color: color, isColorSelection: false)
+            scheduleTitleColorView.configure(false, title: schedule.title, color: color, isColorSelection: false)
+        } else {
+            let randomColorIndex = Int.random(in: 0...14)
+            schedule.color = colorList[randomColorIndex]
+            colorSelectionView.selectedColorIndex = randomColorIndex
         }
-        scheduleTitleColorView.delegate = self
+    }
+    
+    private func configureColorSelectionView() {
+        if let index = colorList.firstIndex(where: { $0 == schedule.color }) {
+            colorSelectionView.configure(index)
+        }
     }
     
     @objc func mainLocationButtonTapped() {
@@ -169,18 +190,31 @@ class WriteRecordViewController: BaseViewController {
     }
 }
 
-extension WriteRecordViewController: ColorSelectionButtonDelegate {
-    func colorSelectionButtonTapped(_ isSelected: Bool) {
-        colorSelectionView.snp.remakeConstraints {
-            $0.height.equalTo(isSelected ? 186 : 0)
+extension WriteRecordViewController {
+    func toggleColorSelectionView() {
+        scheduleTitleColorView.onColorSelectionButtonTapped = { [weak self] isSelected in
+            guard let self = self else { return }
+            
+            colorSelectionView.snp.remakeConstraints {
+                $0.height.equalTo(isSelected ? 186 : 0)
+            }
+            
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutIfNeeded()
+            }
+            
+            if let color = schedule.color {
+                scheduleTitleColorView.configure(false, title: schedule.title, color: color, isColorSelection: isSelected)
+            }
         }
-        
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
-        }
-        
-        if let color = schedule.color {
-            scheduleTitleColorView.configure(with: schedule.title, color: color, isColorSelection: isSelected)
+    }
+    
+    func selectColor() {
+        colorSelectionView.onSelectedColor = { [weak self] selectedColorIndex in
+            guard let self = self else { return }
+            
+            schedule.color = colorList[selectedColorIndex]
+            configureScheduleTitleColorView()
         }
     }
 }

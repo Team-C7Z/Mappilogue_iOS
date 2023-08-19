@@ -1,5 +1,5 @@
 //
-//  AddScheduleTitleColorView.swift
+//  ScheduleTitleColorView.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/08/06.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddScheduleTitleColorView: BaseView {
+class ScheduleTitleColorView: BaseView {
     var onNameEntered: ((String) -> Void)?
     var onColorSelectionButtonTapped: ((Bool) -> Void)?
     
@@ -19,7 +19,6 @@ class AddScheduleTitleColorView: BaseView {
 
         backgroundColor = .colorF9F8F7
         
-        scheduleTitleTextField.textColor = .color1C1C1C
         scheduleTitleTextField.font = .title02
         scheduleTitleTextField.placeholder = "일정 제목을 적어 주세요"
         scheduleTitleTextField.returnKeyType = .done
@@ -55,8 +54,9 @@ class AddScheduleTitleColorView: BaseView {
         }
     }
     
-    func configure(with scheduleTitle: String, color: UIColor, isColorSelection: Bool) {
-        scheduleTitleTextField.text = scheduleTitle
+    func configure(_ isAdd: Bool, title: String, color: UIColor, isColorSelection: Bool) {
+        scheduleTitleTextField.text = title
+        scheduleTitleTextField.textColor = isAdd ? .color1C1C1C : .colorC9C6C2
         
         if color == .color1C1C1C || color == .color9B9791 || color == .color404040 {
             colorSelectionButton.configure(textColor: .colorFFFFFF, color: color, isColorSelection: isColorSelection)
@@ -71,7 +71,7 @@ class AddScheduleTitleColorView: BaseView {
     }
 }
 
-extension AddScheduleTitleColorView: UITextFieldDelegate {
+extension ScheduleTitleColorView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         scheduleTitleTextField.resignFirstResponder()
         onNameEntered?(scheduleTitleTextField.text ?? "")
