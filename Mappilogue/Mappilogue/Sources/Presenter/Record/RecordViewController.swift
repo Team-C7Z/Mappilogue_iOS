@@ -52,7 +52,6 @@ class RecordViewController: NavigationBarViewController {
     let containerView = UIView()
     let bottomSheetViewController = BottomSheetViewController()
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         

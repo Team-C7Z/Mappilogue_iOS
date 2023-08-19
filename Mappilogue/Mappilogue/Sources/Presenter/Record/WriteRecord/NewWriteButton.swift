@@ -1,5 +1,5 @@
 //
-//  NewWriteView.swift
+//  NewWriteButton.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/07/27.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NewWriteView: BaseView {
+class NewWriteButton: BaseButton {
     private let newWriteLabel = UILabel()
     private let moveImage = UIImageView()
     
