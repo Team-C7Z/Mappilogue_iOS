@@ -127,6 +127,9 @@ class ImagePickerViewController: BaseViewController {
     }
     
     private func addPhotoDirectoryView() {
+        photoDirectoryView.authStatus = authStatus
+        photoDirectoryView.recentItemDirectoryPhotos = allPhotos
+        
         view.addSubview(photoDirectoryView)
         
         photoDirectoryView.snp.makeConstraints {

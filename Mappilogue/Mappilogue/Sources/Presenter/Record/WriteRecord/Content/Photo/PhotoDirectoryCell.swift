@@ -6,9 +6,13 @@
 //
 
 import UIKit
+import Photos
 
 class PhotoDirectoryCell: BaseCollectionViewCell {
     static let registerId = "\(PhotoDirectoryCell.self)"
+    
+    let imageManager = PHCachingImageManager()
+    let options = PHImageRequestOptions()
     
     private let photoDirectoryImage = UIImageView()
     private let photoDirectoryTitle = UILabel()
@@ -19,11 +23,9 @@ class PhotoDirectoryCell: BaseCollectionViewCell {
         
         photoDirectoryImage.backgroundColor = .gray
     
-        photoDirectoryTitle.text = "최근항목"
         photoDirectoryTitle.textColor = .color1C1C1C
         photoDirectoryTitle.font = .body01
         
-        photoDirectoryCountLabel.text = "3"
         photoDirectoryCountLabel.textColor = .colorC9C6C2
         photoDirectoryCountLabel.font = .caption01
     }
@@ -55,7 +57,14 @@ class PhotoDirectoryCell: BaseCollectionViewCell {
         }
     }
     
-//    func configure(_ image: PHAsset) {
-//
-//    }
+    func configure(_ mainImage: PHAsset?, title: String, count: Int) {
+        if let mainImage = mainImage {
+            imageManager.requestImage(for: mainImage, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: options) { imag, _ in
+                self.photoDirectoryImage.image = imag
+            }
+        }
+   
+        photoDirectoryTitle.text = title
+        photoDirectoryCountLabel.text = "\(count)"
+    }
 }
