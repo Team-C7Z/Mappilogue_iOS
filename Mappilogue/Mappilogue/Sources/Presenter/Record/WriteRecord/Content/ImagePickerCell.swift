@@ -6,34 +6,42 @@
 //
 
 import UIKit
+import Photos
 
 class ImagePickerCell: BaseCollectionViewCell {
     static let registerId = "\(ImagePickerCell.self)"
     
-    private let image = UIImageView()
+    let imageManager = PHCachingImageManager()
+    let options = PHImageRequestOptions()
+    
+    private let pickerImage = UIImageView()
     
     override func setupProperty() {
         super.setupProperty()
                 
+        pickerImage.contentMode = .scaleAspectFill
+        pickerImage.clipsToBounds = true
+        options.deliveryMode = .highQualityFormat
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        contentView.addSubview(image)
+        contentView.addSubview(pickerImage)
         
     }
     
     override func setupLayout() {
         super.setupLayout()
         
-        image.snp.makeConstraints {
+        pickerImage.snp.makeConstraints {
             $0.width.height.equalTo(contentView)
         }
     }
     
-    func configure(_ image: UIImage) {
-        
+    func configure(_ image: PHAsset) {
+        imageManager.requestImage(for: image, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: options) { imag, _ in
+            self.pickerImage.image = imag
+        }
     }
-    
 }
