@@ -6,8 +6,13 @@
 //
 
 import UIKit
+import Photos
 
 class PhotoDirectoryView: BaseView {
+    var authStatus: PHAuthorizationStatus?
+    var recentItemDirectoryPhotos = PHFetchResult<PHAsset>()
+    let photosOptions = PHFetchOptions()
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -22,7 +27,8 @@ class PhotoDirectoryView: BaseView {
     
     override func setupProperty() {
         super.setupProperty()
-
+    
+        collectionView.reloadData()
     }
     
     override func setupHierarchy() {
@@ -38,16 +44,17 @@ class PhotoDirectoryView: BaseView {
             $0.edges.equalTo(self)
         }
     }
+    
 }
 
 extension PhotoDirectoryView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return authStatus == .limited ? 1 : 5
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoDirectoryCell.registerId, for: indexPath) as? PhotoDirectoryCell else { return UICollectionViewCell() }
-      
+        cell.configure(recentItemDirectoryPhotos.firstObject, title: "최근 항목", count: recentItemDirectoryPhotos.count)
         return cell
     }
 
