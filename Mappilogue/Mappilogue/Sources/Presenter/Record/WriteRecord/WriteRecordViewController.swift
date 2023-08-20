@@ -204,7 +204,7 @@ class WriteRecordViewController: BaseViewController {
             DispatchQueue.main.async {
                 switch status {
                 case .authorized:
-                    print("Album: 권한 허용")
+                    self.showGalleyView()
                 case .denied:
                     self.showGalleyPermissionAlert()
                 case .notDetermined:
@@ -214,6 +214,17 @@ class WriteRecordViewController: BaseViewController {
                 }
             }
         })
+    }
+    
+    func showGalleyView() {
+//        let picker = UIImagePickerController()
+//        picker.sourceType = .photoLibrary
+//        picker.delegate = self
+//        present(picker, animated: false)
+        let imagePickerViewController = ImagePickerViewController()
+        //let navigationController = UINavigationController(rootViewController: imagePickerViewController)
+        imagePickerViewController.modalPresentationStyle = .fullScreen
+        present(imagePickerViewController, animated: true)
     }
     
     func showGalleyPermissionAlert() {
@@ -272,3 +283,18 @@ extension WriteRecordViewController {
         }
     }
 }
+
+//extension WriteRecordViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+//        picker.dismiss(animated: false)
+//        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+//            let attachment = NSTextAttachment()
+//            attachment.image = image
+//            attachment.bounds = CGRect(origin: .zero, size: CGSize(width: 50, height: 50))
+//            let attachmentString = NSAttributedString(attachment: attachment)
+//            let lineBreak = NSAttributedString(string: "\n")
+//            self.recordContentView.contentView.textStorage.append(lineBreak)
+//            self.recordContentView.contentView.textStorage.append(attachmentString)
+//        }
+//    }
+//}

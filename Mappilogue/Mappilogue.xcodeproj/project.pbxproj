@@ -31,6 +31,10 @@
 		920031DE2A8DF62A00E3170D /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 920031DD2A8DF62A00E3170D /* Lottie */; };
 		920031E02A8DF6F800E3170D /* saving.json in Resources */ = {isa = PBXBuildFile; fileRef = 920031DF2A8DF6F800E3170D /* saving.json */; };
 		920031E22A8E1E7700E3170D /* FindMarkersButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031E12A8E1E7700E3170D /* FindMarkersButton.swift */; };
+		920031EB2A9103E900E3170D /* ImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031EA2A9103E900E3170D /* ImagePickerViewController.swift */; };
+		920031ED2A91085300E3170D /* ImagePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031EC2A91085300E3170D /* ImagePickerCell.swift */; };
+		920031EF2A910F7800E3170D /* PhotoDirectoryPickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031EE2A910F7800E3170D /* PhotoDirectoryPickerButton.swift */; };
+		920031F12A918B4700E3170D /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031F02A918B4700E3170D /* CustomNavigationBar.swift */; };
 		92011B282A6E75F1009B047F /* WriteRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B272A6E75F1009B047F /* WriteRecordButton.swift */; };
 		92011B702A70E7D8009B047F /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */; };
 		92011B722A7127FC009B047F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B712A7127FC009B047F /* AlertViewController.swift */; };
@@ -233,6 +237,10 @@
 		920031DA2A8DD29700E3170D /* SavingRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingRecordViewController.swift; sourceTree = "<group>"; };
 		920031DF2A8DF6F800E3170D /* saving.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = saving.json; sourceTree = "<group>"; };
 		920031E12A8E1E7700E3170D /* FindMarkersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindMarkersButton.swift; sourceTree = "<group>"; };
+		920031EA2A9103E900E3170D /* ImagePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerViewController.swift; sourceTree = "<group>"; };
+		920031EC2A91085300E3170D /* ImagePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerCell.swift; sourceTree = "<group>"; };
+		920031EE2A910F7800E3170D /* PhotoDirectoryPickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDirectoryPickerButton.swift; sourceTree = "<group>"; };
+		920031F02A918B4700E3170D /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
 		92011B272A6E75F1009B047F /* WriteRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordButton.swift; sourceTree = "<group>"; };
 		92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		92011B712A7127FC009B047F /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
@@ -583,6 +591,9 @@
 			isa = PBXGroup;
 			children = (
 				92011B882A72B4BB009B047F /* ContentView.swift */,
+				920031EA2A9103E900E3170D /* ImagePickerViewController.swift */,
+				920031EC2A91085300E3170D /* ImagePickerCell.swift */,
+				920031EE2A910F7800E3170D /* PhotoDirectoryPickerButton.swift */,
 			);
 			path = Content;
 			sourceTree = "<group>";
@@ -1034,6 +1045,7 @@
 				92011B712A7127FC009B047F /* AlertViewController.swift */,
 				92011C672A78CB24009B047F /* InputAlertViewController.swift */,
 				925840CE2A7FCB5400997434 /* ScheduleTitleColorView.swift */,
+				920031F02A918B4700E3170D /* CustomNavigationBar.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -1406,6 +1418,7 @@
 				92A7B65F2A4E07DB009C9293 /* TodayScheduleCell.swift in Sources */,
 				926999342A14F2A3003DDAD2 /* BaseViewController.swift in Sources */,
 				92459ED82A52494200493941 /* AddMarkedRecordCell.swift in Sources */,
+				920031ED2A91085300E3170D /* ImagePickerCell.swift in Sources */,
 				925840B92A7F2DA300997434 /* ProfileCell.swift in Sources */,
 				925840C32A7F61E800997434 /* InquiryViewController.swift in Sources */,
 				9224FD052A600F42000A56A6 /* NotificationRepeatButton.swift in Sources */,
@@ -1431,6 +1444,7 @@
 				92011C262A77A48B009B047F /* Category.swift in Sources */,
 				926999482A14F76A003DDAD2 /* MyViewController.swift in Sources */,
 				920031C72A8B5DB700E3170D /* MapSettingsHeaderView.swift in Sources */,
+				920031EF2A910F7800E3170D /* PhotoDirectoryPickerButton.swift in Sources */,
 				92011BF92A73D404009B047F /* ColorSelectionView.swift in Sources */,
 				920031C52A8B5D7D00E3170D /* MapMainLocationViewController.swift in Sources */,
 				920031D72A8DAFD800E3170D /* RecordContentViewController.swift in Sources */,
@@ -1445,6 +1459,7 @@
 				9224FCFD2A5FF185000A56A6 /* AddScheduleViewController.swift in Sources */,
 				9224FD252A638F01000A56A6 /* RepeatType.swift in Sources */,
 				92E781522A85381D000DAACD /* String.swift in Sources */,
+				920031F12A918B4700E3170D /* CustomNavigationBar.swift in Sources */,
 				9224FD192A616EB1000A56A6 /* ColorCell.swift in Sources */,
 				92A7B6682A4E6154009C9293 /* UpcomingScheduleCell.swift in Sources */,
 				927E7F272A683DCD00E6A29F /* CalendarCell.swift in Sources */,
@@ -1492,6 +1507,7 @@
 				920031BD2A8B5C8E00E3170D /* MainLocationCell.swift in Sources */,
 				9224FD462A6579A7000A56A6 /* DeleteLocationFooterView.swift in Sources */,
 				92011C072A74AD97009B047F /* SearchViewController.swift in Sources */,
+				920031EB2A9103E900E3170D /* ImagePickerViewController.swift in Sources */,
 				9224FD332A641B64000A56A6 /* UIViewController.swift in Sources */,
 				925840C92A7F805800997434 /* UILabel.swift in Sources */,
 				9263786B2A546BDE004E5B6E /* OnboardingViewController.swift in Sources */,

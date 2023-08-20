@@ -111,11 +111,11 @@ class AddScheduleViewController: BaseViewController {
     
     func setNavigationBar() {
         title = "일정"
-        setNavigationTitleAndItems(imageName: "x", action: #selector(xButtonTapped), isLeft: true)
-        setNavigationTitleAndItems(imageName: "completion", action: #selector(completionButtonTapped), isLeft: false)
+        setNavigationTitleAndItems(imageName: "common_dismiss", action: #selector(dismissButtonTapped), isLeft: true)
+        setNavigationTitleAndItems(imageName: "common_completion", action: #selector(completionButtonTapped), isLeft: false)
     }
     
-    @objc func xButtonTapped() {
+    @objc func dismissButtonTapped() {
         showAlert()
     }
     
