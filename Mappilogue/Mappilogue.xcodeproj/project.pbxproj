@@ -36,6 +36,8 @@
 		920031EF2A910F7800E3170D /* PhotoDirectoryPickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031EE2A910F7800E3170D /* PhotoDirectoryPickerButton.swift */; };
 		920031F12A918B4700E3170D /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031F02A918B4700E3170D /* CustomNavigationBar.swift */; };
 		920031F32A92274100E3170D /* LimitedPhotoSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031F22A92274000E3170D /* LimitedPhotoSelectionView.swift */; };
+		920031F52A92444E00E3170D /* PhotoDirectoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031F42A92444E00E3170D /* PhotoDirectoryView.swift */; };
+		920031F82A92467A00E3170D /* PhotoDirectoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031F72A92467A00E3170D /* PhotoDirectoryCell.swift */; };
 		92011B282A6E75F1009B047F /* WriteRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B272A6E75F1009B047F /* WriteRecordButton.swift */; };
 		92011B702A70E7D8009B047F /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */; };
 		92011B722A7127FC009B047F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B712A7127FC009B047F /* AlertViewController.swift */; };
@@ -243,6 +245,8 @@
 		920031EE2A910F7800E3170D /* PhotoDirectoryPickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDirectoryPickerButton.swift; sourceTree = "<group>"; };
 		920031F02A918B4700E3170D /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
 		920031F22A92274000E3170D /* LimitedPhotoSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitedPhotoSelectionView.swift; sourceTree = "<group>"; };
+		920031F42A92444E00E3170D /* PhotoDirectoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDirectoryView.swift; sourceTree = "<group>"; };
+		920031F72A92467A00E3170D /* PhotoDirectoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDirectoryCell.swift; sourceTree = "<group>"; };
 		92011B272A6E75F1009B047F /* WriteRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordButton.swift; sourceTree = "<group>"; };
 		92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		92011B712A7127FC009B047F /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
@@ -529,6 +533,19 @@
 			path = RecordContent;
 			sourceTree = "<group>";
 		};
+		920031F62A92445200E3170D /* Photo */ = {
+			isa = PBXGroup;
+			children = (
+				920031EA2A9103E900E3170D /* ImagePickerViewController.swift */,
+				920031EE2A910F7800E3170D /* PhotoDirectoryPickerButton.swift */,
+				920031EC2A91085300E3170D /* ImagePickerCell.swift */,
+				920031F22A92274000E3170D /* LimitedPhotoSelectionView.swift */,
+				920031F42A92444E00E3170D /* PhotoDirectoryView.swift */,
+				920031F72A92467A00E3170D /* PhotoDirectoryCell.swift */,
+			);
+			path = Photo;
+			sourceTree = "<group>";
+		};
 		92011B732A71386F009B047F /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -593,10 +610,7 @@
 			isa = PBXGroup;
 			children = (
 				92011B882A72B4BB009B047F /* ContentView.swift */,
-				920031EA2A9103E900E3170D /* ImagePickerViewController.swift */,
-				920031EE2A910F7800E3170D /* PhotoDirectoryPickerButton.swift */,
-				920031EC2A91085300E3170D /* ImagePickerCell.swift */,
-				920031F22A92274000E3170D /* LimitedPhotoSelectionView.swift */,
+				920031F62A92445200E3170D /* Photo */,
 			);
 			path = Content;
 			sourceTree = "<group>";
@@ -1400,6 +1414,7 @@
 				92FE26112A4A6E1600BCDB82 /* BaseCollectionViewCell.swift in Sources */,
 				92A7B6662A4E5B3A009C9293 /* UpcomingSchedule.swift in Sources */,
 				9224FD312A6397BD000A56A6 /* CycleRepeatViewController.swift in Sources */,
+				920031F52A92444E00E3170D /* PhotoDirectoryView.swift in Sources */,
 				925840DB2A82144A00997434 /* EditViewController.swift in Sources */,
 				9224FCEE2A5BEF80000A56A6 /* ScheduleTitleCell.swift in Sources */,
 				925840C72A7F76A500997434 /* WithdrawalAlertViewController.swift in Sources */,
@@ -1452,6 +1467,7 @@
 				92011BF92A73D404009B047F /* ColorSelectionView.swift in Sources */,
 				920031C52A8B5D7D00E3170D /* MapMainLocationViewController.swift in Sources */,
 				920031D72A8DAFD800E3170D /* RecordContentViewController.swift in Sources */,
+				920031F82A92467A00E3170D /* PhotoDirectoryCell.swift in Sources */,
 				9230BE492A58D23B0053E535 /* NavigationBarViewController.swift in Sources */,
 				920031E22A8E1E7700E3170D /* FindMarkersButton.swift in Sources */,
 				926999442A14F756003DDAD2 /* GatheringViewController.swift in Sources */,
@@ -1626,7 +1642,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1680,7 +1696,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

@@ -63,8 +63,9 @@ class CustomNavigationBar: BaseView {
         onDismiss?()
     }
     
-    @objc func photoDirectoryButtonTapped() {
-        print(2)
+    @objc func photoDirectoryButtonTapped(_ button: UIButton) {
+        button.isSelected = !button.isSelected
+        photoDirectoryPickerButton.configure(button.isSelected)
         onPhotoDirectoryPickerButtonTapped?()
     }
     

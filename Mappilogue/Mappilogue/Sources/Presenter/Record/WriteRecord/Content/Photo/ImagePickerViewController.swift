@@ -14,6 +14,8 @@ class ImagePickerViewController: BaseViewController {
     var allPhotos = PHFetchResult<PHAsset>()
     let allPhotosOptions = PHFetchOptions()
     
+    var isPhotoDirectory: Bool = false
+    
     private let navigationBar = CustomNavigationBar()
     
     private lazy var collectionView: UICollectionView = {
@@ -29,11 +31,13 @@ class ImagePickerViewController: BaseViewController {
     }()
     
     private let limitedPhotoSelectionView = LimitedPhotoSelectionView()
+    private let photoDirectoryView = PhotoDirectoryView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         dismissButtonTapped()
+        photoDirectoryPickerButtonTapped()
         completionButtonTapped()
         
         PHPhotoLibrary.shared().register(self)
@@ -91,6 +95,21 @@ class ImagePickerViewController: BaseViewController {
         }
     }
     
+    private func photoDirectoryPickerButtonTapped() {
+        navigationBar.onPhotoDirectoryPickerButtonTapped = {
+            self.togglePhotoViewMode()
+        }
+    }
+    
+    private func togglePhotoViewMode() {
+        isPhotoDirectory = !isPhotoDirectory
+        if isPhotoDirectory {
+            addPhotoDirectoryView()
+        } else {
+            removePhotoDirectoryView()
+        }
+    }
+    
     private func completionButtonTapped() {
         navigationBar.onCompletion = {
             self.dismiss(animated: true)
@@ -105,6 +124,19 @@ class ImagePickerViewController: BaseViewController {
         if let url = URL(string: UIApplication.openSettingsURLString) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
+    }
+    
+    private func addPhotoDirectoryView() {
+        view.addSubview(photoDirectoryView)
+        
+        photoDirectoryView.snp.makeConstraints {
+            $0.top.equalTo(navigationBar.snp.bottom)
+            $0.leading.bottom.trailing.equalTo(view)
+        }
+    }
+    
+    private func removePhotoDirectoryView() {
+        photoDirectoryView.removeFromSuperview()
     }
 }
 
