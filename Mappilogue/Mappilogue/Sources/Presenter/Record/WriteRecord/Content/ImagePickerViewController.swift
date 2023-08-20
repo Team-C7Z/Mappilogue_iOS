@@ -9,6 +9,7 @@ import UIKit
 import Photos
 
 class ImagePickerViewController: BaseViewController {
+    var authStatus: PHAuthorizationStatus?
     var allPhotos = PHFetchResult<PHAsset>()
     let allPhotosOptions = PHFetchOptions()
     
@@ -26,22 +27,35 @@ class ImagePickerViewController: BaseViewController {
         return collectionView
     }()
     
+    private let limitedPhotoSelectionView = LimitedPhotoSelectionView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         dismissButtonTapped()
         completionButtonTapped()
-       // openGallery()
         
         allPhotosOptions.sortDescriptors = [
             NSSortDescriptor(key: "creationDate", ascending: false)
         ]
         allPhotos = PHAsset.fetchAssets(with: allPhotosOptions)
+        
+        if authStatus == .authorized {
+            limitedPhotoSelectionView.isHidden = true
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        collectionView.reloadData()
     }
     
     override func setupProperty() {
         super.setupProperty()
-    
+        
+        limitedPhotoSelectionView.addImagesButton.addTarget(self, action: #selector(addImagesButtonTapped), for: .touchUpInside)
+        limitedPhotoSelectionView.setPermissionButton.addTarget(self, action: #selector(setPermissionButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -49,6 +63,7 @@ class ImagePickerViewController: BaseViewController {
         
         view.addSubview(navigationBar)
         view.addSubview(collectionView)
+        view.addSubview(limitedPhotoSelectionView)
     }
     
     override func setupLayout() {
@@ -62,6 +77,11 @@ class ImagePickerViewController: BaseViewController {
         collectionView.snp.makeConstraints {
             $0.top.equalTo(navigationBar.snp.bottom)
             $0.leading.trailing.bottom.equalTo(view)
+        }
+        
+        limitedPhotoSelectionView.snp.makeConstraints {
+            $0.leading.bottom.trailing.equalTo(view)
+            $0.height.equalTo(142)
         }
     }
     
@@ -77,7 +97,15 @@ class ImagePickerViewController: BaseViewController {
         }
     }
     
-    private func openGallery() {
+    @objc private func addImagesButtonTapped() {
+        showGallery()
+    }
+    
+    @objc private func setPermissionButtonTapped() {
+        
+    }
+    
+    private func showGallery() {
         let picker = UIImagePickerController()
         picker.sourceType = .photoLibrary
         picker.delegate = self
@@ -116,4 +144,7 @@ extension ImagePickerViewController: UICollectionViewDelegate, UICollectionViewD
 }
 
 extension ImagePickerViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        print("이미지선택")
+    }
 }
