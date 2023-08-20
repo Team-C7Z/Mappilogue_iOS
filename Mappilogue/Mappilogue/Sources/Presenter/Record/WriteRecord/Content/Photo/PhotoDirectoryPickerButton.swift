@@ -16,7 +16,7 @@ class PhotoDirectoryPickerButton: BaseButton {
         
         photoDirectoryTitleLabel.text = "최근 항목"
         photoDirectoryTitleLabel.font = .systemFont(ofSize: 16, weight: .semibold)
-        changePhotoDirectoryImage.image = UIImage(named: "record_changePhotoDirectory")
+        changePhotoDirectoryImage.image = UIImage(named: "record_hidePhotoDirectory")
         changePhotoDirectoryImage.contentMode = .scaleAspectFit
     }
     
@@ -46,5 +46,9 @@ class PhotoDirectoryPickerButton: BaseButton {
             $0.width.equalTo(14)
             $0.height.equalTo(7)
         }
+    }
+    
+    func configure(_ isPhotoDirectory: Bool) {
+        changePhotoDirectoryImage.image = UIImage(named: isPhotoDirectory ? "record_showPhotoDirectory" : "record_hidePhotoDirectory")
     }
 }
