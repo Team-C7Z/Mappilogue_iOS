@@ -7,6 +7,7 @@
 
 import UIKit
 import Photos
+import PhotosUI
 
 class ImagePickerViewController: BaseViewController {
     var authStatus: PHAuthorizationStatus?
@@ -35,6 +36,8 @@ class ImagePickerViewController: BaseViewController {
         dismissButtonTapped()
         completionButtonTapped()
         
+        PHPhotoLibrary.shared().register(self)
+        
         allPhotosOptions.sortDescriptors = [
             NSSortDescriptor(key: "creationDate", ascending: false)
         ]
@@ -45,14 +48,10 @@ class ImagePickerViewController: BaseViewController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        collectionView.reloadData()
-    }
-    
     override func setupProperty() {
         super.setupProperty()
+        
+        limitedPhotoSelectionView.backgroundColor = .colorF9F8F7
         
         limitedPhotoSelectionView.addImagesButton.addTarget(self, action: #selector(addImagesButtonTapped), for: .touchUpInside)
         limitedPhotoSelectionView.setPermissionButton.addTarget(self, action: #selector(setPermissionButtonTapped), for: .touchUpInside)
@@ -76,7 +75,8 @@ class ImagePickerViewController: BaseViewController {
         
         collectionView.snp.makeConstraints {
             $0.top.equalTo(navigationBar.snp.bottom)
-            $0.leading.trailing.bottom.equalTo(view)
+            $0.leading.trailing.equalTo(view)
+            $0.bottom.equalTo(view).offset(authStatus == .limited ? -142 : 0)
         }
         
         limitedPhotoSelectionView.snp.makeConstraints {
@@ -98,18 +98,13 @@ class ImagePickerViewController: BaseViewController {
     }
     
     @objc private func addImagesButtonTapped() {
-        showGallery()
+        PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self)
     }
     
     @objc private func setPermissionButtonTapped() {
-        
-    }
-    
-    private func showGallery() {
-        let picker = UIImagePickerController()
-        picker.sourceType = .photoLibrary
-        picker.delegate = self
-        present(picker, animated: false)
+        if let url = URL(string: UIApplication.openSettingsURLString) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
 }
 
@@ -143,8 +138,13 @@ extension ImagePickerViewController: UICollectionViewDelegate, UICollectionViewD
     }
 }
 
-extension ImagePickerViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        print("이미지선택")
+extension ImagePickerViewController: PHPhotoLibraryChangeObserver {
+    func photoLibraryDidChange(_ changeInstance: PHChange) {
+        guard let changes = changeInstance.changeDetails(for: allPhotos) else { return }
+        allPhotos = changes.fetchResultAfterChanges
+        
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
 }
