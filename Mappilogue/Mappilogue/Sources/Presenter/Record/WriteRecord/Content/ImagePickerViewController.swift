@@ -9,6 +9,9 @@ import UIKit
 import Photos
 
 class ImagePickerViewController: BaseViewController {
+    var allPhotos = PHFetchResult<PHAsset>()
+    let allPhotosOptions = PHFetchOptions()
+    
     private let navigationBar = CustomNavigationBar()
     
     private lazy var collectionView: UICollectionView = {
@@ -28,11 +31,17 @@ class ImagePickerViewController: BaseViewController {
 
         dismissButtonTapped()
         completionButtonTapped()
+       // openGallery()
+        
+        allPhotosOptions.sortDescriptors = [
+            NSSortDescriptor(key: "creationDate", ascending: false)
+        ]
+        allPhotos = PHAsset.fetchAssets(with: allPhotosOptions)
     }
     
     override func setupProperty() {
         super.setupProperty()
-        
+    
     }
     
     override func setupHierarchy() {
@@ -67,15 +76,26 @@ class ImagePickerViewController: BaseViewController {
             self.dismiss(animated: true)
         }
     }
+    
+    private func openGallery() {
+        let picker = UIImagePickerController()
+        picker.sourceType = .photoLibrary
+        picker.delegate = self
+        present(picker, animated: false)
+    }
 }
 
 extension ImagePickerViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return allPhotos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImagePickerCell.registerId, for: indexPath) as? ImagePickerCell else { return UICollectionViewCell() }
+        
+        let asset = allPhotos[indexPath.row]
+        cell.configure(asset)
+        
         return cell
     }
 
@@ -93,4 +113,7 @@ extension ImagePickerViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }
+}
+
+extension ImagePickerViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 }

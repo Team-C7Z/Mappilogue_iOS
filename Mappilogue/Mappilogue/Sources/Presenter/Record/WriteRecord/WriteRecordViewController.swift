@@ -203,8 +203,8 @@ class WriteRecordViewController: BaseViewController {
         PHPhotoLibrary.requestAuthorization({ status in
             DispatchQueue.main.async {
                 switch status {
-                case .authorized:
-                    self.showGalleyView()
+                case .authorized, .limited:
+                    self.showImagePickerViewController()
                 case .denied:
                     self.showGalleyPermissionAlert()
                 case .notDetermined:
@@ -216,13 +216,8 @@ class WriteRecordViewController: BaseViewController {
         })
     }
     
-    func showGalleyView() {
-//        let picker = UIImagePickerController()
-//        picker.sourceType = .photoLibrary
-//        picker.delegate = self
-//        present(picker, animated: false)
+    func showImagePickerViewController() {
         let imagePickerViewController = ImagePickerViewController()
-        //let navigationController = UINavigationController(rootViewController: imagePickerViewController)
         imagePickerViewController.modalPresentationStyle = .fullScreen
         present(imagePickerViewController, animated: true)
     }
