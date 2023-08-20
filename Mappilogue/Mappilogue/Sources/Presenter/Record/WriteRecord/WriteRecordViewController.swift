@@ -200,44 +200,56 @@ class WriteRecordViewController: BaseViewController {
     }
     
     private func checkAlbumPermission() {
-        PHPhotoLibrary.requestAuthorization({ status in
-            DispatchQueue.main.async {
-                switch status {
-                case .authorized, .limited:
-                    self.showImagePickerViewController()
-                case .denied:
+        switch PHPhotoLibrary.authorizationStatus(for: .readWrite) {
+        case .limited:
+            showImagePickerViewController(.limited)
+        case .authorized:
+            showImagePickerViewController(.authorized)
+        case .denied, .restricted:
+            showGalleyPermissionAlert()
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+                if status == .limited {
+                    self.showImagePickerViewController(.limited)
+                } else if status == .authorized {
+                    self.showImagePickerViewController(.authorized)
+                } else {
                     self.showGalleyPermissionAlert()
-                case .notDetermined:
-                    print("Album: 선택하지 않음")
-                default:
-                    break
                 }
             }
-        })
+            print("Album: 선택하지 않음")
+        default:
+            break
+        }
     }
-    
-    func showImagePickerViewController() {
-        let imagePickerViewController = ImagePickerViewController()
-        imagePickerViewController.modalPresentationStyle = .fullScreen
-        present(imagePickerViewController, animated: true)
+
+    func showImagePickerViewController(_ status: PHAuthorizationStatus) {
+        DispatchQueue.main.async {
+            let imagePickerViewController = ImagePickerViewController()
+            imagePickerViewController.authStatus = status
+            imagePickerViewController.modalPresentationStyle = .fullScreen
+            self.present(imagePickerViewController, animated: true)
+        }
     }
     
     func showGalleyPermissionAlert() {
-        let alertViewController = AlertViewController()
-        alertViewController.modalPresentationStyle = .overCurrentContext
-        let alert = Alert(titleText: "사진 접근 권한을 허용해 주세요",
-                          messageText: "사진 접근 권한을 허용하지 않을 경우\n일부 기능을 사용할 수 없어요",
-                          cancelText: "닫기",
-                          doneText: "설정으로 이동",
-                          buttonColor: .color2EBD3D,
-                          alertHeight: 182)
-        alertViewController.configureAlert(with: alert)
-        alertViewController.onDoneTapped = {
-            if let url = URL(string: UIApplication.openSettingsURLString) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        DispatchQueue.main.async {
+            let alertViewController = AlertViewController()
+            alertViewController.modalPresentationStyle = .overCurrentContext
+            let alert = Alert(titleText: "사진 접근 권한을 허용해 주세요",
+                              messageText: "사진 접근 권한을 허용하지 않을 경우\n일부 기능을 사용할 수 없어요",
+                              cancelText: "닫기",
+                              doneText: "설정으로 이동",
+                              buttonColor: .color2EBD3D,
+                              alertHeight: 182)
+            alertViewController.configureAlert(with: alert)
+            alertViewController.onDoneTapped = {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
             }
+            self.present(alertViewController, animated: false)
         }
-        present(alertViewController, animated: false)
     }
     
     @objc func saveRecordButtonTapped() {
