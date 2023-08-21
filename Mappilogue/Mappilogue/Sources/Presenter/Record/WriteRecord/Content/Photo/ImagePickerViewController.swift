@@ -15,9 +15,11 @@ class ImagePickerViewController: BaseViewController {
     var favoritePhotosAlbum =  PHFetchResult<PHAsset>()
     var userCollections = PHFetchResult<PHAssetCollection>()
     var currentAlbum = PHFetchResult<PHAsset>()
-    let options = PHFetchOptions()
+    let allPhotosOptions = PHFetchOptions()
+    var selectedAssets: [PHAsset] = []
     
     var isPhotoDirectory: Bool = false
+    var onCompletion: (([PHAsset]) -> Void)?
     
     private let navigationBar = CustomNavigationBar()
     
@@ -45,9 +47,8 @@ class ImagePickerViewController: BaseViewController {
         
         PHPhotoLibrary.shared().register(self)
         
-        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        
-        allPhotos = PHAsset.fetchAssets(with: options)
+        allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        allPhotos = PHAsset.fetchAssets(with: allPhotosOptions)
    
         getFavoritePhotos()
         
@@ -125,7 +126,9 @@ class ImagePickerViewController: BaseViewController {
     
     private func completionButtonTapped() {
         navigationBar.onCompletion = {
-            self.dismiss(animated: true)
+            self.dismiss(animated: true) {
+                self.onCompletion?(self.selectedAssets)
+            }
         }
     }
     
@@ -200,6 +203,15 @@ extension ImagePickerViewController: UICollectionViewDelegate, UICollectionViewD
     // 수직 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let asset = currentAlbum[indexPath.row]
+        if let index = selectedAssets.firstIndex(where: { $0 == asset}) {
+            selectedAssets.remove(at: index)
+        } else {
+            selectedAssets.append(asset)
+        }
     }
 }
 

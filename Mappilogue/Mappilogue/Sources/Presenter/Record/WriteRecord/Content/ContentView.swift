@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import Photos
 
 class ContentView: BaseView {
     let textViewPlaceHolder = "내용을 입력하세요"
-    var textViewHeight: CGFloat = 300
+    var textViewHeight: CGFloat = 400
     var stackViewHeightUpdated: (() -> Void)?
     
     let contentView = UITextView()
@@ -43,9 +44,35 @@ class ContentView: BaseView {
         contentView.snp.makeConstraints {
             $0.leading.trailing.equalTo(self)
             $0.top.equalTo(self).offset(16)
-            $0.bottom.equalTo(self).offset(-100)
+            $0.bottom.equalTo(self).offset(-50)
         }
     }
+    
+    func displaySelectedImages(assets: [PHAsset]) {
+        if contentView.text == textViewPlaceHolder {
+            contentView.text = nil
+            contentView.textColor = .color1C1C1C
+        }
+
+        let attributedText = NSMutableAttributedString(attributedString: contentView.attributedText)
+        for asset in assets {
+            let imageAttachment = NSTextAttachment()
+            convertPHAssetToUIImage(asset) { image in
+                imageAttachment.image = image
+            }
+           
+        }
+    }
+    
+    private func convertPHAssetToUIImage(_ asset: PHAsset, completion: @escaping (UIImage?) -> Void) {
+        let imageManager = PHImageManager.default()
+        let options = PHImageRequestOptions()
+        
+        imageManager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: options) { image, _ in
+            completion(image)
+        }
+    }
+    
 }
 
 extension ContentView: UITextViewDelegate {
@@ -72,7 +99,7 @@ extension ContentView: UITextViewDelegate {
         let newSize = contentView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
 
         self.snp.remakeConstraints {
-            $0.height.equalTo(max(textViewHeight, newSize.height + 150))
+            $0.height.equalTo(max(textViewHeight, newSize.height + 100))
         }
         stackViewHeightUpdated?()
         self.layoutIfNeeded()
