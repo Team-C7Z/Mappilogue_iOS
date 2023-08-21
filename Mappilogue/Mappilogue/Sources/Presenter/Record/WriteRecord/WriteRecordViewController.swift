@@ -13,6 +13,7 @@ class WriteRecordViewController: BaseViewController {
     var onColorSelectionButtonTapped: (() -> Void)?
     private var colorList = dummyColorSelectionData()
     private var textContentCellHeight: CGFloat = 80
+    private var selectedImages: [PHAsset] = []
     
     private let titleColorStackView = UIStackView()
     private let scrollView = UIScrollView()
@@ -227,6 +228,9 @@ class WriteRecordViewController: BaseViewController {
         DispatchQueue.main.async {
             let imagePickerViewController = ImagePickerViewController()
             imagePickerViewController.authStatus = status
+            imagePickerViewController.onCompletion = { assets in
+                self.recordContentView.displaySelectedImages(assets: assets)
+            }
             imagePickerViewController.modalPresentationStyle = .fullScreen
             self.present(imagePickerViewController, animated: true)
         }
@@ -251,7 +255,7 @@ class WriteRecordViewController: BaseViewController {
             self.present(alertViewController, animated: false)
         }
     }
-    
+  
     @objc func saveRecordButtonTapped() {
         let savingRecordViewController = SavingRecordViewController()
         savingRecordViewController.modalPresentationStyle = .overFullScreen
@@ -291,17 +295,3 @@ extension WriteRecordViewController {
     }
 }
 
-//extension WriteRecordViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-//        picker.dismiss(animated: false)
-//        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-//            let attachment = NSTextAttachment()
-//            attachment.image = image
-//            attachment.bounds = CGRect(origin: .zero, size: CGSize(width: 50, height: 50))
-//            let attachmentString = NSAttributedString(attachment: attachment)
-//            let lineBreak = NSAttributedString(string: "\n")
-//            self.recordContentView.contentView.textStorage.append(lineBreak)
-//            self.recordContentView.contentView.textStorage.append(attachmentString)
-//        }
-//    }
-//}
