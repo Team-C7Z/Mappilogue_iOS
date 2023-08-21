@@ -18,7 +18,7 @@ class ImagePickerCell: BaseCollectionViewCell {
     
     override func setupProperty() {
         super.setupProperty()
-                
+
         pickerImage.contentMode = .scaleAspectFill
         pickerImage.clipsToBounds = true
         options.deliveryMode = .highQualityFormat

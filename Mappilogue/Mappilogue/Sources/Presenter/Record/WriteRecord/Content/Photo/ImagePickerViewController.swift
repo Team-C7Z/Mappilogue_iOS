@@ -10,9 +10,12 @@ import Photos
 import PhotosUI
 
 class ImagePickerViewController: BaseViewController {
-    var authStatus: PHAuthorizationStatus?
     var allPhotos = PHFetchResult<PHAsset>()
-    let allPhotosOptions = PHFetchOptions()
+    var authStatus: PHAuthorizationStatus?
+    var favoritePhotosAlbum =  PHFetchResult<PHAsset>()
+    var userCollections = PHFetchResult<PHAssetCollection>()
+    var currentAlbum = PHFetchResult<PHAsset>()
+    let options = PHFetchOptions()
     
     var isPhotoDirectory: Bool = false
     
@@ -42,14 +45,24 @@ class ImagePickerViewController: BaseViewController {
         
         PHPhotoLibrary.shared().register(self)
         
-        allPhotosOptions.sortDescriptors = [
-            NSSortDescriptor(key: "creationDate", ascending: false)
-        ]
-        allPhotos = PHAsset.fetchAssets(with: allPhotosOptions)
+        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        
+        allPhotos = PHAsset.fetchAssets(with: options)
+   
+        getFavoritePhotos()
+        
+        userCollections = PHAssetCollection.fetchAssetCollections(
+            with: .album,
+            subtype: .albumRegular,
+            options: nil)
         
         if authStatus == .authorized {
             limitedPhotoSelectionView.isHidden = true
         }
+        
+        photoDirectoryView.configure(authStatus, allPhotos: allPhotos, favoritePhotosAlbum: favoritePhotosAlbum, userCollections: userCollections)
+        
+        currentAlbum = allPhotos
     }
     
     override func setupProperty() {
@@ -116,6 +129,20 @@ class ImagePickerViewController: BaseViewController {
         }
     }
     
+    private func getFavoritePhotos() {
+        let favoriteOptios = PHFetchOptions()
+        favoriteOptios.predicate = NSPredicate(format: "favorite == %@", NSNumber(value: true))
+        
+        let smartAlbums = PHAssetCollection.fetchAssetCollections(
+            with: .smartAlbum,
+            subtype: .smartAlbumFavorites,
+            options: nil)
+        
+        if let favoritePhotosAlbum = smartAlbums.firstObject {
+            self.favoritePhotosAlbum = PHAsset.fetchAssets(in: favoritePhotosAlbum, options: favoriteOptios)
+        }
+    }
+    
     @objc private func addImagesButtonTapped() {
         PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self)
     }
@@ -127,14 +154,17 @@ class ImagePickerViewController: BaseViewController {
     }
     
     private func addPhotoDirectoryView() {
-        photoDirectoryView.authStatus = authStatus
-        photoDirectoryView.recentItemDirectoryPhotos = allPhotos
+        photoDirectoryView.configure(authStatus, allPhotos: allPhotos, favoritePhotosAlbum: favoritePhotosAlbum, userCollections: userCollections)
         
         view.addSubview(photoDirectoryView)
         
         photoDirectoryView.snp.makeConstraints {
             $0.top.equalTo(navigationBar.snp.bottom)
             $0.leading.bottom.trailing.equalTo(view)
+        }
+        
+        photoDirectoryView.onDirectorySelection = { album in
+            self.selectDirectory(album)
         }
     }
     
@@ -143,15 +173,15 @@ class ImagePickerViewController: BaseViewController {
     }
 }
 
-extension ImagePickerViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension ImagePickerViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return allPhotos.count
+        return currentAlbum.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImagePickerCell.registerId, for: indexPath) as? ImagePickerCell else { return UICollectionViewCell() }
         
-        let asset = allPhotos[indexPath.row]
+        let asset = currentAlbum[indexPath.row]
         cell.configure(asset)
         
         return cell
@@ -181,5 +211,13 @@ extension ImagePickerViewController: PHPhotoLibraryChangeObserver {
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
+    }
+}
+
+extension ImagePickerViewController {
+    func selectDirectory(_ album: PHFetchResult<PHAsset>) {
+        removePhotoDirectoryView()
+        currentAlbum = album
+        collectionView.reloadData()
     }
 }

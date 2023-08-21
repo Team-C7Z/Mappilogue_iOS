@@ -10,8 +10,12 @@ import Photos
 
 class PhotoDirectoryView: BaseView {
     var authStatus: PHAuthorizationStatus?
-    var recentItemDirectoryPhotos = PHFetchResult<PHAsset>()
+    var allPhotos = PHFetchResult<PHAsset>()
+    var favoritePhotosAlbum = PHFetchResult<PHAsset>()
+    var userCollections = PHFetchResult<PHAssetCollection>()
     let photosOptions = PHFetchOptions()
+    
+    var onDirectorySelection: ((PHFetchResult<PHAsset>) -> Void)?
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -27,8 +31,8 @@ class PhotoDirectoryView: BaseView {
     
     override func setupProperty() {
         super.setupProperty()
-    
-        collectionView.reloadData()
+        
+       // collectionView.reloadData()
     }
     
     override func setupHierarchy() {
@@ -45,16 +49,47 @@ class PhotoDirectoryView: BaseView {
         }
     }
     
+    func configure(_ authStatus: PHAuthorizationStatus?, allPhotos: PHFetchResult<PHAsset>, favoritePhotosAlbum: PHFetchResult<PHAsset>, userCollections: PHFetchResult<PHAssetCollection>) {
+        self.authStatus = authStatus
+        self.allPhotos = allPhotos
+        self.favoritePhotosAlbum = favoritePhotosAlbum
+        self.userCollections = userCollections
+        collectionView.reloadData()
+    }
+    
 }
 
 extension PhotoDirectoryView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return authStatus == .limited ? 1 : 3
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return authStatus == .limited ? 1 : 5
+        switch section {
+        case 0, 1:
+            return 1
+        case 2:
+            return userCollections.count
+        default:
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoDirectoryCell.registerId, for: indexPath) as? PhotoDirectoryCell else { return UICollectionViewCell() }
-        cell.configure(recentItemDirectoryPhotos.firstObject, title: "최근 항목", count: recentItemDirectoryPhotos.count)
+        
+        switch indexPath.section {
+        case 0:
+            cell.configure(allPhotos.firstObject, title: "최근 항목", count: allPhotos.count)
+        case 1:
+            cell.configure(favoritePhotosAlbum.firstObject, title: "즐겨찾는 항목", count: favoritePhotosAlbum.count)
+        default:
+            let album = userCollections[indexPath.row]
+            let assets = PHAsset.fetchAssets(in: album, options: nil)
+            let title = album.localizedTitle ?? ""
+            cell.configure(assets.firstObject, title: title, count: assets.count)
+        }
+      
         return cell
     }
 
@@ -70,5 +105,20 @@ extension PhotoDirectoryView: UICollectionViewDelegate, UICollectionViewDataSour
     // 수직 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 8
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            onDirectorySelection?(allPhotos)
+        case 1:
+            onDirectorySelection?(favoritePhotosAlbum)
+        case 2:
+            let album = userCollections[indexPath.row]
+            let assets = PHAsset.fetchAssets(in: album, options: nil)
+            onDirectorySelection?(assets)
+        default:
+            break
+        }
     }
 }
