@@ -10,6 +10,7 @@ import UIKit
 class CategoryButton: BaseButton {
     let cateogoryLabel = UILabel()
     private let moveImage = UIImageView()
+    private let lineView = UIView()
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -25,6 +26,8 @@ class CategoryButton: BaseButton {
         cateogoryLabel.font = .body02
  
         moveImage.image = UIImage(named: "moveWrite")
+        
+        lineView.backgroundColor = .colorEAE6E1
     }
     
     override func setupHierarchy() {
@@ -32,13 +35,14 @@ class CategoryButton: BaseButton {
         
         addSubview(cateogoryLabel)
         addSubview(moveImage)
+        addSubview(lineView)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
         self.snp.makeConstraints {
-            $0.height.equalTo(40)
+            $0.height.equalTo(41)
         }
         
         cateogoryLabel.snp.makeConstraints {
@@ -51,6 +55,11 @@ class CategoryButton: BaseButton {
             $0.bottom.equalTo(self).offset(-13)
             $0.width.equalTo(7)
             $0.height.equalTo(14)
+        }
+        
+        lineView.snp.makeConstraints {
+            $0.bottom.leading.trailing.equalTo(self)
+            $0.height.equalTo(1)
         }
     }
 }
