@@ -14,6 +14,7 @@ class WriteRecordViewController: BaseViewController {
     private var colorList = dummyColorSelectionData()
     private var textContentCellHeight: CGFloat = 80
     private var selectedImages: [PHAsset] = []
+    private var isFirst: Bool = true
     
     private let titleColorStackView = UIStackView()
     private let scrollView = UIScrollView()
@@ -23,7 +24,7 @@ class WriteRecordViewController: BaseViewController {
     private let scheduleTitleColorView = ScheduleTitleColorView()
     private let colorSelectionView = ColorSelectionView()
     private let mainLocationButton = MainLocationButton()
-    private let recordContentView = ContentView()
+    private let textContentView = TextContentView()
     private let saveRecordView = ImageSaveRecordView()
     
     override func viewDidLoad() {
@@ -55,7 +56,8 @@ class WriteRecordViewController: BaseViewController {
         
         mainLocationButton.addTarget(self, action: #selector(mainLocationButtonTapped), for: .touchUpInside)
         
-        recordContentView.stackViewHeightUpdated = {
+        textContentView.configure(true)
+        textContentView.stackViewHeightUpdated = {
             self.stackView.layoutIfNeeded()
             self.scrollToBottom()
         }
@@ -76,7 +78,7 @@ class WriteRecordViewController: BaseViewController {
         titleColorStackView.addArrangedSubview(scheduleTitleColorView)
         titleColorStackView.addArrangedSubview(colorSelectionView)
         stackView.addArrangedSubview(mainLocationButton)
-        stackView.addArrangedSubview(recordContentView)
+        stackView.addArrangedSubview(textContentView)
         view.addSubview(saveRecordView)
     }
     
@@ -158,7 +160,7 @@ class WriteRecordViewController: BaseViewController {
     
     private func scrollToBottom() {
         let bottomOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - scrollView.bounds.size.height)
-        scrollView.setContentOffset(bottomOffset, animated: true)
+     //   scrollView.setContentOffset(bottomOffset, animated: true)
     }
     
     private func setKeyboardObservers() {
@@ -178,12 +180,12 @@ class WriteRecordViewController: BaseViewController {
     private func keyboardWillChange(_ notification: Notification, isShowing: Bool) {
         guard let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         let keyboardHeight = keyboardFrame.cgRectValue.height
-        
-        stackView.snp.remakeConstraints {
-            $0.top.equalTo(contentView).offset(10)
-            $0.leading.equalTo(contentView).offset(16)
-            $0.trailing.equalTo(contentView).offset(-16)
-            $0.bottom.equalTo(contentView).offset(isShowing ? -keyboardHeight : -58)
+        stackView.snp.updateConstraints {
+            if isShowing {
+                $0.bottom.equalTo(contentView).offset(-keyboardHeight - 150)
+            } else {
+                $0.bottom.equalTo(contentView).offset(-58)
+            }
         }
         
         saveRecordView.snp.remakeConstraints {
@@ -229,7 +231,7 @@ class WriteRecordViewController: BaseViewController {
             let imagePickerViewController = ImagePickerViewController()
             imagePickerViewController.authStatus = status
             imagePickerViewController.onCompletion = { assets in
-                self.recordContentView.displaySelectedImages(assets: assets)
+                self.addImageContentView(assets)
             }
             imagePickerViewController.modalPresentationStyle = .fullScreen
             self.present(imagePickerViewController, animated: true)
@@ -255,7 +257,36 @@ class WriteRecordViewController: BaseViewController {
             self.present(alertViewController, animated: false)
         }
     }
-  
+    
+    func addImageContentView(_ assets: [PHAsset]) {
+        if isFirst {
+            textContentView.configure(false)
+        }
+        for asset in assets {
+            let imageContentView = ImageContentView()
+            let index = stackView.arrangedSubviews.count-1
+            imageContentView.configure(index, asset: asset)
+            stackView.addArrangedSubview(imageContentView)
+            addTextContentView()
+            
+            imageContentView.onRemoveImage = { index in
+                print(index)
+                self.removeImageContentView(index)
+            }
+        }
+    }
+    
+    func removeImageContentView(_ index: Int) {
+        let viewToRemove = stackView.arrangedSubviews[index]
+        stackView.removeArrangedSubview(viewToRemove)
+        viewToRemove.removeFromSuperview()
+    }
+    
+    func addTextContentView() {
+        let textContentView = TextContentView()
+        stackView.addArrangedSubview(textContentView)
+    }
+    
     @objc func saveRecordButtonTapped() {
         let savingRecordViewController = SavingRecordViewController()
         savingRecordViewController.modalPresentationStyle = .overFullScreen
@@ -295,3 +326,8 @@ extension WriteRecordViewController {
     }
 }
 
+extension WriteRecordViewController: UITextViewDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return true
+    }
+}
