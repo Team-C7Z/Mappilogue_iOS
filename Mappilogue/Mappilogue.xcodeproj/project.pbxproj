@@ -38,7 +38,7 @@
 		920031F32A92274100E3170D /* LimitedPhotoSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031F22A92274000E3170D /* LimitedPhotoSelectionView.swift */; };
 		920031F52A92444E00E3170D /* PhotoDirectoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031F42A92444E00E3170D /* PhotoDirectoryView.swift */; };
 		920031F82A92467A00E3170D /* PhotoDirectoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031F72A92467A00E3170D /* PhotoDirectoryCell.swift */; };
-		920031FA2A937DD800E3170D /* WriteRecordHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031F92A937DD800E3170D /* WriteRecordHeaderView.swift */; };
+		920031FE2A93A27000E3170D /* ImageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031FD2A93A27000E3170D /* ImageContentView.swift */; };
 		92011B282A6E75F1009B047F /* WriteRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B272A6E75F1009B047F /* WriteRecordButton.swift */; };
 		92011B702A70E7D8009B047F /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */; };
 		92011B722A7127FC009B047F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B712A7127FC009B047F /* AlertViewController.swift */; };
@@ -49,7 +49,7 @@
 		92011B7F2A726031009B047F /* WriteRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B7E2A726031009B047F /* WriteRecordViewController.swift */; };
 		92011B812A7271D0009B047F /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B802A7271D0009B047F /* CategoryButton.swift */; };
 		92011B872A72B0A7009B047F /* MainLocatonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B862A72B0A7009B047F /* MainLocatonView.swift */; };
-		92011B892A72B4BB009B047F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B882A72B4BB009B047F /* ContentView.swift */; };
+		92011B892A72B4BB009B047F /* TextContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B882A72B4BB009B047F /* TextContentView.swift */; };
 		92011B8B2A72B7DA009B047F /* NewWriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B8A2A72B7DA009B047F /* NewWriteButton.swift */; };
 		92011B8D2A72BBE8009B047F /* ImageSaveRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B8C2A72BBE8009B047F /* ImageSaveRecordView.swift */; };
 		92011B902A7364D0009B047F /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B8F2A7364D0009B047F /* BaseButton.swift */; };
@@ -248,7 +248,7 @@
 		920031F22A92274000E3170D /* LimitedPhotoSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitedPhotoSelectionView.swift; sourceTree = "<group>"; };
 		920031F42A92444E00E3170D /* PhotoDirectoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDirectoryView.swift; sourceTree = "<group>"; };
 		920031F72A92467A00E3170D /* PhotoDirectoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDirectoryCell.swift; sourceTree = "<group>"; };
-		920031F92A937DD800E3170D /* WriteRecordHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordHeaderView.swift; sourceTree = "<group>"; };
+		920031FD2A93A27000E3170D /* ImageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageContentView.swift; sourceTree = "<group>"; };
 		92011B272A6E75F1009B047F /* WriteRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordButton.swift; sourceTree = "<group>"; };
 		92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		92011B712A7127FC009B047F /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
@@ -259,7 +259,7 @@
 		92011B7E2A726031009B047F /* WriteRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordViewController.swift; sourceTree = "<group>"; };
 		92011B802A7271D0009B047F /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
 		92011B862A72B0A7009B047F /* MainLocatonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLocatonView.swift; sourceTree = "<group>"; };
-		92011B882A72B4BB009B047F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		92011B882A72B4BB009B047F /* TextContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextContentView.swift; sourceTree = "<group>"; };
 		92011B8A2A72B7DA009B047F /* NewWriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWriteButton.swift; sourceTree = "<group>"; };
 		92011B8C2A72BBE8009B047F /* ImageSaveRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaveRecordView.swift; sourceTree = "<group>"; };
 		92011B8F2A7364D0009B047F /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
@@ -564,7 +564,6 @@
 				92011B7C2A7174B6009B047F /* DateHeaderView.swift */,
 				92011B8A2A72B7DA009B047F /* NewWriteButton.swift */,
 				92011B7E2A726031009B047F /* WriteRecordViewController.swift */,
-				920031F92A937DD800E3170D /* WriteRecordHeaderView.swift */,
 				92011B8C2A72BBE8009B047F /* ImageSaveRecordView.swift */,
 				920031DA2A8DD29700E3170D /* SavingRecordViewController.swift */,
 				92011B792A716C35009B047F /* Cell */,
@@ -613,7 +612,8 @@
 		92011BFD2A74031B009B047F /* Content */ = {
 			isa = PBXGroup;
 			children = (
-				92011B882A72B4BB009B047F /* ContentView.swift */,
+				92011B882A72B4BB009B047F /* TextContentView.swift */,
+				920031FD2A93A27000E3170D /* ImageContentView.swift */,
 				920031F62A92445200E3170D /* Photo */,
 			);
 			path = Content;
@@ -1383,7 +1383,7 @@
 				925840D32A7FF39B00997434 /* HomeEmptyScheduleCell.swift in Sources */,
 				925840D22A7FF34000997434 /* MarkedRecord.swift in Sources */,
 				926382B62A6D03850064C1A8 /* CalendarEmptyScheduleCell.swift in Sources */,
-				92011B892A72B4BB009B047F /* ContentView.swift in Sources */,
+				92011B892A72B4BB009B047F /* TextContentView.swift in Sources */,
 				92011C222A77907F009B047F /* CategoryCell.swift in Sources */,
 				92011C242A77A329009B047F /* AddCategoryCell.swift in Sources */,
 				92011C662A78980E009B047F /* UIView.swift in Sources */,
@@ -1484,7 +1484,6 @@
 				92E781522A85381D000DAACD /* String.swift in Sources */,
 				920031F12A918B4700E3170D /* CustomNavigationBar.swift in Sources */,
 				9224FD192A616EB1000A56A6 /* ColorCell.swift in Sources */,
-				920031FA2A937DD800E3170D /* WriteRecordHeaderView.swift in Sources */,
 				92A7B6682A4E6154009C9293 /* UpcomingScheduleCell.swift in Sources */,
 				927E7F272A683DCD00E6A29F /* CalendarCell.swift in Sources */,
 				925840C12A7F5B2200997434 /* NotificationSwitchButton.swift in Sources */,
@@ -1500,6 +1499,7 @@
 				9230BE452A57F01E0053E535 /* WeekdayCell.swift in Sources */,
 				92011C102A74F222009B047F /* SearchType.swift in Sources */,
 				92A7B6592A4D01B3009C9293 /* TodayScheduleInfoCell.swift in Sources */,
+				920031FE2A93A27000E3170D /* ImageContentView.swift in Sources */,
 				925840A02A7BD4D700997434 /* CategoryOrderCell.swift in Sources */,
 				9224FCF32A5C5E7A000A56A6 /* WeekCell.swift in Sources */,
 				9224FD092A601B00000A56A6 /* ColorSelectionButton.swift in Sources */,
