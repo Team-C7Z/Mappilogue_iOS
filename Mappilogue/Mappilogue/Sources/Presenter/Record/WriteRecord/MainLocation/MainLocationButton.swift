@@ -8,44 +8,48 @@
 import UIKit
 
 class MainLocationButton: BaseButton {
-    private let lineView = UIView()
     private let mainLocationView = MainLocatonView()
     private let locationTitleLabel = UILabel()
     private let moveImage = UIImageView()
+    private let lineViewTop = UIView()
+    private let lineViewBottom = UIView()
     
     override func setupProperty() {
         super.setupProperty()
         
-        lineView.backgroundColor = .colorEAE6E1
+        backgroundColor = .colorF9F8F7
         
-        locationTitleLabel.text = "카멜리아힐"
         locationTitleLabel.textColor = .color707070
         locationTitleLabel.font = .body02
         
         moveImage.image = UIImage(named: "moveWrite")
+        
+        lineViewTop.backgroundColor = .colorEAE6E1
+        lineViewBottom.backgroundColor = .colorEAE6E1
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
-        
-        addSubview(lineView)
+
+        addSubview(lineViewTop)
         addSubview(mainLocationView)
         addSubview(locationTitleLabel)
         addSubview(moveImage)
+        addSubview(lineViewBottom)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
         self.snp.makeConstraints {
-            $0.height.equalTo(48)
+            $0.height.equalTo(50)
         }
         
-        lineView.snp.makeConstraints {
+        lineViewTop.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(self)
             $0.height.equalTo(1)
         }
-        
+
         mainLocationView.snp.makeConstraints {
             $0.leading.centerY.equalTo(self)
         }
@@ -61,5 +65,15 @@ class MainLocationButton: BaseButton {
             $0.width.equalTo(7)
             $0.height.equalTo(14)
         }
+        
+        lineViewBottom.snp.makeConstraints {
+            $0.bottom.leading.trailing.equalTo(self)
+            $0.height.equalTo(1)
+        }
+
+    }
+    
+    func configure(_ title: String) {
+        locationTitleLabel.text = title
     }
 }
