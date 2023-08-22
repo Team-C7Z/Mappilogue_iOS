@@ -24,7 +24,7 @@ class SelectWriteRecordViewController: BaseViewController {
         return collectionView
     }()
     
-    private let newWriteView = NewWriteView()
+    private let newWriteButton = NewWriteButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,13 +36,15 @@ class SelectWriteRecordViewController: BaseViewController {
         super.setupProperty()
         
         setNavigationTitleAndBackButton("기록 쓰기", backButtonAction: #selector(backButtonTapped))
+        
+        newWriteButton.addTarget(self, action: #selector(newWriteButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
         
         view.addSubview(collectionView)
-        view.addSubview(newWriteView)
+        view.addSubview(newWriteButton)
     }
     
     override func setupLayout() {
@@ -50,15 +52,27 @@ class SelectWriteRecordViewController: BaseViewController {
         
         collectionView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(newWriteView.snp.top).offset(-12)
+            $0.bottom.equalTo(newWriteButton.snp.top).offset(-12)
         }
         
-        newWriteView.snp.makeConstraints {
+        newWriteButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
             $0.height.equalTo(48)
         }
+    }
+    
+    func showWriteRecordViewController(_ indexPath: IndexPath?) {
+        let writeRecordViewController = WriteRecordViewController()
+        if let indexPath = indexPath {
+            writeRecordViewController.schedule = dummyData[indexPath.section].schedules[indexPath.row]
+        }
+        navigationController?.pushViewController(writeRecordViewController, animated: true)
+    }
+    
+    @objc private func newWriteButtonTapped() {
+        showWriteRecordViewController(nil)
     }
 }
 
@@ -113,8 +127,6 @@ extension SelectWriteRecordViewController: UICollectionViewDelegate, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let writeRecordViewController = WriteRecordViewController()
-        writeRecordViewController.schedule = dummyData[indexPath.section].schedules[indexPath.row]
-        navigationController?.pushViewController(writeRecordViewController, animated: true)
+        showWriteRecordViewController(indexPath)
     }
 }

@@ -20,7 +20,7 @@ class AddScheduleHeaderView: BaseCollectionReusableView {
     
     private let titleColorStackView = UIStackView()
     private let stackView = UIStackView()
-    private let scheduleTitleColorView = AddScheduleTitleColorView()
+    private let scheduleTitleColorView = ScheduleTitleColorView()
     private let colorSelectionView = ColorSelectionView()
     private let scheduleDurationView = ScheduleDurationView()
     private let notificationButton = NotificationRepeatButton()
@@ -81,7 +81,7 @@ class AddScheduleHeaderView: BaseCollectionReusableView {
     
     private func configureScheduleTitleColorView() {
         if let color = schedule.color {
-            scheduleTitleColorView.configure(with: schedule.title, color: color, isColorSelection: false)
+            scheduleTitleColorView.configure(false, title: schedule.title, color: color, isColorSelection: false)
         } else {
             let randomColorIndex = Int.random(in: 0...14)
             schedule.color = colorList[randomColorIndex]
@@ -142,7 +142,7 @@ extension AddScheduleHeaderView {
             }
             
             if let color = schedule.color {
-                scheduleTitleColorView.configure(with: schedule.title, color: color, isColorSelection: isSelected)
+                scheduleTitleColorView.configure(true, title: schedule.title, color: color, isColorSelection: isSelected)
             }
             
             onColorSelectionButtonTapped?()

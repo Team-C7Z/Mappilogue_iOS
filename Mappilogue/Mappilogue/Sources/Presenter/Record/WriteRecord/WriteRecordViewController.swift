@@ -6,47 +6,65 @@
 //
 
 import UIKit
+import Photos
 
 class WriteRecordViewController: BaseViewController {
     var schedule: Schedule = Schedule()
-    var textContentCellHeight: CGFloat = 80
+    var onColorSelectionButtonTapped: (() -> Void)?
+    private var colorList = dummyColorSelectionData()
+    private var textContentCellHeight: CGFloat = 80
+    private var selectedImages: [PHAsset] = []
+    private var isFirst: Bool = true
     
+    private let titleColorStackView = UIStackView()
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     private let stackView = UIStackView()
     private let categoryButton = CategoryButton()
-    private let scheduleTitleColorView = UpdateScheduleTitleColorView()
+    private let scheduleTitleColorView = ScheduleTitleColorView()
     private let colorSelectionView = ColorSelectionView()
     private let mainLocationButton = MainLocationButton()
-    private let textContentView = ContentView()
-    private let saveRecordView = SaveRecordView()
+    private let textContentView = TextContentView()
+    private let saveRecordView = ImageSaveRecordView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setKeyboardObservers()
         configureScheduleTitleColorView()
+        configureColorSelectionView()
+        toggleColorSelectionView()
+        selectColor()
+        configureMainLocationButton()
     }
     
     override func setupProperty() {
         super.setupProperty()
         
         setNavigationTitleAndBackButton("기록 쓰기", backButtonAction: #selector(presentAlert))
+
+        titleColorStackView.axis = .vertical
+        titleColorStackView.distribution = .equalSpacing
+        titleColorStackView.spacing = 0
         
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
         stackView.spacing = 0
+        stackView.backgroundColor = .colorEAE6E1
         
         categoryButton.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
         
         mainLocationButton.addTarget(self, action: #selector(mainLocationButtonTapped), for: .touchUpInside)
         
-        textContentView.stackViewHeightUpdated = { [weak self] in
-            self?.stackView.layoutIfNeeded()
+        textContentView.configure(true)
+        textContentView.stackViewHeightUpdated = {
+            self.stackView.layoutIfNeeded()
+            self.scrollToBottom()
         }
         
         saveRecordView.hideKeyboardButton.addTarget(self, action: #selector(dismissKeyboard), for: .touchUpInside)
         saveRecordView.saveRecordButton.addTarget(self, action: #selector(saveRecordButtonTapped), for: .touchUpInside)
+        saveRecordView.galleryButton.addTarget(self, action: #selector(galleryButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -56,8 +74,9 @@ class WriteRecordViewController: BaseViewController {
         scrollView.addSubview(contentView)
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(categoryButton)
-        stackView.addArrangedSubview(scheduleTitleColorView)
-        stackView.addArrangedSubview(colorSelectionView)
+        stackView.addArrangedSubview(titleColorStackView)
+        titleColorStackView.addArrangedSubview(scheduleTitleColorView)
+        titleColorStackView.addArrangedSubview(colorSelectionView)
         stackView.addArrangedSubview(mainLocationButton)
         stackView.addArrangedSubview(textContentView)
         view.addSubview(saveRecordView)
@@ -114,14 +133,34 @@ class WriteRecordViewController: BaseViewController {
     
     private func configureScheduleTitleColorView() {
         if let color = schedule.color {
-            scheduleTitleColorView.configure(with: schedule.title, color: color, isColorSelection: false)
+            scheduleTitleColorView.configure(false, title: schedule.title, color: color, isColorSelection: false)
+        } else {
+            let randomColorIndex = Int.random(in: 0...14)
+            schedule.color = colorList[randomColorIndex]
+            colorSelectionView.selectedColorIndex = randomColorIndex
         }
-        scheduleTitleColorView.delegate = self
+    }
+    
+    private func configureColorSelectionView() {
+        if let index = colorList.firstIndex(where: { $0 == schedule.color }) {
+            colorSelectionView.configure(index)
+        }
+    }
+    
+    private func configureMainLocationButton() {
+        guard let location = schedule.location else { return }
+        
+        mainLocationButton.configure(location)
     }
     
     @objc func mainLocationButtonTapped() {
         let mainLocationViewController = MainLocationViewController()
         navigationController?.pushViewController(mainLocationViewController, animated: true)
+    }
+    
+    private func scrollToBottom() {
+        let bottomOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - scrollView.bounds.size.height)
+     //   scrollView.setContentOffset(bottomOffset, animated: true)
     }
     
     private func setKeyboardObservers() {
@@ -141,12 +180,12 @@ class WriteRecordViewController: BaseViewController {
     private func keyboardWillChange(_ notification: Notification, isShowing: Bool) {
         guard let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         let keyboardHeight = keyboardFrame.cgRectValue.height
-        
-        stackView.snp.remakeConstraints {
-            $0.top.equalTo(contentView).offset(10)
-            $0.leading.equalTo(contentView).offset(16)
-            $0.trailing.equalTo(contentView).offset(-16)
-            $0.bottom.equalTo(contentView).offset(isShowing ? -keyboardHeight : -58)
+        stackView.snp.updateConstraints {
+            if isShowing {
+                $0.bottom.equalTo(contentView).offset(-keyboardHeight - 150)
+            } else {
+                $0.bottom.equalTo(contentView).offset(-58)
+            }
         }
         
         saveRecordView.snp.remakeConstraints {
@@ -159,6 +198,97 @@ class WriteRecordViewController: BaseViewController {
         view.layoutIfNeeded()
     }
     
+    @objc func galleryButtonTapped() {
+        checkAlbumPermission()
+    }
+    
+    private func checkAlbumPermission() {
+        switch PHPhotoLibrary.authorizationStatus(for: .readWrite) {
+        case .limited:
+            showImagePickerViewController(.limited)
+        case .authorized:
+            showImagePickerViewController(.authorized)
+        case .denied, .restricted:
+            showGalleyPermissionAlert()
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+                if status == .limited {
+                    self.showImagePickerViewController(.limited)
+                } else if status == .authorized {
+                    self.showImagePickerViewController(.authorized)
+                } else {
+                    self.showGalleyPermissionAlert()
+                }
+            }
+            print("Album: 선택하지 않음")
+        default:
+            break
+        }
+    }
+
+    func showImagePickerViewController(_ status: PHAuthorizationStatus) {
+        DispatchQueue.main.async {
+            let imagePickerViewController = ImagePickerViewController()
+            imagePickerViewController.authStatus = status
+            imagePickerViewController.onCompletion = { assets in
+                self.addImageContentView(assets)
+            }
+            imagePickerViewController.modalPresentationStyle = .fullScreen
+            self.present(imagePickerViewController, animated: true)
+        }
+    }
+    
+    func showGalleyPermissionAlert() {
+        DispatchQueue.main.async {
+            let alertViewController = AlertViewController()
+            alertViewController.modalPresentationStyle = .overCurrentContext
+            let alert = Alert(titleText: "사진 접근 권한을 허용해 주세요",
+                              messageText: "사진 접근 권한을 허용하지 않을 경우\n일부 기능을 사용할 수 없어요",
+                              cancelText: "닫기",
+                              doneText: "설정으로 이동",
+                              buttonColor: .color2EBD3D,
+                              alertHeight: 182)
+            alertViewController.configureAlert(with: alert)
+            alertViewController.onDoneTapped = {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
+            self.present(alertViewController, animated: false)
+        }
+    }
+    
+    func addImageContentView(_ assets: [PHAsset]) {
+        if isFirst && !assets.isEmpty {
+            textContentView.configure(false)
+        }
+        for asset in assets {
+            let imageContentView = ImageContentView()
+            let index = stackView.arrangedSubviews.count
+            imageContentView.configure(index, asset: asset)
+            // imageContentView.configureMainImage(isFirstImage)
+            stackView.addArrangedSubview(imageContentView)
+            addTextContentView()
+            
+            imageContentView.onRemoveImage = { index in
+                self.removeImageContentView(index)
+            }
+        }
+    }
+    
+    func removeImageContentView(_ index: Int) {
+        for _ in 0..<2 {
+            let viewToRemove = stackView.arrangedSubviews[index]
+            stackView.removeArrangedSubview(viewToRemove)
+            viewToRemove.removeFromSuperview()
+        }
+    }
+    
+    func addTextContentView() {
+        let textContentView = TextContentView()
+        stackView.addArrangedSubview(textContentView)
+    }
+    
     @objc func saveRecordButtonTapped() {
         let savingRecordViewController = SavingRecordViewController()
         savingRecordViewController.modalPresentationStyle = .overFullScreen
@@ -169,18 +299,37 @@ class WriteRecordViewController: BaseViewController {
     }
 }
 
-extension WriteRecordViewController: ColorSelectionButtonDelegate {
-    func colorSelectionButtonTapped(_ isSelected: Bool) {
-        colorSelectionView.snp.remakeConstraints {
-            $0.height.equalTo(isSelected ? 186 : 0)
+extension WriteRecordViewController {
+    func toggleColorSelectionView() {
+        scheduleTitleColorView.onColorSelectionButtonTapped = { [weak self] isSelected in
+            guard let self = self else { return }
+            
+            colorSelectionView.snp.remakeConstraints {
+                $0.height.equalTo(isSelected ? 186 : 0)
+            }
+            
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutIfNeeded()
+            }
+            
+            if let color = schedule.color {
+                scheduleTitleColorView.configure(false, title: schedule.title, color: color, isColorSelection: isSelected)
+            }
         }
-        
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
+    }
+    
+    func selectColor() {
+        colorSelectionView.onSelectedColor = { [weak self] selectedColorIndex in
+            guard let self = self else { return }
+            
+            schedule.color = colorList[selectedColorIndex]
+            configureScheduleTitleColorView()
         }
-        
-        if let color = schedule.color {
-            scheduleTitleColorView.configure(with: schedule.title, color: color, isColorSelection: isSelected)
-        }
+    }
+}
+
+extension WriteRecordViewController: UITextViewDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return true
     }
 }
