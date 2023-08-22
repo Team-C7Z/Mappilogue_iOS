@@ -20,9 +20,11 @@ class ImageContentView: BaseView {
     override func setupProperty() {
         super.setupProperty()
         
+        backgroundColor = .colorF9F8F7
+        
         contentImageButton.addTarget(self, action: #selector(contentImageButtonTapped), for: .touchUpInside)
         contentImageButton.layer.borderColor = UIColor.color2EBD3D.cgColor
-        mainImageButton.backgroundColor = .color2EBD3D
+        
         mainImageButton.layer.cornerRadius = 14
         mainImageButton.setTitle("대표 사진", for: .normal)
         mainImageButton.titleLabel?.font = .caption02
@@ -48,11 +50,12 @@ class ImageContentView: BaseView {
         super.setupLayout()
         
         self.snp.makeConstraints {
-            $0.height.equalTo(227)
+            $0.height.equalTo(227+16)
         }
         
         contentImageButton.snp.makeConstraints {
-            $0.edges.equalTo(self)
+            $0.leading.top.trailing.equalTo(self)
+            $0.bottom.equalTo(self).offset(-16)
         }
         
         contentImage.snp.makeConstraints {
@@ -78,8 +81,8 @@ class ImageContentView: BaseView {
         displaySelectedImages(asset: asset)
     }
     
-    func configureMainImage() {
-        
+    func configureMainImage(_ isMain: Bool) {
+        updateMainImageDesign(isMain)
     }
     
     private func displaySelectedImages(asset: PHAsset) {
@@ -117,7 +120,6 @@ class ImageContentView: BaseView {
     }
     
     @objc func removeImageButtonTapped(_ button: UIButton) {
-        print(index, "dfdfd")
         onRemoveImage?(index)
     }
 }

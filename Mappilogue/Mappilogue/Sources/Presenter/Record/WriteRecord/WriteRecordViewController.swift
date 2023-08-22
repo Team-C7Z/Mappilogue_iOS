@@ -49,7 +49,7 @@ class WriteRecordViewController: BaseViewController {
         
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
-        stackView.spacing = 1
+        stackView.spacing = 0
         stackView.backgroundColor = .colorEAE6E1
         
         categoryButton.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
@@ -259,27 +259,29 @@ class WriteRecordViewController: BaseViewController {
     }
     
     func addImageContentView(_ assets: [PHAsset]) {
-        if isFirst {
+        if isFirst && !assets.isEmpty {
             textContentView.configure(false)
         }
         for asset in assets {
             let imageContentView = ImageContentView()
-            let index = stackView.arrangedSubviews.count-1
+            let index = stackView.arrangedSubviews.count
             imageContentView.configure(index, asset: asset)
+            // imageContentView.configureMainImage(isFirstImage)
             stackView.addArrangedSubview(imageContentView)
             addTextContentView()
             
             imageContentView.onRemoveImage = { index in
-                print(index)
                 self.removeImageContentView(index)
             }
         }
     }
     
     func removeImageContentView(_ index: Int) {
-        let viewToRemove = stackView.arrangedSubviews[index]
-        stackView.removeArrangedSubview(viewToRemove)
-        viewToRemove.removeFromSuperview()
+        for _ in 0..<2 {
+            let viewToRemove = stackView.arrangedSubviews[index]
+            stackView.removeArrangedSubview(viewToRemove)
+            viewToRemove.removeFromSuperview()
+        }
     }
     
     func addTextContentView() {

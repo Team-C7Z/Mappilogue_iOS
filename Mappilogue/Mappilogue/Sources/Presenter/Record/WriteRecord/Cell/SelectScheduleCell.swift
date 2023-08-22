@@ -21,7 +21,6 @@ class SelectScheduleCell: BaseCollectionViewCell {
         super.setupProperty()
         
         scheduleColorView.layer.cornerRadius = 4
-        scheduleColorView.backgroundColor = .orange
         
         scheduleTitleLabel.textColor = .color1C1C1C
         scheduleTitleLabel.font = .body02

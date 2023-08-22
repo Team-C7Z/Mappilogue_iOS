@@ -11,6 +11,8 @@ class MainLocationButton: BaseButton {
     private let mainLocationView = MainLocatonView()
     private let locationTitleLabel = UILabel()
     private let moveImage = UIImageView()
+    private let lineViewTop = UIView()
+    private let lineViewBottom = UIView()
     
     override func setupProperty() {
         super.setupProperty()
@@ -21,21 +23,31 @@ class MainLocationButton: BaseButton {
         locationTitleLabel.font = .body02
         
         moveImage.image = UIImage(named: "moveWrite")
+        
+        lineViewTop.backgroundColor = .colorEAE6E1
+        lineViewBottom.backgroundColor = .colorEAE6E1
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
 
+        addSubview(lineViewTop)
         addSubview(mainLocationView)
         addSubview(locationTitleLabel)
         addSubview(moveImage)
+        addSubview(lineViewBottom)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
         self.snp.makeConstraints {
-            $0.height.equalTo(48)
+            $0.height.equalTo(50)
+        }
+        
+        lineViewTop.snp.makeConstraints {
+            $0.top.leading.trailing.equalTo(self)
+            $0.height.equalTo(1)
         }
 
         mainLocationView.snp.makeConstraints {
@@ -53,6 +65,12 @@ class MainLocationButton: BaseButton {
             $0.width.equalTo(7)
             $0.height.equalTo(14)
         }
+        
+        lineViewBottom.snp.makeConstraints {
+            $0.bottom.leading.trailing.equalTo(self)
+            $0.height.equalTo(1)
+        }
+
     }
     
     func configure(_ title: String) {
