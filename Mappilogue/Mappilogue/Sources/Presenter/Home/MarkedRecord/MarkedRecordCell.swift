@@ -11,7 +11,7 @@ class MarkedRecordCell: BaseCollectionViewCell {
     static let registerId = "\(MarkedRecordCell.self)"
     
     private let markedRecordImage = UIImageView()
-    private let markedRecordButton = UIButton()
+    private let markView = MarkView(frame: CGRect(x: 0, y: 0, width: 28, height: 28))
     private let markedRecordButtonImage = UIImageView()
     private let markedRecordDateLabel = UILabel()
     private let markedRecordLocationLabel = UILabel()
@@ -19,19 +19,14 @@ class MarkedRecordCell: BaseCollectionViewCell {
     override func setupProperty() {
         super.setupProperty()
         
-        contentView.backgroundColor = .colorF5F3F0
+        contentView.backgroundColor = .colorEAE6E1
         contentView.layer.cornerRadius = 12
         
         markedRecordImage.layer.cornerRadius = 12
         markedRecordImage.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         markedRecordImage.layer.masksToBounds = true
-        markedRecordImage.image = UIImage(named: "markedRecordTest")
         
-        markedRecordButton.layer.cornerRadius = 28 / 2
-        markedRecordButton.backgroundColor = .colorC9C6C2
-        
-        markedRecordButtonImage.image = UIImage(named: "markedRecord")
-        markedRecordImage.contentMode = .scaleAspectFill
+        markView.configure(heartWidth: 16, heartHeight: 15)
     
         markedRecordDateLabel.textColor = .color707070
         markedRecordDateLabel.font = .body02
@@ -44,8 +39,7 @@ class MarkedRecordCell: BaseCollectionViewCell {
         super.setupHierarchy()
         
         contentView.addSubview(markedRecordImage)
-        markedRecordImage.addSubview(markedRecordButton)
-        markedRecordButton.addSubview(markedRecordButtonImage)
+        markedRecordImage.addSubview(markView)
         contentView.addSubview(markedRecordDateLabel)
         contentView.addSubview(markedRecordLocationLabel)
     }
@@ -58,15 +52,10 @@ class MarkedRecordCell: BaseCollectionViewCell {
             $0.height.equalTo(148)
         }
         
-        markedRecordButton.snp.makeConstraints {
+        markView.snp.makeConstraints {
             $0.top.equalTo(markedRecordImage).offset(10)
             $0.trailing.equalTo(markedRecordImage).offset(-10)
             $0.width.height.equalTo(28)
-        }
-        
-        markedRecordButtonImage.snp.makeConstraints {
-            $0.centerX.centerY.equalTo(markedRecordButton)
-            $0.width.height.equalTo(18)
         }
         
         markedRecordDateLabel.snp.makeConstraints {
@@ -75,15 +64,15 @@ class MarkedRecordCell: BaseCollectionViewCell {
         }
         
         markedRecordLocationLabel.snp.makeConstraints {
-            $0.top.equalTo(markedRecordDateLabel.snp.bottom)
+            $0.top.equalTo(markedRecordImage.snp.bottom).offset(30)
             $0.leading.equalTo(markedRecordImage).offset(14)
         }
     }
     
-    func configure(image: String, date: String, location: String, color: UIColor) {
-        markedRecordImage.image = UIImage(named: image)
-        markedRecordDateLabel.text = date
-        markedRecordLocationLabel.text = location
-        markedRecordButton.backgroundColor = color
+    func configure(_ markedRecord: MarkedRecord) {
+        markedRecordImage.image = UIImage(named: "markedRecordTest")
+        markedRecordDateLabel.text = markedRecord.date
+        markedRecordLocationLabel.text = markedRecord.location
+        markView.backgroundColor = markedRecord.color
     }
 }

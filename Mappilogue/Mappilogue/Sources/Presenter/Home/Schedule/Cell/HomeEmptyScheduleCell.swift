@@ -10,14 +10,13 @@ import UIKit
 class HomeEmptyScheduleCell: BaseTableViewCell {
     static let registerId = "\(HomeEmptyScheduleCell.self)"
     
-    private let stackView = UIStackView()
     private let emptyScheduleLabel = UILabel()
     private let emptyScheduleSubLabel = UILabel()
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16))
     }
     
     override func setupProperty() {
@@ -25,10 +24,6 @@ class HomeEmptyScheduleCell: BaseTableViewCell {
         
         contentView.backgroundColor = .colorF5F3F0
         contentView.layer.cornerRadius = 12
-        
-        stackView.axis = .vertical
-        stackView.distribution = .equalSpacing
-        stackView.spacing = 4
         
         emptyScheduleLabel.font = .title02
         emptyScheduleLabel.textColor = .color707070
@@ -43,16 +38,21 @@ class HomeEmptyScheduleCell: BaseTableViewCell {
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        contentView.addSubview(stackView)
-        stackView.addArrangedSubview(emptyScheduleLabel)
-        stackView.addArrangedSubview(emptyScheduleSubLabel)
+        contentView.addSubview(emptyScheduleLabel)
+        contentView.addSubview(emptyScheduleSubLabel)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
-        stackView.snp.makeConstraints {
-            $0.centerX.centerY.equalTo(contentView)
+        emptyScheduleLabel.snp.makeConstraints {
+            $0.top.equalTo(contentView).offset(41)
+            $0.centerX.equalTo(contentView)
+        }
+        
+        emptyScheduleSubLabel.snp.makeConstraints {
+            $0.top.equalTo(contentView).offset(66)
+            $0.centerX.equalTo(contentView)
         }
     }
     

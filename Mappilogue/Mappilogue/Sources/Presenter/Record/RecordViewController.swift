@@ -226,6 +226,7 @@ class RecordViewController: NavigationBarViewController {
     private func createZoomOutMarkerView(record: Record) -> MarkView {
         let markView = MarkView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
         markView.configure(heartWidth: 14, heartHeight: 13)
+        markView.layer.applyShadow()
         markView.backgroundColor = record.color
         return markView
     }
