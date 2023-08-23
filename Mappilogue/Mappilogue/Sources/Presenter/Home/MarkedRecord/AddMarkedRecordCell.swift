@@ -18,7 +18,8 @@ class AddMarkedRecordCell: BaseCollectionViewCell {
         contentView.backgroundColor = .colorF5F3F0
         contentView.layer.cornerRadius = 12
         
-        addMarkedRecordButton.setImage(UIImage(named: "addMarkedRecord"), for: .normal)
+        addMarkedRecordButton.setImage(UIImage(named: "home_addMarkedRecord"), for: .normal)
+        addMarkedRecordButton.isUserInteractionEnabled = false
     }
     
     override func setupHierarchy() {

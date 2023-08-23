@@ -32,7 +32,6 @@ class TodayScheduleInfoCell: BaseTableViewCell {
         locationLabel.numberOfLines = 1
         locationLabel.lineBreakMode = .byTruncatingTail
         
-        separatorImage.image = UIImage(named: "separator")
         separatorImage.tintColor = .color9B9791
         
         timeLabel.textColor = .color9B9791
@@ -76,9 +75,14 @@ class TodayScheduleInfoCell: BaseTableViewCell {
         }
     }
     
-    func configure(location: String, time: String) {
+    func configure(location: String, time: String?) {
         locationLabel.text = location
-        timeLabel.text = time
+        if let time = time {
+            separatorImage.image = UIImage(named: "common_separator")
+            timeLabel.text = time
+        } else {
+            timeLabel.text = ""
+        }
 
         self.layoutSubviews()
     }

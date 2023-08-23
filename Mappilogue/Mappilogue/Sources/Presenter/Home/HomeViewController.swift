@@ -8,7 +8,7 @@
 import UIKit
 
 class HomeViewController: NavigationBarViewController {
-    let dummyTodayData = dummyTodayScheduleData(scheduleCount: 0)
+    let dummyTodayData = dummyTodayScheduleData(scheduleCount: 3)
     let dummyUpcomingData = dummyUpcomingScheduleData(scheduleCount: 0)
     var isScheduleExpanded = [Bool]()
     
@@ -84,7 +84,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             if dummyTodayData.isEmpty {
                 return 1
             } else {
-                return isScheduleExpanded[section] ? dummyTodayData[section].location.count : 1
+                return isScheduleExpanded[section] ? dummyTodayData[section].location.count + 1 : 1
             }
         case .upcoming:
             return dummyUpcomingData.isEmpty ? 1 : dummyUpcomingData.count
@@ -107,22 +107,22 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: TodayScheduleCell.registerId, for: indexPath) as? TodayScheduleCell else { return UITableViewCell() }
                     cell.selectionStyle = .none
                     cell.delegate = self
-                    
+              
                     let schedule = dummyTodayData[indexPath.section]
                     let isExpanded = isScheduleExpanded[indexPath.section]
                     cell.configure(schedule, isExpanded: isExpanded)
-                    
+               
                     return cell
                     
                 } else {
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: TodayScheduleInfoCell.registerId, for: indexPath) as? TodayScheduleInfoCell else { return UITableViewCell() }
                     cell.selectionStyle = .none
-                    
+             
                     let schedule = dummyTodayData[indexPath.section]
-                    let location = schedule.location[indexPath.row]
-                    let time = schedule.time[indexPath.row]
+                    let location = schedule.location[indexPath.row - 1]
+                    let time = schedule.time[indexPath.row - 1]
                     cell.configure(location: location, time: time)
-                    
+           
                     return cell
                 }
             }
@@ -191,7 +191,15 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         guard let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: MaredRecordsFooterView.registerId) as? MaredRecordsFooterView else { return UIView() }
         
         footerView.onAddSchedule = {
-            self.showAddScheduleButtonTapped()
+            self.showAddScheduleViewController()
+        }
+        
+        footerView.onMarkedRecord = {
+            self.showRecordContentViewController()
+        }
+        
+        footerView.onAddRecord = {
+            self.showSelectWriteRecordViewController()
         }
         
         return footerView
@@ -209,6 +217,19 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             return 352
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch selectedScheduleType {
+        case .today:
+            if !dummyTodayData.isEmpty {
+                showAddScheduleViewController()
+            }
+        case .upcoming:
+            if !dummyUpcomingData.isEmpty {
+                showAddScheduleViewController()
+            }
+        }
+    }
 }
 
 extension HomeViewController: ScheduleTypeDelegate, ExpandCellDelegate {
@@ -224,8 +245,18 @@ extension HomeViewController: ScheduleTypeDelegate, ExpandCellDelegate {
         tableView.reloadSections([indexPath.section], with: .none)
     }
     
-    func showAddScheduleButtonTapped() {
+    func showAddScheduleViewController() {
         let addScheduleViewController = AddScheduleViewController()
         navigationController?.pushViewController(addScheduleViewController, animated: true)
+    }
+    
+    func showRecordContentViewController() {
+        let recordContentViewController = RecordContentViewController()
+        navigationController?.pushViewController(recordContentViewController, animated: true)
+    }
+    
+    func showSelectWriteRecordViewController() {
+        let selectWriteRecordViewController = SelectWriteRecordViewController()
+        navigationController?.pushViewController(selectWriteRecordViewController, animated: true)
     }
 }

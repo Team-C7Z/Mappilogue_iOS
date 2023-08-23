@@ -85,7 +85,7 @@ class UpcomingScheduleCell: BaseTableViewCell {
         upcomingScheduleDateLabel.text = schedule.date
         if let time = schedule.time {
             upcomingScheduleTimeLabel.text = "\(time) 시작"
-            separatorImage.image = UIImage(named: "separator")
+            separatorImage.image = UIImage(named: "common_separator")
         } else {
             upcomingScheduleTimeLabel.text = ""
         }

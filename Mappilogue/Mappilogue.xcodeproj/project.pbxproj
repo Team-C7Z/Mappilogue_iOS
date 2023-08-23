@@ -1014,10 +1014,10 @@
 				920031E12A8E1E7700E3170D /* FindMarkersButton.swift */,
 				92011B732A71386F009B047F /* Cell */,
 				920031E32A8E1E8100E3170D /* BottomSheet */,
-				920031E52A8E1EBC00E3170D /* RecordContent */,
-				92011CB72A7A16F8009B047F /* MyRecord */,
 				92011C052A74A0FE009B047F /* Search */,
+				92011CB72A7A16F8009B047F /* MyRecord */,
 				92011B762A716801009B047F /* WriteRecord */,
+				920031E52A8E1EBC00E3170D /* RecordContent */,
 			);
 			path = Record;
 			sourceTree = "<group>";
