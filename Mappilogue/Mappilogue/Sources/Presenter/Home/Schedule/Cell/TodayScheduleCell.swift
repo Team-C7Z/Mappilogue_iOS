@@ -18,6 +18,7 @@ class TodayScheduleCell: BaseTableViewCell {
     
     private var isExpanded: Bool = true
     
+    private let outerView = UIView()
     private let todayScheduleLabel = UILabel()
     private let expandButton = UIButton()
     
@@ -30,7 +31,7 @@ class TodayScheduleCell: BaseTableViewCell {
     override func setupProperty() {
         super.setupProperty()
         
-        contentView.layer.cornerRadius = 12
+        outerView.layer.cornerRadius = 12
         
         todayScheduleLabel.textColor = .color1C1C1C
         todayScheduleLabel.textAlignment = .center
@@ -42,6 +43,7 @@ class TodayScheduleCell: BaseTableViewCell {
     override func setupHierarchy() {
         super.setupHierarchy()
         
+        contentView.addSubview(outerView)
         contentView.addSubview(todayScheduleLabel)
         contentView.addSubview(expandButton)
     }
@@ -49,21 +51,26 @@ class TodayScheduleCell: BaseTableViewCell {
     override func setupLayout() {
         super.setupLayout()
         
+        outerView.snp.makeConstraints {
+            $0.leading.bottom.trailing.equalTo(contentView)
+            $0.height.equalTo(38)
+        }
+        
         todayScheduleLabel.snp.makeConstraints {
-            $0.leading.equalTo(contentView).offset(14)
-            $0.centerY.equalTo(contentView)
+            $0.leading.equalTo(outerView).offset(14)
+            $0.centerY.equalTo(outerView)
         }
         
         expandButton.snp.makeConstraints {
-            $0.trailing.equalTo(contentView).offset(-14)
-            $0.centerY.equalTo(contentView)
+            $0.trailing.equalTo(outerView).offset(-14)
+            $0.centerY.equalTo(outerView)
             $0.width.height.equalTo(24)
         }
     }
     
-    func configure(with schedule: TodaySchedule, isExpanded: Bool) {
+    func configure(_ schedule: TodaySchedule, isExpanded: Bool) {
         todayScheduleLabel.text = schedule.title
-        contentView.backgroundColor = schedule.color
+        outerView.backgroundColor = schedule.color
         expandButton.setImage(UIImage(named: isExpanded ? "hideSchedule" : "openSchedule"), for: .normal)
     }
     

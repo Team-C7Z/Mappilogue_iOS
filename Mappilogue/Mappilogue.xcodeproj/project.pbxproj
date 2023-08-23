@@ -39,6 +39,7 @@
 		920031F52A92444E00E3170D /* PhotoDirectoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031F42A92444E00E3170D /* PhotoDirectoryView.swift */; };
 		920031F82A92467A00E3170D /* PhotoDirectoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031F72A92467A00E3170D /* PhotoDirectoryCell.swift */; };
 		920031FE2A93A27000E3170D /* ImageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031FD2A93A27000E3170D /* ImageContentView.swift */; };
+		920032002A9504EE00E3170D /* MaredRecordsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031FF2A9504EE00E3170D /* MaredRecordsFooterView.swift */; };
 		92011B282A6E75F1009B047F /* WriteRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B272A6E75F1009B047F /* WriteRecordButton.swift */; };
 		92011B702A70E7D8009B047F /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */; };
 		92011B722A7127FC009B047F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B712A7127FC009B047F /* AlertViewController.swift */; };
@@ -88,10 +89,6 @@
 		9224FD032A600ACF000A56A6 /* ScheduleDurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD022A600ACF000A56A6 /* ScheduleDurationView.swift */; };
 		9224FD052A600F42000A56A6 /* NotificationRepeatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD042A600F42000A56A6 /* NotificationRepeatButton.swift */; };
 		9224FD092A601B00000A56A6 /* ColorSelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD082A601B00000A56A6 /* ColorSelectionButton.swift */; };
-		9224FD0D2A610134000A56A6 /* EmptyTodayScheduleSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD0C2A610134000A56A6 /* EmptyTodayScheduleSection.swift */; };
-		9224FD0F2A610E64000A56A6 /* EmptyUpcomingScheduleSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD0E2A610E64000A56A6 /* EmptyUpcomingScheduleSection.swift */; };
-		9224FD112A611218000A56A6 /* TodayScheduleSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD102A611218000A56A6 /* TodayScheduleSection.swift */; };
-		9224FD152A613AB8000A56A6 /* UpcomingScheduleSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD142A613AB8000A56A6 /* UpcomingScheduleSection.swift */; };
 		9224FD192A616EB1000A56A6 /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD182A616EB1000A56A6 /* ColorCell.swift */; };
 		9224FD1B2A61705D000A56A6 /* ColorSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD1A2A61705D000A56A6 /* ColorSelection.swift */; };
 		9224FD1F2A62B4E9000A56A6 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD1E2A62B4E9000A56A6 /* NotificationViewController.swift */; };
@@ -117,7 +114,6 @@
 		92459ED82A52494200493941 /* AddMarkedRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92459ED72A52494200493941 /* AddMarkedRecordCell.swift */; };
 		92459EDA2A530D1100493941 /* MarkedRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92459ED92A530D1100493941 /* MarkedRecordCell.swift */; };
 		924BE0CA2A51AE25002C70FF /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 924BE0C92A51AE25002C70FF /* .swiftlint.yml */; };
-		924BE0CE2A51C4D4002C70FF /* MarkedRecordsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924BE0CD2A51C4D4002C70FF /* MarkedRecordsCell.swift */; };
 		9258409E2A7BD30700997434 /* CategorySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258409D2A7BD30700997434 /* CategorySettingViewController.swift */; };
 		925840A02A7BD4D700997434 /* CategoryOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258409F2A7BD4D700997434 /* CategoryOrderCell.swift */; };
 		925840A42A7C890100997434 /* CategorySelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840A32A7C890100997434 /* CategorySelectionCell.swift */; };
@@ -174,11 +170,9 @@
 		9291582A2A252CC20022BEF9 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929158292A252CC20022BEF9 /* UIColor.swift */; };
 		929158302A2537E40022BEF9 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9291582F2A2537E40022BEF9 /* SnapKit */; };
 		92A7B64F2A4CCE29009C9293 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B64E2A4CCE29009C9293 /* AddButton.swift */; };
-		92A7B6512A4CD261009C9293 /* AddScheduleButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6502A4CD261009C9293 /* AddScheduleButtonCell.swift */; };
 		92A7B6532A4CDD4D009C9293 /* ScheduleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6522A4CDD4D009C9293 /* ScheduleType.swift */; };
 		92A7B6552A4CEA28009C9293 /* TodaySchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6542A4CEA28009C9293 /* TodaySchedule.swift */; };
 		92A7B6592A4D01B3009C9293 /* TodayScheduleInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6582A4D01B3009C9293 /* TodayScheduleInfoCell.swift */; };
-		92A7B65B2A4D0FD9009C9293 /* AddLocationButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B65A2A4D0FD9009C9293 /* AddLocationButtonCell.swift */; };
 		92A7B65F2A4E07DB009C9293 /* TodayScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B65E2A4E07DB009C9293 /* TodayScheduleCell.swift */; };
 		92A7B6612A4E2039009C9293 /* BaseTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6602A4E2039009C9293 /* BaseTableViewHeaderFooterView.swift */; };
 		92A7B6632A4E20BF009C9293 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6622A4E20BF009C9293 /* BaseTableViewCell.swift */; };
@@ -249,6 +243,7 @@
 		920031F42A92444E00E3170D /* PhotoDirectoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDirectoryView.swift; sourceTree = "<group>"; };
 		920031F72A92467A00E3170D /* PhotoDirectoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDirectoryCell.swift; sourceTree = "<group>"; };
 		920031FD2A93A27000E3170D /* ImageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageContentView.swift; sourceTree = "<group>"; };
+		920031FF2A9504EE00E3170D /* MaredRecordsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaredRecordsFooterView.swift; sourceTree = "<group>"; };
 		92011B272A6E75F1009B047F /* WriteRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordButton.swift; sourceTree = "<group>"; };
 		92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		92011B712A7127FC009B047F /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
@@ -298,10 +293,6 @@
 		9224FD022A600ACF000A56A6 /* ScheduleDurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDurationView.swift; sourceTree = "<group>"; };
 		9224FD042A600F42000A56A6 /* NotificationRepeatButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRepeatButton.swift; sourceTree = "<group>"; };
 		9224FD082A601B00000A56A6 /* ColorSelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectionButton.swift; sourceTree = "<group>"; };
-		9224FD0C2A610134000A56A6 /* EmptyTodayScheduleSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTodayScheduleSection.swift; sourceTree = "<group>"; };
-		9224FD0E2A610E64000A56A6 /* EmptyUpcomingScheduleSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyUpcomingScheduleSection.swift; sourceTree = "<group>"; };
-		9224FD102A611218000A56A6 /* TodayScheduleSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayScheduleSection.swift; sourceTree = "<group>"; };
-		9224FD142A613AB8000A56A6 /* UpcomingScheduleSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingScheduleSection.swift; sourceTree = "<group>"; };
 		9224FD182A616EB1000A56A6 /* ColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
 		9224FD1A2A61705D000A56A6 /* ColorSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelection.swift; sourceTree = "<group>"; };
 		9224FD1E2A62B4E9000A56A6 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
@@ -328,7 +319,6 @@
 		92459ED92A530D1100493941 /* MarkedRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkedRecordCell.swift; sourceTree = "<group>"; };
 		92459EDB2A53158A00493941 /* MarkedRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkedRecord.swift; sourceTree = "<group>"; };
 		924BE0C92A51AE25002C70FF /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
-		924BE0CD2A51C4D4002C70FF /* MarkedRecordsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkedRecordsCell.swift; sourceTree = "<group>"; };
 		9258409D2A7BD30700997434 /* CategorySettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingViewController.swift; sourceTree = "<group>"; };
 		9258409F2A7BD4D700997434 /* CategoryOrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryOrderCell.swift; sourceTree = "<group>"; };
 		925840A32A7C890100997434 /* CategorySelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionCell.swift; sourceTree = "<group>"; };
@@ -386,11 +376,9 @@
 		929158292A252CC20022BEF9 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		92A7B64B2A4CC0E6009C9293 /* HomeEmptyScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEmptyScheduleCell.swift; sourceTree = "<group>"; };
 		92A7B64E2A4CCE29009C9293 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
-		92A7B6502A4CD261009C9293 /* AddScheduleButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleButtonCell.swift; sourceTree = "<group>"; };
 		92A7B6522A4CDD4D009C9293 /* ScheduleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScheduleType.swift; path = Mappilogue/Sources/Presenter/Home/Schedule/ScheduleType.swift; sourceTree = SOURCE_ROOT; };
 		92A7B6542A4CEA28009C9293 /* TodaySchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TodaySchedule.swift; path = Mappilogue/Sources/Model/TodaySchedule.swift; sourceTree = SOURCE_ROOT; };
 		92A7B6582A4D01B3009C9293 /* TodayScheduleInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayScheduleInfoCell.swift; sourceTree = "<group>"; };
-		92A7B65A2A4D0FD9009C9293 /* AddLocationButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationButtonCell.swift; sourceTree = "<group>"; };
 		92A7B65E2A4E07DB009C9293 /* TodayScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayScheduleCell.swift; sourceTree = "<group>"; };
 		92A7B6602A4E2039009C9293 /* BaseTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
 		92A7B6622A4E20BF009C9293 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
@@ -733,7 +721,7 @@
 		9224FD2E2A6395F9000A56A6 /* MarkedRecord */ = {
 			isa = PBXGroup;
 			children = (
-				924BE0CD2A51C4D4002C70FF /* MarkedRecordsCell.swift */,
+				920031FF2A9504EE00E3170D /* MaredRecordsFooterView.swift */,
 				92459ED92A530D1100493941 /* MarkedRecordCell.swift */,
 				92459ED72A52494200493941 /* AddMarkedRecordCell.swift */,
 			);
@@ -747,8 +735,6 @@
 				92A7B65E2A4E07DB009C9293 /* TodayScheduleCell.swift */,
 				92A7B6582A4D01B3009C9293 /* TodayScheduleInfoCell.swift */,
 				92A7B6672A4E6154009C9293 /* UpcomingScheduleCell.swift */,
-				92A7B6502A4CD261009C9293 /* AddScheduleButtonCell.swift */,
-				92A7B65A2A4D0FD9009C9293 /* AddLocationButtonCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -976,10 +962,6 @@
 			isa = PBXGroup;
 			children = (
 				9269993F2A14F73C003DDAD2 /* HomeViewController.swift */,
-				9224FD0C2A610134000A56A6 /* EmptyTodayScheduleSection.swift */,
-				9224FD0E2A610E64000A56A6 /* EmptyUpcomingScheduleSection.swift */,
-				9224FD102A611218000A56A6 /* TodayScheduleSection.swift */,
-				9224FD142A613AB8000A56A6 /* UpcomingScheduleSection.swift */,
 				9224FD2D2A6395EE000A56A6 /* Schedule */,
 				9224FD2E2A6395F9000A56A6 /* MarkedRecord */,
 			);
@@ -1425,7 +1407,6 @@
 				92011B782A71683E009B047F /* SelectWriteRecordViewController.swift in Sources */,
 				92011C1A2A755D02009B047F /* MyRecordButton.swift in Sources */,
 				9224FD3D2A6559A0000A56A6 /* AddLocationViewController.swift in Sources */,
-				924BE0CE2A51C4D4002C70FF /* MarkedRecordsCell.swift in Sources */,
 				9224FD1F2A62B4E9000A56A6 /* NotificationViewController.swift in Sources */,
 				92011C1E2A75EE79009B047F /* MarkView.swift in Sources */,
 				9224FD372A653024000A56A6 /* SpacingView.swift in Sources */,
@@ -1442,10 +1423,10 @@
 				920031ED2A91085300E3170D /* ImagePickerCell.swift in Sources */,
 				925840B92A7F2DA300997434 /* ProfileCell.swift in Sources */,
 				925840C32A7F61E800997434 /* InquiryViewController.swift in Sources */,
+				920032002A9504EE00E3170D /* MaredRecordsFooterView.swift in Sources */,
 				9224FD052A600F42000A56A6 /* NotificationRepeatButton.swift in Sources */,
 				920031DB2A8DD29700E3170D /* SavingRecordViewController.swift in Sources */,
 				9224FCF92A5FCF72000A56A6 /* ScheduleCell.swift in Sources */,
-				9224FD0F2A610E64000A56A6 /* EmptyUpcomingScheduleSection.swift in Sources */,
 				9263786E2A5475AF004E5B6E /* OnboardingCell.swift in Sources */,
 				92A7B6532A4CDD4D009C9293 /* ScheduleType.swift in Sources */,
 				9224FD352A652A96000A56A6 /* WeekdayView.swift in Sources */,
@@ -1455,7 +1436,6 @@
 				925840C52A7F71E600997434 /* EmailCopyToastMessageView.swift in Sources */,
 				925840D92A80D84300997434 /* SelectedNotificationCell.swift in Sources */,
 				92FE26132A4B74D800BCDB82 /* ScheduleTypeHeaderView.swift in Sources */,
-				9224FD0D2A610134000A56A6 /* EmptyTodayScheduleSection.swift in Sources */,
 				926998F72A14EC07003DDAD2 /* AppDelegate.swift in Sources */,
 				9224FD032A600ACF000A56A6 /* ScheduleDurationView.swift in Sources */,
 				92A7B6612A4E2039009C9293 /* BaseTableViewHeaderFooterView.swift in Sources */,
@@ -1477,7 +1457,6 @@
 				92E7814C2A84B9B3000DAACD /* ScheduleDateHeaderView.swift in Sources */,
 				926378712A54E0E6004E5B6E /* OnboardingManager.swift in Sources */,
 				925840CF2A7FCB5400997434 /* ScheduleTitleColorView.swift in Sources */,
-				92A7B6512A4CD261009C9293 /* AddScheduleButtonCell.swift in Sources */,
 				92011B722A7127FC009B047F /* AlertViewController.swift in Sources */,
 				9224FCFD2A5FF185000A56A6 /* AddScheduleViewController.swift in Sources */,
 				9224FD252A638F01000A56A6 /* RepeatType.swift in Sources */,
@@ -1487,10 +1466,8 @@
 				92A7B6682A4E6154009C9293 /* UpcomingScheduleCell.swift in Sources */,
 				927E7F272A683DCD00E6A29F /* CalendarCell.swift in Sources */,
 				925840C12A7F5B2200997434 /* NotificationSwitchButton.swift in Sources */,
-				9224FD112A611218000A56A6 /* TodayScheduleSection.swift in Sources */,
 				92011B8B2A72B7DA009B047F /* NewWriteButton.swift in Sources */,
 				925840B72A7F2D5A00997434 /* VersionCell.swift in Sources */,
-				92A7B65B2A4D0FD9009C9293 /* AddLocationButtonCell.swift in Sources */,
 				925840D72A80D4BD00997434 /* NotificationHeaderView.swift in Sources */,
 				9230BE512A59B45D0053E535 /* MonthlyCalendar.swift in Sources */,
 				92011B902A7364D0009B047F /* BaseButton.swift in Sources */,
@@ -1521,7 +1498,6 @@
 				92011B8D2A72BBE8009B047F /* ImageSaveRecordView.swift in Sources */,
 				927E7F212A66F64400E6A29F /* Schedule.swift in Sources */,
 				925840BD2A7F459600997434 /* NotificationSettingView.swift in Sources */,
-				9224FD152A613AB8000A56A6 /* UpcomingScheduleSection.swift in Sources */,
 				92011C142A74F9DE009B047F /* SearchLocationCell.swift in Sources */,
 				92459EDA2A530D1100493941 /* MarkedRecordCell.swift in Sources */,
 				920031C32A8B5D2F00E3170D /* MainLocationViewController.swift in Sources */,

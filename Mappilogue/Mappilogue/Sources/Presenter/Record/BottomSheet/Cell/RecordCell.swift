@@ -31,6 +31,8 @@ class RecordCell: BaseCollectionViewCell {
     override func setupProperty() {
         super.setupProperty()
         
+        markView.layer.applyShadow()
+        
         recordImage.layer.cornerRadius = 12
         recordImage.clipsToBounds = true
         

@@ -1,16 +1,20 @@
 //
-//  MarkedRecordsCell.swift
+//  MaredRecordsFooterView.swift
 //  Mappilogue
 //
-//  Created by hyemi on 2023/07/02.
+//  Created by hyemi on 2023/08/22.
 //
 
 import UIKit
 
-class MarkedRecordsCell: BaseTableViewCell {
-    static let registerId = "\(MarkedRecordsCell.self)"
+class MaredRecordsFooterView: BaseTableViewHeaderFooterView {
+    static let registerId = "\(MaredRecordsFooterView.self)"
     
-    let dummyMarkedData = dummyMarkedRecordData(markedRecordCount: 4)
+    var onAddSchedule: (() -> Void)?
+    
+    private let addScheduleButton = AddButton(text: "일정 추가하기", backgroundColor: .color1C1C1C)
+    
+    let dummyMarkedData = dummyMarkedRecordData(markedRecordCount: 3)
     let limitedMarkedRecordsCount = 3
     
     private var markedRecordsLabel = UILabel()
@@ -30,13 +34,14 @@ class MarkedRecordsCell: BaseTableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-    
+        
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 16, left: 16, bottom: 0, right: 16))
     }
     
     override func setupProperty() {
         super.setupProperty()
-
-        contentView.backgroundColor = .colorF9F8F7
+        
+        addScheduleButton.addTarget(self, action: #selector(addScheduleButtonTapped), for: .touchUpInside)
         
         markedRecordsLabel.text = "마크한 기록"
         markedRecordsLabel.font = .title01
@@ -46,26 +51,37 @@ class MarkedRecordsCell: BaseTableViewCell {
     override func setupHierarchy() {
         super.setupHierarchy()
         
+        contentView.addSubview(addScheduleButton)
         contentView.addSubview(markedRecordsLabel)
         contentView.addSubview(collectionView)
     }
     
     override func setupLayout() {
         super.setupLayout()
-    
+        
+        addScheduleButton.snp.makeConstraints {
+            $0.leading.top.trailing.equalTo(contentView)
+            $0.height.equalTo(53)
+        }
+        
         markedRecordsLabel.snp.makeConstraints {
-            $0.top.equalTo(contentView)
-            $0.leading.equalTo(contentView).offset(16)
+            $0.top.equalTo(addScheduleButton.snp.bottom).offset(24)
+            $0.leading.equalTo(contentView)
         }
         
         collectionView.snp.makeConstraints {
             $0.top.equalTo(markedRecordsLabel.snp.bottom).offset(18)
-            $0.leading.bottom.trailing.equalTo(contentView)
+            $0.leading.trailing.equalTo(contentView)
+            $0.height.equalTo(221)
         }
+    }
+    
+    @objc func addScheduleButtonTapped(_ sender: UIButton) {
+        onAddSchedule?()
     }
 }
 
-extension MarkedRecordsCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension MaredRecordsFooterView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return min(dummyMarkedData.count, limitedMarkedRecordsCount) + 1
     }
@@ -73,21 +89,15 @@ extension MarkedRecordsCell: UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.row < min(dummyMarkedData.count, limitedMarkedRecordsCount) {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MarkedRecordCell.registerId, for: indexPath) as? MarkedRecordCell else { return UICollectionViewCell() }
-            
-            let image = "markedRecordTest"
-            let date = dummyMarkedData[indexPath.row].date
-            let location = dummyMarkedData[indexPath.row].location
-            cell.configure(image: image, date: date, location: location, color: dummyMarkedData[indexPath.row].color)
+
+            let markedRecord = dummyMarkedData[indexPath.row]
+            cell.configure(markedRecord)
             
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddMarkedRecordCell.registerId, for: indexPath) as? AddMarkedRecordCell else { return UICollectionViewCell() }
             return cell
         }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
