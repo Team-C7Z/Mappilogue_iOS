@@ -8,7 +8,7 @@
 import UIKit
 
 class HomeViewController: NavigationBarViewController {
-    let dummyTodayData = dummyTodayScheduleData(scheduleCount: 1)
+    let dummyTodayData = dummyTodayScheduleData(scheduleCount: 3)
     let dummyUpcomingData = dummyUpcomingScheduleData(scheduleCount: 0)
     var isScheduleExpanded = [Bool]()
     
@@ -21,14 +21,13 @@ class HomeViewController: NavigationBarViewController {
         tableView.backgroundColor = .colorF9F8F7
         tableView.sectionHeaderHeight = 0
         tableView.sectionFooterHeight = 0
+        tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         tableView.register(HomeEmptyScheduleCell.self, forCellReuseIdentifier: HomeEmptyScheduleCell.registerId)
         tableView.register(TodayScheduleCell.self, forCellReuseIdentifier: TodayScheduleCell.registerId)
         tableView.register(TodayScheduleInfoCell.self, forCellReuseIdentifier: TodayScheduleInfoCell.registerId)
         tableView.register(UpcomingScheduleCell.self, forCellReuseIdentifier: UpcomingScheduleCell.registerId)
-        tableView.register(AddScheduleButtonCell.self, forCellReuseIdentifier: AddScheduleButtonCell.registerId)
-        tableView.register(AddLocationButtonCell.self, forCellReuseIdentifier: AddLocationButtonCell.registerId)
-        tableView.register(MarkedRecordsCell.self, forCellReuseIdentifier: MarkedRecordsCell.registerId)
         tableView.register(ScheduleTypeHeaderView.self, forHeaderFooterViewReuseIdentifier: ScheduleTypeHeaderView.registerId)
+        tableView.register(MaredRecordsFooterView.self, forHeaderFooterViewReuseIdentifier: MaredRecordsFooterView.registerId)
         tableView.delegate = self
         tableView.dataSource = self
         return tableView
@@ -37,7 +36,7 @@ class HomeViewController: NavigationBarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        isScheduleExpanded = Array(repeating: true, count: dummyTodayData.count + 2)
+        isScheduleExpanded = Array(repeating: true, count: dummyTodayData.count)
     }
     
     override func setupProperty() {
@@ -73,14 +72,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         switch selectedScheduleType {
         case .today:
-            if dummyTodayData.isEmpty {
-                return EmptyTodayScheduleSection.allCases.count
-            } else {
-                guard let tableViewSection = TodayScheduleSection(rawValue: 0) else { return 0 }
-                return tableViewSection.numberOfSections(dummyTodayData)
-            }
+            return dummyTodayData.isEmpty ? 1 : dummyTodayData.count
         case .upcoming:
-            return dummyUpcomingData.isEmpty ? EmptyUpcomingScheduleSection.allCases.count : UpcomingScheduleSection.allCases.count
+            return 1
         }
     }
     
@@ -88,21 +82,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         switch selectedScheduleType {
         case .today:
             if dummyTodayData.isEmpty {
-                guard let tableViewSection = EmptyTodayScheduleSection(rawValue: section) else { return 0 }
-                return tableViewSection.numberOfRows
-                
+                return 1
             } else {
-                guard let tableViewSection = TodayScheduleSection(rawValue: 0) else { return 0 }
-                return tableViewSection.numberOfRows(section, scheduleData: dummyTodayData, isExpand: isScheduleExpanded[section])
+                return isScheduleExpanded[section] ? dummyTodayData[section].location.count + 1 : 1
             }
         case .upcoming:
-            if dummyUpcomingData.isEmpty {
-                guard let tableViewSection = EmptyUpcomingScheduleSection(rawValue: section) else { return 0 }
-                return tableViewSection.numberOfRows
-            } else {
-                guard let tableViewSection = UpcomingScheduleSection(rawValue: section) else { return 0 }
-                return tableViewSection.numberOfRows(section: section, scheduleData: dummyUpcomingData, limitedUpcomingScheduleCount: limitedUpcomingScheduleCount)
-            }
+            return dummyUpcomingData.isEmpty ? 1 : dummyUpcomingData.count
         }
     }
     
@@ -110,104 +95,53 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         switch selectedScheduleType {
         case .today:
             if dummyTodayData.isEmpty {
-                guard let tableViewSection = EmptyTodayScheduleSection(rawValue: indexPath.section) else { return UITableViewCell() }
-                
-                let cellIdentifier = tableViewSection.cellIdentifier
-                let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-                
-                if let emptyScheduleCell = cell as? HomeEmptyScheduleCell {
-                    tableViewSection.configureCell(emptyScheduleCell)
-                }
-                
-                if let addScheduleButtonCell = cell as? AddScheduleButtonCell {
-                    addScheduleButtonCell.delegate = self
-                }
-                
-                return cell
-                
-            } else if dummyTodayData.count > indexPath.section {
-                switch indexPath.row {
-                case 0:
-                    guard let tableViewSection = TodayScheduleSection(rawValue: 0) else { return UITableViewCell() }
-                    
-                    let cellIdentifier = tableViewSection.cellIdentifier
-                    let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-                    cell.selectionStyle = .none
-                    
-                    if let todayScheduleCell = cell as? TodayScheduleCell {
-                        todayScheduleCell.delegate = self
-                        tableViewSection.configureTodayScheduleCell(todayScheduleCell, section: indexPath.section, scheduleData: dummyTodayData, isExpand: isScheduleExpanded[indexPath.section])
-                    }
-            
-                    return cell
-                    
-                default:
-                    guard let tableViewSection = TodayScheduleSection(rawValue: 1) else { return UITableViewCell() }
-                    
-                    let cellIdentifier = tableViewSection.cellIdentifier
-                    let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-                    cell.selectionStyle = .none
-                    
-                    if let todayScheduleInfoCell = cell as? TodayScheduleInfoCell {
-                        tableViewSection.configureTodayScheduleInfoCell(todayScheduleInfoCell, indexPath: indexPath, scheduleData: dummyTodayData)
-                    }
-                  
-                    return cell
-                }
-                
-            } else if dummyTodayData.count == indexPath.section {
-                guard let tableViewSection = TodayScheduleSection(rawValue: 2) else { return UITableViewCell() }
-                
-                let cellIdentifier = tableViewSection.cellIdentifier
-                let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeEmptyScheduleCell.registerId, for: indexPath) as? HomeEmptyScheduleCell else { return UITableViewCell() }
                 cell.selectionStyle = .none
                 
-                if let addLocationButtonCell = cell as? AddLocationButtonCell {
-                    addLocationButtonCell.delegate = self
-                }
+                cell.configure(scheduleType: .today)
                 
                 return cell
+                
             } else {
-                guard let tableViewSection = TodayScheduleSection(rawValue: 3) else { return UITableViewCell() }
-                
-                let cellIdentifier = tableViewSection.cellIdentifier
-                let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-                cell.selectionStyle = .none
-                
-                return cell
+                if indexPath.row == 0 {
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: TodayScheduleCell.registerId, for: indexPath) as? TodayScheduleCell else { return UITableViewCell() }
+                    cell.selectionStyle = .none
+                    cell.delegate = self
+              
+                    let schedule = dummyTodayData[indexPath.section]
+                    let isExpanded = isScheduleExpanded[indexPath.section]
+                    cell.configure(schedule, isExpanded: isExpanded)
+               
+                    return cell
+                    
+                } else {
+                    guard let cell = tableView.dequeueReusableCell(withIdentifier: TodayScheduleInfoCell.registerId, for: indexPath) as? TodayScheduleInfoCell else { return UITableViewCell() }
+                    cell.selectionStyle = .none
+             
+                    let schedule = dummyTodayData[indexPath.section]
+                    let location = schedule.location[indexPath.row - 1]
+                    let time = schedule.time[indexPath.row - 1]
+                    cell.configure(location: location, time: time)
+           
+                    return cell
+                }
             }
             
         case .upcoming:
             if dummyUpcomingData.isEmpty {
-                guard let section = EmptyUpcomingScheduleSection(rawValue: indexPath.section) else { return UITableViewCell() }
-                
-                let cellIdentifier = section.cellIdentifier
-                let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeEmptyScheduleCell.registerId, for: indexPath) as? HomeEmptyScheduleCell else { return UITableViewCell() }
                 cell.selectionStyle = .none
                 
-                if let emptyScheduleCell = cell as? HomeEmptyScheduleCell {
-                    section.configureCell(emptyScheduleCell)
-                }
-                
-                if let addScheduleButtonCell = cell as? AddScheduleButtonCell {
-                    addScheduleButtonCell.delegate = self
-                }
+                cell.configure(scheduleType: .upcoming)
                 
                 return cell
                 
             } else {
-                guard let section = UpcomingScheduleSection(rawValue: indexPath.section) else { return UITableViewCell() }
-                let cellIdentifier = section.cellIdentifier
-                let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: UpcomingScheduleCell.registerId, for: indexPath) as? UpcomingScheduleCell else { return UITableViewCell() }
                 cell.selectionStyle = .none
-          
-                if let upcomingScheduleCell = cell as? UpcomingScheduleCell {
-                    section.configureCell(upcomingScheduleCell, row: indexPath.row, scheduleData: dummyUpcomingData)
-                }
                 
-                if let addScheduleButtonCell = cell as? AddScheduleButtonCell {
-                    addScheduleButtonCell.delegate = self
-                }
+                let schedule = dummyUpcomingData[indexPath.row]
+                cell.configure(schedule)
                 
                 return cell
             }
@@ -218,61 +152,87 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         switch selectedScheduleType {
         case .today:
             if dummyTodayData.isEmpty {
-                guard let section = EmptyTodayScheduleSection(rawValue: indexPath.section) else { return 0 }
-                return section.rowHeight
+                return 130 + 16
                 
             } else {
-                guard let section = TodayScheduleSection(rawValue: indexPath.section) else { return 0 }
-                return section.rowHeight(indexPath, scheduleData: dummyTodayData)
+                if indexPath.row == 0 {
+                    return 38 + 16
+                } else if indexPath.row == 1 {
+                    return 48 + 16
+                } else {
+                    return 48 + 8
+                }
             }
         case .upcoming:
             if dummyUpcomingData.isEmpty {
-                guard let section = EmptyUpcomingScheduleSection(rawValue: indexPath.section) else { return 0 }
-                return section.rowHeight
+                return 130 + 16
                 
             } else {
-                guard let section = UpcomingScheduleSection(rawValue: indexPath.section) else { return 0 }
-                return section.rowHeight(indexPath.section)
+                if indexPath.row == 0 {
+                    return 76 + 16
+                } else {
+                    return 76 + 8
+                }
             }
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: ScheduleTypeHeaderView.registerId) as? ScheduleTypeHeaderView else { return UIView() }
-        header.delegate = self
-        return header
+        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: ScheduleTypeHeaderView.registerId) as? ScheduleTypeHeaderView else { return UIView() }
+        headerView.delegate = self
+        return headerView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        let headerHeight: CGFloat = (section == 0) ? 58 : 0
-        return headerHeight
+        return section == 0 ? 30 : 0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        guard let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: MaredRecordsFooterView.registerId) as? MaredRecordsFooterView else { return UIView() }
+        
+        footerView.onAddSchedule = {
+            self.showAddScheduleViewController()
+        }
+        
+        footerView.onMarkedRecord = {
+            self.showRecordContentViewController()
+        }
+        
+        footerView.onAddRecord = {
+            self.showSelectWriteRecordViewController()
+        }
+        
+        return footerView
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch selectedScheduleType {
         case .today:
             if dummyTodayData.isEmpty {
-                guard let tableViewSection = EmptyTodayScheduleSection(rawValue: section) else { return 0 }
-                return tableViewSection.footerHeight
-                
+                return 352
             } else {
-                guard let tableViewSection = TodayScheduleSection(rawValue: section) else { return 0 }
-                return tableViewSection.footerHeight(section, scheduleData: dummyTodayData)
+                return section == dummyTodayData.count - 1 ? 336 + 16 : 0
             }
         case .upcoming:
-            if dummyUpcomingData.isEmpty {
-                guard let tableViewSection = EmptyUpcomingScheduleSection(rawValue: section) else { return 0 }
-                return tableViewSection.footerHeight
-                
-            } else {
-                guard let tableViewSection = UpcomingScheduleSection(rawValue: section) else { return 0 }
-                return tableViewSection.footerHeight(section)
+            return 352
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch selectedScheduleType {
+        case .today:
+            if !dummyTodayData.isEmpty {
+                showAddScheduleViewController()
+            }
+        case .upcoming:
+            if !dummyUpcomingData.isEmpty {
+                showAddScheduleViewController()
             }
         }
     }
 }
 
-extension HomeViewController: ScheduleTypeDelegate, ExpandCellDelegate, AddLocationDelegate, AddScheduleDelegate {
+extension HomeViewController: ScheduleTypeDelegate, ExpandCellDelegate {
     func scheduleButtonTapped(scheduleType: ScheduleType) {
         self.selectedScheduleType = scheduleType
         
@@ -285,14 +245,18 @@ extension HomeViewController: ScheduleTypeDelegate, ExpandCellDelegate, AddLocat
         tableView.reloadSections([indexPath.section], with: .none)
     }
     
-    func addLocationButtonTapped() {
-        let addLocationViewController = AddLocationViewController()
-        addLocationViewController.modalPresentationStyle = .overFullScreen
-        present(addLocationViewController, animated: false)
-    }
-    
-    func addScheduleButtonTapped() {
+    func showAddScheduleViewController() {
         let addScheduleViewController = AddScheduleViewController()
         navigationController?.pushViewController(addScheduleViewController, animated: true)
+    }
+    
+    func showRecordContentViewController() {
+        let recordContentViewController = RecordContentViewController()
+        navigationController?.pushViewController(recordContentViewController, animated: true)
+    }
+    
+    func showSelectWriteRecordViewController() {
+        let selectWriteRecordViewController = SelectWriteRecordViewController()
+        navigationController?.pushViewController(selectWriteRecordViewController, animated: true)
     }
 }

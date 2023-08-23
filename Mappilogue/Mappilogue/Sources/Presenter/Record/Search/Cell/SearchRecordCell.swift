@@ -27,7 +27,7 @@ class SearchRecordCell: BaseCollectionViewCell {
         recordDateLabel.textColor = .color707070
         recordDateLabel.font = .caption01
         
-        separatorImage.image = UIImage(named: "separator")
+        separatorImage.image = UIImage(named: "common_separator")
     
         recordLocationLabel.textColor = .color707070
         recordLocationLabel.font = .caption01

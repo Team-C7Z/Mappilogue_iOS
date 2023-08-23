@@ -26,7 +26,7 @@ func dummyMarkedRecordData(markedRecordCount: Int) -> [MarkedRecord] {
         let markedRecord2 = MarkedRecord(date: "5일전", location: "광안리", color: .colorF0F1B0)
         
         markedRecords = [markedRecord1, markedRecord2]
-    } else if markedRecordCount == 4 {
+    } else if markedRecordCount >= 3 {
         let markedRecord1 = MarkedRecord(date: "2일전", location: "롯데월드", color: .colorBAD7FA)
         let markedRecord2 = MarkedRecord(date: "5일전", location: "광안리", color: .colorF0F1B0)
         let markedRecord3 = MarkedRecord(date: "6일전", location: "한강", color: .colorF0F1B0)
