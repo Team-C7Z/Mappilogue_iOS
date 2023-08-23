@@ -11,10 +11,12 @@ class MaredRecordsFooterView: BaseTableViewHeaderFooterView {
     static let registerId = "\(MaredRecordsFooterView.self)"
     
     var onAddSchedule: (() -> Void)?
+    var onMarkedRecord: (() -> Void)?
+    var onAddRecord: (() -> Void)?
     
     private let addScheduleButton = AddButton(text: "일정 추가하기", backgroundColor: .color1C1C1C)
     
-    let dummyMarkedData = dummyMarkedRecordData(markedRecordCount: 3)
+    let dummyMarkedData = dummyMarkedRecordData(markedRecordCount: 1         )
     let limitedMarkedRecordsCount = 3
     
     private var markedRecordsLabel = UILabel()
@@ -89,9 +91,9 @@ extension MaredRecordsFooterView: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.row < min(dummyMarkedData.count, limitedMarkedRecordsCount) {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MarkedRecordCell.registerId, for: indexPath) as? MarkedRecordCell else { return UICollectionViewCell() }
-
-            let markedRecord = dummyMarkedData[indexPath.row]
-            cell.configure(markedRecord)
+            
+            let record = dummyMarkedData[indexPath.row]
+            cell.configure(record)
             
             return cell
         } else {
@@ -102,5 +104,13 @@ extension MaredRecordsFooterView: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 176, height: 211)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row < min(dummyMarkedData.count, limitedMarkedRecordsCount) {
+            onMarkedRecord?()
+        } else {
+            onAddRecord?()
+        }
     }
 }
