@@ -14,7 +14,6 @@ class MarkView: BaseView {
         super.init(frame: frame)
     
         layer.cornerRadius = frame.height / 2
-        layer.applyShadow()
         
         addSubview(markImage)
         markImage.image = UIImage(named: "common_mark")

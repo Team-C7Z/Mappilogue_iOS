@@ -10,6 +10,7 @@ import UIKit
 class UpcomingScheduleCell: BaseTableViewCell {
     static let registerId = "\(UpcomingScheduleCell.self)"
     
+    private let outerView = UIView()
     private let upcomingScheduleDateLabel = UILabel()
     private let separatorImage = UIImageView()
     private let upcomingScheduleTimeLabel = UILabel()
@@ -18,19 +19,18 @@ class UpcomingScheduleCell: BaseTableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 10, right: 16))
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
     }
     
     override func setupProperty() {
         super.setupProperty()
         
-        contentView.layer.cornerRadius = 12
-        contentView.backgroundColor = .colorF5F3F0
+        outerView.layer.cornerRadius = 12
+        outerView.backgroundColor = .colorF5F3F0
         
         upcomingScheduleTimeLabel.textColor = .color1C1C1C
         upcomingScheduleDateLabel.font = .caption02
         
-        separatorImage.image = UIImage(named: "separator")
         separatorImage.tintColor = .color1C1C1C
         
         upcomingScheduleTimeLabel.textColor = .color1C1C1C
@@ -43,18 +43,24 @@ class UpcomingScheduleCell: BaseTableViewCell {
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        contentView.addSubview(upcomingScheduleDateLabel)
-        contentView.addSubview(separatorImage)
-        contentView.addSubview(upcomingScheduleTimeLabel)
-        contentView.addSubview(upcomingScheduleLabel)
+        contentView.addSubview(outerView)
+        outerView.addSubview(upcomingScheduleDateLabel)
+        outerView.addSubview(separatorImage)
+        outerView.addSubview(upcomingScheduleTimeLabel)
+        outerView.addSubview(upcomingScheduleLabel)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
+        outerView.snp.makeConstraints {
+            $0.leading.bottom.trailing.equalTo(contentView)
+            $0.height.equalTo(76)
+        }
+        
         upcomingScheduleDateLabel.snp.makeConstraints {
-            $0.top.equalTo(contentView).offset(16)
-            $0.leading.equalTo(contentView).offset(14)
+            $0.top.equalTo(outerView).offset(16)
+            $0.leading.equalTo(outerView).offset(14)
         }
         
         separatorImage.snp.makeConstraints {
@@ -69,16 +75,22 @@ class UpcomingScheduleCell: BaseTableViewCell {
         }
         
         upcomingScheduleLabel.snp.makeConstraints {
-            $0.top.equalTo(contentView).offset(37)
-            $0.leading.equalTo(contentView).offset(14)
-            $0.trailing.lessThanOrEqualTo(contentView).offset(-20)
+            $0.top.equalTo(outerView).offset(37)
+            $0.leading.equalTo(outerView).offset(14)
+            $0.trailing.lessThanOrEqualTo(outerView).offset(-20)
         }
     }
     
-    func configure(with title: String, date: String, time: String) {
-        upcomingScheduleDateLabel.text = date
-        upcomingScheduleTimeLabel.text = "\(time) 시작"
-        upcomingScheduleLabel.text = title
+    func configure(_ schedule: UpcomingSchedule) {
+        upcomingScheduleDateLabel.text = schedule.date
+        if let time = schedule.time {
+            upcomingScheduleTimeLabel.text = "\(time) 시작"
+            separatorImage.image = UIImage(named: "separator")
+        } else {
+            upcomingScheduleTimeLabel.text = ""
+        }
+        
+        upcomingScheduleLabel.text = schedule.title
     }
     
 }
