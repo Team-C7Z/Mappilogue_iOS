@@ -40,6 +40,8 @@
 		920031F82A92467A00E3170D /* PhotoDirectoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031F72A92467A00E3170D /* PhotoDirectoryCell.swift */; };
 		920031FE2A93A27000E3170D /* ImageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031FD2A93A27000E3170D /* ImageContentView.swift */; };
 		920032002A9504EE00E3170D /* MaredRecordsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031FF2A9504EE00E3170D /* MaredRecordsFooterView.swift */; };
+		920032032A9715D600E3170D /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920032022A9715D600E3170D /* PermissionViewController.swift */; };
+		920032052A97166700E3170D /* PermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920032042A97166700E3170D /* PermissionView.swift */; };
 		92011B282A6E75F1009B047F /* WriteRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B272A6E75F1009B047F /* WriteRecordButton.swift */; };
 		92011B702A70E7D8009B047F /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */; };
 		92011B722A7127FC009B047F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B712A7127FC009B047F /* AlertViewController.swift */; };
@@ -244,6 +246,8 @@
 		920031F72A92467A00E3170D /* PhotoDirectoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDirectoryCell.swift; sourceTree = "<group>"; };
 		920031FD2A93A27000E3170D /* ImageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageContentView.swift; sourceTree = "<group>"; };
 		920031FF2A9504EE00E3170D /* MaredRecordsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaredRecordsFooterView.swift; sourceTree = "<group>"; };
+		920032022A9715D600E3170D /* PermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewController.swift; sourceTree = "<group>"; };
+		920032042A97166700E3170D /* PermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionView.swift; sourceTree = "<group>"; };
 		92011B272A6E75F1009B047F /* WriteRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordButton.swift; sourceTree = "<group>"; };
 		92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		92011B712A7127FC009B047F /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
@@ -534,6 +538,15 @@
 				920031F72A92467A00E3170D /* PhotoDirectoryCell.swift */,
 			);
 			path = Photo;
+			sourceTree = "<group>";
+		};
+		920032012A9715B800E3170D /* Permission */ = {
+			isa = PBXGroup;
+			children = (
+				920032022A9715D600E3170D /* PermissionViewController.swift */,
+				920032042A97166700E3170D /* PermissionView.swift */,
+			);
+			path = Permission;
 			sourceTree = "<group>";
 		};
 		92011B732A71386F009B047F /* Cell */ = {
@@ -939,6 +952,7 @@
 		9269992C2A14F164003DDAD2 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				920032012A9715B800E3170D /* Permission */,
 				9263786C2A546BE3004E5B6E /* Onboarding */,
 				926999392A14F673003DDAD2 /* TabBar */,
 				9269993A2A14F689003DDAD2 /* Home */,
@@ -1415,6 +1429,7 @@
 				925840CD2A7F8E1C00997434 /* WithdrawalReasonView.swift in Sources */,
 				92011B872A72B0A7009B047F /* MainLocatonView.swift in Sources */,
 				926999382A14F4AA003DDAD2 /* TabBarControllerController.swift in Sources */,
+				920032032A9715D600E3170D /* PermissionViewController.swift in Sources */,
 				9258409E2A7BD30700997434 /* CategorySettingViewController.swift in Sources */,
 				92C2EC612A6924B5002DB0E3 /* LineCell.swift in Sources */,
 				92A7B65F2A4E07DB009C9293 /* TodayScheduleCell.swift in Sources */,
@@ -1451,6 +1466,7 @@
 				920031C52A8B5D7D00E3170D /* MapMainLocationViewController.swift in Sources */,
 				920031D72A8DAFD800E3170D /* RecordContentViewController.swift in Sources */,
 				920031F82A92467A00E3170D /* PhotoDirectoryCell.swift in Sources */,
+				920032052A97166700E3170D /* PermissionView.swift in Sources */,
 				9230BE492A58D23B0053E535 /* NavigationBarViewController.swift in Sources */,
 				920031E22A8E1E7700E3170D /* FindMarkersButton.swift in Sources */,
 				926999442A14F756003DDAD2 /* GatheringViewController.swift in Sources */,
