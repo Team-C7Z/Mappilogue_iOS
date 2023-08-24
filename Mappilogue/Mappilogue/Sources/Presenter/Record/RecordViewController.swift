@@ -147,7 +147,6 @@ class RecordViewController: NavigationBarViewController {
     private func setLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
     }
     
     private func startLocationManager() {
