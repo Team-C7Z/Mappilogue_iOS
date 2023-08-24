@@ -20,8 +20,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        print(PermissionManager.isPermissionNeeded(), OnboardingManager.isOnboardingNeeded())
-        
         if PermissionManager.isPermissionNeeded() {
             window.rootViewController = PermissionViewController()
         } else if OnboardingManager.isOnboardingNeeded() {
