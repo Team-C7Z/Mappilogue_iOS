@@ -95,7 +95,7 @@ class OnboardingViewController: BaseViewController {
         }
         
         startButton.snp.makeConstraints {
-            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.bottom.equalToSuperview()
             $0.height.equalTo(94)
         }
         

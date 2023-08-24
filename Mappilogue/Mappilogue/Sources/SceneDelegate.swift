@@ -20,11 +20,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        if OnboardingManager.isOnboardingNeeded() {
+        print(PermissionManager.isPermissionNeeded(), OnboardingManager.isOnboardingNeeded())
+        
+        if PermissionManager.isPermissionNeeded() {
+            window.rootViewController = PermissionViewController()
+        } else if OnboardingManager.isOnboardingNeeded() {
             window.rootViewController = OnboardingViewController()
         } else {
-            window.rootViewController = PermissionViewController()
-            //TabBarController()
+            window.rootViewController = TabBarController()
         }
         window.makeKeyAndVisible()
         self.window = window
