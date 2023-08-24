@@ -42,6 +42,7 @@
 		920032002A9504EE00E3170D /* MaredRecordsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031FF2A9504EE00E3170D /* MaredRecordsFooterView.swift */; };
 		920032032A9715D600E3170D /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920032022A9715D600E3170D /* PermissionViewController.swift */; };
 		920032052A97166700E3170D /* PermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920032042A97166700E3170D /* PermissionView.swift */; };
+		920032072A975B2100E3170D /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920032062A975B2100E3170D /* PermissionManager.swift */; };
 		92011B282A6E75F1009B047F /* WriteRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B272A6E75F1009B047F /* WriteRecordButton.swift */; };
 		92011B702A70E7D8009B047F /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */; };
 		92011B722A7127FC009B047F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B712A7127FC009B047F /* AlertViewController.swift */; };
@@ -248,6 +249,7 @@
 		920031FF2A9504EE00E3170D /* MaredRecordsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaredRecordsFooterView.swift; sourceTree = "<group>"; };
 		920032022A9715D600E3170D /* PermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewController.swift; sourceTree = "<group>"; };
 		920032042A97166700E3170D /* PermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionView.swift; sourceTree = "<group>"; };
+		920032062A975B2100E3170D /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
 		92011B272A6E75F1009B047F /* WriteRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordButton.swift; sourceTree = "<group>"; };
 		92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		92011B712A7127FC009B047F /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
@@ -827,6 +829,7 @@
 			isa = PBXGroup;
 			children = (
 				926378702A54E0E6004E5B6E /* OnboardingManager.swift */,
+				920032062A975B2100E3170D /* PermissionManager.swift */,
 			);
 			path = UserDefaults;
 			sourceTree = "<group>";
@@ -1486,6 +1489,7 @@
 				925840B72A7F2D5A00997434 /* VersionCell.swift in Sources */,
 				925840D72A80D4BD00997434 /* NotificationHeaderView.swift in Sources */,
 				9230BE512A59B45D0053E535 /* MonthlyCalendar.swift in Sources */,
+				920032072A975B2100E3170D /* PermissionManager.swift in Sources */,
 				92011B902A7364D0009B047F /* BaseButton.swift in Sources */,
 				92011C682A78CB24009B047F /* InputAlertViewController.swift in Sources */,
 				9224FD3F2A6561CD000A56A6 /* UITextField.swift in Sources */,

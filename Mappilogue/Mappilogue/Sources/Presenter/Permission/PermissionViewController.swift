@@ -41,7 +41,6 @@ class PermissionViewController: BaseViewController {
         startButtonLabel.text = "허용하고 시작하기"
         startButtonLabel.textColor = .colorFFFFFF
         startButtonLabel.font = .subtitle01
-        startButton.isEnabled = false
         startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
     }
     
@@ -84,6 +83,10 @@ class PermissionViewController: BaseViewController {
     }
     
     @objc private func startButtonTapped(_ sender: UIButton) {
-        
+        PermissionManager.setPermissionComplete()
+
+        let onboardingViewController = OnboardingViewController()
+        onboardingViewController.modalPresentationStyle = .fullScreen
+        present(onboardingViewController, animated: false)
     }
 }
