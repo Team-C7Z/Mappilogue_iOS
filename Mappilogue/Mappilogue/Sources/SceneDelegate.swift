@@ -23,7 +23,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if OnboardingManager.isOnboardingNeeded() {
             window.rootViewController = OnboardingViewController()
         } else {
-            window.rootViewController = TabBarController()
+            window.rootViewController = PermissionViewController()
+            //TabBarController()
         }
         window.makeKeyAndVisible()
         self.window = window
