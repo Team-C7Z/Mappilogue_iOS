@@ -43,6 +43,7 @@
 		920032032A9715D600E3170D /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920032022A9715D600E3170D /* PermissionViewController.swift */; };
 		920032052A97166700E3170D /* PermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920032042A97166700E3170D /* PermissionView.swift */; };
 		920032072A975B2100E3170D /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920032062A975B2100E3170D /* PermissionManager.swift */; };
+		920032092A975EA400E3170D /* SelectPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920032082A975EA400E3170D /* SelectPermissionViewController.swift */; };
 		92011B282A6E75F1009B047F /* WriteRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B272A6E75F1009B047F /* WriteRecordButton.swift */; };
 		92011B702A70E7D8009B047F /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */; };
 		92011B722A7127FC009B047F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B712A7127FC009B047F /* AlertViewController.swift */; };
@@ -250,6 +251,7 @@
 		920032022A9715D600E3170D /* PermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewController.swift; sourceTree = "<group>"; };
 		920032042A97166700E3170D /* PermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionView.swift; sourceTree = "<group>"; };
 		920032062A975B2100E3170D /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
+		920032082A975EA400E3170D /* SelectPermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPermissionViewController.swift; sourceTree = "<group>"; };
 		92011B272A6E75F1009B047F /* WriteRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordButton.swift; sourceTree = "<group>"; };
 		92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		92011B712A7127FC009B047F /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
@@ -547,6 +549,7 @@
 			children = (
 				920032022A9715D600E3170D /* PermissionViewController.swift */,
 				920032042A97166700E3170D /* PermissionView.swift */,
+				920032082A975EA400E3170D /* SelectPermissionViewController.swift */,
 			);
 			path = Permission;
 			sourceTree = "<group>";
@@ -1523,6 +1526,7 @@
 				920031C32A8B5D2F00E3170D /* MainLocationViewController.swift in Sources */,
 				9224FCF72A5FC4CA000A56A6 /* ScheduleViewController.swift in Sources */,
 				920031BA2A8B5C3000E3170D /* AddedLocationsHeaderView.swift in Sources */,
+				920032092A975EA400E3170D /* SelectPermissionViewController.swift in Sources */,
 				926998F92A14EC07003DDAD2 /* SceneDelegate.swift in Sources */,
 				920031BD2A8B5C8E00E3170D /* MainLocationCell.swift in Sources */,
 				9224FD462A6579A7000A56A6 /* DeleteLocationFooterView.swift in Sources */,

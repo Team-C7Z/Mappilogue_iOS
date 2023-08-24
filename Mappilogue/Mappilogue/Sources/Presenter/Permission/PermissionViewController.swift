@@ -83,10 +83,10 @@ class PermissionViewController: BaseViewController {
     }
     
     @objc private func startButtonTapped(_ sender: UIButton) {
-        PermissionManager.setPermissionComplete()
+  //      PermissionManager.setPermissionComplete()
 
-        let onboardingViewController = OnboardingViewController()
-        onboardingViewController.modalPresentationStyle = .fullScreen
-        present(onboardingViewController, animated: false)
+        let selectPermissionViewController = SelectPermissionViewController()
+        selectPermissionViewController.modalPresentationStyle = .fullScreen
+        present(selectPermissionViewController, animated: false)
     }
 }
