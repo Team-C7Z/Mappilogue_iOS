@@ -60,7 +60,7 @@ class OnboardingViewController: BaseViewController {
         
         startButtonLabel.text = "시작하기"
         startButtonLabel.textColor = .colorFFFFFF
-        startButtonLabel.font = .pretendard(.regular, size: 20)
+        startButtonLabel.font = .subtitle01
         startButton.isEnabled = false
         startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
     }
@@ -95,8 +95,7 @@ class OnboardingViewController: BaseViewController {
         }
         
         startButton.snp.makeConstraints {
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalToSuperview()
+            $0.leading.trailing.bottom.equalToSuperview()
             $0.height.equalTo(94)
         }
         
