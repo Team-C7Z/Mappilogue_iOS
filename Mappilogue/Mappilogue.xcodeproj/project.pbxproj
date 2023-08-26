@@ -44,6 +44,7 @@
 		920032052A97166700E3170D /* PermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920032042A97166700E3170D /* PermissionView.swift */; };
 		920032072A975B2100E3170D /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920032062A975B2100E3170D /* PermissionManager.swift */; };
 		920032092A975EA400E3170D /* SelectPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920032082A975EA400E3170D /* SelectPermissionViewController.swift */; };
+		9200320F2A99A3A800E3170D /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9200320E2A99A3A800E3170D /* SignInViewController.swift */; };
 		92011B282A6E75F1009B047F /* WriteRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B272A6E75F1009B047F /* WriteRecordButton.swift */; };
 		92011B702A70E7D8009B047F /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */; };
 		92011B722A7127FC009B047F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B712A7127FC009B047F /* AlertViewController.swift */; };
@@ -167,6 +168,7 @@
 		927C144BD1C3E8536A8EC3A1 /* Pods_Mappilogue_MappilogueUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65FB9F97A7DA9BC190F4E1BF /* Pods_Mappilogue_MappilogueUITests.framework */; };
 		927E7F212A66F64400E6A29F /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927E7F202A66F64400E6A29F /* Schedule.swift */; };
 		927E7F272A683DCD00E6A29F /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927E7F262A683DCD00E6A29F /* CalendarCell.swift */; };
+		928B7BD92A99AFD700E4F789 /* SignUpCompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BD82A99AFD700E4F789 /* SignUpCompletionViewController.swift */; };
 		929158222A2529660022BEF9 /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 929158192A2529660022BEF9 /* Pretendard-Regular.ttf */; };
 		929158242A2529660022BEF9 /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581B2A2529660022BEF9 /* Pretendard-Medium.ttf */; };
 		929158252A2529660022BEF9 /* Pretendard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */; };
@@ -252,6 +254,7 @@
 		920032042A97166700E3170D /* PermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionView.swift; sourceTree = "<group>"; };
 		920032062A975B2100E3170D /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
 		920032082A975EA400E3170D /* SelectPermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPermissionViewController.swift; sourceTree = "<group>"; };
+		9200320E2A99A3A800E3170D /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		92011B272A6E75F1009B047F /* WriteRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordButton.swift; sourceTree = "<group>"; };
 		92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		92011B712A7127FC009B047F /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
@@ -377,6 +380,7 @@
 		926999472A14F76A003DDAD2 /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
 		927E7F202A66F64400E6A29F /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		927E7F262A683DCD00E6A29F /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
+		928B7BD82A99AFD700E4F789 /* SignUpCompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCompletionViewController.swift; sourceTree = "<group>"; };
 		929158192A2529660022BEF9 /* Pretendard-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.ttf"; sourceTree = "<group>"; };
 		9291581B2A2529660022BEF9 /* Pretendard-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.ttf"; sourceTree = "<group>"; };
 		9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.ttf"; sourceTree = "<group>"; };
@@ -552,6 +556,15 @@
 				920032082A975EA400E3170D /* SelectPermissionViewController.swift */,
 			);
 			path = Permission;
+			sourceTree = "<group>";
+		};
+		9200320D2A99A39A00E3170D /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				928B7BD82A99AFD700E4F789 /* SignUpCompletionViewController.swift */,
+				9200320E2A99A3A800E3170D /* SignInViewController.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		92011B732A71386F009B047F /* Cell */ = {
@@ -960,6 +973,7 @@
 			children = (
 				920032012A9715B800E3170D /* Permission */,
 				9263786C2A546BE3004E5B6E /* Onboarding */,
+				9200320D2A99A39A00E3170D /* Login */,
 				926999392A14F673003DDAD2 /* TabBar */,
 				9269993A2A14F689003DDAD2 /* Home */,
 				9269993B2A14F6A4003DDAD2 /* Calendar */,
@@ -1447,6 +1461,7 @@
 				920032002A9504EE00E3170D /* MaredRecordsFooterView.swift in Sources */,
 				9224FD052A600F42000A56A6 /* NotificationRepeatButton.swift in Sources */,
 				920031DB2A8DD29700E3170D /* SavingRecordViewController.swift in Sources */,
+				928B7BD92A99AFD700E4F789 /* SignUpCompletionViewController.swift in Sources */,
 				9224FCF92A5FCF72000A56A6 /* ScheduleCell.swift in Sources */,
 				9263786E2A5475AF004E5B6E /* OnboardingCell.swift in Sources */,
 				92A7B6532A4CDD4D009C9293 /* ScheduleType.swift in Sources */,
@@ -1476,6 +1491,7 @@
 				9230BE492A58D23B0053E535 /* NavigationBarViewController.swift in Sources */,
 				920031E22A8E1E7700E3170D /* FindMarkersButton.swift in Sources */,
 				926999442A14F756003DDAD2 /* GatheringViewController.swift in Sources */,
+				9200320F2A99A3A800E3170D /* SignInViewController.swift in Sources */,
 				92E7814C2A84B9B3000DAACD /* ScheduleDateHeaderView.swift in Sources */,
 				926378712A54E0E6004E5B6E /* OnboardingManager.swift in Sources */,
 				925840CF2A7FCB5400997434 /* ScheduleTitleColorView.swift in Sources */,
