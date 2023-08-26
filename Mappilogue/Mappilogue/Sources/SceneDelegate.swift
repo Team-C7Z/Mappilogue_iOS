@@ -25,7 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         } else if OnboardingManager.isOnboardingNeeded() {
             window.rootViewController = OnboardingViewController()
         } else {
-            window.rootViewController = TabBarController()
+            window.rootViewController = SignInViewController()
         }
         window.makeKeyAndVisible()
         self.window = window
