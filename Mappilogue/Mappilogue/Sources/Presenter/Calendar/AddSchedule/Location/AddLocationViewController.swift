@@ -10,7 +10,6 @@ import UIKit
 class AddLocationViewController: BaseViewController {
     var searchKeyword: String = ""
     var searchPlaces: [KakaoSearchPlaces] = []
-    let searchManager = LocationManager()
     var currentPage = 1
     var totalPage = 10
     var isLoading = false
@@ -100,7 +99,7 @@ class AddLocationViewController: BaseViewController {
         
         isLoading = true
         
-        searchManager.getSearchResults(keyword: search, page: currentPage) { places in
+        LocationManager.shared.getSearchResults(keyword: search, page: currentPage) { places in
             guard let places = places else { return }
             
             self.isLoading = false

@@ -9,6 +9,8 @@ import Foundation
 import Moya
 
 class LocationManager {
+    static let shared = LocationManager()
+    
     private let provider = MoyaProvider<LocationAPI>()
 
     func getAddress(long: Double, lat: Double, completion: @escaping (AddressDocuments?) -> Void) {

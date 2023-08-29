@@ -13,7 +13,6 @@ class MapMainLocationViewController: BaseViewController {
 
     let locationManager = CLLocationManager()
     let marker = NMFMarker()
-    let addressManager = LocationManager()
 
     let mapView = NMFMapView()
     let mainLocationSettingView = MainLocationSettingView()
@@ -144,7 +143,7 @@ extension MapMainLocationViewController: NMFMapViewCameraDelegate {
     }
 
     func mapViewCameraIdle(_ mapView: NMFMapView) {
-       addressManager.getAddress(long: mapView.longitude, lat: mapView.latitude) { address in
+        LocationManager.shared.getAddress(long: mapView.longitude, lat: mapView.latitude) { address in
            guard let address = address else { return }
            if let roadAddress = address.roadAddress {
                self.mainLocationSettingView.configure(roadAddress.addressName)
