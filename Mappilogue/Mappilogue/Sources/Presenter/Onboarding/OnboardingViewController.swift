@@ -106,11 +106,11 @@ class OnboardingViewController: BaseViewController {
     }
     
     @objc private func startButtonTapped(_ sender: UIButton) {
-        OnboardingManager.setOnboardingComplete()
+        RootUserDefaults.setOnboardingComplete()
         
-        let signInViewController = SignInViewController()
-        signInViewController.modalPresentationStyle = .fullScreen
-        present(signInViewController, animated: false)
+        let logInViewController = LogInViewController()
+        logInViewController.modalPresentationStyle = .fullScreen
+        present(logInViewController, animated: false)
     }
 }
 

@@ -1,13 +1,18 @@
 //
-//  SignInViewController.swift
+//  LogInViewController.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/08/26.
 //
 
 import UIKit
+import KakaoSDKAuth
+import KakaoSDKUser
+import KakaoSDKCommon
 
-class SignInViewController: BaseViewController {
+class LogInViewController: BaseViewController {
+    let authManager = AuthManager()
+    
     private let logoImage = UIImageView()
     private let titleLabel = UILabel()
     private let kakaoLoginButton = UIButton()
@@ -28,6 +33,7 @@ class SignInViewController: BaseViewController {
         titleLabel.font = .title01
         
         kakaoLoginButton.setImage(UIImage(named: "login_kakao"), for: .normal)
+        kakaoLoginButton.addTarget(self, action: #selector(kakaoLoginButtonTapped), for: .touchUpInside)
         appleLoginButton.setImage(UIImage(named: "login_apple"), for: .normal)
     }
     
@@ -67,6 +73,38 @@ class SignInViewController: BaseViewController {
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().offset(-16)
             $0.height.equalTo(54)
+        }
+    }
+    
+    @objc private func kakaoLoginButtonTapped() {
+        if UserApi.isKakaoTalkLoginAvailable() {
+            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
+                self.handleKakaoTalkLogin(oauthToken: oauthToken, error: error)
+            }
+        } else {
+            UserApi.shared.loginWithKakaoAccount {(oauthToken, error) in
+                self.handleKakaoTalkLogin(oauthToken: oauthToken, error: error)
+            }
+        }
+    }
+    
+    func handleKakaoTalkLogin(oauthToken: OAuthToken?, error: Error?) {
+        if let error = error {
+            print(error)
+        } else {
+            guard let oauthToken = oauthToken else { return }
+            let accessToken = oauthToken.accessToken
+            self.authManager.logIn(token: accessToken, socialVendor: .kakao, isAlarm: nil) { result in
+                switch result {
+                case .success(let response):
+                    if let baseResponse = response as? BaseResponse<AuthResponse>, let result = baseResponse.result {
+                        AuthUserDefaults.accessToken = result.accessToken
+                        AuthUserDefaults.refreshToken = result.refreshToken
+                    }
+                default:
+                    print("log in error")
+                }
+            }
         }
     }
 }
