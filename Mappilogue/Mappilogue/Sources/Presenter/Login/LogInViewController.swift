@@ -100,11 +100,29 @@ class LogInViewController: BaseViewController {
                     if let baseResponse = response as? BaseResponse<AuthResponse>, let result = baseResponse.result {
                         AuthUserDefaults.accessToken = result.accessToken
                         AuthUserDefaults.refreshToken = result.refreshToken
+                        
+                        if result.type == "LOGIN" {
+                            self.showTabBarController()
+                        } else {
+                            self.showSignUpCompleteViewController()
+                        }
                     }
                 default:
                     print("log in error")
                 }
             }
         }
+    }
+    
+    func showSignUpCompleteViewController() {
+        let signUpCompletionViewController = SignUpCompletionViewController()
+        signUpCompletionViewController.modalPresentationStyle = .fullScreen
+        present(signUpCompletionViewController, animated: false)
+    }
+    
+    func showTabBarController() {
+        let tabBarController = TabBarController()
+        tabBarController.modalPresentationStyle = .fullScreen
+        present(tabBarController, animated: false)
     }
 }

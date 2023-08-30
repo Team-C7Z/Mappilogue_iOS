@@ -28,4 +28,11 @@ class AuthUserDefaults {
             UserDefaults.standard.set(newValue, forKey: refreshTokenKey)
         }
     }
+    
+    static func autoLogin() -> Bool {
+         if let accessToken = accessToken {
+             return true
+         }
+         return false
+     }
 }

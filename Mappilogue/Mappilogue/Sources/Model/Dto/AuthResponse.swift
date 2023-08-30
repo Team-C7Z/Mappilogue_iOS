@@ -8,6 +8,7 @@
 import Foundation
 
 struct AuthResponse: Codable {
+    let type: String
     let accessToken: String
     let refreshToken: String
 }

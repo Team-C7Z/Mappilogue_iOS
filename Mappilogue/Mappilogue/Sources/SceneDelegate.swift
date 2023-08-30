@@ -25,6 +25,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = PermissionViewController()
         } else if RootUserDefaults.isOnboardingNeeded() {
             window.rootViewController = OnboardingViewController()
+        } else if AuthUserDefaults.autoLogin() {
+            window.rootViewController = TabBarController()
         } else {
             window.rootViewController = LogInViewController()
         }
