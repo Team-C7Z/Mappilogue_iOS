@@ -183,6 +183,8 @@
 		928B7BF92A9D944D00E4F789 /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BF82A9D944D00E4F789 /* Interceptor.swift */; };
 		928B7BFB2A9DC55600E4F789 /* AuthUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BFA2A9DC55600E4F789 /* AuthUserDefaults.swift */; };
 		928B7BFD2A9DD4DC00E4F789 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BFC2A9DD4DC00E4F789 /* BaseAPI.swift */; };
+		928B7BFF2A9F2D6600E4F789 /* AuthType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BFE2A9F2D6600E4F789 /* AuthType.swift */; };
+		928B7C012A9F577900E4F789 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C002A9F577900E4F789 /* APIError.swift */; };
 		929158222A2529660022BEF9 /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 929158192A2529660022BEF9 /* Pretendard-Regular.ttf */; };
 		929158242A2529660022BEF9 /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581B2A2529660022BEF9 /* Pretendard-Medium.ttf */; };
 		929158252A2529660022BEF9 /* Pretendard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */; };
@@ -406,6 +408,8 @@
 		928B7BF82A9D944D00E4F789 /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
 		928B7BFA2A9DC55600E4F789 /* AuthUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUserDefaults.swift; sourceTree = "<group>"; };
 		928B7BFC2A9DD4DC00E4F789 /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
+		928B7BFE2A9F2D6600E4F789 /* AuthType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthType.swift; sourceTree = "<group>"; };
+		928B7C002A9F577900E4F789 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		929158192A2529660022BEF9 /* Pretendard-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.ttf"; sourceTree = "<group>"; };
 		9291581B2A2529660022BEF9 /* Pretendard-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.ttf"; sourceTree = "<group>"; };
 		9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.ttf"; sourceTree = "<group>"; };
@@ -524,9 +528,9 @@
 			children = (
 				928B7BE82A9B1C5B00E4F789 /* BaseResponse.swift */,
 				928B7BF42A9CA51500E4F789 /* ErrorResponse.swift */,
+				928B7BEA2A9B27E800E4F789 /* AuthResponse.swift */,
 				920031B72A8B5BC700E3170D /* KakaoAddressResponse.swift */,
 				920031D42A8D021000E3170D /* KakaoSerachResponse.swift */,
-				928B7BEA2A9B27E800E4F789 /* AuthResponse.swift */,
 			);
 			path = Dto;
 			sourceTree = "<group>";
@@ -1110,6 +1114,7 @@
 				928B7BE42A9AFE4A00E4F789 /* NetworkResult.swift */,
 				928B7BF22A9C7B4400E4F789 /* NetworkLoggerPlugin.swift */,
 				928B7BF82A9D944D00E4F789 /* Interceptor.swift */,
+				928B7C002A9F577900E4F789 /* APIError.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1150,6 +1155,7 @@
 				928B7BEC2A9C5C7A00E4F789 /* Mappilogue */,
 				928B7BDF2A9AEAE800E4F789 /* AuthVendor.swift */,
 				928B7BF62A9CA92F00E4F789 /* AlarmType.swift */,
+				928B7BFE2A9F2D6600E4F789 /* AuthType.swift */,
 				920031B62A8B5BB000E3170D /* Dto */,
 			);
 			path = Model;
@@ -1485,6 +1491,7 @@
 				928B7BE52A9AFE4A00E4F789 /* NetworkResult.swift in Sources */,
 				925840CB2A7F86F900997434 /* WithdrawalViewController.swift in Sources */,
 				920031AF2A8B5AF600E3170D /* LocationAPI.swift in Sources */,
+				928B7BFF2A9F2D6600E4F789 /* AuthType.swift in Sources */,
 				920031B22A8B5B4C00E3170D /* LocationManager.swift in Sources */,
 				92FE26172A4B76B800BCDB82 /* UIFont.swift in Sources */,
 				926999422A14F74B003DDAD2 /* CalendarViewController.swift in Sources */,
@@ -1632,6 +1639,7 @@
 				92011C182A753AEB009B047F /* CALayer.swift in Sources */,
 				92011B702A70E7D8009B047F /* BottomSheetViewController.swift in Sources */,
 				92011B7F2A726031009B047F /* WriteRecordViewController.swift in Sources */,
+				928B7C012A9F577900E4F789 /* APIError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
