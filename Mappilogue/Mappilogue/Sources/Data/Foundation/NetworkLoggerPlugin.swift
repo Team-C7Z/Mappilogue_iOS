@@ -10,7 +10,7 @@ import Moya
 
 class NetworkLoggerPlugin: PluginType {
     func willSend(_ request: RequestType, target: TargetType) {
-        guard let _ = request.request else {
+        guard request.request != nil else {
             print("Invalid Request")
             return
         }
@@ -19,11 +19,30 @@ class NetworkLoggerPlugin: PluginType {
     func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
         switch result {
         case let .success(response):
-            print("Logger - SUCCESS")
-            print(response.statusCode)
+            onSucceed(response)
         case let .failure(error):
-            print("Logger - FAILURE")
-            print(error)
+            onFail(error)
         }
+    }
+}
+
+extension NetworkLoggerPlugin {
+    func onSucceed(_ response: Response) {
+        let log = """
+            ===================== SUCCESS 🎁 =====================
+            ✔️ url: \(response.request?.url?.absoluteString ?? "")
+            ✔️ response: \(String(bytes: response.data, encoding: String.Encoding.utf8) ?? "")
+            ✔️ status code: \(response.statusCode)
+            """
+        print(log)
+    }
+    
+    func onFail(_ error: MoyaError) {
+        let log = """
+            ===================== FAILURE ❌ =====================
+            ✔️ url: \(error.response?.request?.url?.absoluteString ?? "")
+            ✔️ status code: \(error.response?.statusCode ?? 0)
+            """
+        print(log)
     }
 }

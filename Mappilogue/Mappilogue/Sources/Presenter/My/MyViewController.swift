@@ -152,6 +152,8 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
+        case 0:
+            showEditProfileViewController()
         case 2:
             didSelect2Section(indexPath)
         case 3:
@@ -161,10 +163,15 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
         }
     }
     
+    private func showEditProfileViewController() {
+        let editProfileViewController = EditProfileViewController()
+        navigationController?.pushViewController(editProfileViewController, animated: true)
+    }
+    
     private func didSelect2Section(_ indexPath: IndexPath) {
         if indexPath.row == 0 {
-            let notificationSettingsViewController = NotificationSettingsViewController()
-            navigationController?.pushViewController(notificationSettingsViewController, animated: true)
+            let notificationSettingViewController = NotificationSettingViewController()
+            navigationController?.pushViewController(notificationSettingViewController, animated: true)
         } else if indexPath.row == 2 {
             let inquiryViewController = InquiryViewController()
             navigationController?.pushViewController(inquiryViewController, animated: true)

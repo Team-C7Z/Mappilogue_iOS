@@ -10,6 +10,7 @@ import Moya
 
 enum AuthAPI {
     case socialLogin(token: String, socialVendor: String, isAlarm: String?)
+    case refreshToken(token: String)
 }
 
 extension AuthAPI: TargetType {
@@ -18,7 +19,12 @@ extension AuthAPI: TargetType {
     }
     
     var path: String {
-        return "/api/v1/auth/social-login"
+        switch self {
+        case .socialLogin:
+            return "/api/v1/auth/social-login"
+        case .refreshToken:
+            return "/api/v1/auth/token-refresh"
+        }
     }
     
     var method: Moya.Method {
@@ -36,6 +42,13 @@ extension AuthAPI: TargetType {
             if let isAlarmValue = isAlarm {
                 requestParameters["isAlarmAccept"] = isAlarmValue
             }
+            
+            return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
+        case let .refreshToken(token):
+            let requestParameters: [String: String] = [
+                "refreshToken": token
+            ]
+            
             return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
         }
     }
