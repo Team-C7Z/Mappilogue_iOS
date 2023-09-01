@@ -16,12 +16,7 @@ extension BaseAPI {
     }
     
     var headers: [String: String]? {
-        if let token = AuthUserDefaults.accessToken {
-            return [
-                "Bearer Token": "\(token)"
-            ]
-        } else {
-            return nil
-        }
+        guard let token = AuthUserDefaults.accessToken else { return nil }
+        return ["Authorization": "Bearer \(token)"]
     }
 }

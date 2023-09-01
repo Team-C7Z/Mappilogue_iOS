@@ -180,13 +180,15 @@
 		928B7BF32A9C7B4400E4F789 /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BF22A9C7B4400E4F789 /* NetworkLoggerPlugin.swift */; };
 		928B7BF52A9CA51500E4F789 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BF42A9CA51500E4F789 /* ErrorResponse.swift */; };
 		928B7BF72A9CA92F00E4F789 /* AlarmType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BF62A9CA92F00E4F789 /* AlarmType.swift */; };
-		928B7BF92A9D944D00E4F789 /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BF82A9D944D00E4F789 /* Interceptor.swift */; };
+		928B7BF92A9D944D00E4F789 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BF82A9D944D00E4F789 /* AuthInterceptor.swift */; };
 		928B7BFB2A9DC55600E4F789 /* AuthUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BFA2A9DC55600E4F789 /* AuthUserDefaults.swift */; };
 		928B7BFD2A9DD4DC00E4F789 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BFC2A9DD4DC00E4F789 /* BaseAPI.swift */; };
 		928B7BFF2A9F2D6600E4F789 /* AuthType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BFE2A9F2D6600E4F789 /* AuthType.swift */; };
 		928B7C052A9F9CD900E4F789 /* RefreshTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C042A9F9CD900E4F789 /* RefreshTokenResponse.swift */; };
-		928B7C072A9FA90500E4F789 /* BaseManaager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C062A9FA90500E4F789 /* BaseManaager.swift */; };
+		928B7C072A9FA90500E4F789 /* BaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C062A9FA90500E4F789 /* BaseManager.swift */; };
 		928B7C0C2AA06F7400E4F789 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C0B2AA06F7400E4F789 /* EditProfileViewController.swift */; };
+		928B7C102AA19E7700E4F789 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C0F2AA19E7700E4F789 /* UserAPI.swift */; };
+		928B7C162AA1C62400E4F789 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C152AA1C62400E4F789 /* UserManager.swift */; };
 		929158222A2529660022BEF9 /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 929158192A2529660022BEF9 /* Pretendard-Regular.ttf */; };
 		929158242A2529660022BEF9 /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581B2A2529660022BEF9 /* Pretendard-Medium.ttf */; };
 		929158252A2529660022BEF9 /* Pretendard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */; };
@@ -407,13 +409,15 @@
 		928B7BF22A9C7B4400E4F789 /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
 		928B7BF42A9CA51500E4F789 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
 		928B7BF62A9CA92F00E4F789 /* AlarmType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmType.swift; sourceTree = "<group>"; };
-		928B7BF82A9D944D00E4F789 /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
+		928B7BF82A9D944D00E4F789 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
 		928B7BFA2A9DC55600E4F789 /* AuthUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUserDefaults.swift; sourceTree = "<group>"; };
 		928B7BFC2A9DD4DC00E4F789 /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
 		928B7BFE2A9F2D6600E4F789 /* AuthType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthType.swift; sourceTree = "<group>"; };
 		928B7C042A9F9CD900E4F789 /* RefreshTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenResponse.swift; sourceTree = "<group>"; };
-		928B7C062A9FA90500E4F789 /* BaseManaager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseManaager.swift; sourceTree = "<group>"; };
+		928B7C062A9FA90500E4F789 /* BaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseManager.swift; sourceTree = "<group>"; };
 		928B7C0B2AA06F7400E4F789 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		928B7C0F2AA19E7700E4F789 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
+		928B7C152AA1C62400E4F789 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		929158192A2529660022BEF9 /* Pretendard-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.ttf"; sourceTree = "<group>"; };
 		9291581B2A2529660022BEF9 /* Pretendard-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.ttf"; sourceTree = "<group>"; };
 		9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.ttf"; sourceTree = "<group>"; };
@@ -493,8 +497,8 @@
 			children = (
 				925840CA2A7F86F900997434 /* WithdrawalViewController.swift */,
 				925840CC2A7F8E1C00997434 /* WithdrawalReasonView.swift */,
-				9200318E2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift */,
 				925840C62A7F76A500997434 /* WithdrawalAlertViewController.swift */,
+				9200318E2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift */,
 			);
 			path = Withdrawal;
 			sourceTree = "<group>";
@@ -504,6 +508,7 @@
 			children = (
 				928B7BFC2A9DD4DC00E4F789 /* BaseAPI.swift */,
 				928B7BE12A9AF09E00E4F789 /* AuthAPI.swift */,
+				928B7C0F2AA19E7700E4F789 /* UserAPI.swift */,
 				920031AE2A8B5AF600E3170D /* LocationAPI.swift */,
 			);
 			path = API;
@@ -512,8 +517,9 @@
 		920031B02A8B5B2A00E3170D /* APIManager */ = {
 			isa = PBXGroup;
 			children = (
-				928B7C062A9FA90500E4F789 /* BaseManaager.swift */,
+				928B7C062A9FA90500E4F789 /* BaseManager.swift */,
 				928B7BE62A9B1B3E00E4F789 /* AuthManager.swift */,
+				928B7C152AA1C62400E4F789 /* UserManager.swift */,
 				920031B12A8B5B4C00E3170D /* LocationManager.swift */,
 			);
 			path = APIManager;
@@ -1117,7 +1123,7 @@
 			children = (
 				928B7BE42A9AFE4A00E4F789 /* NetworkResult.swift */,
 				928B7BF22A9C7B4400E4F789 /* NetworkLoggerPlugin.swift */,
-				928B7BF82A9D944D00E4F789 /* Interceptor.swift */,
+				928B7BF82A9D944D00E4F789 /* AuthInterceptor.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1542,6 +1548,7 @@
 				925840AA2A7CC92E00997434 /* CategorySettingCell.swift in Sources */,
 				9291582A2A252CC20022BEF9 /* UIColor.swift in Sources */,
 				925840CD2A7F8E1C00997434 /* WithdrawalReasonView.swift in Sources */,
+				928B7C162AA1C62400E4F789 /* UserManager.swift in Sources */,
 				928B7BEB2A9B27E800E4F789 /* AuthResponse.swift in Sources */,
 				92011B872A72B0A7009B047F /* MainLocatonView.swift in Sources */,
 				928B7C0C2AA06F7400E4F789 /* EditProfileViewController.swift in Sources */,
@@ -1604,8 +1611,9 @@
 				92A7B6682A4E6154009C9293 /* UpcomingScheduleCell.swift in Sources */,
 				927E7F272A683DCD00E6A29F /* CalendarCell.swift in Sources */,
 				925840C12A7F5B2200997434 /* NotificationSwitchButton.swift in Sources */,
-				928B7BF92A9D944D00E4F789 /* Interceptor.swift in Sources */,
+				928B7BF92A9D944D00E4F789 /* AuthInterceptor.swift in Sources */,
 				92011B8B2A72B7DA009B047F /* NewWriteButton.swift in Sources */,
+				928B7C102AA19E7700E4F789 /* UserAPI.swift in Sources */,
 				925840B72A7F2D5A00997434 /* VersionCell.swift in Sources */,
 				925840D72A80D4BD00997434 /* NotificationHeaderView.swift in Sources */,
 				9230BE512A59B45D0053E535 /* MonthlyCalendar.swift in Sources */,
@@ -1627,7 +1635,7 @@
 				92011C202A769C12009B047F /* SortView.swift in Sources */,
 				928B7BF32A9C7B4400E4F789 /* NetworkLoggerPlugin.swift in Sources */,
 				92011B7B2A716C9D009B047F /* SelectScheduleCell.swift in Sources */,
-				928B7C072A9FA90500E4F789 /* BaseManaager.swift in Sources */,
+				928B7C072A9FA90500E4F789 /* BaseManager.swift in Sources */,
 				920031C12A8B5D0800E3170D /* MainLocationSettingView.swift in Sources */,
 				92011B922A7367E6009B047F /* MainLocationButton.swift in Sources */,
 				9224FCFB2A5FDD90000A56A6 /* AddScheduleButton.swift in Sources */,

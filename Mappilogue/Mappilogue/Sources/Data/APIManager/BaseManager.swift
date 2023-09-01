@@ -8,6 +8,6 @@
 import Foundation
 import Moya
 
-class BaseManaager {
+class BaseManager {
     
 }

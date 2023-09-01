@@ -93,13 +93,13 @@ class LogInViewController: BaseViewController {
             guard let oauthToken = oauthToken else { return }
             let accessToken = oauthToken.accessToken
             
-            AuthManager.shared.logIn(token: accessToken, socialVendor: .kakao, isAlarm: nil) { result in
+            AuthManager.shared.logIn(token: accessToken, socialVendor: .kakao, isAlarm: .inactive) { result in
                 switch result {
                 case .success(let response):
                     if let baseResponse = response as? BaseResponse<AuthResponse>, let result = baseResponse.result {
                         AuthUserDefaults.accessToken = result.accessToken
                         AuthUserDefaults.refreshToken = result.refreshToken
-                      
+                        
                         if result.type == "LOGIN" {
                             self.showTabBarController()
                         } else {

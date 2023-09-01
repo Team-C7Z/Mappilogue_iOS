@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import KakaoSDKUser
 
 class WithdrawalViewController: BaseViewController {
     let withdrawalReasons = [
@@ -93,7 +94,7 @@ class WithdrawalViewController: BaseViewController {
     }
     
     func setSkipButtonItem() {
-        let skipButtonItem = UIBarButtonItem(title: "건너뛰기", style: .plain, target: self, action: #selector(completeWithdrawal))
+        let skipButtonItem = UIBarButtonItem(title: "건너뛰기", style: .plain, target: self, action: #selector(withdrawal))
         skipButtonItem.tintColor = .color9B9791
         navigationItem.rightBarButtonItem = skipButtonItem
     }
@@ -121,11 +122,49 @@ class WithdrawalViewController: BaseViewController {
     
     @objc func submitButtonTapped() {
         if isSelectedReason {
-            completeWithdrawal()
+            withdrawal()
         }
     }
-
-    @objc func completeWithdrawal() {
+    
+    @objc private func withdrawal() {
+        UserApi.shared.unlink { error in
+            if let error = error {
+                print(error)
+            } else {
+                UserManager.shared.withdrawal(reason: self.setWithdrawlReason()) { result in
+                    switch result {
+                    case .success:
+                        AuthUserDefaults.accessToken = nil
+                        AuthUserDefaults.refreshToken = nil
+                        self.completeWithdrawal()
+                    default:
+                        break
+                    }
+                }
+            }
+        }
+    }
+    
+    private func setWithdrawlReason() -> String {
+        var reasons: [String] = []
+        if isSelectedReason {
+            for (index, selectedReason) in selectedReasons.enumerated() where selectedReason {
+                reasons.append(withdrawalReasons[index])
+            }
+        }
+        return reasons.joined(separator: " / ")
+    }
+    
+    private func presentWithdrawalCompletedAlert() {
+        let withdrawalCompletedAlertViewController = WithdrawalCompletedAlertViewController()
+        withdrawalCompletedAlertViewController.modalPresentationStyle = .overCurrentContext
+        withdrawalCompletedAlertViewController.onDoneTapped = {
+            print("fdfd")
+        }
+        present(withdrawalCompletedAlertViewController, animated: false)
+     }
+    
+    func completeWithdrawal() {
         if let navigationController = self.navigationController {
             navigationController.popToRootViewController(animated: false)
         }

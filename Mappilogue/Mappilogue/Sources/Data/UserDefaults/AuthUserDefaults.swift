@@ -29,22 +29,27 @@ class AuthUserDefaults {
         }
     }
     
-    static func autoLogin() -> Bool {
-         if let accessToken = accessToken {
-             guard let refreshToken = refreshToken else { return false }
-             AuthManager.shared.updateAccessToken(token: refreshToken) { result in
-                 switch result {
-                 case .success(let response):
-                     if let baseResponse = response as? BaseResponse<RefreshTokenResponse>, let result = baseResponse.result {
-                         AuthUserDefaults.accessToken = result.accessToken
-                         AuthUserDefaults.refreshToken = result.refreshToken
-                     }
-                 default:
-                     print("autoLogin in error")
-                 }
-             }
-             return true
-         }
-         return false
-     }
+    static func autoLogin(completion: @escaping (Bool) -> Void) {
+        if let accessToken = accessToken {
+            guard let refreshToken = refreshToken else {
+                completion(false)
+                return
+            }
+          
+            AuthManager.shared.updateAccessToken(token: refreshToken) { result in
+                switch result {
+                case .success(let response):
+                    if let baseResponse = response as? BaseResponse<RefreshTokenResponse>, let result = baseResponse.result {
+                        AuthUserDefaults.accessToken = result.accessToken
+                        AuthUserDefaults.refreshToken = result.refreshToken
+                        completion(true)
+                    }
+                default:
+                    completion(false)
+                }
+            }
+        } else {
+            completion(false)
+        }
+    }
 }

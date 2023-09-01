@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import KakaoSDKUser
 
 struct MyInfo {
     var image: String
@@ -197,7 +198,7 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
                           alertHeight: 140)
         alertViewController.configureAlert(with: alert)
         alertViewController.onDoneTapped = {
-            print("로그아웃")
+            self.logout()
         }
         present(alertViewController, animated: false)
      }
@@ -210,5 +211,23 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
             self.navigationController?.pushViewController(withdrawalViewController, animated: true)
         }
         present(withdrawalAlertViewController, animated: false)
+    }
+    
+    func logout() {
+        UserApi.shared.logout { error in
+            if let error = error {
+                print(error)
+            } else {
+                UserManager.shared.logout { result in
+                    switch result {
+                    case .success:
+                        AuthUserDefaults.accessToken = nil
+                        AuthUserDefaults.refreshToken = nil
+                    default:
+                        break
+                    }
+                }
+            }
+        }
     }
 }

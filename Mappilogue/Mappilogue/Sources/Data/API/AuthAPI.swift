@@ -44,6 +44,7 @@ extension AuthAPI: TargetType {
             }
             
             return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
+            
         case let .refreshToken(token):
             let requestParameters: [String: String] = [
                 "refreshToken": token
@@ -57,3 +58,9 @@ extension AuthAPI: TargetType {
         return nil
     }
 }
+
+//extension AuthAPI {
+//    var validationType: ValidationType {
+//        return .successCodes
+//    }
+//}
