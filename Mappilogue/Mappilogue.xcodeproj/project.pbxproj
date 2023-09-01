@@ -127,7 +127,7 @@
 		925840B52A7F2D3B00997434 /* MyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840B42A7F2D3B00997434 /* MyCell.swift */; };
 		925840B72A7F2D5A00997434 /* VersionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840B62A7F2D5A00997434 /* VersionCell.swift */; };
 		925840B92A7F2DA300997434 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840B82A7F2DA300997434 /* ProfileCell.swift */; };
-		925840BB2A7F455D00997434 /* NotificationSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840BA2A7F455D00997434 /* NotificationSettingsViewController.swift */; };
+		925840BB2A7F455D00997434 /* NotificationSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840BA2A7F455D00997434 /* NotificationSettingViewController.swift */; };
 		925840BD2A7F459600997434 /* NotificationSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840BC2A7F459600997434 /* NotificationSettingView.swift */; };
 		925840C12A7F5B2200997434 /* NotificationSwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C02A7F5B2200997434 /* NotificationSwitchButton.swift */; };
 		925840C32A7F61E800997434 /* InquiryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C22A7F61E800997434 /* InquiryViewController.swift */; };
@@ -184,6 +184,9 @@
 		928B7BFB2A9DC55600E4F789 /* AuthUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BFA2A9DC55600E4F789 /* AuthUserDefaults.swift */; };
 		928B7BFD2A9DD4DC00E4F789 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BFC2A9DD4DC00E4F789 /* BaseAPI.swift */; };
 		928B7BFF2A9F2D6600E4F789 /* AuthType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BFE2A9F2D6600E4F789 /* AuthType.swift */; };
+		928B7C052A9F9CD900E4F789 /* RefreshTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C042A9F9CD900E4F789 /* RefreshTokenResponse.swift */; };
+		928B7C072A9FA90500E4F789 /* BaseManaager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C062A9FA90500E4F789 /* BaseManaager.swift */; };
+		928B7C0C2AA06F7400E4F789 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C0B2AA06F7400E4F789 /* EditProfileViewController.swift */; };
 		929158222A2529660022BEF9 /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 929158192A2529660022BEF9 /* Pretendard-Regular.ttf */; };
 		929158242A2529660022BEF9 /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581B2A2529660022BEF9 /* Pretendard-Medium.ttf */; };
 		929158252A2529660022BEF9 /* Pretendard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */; };
@@ -352,7 +355,7 @@
 		925840B42A7F2D3B00997434 /* MyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCell.swift; sourceTree = "<group>"; };
 		925840B62A7F2D5A00997434 /* VersionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCell.swift; sourceTree = "<group>"; };
 		925840B82A7F2DA300997434 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
-		925840BA2A7F455D00997434 /* NotificationSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewController.swift; sourceTree = "<group>"; };
+		925840BA2A7F455D00997434 /* NotificationSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingViewController.swift; sourceTree = "<group>"; };
 		925840BC2A7F459600997434 /* NotificationSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingView.swift; sourceTree = "<group>"; };
 		925840C02A7F5B2200997434 /* NotificationSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSwitchButton.swift; sourceTree = "<group>"; };
 		925840C22A7F61E800997434 /* InquiryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryViewController.swift; sourceTree = "<group>"; };
@@ -408,6 +411,9 @@
 		928B7BFA2A9DC55600E4F789 /* AuthUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUserDefaults.swift; sourceTree = "<group>"; };
 		928B7BFC2A9DD4DC00E4F789 /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
 		928B7BFE2A9F2D6600E4F789 /* AuthType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthType.swift; sourceTree = "<group>"; };
+		928B7C042A9F9CD900E4F789 /* RefreshTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenResponse.swift; sourceTree = "<group>"; };
+		928B7C062A9FA90500E4F789 /* BaseManaager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseManaager.swift; sourceTree = "<group>"; };
+		928B7C0B2AA06F7400E4F789 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		929158192A2529660022BEF9 /* Pretendard-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.ttf"; sourceTree = "<group>"; };
 		9291581B2A2529660022BEF9 /* Pretendard-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.ttf"; sourceTree = "<group>"; };
 		9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.ttf"; sourceTree = "<group>"; };
@@ -506,6 +512,7 @@
 		920031B02A8B5B2A00E3170D /* APIManager */ = {
 			isa = PBXGroup;
 			children = (
+				928B7C062A9FA90500E4F789 /* BaseManaager.swift */,
 				928B7BE62A9B1B3E00E4F789 /* AuthManager.swift */,
 				920031B12A8B5B4C00E3170D /* LocationManager.swift */,
 			);
@@ -527,6 +534,7 @@
 				928B7BE82A9B1C5B00E4F789 /* BaseResponse.swift */,
 				928B7BF42A9CA51500E4F789 /* ErrorResponse.swift */,
 				928B7BEA2A9B27E800E4F789 /* AuthResponse.swift */,
+				928B7C042A9F9CD900E4F789 /* RefreshTokenResponse.swift */,
 				920031B72A8B5BC700E3170D /* KakaoAddressResponse.swift */,
 				920031D42A8D021000E3170D /* KakaoSerachResponse.swift */,
 			);
@@ -623,7 +631,6 @@
 				92011BFA2A7402DD009B047F /* Category */,
 				92011BFC2A740304009B047F /* MainLocation */,
 				92011BFD2A74031B009B047F /* Content */,
-				9269993D2A14F6F9003DDAD2 /* My */,
 			);
 			path = WriteRecord;
 			sourceTree = "<group>";
@@ -1014,6 +1021,7 @@
 				9269993B2A14F6A4003DDAD2 /* Calendar */,
 				9269993C2A14F6BF003DDAD2 /* Gathering */,
 				9269993E2A14F71D003DDAD2 /* Record */,
+				9269993D2A14F6F9003DDAD2 /* My */,
 				92A7B64D2A4CCDB7009C9293 /* Reusable */,
 			);
 			path = Presenter;
@@ -1063,11 +1071,9 @@
 			isa = PBXGroup;
 			children = (
 				926999472A14F76A003DDAD2 /* MyViewController.swift */,
-				925840BA2A7F455D00997434 /* NotificationSettingsViewController.swift */,
-				925840BC2A7F459600997434 /* NotificationSettingView.swift */,
-				925840C02A7F5B2200997434 /* NotificationSwitchButton.swift */,
-				925840C22A7F61E800997434 /* InquiryViewController.swift */,
-				925840C42A7F71E600997434 /* EmailCopyToastMessageView.swift */,
+				928B7C0A2AA06F4400E4F789 /* Profile */,
+				928B7C082AA06DE500E4F789 /* NotificationSetting */,
+				928B7C092AA06E1900E4F789 /* Inquiry */,
 				920031902A85FAF700E3170D /* Withdrawal */,
 				925840B32A7F281A00997434 /* Cell */,
 			);
@@ -1114,6 +1120,33 @@
 				928B7BF82A9D944D00E4F789 /* Interceptor.swift */,
 			);
 			path = Foundation;
+			sourceTree = "<group>";
+		};
+		928B7C082AA06DE500E4F789 /* NotificationSetting */ = {
+			isa = PBXGroup;
+			children = (
+				925840BA2A7F455D00997434 /* NotificationSettingViewController.swift */,
+				925840BC2A7F459600997434 /* NotificationSettingView.swift */,
+				925840C02A7F5B2200997434 /* NotificationSwitchButton.swift */,
+			);
+			path = NotificationSetting;
+			sourceTree = "<group>";
+		};
+		928B7C092AA06E1900E4F789 /* Inquiry */ = {
+			isa = PBXGroup;
+			children = (
+				925840C22A7F61E800997434 /* InquiryViewController.swift */,
+				925840C42A7F71E600997434 /* EmailCopyToastMessageView.swift */,
+			);
+			path = Inquiry;
+			sourceTree = "<group>";
+		};
+		928B7C0A2AA06F4400E4F789 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				928B7C0B2AA06F7400E4F789 /* EditProfileViewController.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		929158162A25292A0022BEF9 /* Fonts */ = {
@@ -1474,7 +1507,7 @@
 				925840D12A7FCE6800997434 /* AddScheduleHeaderView.swift in Sources */,
 				925840A82A7CBF3B00997434 /* CategorySelectionLabelCell.swift in Sources */,
 				928B7BFB2A9DC55600E4F789 /* AuthUserDefaults.swift in Sources */,
-				925840BB2A7F455D00997434 /* NotificationSettingsViewController.swift in Sources */,
+				925840BB2A7F455D00997434 /* NotificationSettingViewController.swift in Sources */,
 				92011C012A740A08009B047F /* AddNewCategoryCell.swift in Sources */,
 				92011B752A7138B0009B047F /* EmptyRecordCell.swift in Sources */,
 				920031D92A8DB50600E3170D /* RecordContentHeaderView.swift in Sources */,
@@ -1511,12 +1544,14 @@
 				925840CD2A7F8E1C00997434 /* WithdrawalReasonView.swift in Sources */,
 				928B7BEB2A9B27E800E4F789 /* AuthResponse.swift in Sources */,
 				92011B872A72B0A7009B047F /* MainLocatonView.swift in Sources */,
+				928B7C0C2AA06F7400E4F789 /* EditProfileViewController.swift in Sources */,
 				928B7BE22A9AF09E00E4F789 /* AuthAPI.swift in Sources */,
 				926999382A14F4AA003DDAD2 /* TabBarControllerController.swift in Sources */,
 				920032032A9715D600E3170D /* PermissionViewController.swift in Sources */,
 				9258409E2A7BD30700997434 /* CategorySettingViewController.swift in Sources */,
 				92C2EC612A6924B5002DB0E3 /* LineCell.swift in Sources */,
 				92A7B65F2A4E07DB009C9293 /* TodayScheduleCell.swift in Sources */,
+				928B7C052A9F9CD900E4F789 /* RefreshTokenResponse.swift in Sources */,
 				926999342A14F2A3003DDAD2 /* BaseViewController.swift in Sources */,
 				92459ED82A52494200493941 /* AddMarkedRecordCell.swift in Sources */,
 				920031ED2A91085300E3170D /* ImagePickerCell.swift in Sources */,
@@ -1592,6 +1627,7 @@
 				92011C202A769C12009B047F /* SortView.swift in Sources */,
 				928B7BF32A9C7B4400E4F789 /* NetworkLoggerPlugin.swift in Sources */,
 				92011B7B2A716C9D009B047F /* SelectScheduleCell.swift in Sources */,
+				928B7C072A9FA90500E4F789 /* BaseManaager.swift in Sources */,
 				920031C12A8B5D0800E3170D /* MainLocationSettingView.swift in Sources */,
 				92011B922A7367E6009B047F /* MainLocationButton.swift in Sources */,
 				9224FCFB2A5FDD90000A56A6 /* AddScheduleButton.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  NotificationSettingsViewController.swift
+//  NotificationSettingViewController.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/08/06.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NotificationSettingsViewController: BaseViewController {
+class NotificationSettingViewController: BaseViewController {
     var isNotificationControl: Bool = false
     var isNoti: Bool = false
     var isEvent: Bool = false

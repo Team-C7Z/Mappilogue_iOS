@@ -11,8 +11,6 @@ import KakaoSDKUser
 import KakaoSDKCommon
 
 class LogInViewController: BaseViewController {
-    let authManager = AuthManager()
-    
     private let logoImage = UIImageView()
     private let titleLabel = UILabel()
     private let kakaoLoginButton = UIButton()
@@ -94,13 +92,14 @@ class LogInViewController: BaseViewController {
         } else {
             guard let oauthToken = oauthToken else { return }
             let accessToken = oauthToken.accessToken
-            self.authManager.logIn(token: accessToken, socialVendor: .kakao, isAlarm: nil) { result in
+            
+            AuthManager.shared.logIn(token: accessToken, socialVendor: .kakao, isAlarm: nil) { result in
                 switch result {
                 case .success(let response):
                     if let baseResponse = response as? BaseResponse<AuthResponse>, let result = baseResponse.result {
                         AuthUserDefaults.accessToken = result.accessToken
                         AuthUserDefaults.refreshToken = result.refreshToken
-                        
+                      
                         if result.type == "LOGIN" {
                             self.showTabBarController()
                         } else {
