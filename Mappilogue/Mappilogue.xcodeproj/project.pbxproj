@@ -189,6 +189,7 @@
 		928B7C0C2AA06F7400E4F789 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C0B2AA06F7400E4F789 /* EditProfileViewController.swift */; };
 		928B7C102AA19E7700E4F789 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C0F2AA19E7700E4F789 /* UserAPI.swift */; };
 		928B7C162AA1C62400E4F789 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C152AA1C62400E4F789 /* UserManager.swift */; };
+		928B7C192AA462CE00E4F789 /* TermsOfUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C182AA462CE00E4F789 /* TermsOfUseViewController.swift */; };
 		929158222A2529660022BEF9 /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 929158192A2529660022BEF9 /* Pretendard-Regular.ttf */; };
 		929158242A2529660022BEF9 /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581B2A2529660022BEF9 /* Pretendard-Medium.ttf */; };
 		929158252A2529660022BEF9 /* Pretendard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */; };
@@ -418,6 +419,7 @@
 		928B7C0B2AA06F7400E4F789 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		928B7C0F2AA19E7700E4F789 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		928B7C152AA1C62400E4F789 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		928B7C182AA462CE00E4F789 /* TermsOfUseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewController.swift; sourceTree = "<group>"; };
 		929158192A2529660022BEF9 /* Pretendard-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.ttf"; sourceTree = "<group>"; };
 		9291581B2A2529660022BEF9 /* Pretendard-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.ttf"; sourceTree = "<group>"; };
 		9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.ttf"; sourceTree = "<group>"; };
@@ -1079,6 +1081,7 @@
 				926999472A14F76A003DDAD2 /* MyViewController.swift */,
 				928B7C0A2AA06F4400E4F789 /* Profile */,
 				928B7C082AA06DE500E4F789 /* NotificationSetting */,
+				928B7C172AA4629F00E4F789 /* TermsOfUse */,
 				928B7C092AA06E1900E4F789 /* Inquiry */,
 				920031902A85FAF700E3170D /* Withdrawal */,
 				925840B32A7F281A00997434 /* Cell */,
@@ -1153,6 +1156,14 @@
 				928B7C0B2AA06F7400E4F789 /* EditProfileViewController.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		928B7C172AA4629F00E4F789 /* TermsOfUse */ = {
+			isa = PBXGroup;
+			children = (
+				928B7C182AA462CE00E4F789 /* TermsOfUseViewController.swift */,
+			);
+			path = TermsOfUse;
 			sourceTree = "<group>";
 		};
 		929158162A25292A0022BEF9 /* Fonts */ = {
@@ -1560,6 +1571,7 @@
 				92A7B65F2A4E07DB009C9293 /* TodayScheduleCell.swift in Sources */,
 				928B7C052A9F9CD900E4F789 /* RefreshTokenResponse.swift in Sources */,
 				926999342A14F2A3003DDAD2 /* BaseViewController.swift in Sources */,
+				928B7C192AA462CE00E4F789 /* TermsOfUseViewController.swift in Sources */,
 				92459ED82A52494200493941 /* AddMarkedRecordCell.swift in Sources */,
 				920031ED2A91085300E3170D /* ImagePickerCell.swift in Sources */,
 				925840B92A7F2DA300997434 /* ProfileCell.swift in Sources */,
