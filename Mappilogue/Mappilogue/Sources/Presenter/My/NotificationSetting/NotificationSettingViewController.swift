@@ -10,10 +10,10 @@ import UIKit
 class NotificationSettingViewController: BaseViewController {
     private var notificationDTO: NotificationDTO?
     
-    private let notificationControlView = NotificationSettingView()
+    private let totalNotiviationView = NotificationSettingView()
     private var stackView = UIStackView()
-    private let noticeNotificationView = NotificationSettingView()
-    private let eventReminderView = NotificationSettingView()
+    private let noticeNotification = NotificationSettingView()
+    private let scheduleReminderNotification = NotificationSettingView()
     private let marketingAlertView = NotificationSettingView()
     private let notificationControlOffView = UIView()
     
@@ -33,22 +33,7 @@ class NotificationSettingViewController: BaseViewController {
         stackView.spacing = 1
         stackView.backgroundColor = .colorEAE6E1
 
-        notificationControlView.onSwitchTapped = {
-            //self..toggle()
-           // self.setNotificationControl()
-        }
-        
-        noticeNotificationView.onSwitchTapped = {
-          //  self.isNoti.toggle()
-        }
-        
-        eventReminderView.onSwitchTapped = {
-          //  self.isEvent.toggle()
-        }
-        
-        marketingAlertView.onSwitchTapped = {
-            //self.isMarketing.toggle()
-        }
+        setSwitchToggleActions()
         
         notificationControlOffView.backgroundColor = .colorF9F8F7.withAlphaComponent(0.4)
     }
@@ -56,10 +41,10 @@ class NotificationSettingViewController: BaseViewController {
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        view.addSubview(notificationControlView)
+        view.addSubview(totalNotiviationView)
         view.addSubview(stackView)
-        stackView.addArrangedSubview(noticeNotificationView)
-        stackView.addArrangedSubview(eventReminderView)
+        stackView.addArrangedSubview(noticeNotification)
+        stackView.addArrangedSubview(scheduleReminderNotification)
         stackView.addArrangedSubview(marketingAlertView)
         stackView.addSubview(notificationControlOffView)
     }
@@ -67,14 +52,14 @@ class NotificationSettingViewController: BaseViewController {
     override func setupLayout() {
         super.setupLayout()
     
-        notificationControlView.snp.makeConstraints {
+        totalNotiviationView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
         }
         
         stackView.snp.makeConstraints {
-            $0.top.equalTo(notificationControlView.snp.bottom).offset(16)
+            $0.top.equalTo(totalNotiviationView.snp.bottom).offset(16)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
             $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
         }
@@ -106,15 +91,55 @@ class NotificationSettingViewController: BaseViewController {
     func configureNotification() {
         guard let notification = notificationDTO else { return }
         
-        notificationControlView.configure(title: "알림 받기", isSwitch: notification.isTotalAlarm)
-        noticeNotificationView.configure(title: "공지사항 알림", isSwitch: notification.isNoticeAlarm)
-        eventReminderView.configure(title: "일정 미리 알림", isSwitch: notification.isMarketingAlarm)
-        marketingAlertView.configure(title: "마케팅 알림", isSwitch: notification.isScheduleReminderAlarm)
+        totalNotiviationView.configure(title: "알림 받기", isSwitch: notification.isTotalNotification)
+        noticeNotification.configure(title: "공지사항 알림", isSwitch: notification.isNoticeNotification)
+        scheduleReminderNotification.configure(title: "일정 미리 알림", isSwitch: notification.isScheduleReminderNotification)
+        marketingAlertView.configure(title: "마케팅 알림", isSwitch: notification.isMarketingNotification)
+    }
+    
+    func setSwitchToggleActions() {
+        totalNotiviationView.onSwitchTapped = {
+            guard let notification = self.notificationDTO else { return }
+            
+            self.notificationDTO?.isTotalNotification = self.switchToggle(notification.isTotalNotification)
+            self.configureNotification()
+            self.setTotalNotificationControl()
+        }
+        
+        noticeNotification.onSwitchTapped = {
+            guard let notification = self.notificationDTO else { return }
+            
+            self.notificationDTO?.isNoticeNotification = self.switchToggle(notification.isNoticeNotification)
+            self.configureNotification()
+        }
+        
+        scheduleReminderNotification.onSwitchTapped = {
+            guard let notification = self.notificationDTO else { return }
+            
+            self.notificationDTO?.isScheduleReminderNotification = self.switchToggle(notification.isScheduleReminderNotification)
+            self.configureNotification()
+        }
+        
+        marketingAlertView.onSwitchTapped = {
+            guard var notification = self.notificationDTO else { return }
+            
+            self.notificationDTO?.isMarketingNotification = self.switchToggle(notification.isMarketingNotification)
+            self.configureNotification()
+        }
+    }
+    
+    func switchToggle(_ notification: String?) -> String {
+        guard let notification = notification else { return "" }
+        
+        let currentType = NotificationType(rawValue: notification)
+        let newType: NotificationType = currentType == .active ? .inactive : .active
+        
+        return newType.rawValue
     }
     
     func setTotalNotificationControl() {
-        guard let notification = notificationDTO, let isTotalAlarm = NotificationType(rawValue: notification.isTotalAlarm) else { return }
+        guard let notification = notificationDTO, let isTotalNotification = NotificationType(rawValue: notification.isTotalNotification) else { return }
         
-        notificationControlOffView.isHidden = isTotalAlarm == .active
+        notificationControlOffView.isHidden = isTotalNotification == .active
     }
 }
