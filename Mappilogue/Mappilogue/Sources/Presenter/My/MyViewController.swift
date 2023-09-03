@@ -187,7 +187,7 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     
     private func presentLogoutAlert() {
         let alertViewController = AlertViewController()
-        alertViewController.modalPresentationStyle = .overCurrentContext
+        alertViewController.modalPresentationStyle = .overFullScreen
         let alert = Alert(titleText: "로그아웃 할까요?",
                           messageText: nil,
                           cancelText: "취소",
@@ -203,7 +203,7 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     
     private func presentWithdrawalAlert() {
         let withdrawalAlertViewController = WithdrawalAlertViewController()
-        withdrawalAlertViewController.modalPresentationStyle = .overCurrentContext
+        withdrawalAlertViewController.modalPresentationStyle = .overFullScreen
         withdrawalAlertViewController.onDoneTapped = {
             self.navigateToWithdrawalViewController()
         }
