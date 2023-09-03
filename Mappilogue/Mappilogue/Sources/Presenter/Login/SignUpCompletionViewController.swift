@@ -44,17 +44,32 @@ class SignUpCompletionViewController: BaseViewController {
         super.setupLayout()
         
         completionRoundView.snp.makeConstraints {
-            $0.bottom.equalToSuperview().offset(-362)
+            $0.centerY.equalToSuperview().offset(10)
             $0.centerX.equalToSuperview()
+            $0.width.height.equalTo(35)
         }
         
         completionImage.snp.makeConstraints {
             $0.center.equalTo(completionRoundView)
+            $0.width.equalTo(17)
+            $0.height.equalTo(10)
         }
         
         completionLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview().offset(-307)
+            $0.top.equalTo(completionRoundView.snp.bottom).offset(25)
             $0.centerX.equalToSuperview()
         }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        dismiss(animated: true) {
+            self.presentTabBarController()
+        }
+    }
+    
+    private func presentTabBarController() {
+        let tabBarController = TabBarController()
+        tabBarController.modalPresentationStyle = .fullScreen
+        present(tabBarController, animated: false)
     }
 }

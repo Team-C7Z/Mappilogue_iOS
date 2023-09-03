@@ -73,7 +73,7 @@ class MainLocationViewController: BaseViewController {
         collectionView.reloadData()
     }
 
-    private func showMainLocationAlert() {
+    private func presentMainLocationAlert() {
         let mainLocationAlertViewController = MainLocationAlertViewController()
         mainLocationAlertViewController.modalPresentationStyle = .overCurrentContext
         mainLocationAlertViewController.onCanelTapped = {
@@ -109,7 +109,7 @@ extension MainLocationViewController: UICollectionViewDelegate, UICollectionView
                 self.selectMainLocation(index)
                 if let index = index {
                     if index == 0 && self.dummyLocation[index].address.isEmpty {
-                        self.showMainLocationAlert()
+                        self.presentMainLocationAlert()
                     }
                 }
             }

@@ -26,7 +26,7 @@ class UserManager {
         }
     }
 
-    func withdrawal(reason: String, completion: @escaping (NetworkResult<Any>) -> Void) {
+    func withdrawal(reason: String?, completion: @escaping (NetworkResult<Any>) -> Void) {
         provider.request(.withdrawal(reason: reason)) { result in
             switch result {
             case .success(let response):

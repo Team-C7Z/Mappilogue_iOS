@@ -63,7 +63,7 @@ class SelectWriteRecordViewController: BaseViewController {
         }
     }
     
-    func showWriteRecordViewController(_ indexPath: IndexPath?) {
+    func presentToWriteRecordViewController(_ indexPath: IndexPath?) {
         let writeRecordViewController = WriteRecordViewController()
         if let indexPath = indexPath {
             writeRecordViewController.schedule = dummyData[indexPath.section].schedules[indexPath.row]
@@ -72,7 +72,7 @@ class SelectWriteRecordViewController: BaseViewController {
     }
     
     @objc private func newWriteButtonTapped() {
-        showWriteRecordViewController(nil)
+        presentToWriteRecordViewController(nil)
     }
 }
 
@@ -127,6 +127,6 @@ extension SelectWriteRecordViewController: UICollectionViewDelegate, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        showWriteRecordViewController(indexPath)
+        presentToWriteRecordViewController(indexPath)
     }
 }

@@ -43,7 +43,7 @@
 		920032032A9715D600E3170D /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920032022A9715D600E3170D /* PermissionViewController.swift */; };
 		920032052A97166700E3170D /* PermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920032042A97166700E3170D /* PermissionView.swift */; };
 		920032092A975EA400E3170D /* SelectPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920032082A975EA400E3170D /* SelectPermissionViewController.swift */; };
-		9200320F2A99A3A800E3170D /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9200320E2A99A3A800E3170D /* LogInViewController.swift */; };
+		9200320F2A99A3A800E3170D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9200320E2A99A3A800E3170D /* LoginViewController.swift */; };
 		92011B282A6E75F1009B047F /* WriteRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B272A6E75F1009B047F /* WriteRecordButton.swift */; };
 		92011B702A70E7D8009B047F /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */; };
 		92011B722A7127FC009B047F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B712A7127FC009B047F /* AlertViewController.swift */; };
@@ -272,7 +272,7 @@
 		920032022A9715D600E3170D /* PermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewController.swift; sourceTree = "<group>"; };
 		920032042A97166700E3170D /* PermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionView.swift; sourceTree = "<group>"; };
 		920032082A975EA400E3170D /* SelectPermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPermissionViewController.swift; sourceTree = "<group>"; };
-		9200320E2A99A3A800E3170D /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		9200320E2A99A3A800E3170D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		92011B272A6E75F1009B047F /* WriteRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordButton.swift; sourceTree = "<group>"; };
 		92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		92011B712A7127FC009B047F /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
@@ -495,9 +495,9 @@
 		920031902A85FAF700E3170D /* Withdrawal */ = {
 			isa = PBXGroup;
 			children = (
+				925840C62A7F76A500997434 /* WithdrawalAlertViewController.swift */,
 				925840CA2A7F86F900997434 /* WithdrawalViewController.swift */,
 				925840CC2A7F8E1C00997434 /* WithdrawalReasonView.swift */,
-				925840C62A7F76A500997434 /* WithdrawalAlertViewController.swift */,
 				9200318E2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift */,
 			);
 			path = Withdrawal;
@@ -609,7 +609,7 @@
 		9200320D2A99A39A00E3170D /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				9200320E2A99A3A800E3170D /* LogInViewController.swift */,
+				9200320E2A99A3A800E3170D /* LoginViewController.swift */,
 				928B7BD82A99AFD700E4F789 /* SignUpCompletionViewController.swift */,
 			);
 			path = Login;
@@ -1598,7 +1598,7 @@
 				9230BE492A58D23B0053E535 /* NavigationBarViewController.swift in Sources */,
 				920031E22A8E1E7700E3170D /* FindMarkersButton.swift in Sources */,
 				926999442A14F756003DDAD2 /* GatheringViewController.swift in Sources */,
-				9200320F2A99A3A800E3170D /* LogInViewController.swift in Sources */,
+				9200320F2A99A3A800E3170D /* LoginViewController.swift in Sources */,
 				92E7814C2A84B9B3000DAACD /* ScheduleDateHeaderView.swift in Sources */,
 				926378712A54E0E6004E5B6E /* RootUserDefaults.swift in Sources */,
 				925840CF2A7FCB5400997434 /* ScheduleTitleColorView.swift in Sources */,

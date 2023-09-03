@@ -102,7 +102,7 @@ extension MapMainLocationViewController: CLLocationManagerDelegate {
         let authorizationStatus = locationManager.authorizationStatus
         switch authorizationStatus {
         case .denied, .restricted:
-            showLocationPermissionAlert()
+            presentLocationPermissionAlert()
         case .authorizedAlways, .authorizedWhenInUse:
             startLocationManager()
         case .notDetermined:
@@ -112,7 +112,7 @@ extension MapMainLocationViewController: CLLocationManagerDelegate {
         }
     }
 
-    func showLocationPermissionAlert() {
+    func presentLocationPermissionAlert() {
         let alertViewController = AlertViewController()
         alertViewController.modalPresentationStyle = .overCurrentContext
         let alert = Alert(titleText: "위치 권한을 허용해 주세요",

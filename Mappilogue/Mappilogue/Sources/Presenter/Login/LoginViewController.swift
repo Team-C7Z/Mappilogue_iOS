@@ -10,7 +10,7 @@ import KakaoSDKAuth
 import KakaoSDKUser
 import KakaoSDKCommon
 
-class LogInViewController: BaseViewController {
+class LoginViewController: BaseViewController {
     private let logoImage = UIImageView()
     private let titleLabel = UILabel()
     private let kakaoLoginButton = UIButton()
@@ -101,9 +101,9 @@ class LogInViewController: BaseViewController {
                         AuthUserDefaults.refreshToken = result.refreshToken
                         
                         if result.type == "LOGIN" {
-                            self.showTabBarController()
+                            self.presentTabBarController()
                         } else {
-                            self.showSignUpCompleteViewController()
+                            self.presentSignUpCompleteViewController()
                         }
                     }
                 default:
@@ -113,13 +113,13 @@ class LogInViewController: BaseViewController {
         }
     }
     
-    func showSignUpCompleteViewController() {
+    func presentSignUpCompleteViewController() {
         let signUpCompletionViewController = SignUpCompletionViewController()
         signUpCompletionViewController.modalPresentationStyle = .fullScreen
         present(signUpCompletionViewController, animated: false)
     }
     
-    func showTabBarController() {
+    func presentTabBarController() {
         let tabBarController = TabBarController()
         tabBarController.modalPresentationStyle = .fullScreen
         present(tabBarController, animated: false)
