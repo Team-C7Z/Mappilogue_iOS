@@ -12,7 +12,7 @@ class AuthManager {
     static let shared = AuthManager()
     private let provider = MoyaProvider<AuthAPI>(plugins: [NetworkLoggerPlugin()])
   
-    func logIn(token: String, socialVendor: AuthVendor, isAlarm: AlarmType?, completion: @escaping (NetworkResult<Any>) -> Void) {
+    func logIn(token: String, socialVendor: AuthVendor, isAlarm: NotificationType?, completion: @escaping (NetworkResult<Any>) -> Void) {
         provider.request(.socialLogin(token: token, socialVendor: socialVendor.rawValue, isAlarm: isAlarm?.rawValue)) { result in
             switch result {
             case .success(let response):

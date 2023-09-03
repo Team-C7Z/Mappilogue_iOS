@@ -50,8 +50,10 @@ class NotificationSettingView: BaseView {
         }
     }
     
-    func configure(title: String, isSwitch: Bool) {
+    func configure(title: String, isSwitch: String) {
+        guard let isSwitch = NotificationType(rawValue: isSwitch) else { return }
+        
         notificationLabel.text = title
-        notificationSwitch.configure(isSwitch)
+        notificationSwitch.configure(isSwitch == .active)
     }
 }

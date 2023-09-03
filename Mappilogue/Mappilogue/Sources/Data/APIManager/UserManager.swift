@@ -61,7 +61,7 @@ class UserManager {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseResponse<NotificationSettingResponse>.self)
+                let networkResult = self.judgeStatus(statusCode, data, BaseResponse<NotificationDTO>.self)
                 completion(networkResult)
             case .failure(let error):
                 print(error)
