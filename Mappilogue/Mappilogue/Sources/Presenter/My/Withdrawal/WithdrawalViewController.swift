@@ -19,6 +19,7 @@ class WithdrawalViewController: BaseViewController {
     ]
     var selectedReasons: [Bool] = []
     var isSelectedReason: Bool = false
+    var onWithdrawal: (() -> Void)?
     
     private let withdrawalTitleLabel = UILabel()
     private let withdrawalSubTitleLabel = UILabel()
@@ -94,7 +95,7 @@ class WithdrawalViewController: BaseViewController {
     }
     
     func setSkipButtonItem() {
-        let skipButtonItem = UIBarButtonItem(title: "건너뛰기", style: .plain, target: self, action: #selector(withdrawal))
+        let skipButtonItem = UIBarButtonItem(title: "건너뛰기", style: .plain, target: self, action: #selector(performWithdrawal))
         skipButtonItem.tintColor = .color9B9791
         navigationItem.rightBarButtonItem = skipButtonItem
     }
@@ -122,16 +123,16 @@ class WithdrawalViewController: BaseViewController {
     
     @objc func submitButtonTapped() {
         if isSelectedReason {
-            withdrawal()
+            performWithdrawal()
         }
     }
     
-    @objc private func withdrawal() {
+    @objc private func performWithdrawal() {
         UserApi.shared.unlink { error in
             if let error = error {
                 print(error)
             } else {
-                UserManager.shared.withdrawal(reason: self.setWithdrawlReason()) { result in
+                UserManager.shared.withdrawal(reason: self.withdrawalReason()) { result in
                     switch result {
                     case .success:
                         AuthUserDefaults.accessToken = nil
@@ -145,28 +146,20 @@ class WithdrawalViewController: BaseViewController {
         }
     }
     
+    private func withdrawalReason() -> String? {
+        return isSelectedReason ? setWithdrawlReason() : nil
+    }
+    
     private func setWithdrawlReason() -> String {
         var reasons: [String] = []
-        if isSelectedReason {
-            for (index, selectedReason) in selectedReasons.enumerated() where selectedReason {
-                reasons.append(withdrawalReasons[index])
-            }
+        for (index, selectedReason) in selectedReasons.enumerated() where selectedReason {
+            reasons.append(withdrawalReasons[index])
         }
         return reasons.joined(separator: " / ")
     }
     
-    private func presentWithdrawalCompletedAlert() {
-        let withdrawalCompletedAlertViewController = WithdrawalCompletedAlertViewController()
-        withdrawalCompletedAlertViewController.modalPresentationStyle = .overCurrentContext
-        withdrawalCompletedAlertViewController.onDoneTapped = {
-            print("fdfd")
-        }
-        present(withdrawalCompletedAlertViewController, animated: false)
-     }
-    
     func completeWithdrawal() {
-        if let navigationController = self.navigationController {
-            navigationController.popToRootViewController(animated: false)
-        }
+        navigationController?.popViewController(animated: false)
+        onWithdrawal?()
     }
 }

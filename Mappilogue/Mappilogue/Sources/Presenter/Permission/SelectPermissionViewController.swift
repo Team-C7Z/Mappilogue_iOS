@@ -19,7 +19,7 @@ class SelectPermissionViewController: BaseViewController {
         locationManager.delegate = self
     }
     
-    func showOnboardingViewController() {
+    func presentOnboardingViewController() {
         let onboardingViewController = OnboardingViewController()
         onboardingViewController.modalPresentationStyle = .fullScreen
         present(onboardingViewController, animated: false)
@@ -33,7 +33,7 @@ class SelectPermissionViewController: BaseViewController {
 extension SelectPermissionViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status != .notDetermined {
-            showOnboardingViewController()
+            presentOnboardingViewController()
         }
      }
 }

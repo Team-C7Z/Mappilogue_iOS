@@ -45,11 +45,6 @@ class MyViewController: NavigationBarViewController {
         super.viewDidLoad()
      
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
 
     override func setupProperty() {
         super.setupProperty()
@@ -70,10 +65,10 @@ class MyViewController: NavigationBarViewController {
     }
     
     @objc func checkWithdrawalStatus(_ notification: Notification) {
-        showWithdrawalConfirmationAlert()
+        presentWithdrawalConfirmationAlert()
     }
     
-    @objc func showWithdrawalConfirmationAlert() {
+    @objc func presentWithdrawalConfirmationAlert() {
         let withdrawalCompletedAlertViewController = WithdrawalCompletedAlertViewController()
         withdrawalCompletedAlertViewController.modalPresentationStyle = .overCurrentContext
         withdrawalCompletedAlertViewController.onDoneTapped = {
@@ -154,7 +149,7 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            showEditProfileViewController()
+            navigateToEditProfileViewController()
         case 2:
             didSelect2Section(indexPath)
         case 3:
@@ -164,7 +159,7 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
         }
     }
     
-    private func showEditProfileViewController() {
+    private func navigateToEditProfileViewController() {
         let editProfileViewController = EditProfileViewController()
         navigationController?.pushViewController(editProfileViewController, animated: true)
     }
@@ -207,10 +202,19 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
         let withdrawalAlertViewController = WithdrawalAlertViewController()
         withdrawalAlertViewController.modalPresentationStyle = .overCurrentContext
         withdrawalAlertViewController.onDoneTapped = {
-            let withdrawalViewController = WithdrawalViewController()
-            self.navigationController?.pushViewController(withdrawalViewController, animated: true)
+            self.navigateToWithdrawalViewController()
         }
         present(withdrawalAlertViewController, animated: false)
+    }
+    
+    private func navigateToWithdrawalViewController() {
+        let withdrawalViewController = WithdrawalViewController()
+        withdrawalViewController.onWithdrawal = {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.presentWithdrawalCompletedAlert()
+            }
+        }
+        self.navigationController?.pushViewController(withdrawalViewController, animated: true)
     }
     
     func logout() {
@@ -229,5 +233,20 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
                 }
             }
         }
+    }
+    
+    func presentWithdrawalCompletedAlert() {
+        let withdrawalCompletedAlertViewController = WithdrawalCompletedAlertViewController()
+        withdrawalCompletedAlertViewController.modalPresentationStyle = .overFullScreen
+        withdrawalCompletedAlertViewController.onDoneTapped = {
+            self.presentLoginViewController()
+        }
+        present(withdrawalCompletedAlertViewController, animated: false)
+    }
+    
+    func presentLoginViewController() {
+        let loginViewController = LoginViewController()
+        loginViewController.modalPresentationStyle = .fullScreen
+        present(loginViewController, animated: false)
     }
 }

@@ -44,7 +44,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         if viewController == self.viewControllers?[2] {
-            showGatheringToastMessage()
+            presentGatheringToastMessage()
             return false // 이동 불가
         } else {
             return true
@@ -60,7 +60,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         }
     }
     
-    func showGatheringToastMessage() {
+    func presentGatheringToastMessage() {
         self.setGatheringToastMessage()
         
         UIView.animate(withDuration: 2, delay: 0, options: .curveLinear, animations: {

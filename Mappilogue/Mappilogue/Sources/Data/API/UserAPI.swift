@@ -10,7 +10,7 @@ import Moya
 
 enum UserAPI: BaseAPI {
     case logout
-    case withdrawal(reason: String)
+    case withdrawal(reason: String?)
 }
 
 extension UserAPI: TargetType {
@@ -41,9 +41,11 @@ extension UserAPI: TargetType {
         case .logout:
             return .requestPlain
         case let .withdrawal(reason):
-            let requestParameters: [String: String] = [
-                "reason": reason
-            ]
+            var requestParameters: [String: String] = [:]
+            
+            if let reason = reason {
+                requestParameters["reason"] = reason
+            }
             
             return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
         }

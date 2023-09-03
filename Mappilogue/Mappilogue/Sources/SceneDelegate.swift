@@ -30,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             if success {
                 window.rootViewController = TabBarController()
             } else {
-                window.rootViewController = LogInViewController()
+                window.rootViewController = LoginViewController()
             }
         }
         
