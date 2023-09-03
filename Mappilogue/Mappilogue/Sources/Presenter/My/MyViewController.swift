@@ -151,9 +151,25 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
         case 0:
             navigateToEditProfileViewController()
         case 2:
-            didSelect2Section(indexPath)
+            if indexPath.row == 0 {
+                let notificationSettingViewController = NotificationSettingViewController()
+                notificationSettingViewController.hidesBottomBarWhenPushed = true
+                navigationController?.pushViewController(notificationSettingViewController, animated: true)
+            } else if indexPath.row == 1 {
+                let termsOfUseViewController = TermsOfUseViewController()
+                termsOfUseViewController.hidesBottomBarWhenPushed = true
+                navigationController?.pushViewController(termsOfUseViewController, animated: true)
+            } else if indexPath.row == 2 {
+                let inquiryViewController = InquiryViewController()
+                inquiryViewController.hidesBottomBarWhenPushed = true
+                navigationController?.pushViewController(inquiryViewController, animated: true)
+            }
         case 3:
-            didSelect3Section(indexPath)
+            if indexPath.row == 0 {
+                presentLogoutAlert()
+            } else if indexPath.row == 1 {
+                presentWithdrawalAlert()
+            }
         default:
             break
         }
@@ -163,26 +179,6 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
         let editProfileViewController = EditProfileViewController()
         editProfileViewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(editProfileViewController, animated: true)
-    }
-    
-    private func didSelect2Section(_ indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            let notificationSettingViewController = NotificationSettingViewController()
-            notificationSettingViewController.hidesBottomBarWhenPushed = true
-            navigationController?.pushViewController(notificationSettingViewController, animated: true)
-        } else if indexPath.row == 2 {
-            let inquiryViewController = InquiryViewController()
-            inquiryViewController.hidesBottomBarWhenPushed = true
-            navigationController?.pushViewController(inquiryViewController, animated: true)
-        }
-    }
-    
-    private func didSelect3Section(_ indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            presentLogoutAlert()
-        } else if indexPath.row == 1 {
-            presentWithdrawalAlert()
-        }
     }
     
     private func presentLogoutAlert() {
