@@ -161,15 +161,18 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     
     private func navigateToEditProfileViewController() {
         let editProfileViewController = EditProfileViewController()
+        editProfileViewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(editProfileViewController, animated: true)
     }
     
     private func didSelect2Section(_ indexPath: IndexPath) {
         if indexPath.row == 0 {
             let notificationSettingViewController = NotificationSettingViewController()
+            notificationSettingViewController.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(notificationSettingViewController, animated: true)
         } else if indexPath.row == 2 {
             let inquiryViewController = InquiryViewController()
+            inquiryViewController.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(inquiryViewController, animated: true)
         }
     }
@@ -209,6 +212,7 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     
     private func navigateToWithdrawalViewController() {
         let withdrawalViewController = WithdrawalViewController()
+        withdrawalViewController.hidesBottomBarWhenPushed = true
         withdrawalViewController.onWithdrawal = {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 self.presentWithdrawalCompletedAlert()
