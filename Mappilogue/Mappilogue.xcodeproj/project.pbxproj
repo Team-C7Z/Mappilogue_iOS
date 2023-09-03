@@ -190,6 +190,7 @@
 		928B7C102AA19E7700E4F789 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C0F2AA19E7700E4F789 /* UserAPI.swift */; };
 		928B7C162AA1C62400E4F789 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C152AA1C62400E4F789 /* UserManager.swift */; };
 		928B7C192AA462CE00E4F789 /* TermsOfUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C182AA462CE00E4F789 /* TermsOfUseViewController.swift */; };
+		928B7C1B2AA4784500E4F789 /* TermsOfUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C1A2AA4784500E4F789 /* TermsOfUserResponse.swift */; };
 		929158222A2529660022BEF9 /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 929158192A2529660022BEF9 /* Pretendard-Regular.ttf */; };
 		929158242A2529660022BEF9 /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581B2A2529660022BEF9 /* Pretendard-Medium.ttf */; };
 		929158252A2529660022BEF9 /* Pretendard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */; };
@@ -420,6 +421,7 @@
 		928B7C0F2AA19E7700E4F789 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		928B7C152AA1C62400E4F789 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		928B7C182AA462CE00E4F789 /* TermsOfUseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewController.swift; sourceTree = "<group>"; };
+		928B7C1A2AA4784500E4F789 /* TermsOfUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUserResponse.swift; sourceTree = "<group>"; };
 		929158192A2529660022BEF9 /* Pretendard-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.ttf"; sourceTree = "<group>"; };
 		9291581B2A2529660022BEF9 /* Pretendard-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.ttf"; sourceTree = "<group>"; };
 		9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.ttf"; sourceTree = "<group>"; };
@@ -543,8 +545,9 @@
 				928B7BF42A9CA51500E4F789 /* ErrorResponse.swift */,
 				928B7BEA2A9B27E800E4F789 /* AuthResponse.swift */,
 				928B7C042A9F9CD900E4F789 /* RefreshTokenResponse.swift */,
-				920031B72A8B5BC700E3170D /* KakaoAddressResponse.swift */,
+				928B7C1A2AA4784500E4F789 /* TermsOfUserResponse.swift */,
 				920031D42A8D021000E3170D /* KakaoSerachResponse.swift */,
+				920031B72A8B5BC700E3170D /* KakaoAddressResponse.swift */,
 			);
 			path = Dto;
 			sourceTree = "<group>";
@@ -1679,6 +1682,7 @@
 				9263786B2A546BDE004E5B6E /* OnboardingViewController.swift in Sources */,
 				92A7B6632A4E20BF009C9293 /* BaseTableViewCell.swift in Sources */,
 				92CD36FA2A7B505900768B61 /* MyCategoryViewController.swift in Sources */,
+				928B7C1B2AA4784500E4F789 /* TermsOfUserResponse.swift in Sources */,
 				9224FD1B2A61705D000A56A6 /* ColorSelection.swift in Sources */,
 				920031D32A8C832300E3170D /* SearchBar.swift in Sources */,
 				928B7BF72A9CA92F00E4F789 /* AlarmType.swift in Sources */,

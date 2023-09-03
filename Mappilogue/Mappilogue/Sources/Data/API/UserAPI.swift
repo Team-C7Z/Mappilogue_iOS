@@ -11,6 +11,7 @@ import Moya
 enum UserAPI: BaseAPI {
     case logout
     case withdrawal(reason: String?)
+    case termsOfUse
 }
 
 extension UserAPI: TargetType {
@@ -24,6 +25,8 @@ extension UserAPI: TargetType {
             return "/api/v1/users/logout"
         case .withdrawal:
             return "/api/v1/users/withdrawal"
+        case .termsOfUse:
+            return "/api/v1/users/tos"
         }
     }
     
@@ -33,12 +36,14 @@ extension UserAPI: TargetType {
             return .post
         case .withdrawal:
             return .post
+        case .termsOfUse:
+            return .get
         }
     }
     
     var task: Moya.Task {
         switch self {
-        case .logout:
+        case .logout, .termsOfUse:
             return .requestPlain
         case let .withdrawal(reason):
             var requestParameters: [String: String] = [:]

@@ -40,6 +40,19 @@ class UserManager {
         }
     }
     
+    func termsOfUse(completion: @escaping (NetworkResult<Any>) -> Void) {
+        provider.request(.termsOfUse) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(statusCode, data, BaseResponse<TermsOfUserResponse>.self)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     private func judgeStatus<T: Codable>(_ statusCode: Int, _ data: Data, _ dataModel: T.Type) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
         switch statusCode {
