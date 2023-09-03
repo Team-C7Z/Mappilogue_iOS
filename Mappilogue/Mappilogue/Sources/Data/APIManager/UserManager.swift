@@ -11,6 +11,7 @@ import Moya
 class UserManager {
     static let shared = UserManager()
     private let provider = MoyaProvider<UserAPI>(plugins: [NetworkLoggerPlugin()])
+    private let interceptorSessionProvider = MoyaProvider<UserAPI>(session: Session(interceptor: Interceptor()), plugins: [NetworkLoggerPlugin()])
   
     func logout(completion: @escaping (NetworkResult<Any>) -> Void) {
         provider.request(.logout) { result in
@@ -47,6 +48,21 @@ class UserManager {
                 let statusCode = response.statusCode
                 let data = response.data
                 let networkResult = self.judgeStatus(statusCode, data, BaseResponse<TermsOfUserResponse>.self)
+                completion(networkResult)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func getNotificationSetting(completion: @escaping (NetworkResult<Any>) -> Void) {
+        interceptorSessionProvider.request(.getNotificationSetting) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(statusCode, data, BaseResponse<NotificationSettingResponse>.self)
+                completion(networkResult)
             case .failure(let error):
                 print(error)
             }
