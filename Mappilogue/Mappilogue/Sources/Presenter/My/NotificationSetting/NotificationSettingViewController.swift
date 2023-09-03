@@ -8,6 +8,8 @@
 import UIKit
 
 class NotificationSettingViewController: BaseViewController {
+    private var notificationDTO: NotificationDTO?
+    
     private let notificationControlView = NotificationSettingView()
     private var stackView = UIStackView()
     private let noticeNotificationView = NotificationSettingView()
@@ -31,7 +33,6 @@ class NotificationSettingViewController: BaseViewController {
         stackView.spacing = 1
         stackView.backgroundColor = .colorEAE6E1
 
-        
         notificationControlView.onSwitchTapped = {
             //self..toggle()
            // self.setNotificationControl()
@@ -87,24 +88,33 @@ class NotificationSettingViewController: BaseViewController {
         UserManager.shared.getNotificationSetting { result in
             switch result {
             case .success(let response):
-                if let baseResponse = response as? BaseResponse<NotificationSettingResponse>, let result = baseResponse.result {
-                    self.configureNotification(notification: result)
-                    self.setTotalNotificationControl(isTotalNotification: result.isTotalAlarm == "ACTIVE")
-                }
+                self.handleNotificationSettingResponse(response)
             default:
                 break
             }
         }
     }
     
-    func configureNotification(notification: NotificationSettingResponse) {
-        notificationControlView.configure(title: "알림 받기", isSwitch: notification.isTotalAlarm == "ACTIVE")
-        noticeNotificationView.configure(title: "공지사항 알림", isSwitch: notification.isNoticeAlarm == "ACTIVE")
-        eventReminderView.configure(title: "일정 미리 알림", isSwitch: notification.isMarketingAlarm == "ACTIVE")
-        marketingAlertView.configure(title: "마케팅 알림", isSwitch: notification.isScheduleReminderAlarm == "ACTIVE")
+    private func handleNotificationSettingResponse(_ response: Any) {
+        guard let baseResponse = response as? BaseResponse<NotificationDTO>, let result = baseResponse.result else { return }
+        
+        notificationDTO = result
+        configureNotification()
+        setTotalNotificationControl()
     }
     
-    func setTotalNotificationControl(isTotalNotification: Bool) {
-        notificationControlOffView.isHidden = isTotalNotification
+    func configureNotification() {
+        guard let notification = notificationDTO else { return }
+        
+        notificationControlView.configure(title: "알림 받기", isSwitch: notification.isTotalAlarm)
+        noticeNotificationView.configure(title: "공지사항 알림", isSwitch: notification.isNoticeAlarm)
+        eventReminderView.configure(title: "일정 미리 알림", isSwitch: notification.isMarketingAlarm)
+        marketingAlertView.configure(title: "마케팅 알림", isSwitch: notification.isScheduleReminderAlarm)
+    }
+    
+    func setTotalNotificationControl() {
+        guard let notification = notificationDTO, let isTotalAlarm = NotificationType(rawValue: notification.isTotalAlarm) else { return }
+        
+        notificationControlOffView.isHidden = isTotalAlarm == .active
     }
 }

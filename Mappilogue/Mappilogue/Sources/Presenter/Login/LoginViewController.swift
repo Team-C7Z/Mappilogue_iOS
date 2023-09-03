@@ -89,6 +89,7 @@ class LoginViewController: BaseViewController {
     func handleKakaoTalkLogin(oauthToken: OAuthToken?, error: Error?) {
         if let error = error {
             print(error)
+            return
         } else {
             guard let oauthToken = oauthToken else { return }
             let accessToken = oauthToken.accessToken
@@ -96,20 +97,29 @@ class LoginViewController: BaseViewController {
             AuthManager.shared.logIn(token: accessToken, socialVendor: .kakao, isAlarm: .active) { result in
                 switch result {
                 case .success(let response):
-                    if let baseResponse = response as? BaseResponse<AuthResponse>, let result = baseResponse.result {
-                        AuthUserDefaults.accessToken = result.accessToken
-                        AuthUserDefaults.refreshToken = result.refreshToken
-                        
-                        if result.type == "LOGIN" {
-                            self.presentTabBarController()
-                        } else {
-                            self.presentSignUpCompleteViewController()
-                        }
-                    }
+                    self.handleLoginResponse(response)
                 default:
                     break
                 }
             }
+        }
+    }
+    
+    private func handleLoginResponse(_ response: Any) {
+        guard let baseResponse = response as? BaseResponse<AuthResponse>, let result = baseResponse.result else { return }
+        
+        AuthUserDefaults.accessToken = result.accessToken
+        AuthUserDefaults.refreshToken = result.refreshToken
+        
+        guard let authType = AuthType(rawValue: result.type) else {
+            return
+        }
+        
+        switch authType {
+        case .logIn:
+            presentTabBarController()
+        case .signUp:
+            presentSignUpCompleteViewController()
         }
     }
     

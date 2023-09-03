@@ -30,7 +30,7 @@ class AuthUserDefaults {
     }
     
     static func autoLogin(completion: @escaping (Bool) -> Void) {
-        if let accessToken = accessToken {
+        if accessToken != nil {
             guard let refreshToken = refreshToken else {
                 completion(false)
                 return
@@ -39,11 +39,7 @@ class AuthUserDefaults {
             AuthManager.shared.updateAccessToken(token: refreshToken) { result in
                 switch result {
                 case .success(let response):
-                    if let baseResponse = response as? BaseResponse<RefreshTokenResponse>, let result = baseResponse.result {
-                        AuthUserDefaults.accessToken = result.accessToken
-                        AuthUserDefaults.refreshToken = result.refreshToken
-                        completion(true)
-                    }
+                    handleRefreshTokenResponse(response, completion: completion)
                 default:
                     completion(false)
                 }
@@ -51,5 +47,13 @@ class AuthUserDefaults {
         } else {
             completion(false)
         }
+    }
+    
+    private static func handleRefreshTokenResponse(_ response: Any, completion: @escaping (Bool) -> Void) {
+        guard let baseResponse = response as? BaseResponse<RefreshTokenResponse>, let result = baseResponse.result else { return }
+        
+        AuthUserDefaults.accessToken = result.accessToken
+        AuthUserDefaults.refreshToken = result.refreshToken
+        completion(true)
     }
 }

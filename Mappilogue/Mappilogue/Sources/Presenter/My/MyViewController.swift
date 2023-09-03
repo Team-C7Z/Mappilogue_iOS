@@ -221,18 +221,27 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
         UserApi.shared.logout { error in
             if let error = error {
                 print(error)
+                return
             } else {
-                UserManager.shared.logout { result in
-                    switch result {
-                    case .success:
-                        AuthUserDefaults.accessToken = nil
-                        AuthUserDefaults.refreshToken = nil
-                    default:
-                        break
-                    }
-                }
+                self.handleUserManagerLogout()
             }
         }
+    }
+    
+    private func handleUserManagerLogout() {
+        UserManager.shared.logout { result in
+            switch result {
+            case .success:
+                self.clearAuthUserDefaults()
+            default:
+                break
+            }
+        }
+    }
+    
+    private func clearAuthUserDefaults() {
+        AuthUserDefaults.accessToken = nil
+        AuthUserDefaults.refreshToken = nil
     }
     
     func presentWithdrawalCompletedAlert() {

@@ -48,13 +48,17 @@ class TermsOfUseViewController: BaseViewController {
         UserManager.shared.termsOfUse { result in
             switch result {
             case .success(let response):
-                if let baseResponse = response as? BaseResponse<TermsOfUserResponse>, let result = baseResponse.result {
-                    let url = result.link
-                    self.openWebView(url: "https://www.youtube.com")
-                }
+                self.handleTermsOfUserResponse(response)
             default:
                 break
             }
         }
+    }
+    
+    func handleTermsOfUserResponse(_ response: Any) {
+        guard let baseResponse = response as? BaseResponse<TermsOfUserResponse>, let result = baseResponse.result else { return }
+        
+        let url = result.link
+        self.openWebView(url: url)
     }
 }

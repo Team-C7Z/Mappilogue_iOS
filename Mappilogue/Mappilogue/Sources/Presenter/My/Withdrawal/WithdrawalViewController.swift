@@ -132,18 +132,26 @@ class WithdrawalViewController: BaseViewController {
             if let error = error {
                 print(error)
             } else {
-                UserManager.shared.withdrawal(reason: self.withdrawalReason()) { result in
-                    switch result {
-                    case .success:
-                        AuthUserDefaults.accessToken = nil
-                        AuthUserDefaults.refreshToken = nil
-                        self.completeWithdrawal()
-                    default:
-                        break
-                    }
-                }
+                self.handleUserManagerWithdrawal()
             }
         }
+    }
+    
+    private func handleUserManagerWithdrawal() {
+        UserManager.shared.withdrawal(reason: self.withdrawalReason()) { result in
+            switch result {
+            case .success:
+                self.clearAuthUserDefaults()
+                self.completeWithdrawal()
+            default:
+                break
+            }
+        }
+    }
+    
+    private func clearAuthUserDefaults() {
+        AuthUserDefaults.accessToken = nil
+        AuthUserDefaults.refreshToken = nil
     }
     
     private func withdrawalReason() -> String? {

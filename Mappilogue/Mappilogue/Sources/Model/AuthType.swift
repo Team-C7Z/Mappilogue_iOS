@@ -8,6 +8,6 @@
 import Foundation
 
 enum AuthType: String, Codable {
-    case logIn
-    case signUp
+    case logIn = "LOGIN"
+    case signUp = "SIGNUP"
 }
