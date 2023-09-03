@@ -116,6 +116,9 @@ class LoginViewController: BaseViewController {
     func presentSignUpCompleteViewController() {
         let signUpCompletionViewController = SignUpCompletionViewController()
         signUpCompletionViewController.modalPresentationStyle = .fullScreen
+        signUpCompletionViewController.onTapped = {
+            self.presentTabBarController()
+        }
         present(signUpCompletionViewController, animated: false)
     }
     
