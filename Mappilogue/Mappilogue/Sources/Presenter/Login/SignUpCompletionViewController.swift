@@ -46,7 +46,7 @@ class SignUpCompletionViewController: BaseViewController {
         super.setupLayout()
         
         completionRoundView.snp.makeConstraints {
-            $0.centerY.equalToSuperview().offset(10)
+            $0.centerY.equalToSuperview()
             $0.centerX.equalToSuperview()
             $0.width.height.equalTo(35)
         }
