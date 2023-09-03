@@ -11,12 +11,10 @@ import WebKit
 class TermsOfUseViewController: BaseViewController {
     private let webView = WKWebView()
     
-    let naverURL = ""
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        openWebView(url: naverURL)
+    
+        getTermsOfUserURL()
     }
     
     override func setupProperty() {
@@ -46,6 +44,17 @@ class TermsOfUseViewController: BaseViewController {
         webView.load(request)
     }
     
-    
-    
+    func getTermsOfUserURL() {
+        UserManager.shared.termsOfUse { result in
+            switch result {
+            case .success(let response):
+                if let baseResponse = response as? BaseResponse<TermsOfUserResponse>, let result = baseResponse.result {
+                    let url = result.link
+                    self.openWebView(url: "https://www.youtube.com")
+                }
+            default:
+                break
+            }
+        }
+    }
 }
