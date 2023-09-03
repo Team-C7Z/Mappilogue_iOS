@@ -8,6 +8,8 @@
 import UIKit
 
 class SignUpCompletionViewController: BaseViewController {
+    var onTapped: (() -> Void)?
+    
     private let completionRoundView = UIView()
     private let completionImage = UIImageView()
     private let completionLabel = UILabel()
@@ -63,13 +65,7 @@ class SignUpCompletionViewController: BaseViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         dismiss(animated: true) {
-            self.presentTabBarController()
+            self.onTapped?()
         }
-    }
-    
-    private func presentTabBarController() {
-        let tabBarController = TabBarController()
-        tabBarController.modalPresentationStyle = .fullScreen
-        present(tabBarController, animated: false)
     }
 }
