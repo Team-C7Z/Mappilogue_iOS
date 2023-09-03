@@ -1,5 +1,5 @@
 //
-//  AuthInterceptor.swift
+//  Interceptor.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/08/29.
@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-class AuthInterceptor: RequestInterceptor {
+class Interceptor: RequestInterceptor {
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         guard urlRequest.url?.absoluteString.hasPrefix(Environment.baseURL) == true,
             let accessToken = AuthUserDefaults.accessToken,

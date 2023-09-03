@@ -8,11 +8,6 @@
 import UIKit
 
 class NotificationSettingViewController: BaseViewController {
-    var isNotificationControl: Bool = false
-    var isNoti: Bool = false
-    var isEvent: Bool = false
-    var isMarketing: Bool = false
-    
     private let notificationControlView = NotificationSettingView()
     private var stackView = UIStackView()
     private let noticeNotificationView = NotificationSettingView()
@@ -23,6 +18,7 @@ class NotificationSettingViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        getNotificationSetting()
     }
     
     override func setupProperty() {
@@ -34,31 +30,26 @@ class NotificationSettingViewController: BaseViewController {
         stackView.distribution = .equalSpacing
         stackView.spacing = 1
         stackView.backgroundColor = .colorEAE6E1
-        
-        notificationControlView.configure(title: "알림 받기", isSwitch: isNotificationControl)
-        noticeNotificationView.configure(title: "공지사항 알림", isSwitch: isNoti)
-        eventReminderView.configure(title: "일정 미리 알림", isSwitch: isEvent)
-        marketingAlertView.configure(title: "마케팅 알림", isSwitch: isMarketing)
+
         
         notificationControlView.onSwitchTapped = {
-            self.isNotificationControl.toggle()
-            self.setNotificationControl()
+            //self..toggle()
+           // self.setNotificationControl()
         }
         
         noticeNotificationView.onSwitchTapped = {
-            self.isNoti.toggle()
+          //  self.isNoti.toggle()
         }
         
         eventReminderView.onSwitchTapped = {
-            self.isEvent.toggle()
+          //  self.isEvent.toggle()
         }
         
         marketingAlertView.onSwitchTapped = {
-            self.isMarketing.toggle()
+            //self.isMarketing.toggle()
         }
         
         notificationControlOffView.backgroundColor = .colorF9F8F7.withAlphaComponent(0.4)
-        setNotificationControl()
     }
     
     override func setupHierarchy() {
@@ -92,7 +83,28 @@ class NotificationSettingViewController: BaseViewController {
         }
     }
     
-    func setNotificationControl() {
-        notificationControlOffView.isHidden = isNotificationControl
+    func getNotificationSetting() {
+        UserManager.shared.getNotificationSetting { result in
+            switch result {
+            case .success(let response):
+                if let baseResponse = response as? BaseResponse<NotificationSettingResponse>, let result = baseResponse.result {
+                    self.configureNotification(notification: result)
+                    self.setTotalNotificationControl(isTotalNotification: result.isTotalAlarm == "ACTIVE")
+                }
+            default:
+                break
+            }
+        }
+    }
+    
+    func configureNotification(notification: NotificationSettingResponse) {
+        notificationControlView.configure(title: "알림 받기", isSwitch: notification.isTotalAlarm == "ACTIVE")
+        noticeNotificationView.configure(title: "공지사항 알림", isSwitch: notification.isNoticeAlarm == "ACTIVE")
+        eventReminderView.configure(title: "일정 미리 알림", isSwitch: notification.isMarketingAlarm == "ACTIVE")
+        marketingAlertView.configure(title: "마케팅 알림", isSwitch: notification.isScheduleReminderAlarm == "ACTIVE")
+    }
+    
+    func setTotalNotificationControl(isTotalNotification: Bool) {
+        notificationControlOffView.isHidden = isTotalNotification
     }
 }

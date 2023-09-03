@@ -93,7 +93,7 @@ class LoginViewController: BaseViewController {
             guard let oauthToken = oauthToken else { return }
             let accessToken = oauthToken.accessToken
             
-            AuthManager.shared.logIn(token: accessToken, socialVendor: .kakao, isAlarm: .inactive) { result in
+            AuthManager.shared.logIn(token: accessToken, socialVendor: .kakao, isAlarm: .active) { result in
                 switch result {
                 case .success(let response):
                     if let baseResponse = response as? BaseResponse<AuthResponse>, let result = baseResponse.result {
@@ -107,7 +107,7 @@ class LoginViewController: BaseViewController {
                         }
                     }
                 default:
-                    print("log in error")
+                    break
                 }
             }
         }
