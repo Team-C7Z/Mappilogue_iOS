@@ -13,6 +13,7 @@ enum UserAPI: BaseAPI {
     case withdrawal(reason: String?)
     case termsOfUse
     case getNotificationSetting
+    case updateNotificationSetting(notification: NotificationDTO)
 }
 
 extension UserAPI: TargetType {
@@ -30,6 +31,8 @@ extension UserAPI: TargetType {
             return "/api/v1/users/tos"
         case .getNotificationSetting:
             return "/api/v1/users/alarms-setting"
+        case .updateNotificationSetting:
+            return "/api/v1/users/alarms-setting"
         }
     }
     
@@ -39,6 +42,8 @@ extension UserAPI: TargetType {
             return .post
         case .termsOfUse, .getNotificationSetting:
             return .get
+        case .updateNotificationSetting:
+            return .put
         }
     }
     
@@ -46,12 +51,23 @@ extension UserAPI: TargetType {
         switch self {
         case .logout, .termsOfUse, .getNotificationSetting:
             return .requestPlain
+        
         case let .withdrawal(reason):
             var requestParameters: [String: String] = [:]
             
             if let reason = reason {
                 requestParameters["reason"] = reason
             }
+            
+            return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
+        
+        case let .updateNotificationSetting(notification):
+            let requestParameters: [String: String] = [
+                "isTotalAlarm": notification.isTotalNotification,
+                "isNoticeAlarm": notification.isNoticeNotification,
+                "isMarketingAlarm": notification.isMarketingNotification,
+                "isScheduleReminderAlarm": notification.isScheduleReminderNotification
+            ]
             
             return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
         }

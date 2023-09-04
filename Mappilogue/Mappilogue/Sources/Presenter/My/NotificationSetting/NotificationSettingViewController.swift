@@ -26,7 +26,7 @@ class NotificationSettingViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationTitleAndBackButton("My", backButtonAction: #selector(backButtonTapped))
+        setNavigationTitleAndBackButton("알림 설정", backButtonAction: #selector(updateNotification))
         
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
@@ -67,6 +67,19 @@ class NotificationSettingViewController: BaseViewController {
         notificationControlOffView.snp.makeConstraints {
             $0.width.height.equalTo(stackView)
         }
+    }
+    
+    @objc private func updateNotification() {
+        UserManager.shared.updateNotificationSetting { result in
+            switch result {
+            case .success(let response):
+                print(response)
+            default:
+                break
+            }
+        }
+        
+        backButtonTapped()
     }
     
     func getNotificationSetting() {
@@ -121,7 +134,7 @@ class NotificationSettingViewController: BaseViewController {
         }
         
         marketingAlertView.onSwitchTapped = {
-            guard var notification = self.notificationDTO else { return }
+            guard let notification = self.notificationDTO else { return }
             
             self.notificationDTO?.isMarketingNotification = self.switchToggle(notification.isMarketingNotification)
             self.configureNotification()
