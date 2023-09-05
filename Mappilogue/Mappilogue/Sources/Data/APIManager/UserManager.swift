@@ -89,7 +89,21 @@ class UserManager {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseResponse<ProfileResponse>.self)
+                let networkResult = self.judgeStatus(statusCode, data, BaseResponse<ProfileDTO>.self)
+                completion(networkResult)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func updateNickname(nickname: String, completion: @escaping (NetworkResult<Any>) -> Void) {
+        interceptorSessionProvider.request(.updateNickname(nickname: nickname)) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(statusCode, data, BaseResponse<String>.self)
                 completion(networkResult)
             case .failure(let error):
                 print(error)

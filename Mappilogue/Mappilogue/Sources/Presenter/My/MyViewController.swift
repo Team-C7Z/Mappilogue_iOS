@@ -25,7 +25,7 @@ class MyViewController: NavigationBarViewController {
             MyInfo(image: "my_withdrawal", title: "탈퇴하기")
         ]
     ]
-    var profile: ProfileResponse?
+    var profile: ProfileDTO?
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -76,8 +76,7 @@ class MyViewController: NavigationBarViewController {
         UserManager.shared.getProfile { result in
             switch result {
             case .success(let response):
-                print(response)
-                guard let baseResponse = response as? BaseResponse<ProfileResponse>, let result = baseResponse.result else { return }
+                guard let baseResponse = response as? BaseResponse<ProfileDTO>, let result = baseResponse.result else { return }
                 self.profile = result
                 self.collectionView.reloadData()
             default:

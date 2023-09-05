@@ -1,5 +1,5 @@
 //
-//  ProfileResponse.swift
+//  ProfileDTO.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/09/05.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ProfileResponse: Codable {
+struct ProfileDTO: Codable {
     let nickname: String
     let email: String
     let profileImageUrl: String?

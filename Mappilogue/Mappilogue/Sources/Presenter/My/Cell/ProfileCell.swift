@@ -66,7 +66,7 @@ class ProfileCell: BaseCollectionViewCell {
         }
     }
 
-    func configure(_ profile: ProfileResponse?) {
+    func configure(_ profile: ProfileDTO?) {
         guard let profile else { return }
         
         profileNameLabel.text = profile.nickname
