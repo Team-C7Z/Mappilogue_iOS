@@ -15,6 +15,7 @@ enum UserAPI: BaseAPI {
     case getNotificationSetting
     case updateNotificationSetting(notification: NotificationDTO)
     case getProfile
+    case updateNickname(nickname: String)
 }
 
 extension UserAPI: TargetType {
@@ -36,6 +37,8 @@ extension UserAPI: TargetType {
             return "/api/v1/users/alarms-setting"
         case .getProfile:
             return "/api/v1/users/profile"
+        case .updateNickname:
+            return "/api/v1/users/nickname"
         }
     }
     
@@ -47,6 +50,8 @@ extension UserAPI: TargetType {
             return .get
         case .updateNotificationSetting:
             return .put
+        case .updateNickname:
+            return .patch
         }
     }
     
@@ -54,7 +59,7 @@ extension UserAPI: TargetType {
         switch self {
         case .logout, .termsOfUse, .getNotificationSetting, .getProfile:
             return .requestPlain
-        
+            
         case let .withdrawal(reason):
             var requestParameters: [String: String] = [:]
             
@@ -63,13 +68,20 @@ extension UserAPI: TargetType {
             }
             
             return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
-        
+            
         case let .updateNotificationSetting(notification):
             let requestParameters: [String: String] = [
                 "isTotalAlarm": notification.isTotalNotification,
                 "isNoticeAlarm": notification.isNoticeNotification,
                 "isMarketingAlarm": notification.isMarketingNotification,
                 "isScheduleReminderAlarm": notification.isScheduleReminderNotification
+            ]
+            
+            return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
+        
+        case let .updateNickname(nickname):
+            let requestParameters: [String: String] = [
+                "nickname": nickname
             ]
             
             return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)

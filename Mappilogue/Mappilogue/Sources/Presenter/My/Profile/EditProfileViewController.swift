@@ -28,7 +28,7 @@ class EditProfileViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationTitleAndBackButton("프로필 편집", backButtonAction: #selector(backButtonTapped))
+        setNavigationTitleAndBackButton("프로필 편집", backButtonAction: #selector(updateNickname))
         
         editProfileImageImage.image = UIImage(named: "my_editProfileImage")
         
@@ -45,6 +45,8 @@ class EditProfileViewController: BaseViewController {
         editNicknameTextField.font = .title02
         editNicknameTextField.returnKeyType = .done
         editNicknameTextField.delegate = self
+        
+        editNicknameImage.image = UIImage(named: "my_editNickname")
         
         nicknameLineView.backgroundColor = .color1C1C1C
         
@@ -137,7 +139,7 @@ class EditProfileViewController: BaseViewController {
         //
     }
     
-    func configure(_ profile: ProfileResponse) {
+    func configure(_ profile: ProfileDTO) {
         if let profileImageUrl = profile.profileImageUrl, let url = URL(string: profileImageUrl) {
             DispatchQueue.global().async { [weak self] in
                 if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
@@ -154,6 +156,20 @@ class EditProfileViewController: BaseViewController {
         loginAccountLabel.text = profile.email
         let snsType = AuthVendor(rawValue: profile.snsType)
         loginAccountImage.image = UIImage(named: snsType == .kakao ? "my_kakaoAccount" : "")
+    }
+    
+    @objc func updateNickname() {
+        backButtonTapped()
+        
+        guard let nickname = editNicknameTextField.text else { return }
+        UserManager.shared.updateNickname(nickname: nickname) { result in
+            switch result {
+            case .success(let response):
+                print(response)
+            default:
+                break
+            }
+        }
     }
 }
 
