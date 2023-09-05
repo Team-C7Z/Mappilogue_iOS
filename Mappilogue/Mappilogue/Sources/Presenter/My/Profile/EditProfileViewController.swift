@@ -11,10 +11,10 @@ class EditProfileViewController: BaseViewController {
     private let profileImage = UIImageView()
     private let editProfileImageImage = UIImageView()
     private let editProfileImageLabel = UILabel()
-    private let nickNameTitleLabel = UILabel()
-    private let editNickNameTextField = UITextField()
-    private let editNickNameImage = UIImageView()
-    private let nickNameLineView = UIView()
+    private let nicknameTitleLabel = UILabel()
+    private let editNicknameTextField = UITextField()
+    private let editNicknameImage = UIImageView()
+    private let nicknameLineView = UIView()
     private let loginAccountTitleLabel = UILabel()
     private let loginAccountImage = UIImageView()
     private let loginAccountLabel = UILabel()
@@ -30,28 +30,23 @@ class EditProfileViewController: BaseViewController {
         
         setNavigationTitleAndBackButton("프로필 편집", backButtonAction: #selector(backButtonTapped))
         
-        profileImage.image = UIImage(named: "my_profile")
-        
         editProfileImageImage.image = UIImage(named: "my_editProfileImage")
         
         editProfileImageLabel.text = "사진 편집"
         editProfileImageLabel.textColor = .colorFFFFFF
         editProfileImageLabel.font = .caption03
         
-        nickNameTitleLabel.text = "닉네임"
-        nickNameTitleLabel.textColor = .color707070
-        nickNameTitleLabel.font = .body02
+        nicknameTitleLabel.text = "닉네임"
+        nicknameTitleLabel.textColor = .color707070
+        nicknameTitleLabel.font = .body02
         
-        editNickNameTextField.placeholder = "8자 이하의 한글/영문"
-        editNickNameTextField.text = "맵필로그"
-        editNickNameTextField.textColor = .color1C1C1C
-        editNickNameTextField.font = .title02
-        editNickNameTextField.returnKeyType = .done
-        editNickNameTextField.delegate = self
+        editNicknameTextField.placeholder = "8자 이하의 한글/영문"
+        editNicknameTextField.textColor = .color1C1C1C
+        editNicknameTextField.font = .title02
+        editNicknameTextField.returnKeyType = .done
+        editNicknameTextField.delegate = self
         
-        editNickNameImage.image = UIImage(named: "my_editNickName")
-        
-        nickNameLineView.backgroundColor = .color1C1C1C
+        nicknameLineView.backgroundColor = .color1C1C1C
         
         loginAccountTitleLabel.text = "로그인 계정"
         loginAccountTitleLabel.textColor = .color707070
@@ -59,7 +54,6 @@ class EditProfileViewController: BaseViewController {
         
         loginAccountImage.image = UIImage(named: "my_kakaoAccount")
         
-        loginAccountLabel.text = "mappilogue@kakao.com"
         loginAccountLabel.textColor = .color707070
         loginAccountLabel.font = .caption01
     }
@@ -70,10 +64,10 @@ class EditProfileViewController: BaseViewController {
         view.addSubview(profileImage)
         profileImage.addSubview(editProfileImageImage)
         editProfileImageImage.addSubview(editProfileImageLabel)
-        view.addSubview(nickNameTitleLabel)
-        view.addSubview(editNickNameTextField)
-        view.addSubview(editNickNameImage)
-        view.addSubview(nickNameLineView)
+        view.addSubview(nicknameTitleLabel)
+        view.addSubview(editNicknameTextField)
+        view.addSubview(editNicknameImage)
+        view.addSubview(nicknameLineView)
         view.addSubview(loginAccountTitleLabel)
         view.addSubview(loginAccountImage)
         view.addSubview(loginAccountLabel)
@@ -98,27 +92,27 @@ class EditProfileViewController: BaseViewController {
             $0.centerX.equalTo(editProfileImageImage)
         }
         
-        nickNameTitleLabel.snp.makeConstraints {
+        nicknameTitleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(25)
             $0.leading.equalTo(profileImage.snp.trailing).offset(20)
         }
         
-        editNickNameTextField.snp.makeConstraints {
-            $0.leading.equalTo(nickNameTitleLabel)
+        editNicknameTextField.snp.makeConstraints {
+            $0.leading.equalTo(nicknameTitleLabel)
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(46)
         }
         
-        editNickNameImage.snp.makeConstraints {
-            $0.leading.equalTo(editNickNameTextField.snp.trailing).offset(8)
-            $0.centerY.equalTo(editNickNameTextField)
+        editNicknameImage.snp.makeConstraints {
+            $0.leading.equalTo(editNicknameTextField.snp.trailing).offset(8)
+            $0.centerY.equalTo(editNicknameTextField)
             $0.width.equalTo(12)
             $0.height.equalTo(11)
         }
         
-        nickNameLineView.snp.makeConstraints {
-            $0.top.equalTo(editNickNameTextField.snp.bottom).offset(2)
-            $0.leading.equalTo(editNickNameTextField)
-            $0.trailing.equalTo(editNickNameImage.snp.trailing)
+        nicknameLineView.snp.makeConstraints {
+            $0.top.equalTo(editNicknameTextField.snp.bottom).offset(2)
+            $0.leading.equalTo(editNicknameTextField)
+            $0.trailing.equalTo(editNicknameImage.snp.trailing)
             $0.height.equalTo(1)
         }
         
@@ -141,6 +135,25 @@ class EditProfileViewController: BaseViewController {
     
     func updateTextFieldPlaceHolder() {
         //
+    }
+    
+    func configure(_ profile: ProfileResponse) {
+        if let profileImageUrl = profile.profileImageUrl, let url = URL(string: profileImageUrl) {
+            DispatchQueue.global().async { [weak self] in
+                if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.profileImage.image = image
+                    }
+                }
+            }
+        } else {
+            profileImage.image = UIImage(named: "my_profile")
+        }
+        
+        editNicknameTextField.text = profile.nickname
+        loginAccountLabel.text = profile.email
+        let snsType = AuthVendor(rawValue: profile.snsType)
+        loginAccountImage.image = UIImage(named: snsType == .kakao ? "my_kakaoAccount" : "")
     }
 }
 

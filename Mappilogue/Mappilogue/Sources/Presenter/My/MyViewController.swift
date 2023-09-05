@@ -25,6 +25,7 @@ class MyViewController: NavigationBarViewController {
             MyInfo(image: "my_withdrawal", title: "탈퇴하기")
         ]
     ]
+    var profile: ProfileResponse?
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -45,9 +46,16 @@ class MyViewController: NavigationBarViewController {
         super.viewDidLoad()
      
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        getProfile()
+    }
 
     override func setupProperty() {
         super.setupProperty()
+        
     }
     
     override func setupHierarchy() {
@@ -61,6 +69,20 @@ class MyViewController: NavigationBarViewController {
     
         collectionView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+    
+    private func getProfile() {
+        UserManager.shared.getProfile { result in
+            switch result {
+            case .success(let response):
+                print(response)
+                guard let baseResponse = response as? BaseResponse<ProfileResponse>, let result = baseResponse.result else { return }
+                self.profile = result
+                self.collectionView.reloadData()
+            default:
+                break
+            }
         }
     }
     
@@ -112,6 +134,7 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     
     private func configureProfileCell(for indexPath: IndexPath, in collectionView: UICollectionView) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileCell.registerId, for: indexPath) as? ProfileCell else { return UICollectionViewCell() }
+        cell.configure(profile)
         return cell
     }
     
@@ -178,6 +201,9 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     private func navigateToEditProfileViewController() {
         let editProfileViewController = EditProfileViewController()
         editProfileViewController.hidesBottomBarWhenPushed = true
+        if let profile = profile {
+            editProfileViewController.configure(profile)
+        }
         navigationController?.pushViewController(editProfileViewController, animated: true)
     }
     

@@ -14,6 +14,7 @@ enum UserAPI: BaseAPI {
     case termsOfUse
     case getNotificationSetting
     case updateNotificationSetting(notification: NotificationDTO)
+    case getProfile
 }
 
 extension UserAPI: TargetType {
@@ -33,6 +34,8 @@ extension UserAPI: TargetType {
             return "/api/v1/users/alarms-setting"
         case .updateNotificationSetting:
             return "/api/v1/users/alarms-setting"
+        case .getProfile:
+            return "/api/v1/users/profile"
         }
     }
     
@@ -40,7 +43,7 @@ extension UserAPI: TargetType {
         switch self {
         case .logout, .withdrawal:
             return .post
-        case .termsOfUse, .getNotificationSetting:
+        case .termsOfUse, .getNotificationSetting, .getProfile:
             return .get
         case .updateNotificationSetting:
             return .put
@@ -49,7 +52,7 @@ extension UserAPI: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case .logout, .termsOfUse, .getNotificationSetting:
+        case .logout, .termsOfUse, .getNotificationSetting, .getProfile:
             return .requestPlain
         
         case let .withdrawal(reason):
