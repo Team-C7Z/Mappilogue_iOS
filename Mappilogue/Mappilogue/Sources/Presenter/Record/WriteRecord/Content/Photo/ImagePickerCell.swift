@@ -19,6 +19,8 @@ class ImagePickerCell: BaseCollectionViewCell {
     override func setupProperty() {
         super.setupProperty()
 
+        contentView.layer.borderColor = UIColor.color2EBD3D.cgColor
+        
         pickerImage.contentMode = .scaleAspectFill
         pickerImage.clipsToBounds = true
         options.deliveryMode = .highQualityFormat
@@ -39,9 +41,13 @@ class ImagePickerCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(_ image: PHAsset) {
+    func configure(_ image: PHAsset, isSelected: Bool) {
         imageManager.requestImage(for: image, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: options) { imag, _ in
-            self.pickerImage.image = imag
+            DispatchQueue.main.async {
+                self.pickerImage.image = imag
+            }
         }
+        
+        contentView.layer.borderWidth = isSelected ? 4 : 0
     }
 }
