@@ -28,4 +28,32 @@ class AuthUserDefaults {
             UserDefaults.standard.set(newValue, forKey: refreshTokenKey)
         }
     }
+    
+    static func autoLogin(completion: @escaping (Bool) -> Void) {
+        if accessToken != nil {
+            guard let refreshToken = refreshToken else {
+                completion(false)
+                return
+            }
+          
+            AuthManager.shared.updateAccessToken(token: refreshToken) { result in
+                switch result {
+                case .success(let response):
+                    handleRefreshTokenResponse(response, completion: completion)
+                default:
+                    completion(false)
+                }
+            }
+        } else {
+            completion(false)
+        }
+    }
+    
+    private static func handleRefreshTokenResponse(_ response: Any, completion: @escaping (Bool) -> Void) {
+        guard let baseResponse = response as? BaseResponse<RefreshTokenResponse>, let result = baseResponse.result else { return }
+        
+        AuthUserDefaults.accessToken = result.accessToken
+        AuthUserDefaults.refreshToken = result.refreshToken
+        completion(true)
+    }
 }

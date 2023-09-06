@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import KakaoSDKUser
 
 struct MyInfo {
     var image: String
@@ -24,6 +25,7 @@ class MyViewController: NavigationBarViewController {
             MyInfo(image: "my_withdrawal", title: "탈퇴하기")
         ]
     ]
+    var profile: ProfileDTO?
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -45,13 +47,15 @@ class MyViewController: NavigationBarViewController {
      
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
+        getProfile()
     }
 
     override func setupProperty() {
         super.setupProperty()
+        
     }
     
     override func setupHierarchy() {
@@ -68,11 +72,24 @@ class MyViewController: NavigationBarViewController {
         }
     }
     
-    @objc func checkWithdrawalStatus(_ notification: Notification) {
-        showWithdrawalConfirmationAlert()
+    private func getProfile() {
+        UserManager.shared.getProfile { result in
+            switch result {
+            case .success(let response):
+                guard let baseResponse = response as? BaseResponse<ProfileDTO>, let result = baseResponse.result else { return }
+                self.profile = result
+                self.collectionView.reloadData()
+            default:
+                break
+            }
+        }
     }
     
-    @objc func showWithdrawalConfirmationAlert() {
+    @objc func checkWithdrawalStatus(_ notification: Notification) {
+        presentWithdrawalConfirmationAlert()
+    }
+    
+    @objc func presentWithdrawalConfirmationAlert() {
         let withdrawalCompletedAlertViewController = WithdrawalCompletedAlertViewController()
         withdrawalCompletedAlertViewController.modalPresentationStyle = .overCurrentContext
         withdrawalCompletedAlertViewController.onDoneTapped = {
@@ -116,6 +133,7 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     
     private func configureProfileCell(for indexPath: IndexPath, in collectionView: UICollectionView) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileCell.registerId, for: indexPath) as? ProfileCell else { return UICollectionViewCell() }
+        cell.configure(profile)
         return cell
     }
     
@@ -152,36 +170,45 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
+        case 0:
+            navigateToEditProfileViewController()
         case 2:
-            didSelect2Section(indexPath)
+            if indexPath.row == 0 {
+                let notificationSettingViewController = NotificationSettingViewController()
+                notificationSettingViewController.hidesBottomBarWhenPushed = true
+                navigationController?.pushViewController(notificationSettingViewController, animated: true)
+            } else if indexPath.row == 1 {
+                let termsOfUseViewController = TermsOfUseViewController()
+                termsOfUseViewController.hidesBottomBarWhenPushed = true
+                navigationController?.pushViewController(termsOfUseViewController, animated: true)
+            } else if indexPath.row == 2 {
+                let inquiryViewController = InquiryViewController()
+                inquiryViewController.hidesBottomBarWhenPushed = true
+                navigationController?.pushViewController(inquiryViewController, animated: true)
+            }
         case 3:
-            didSelect3Section(indexPath)
+            if indexPath.row == 0 {
+                presentLogoutAlert()
+            } else if indexPath.row == 1 {
+                presentWithdrawalAlert()
+            }
         default:
             break
         }
     }
     
-    private func didSelect2Section(_ indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            let notificationSettingsViewController = NotificationSettingsViewController()
-            navigationController?.pushViewController(notificationSettingsViewController, animated: true)
-        } else if indexPath.row == 2 {
-            let inquiryViewController = InquiryViewController()
-            navigationController?.pushViewController(inquiryViewController, animated: true)
+    private func navigateToEditProfileViewController() {
+        let editProfileViewController = EditProfileViewController()
+        editProfileViewController.hidesBottomBarWhenPushed = true
+        if let profile = profile {
+            editProfileViewController.configure(profile)
         }
-    }
-    
-    private func didSelect3Section(_ indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            presentLogoutAlert()
-        } else if indexPath.row == 1 {
-            presentWithdrawalAlert()
-        }
+        navigationController?.pushViewController(editProfileViewController, animated: true)
     }
     
     private func presentLogoutAlert() {
         let alertViewController = AlertViewController()
-        alertViewController.modalPresentationStyle = .overCurrentContext
+        alertViewController.modalPresentationStyle = .overFullScreen
         let alert = Alert(titleText: "로그아웃 할까요?",
                           messageText: nil,
                           cancelText: "취소",
@@ -190,18 +217,70 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
                           alertHeight: 140)
         alertViewController.configureAlert(with: alert)
         alertViewController.onDoneTapped = {
-            print("로그아웃")
+            self.logout()
         }
         present(alertViewController, animated: false)
      }
     
     private func presentWithdrawalAlert() {
         let withdrawalAlertViewController = WithdrawalAlertViewController()
-        withdrawalAlertViewController.modalPresentationStyle = .overCurrentContext
+        withdrawalAlertViewController.modalPresentationStyle = .overFullScreen
         withdrawalAlertViewController.onDoneTapped = {
-            let withdrawalViewController = WithdrawalViewController()
-            self.navigationController?.pushViewController(withdrawalViewController, animated: true)
+            self.navigateToWithdrawalViewController()
         }
         present(withdrawalAlertViewController, animated: false)
+    }
+    
+    private func navigateToWithdrawalViewController() {
+        let withdrawalViewController = WithdrawalViewController()
+        withdrawalViewController.hidesBottomBarWhenPushed = true
+        withdrawalViewController.onWithdrawal = {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.presentWithdrawalCompletedAlert()
+            }
+        }
+        self.navigationController?.pushViewController(withdrawalViewController, animated: true)
+    }
+    
+    func logout() {
+        UserApi.shared.logout { error in
+            if let error = error {
+                print(error)
+                return
+            } else {
+                self.handleUserManagerLogout()
+            }
+        }
+    }
+    
+    private func handleUserManagerLogout() {
+        UserManager.shared.logout { result in
+            switch result {
+            case .success:
+                self.clearAuthUserDefaults()
+            default:
+                break
+            }
+        }
+    }
+    
+    private func clearAuthUserDefaults() {
+        AuthUserDefaults.accessToken = nil
+        AuthUserDefaults.refreshToken = nil
+    }
+    
+    func presentWithdrawalCompletedAlert() {
+        let withdrawalCompletedAlertViewController = WithdrawalCompletedAlertViewController()
+        withdrawalCompletedAlertViewController.modalPresentationStyle = .overFullScreen
+        withdrawalCompletedAlertViewController.onDoneTapped = {
+            self.presentLoginViewController()
+        }
+        present(withdrawalCompletedAlertViewController, animated: false)
+    }
+    
+    func presentLoginViewController() {
+        let loginViewController = LoginViewController()
+        loginViewController.modalPresentationStyle = .fullScreen
+        present(loginViewController, animated: false)
     }
 }

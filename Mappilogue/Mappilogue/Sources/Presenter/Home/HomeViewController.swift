@@ -191,15 +191,15 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         guard let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: MaredRecordsFooterView.registerId) as? MaredRecordsFooterView else { return UIView() }
         
         footerView.onAddSchedule = {
-            self.showAddScheduleViewController()
+            self.navigateToAddScheduleViewController()
         }
         
         footerView.onMarkedRecord = {
-            self.showRecordContentViewController()
+            self.navigateToRecordContentViewController()
         }
         
         footerView.onAddRecord = {
-            self.showSelectWriteRecordViewController()
+            self.navigateToSelectWriteRecordViewController()
         }
         
         return footerView
@@ -222,11 +222,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         switch selectedScheduleType {
         case .today:
             if !dummyTodayData.isEmpty {
-                showAddScheduleViewController()
+                navigateToAddScheduleViewController()
             }
         case .upcoming:
             if !dummyUpcomingData.isEmpty {
-                showAddScheduleViewController()
+                navigateToAddScheduleViewController()
             }
         }
     }
@@ -245,17 +245,17 @@ extension HomeViewController: ScheduleTypeDelegate, ExpandCellDelegate {
         tableView.reloadSections([indexPath.section], with: .none)
     }
     
-    func showAddScheduleViewController() {
+    func navigateToAddScheduleViewController() {
         let addScheduleViewController = AddScheduleViewController()
         navigationController?.pushViewController(addScheduleViewController, animated: true)
     }
     
-    func showRecordContentViewController() {
+    func navigateToRecordContentViewController() {
         let recordContentViewController = RecordContentViewController()
         navigationController?.pushViewController(recordContentViewController, animated: true)
     }
     
-    func showSelectWriteRecordViewController() {
+    func navigateToSelectWriteRecordViewController() {
         let selectWriteRecordViewController = SelectWriteRecordViewController()
         navigationController?.pushViewController(selectWriteRecordViewController, animated: true)
     }

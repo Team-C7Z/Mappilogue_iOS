@@ -64,7 +64,7 @@ class CalendarViewController: NavigationBarViewController {
         currentDateLabel.font = .subtitle01
         changeDateImage.image = UIImage(named: "changeDate")
         
-        addScheduleButton.addTarget(self, action: #selector(addScheduleButtonTapped), for: .touchUpInside)
+        addScheduleButton.addTarget(self, action: #selector(navigationToAddScheduleViewController), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -133,11 +133,6 @@ class CalendarViewController: NavigationBarViewController {
         view.backgroundColor = .colorF5F3F0
     }
     
-    @objc func addScheduleButtonTapped(_ sender: UIButton) {
-        let addScheduleViewController = AddScheduleViewController()
-        navigationController?.pushViewController(addScheduleViewController, animated: true)
-    }
-    
     @objc func presentScheduleViewContoller(_ notification: Notification) {
         addScheduleButton.isHidden = true
         if let calendarSchedule = notification.object as? CalendarSchedule {
@@ -145,17 +140,17 @@ class CalendarViewController: NavigationBarViewController {
             scheduleViewController.calendarSchedule = calendarSchedule
             scheduleViewController.addButtonLocation = addScheduleButton.frame
             scheduleViewController.onWriteRecordButtonTapped = { schedule in
-                self.presentWriteRecordViewController(schedule)
+                self.navigationToWriteRecordViewController(schedule)
             }
             scheduleViewController.onAddScheduleButtonTapped = {
-                self.presentAddScheduleViewController()
+                self.navigationToAddScheduleViewController()
             }
             scheduleViewController.modalPresentationStyle = .overFullScreen
             present(scheduleViewController, animated: false)
         }
     }
     
-    func presentWriteRecordViewController(_ schedule: Schedule) {
+    func navigationToWriteRecordViewController(_ schedule: Schedule) {
         let writeRecordViewController = WriteRecordViewController()
         writeRecordViewController.hidesBottomBarWhenPushed = true
         writeRecordViewController.schedule = schedule
@@ -166,9 +161,10 @@ class CalendarViewController: NavigationBarViewController {
         addScheduleButton.isHidden = false
     }
     
-    func presentAddScheduleViewController() {
+    @objc func navigationToAddScheduleViewController() {
         addScheduleButton.isHidden = false
         let addScheduleViewController = AddScheduleViewController()
+        addScheduleViewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(addScheduleViewController, animated: true)
     }
 }
