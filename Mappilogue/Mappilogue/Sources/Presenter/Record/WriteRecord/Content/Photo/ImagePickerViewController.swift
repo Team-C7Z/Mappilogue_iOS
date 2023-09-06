@@ -18,6 +18,7 @@ class ImagePickerViewController: BaseViewController {
     let allPhotosOptions = PHFetchOptions()
     var selectedAssets: [PHAsset] = []
     
+    var isProfile: Bool = false
     var isPhotoDirectory: Bool = false
     var onCompletion: (([PHAsset]) -> Void)?
     
@@ -185,7 +186,8 @@ extension ImagePickerViewController: UICollectionViewDelegate, UICollectionViewD
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImagePickerCell.registerId, for: indexPath) as? ImagePickerCell else { return UICollectionViewCell() }
         
         let asset = currentAlbum[indexPath.row]
-        cell.configure(asset)
+        let isSelected = selectedAssets.contains(asset)
+        cell.configure(asset, isSelected: isSelected)
         
         return cell
     }
@@ -207,11 +209,18 @@ extension ImagePickerViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let asset = currentAlbum[indexPath.row]
-        if let index = selectedAssets.firstIndex(where: { $0 == asset}) {
-            selectedAssets.remove(at: index)
+        
+        if isProfile {
+            selectedAssets = [asset]
         } else {
-            selectedAssets.append(asset)
+            if let index = selectedAssets.firstIndex(where: { $0 == asset}) {
+                selectedAssets.remove(at: index)
+            } else {
+                selectedAssets.append(asset)
+            }
         }
+      
+        collectionView.reloadData()
     }
 }
 

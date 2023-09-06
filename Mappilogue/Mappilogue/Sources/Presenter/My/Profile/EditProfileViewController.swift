@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import Photos
 
 class EditProfileViewController: BaseViewController {
+    private let profileImageButton = UIButton()
     private let profileImage = UIImageView()
     private let editProfileImageImage = UIImageView()
     private let editProfileImageLabel = UILabel()
@@ -22,13 +24,19 @@ class EditProfileViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        editNicnameTextFieldTapped()
+        editNicknameTextFieldTapped()
     }
     
     override func setupProperty() {
         super.setupProperty()
         
         setNavigationTitleAndBackButton("프로필 편집", backButtonAction: #selector(backButtonTapped))
+        
+        profileImageButton.addTarget(self, action: #selector(profileImageButtonTapped), for: .touchUpInside)
+        
+        profileImage.layer.cornerRadius = 44
+        profileImage.layer.masksToBounds = true
+        profileImage.contentMode = .scaleAspectFill
         
         editProfileImageImage.image = UIImage(named: "my_editProfileImage")
         
@@ -61,7 +69,8 @@ class EditProfileViewController: BaseViewController {
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        view.addSubview(profileImage)
+        view.addSubview(profileImageButton)
+        profileImageButton.addSubview(profileImage)
         profileImage.addSubview(editProfileImageImage)
         editProfileImageImage.addSubview(editProfileImageLabel)
         view.addSubview(nicknameTitleLabel)
@@ -76,10 +85,14 @@ class EditProfileViewController: BaseViewController {
     override func setupLayout() {
         super.setupLayout()
     
-        profileImage.snp.makeConstraints {
+        profileImageButton.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
             $0.width.height.equalTo(88)
+        }
+        
+        profileImage.snp.makeConstraints {
+            $0.edges.equalTo(profileImageButton)
         }
         
         editProfileImageImage.snp.makeConstraints {
@@ -152,7 +165,81 @@ class EditProfileViewController: BaseViewController {
         loginAccountImage.image = UIImage(named: snsType == .kakao ? "my_kakaoAccount" : "my_appleAccount")
     }
     
-    func editNicnameTextFieldTapped() {
+    @objc private func profileImageButtonTapped() {
+        checkAlbumPermission()
+    }
+    
+    private func checkAlbumPermission() {
+        switch PHPhotoLibrary.authorizationStatus(for: .readWrite) {
+        case .limited:
+            presentImagePickerViewController(.limited)
+        case .authorized:
+            presentImagePickerViewController(.authorized)
+        case .denied, .restricted:
+            presentGalleyPermissionAlert()
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+                if status == .limited {
+                    self.presentImagePickerViewController(.limited)
+                } else if status == .authorized {
+                    self.presentImagePickerViewController(.authorized)
+                } else {
+                    self.presentGalleyPermissionAlert()
+                }
+            }
+            print("Album: 선택하지 않음")
+        default:
+            break
+        }
+    }
+    
+    func presentGalleyPermissionAlert() {
+        DispatchQueue.main.async {
+            let alertViewController = AlertViewController()
+            alertViewController.modalPresentationStyle = .overCurrentContext
+            let alert = Alert(titleText: "사진 접근 권한을 허용해 주세요",
+                              messageText: "사진 접근 권한을 허용하지 않을 경우\n일부 기능을 사용할 수 없어요",
+                              cancelText: "닫기",
+                              doneText: "설정으로 이동",
+                              buttonColor: .color2EBD3D,
+                              alertHeight: 182)
+            alertViewController.configureAlert(with: alert)
+            alertViewController.onDoneTapped = {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
+            self.present(alertViewController, animated: false)
+        }
+    }
+    
+    func presentImagePickerViewController(_ status: PHAuthorizationStatus) {
+        DispatchQueue.main.async {
+            let imagePickerViewController = ImagePickerViewController()
+            imagePickerViewController.authStatus = status
+            imagePickerViewController.isProfile = true
+            imagePickerViewController.onCompletion = { assets in
+                if let asset = assets.first {
+                    self.updateProfileImage(asset)
+                }
+            }
+            imagePickerViewController.modalPresentationStyle = .fullScreen
+            self.present(imagePickerViewController, animated: true)
+        }
+    }
+    
+    private func updateProfileImage(_ asset: PHAsset) {
+        let imageManager = PHCachingImageManager()
+        let options = PHImageRequestOptions()
+        
+        imageManager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: options) { image, _ in
+            DispatchQueue.main.async {
+                self.profileImage.image = image
+            }
+        }
+    }
+    
+    func editNicknameTextFieldTapped() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(presentEditNicknameModalViewController))
         editNicknameTextField.addGestureRecognizer(tap)
     }
