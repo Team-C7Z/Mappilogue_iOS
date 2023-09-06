@@ -22,13 +22,13 @@ class EditProfileViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        hideKeyboardWhenTappedAround()
+        editNicnameTextFieldTapped()
     }
     
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationTitleAndBackButton("프로필 편집", backButtonAction: #selector(updateNickname))
+        setNavigationTitleAndBackButton("프로필 편집", backButtonAction: #selector(backButtonTapped))
         
         editProfileImageImage.image = UIImage(named: "my_editProfileImage")
         
@@ -40,10 +40,8 @@ class EditProfileViewController: BaseViewController {
         nicknameTitleLabel.textColor = .color707070
         nicknameTitleLabel.font = .body02
         
-        editNicknameTextField.placeholder = "8자 이하의 한글/영문"
         editNicknameTextField.textColor = .color1C1C1C
         editNicknameTextField.font = .title02
-        editNicknameTextField.returnKeyType = .done
         editNicknameTextField.delegate = self
         
         editNicknameImage.image = UIImage(named: "my_editNickname")
@@ -135,10 +133,6 @@ class EditProfileViewController: BaseViewController {
         }
     }
     
-    func updateTextFieldPlaceHolder() {
-        //
-    }
-    
     func configure(_ profile: ProfileDTO) {
         if let profileImageUrl = profile.profileImageUrl, let url = URL(string: profileImageUrl) {
             DispatchQueue.global().async { [weak self] in
@@ -155,35 +149,31 @@ class EditProfileViewController: BaseViewController {
         editNicknameTextField.text = profile.nickname
         loginAccountLabel.text = profile.email
         let snsType = AuthVendor(rawValue: profile.snsType)
-        loginAccountImage.image = UIImage(named: snsType == .kakao ? "my_kakaoAccount" : "")
+        loginAccountImage.image = UIImage(named: snsType == .kakao ? "my_kakaoAccount" : "my_appleAccount")
     }
     
-    @objc func updateNickname() {
-        backButtonTapped()
-        
-        guard let nickname = editNicknameTextField.text else { return }
-        UserManager.shared.updateNickname(nickname: nickname) { result in
-            switch result {
-            case .success(let response):
-                print(response)
-            default:
-                break
-            }
+    func editNicnameTextFieldTapped() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(presentEditNicknameModalViewController))
+        editNicknameTextField.addGestureRecognizer(tap)
+    }
+    
+    @objc func presentEditNicknameModalViewController() {
+        let editNicknameModalViewController = EditNicknameModalViewController()
+        editNicknameModalViewController.modalPresentationStyle = .overFullScreen
+        editNicknameModalViewController.configure(editNicknameTextField.text ?? "")
+        editNicknameModalViewController.onChangeTapped = { nickname in
+            self.changeNickname(nickname)
         }
+        present(editNicknameModalViewController, animated: false)
+    }
+    
+    private func changeNickname(_ nickname: String) {
+        editNicknameTextField.text = nickname
     }
 }
 
 extension EditProfileViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        return true
-    }
-    
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        updateTextFieldPlaceHolder()
-    }
-
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+        return false
     }
 }
