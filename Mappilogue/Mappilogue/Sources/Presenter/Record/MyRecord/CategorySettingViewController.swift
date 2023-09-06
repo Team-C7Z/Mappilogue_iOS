@@ -162,7 +162,7 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 0 && indexPath.row == dummyCategory.count + 1 {
-            showInputAlertViewController()
+            presentInputAlertViewController()
         } else if indexPath.section == 1 && indexPath.row > 0 {
             if collectionView.cellForItem(at: indexPath) is CategorySelectionCell {
                 selectedCateogry[indexPath.row-1] = !selectedCateogry[indexPath.row-1]
@@ -175,15 +175,19 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
         return true
     }
     
-    private func showInputAlertViewController() {
+    private func presentInputAlertViewController() {
         let inputAlertViewController = InputAlertViewController()
         inputAlertViewController.modalPresentationStyle = .overCurrentContext
         inputAlertViewController.onCompletionTapped = { inputText in
-            self.dummyCategory.append(CategoryData(title: inputText, count: 0))
-            self.selectedCateogry.append(false)
-            self.collectionView.reloadData()
+            self.addCategory(inputText)
         }
         present(inputAlertViewController, animated: false)
+    }
+    
+    func addCategory(_ input: String) {
+        dummyCategory.append(CategoryData(title: input, count: 0))
+        selectedCateogry.append(false)
+        collectionView.reloadData()
     }
     
     private func isIndexPathValid(_ indexPath: IndexPath) -> Bool {

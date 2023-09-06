@@ -116,10 +116,10 @@ class AddScheduleViewController: BaseViewController {
     }
     
     @objc func dismissButtonTapped() {
-        showAlert()
+        presentAlert()
     }
     
-    private func showAlert() {
+    private func presentAlert() {
         let alertViewController = AlertViewController()
         alertViewController.modalPresentationStyle = .overCurrentContext
         let alert = Alert(titleText: "일정 작성을 중단할까요?",
@@ -197,17 +197,17 @@ class AddScheduleViewController: BaseViewController {
         }
     }
 
-    func showNotificationViewController() {
+    func navigateToNotificationViewController() {
         let notificationViewController = NotificationViewController()
         navigationController?.pushViewController(notificationViewController, animated: true)
     }
     
-    func showRepeatViewController() {
+    func presentRepeatViewController() {
         let repeatViewController = RepeatViewController()
         navigationController?.pushViewController(repeatViewController, animated: true)
     }
     
-    func showAddLocationController() {
+    func presentAddLocationController() {
         let addLocationViewController = AddLocationViewController()
         addLocationViewController.modalPresentationStyle = .overFullScreen
         addLocationViewController.onLocationSelected = { location in
@@ -247,7 +247,7 @@ class AddScheduleViewController: BaseViewController {
         return dates
     }
     
-    func showTimePicker(indexPath: IndexPath) {
+    func presentTimePicker(indexPath: IndexPath) {
         let timePickerViewController = TimePickerViewController()
         let selectedTime = locations[indexPath.section].locationDetail[indexPath.row].time
         timePickerViewController.selectedTime = selectedTime == "설정 안 함" ? initialTime : selectedTime
@@ -271,7 +271,7 @@ class AddScheduleViewController: BaseViewController {
         }
     }
     
-    func showDeleteLocationAlert() {
+    func presentDeleteLocationAlert() {
         guard !selectedLocations.isEmpty else { return }
         
         let alertViewController = AlertViewController()
@@ -321,7 +321,7 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
             self.checkButtonTapped(indexPath)
         }
         cell.onSelectedTime = { indexPath in
-            self.showTimePicker(indexPath: indexPath)
+            self.presentTimePicker(indexPath: indexPath)
         }
         
         return cell
@@ -356,7 +356,7 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
             }
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: AddLocationFooterView.registerId, for: indexPath) as! AddLocationFooterView
             footerView.onAddLocationButtonTapped = {
-                self.showAddLocationController()
+                self.presentAddLocationController()
             }
             return footerView
         }
@@ -384,8 +384,8 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
             dateButtonConfiguration(false)
             self.addDatePickerTapGesture()
         }
-        headerView.onNotificationButtonTapped = { self.showNotificationViewController()}
-        headerView.onRepeatButtonTapped = { self.showRepeatViewController() }
+        headerView.onNotificationButtonTapped = { self.navigateToNotificationViewController()}
+        headerView.onRepeatButtonTapped = { self.presentRepeatViewController() }
     }
     
     func configureDeleteLocationFooterView(_ footerView: DeleteLocationFooterView) {
@@ -394,7 +394,7 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
             self.collectionView.reloadData()
         }
         footerView.onDeleteLocation = {
-            self.showDeleteLocationAlert()
+            self.presentDeleteLocationAlert()
         }
     }
     

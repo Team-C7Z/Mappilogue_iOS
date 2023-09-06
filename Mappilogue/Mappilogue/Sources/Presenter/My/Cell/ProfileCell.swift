@@ -11,8 +11,8 @@ class ProfileCell: BaseCollectionViewCell {
     static let registerId = "\(ProfileCell.self)"
     
     private let profileImage = UIImageView()
-    private let profileName = UILabel()
-    private let profileEmail = UILabel()
+    private let profileNameLabel = UILabel()
+    private let profileEmailLabel = UILabel()
     private let moveImage = UIImageView()
     
     override func setupProperty() {
@@ -20,15 +20,12 @@ class ProfileCell: BaseCollectionViewCell {
         
         profileImage.layer.cornerRadius = 56 / 2
         profileImage.backgroundColor = .colorF5F3F0
-        profileImage.image = UIImage(named: "my_profile")
         
-        profileName.text = "맵필로그 님"
-        profileName.textColor = .color000000
-        profileName.font = .title02
+        profileNameLabel.textColor = .color000000
+        profileNameLabel.font = .title02
         
-        profileEmail.text = "mappilogue@kakao.com"
-        profileEmail.textColor = .color707070
-        profileEmail.font = .caption01
+        profileEmailLabel.textColor = .color707070
+        profileEmailLabel.font = .caption01
         
         moveImage.image = UIImage(named: "my_move")
         moveImage.tintColor = .color707070
@@ -38,8 +35,8 @@ class ProfileCell: BaseCollectionViewCell {
         super.setupHierarchy()
         
         contentView.addSubview(profileImage)
-        contentView.addSubview(profileName)
-        contentView.addSubview(profileEmail)
+        contentView.addSubview(profileNameLabel)
+        contentView.addSubview(profileEmailLabel)
         contentView.addSubview(moveImage)
     }
     
@@ -51,13 +48,13 @@ class ProfileCell: BaseCollectionViewCell {
             $0.width.height.equalTo(56)
         }
         
-        profileName.snp.makeConstraints {
+        profileNameLabel.snp.makeConstraints {
             $0.leading.equalTo(profileImage.snp.trailing).offset(12)
             $0.top.equalTo(contentView).offset(14)
         }
         
-        profileEmail.snp.makeConstraints {
-            $0.leading.equalTo(profileName)
+        profileEmailLabel.snp.makeConstraints {
+            $0.leading.equalTo(profileNameLabel)
             $0.top.equalTo(contentView).offset(38)
         }
         
@@ -68,7 +65,23 @@ class ProfileCell: BaseCollectionViewCell {
             $0.height.equalTo(14)
         }
     }
-    
-    func configure() {
+
+    func configure(_ profile: ProfileDTO?) {
+        guard let profile else { return }
+        
+        profileNameLabel.text = profile.nickname
+        profileEmailLabel.text = profile.email
+        
+        if let profileImageUrl = profile.profileImageUrl, let url = URL(string: profileImageUrl) {
+            DispatchQueue.global().async { [weak self] in
+                if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.profileImage.image = image
+                    }
+                }
+            }
+        } else {
+            profileImage.image = UIImage(named: "my_profile")
+        }
     }
 }

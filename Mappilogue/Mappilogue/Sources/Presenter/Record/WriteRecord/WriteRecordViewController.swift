@@ -205,19 +205,19 @@ class WriteRecordViewController: BaseViewController {
     private func checkAlbumPermission() {
         switch PHPhotoLibrary.authorizationStatus(for: .readWrite) {
         case .limited:
-            showImagePickerViewController(.limited)
+            presentImagePickerViewController(.limited)
         case .authorized:
-            showImagePickerViewController(.authorized)
+            presentImagePickerViewController(.authorized)
         case .denied, .restricted:
-            showGalleyPermissionAlert()
+            presentGalleyPermissionAlert()
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
                 if status == .limited {
-                    self.showImagePickerViewController(.limited)
+                    self.presentImagePickerViewController(.limited)
                 } else if status == .authorized {
-                    self.showImagePickerViewController(.authorized)
+                    self.presentImagePickerViewController(.authorized)
                 } else {
-                    self.showGalleyPermissionAlert()
+                    self.presentGalleyPermissionAlert()
                 }
             }
             print("Album: 선택하지 않음")
@@ -226,7 +226,7 @@ class WriteRecordViewController: BaseViewController {
         }
     }
 
-    func showImagePickerViewController(_ status: PHAuthorizationStatus) {
+    func presentImagePickerViewController(_ status: PHAuthorizationStatus) {
         DispatchQueue.main.async {
             let imagePickerViewController = ImagePickerViewController()
             imagePickerViewController.authStatus = status
@@ -238,7 +238,7 @@ class WriteRecordViewController: BaseViewController {
         }
     }
     
-    func showGalleyPermissionAlert() {
+    func presentGalleyPermissionAlert() {
         DispatchQueue.main.async {
             let alertViewController = AlertViewController()
             alertViewController.modalPresentationStyle = .overCurrentContext

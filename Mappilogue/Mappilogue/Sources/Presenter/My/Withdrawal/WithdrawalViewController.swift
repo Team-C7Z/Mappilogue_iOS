@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import KakaoSDKUser
 
 class WithdrawalViewController: BaseViewController {
     let withdrawalReasons = [
@@ -18,6 +19,7 @@ class WithdrawalViewController: BaseViewController {
     ]
     var selectedReasons: [Bool] = []
     var isSelectedReason: Bool = false
+    var onWithdrawal: (() -> Void)?
     
     private let withdrawalTitleLabel = UILabel()
     private let withdrawalSubTitleLabel = UILabel()
@@ -93,7 +95,7 @@ class WithdrawalViewController: BaseViewController {
     }
     
     func setSkipButtonItem() {
-        let skipButtonItem = UIBarButtonItem(title: "건너뛰기", style: .plain, target: self, action: #selector(completeWithdrawal))
+        let skipButtonItem = UIBarButtonItem(title: "건너뛰기", style: .plain, target: self, action: #selector(performWithdrawal))
         skipButtonItem.tintColor = .color9B9791
         navigationItem.rightBarButtonItem = skipButtonItem
     }
@@ -121,13 +123,51 @@ class WithdrawalViewController: BaseViewController {
     
     @objc func submitButtonTapped() {
         if isSelectedReason {
-            completeWithdrawal()
+            performWithdrawal()
         }
     }
-
-    @objc func completeWithdrawal() {
-        if let navigationController = self.navigationController {
-            navigationController.popToRootViewController(animated: false)
+    
+    @objc private func performWithdrawal() {
+        UserApi.shared.unlink { error in
+            if let error = error {
+                print(error)
+            } else {
+                self.handleUserManagerWithdrawal()
+            }
         }
+    }
+    
+    private func handleUserManagerWithdrawal() {
+        UserManager.shared.withdrawal(reason: self.withdrawalReason()) { result in
+            switch result {
+            case .success:
+                self.clearAuthUserDefaults()
+                self.completeWithdrawal()
+            default:
+                break
+            }
+        }
+    }
+    
+    private func clearAuthUserDefaults() {
+        AuthUserDefaults.accessToken = nil
+        AuthUserDefaults.refreshToken = nil
+    }
+    
+    private func withdrawalReason() -> String? {
+        return isSelectedReason ? setWithdrawlReason() : nil
+    }
+    
+    private func setWithdrawlReason() -> String {
+        var reasons: [String] = []
+        for (index, selectedReason) in selectedReasons.enumerated() where selectedReason {
+            reasons.append(withdrawalReasons[index])
+        }
+        return reasons.joined(separator: " / ")
+    }
+    
+    func completeWithdrawal() {
+        navigationController?.popViewController(animated: false)
+        onWithdrawal?()
     }
 }

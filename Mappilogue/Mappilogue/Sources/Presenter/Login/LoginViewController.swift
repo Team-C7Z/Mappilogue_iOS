@@ -10,9 +10,7 @@ import KakaoSDKAuth
 import KakaoSDKUser
 import KakaoSDKCommon
 
-class LogInViewController: BaseViewController {
-    let authManager = AuthManager()
-    
+class LoginViewController: BaseViewController {
     private let logoImage = UIImageView()
     private let titleLabel = UILabel()
     private let kakaoLoginButton = UIButton()
@@ -91,20 +89,52 @@ class LogInViewController: BaseViewController {
     func handleKakaoTalkLogin(oauthToken: OAuthToken?, error: Error?) {
         if let error = error {
             print(error)
+            return
         } else {
             guard let oauthToken = oauthToken else { return }
             let accessToken = oauthToken.accessToken
-            self.authManager.logIn(token: accessToken, socialVendor: .kakao, isAlarm: nil) { result in
+            
+            AuthManager.shared.logIn(token: accessToken, socialVendor: .kakao, isAlarm: .active) { result in
                 switch result {
                 case .success(let response):
-                    if let baseResponse = response as? BaseResponse<AuthResponse>, let result = baseResponse.result {
-                        AuthUserDefaults.accessToken = result.accessToken
-                        AuthUserDefaults.refreshToken = result.refreshToken
-                    }
+                    self.handleLoginResponse(response)
                 default:
-                    print("log in error")
+                    break
                 }
             }
         }
+    }
+    
+    private func handleLoginResponse(_ response: Any) {
+        guard let baseResponse = response as? BaseResponse<AuthResponse>, let result = baseResponse.result else { return }
+        
+        AuthUserDefaults.accessToken = result.accessToken
+        AuthUserDefaults.refreshToken = result.refreshToken
+        
+        guard let authType = AuthType(rawValue: result.type) else {
+            return
+        }
+        
+        switch authType {
+        case .logIn:
+            presentTabBarController()
+        case .signUp:
+            presentSignUpCompleteViewController()
+        }
+    }
+    
+    func presentSignUpCompleteViewController() {
+        let signUpCompletionViewController = SignUpCompletionViewController()
+        signUpCompletionViewController.modalPresentationStyle = .fullScreen
+        signUpCompletionViewController.onTapped = {
+            self.presentTabBarController()
+        }
+        present(signUpCompletionViewController, animated: false)
+    }
+    
+    func presentTabBarController() {
+        let tabBarController = TabBarController()
+        tabBarController.modalPresentationStyle = .fullScreen
+        present(tabBarController, animated: false)
     }
 }

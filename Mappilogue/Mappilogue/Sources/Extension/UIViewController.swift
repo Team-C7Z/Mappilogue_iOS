@@ -30,7 +30,7 @@ extension UIViewController {
         }
     }
     
-    @objc func backButtonTapped(_ sender: UIButton) {
+    @objc func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
     
