@@ -131,7 +131,7 @@ class EditNicknameModalViewController: BaseViewController {
     @objc private func deleteButtonTapped(_ sender: UIButton) {
         guard let text = inputTextField.text else { return }
             
-        if isValidNickname(text) {
+        if isValidNickname(text) && !text.isEmpty {
             dismiss(animated: false) {
                 self.updateNickname(text)
                 self.onChangeTapped?(text)
@@ -173,5 +173,13 @@ extension EditNicknameModalViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+    
+        if text.count > 8 {
+            textField.text = String(text.prefix(8))
+        }
     }
 }
