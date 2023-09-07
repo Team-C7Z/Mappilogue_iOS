@@ -175,23 +175,47 @@ class ImagePickerViewController: BaseViewController {
     private func removePhotoDirectoryView() {
         photoDirectoryView.removeFromSuperview()
     }
+    
+    private func checkCameraPermission() {
+        AVCaptureDevice.requestAccess(for: .video) { permission in
+            if permission {
+                print("Camera: 권한 허용")
+                DispatchQueue.main.async {
+                    self.presentCameraViewController()
+                }
+            } else {
+                print("Camera: 권한 거부")
+            }
+        }
+    }
+    
+    private func presentCameraViewController() {
+        let cameraViewController = CameraViewController()
+        let navigationController = UINavigationController(rootViewController: cameraViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
+    }
 }
 
-extension ImagePickerViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {    
+extension ImagePickerViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return currentAlbum.count
+        return currentAlbum.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImagePickerCell.registerId, for: indexPath) as? ImagePickerCell else { return UICollectionViewCell() }
         
-        let asset = currentAlbum[indexPath.row]
-        let isSelected = selectedAssets.contains(asset)
-        cell.configure(asset, isSelected: isSelected)
+        if indexPath.row == 0 {
+            cell.configure(nil, isCamera: true, isSelected: false)
+        } else {
+            let asset = currentAlbum[indexPath.row - 1]
+            let isSelected = selectedAssets.contains(asset)
+            cell.configure(asset, isCamera: false, isSelected: isSelected)
+        }
         
         return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = (collectionView.frame.width - 10) / 3
         return CGSize(width: size, height: size)
@@ -208,19 +232,24 @@ extension ImagePickerViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let asset = currentAlbum[indexPath.row]
-        
-        if isProfile {
-            selectedAssets = [asset]
+        if indexPath.row == 0 {
+            checkCameraPermission()
         } else {
-            if let index = selectedAssets.firstIndex(where: { $0 == asset}) {
-                selectedAssets.remove(at: index)
+            let asset = currentAlbum[indexPath.row - 1]
+            
+            if isProfile {
+                selectedAssets = [asset]
+                
             } else {
-                selectedAssets.append(asset)
+                if let index = selectedAssets.firstIndex(where: { $0 == asset}) {
+                    selectedAssets.remove(at: index)
+                } else {
+                    selectedAssets.append(asset)
+                }
             }
+            
+            collectionView.reloadItems(at: [indexPath])
         }
-      
-        collectionView.reloadData()
     }
 }
 
@@ -228,7 +257,7 @@ extension ImagePickerViewController: PHPhotoLibraryChangeObserver {
     func photoLibraryDidChange(_ changeInstance: PHChange) {
         guard let changes = changeInstance.changeDetails(for: allPhotos) else { return }
         allPhotos = changes.fetchResultAfterChanges
-        
+    
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }

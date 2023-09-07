@@ -53,7 +53,7 @@ class EditProfileViewController: BaseViewController {
         editNicknameTextField.delegate = self
         
         editNicknameImage.image = UIImage(named: "my_editNickname")
-        
+  
         nicknameLineView.backgroundColor = .color1C1C1C
         
         loginAccountTitleLabel.text = "로그인 계정"
