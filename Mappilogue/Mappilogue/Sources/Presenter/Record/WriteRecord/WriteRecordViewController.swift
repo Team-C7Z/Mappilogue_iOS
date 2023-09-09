@@ -21,7 +21,8 @@ class WriteRecordViewController: BaseViewController {
     private let scheduleTitleColorView = ScheduleTitleColorView()
     private let colorSelectionView = ColorSelectionView()
     private let mainLocationButton = MainLocationButton()
-    private let textContentView = TextContentView()
+    private let contentImageView = ContentImageView()
+    private let contentTextView = ContentTextView()
     private let saveRecordView = ImageSaveRecordView()
     
     override func viewDidLoad() {
@@ -47,13 +48,12 @@ class WriteRecordViewController: BaseViewController {
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
         stackView.spacing = 0
-        stackView.backgroundColor = .colorEAE6E1
         
         categoryButton.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
         
         mainLocationButton.addTarget(self, action: #selector(mainLocationButtonTapped), for: .touchUpInside)
         
-        textContentView.stackViewHeightUpdated = {
+        contentTextView.stackViewHeightUpdated = {
             self.stackView.layoutIfNeeded()
             self.scrollToBottom()
         }
@@ -74,7 +74,8 @@ class WriteRecordViewController: BaseViewController {
         titleColorStackView.addArrangedSubview(scheduleTitleColorView)
         titleColorStackView.addArrangedSubview(colorSelectionView)
         stackView.addArrangedSubview(mainLocationButton)
-        stackView.addArrangedSubview(textContentView)
+        stackView.addArrangedSubview(contentImageView)
+        stackView.addArrangedSubview(contentTextView)
         view.addSubview(saveRecordView)
     }
     

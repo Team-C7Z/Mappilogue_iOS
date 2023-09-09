@@ -1,5 +1,5 @@
 //
-//  TextContentView.swift
+//  ContentTextView.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/07/27.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TextContentView: BaseView {
+class ContentTextView: BaseView {
     let textViewPlaceHolder = "기록을 입력하세요"
     var textViewHeight: CGFloat = 300
     var stackViewHeightUpdated: (() -> Void)?
@@ -43,13 +43,13 @@ class TextContentView: BaseView {
         
         textView.snp.makeConstraints {
             $0.leading.trailing.equalTo(self)
-            $0.top.equalTo(self).offset(16)
+            $0.top.equalTo(self).offset(12)
             $0.bottom.equalTo(self).offset(-100)
         }
     }
 }
 
-extension TextContentView: UITextViewDelegate {
+extension ContentTextView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == textViewPlaceHolder {
             textView.text = nil
