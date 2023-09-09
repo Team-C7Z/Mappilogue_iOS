@@ -6,11 +6,15 @@
 //
 
 import UIKit
+import Photos
 
 class ContentImageCell: BaseCollectionViewCell {
     static let registerId = "\(ContentImageCell.self)"
     
-    private let contentImageView = UIImageView()
+    let imageManager = PHCachingImageManager()
+    let options = PHImageRequestOptions()
+    
+    private let contentImage = UIImageView()
     private let removeImageButton = UIButton()
     private let mainImageButton = UIButton()
     
@@ -25,6 +29,10 @@ class ContentImageCell: BaseCollectionViewCell {
         contentView.layer.cornerRadius = 12
         contentView.layer.borderColor = UIColor.color2EBD3D.cgColor
         
+        contentImage.layer.cornerRadius = 12
+        contentImage.contentMode = .scaleAspectFill
+        contentImage.layer.masksToBounds = true
+        
         removeImageButton.setImage(UIImage(named: "record_removeImage"), for: .normal)
         
         mainImageButton.layer.cornerRadius = 23 / 2
@@ -37,7 +45,7 @@ class ContentImageCell: BaseCollectionViewCell {
     override func setupHierarchy() {
         super.setupHierarchy()
 
-        addSubview(contentImageView)
+        addSubview(contentImage)
         addSubview(removeImageButton)
         addSubview(mainImageButton)
     }
@@ -45,7 +53,7 @@ class ContentImageCell: BaseCollectionViewCell {
     override func setupLayout() {
         super.setupLayout()
         
-        contentImageView.snp.makeConstraints {
+        contentImage.snp.makeConstraints {
             $0.edges.equalTo(self)
         }
         
@@ -63,7 +71,11 @@ class ContentImageCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(_ image: UIImage, isMain: Bool, isSelected: Bool) {
-        
+    func configure(_ asset: PHAsset, isMain: Bool, isSelected: Bool) {
+        imageManager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: options) { image, _ in
+            DispatchQueue.main.async {
+                self.contentImage.image = image
+            }
+        }
     }
 }

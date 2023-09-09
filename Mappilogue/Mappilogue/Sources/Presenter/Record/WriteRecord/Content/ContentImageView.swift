@@ -6,14 +6,18 @@
 //
 
 import UIKit
+import Photos
 
 class ContentImageView: BaseView {
+    private var assets: [PHAsset] = []
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsHorizontalScrollIndicator = false
+        collectionView.backgroundColor = .clear
         collectionView.register(ContentImageCell.self, forCellWithReuseIdentifier: ContentImageCell.registerId)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -39,7 +43,7 @@ class ContentImageView: BaseView {
         super.setupLayout()
         
         self.snp.makeConstraints {
-            $0.height.equalTo(133)
+            $0.height.equalTo(0)
         }
         
         collectionView.snp.makeConstraints {
@@ -53,16 +57,29 @@ class ContentImageView: BaseView {
             $0.height.equalTo(1)
         }
     }
+    
+    func configure(_ assets: [PHAsset]) {
+        self.assets += assets
+        
+        self.snp.updateConstraints {
+            $0.height.equalTo(assets.isEmpty ? 0 : 133)
+        }
+        
+        collectionView.reloadData()
+    }
 }
 
 extension ContentImageView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return assets.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentImageCell.registerId, for: indexPath) as? ContentImageCell else { return UICollectionViewCell() }
 
+        let asset = assets[indexPath.row]
+        cell.configure(asset, isMain: false, isSelected: false)
+        
         return cell
     }
 //
