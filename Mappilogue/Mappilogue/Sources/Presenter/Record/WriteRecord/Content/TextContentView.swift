@@ -8,56 +8,43 @@
 import UIKit
 
 class TextContentView: BaseView {
-    var isFirst: Bool = false
-    let textViewPlaceHolder = "내용을 입력하세요"
-    var textViewHeight: CGFloat = 50
+    let textViewPlaceHolder = "기록을 입력하세요"
+    var textViewHeight: CGFloat = 300
     var stackViewHeightUpdated: (() -> Void)?
     
-    let contentView = UITextView()
+    let textView = UITextView()
 
     override func setupProperty() {
         super.setupProperty()
         
         backgroundColor = .colorF9F8F7
        
-        contentView.backgroundColor = .clear
-        contentView.font = .body01
-        contentView.isScrollEnabled = false
-        contentView.delegate = self
-        contentView.setLineAndLetterSpacing(contentView.text)
+        textView.text = textViewPlaceHolder
+        textView.textColor = .color9B9791
+        textView.backgroundColor = .clear
+        textView.font = .body02
+        textView.tintColor = .color2EBD3D
+        textView.isScrollEnabled = false
+        textView.delegate = self
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        addSubview(contentView)
+        addSubview(textView)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
-        contentView.snp.makeConstraints {
-            $0.leading.trailing.equalTo(self)
-            $0.top.equalTo(self)
-            $0.bottom.equalTo(self)
+        self.snp.makeConstraints {
+            $0.height.equalTo(textViewHeight)
         }
-    }
-    
-    func configure(_ isFirst: Bool) {
-        self.isFirst = isFirst
-        if isFirst {
-            contentView.text = textViewPlaceHolder
-            contentView.textColor = .colorC9C6C2
-         
-            contentView.snp.updateConstraints {
-                $0.top.equalTo(self).offset(16)
-            }
-        } else {
-            if contentView.text == textViewPlaceHolder {
-                contentView.text = ""
-            }
-            
-            contentView.textColor = .color1C1C1C
+        
+        textView.snp.makeConstraints {
+            $0.leading.trailing.equalTo(self)
+            $0.top.equalTo(self).offset(16)
+            $0.bottom.equalTo(self).offset(-100)
         }
     }
 }
@@ -71,24 +58,25 @@ extension TextContentView: UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        if isFirst && textView.text.isEmpty {
+        if textView.text.isEmpty {
             textView.text = textViewPlaceHolder
-            textView.textColor = .colorC9C6C2
+            textView.textColor = .color9B9791
         }
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        contentView.setLineAndLetterSpacing(textView.text)
-        contentView.font = .body01
+        textView.setLineAndLetterSpacing(textView.text)
+        textView.font = .body02
+        textView.textColor = .color1C1C1C
         updateTextViewHeight()
     }
     
     func updateTextViewHeight() {
-        let fixedWidth = contentView.frame.size.width
-        let newSize = contentView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
-
+        let fixedWidth = textView.frame.size.width
+        let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+        
         self.snp.remakeConstraints {
-            $0.height.equalTo(max(textViewHeight, isFirst ? newSize.height+32 : newSize.height+16))
+            $0.height.equalTo(max(textViewHeight, newSize.height + 130))
         }
         stackViewHeightUpdated?()
         self.layoutIfNeeded()
@@ -99,11 +87,12 @@ extension UITextView {
     func setLineAndLetterSpacing(_ text: String) {
         let style = NSMutableParagraphStyle()
    
-        style.lineSpacing = 5
+        style.lineSpacing = 6
         let attributedString = NSMutableAttributedString(string: text)
 
         attributedString.addAttribute(NSAttributedString.Key.kern, value: CGFloat(0), range: NSRange(location: 0, length: attributedString.length))
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: style, range: NSRange(location: 0, length: attributedString.length))
+    
         self.attributedText = attributedString
     }
 }
