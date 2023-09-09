@@ -21,6 +21,7 @@ class ScheduleTitleColorView: BaseView {
         
         scheduleTitleTextField.font = .title02
         scheduleTitleTextField.placeholder = "일정 제목을 적어 주세요"
+        scheduleTitleTextField.tintColor = .color2EBD3D
         scheduleTitleTextField.returnKeyType = .done
         scheduleTitleTextField.delegate = self
         

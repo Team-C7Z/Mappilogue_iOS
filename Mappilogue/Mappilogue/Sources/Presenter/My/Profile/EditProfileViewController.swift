@@ -50,6 +50,7 @@ class EditProfileViewController: BaseViewController {
         
         editNicknameTextField.textColor = .color1C1C1C
         editNicknameTextField.font = .title02
+        editNicknameTextField.tintColor = .color2EBD3D
         editNicknameTextField.delegate = self
         
         editNicknameImage.image = UIImage(named: "my_editNickname")

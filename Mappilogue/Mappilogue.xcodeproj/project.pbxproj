@@ -38,7 +38,6 @@
 		920031F32A92274100E3170D /* LimitedPhotoSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031F22A92274000E3170D /* LimitedPhotoSelectionView.swift */; };
 		920031F52A92444E00E3170D /* PhotoDirectoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031F42A92444E00E3170D /* PhotoDirectoryView.swift */; };
 		920031F82A92467A00E3170D /* PhotoDirectoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031F72A92467A00E3170D /* PhotoDirectoryCell.swift */; };
-		920031FE2A93A27000E3170D /* ImageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031FD2A93A27000E3170D /* ImageContentView.swift */; };
 		920032002A9504EE00E3170D /* MaredRecordsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031FF2A9504EE00E3170D /* MaredRecordsFooterView.swift */; };
 		920032032A9715D600E3170D /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920032022A9715D600E3170D /* PermissionViewController.swift */; };
 		920032052A97166700E3170D /* PermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920032042A97166700E3170D /* PermissionView.swift */; };
@@ -272,7 +271,6 @@
 		920031F22A92274000E3170D /* LimitedPhotoSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitedPhotoSelectionView.swift; sourceTree = "<group>"; };
 		920031F42A92444E00E3170D /* PhotoDirectoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDirectoryView.swift; sourceTree = "<group>"; };
 		920031F72A92467A00E3170D /* PhotoDirectoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDirectoryCell.swift; sourceTree = "<group>"; };
-		920031FD2A93A27000E3170D /* ImageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageContentView.swift; sourceTree = "<group>"; };
 		920031FF2A9504EE00E3170D /* MaredRecordsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaredRecordsFooterView.swift; sourceTree = "<group>"; };
 		920032022A9715D600E3170D /* PermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewController.swift; sourceTree = "<group>"; };
 		920032042A97166700E3170D /* PermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionView.swift; sourceTree = "<group>"; };
@@ -692,7 +690,6 @@
 			isa = PBXGroup;
 			children = (
 				92011B882A72B4BB009B047F /* TextContentView.swift */,
-				920031FD2A93A27000E3170D /* ImageContentView.swift */,
 				920031F62A92445200E3170D /* Photo */,
 			);
 			path = Content;
@@ -1649,7 +1646,6 @@
 				928B7C1F2AA6DADA00E4F789 /* ProfileDTO.swift in Sources */,
 				92011C102A74F222009B047F /* SearchType.swift in Sources */,
 				92A7B6592A4D01B3009C9293 /* TodayScheduleInfoCell.swift in Sources */,
-				920031FE2A93A27000E3170D /* ImageContentView.swift in Sources */,
 				925840A02A7BD4D700997434 /* CategoryOrderCell.swift in Sources */,
 				9224FCF32A5C5E7A000A56A6 /* WeekCell.swift in Sources */,
 				9224FD092A601B00000A56A6 /* ColorSelectionButton.swift in Sources */,

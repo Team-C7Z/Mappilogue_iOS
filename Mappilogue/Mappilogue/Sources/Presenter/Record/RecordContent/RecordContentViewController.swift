@@ -29,8 +29,8 @@ class RecordContentViewController: BaseViewController {
         stackView.distribution = .equalSpacing
         stackView.spacing = 0
         
-        recordContentView.contentView.text = " "
-        recordContentView.contentView.isEditable = false
+        recordContentView.textView.text = " "
+        recordContentView.textView.isEditable = false
     }
     
     override func setupHierarchy() {

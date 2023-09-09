@@ -12,10 +12,7 @@ class WriteRecordViewController: BaseViewController {
     var schedule: Schedule = Schedule()
     var onColorSelectionButtonTapped: (() -> Void)?
     private var colorList = dummyColorSelectionData()
-    private var textContentCellHeight: CGFloat = 80
-    private var selectedImages: [PHAsset] = []
-    private var isFirst: Bool = true
-    
+ 
     private let titleColorStackView = UIStackView()
     private let scrollView = UIScrollView()
     private let contentView = UIView()
@@ -56,7 +53,6 @@ class WriteRecordViewController: BaseViewController {
         
         mainLocationButton.addTarget(self, action: #selector(mainLocationButtonTapped), for: .touchUpInside)
         
-        textContentView.configure(true)
         textContentView.stackViewHeightUpdated = {
             self.stackView.layoutIfNeeded()
             self.scrollToBottom()
@@ -160,7 +156,7 @@ class WriteRecordViewController: BaseViewController {
     
     private func scrollToBottom() {
         let bottomOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - scrollView.bounds.size.height)
-     //   scrollView.setContentOffset(bottomOffset, animated: true)
+        scrollView.setContentOffset(bottomOffset, animated: true)
     }
     
     private func setKeyboardObservers() {
@@ -182,7 +178,7 @@ class WriteRecordViewController: BaseViewController {
         let keyboardHeight = keyboardFrame.cgRectValue.height
         stackView.snp.updateConstraints {
             if isShowing {
-                $0.bottom.equalTo(contentView).offset(-keyboardHeight - 150)
+                $0.bottom.equalTo(contentView).offset(-keyboardHeight)
             } else {
                 $0.bottom.equalTo(contentView).offset(-58)
             }
@@ -231,7 +227,7 @@ class WriteRecordViewController: BaseViewController {
             let imagePickerViewController = ImagePickerViewController()
             imagePickerViewController.authStatus = status
             imagePickerViewController.onCompletion = { assets in
-                self.addImageContentView(assets)
+                
             }
             imagePickerViewController.modalPresentationStyle = .fullScreen
             self.present(imagePickerViewController, animated: true)
@@ -256,37 +252,6 @@ class WriteRecordViewController: BaseViewController {
             }
             self.present(alertViewController, animated: false)
         }
-    }
-    
-    func addImageContentView(_ assets: [PHAsset]) {
-        if isFirst && !assets.isEmpty {
-            textContentView.configure(false)
-        }
-        for asset in assets {
-            let imageContentView = ImageContentView()
-            let index = stackView.arrangedSubviews.count
-            imageContentView.configure(index, asset: asset)
-            // imageContentView.configureMainImage(isFirstImage)
-            stackView.addArrangedSubview(imageContentView)
-            addTextContentView()
-            
-            imageContentView.onRemoveImage = { index in
-                self.removeImageContentView(index)
-            }
-        }
-    }
-    
-    func removeImageContentView(_ index: Int) {
-        for _ in 0..<2 {
-            let viewToRemove = stackView.arrangedSubviews[index]
-            stackView.removeArrangedSubview(viewToRemove)
-            viewToRemove.removeFromSuperview()
-        }
-    }
-    
-    func addTextContentView() {
-        let textContentView = TextContentView()
-        stackView.addArrangedSubview(textContentView)
     }
     
     @objc func saveRecordButtonTapped() {
