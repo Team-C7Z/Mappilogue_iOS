@@ -14,6 +14,9 @@ class ContentImageCell: BaseCollectionViewCell {
     let imageManager = PHCachingImageManager()
     let options = PHImageRequestOptions()
     
+    private var index: Int = -1
+    var onRemoveImage: ((Int) -> Void)?
+    
     private let contentImage = UIImageView()
     private let removeImageButton = UIButton()
     private let mainImageButton = UIButton()
@@ -26,17 +29,17 @@ class ContentImageCell: BaseCollectionViewCell {
     override func setupProperty() {
         super.setupProperty()
     
-        contentView.layer.cornerRadius = 12
-        contentView.layer.borderColor = UIColor.color2EBD3D.cgColor
+        layer.cornerRadius = 12
+        layer.borderColor = UIColor.color2EBD3D.cgColor
         
         contentImage.layer.cornerRadius = 12
         contentImage.contentMode = .scaleAspectFill
         contentImage.layer.masksToBounds = true
         
         removeImageButton.setImage(UIImage(named: "record_removeImage"), for: .normal)
+        removeImageButton.addTarget(self, action: #selector(removeImageButtonTapped), for: .touchUpInside)
         
         mainImageButton.layer.cornerRadius = 23 / 2
-        mainImageButton.backgroundColor = .color2EBD3D
         mainImageButton.setTitle("대표", for: .normal)
         mainImageButton.setTitleColor(.colorFFFFFF, for: .normal)
         mainImageButton.titleLabel?.font = .caption03
@@ -71,11 +74,20 @@ class ContentImageCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(_ asset: PHAsset, isMain: Bool, isSelected: Bool) {
+    func configure(_ asset: PHAsset, index: Int, isMain: Bool, isSelected: Bool) {
         imageManager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: options) { image, _ in
             DispatchQueue.main.async {
                 self.contentImage.image = image
             }
         }
+        
+        self.index = index
+        mainImageButton.backgroundColor = isMain ? .color2EBD3D : .colorEAE6E1
+        layer.borderWidth = isSelected ? 2 : 0
+        removeImageButton.isHidden = !isSelected
+    }
+    
+    @objc func removeImageButtonTapped() {
+        onRemoveImage?(index)
     }
 }
