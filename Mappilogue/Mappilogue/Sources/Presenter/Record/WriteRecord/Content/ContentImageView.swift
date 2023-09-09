@@ -10,6 +10,8 @@ import Photos
 
 class ContentImageView: BaseView {
     private var assets: [PHAsset] = []
+    private var selectedMainImageIndex: Int = 0
+    private var selectedImageIndex: Int?
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -61,11 +63,21 @@ class ContentImageView: BaseView {
     func configure(_ assets: [PHAsset]) {
         self.assets += assets
         
+        updateViewHeight()
+    }
+    
+    func updateViewHeight() {
         self.snp.updateConstraints {
             $0.height.equalTo(assets.isEmpty ? 0 : 133)
         }
         
         collectionView.reloadData()
+    }
+    
+    func removeAsset(_ index: Int) {
+        assets.remove(at: index)
+        
+        updateViewHeight()
     }
 }
 
@@ -77,15 +89,20 @@ extension ContentImageView: UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentImageCell.registerId, for: indexPath) as? ContentImageCell else { return UICollectionViewCell() }
 
+        cell.onRemoveImage = { index in
+            self.removeAsset(index)
+        }
+        
         let asset = assets[indexPath.row]
-        cell.configure(asset, isMain: false, isSelected: false)
+        let isMain = indexPath.row == selectedMainImageIndex
+        var isSelected: Bool = false
+        if let index = selectedImageIndex, indexPath.row == index {
+            isSelected = true
+        }
+        cell.configure(asset, index: indexPath.row, isMain: isMain, isSelected: isSelected)
         
         return cell
     }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        return UIEdgeInsets(top: , left: 16, bottom: 0, right: 16)
-//    }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 100, height: 100)
@@ -99,5 +116,10 @@ extension ContentImageView: UICollectionViewDelegate, UICollectionViewDataSource
     // 수직 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 8
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedImageIndex = indexPath.row
+        collectionView.reloadData()
     }
 }
