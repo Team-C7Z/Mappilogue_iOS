@@ -228,7 +228,7 @@ class WriteRecordViewController: BaseViewController {
             let imagePickerViewController = ImagePickerViewController()
             imagePickerViewController.authStatus = status
             imagePickerViewController.onCompletion = { assets in
-                
+                self.displayRecordImages(assets)
             }
             imagePickerViewController.modalPresentationStyle = .fullScreen
             self.present(imagePickerViewController, animated: true)
@@ -253,6 +253,10 @@ class WriteRecordViewController: BaseViewController {
             }
             self.present(alertViewController, animated: false)
         }
+    }
+    
+    func displayRecordImages(_ assets: [PHAsset]) {
+        contentImageView.configure(assets)
     }
     
     @objc func saveRecordButtonTapped() {
