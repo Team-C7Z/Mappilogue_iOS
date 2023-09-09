@@ -12,10 +12,6 @@ class CategoryButton: BaseButton {
     private let moveImage = UIImageView()
     private let lineView = UIView()
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-    
     override func setupProperty() {
         super.setupProperty()
         

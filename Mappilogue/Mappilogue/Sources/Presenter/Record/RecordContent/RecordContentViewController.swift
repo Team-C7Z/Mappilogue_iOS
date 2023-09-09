@@ -12,7 +12,7 @@ class RecordContentViewController: BaseViewController {
     private let contentView = UIView()
     private let stackView = UIStackView()
     private let recordContentHeaderView = RecordContentHeaderView()
-    private let recordContentView = TextContentView()
+    private let recordContentView = ContentTextView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
