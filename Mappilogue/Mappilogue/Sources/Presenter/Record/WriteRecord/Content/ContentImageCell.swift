@@ -16,6 +16,7 @@ class ContentImageCell: BaseCollectionViewCell {
     
     private var index: Int = -1
     var onRemoveImage: ((Int) -> Void)?
+    var onMainImage: ((Int) -> Void)?
     
     private let contentImage = UIImageView()
     private let removeImageButton = UIButton()
@@ -43,6 +44,7 @@ class ContentImageCell: BaseCollectionViewCell {
         mainImageButton.setTitle("대표", for: .normal)
         mainImageButton.setTitleColor(.colorFFFFFF, for: .normal)
         mainImageButton.titleLabel?.font = .caption03
+        mainImageButton.addTarget(self, action: #selector(mainImageButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -89,5 +91,9 @@ class ContentImageCell: BaseCollectionViewCell {
     
     @objc func removeImageButtonTapped() {
         onRemoveImage?(index)
+    }
+    
+    @objc func mainImageButtonTapped() {
+        onMainImage?(index)
     }
 }

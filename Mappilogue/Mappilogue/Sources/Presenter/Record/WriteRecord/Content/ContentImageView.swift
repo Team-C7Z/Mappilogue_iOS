@@ -10,8 +10,8 @@ import Photos
 
 class ContentImageView: BaseView {
     private var assets: [PHAsset] = []
-    private var selectedMainImageIndex: Int = 0
     private var selectedImageIndex: Int?
+    private var selectedMainImageIndex: Int = 0
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -79,6 +79,12 @@ class ContentImageView: BaseView {
         
         updateViewHeight()
     }
+    
+    func selectMainImage(_ index: Int) {
+        selectedMainImageIndex = index
+        
+        collectionView.reloadData()
+    }
 }
 
 extension ContentImageView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -91,6 +97,10 @@ extension ContentImageView: UICollectionViewDelegate, UICollectionViewDataSource
 
         cell.onRemoveImage = { index in
             self.removeAsset(index)
+        }
+        
+        cell.onMainImage = { index in
+            self.selectMainImage(index)
         }
         
         let asset = assets[indexPath.row]
