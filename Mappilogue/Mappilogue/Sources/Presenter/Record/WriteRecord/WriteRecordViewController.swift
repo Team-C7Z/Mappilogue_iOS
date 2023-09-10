@@ -263,9 +263,15 @@ class WriteRecordViewController: BaseViewController {
         let savingRecordViewController = SavingRecordViewController()
         savingRecordViewController.modalPresentationStyle = .overFullScreen
         savingRecordViewController.onSaveComplete = {
-            self.navigationController?.popViewController(animated: false)
+            self.navigateToRecordContentViewController()
         }
         present(savingRecordViewController, animated: false)
+    }
+    
+    private func navigateToRecordContentViewController() {
+        let myRecordContentViewController = MyRecordContentViewController()
+        myRecordContentViewController.schedule = schedule
+        navigationController?.pushViewController(myRecordContentViewController, animated: true)
     }
 }
 

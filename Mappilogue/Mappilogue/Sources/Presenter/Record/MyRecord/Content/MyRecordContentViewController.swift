@@ -1,5 +1,5 @@
 //
-//  RecordContentViewController.swift
+//  MyRecordContentViewController.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/08/17.
@@ -7,12 +7,15 @@
 
 import UIKit
 
-class RecordContentViewController: BaseViewController {
+class MyRecordContentViewController: BaseViewController {
+    var schedule: Schedule = Schedule()
+    
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     private let stackView = UIStackView()
-    private let recordContentHeaderView = RecordContentHeaderView()
-    private let recordContentView = ContentTextView()
+    private let recordContentHeaderView = MyRecordContentHeaderView()
+    private let myRecordContentImageView = MyRecordContentImageView()
+    private let myRecordContentTextView = MyRecordContentTextView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +32,8 @@ class RecordContentViewController: BaseViewController {
         stackView.distribution = .equalSpacing
         stackView.spacing = 0
         
-        recordContentView.textView.text = " "
-        recordContentView.textView.isEditable = false
+        recordContentHeaderView.configure(schedule)
+        myRecordContentTextView.configure(schedule.content ?? "")
     }
     
     override func setupHierarchy() {
@@ -40,7 +43,7 @@ class RecordContentViewController: BaseViewController {
         scrollView.addSubview(contentView)
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(recordContentHeaderView)
-        stackView.addArrangedSubview(recordContentView)
+        stackView.addArrangedSubview(myRecordContentTextView)
     }
     
     override func setupLayout() {
@@ -89,5 +92,4 @@ class RecordContentViewController: BaseViewController {
     private func deleteRecord() {
         self.navigationController?.popViewController(animated: false)
     }
-
 }

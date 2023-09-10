@@ -275,7 +275,7 @@ class RecordViewController: NavigationBarViewController {
         getMapLatitudeLongitude()
     }
     
-    @objc private func myRecordButtonTapped(_ sender: UIButton) {
+    @objc private func myRecordButtonTapped() {
         let myRecordViewController = MyRecordViewController()
         myRecordViewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(myRecordViewController, animated: true)
@@ -361,6 +361,12 @@ class RecordViewController: NavigationBarViewController {
             bottomSheetViewController.emptyCellHeight = view.frame.height - 200
         } else {
             bottomSheetViewController.emptyCellHeight = 196
+        }
+    }
+    
+    func popToWriteViewControllr() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.myRecordButtonTapped()
         }
     }
 }
