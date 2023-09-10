@@ -12,6 +12,7 @@ class MyCategoryViewController: BaseViewController {
     var categoryName: String = ""
     var onModifyCategory: ((String) -> Void)?
     var onDeleteCategory: (() -> Void)?
+    var isNewWrite: Bool = false
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -28,13 +29,13 @@ class MyCategoryViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+  
     }
     
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationTitleAndBackButton(categoryName, backButtonAction: #selector(backButtonTapped))
+        setNavigationTitleAndBackButton(categoryName, backButtonAction: isNewWrite ? #selector(navigateToMyRecordViewController) : #selector(backButtonTapped))
         setMenuButtonItem()
     }
     
@@ -74,6 +75,16 @@ class MyCategoryViewController: BaseViewController {
             self.navigationController?.popViewController(animated: false)
         }
         present(editCategoryViewController, animated: false)
+    }
+    
+    private func navigateToRecordContentViewController() {
+        let myRecordContentViewController = MyRecordContentViewController()
+        navigationController?.pushViewController(myRecordContentViewController, animated: true)
+    }
+    
+    @objc private func navigateToMyRecordViewController() {
+        let myRecordViewController = MyRecordViewController()
+        navigationController?.pushViewController(myRecordViewController, animated: false)
     }
 }
 
@@ -125,6 +136,6 @@ extension MyCategoryViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        navigateToRecordContentViewController()
     }
 }

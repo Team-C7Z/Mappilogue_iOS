@@ -363,12 +363,6 @@ class RecordViewController: NavigationBarViewController {
             bottomSheetViewController.emptyCellHeight = 196
         }
     }
-    
-    func popToWriteViewControllr() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.myRecordButtonTapped()
-        }
-    }
 }
 
 extension RecordViewController: CLLocationManagerDelegate {
