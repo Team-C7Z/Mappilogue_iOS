@@ -20,6 +20,9 @@ struct Schedule {
     var color: UIColor?
     var time: String?
     var location: String?
+    var image: [String]?
+    var content: String?
+    var category: String?
 }
 
 func dummyScheduleData() -> [CalendarSchedule] {
@@ -29,16 +32,16 @@ func dummyScheduleData() -> [CalendarSchedule] {
         Schedule(title: "저녁 회의", color: .colorB2EAD6, time: "8:00 PM", location: "스타벅스 논현점")
     ])
     let calendarSchedule2 = CalendarSchedule(year: 2023, month: 7, day: 16, schedules: [
-        Schedule(title: "놀이공원", color: .colorBAD7FA, time: "3:00 PM", location: "잠실역")
+        Schedule(title: "놀이공원", color: .colorBAD7FA, time: "3:00 PM", location: "잠실역", category: "데이트")
     ])
     let calendarSchedule3 = CalendarSchedule(year: 2023, month: 8, day: 25, schedules: [
-        Schedule(title: "부산여행", color: .colorF0F1B0, time: "3:00 PM", location: "잠실역")
+        Schedule(title: "부산여행", color: .colorF0F1B0, time: "3:00 PM", location: "부산역", image: ["recordTest1", "recordTest2", "recordTest3"], content: "제주 여행 마지막 날이다!\n아침부터 보이는 풍경이 너무 멋지다.", category: "여행")
     ])
     let calendarSchedule4 = CalendarSchedule(year: 2023, month: 8, day: 26, schedules: [
-        Schedule(title: "부산여행", color: .colorF0F1B0, time: nil, location: "잠실역")
+        Schedule(title: "부산여행", color: .colorF0F1B0, time: nil, location: "광안리", image: ["recordTest1"], content: "졸려어.....", category: "여행")
     ])
     let calendarSchedule5 = CalendarSchedule(year: 2023, month: 8, day: 27, schedules: [
-        Schedule(title: "부산여행", color: .colorF0F1B0, time: nil, location: "잠실역")
+        Schedule(title: "부산여행", color: .colorF0F1B0, time: nil, location: "해운대")
     ])
     let calendarSchedule6 = CalendarSchedule(year: 2023, month: 8, day: 28, schedules: [
         Schedule(title: "부산여행", color: .colorF0F1B0, time: nil, location: "잠실역")

@@ -25,8 +25,8 @@
 		920031D12A8B65F000E3170D /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D02A8B65F000E3170D /* Bundle.swift */; };
 		920031D32A8C832300E3170D /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D22A8C832300E3170D /* SearchBar.swift */; };
 		920031D52A8D021000E3170D /* KakaoSerachResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D42A8D021000E3170D /* KakaoSerachResponse.swift */; };
-		920031D72A8DAFD800E3170D /* RecordContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D62A8DAFD800E3170D /* RecordContentViewController.swift */; };
-		920031D92A8DB50600E3170D /* RecordContentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D82A8DB50600E3170D /* RecordContentHeaderView.swift */; };
+		920031D72A8DAFD800E3170D /* MyRecordContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D62A8DAFD800E3170D /* MyRecordContentViewController.swift */; };
+		920031D92A8DB50600E3170D /* MyRecordContentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D82A8DB50600E3170D /* MyRecordContentHeaderView.swift */; };
 		920031DB2A8DD29700E3170D /* SavingRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031DA2A8DD29700E3170D /* SavingRecordViewController.swift */; };
 		920031DE2A8DF62A00E3170D /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 920031DD2A8DF62A00E3170D /* Lottie */; };
 		920031E02A8DF6F800E3170D /* saving.json in Resources */ = {isa = PBXBuildFile; fileRef = 920031DF2A8DF6F800E3170D /* saving.json */; };
@@ -84,6 +84,9 @@
 		92011CBC2A7A19CA009B047F /* MyRecordCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011CBB2A7A19CA009B047F /* MyRecordCategoryCell.swift */; };
 		92139D6D2AAC454B005344AE /* ContentImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D6C2AAC454B005344AE /* ContentImageView.swift */; };
 		92139D6F2AAC4737005344AE /* ContentImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D6E2AAC4737005344AE /* ContentImageCell.swift */; };
+		92139D732AAD673A005344AE /* MyRecordContentTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D722AAD673A005344AE /* MyRecordContentTextView.swift */; };
+		92139D752AAD67E8005344AE /* MyRecordContentImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D742AAD67E8005344AE /* MyRecordContentImageView.swift */; };
+		92139D772AAD6DCF005344AE /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D762AAD6DCF005344AE /* UITextView.swift */; };
 		9224FCEE2A5BEF80000A56A6 /* ScheduleTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */; };
 		9224FCF32A5C5E7A000A56A6 /* WeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */; };
 		9224FCF52A5D6C65000A56A6 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */; };
@@ -261,8 +264,8 @@
 		920031D02A8B65F000E3170D /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		920031D22A8C832300E3170D /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		920031D42A8D021000E3170D /* KakaoSerachResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSerachResponse.swift; sourceTree = "<group>"; };
-		920031D62A8DAFD800E3170D /* RecordContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordContentViewController.swift; sourceTree = "<group>"; };
-		920031D82A8DB50600E3170D /* RecordContentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordContentHeaderView.swift; sourceTree = "<group>"; };
+		920031D62A8DAFD800E3170D /* MyRecordContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordContentViewController.swift; sourceTree = "<group>"; };
+		920031D82A8DB50600E3170D /* MyRecordContentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordContentHeaderView.swift; sourceTree = "<group>"; };
 		920031DA2A8DD29700E3170D /* SavingRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingRecordViewController.swift; sourceTree = "<group>"; };
 		920031DF2A8DF6F800E3170D /* saving.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = saving.json; sourceTree = "<group>"; };
 		920031E12A8E1E7700E3170D /* FindMarkersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindMarkersButton.swift; sourceTree = "<group>"; };
@@ -319,6 +322,9 @@
 		92011CBB2A7A19CA009B047F /* MyRecordCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordCategoryCell.swift; sourceTree = "<group>"; };
 		92139D6C2AAC454B005344AE /* ContentImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentImageView.swift; sourceTree = "<group>"; };
 		92139D6E2AAC4737005344AE /* ContentImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentImageCell.swift; sourceTree = "<group>"; };
+		92139D722AAD673A005344AE /* MyRecordContentTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordContentTextView.swift; sourceTree = "<group>"; };
+		92139D742AAD67E8005344AE /* MyRecordContentImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordContentImageView.swift; sourceTree = "<group>"; };
+		92139D762AAD6DCF005344AE /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTitleCell.swift; sourceTree = "<group>"; };
 		9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCell.swift; sourceTree = "<group>"; };
 		9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
@@ -589,13 +595,15 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		920031E52A8E1EBC00E3170D /* RecordContent */ = {
+		920031E52A8E1EBC00E3170D /* Content */ = {
 			isa = PBXGroup;
 			children = (
-				920031D62A8DAFD800E3170D /* RecordContentViewController.swift */,
-				920031D82A8DB50600E3170D /* RecordContentHeaderView.swift */,
+				920031D62A8DAFD800E3170D /* MyRecordContentViewController.swift */,
+				920031D82A8DB50600E3170D /* MyRecordContentHeaderView.swift */,
+				92139D742AAD67E8005344AE /* MyRecordContentImageView.swift */,
+				92139D722AAD673A005344AE /* MyRecordContentTextView.swift */,
 			);
-			path = RecordContent;
+			path = Content;
 			sourceTree = "<group>";
 		};
 		920031F62A92445200E3170D /* Photo */ = {
@@ -738,6 +746,7 @@
 				925840AD2A7CD17E00997434 /* EditCategoryViewController.swift */,
 				9258409D2A7BD30700997434 /* CategorySettingViewController.swift */,
 				92011CBA2A7A199F009B047F /* Cell */,
+				920031E52A8E1EBC00E3170D /* Content */,
 			);
 			path = MyRecord;
 			sourceTree = "<group>";
@@ -1011,10 +1020,11 @@
 				929158292A252CC20022BEF9 /* UIColor.swift */,
 				92FE26162A4B76B800BCDB82 /* UIFont.swift */,
 				9224FD322A641B64000A56A6 /* UIViewController.swift */,
-				9224FD3E2A6561CD000A56A6 /* UITextField.swift */,
-				92011C172A753AEB009B047F /* CALayer.swift */,
 				92011C652A78980E009B047F /* UIView.swift */,
 				925840C82A7F805800997434 /* UILabel.swift */,
+				92139D762AAD6DCF005344AE /* UITextView.swift */,
+				9224FD3E2A6561CD000A56A6 /* UITextField.swift */,
+				92011C172A753AEB009B047F /* CALayer.swift */,
 				92E7814D2A850316000DAACD /* Date.swift */,
 				92E781512A85381D000DAACD /* String.swift */,
 			);
@@ -1115,7 +1125,6 @@
 				92011C052A74A0FE009B047F /* Search */,
 				92011CB72A7A16F8009B047F /* MyRecord */,
 				92011B762A716801009B047F /* WriteRecord */,
-				920031E52A8E1EBC00E3170D /* RecordContent */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -1542,7 +1551,7 @@
 				925840BB2A7F455D00997434 /* NotificationSettingViewController.swift in Sources */,
 				92011C012A740A08009B047F /* AddNewCategoryCell.swift in Sources */,
 				92011B752A7138B0009B047F /* EmptyRecordCell.swift in Sources */,
-				920031D92A8DB50600E3170D /* RecordContentHeaderView.swift in Sources */,
+				920031D92A8DB50600E3170D /* MyRecordContentHeaderView.swift in Sources */,
 				925840D52A80957900997434 /* AddLocationFooterView.swift in Sources */,
 				92011BFF2A7407D3009B047F /* SelectCategoryViewController.swift in Sources */,
 				925840AE2A7CD17E00997434 /* EditCategoryViewController.swift in Sources */,
@@ -1599,6 +1608,7 @@
 				928B7BD92A99AFD700E4F789 /* SignUpCompletionViewController.swift in Sources */,
 				9224FCF92A5FCF72000A56A6 /* ScheduleCell.swift in Sources */,
 				9263786E2A5475AF004E5B6E /* OnboardingCell.swift in Sources */,
+				92139D752AAD67E8005344AE /* MyRecordContentImageView.swift in Sources */,
 				92A7B6532A4CDD4D009C9293 /* ScheduleType.swift in Sources */,
 				9224FD352A652A96000A56A6 /* WeekdayView.swift in Sources */,
 				926999362A14F443003DDAD2 /* BaseView.swift in Sources */,
@@ -1616,12 +1626,13 @@
 				92011B7D2A7174B6009B047F /* DateHeaderView.swift in Sources */,
 				9224FD482A6579ED000A56A6 /* LocationTimeCell.swift in Sources */,
 				92011C262A77A48B009B047F /* Category.swift in Sources */,
+				92139D772AAD6DCF005344AE /* UITextView.swift in Sources */,
 				926999482A14F76A003DDAD2 /* MyViewController.swift in Sources */,
 				920031C72A8B5DB700E3170D /* MapSettingsHeaderView.swift in Sources */,
 				920031EF2A910F7800E3170D /* PhotoDirectoryPickerButton.swift in Sources */,
 				92011BF92A73D404009B047F /* ColorSelectionView.swift in Sources */,
 				920031C52A8B5D7D00E3170D /* MapMainLocationViewController.swift in Sources */,
-				920031D72A8DAFD800E3170D /* RecordContentViewController.swift in Sources */,
+				920031D72A8DAFD800E3170D /* MyRecordContentViewController.swift in Sources */,
 				920031F82A92467A00E3170D /* PhotoDirectoryCell.swift in Sources */,
 				920032052A97166700E3170D /* PermissionView.swift in Sources */,
 				9230BE492A58D23B0053E535 /* NavigationBarViewController.swift in Sources */,
@@ -1688,6 +1699,7 @@
 				920032092A975EA400E3170D /* SelectPermissionViewController.swift in Sources */,
 				928B7BFD2A9DD4DC00E4F789 /* BaseAPI.swift in Sources */,
 				926998F92A14EC07003DDAD2 /* SceneDelegate.swift in Sources */,
+				92139D732AAD673A005344AE /* MyRecordContentTextView.swift in Sources */,
 				920031BD2A8B5C8E00E3170D /* MainLocationCell.swift in Sources */,
 				928B7BE02A9AEAE800E4F789 /* AuthVendor.swift in Sources */,
 				9224FD462A6579A7000A56A6 /* DeleteLocationFooterView.swift in Sources */,
