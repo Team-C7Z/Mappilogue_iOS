@@ -18,7 +18,6 @@ class MyRecordContentTextView: BaseView {
         textView.backgroundColor = .clear
         textView.isEditable = false
         textView.isScrollEnabled = false
-        textView.backgroundColor = .orange
     }
     
     override func setupHierarchy() {

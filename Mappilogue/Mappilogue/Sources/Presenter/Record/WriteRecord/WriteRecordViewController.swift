@@ -270,6 +270,7 @@ class WriteRecordViewController: BaseViewController {
     
     private func navigateToRecordContentViewController() {
         let myRecordContentViewController = MyRecordContentViewController()
+        myRecordContentViewController.isNewWrite = true
         myRecordContentViewController.schedule = schedule
         navigationController?.pushViewController(myRecordContentViewController, animated: true)
     }

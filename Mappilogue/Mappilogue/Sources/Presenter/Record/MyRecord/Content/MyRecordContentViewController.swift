@@ -9,6 +9,7 @@ import UIKit
 
 class MyRecordContentViewController: BaseViewController {
     var schedule: Schedule = Schedule()
+    var isNewWrite: Bool = false
     
     private let scrollView = UIScrollView()
     private let contentView = UIView()
@@ -26,7 +27,7 @@ class MyRecordContentViewController: BaseViewController {
         super.setupProperty()
         
         setNavigationTitleAndItems(imageName: "menu", action: #selector(menuButtonTapped), isLeft: false)
-        setNavigationTitleAndBackButton("나의 기록", backButtonAction: #selector(backButtonTapped))
+        setNavigationTitleAndBackButton("나의 기록", backButtonAction: isNewWrite ? #selector(navigateToMyCategoryViewController) : #selector(backButtonTapped))
         
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
@@ -72,6 +73,13 @@ class MyRecordContentViewController: BaseViewController {
             $0.bottom.equalTo(contentView).offset(-58)
         }
         
+    }
+    
+    @objc func navigateToMyCategoryViewController() {
+        let myCategoryViewController = MyCategoryViewController()
+        myCategoryViewController.isNewWrite = true
+        myCategoryViewController.categoryName = "전체" 
+        navigationController?.pushViewController(myCategoryViewController, animated: false)
     }
     
     @objc func menuButtonTapped() {
