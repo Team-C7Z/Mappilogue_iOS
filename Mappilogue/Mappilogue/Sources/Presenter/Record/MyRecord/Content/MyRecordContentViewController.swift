@@ -33,7 +33,13 @@ class MyRecordContentViewController: BaseViewController {
         stackView.spacing = 0
         
         recordContentHeaderView.configure(schedule)
-        myRecordContentTextView.configure(schedule.content ?? "")
+        if let images = schedule.image {
+            myRecordContentImageView.configure(images, size: view.frame.width - 32)
+        }
+        myRecordContentTextView.configure(schedule.content ?? "", width: view.frame.width - 32)
+        myRecordContentTextView.stackViewHeightUpdated = {
+            self.stackView.layoutIfNeeded()
+        }
     }
     
     override func setupHierarchy() {
@@ -43,6 +49,7 @@ class MyRecordContentViewController: BaseViewController {
         scrollView.addSubview(contentView)
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(recordContentHeaderView)
+        stackView.addArrangedSubview(myRecordContentImageView)
         stackView.addArrangedSubview(myRecordContentTextView)
     }
     

@@ -38,10 +38,10 @@ func dummyScheduleData() -> [CalendarSchedule] {
         Schedule(title: "부산여행", color: .colorF0F1B0, time: "3:00 PM", location: "부산역", image: ["recordTest1", "recordTest2", "recordTest3"], content: "제주 여행 마지막 날이다!\n아침부터 보이는 풍경이 너무 멋지다.", category: "여행")
     ])
     let calendarSchedule4 = CalendarSchedule(year: 2023, month: 8, day: 26, schedules: [
-        Schedule(title: "부산여행", color: .colorF0F1B0, time: nil, location: "광안리", image: ["recordTest1"], content: "졸려어.....", category: "여행")
+        Schedule(title: "부산여행", color: .colorF0F1B0, time: nil, location: "광안리", image: ["recordTest1"], content: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.", category: "여행")
     ])
     let calendarSchedule5 = CalendarSchedule(year: 2023, month: 8, day: 27, schedules: [
-        Schedule(title: "부산여행", color: .colorF0F1B0, time: nil, location: "해운대")
+        Schedule(title: "부산여행", color: .colorF0F1B0, time: nil, location: "해운대", content: "냠냠")
     ])
     let calendarSchedule6 = CalendarSchedule(year: 2023, month: 8, day: 28, schedules: [
         Schedule(title: "부산여행", color: .colorF0F1B0, time: nil, location: "잠실역")
