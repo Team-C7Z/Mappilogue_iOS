@@ -136,7 +136,7 @@
 		925840BD2A7F459600997434 /* NotificationSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840BC2A7F459600997434 /* NotificationSettingView.swift */; };
 		925840C12A7F5B2200997434 /* NotificationSwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C02A7F5B2200997434 /* NotificationSwitchButton.swift */; };
 		925840C32A7F61E800997434 /* InquiryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C22A7F61E800997434 /* InquiryViewController.swift */; };
-		925840C52A7F71E600997434 /* EmailCopyToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C42A7F71E600997434 /* EmailCopyToastMessageView.swift */; };
+		925840C52A7F71E600997434 /* ToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C42A7F71E600997434 /* ToastMessageView.swift */; };
 		925840C72A7F76A500997434 /* WithdrawalAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C62A7F76A500997434 /* WithdrawalAlertViewController.swift */; };
 		925840C92A7F805800997434 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C82A7F805800997434 /* UILabel.swift */; };
 		925840CB2A7F86F900997434 /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840CA2A7F86F900997434 /* WithdrawalViewController.swift */; };
@@ -376,7 +376,7 @@
 		925840BC2A7F459600997434 /* NotificationSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingView.swift; sourceTree = "<group>"; };
 		925840C02A7F5B2200997434 /* NotificationSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSwitchButton.swift; sourceTree = "<group>"; };
 		925840C22A7F61E800997434 /* InquiryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryViewController.swift; sourceTree = "<group>"; };
-		925840C42A7F71E600997434 /* EmailCopyToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCopyToastMessageView.swift; sourceTree = "<group>"; };
+		925840C42A7F71E600997434 /* ToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessageView.swift; sourceTree = "<group>"; };
 		925840C62A7F76A500997434 /* WithdrawalAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalAlertViewController.swift; sourceTree = "<group>"; };
 		925840C82A7F805800997434 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		925840CA2A7F86F900997434 /* WithdrawalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
@@ -1171,7 +1171,7 @@
 			isa = PBXGroup;
 			children = (
 				925840C22A7F61E800997434 /* InquiryViewController.swift */,
-				925840C42A7F71E600997434 /* EmailCopyToastMessageView.swift */,
+				925840C42A7F71E600997434 /* ToastMessageView.swift */,
 			);
 			path = Inquiry;
 			sourceTree = "<group>";
@@ -1618,7 +1618,7 @@
 				926999362A14F443003DDAD2 /* BaseView.swift in Sources */,
 				920031F32A92274100E3170D /* LimitedPhotoSelectionView.swift in Sources */,
 				92011C0E2A74C1FC009B047F /* EmptySearchCell.swift in Sources */,
-				925840C52A7F71E600997434 /* EmailCopyToastMessageView.swift in Sources */,
+				925840C52A7F71E600997434 /* ToastMessageView.swift in Sources */,
 				925840D92A80D84300997434 /* SelectedNotificationCell.swift in Sources */,
 				92FE26132A4B74D800BCDB82 /* ScheduleTypeHeaderView.swift in Sources */,
 				926998F72A14EC07003DDAD2 /* AppDelegate.swift in Sources */,
