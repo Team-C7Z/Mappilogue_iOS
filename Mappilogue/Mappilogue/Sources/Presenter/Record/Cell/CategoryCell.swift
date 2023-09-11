@@ -10,37 +10,50 @@ import UIKit
 class CategoryCell: BaseCollectionViewCell {
     static let registerId = "\(CategoryCell.self)"
 
-    private let addCategoryImage = UIImageView()
     private let categoryLabel = UILabel()
+    private let xCategoryButton = UIButton()
     
     override func setupProperty() {
         super.setupProperty()
         
         layer.cornerRadius = 17
         layer.applyShadow()
-        backgroundColor = .colorF9F8F7
         
         categoryLabel.text = "유진이랑 논 날"
         categoryLabel.textColor = .color1C1C1C
         categoryLabel.font = .caption02
+        
+        xCategoryButton.setImage(UIImage(named: "record_deleteCategoryMark"), for: .normal)
+        xCategoryButton.isHidden = true
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
    
         contentView.addSubview(categoryLabel)
+        contentView.addSubview(xCategoryButton)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
         categoryLabel.snp.makeConstraints {
-            $0.center.equalTo(contentView)
+            $0.centerY.equalTo(contentView)
+            $0.leading.equalTo(12)
+        }
+        
+        xCategoryButton.snp.makeConstraints {
+            $0.centerY.equalTo(contentView)
+            $0.trailing.equalTo(contentView).offset(-7)
+            $0.width.height.equalTo(19)
         }
     }
     
-    func configure(with title: String) {
+    func configure(_ title: String, isSelected: Bool) {
         categoryLabel.text = title
+        
+        backgroundColor = isSelected ? .colorEAE6E1 : .colorF9F8F7
+        xCategoryButton.isHidden = !isSelected
         
 //        let categoryLabelSize = categoryLabel.sizeThatFits(CGSize(width: categoryLabel.bounds.width, height: CGFloat.greatestFiniteMagnitude))
 //        let cellWidth = categoryLabelSize.width + 12 + 12
