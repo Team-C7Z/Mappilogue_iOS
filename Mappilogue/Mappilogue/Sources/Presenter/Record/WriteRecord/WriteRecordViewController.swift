@@ -60,7 +60,7 @@ class WriteRecordViewController: BaseViewController {
         
         saveRecordView.hideKeyboardButton.addTarget(self, action: #selector(dismissKeyboard), for: .touchUpInside)
         saveRecordView.saveRecordButton.addTarget(self, action: #selector(saveRecordButtonTapped), for: .touchUpInside)
-        saveRecordView.galleryButton.addTarget(self, action: #selector(galleryButtonTapped), for: .touchUpInside)
+        saveRecordView.addImageButton.addTarget(self, action: #selector(addImageButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -195,7 +195,7 @@ class WriteRecordViewController: BaseViewController {
         view.layoutIfNeeded()
     }
     
-    @objc func galleryButtonTapped() {
+    @objc func addImageButtonTapped() {
         checkAlbumPermission()
     }
     
