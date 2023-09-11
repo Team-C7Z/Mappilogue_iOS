@@ -105,6 +105,13 @@ class MyRecordContentViewController: BaseViewController {
     }
     
     private func deleteRecord() {
-        self.navigationController?.popViewController(animated: false)
+        if isNewWrite {
+            if let viewControllerToPopTo = navigationController?.viewControllers.first(where: { $0 is SelectWriteRecordViewController }) {
+                
+                navigationController?.popToViewController(viewControllerToPopTo, animated: true)
+            }
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
     }
 }
