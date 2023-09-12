@@ -251,7 +251,7 @@ extension HomeViewController: ScheduleTypeDelegate, ExpandCellDelegate {
     }
     
     func navigateToRecordContentViewController() {
-        let recordContentViewController = RecordContentViewController()
+        let recordContentViewController = MyRecordContentViewController()
         navigationController?.pushViewController(recordContentViewController, animated: true)
     }
     

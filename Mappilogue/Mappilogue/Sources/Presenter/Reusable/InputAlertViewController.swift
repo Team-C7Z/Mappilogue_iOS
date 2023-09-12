@@ -39,6 +39,7 @@ class InputAlertViewController: BaseViewController {
         inputTextField.backgroundColor = .colorF5F3F0
         inputTextField.placeholder = "새로운 카테고리"
         inputTextField.layer.cornerRadius = 12
+        inputTextField.tintColor = .color2EBD3D
         inputTextField.addLeftPadding()
         inputTextField.delegate = self
         inputTextField.becomeFirstResponder()

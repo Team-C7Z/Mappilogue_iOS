@@ -25,8 +25,8 @@
 		920031D12A8B65F000E3170D /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D02A8B65F000E3170D /* Bundle.swift */; };
 		920031D32A8C832300E3170D /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D22A8C832300E3170D /* SearchBar.swift */; };
 		920031D52A8D021000E3170D /* KakaoSerachResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D42A8D021000E3170D /* KakaoSerachResponse.swift */; };
-		920031D72A8DAFD800E3170D /* RecordContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D62A8DAFD800E3170D /* RecordContentViewController.swift */; };
-		920031D92A8DB50600E3170D /* RecordContentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D82A8DB50600E3170D /* RecordContentHeaderView.swift */; };
+		920031D72A8DAFD800E3170D /* MyRecordContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D62A8DAFD800E3170D /* MyRecordContentViewController.swift */; };
+		920031D92A8DB50600E3170D /* MyRecordContentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D82A8DB50600E3170D /* MyRecordContentHeaderView.swift */; };
 		920031DB2A8DD29700E3170D /* SavingRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031DA2A8DD29700E3170D /* SavingRecordViewController.swift */; };
 		920031DE2A8DF62A00E3170D /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 920031DD2A8DF62A00E3170D /* Lottie */; };
 		920031E02A8DF6F800E3170D /* saving.json in Resources */ = {isa = PBXBuildFile; fileRef = 920031DF2A8DF6F800E3170D /* saving.json */; };
@@ -38,7 +38,6 @@
 		920031F32A92274100E3170D /* LimitedPhotoSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031F22A92274000E3170D /* LimitedPhotoSelectionView.swift */; };
 		920031F52A92444E00E3170D /* PhotoDirectoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031F42A92444E00E3170D /* PhotoDirectoryView.swift */; };
 		920031F82A92467A00E3170D /* PhotoDirectoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031F72A92467A00E3170D /* PhotoDirectoryCell.swift */; };
-		920031FE2A93A27000E3170D /* ImageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031FD2A93A27000E3170D /* ImageContentView.swift */; };
 		920032002A9504EE00E3170D /* MaredRecordsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031FF2A9504EE00E3170D /* MaredRecordsFooterView.swift */; };
 		920032032A9715D600E3170D /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920032022A9715D600E3170D /* PermissionViewController.swift */; };
 		920032052A97166700E3170D /* PermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920032042A97166700E3170D /* PermissionView.swift */; };
@@ -54,7 +53,7 @@
 		92011B7F2A726031009B047F /* WriteRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B7E2A726031009B047F /* WriteRecordViewController.swift */; };
 		92011B812A7271D0009B047F /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B802A7271D0009B047F /* CategoryButton.swift */; };
 		92011B872A72B0A7009B047F /* MainLocatonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B862A72B0A7009B047F /* MainLocatonView.swift */; };
-		92011B892A72B4BB009B047F /* TextContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B882A72B4BB009B047F /* TextContentView.swift */; };
+		92011B892A72B4BB009B047F /* ContentTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B882A72B4BB009B047F /* ContentTextView.swift */; };
 		92011B8B2A72B7DA009B047F /* NewWriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B8A2A72B7DA009B047F /* NewWriteButton.swift */; };
 		92011B8D2A72BBE8009B047F /* ImageSaveRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B8C2A72BBE8009B047F /* ImageSaveRecordView.swift */; };
 		92011B902A7364D0009B047F /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B8F2A7364D0009B047F /* BaseButton.swift */; };
@@ -83,6 +82,12 @@
 		92011C682A78CB24009B047F /* InputAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C672A78CB24009B047F /* InputAlertViewController.swift */; };
 		92011CB92A7A1718009B047F /* MyRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011CB82A7A1718009B047F /* MyRecordViewController.swift */; };
 		92011CBC2A7A19CA009B047F /* MyRecordCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011CBB2A7A19CA009B047F /* MyRecordCategoryCell.swift */; };
+		92139D6D2AAC454B005344AE /* ContentImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D6C2AAC454B005344AE /* ContentImageView.swift */; };
+		92139D6F2AAC4737005344AE /* ContentImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D6E2AAC4737005344AE /* ContentImageCell.swift */; };
+		92139D732AAD673A005344AE /* MyRecordContentTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D722AAD673A005344AE /* MyRecordContentTextView.swift */; };
+		92139D752AAD67E8005344AE /* MyRecordContentImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D742AAD67E8005344AE /* MyRecordContentImageView.swift */; };
+		92139D772AAD6DCF005344AE /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D762AAD6DCF005344AE /* UITextView.swift */; };
+		92139D792AAD709E005344AE /* MyRecordContentImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D782AAD709E005344AE /* MyRecordContentImageCell.swift */; };
 		9224FCEE2A5BEF80000A56A6 /* ScheduleTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */; };
 		9224FCF32A5C5E7A000A56A6 /* WeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */; };
 		9224FCF52A5D6C65000A56A6 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */; };
@@ -131,7 +136,7 @@
 		925840BD2A7F459600997434 /* NotificationSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840BC2A7F459600997434 /* NotificationSettingView.swift */; };
 		925840C12A7F5B2200997434 /* NotificationSwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C02A7F5B2200997434 /* NotificationSwitchButton.swift */; };
 		925840C32A7F61E800997434 /* InquiryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C22A7F61E800997434 /* InquiryViewController.swift */; };
-		925840C52A7F71E600997434 /* EmailCopyToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C42A7F71E600997434 /* EmailCopyToastMessageView.swift */; };
+		925840C52A7F71E600997434 /* ToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C42A7F71E600997434 /* ToastMessageView.swift */; };
 		925840C72A7F76A500997434 /* WithdrawalAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C62A7F76A500997434 /* WithdrawalAlertViewController.swift */; };
 		925840C92A7F805800997434 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C82A7F805800997434 /* UILabel.swift */; };
 		925840CB2A7F86F900997434 /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840CA2A7F86F900997434 /* WithdrawalViewController.swift */; };
@@ -260,8 +265,8 @@
 		920031D02A8B65F000E3170D /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		920031D22A8C832300E3170D /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		920031D42A8D021000E3170D /* KakaoSerachResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSerachResponse.swift; sourceTree = "<group>"; };
-		920031D62A8DAFD800E3170D /* RecordContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordContentViewController.swift; sourceTree = "<group>"; };
-		920031D82A8DB50600E3170D /* RecordContentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordContentHeaderView.swift; sourceTree = "<group>"; };
+		920031D62A8DAFD800E3170D /* MyRecordContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordContentViewController.swift; sourceTree = "<group>"; };
+		920031D82A8DB50600E3170D /* MyRecordContentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordContentHeaderView.swift; sourceTree = "<group>"; };
 		920031DA2A8DD29700E3170D /* SavingRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingRecordViewController.swift; sourceTree = "<group>"; };
 		920031DF2A8DF6F800E3170D /* saving.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = saving.json; sourceTree = "<group>"; };
 		920031E12A8E1E7700E3170D /* FindMarkersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindMarkersButton.swift; sourceTree = "<group>"; };
@@ -272,7 +277,6 @@
 		920031F22A92274000E3170D /* LimitedPhotoSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitedPhotoSelectionView.swift; sourceTree = "<group>"; };
 		920031F42A92444E00E3170D /* PhotoDirectoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDirectoryView.swift; sourceTree = "<group>"; };
 		920031F72A92467A00E3170D /* PhotoDirectoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDirectoryCell.swift; sourceTree = "<group>"; };
-		920031FD2A93A27000E3170D /* ImageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageContentView.swift; sourceTree = "<group>"; };
 		920031FF2A9504EE00E3170D /* MaredRecordsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaredRecordsFooterView.swift; sourceTree = "<group>"; };
 		920032022A9715D600E3170D /* PermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewController.swift; sourceTree = "<group>"; };
 		920032042A97166700E3170D /* PermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionView.swift; sourceTree = "<group>"; };
@@ -288,7 +292,7 @@
 		92011B7E2A726031009B047F /* WriteRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordViewController.swift; sourceTree = "<group>"; };
 		92011B802A7271D0009B047F /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
 		92011B862A72B0A7009B047F /* MainLocatonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLocatonView.swift; sourceTree = "<group>"; };
-		92011B882A72B4BB009B047F /* TextContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextContentView.swift; sourceTree = "<group>"; };
+		92011B882A72B4BB009B047F /* ContentTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentTextView.swift; sourceTree = "<group>"; };
 		92011B8A2A72B7DA009B047F /* NewWriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWriteButton.swift; sourceTree = "<group>"; };
 		92011B8C2A72BBE8009B047F /* ImageSaveRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaveRecordView.swift; sourceTree = "<group>"; };
 		92011B8F2A7364D0009B047F /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
@@ -317,6 +321,12 @@
 		92011C672A78CB24009B047F /* InputAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAlertViewController.swift; sourceTree = "<group>"; };
 		92011CB82A7A1718009B047F /* MyRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordViewController.swift; sourceTree = "<group>"; };
 		92011CBB2A7A19CA009B047F /* MyRecordCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordCategoryCell.swift; sourceTree = "<group>"; };
+		92139D6C2AAC454B005344AE /* ContentImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentImageView.swift; sourceTree = "<group>"; };
+		92139D6E2AAC4737005344AE /* ContentImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentImageCell.swift; sourceTree = "<group>"; };
+		92139D722AAD673A005344AE /* MyRecordContentTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordContentTextView.swift; sourceTree = "<group>"; };
+		92139D742AAD67E8005344AE /* MyRecordContentImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordContentImageView.swift; sourceTree = "<group>"; };
+		92139D762AAD6DCF005344AE /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
+		92139D782AAD709E005344AE /* MyRecordContentImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordContentImageCell.swift; sourceTree = "<group>"; };
 		9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTitleCell.swift; sourceTree = "<group>"; };
 		9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCell.swift; sourceTree = "<group>"; };
 		9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
@@ -366,7 +376,7 @@
 		925840BC2A7F459600997434 /* NotificationSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingView.swift; sourceTree = "<group>"; };
 		925840C02A7F5B2200997434 /* NotificationSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSwitchButton.swift; sourceTree = "<group>"; };
 		925840C22A7F61E800997434 /* InquiryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryViewController.swift; sourceTree = "<group>"; };
-		925840C42A7F71E600997434 /* EmailCopyToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCopyToastMessageView.swift; sourceTree = "<group>"; };
+		925840C42A7F71E600997434 /* ToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessageView.swift; sourceTree = "<group>"; };
 		925840C62A7F76A500997434 /* WithdrawalAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalAlertViewController.swift; sourceTree = "<group>"; };
 		925840C82A7F805800997434 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		925840CA2A7F86F900997434 /* WithdrawalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
@@ -587,13 +597,16 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		920031E52A8E1EBC00E3170D /* RecordContent */ = {
+		920031E52A8E1EBC00E3170D /* Content */ = {
 			isa = PBXGroup;
 			children = (
-				920031D62A8DAFD800E3170D /* RecordContentViewController.swift */,
-				920031D82A8DB50600E3170D /* RecordContentHeaderView.swift */,
+				920031D62A8DAFD800E3170D /* MyRecordContentViewController.swift */,
+				920031D82A8DB50600E3170D /* MyRecordContentHeaderView.swift */,
+				92139D742AAD67E8005344AE /* MyRecordContentImageView.swift */,
+				92139D722AAD673A005344AE /* MyRecordContentTextView.swift */,
+				92139D782AAD709E005344AE /* MyRecordContentImageCell.swift */,
 			);
-			path = RecordContent;
+			path = Content;
 			sourceTree = "<group>";
 		};
 		920031F62A92445200E3170D /* Photo */ = {
@@ -691,8 +704,9 @@
 		92011BFD2A74031B009B047F /* Content */ = {
 			isa = PBXGroup;
 			children = (
-				92011B882A72B4BB009B047F /* TextContentView.swift */,
-				920031FD2A93A27000E3170D /* ImageContentView.swift */,
+				92139D6C2AAC454B005344AE /* ContentImageView.swift */,
+				92011B882A72B4BB009B047F /* ContentTextView.swift */,
+				92139D6E2AAC4737005344AE /* ContentImageCell.swift */,
 				920031F62A92445200E3170D /* Photo */,
 			);
 			path = Content;
@@ -735,6 +749,7 @@
 				925840AD2A7CD17E00997434 /* EditCategoryViewController.swift */,
 				9258409D2A7BD30700997434 /* CategorySettingViewController.swift */,
 				92011CBA2A7A199F009B047F /* Cell */,
+				920031E52A8E1EBC00E3170D /* Content */,
 			);
 			path = MyRecord;
 			sourceTree = "<group>";
@@ -1008,10 +1023,11 @@
 				929158292A252CC20022BEF9 /* UIColor.swift */,
 				92FE26162A4B76B800BCDB82 /* UIFont.swift */,
 				9224FD322A641B64000A56A6 /* UIViewController.swift */,
-				9224FD3E2A6561CD000A56A6 /* UITextField.swift */,
-				92011C172A753AEB009B047F /* CALayer.swift */,
 				92011C652A78980E009B047F /* UIView.swift */,
 				925840C82A7F805800997434 /* UILabel.swift */,
+				92139D762AAD6DCF005344AE /* UITextView.swift */,
+				9224FD3E2A6561CD000A56A6 /* UITextField.swift */,
+				92011C172A753AEB009B047F /* CALayer.swift */,
 				92E7814D2A850316000DAACD /* Date.swift */,
 				92E781512A85381D000DAACD /* String.swift */,
 			);
@@ -1112,7 +1128,6 @@
 				92011C052A74A0FE009B047F /* Search */,
 				92011CB72A7A16F8009B047F /* MyRecord */,
 				92011B762A716801009B047F /* WriteRecord */,
-				920031E52A8E1EBC00E3170D /* RecordContent */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -1156,7 +1171,7 @@
 			isa = PBXGroup;
 			children = (
 				925840C22A7F61E800997434 /* InquiryViewController.swift */,
-				925840C42A7F71E600997434 /* EmailCopyToastMessageView.swift */,
+				925840C42A7F71E600997434 /* ToastMessageView.swift */,
 			);
 			path = Inquiry;
 			sourceTree = "<group>";
@@ -1520,7 +1535,7 @@
 				925840D32A7FF39B00997434 /* HomeEmptyScheduleCell.swift in Sources */,
 				925840D22A7FF34000997434 /* MarkedRecord.swift in Sources */,
 				926382B62A6D03850064C1A8 /* CalendarEmptyScheduleCell.swift in Sources */,
-				92011B892A72B4BB009B047F /* TextContentView.swift in Sources */,
+				92011B892A72B4BB009B047F /* ContentTextView.swift in Sources */,
 				92011C222A77907F009B047F /* CategoryCell.swift in Sources */,
 				92011C242A77A329009B047F /* AddCategoryCell.swift in Sources */,
 				92011C662A78980E009B047F /* UIView.swift in Sources */,
@@ -1539,7 +1554,7 @@
 				925840BB2A7F455D00997434 /* NotificationSettingViewController.swift in Sources */,
 				92011C012A740A08009B047F /* AddNewCategoryCell.swift in Sources */,
 				92011B752A7138B0009B047F /* EmptyRecordCell.swift in Sources */,
-				920031D92A8DB50600E3170D /* RecordContentHeaderView.swift in Sources */,
+				920031D92A8DB50600E3170D /* MyRecordContentHeaderView.swift in Sources */,
 				925840D52A80957900997434 /* AddLocationFooterView.swift in Sources */,
 				92011BFF2A7407D3009B047F /* SelectCategoryViewController.swift in Sources */,
 				925840AE2A7CD17E00997434 /* EditCategoryViewController.swift in Sources */,
@@ -1564,6 +1579,7 @@
 				920031B82A8B5BC700E3170D /* KakaoAddressResponse.swift in Sources */,
 				92011B782A71683E009B047F /* SelectWriteRecordViewController.swift in Sources */,
 				92011C1A2A755D02009B047F /* MyRecordButton.swift in Sources */,
+				92139D6F2AAC4737005344AE /* ContentImageCell.swift in Sources */,
 				9224FD3D2A6559A0000A56A6 /* AddLocationViewController.swift in Sources */,
 				9224FD1F2A62B4E9000A56A6 /* NotificationViewController.swift in Sources */,
 				92011C1E2A75EE79009B047F /* MarkView.swift in Sources */,
@@ -1576,6 +1592,7 @@
 				92011B872A72B0A7009B047F /* MainLocatonView.swift in Sources */,
 				928B7C0C2AA06F7400E4F789 /* EditProfileViewController.swift in Sources */,
 				928B7BE22A9AF09E00E4F789 /* AuthAPI.swift in Sources */,
+				92139D792AAD709E005344AE /* MyRecordContentImageCell.swift in Sources */,
 				926999382A14F4AA003DDAD2 /* TabBarControllerController.swift in Sources */,
 				920032032A9715D600E3170D /* PermissionViewController.swift in Sources */,
 				9258409E2A7BD30700997434 /* CategorySettingViewController.swift in Sources */,
@@ -1595,12 +1612,13 @@
 				928B7BD92A99AFD700E4F789 /* SignUpCompletionViewController.swift in Sources */,
 				9224FCF92A5FCF72000A56A6 /* ScheduleCell.swift in Sources */,
 				9263786E2A5475AF004E5B6E /* OnboardingCell.swift in Sources */,
+				92139D752AAD67E8005344AE /* MyRecordContentImageView.swift in Sources */,
 				92A7B6532A4CDD4D009C9293 /* ScheduleType.swift in Sources */,
 				9224FD352A652A96000A56A6 /* WeekdayView.swift in Sources */,
 				926999362A14F443003DDAD2 /* BaseView.swift in Sources */,
 				920031F32A92274100E3170D /* LimitedPhotoSelectionView.swift in Sources */,
 				92011C0E2A74C1FC009B047F /* EmptySearchCell.swift in Sources */,
-				925840C52A7F71E600997434 /* EmailCopyToastMessageView.swift in Sources */,
+				925840C52A7F71E600997434 /* ToastMessageView.swift in Sources */,
 				925840D92A80D84300997434 /* SelectedNotificationCell.swift in Sources */,
 				92FE26132A4B74D800BCDB82 /* ScheduleTypeHeaderView.swift in Sources */,
 				926998F72A14EC07003DDAD2 /* AppDelegate.swift in Sources */,
@@ -1612,12 +1630,13 @@
 				92011B7D2A7174B6009B047F /* DateHeaderView.swift in Sources */,
 				9224FD482A6579ED000A56A6 /* LocationTimeCell.swift in Sources */,
 				92011C262A77A48B009B047F /* Category.swift in Sources */,
+				92139D772AAD6DCF005344AE /* UITextView.swift in Sources */,
 				926999482A14F76A003DDAD2 /* MyViewController.swift in Sources */,
 				920031C72A8B5DB700E3170D /* MapSettingsHeaderView.swift in Sources */,
 				920031EF2A910F7800E3170D /* PhotoDirectoryPickerButton.swift in Sources */,
 				92011BF92A73D404009B047F /* ColorSelectionView.swift in Sources */,
 				920031C52A8B5D7D00E3170D /* MapMainLocationViewController.swift in Sources */,
-				920031D72A8DAFD800E3170D /* RecordContentViewController.swift in Sources */,
+				920031D72A8DAFD800E3170D /* MyRecordContentViewController.swift in Sources */,
 				920031F82A92467A00E3170D /* PhotoDirectoryCell.swift in Sources */,
 				920032052A97166700E3170D /* PermissionView.swift in Sources */,
 				9230BE492A58D23B0053E535 /* NavigationBarViewController.swift in Sources */,
@@ -1636,6 +1655,7 @@
 				92A7B6682A4E6154009C9293 /* UpcomingScheduleCell.swift in Sources */,
 				927E7F272A683DCD00E6A29F /* CalendarCell.swift in Sources */,
 				925840C12A7F5B2200997434 /* NotificationSwitchButton.swift in Sources */,
+				92139D6D2AAC454B005344AE /* ContentImageView.swift in Sources */,
 				928B7BF92A9D944D00E4F789 /* Interceptor.swift in Sources */,
 				92011B8B2A72B7DA009B047F /* NewWriteButton.swift in Sources */,
 				928B7C102AA19E7700E4F789 /* UserAPI.swift in Sources */,
@@ -1649,7 +1669,6 @@
 				928B7C1F2AA6DADA00E4F789 /* ProfileDTO.swift in Sources */,
 				92011C102A74F222009B047F /* SearchType.swift in Sources */,
 				92A7B6592A4D01B3009C9293 /* TodayScheduleInfoCell.swift in Sources */,
-				920031FE2A93A27000E3170D /* ImageContentView.swift in Sources */,
 				925840A02A7BD4D700997434 /* CategoryOrderCell.swift in Sources */,
 				9224FCF32A5C5E7A000A56A6 /* WeekCell.swift in Sources */,
 				9224FD092A601B00000A56A6 /* ColorSelectionButton.swift in Sources */,
@@ -1684,6 +1703,7 @@
 				920032092A975EA400E3170D /* SelectPermissionViewController.swift in Sources */,
 				928B7BFD2A9DD4DC00E4F789 /* BaseAPI.swift in Sources */,
 				926998F92A14EC07003DDAD2 /* SceneDelegate.swift in Sources */,
+				92139D732AAD673A005344AE /* MyRecordContentTextView.swift in Sources */,
 				920031BD2A8B5C8E00E3170D /* MainLocationCell.swift in Sources */,
 				928B7BE02A9AEAE800E4F789 /* AuthVendor.swift in Sources */,
 				9224FD462A6579A7000A56A6 /* DeleteLocationFooterView.swift in Sources */,

@@ -37,6 +37,7 @@ class EditNicknameModalViewController: BaseViewController {
         inputTextField.placeholder = "1~8자의 한글 또는 영문"
         inputTextField.layer.cornerRadius = 12
         inputTextField.addLeftPadding()
+        inputTextField.tintColor = .color2EBD3D
         inputTextField.returnKeyType = .done
         inputTextField.delegate = self
         inputTextField.becomeFirstResponder()

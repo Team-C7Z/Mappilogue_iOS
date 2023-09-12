@@ -64,6 +64,7 @@ class SpacingView: BaseView {
         spacingTextField.font = .title02
         spacingTextField.keyboardType = .numberPad
         spacingTextField.textAlignment = .center
+        spacingTextField.tintColor = .color2EBD3D
         spacingTextField.delegate = self
         spacingTextField.addTarget(self, action: #selector(textFieldDidBeginEditing), for: .editingDidBegin)
         spacingTextField.addTarget(self, action: #selector(textFieldEditingChanged), for: .editingChanged)
