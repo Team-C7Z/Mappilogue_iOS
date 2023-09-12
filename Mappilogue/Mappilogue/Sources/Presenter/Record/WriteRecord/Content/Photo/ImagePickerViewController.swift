@@ -219,7 +219,7 @@ extension ImagePickerViewController: UICollectionViewDelegate, UICollectionViewD
                 selectedAssets.append(asset)
             }
         }
-      
+        
         collectionView.reloadData()
     }
 }
