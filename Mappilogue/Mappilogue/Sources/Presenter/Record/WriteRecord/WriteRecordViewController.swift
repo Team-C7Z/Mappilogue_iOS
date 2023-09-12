@@ -12,10 +12,7 @@ class WriteRecordViewController: BaseViewController {
     var schedule: Schedule = Schedule()
     var onColorSelectionButtonTapped: (() -> Void)?
     private var colorList = dummyColorSelectionData()
-    private var textContentCellHeight: CGFloat = 80
-    private var selectedImages: [PHAsset] = []
-    private var isFirst: Bool = true
-    
+ 
     private let titleColorStackView = UIStackView()
     private let scrollView = UIScrollView()
     private let contentView = UIView()
@@ -24,7 +21,8 @@ class WriteRecordViewController: BaseViewController {
     private let scheduleTitleColorView = ScheduleTitleColorView()
     private let colorSelectionView = ColorSelectionView()
     private let mainLocationButton = MainLocationButton()
-    private let textContentView = TextContentView()
+    private let contentImageView = ContentImageView()
+    private let contentTextView = ContentTextView()
     private let saveRecordView = ImageSaveRecordView()
     
     override func viewDidLoad() {
@@ -50,21 +48,19 @@ class WriteRecordViewController: BaseViewController {
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
         stackView.spacing = 0
-        stackView.backgroundColor = .colorEAE6E1
         
         categoryButton.addTarget(self, action: #selector(categoryButtonTapped), for: .touchUpInside)
         
         mainLocationButton.addTarget(self, action: #selector(mainLocationButtonTapped), for: .touchUpInside)
         
-        textContentView.configure(true)
-        textContentView.stackViewHeightUpdated = {
+        contentTextView.stackViewHeightUpdated = {
             self.stackView.layoutIfNeeded()
             self.scrollToBottom()
         }
         
         saveRecordView.hideKeyboardButton.addTarget(self, action: #selector(dismissKeyboard), for: .touchUpInside)
         saveRecordView.saveRecordButton.addTarget(self, action: #selector(saveRecordButtonTapped), for: .touchUpInside)
-        saveRecordView.galleryButton.addTarget(self, action: #selector(galleryButtonTapped), for: .touchUpInside)
+        saveRecordView.addImageButton.addTarget(self, action: #selector(addImageButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -78,7 +74,8 @@ class WriteRecordViewController: BaseViewController {
         titleColorStackView.addArrangedSubview(scheduleTitleColorView)
         titleColorStackView.addArrangedSubview(colorSelectionView)
         stackView.addArrangedSubview(mainLocationButton)
-        stackView.addArrangedSubview(textContentView)
+        stackView.addArrangedSubview(contentImageView)
+        stackView.addArrangedSubview(contentTextView)
         view.addSubview(saveRecordView)
     }
     
@@ -160,7 +157,7 @@ class WriteRecordViewController: BaseViewController {
     
     private func scrollToBottom() {
         let bottomOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - scrollView.bounds.size.height)
-     //   scrollView.setContentOffset(bottomOffset, animated: true)
+        scrollView.setContentOffset(bottomOffset, animated: true)
     }
     
     private func setKeyboardObservers() {
@@ -182,7 +179,7 @@ class WriteRecordViewController: BaseViewController {
         let keyboardHeight = keyboardFrame.cgRectValue.height
         stackView.snp.updateConstraints {
             if isShowing {
-                $0.bottom.equalTo(contentView).offset(-keyboardHeight - 150)
+                $0.bottom.equalTo(contentView).offset(-keyboardHeight)
             } else {
                 $0.bottom.equalTo(contentView).offset(-58)
             }
@@ -198,7 +195,7 @@ class WriteRecordViewController: BaseViewController {
         view.layoutIfNeeded()
     }
     
-    @objc func galleryButtonTapped() {
+    @objc func addImageButtonTapped() {
         checkAlbumPermission()
     }
     
@@ -231,7 +228,7 @@ class WriteRecordViewController: BaseViewController {
             let imagePickerViewController = ImagePickerViewController()
             imagePickerViewController.authStatus = status
             imagePickerViewController.onCompletion = { assets in
-                self.addImageContentView(assets)
+                self.displayRecordImages(assets)
             }
             imagePickerViewController.modalPresentationStyle = .fullScreen
             self.present(imagePickerViewController, animated: true)
@@ -258,44 +255,24 @@ class WriteRecordViewController: BaseViewController {
         }
     }
     
-    func addImageContentView(_ assets: [PHAsset]) {
-        if isFirst && !assets.isEmpty {
-            textContentView.configure(false)
-        }
-        for asset in assets {
-            let imageContentView = ImageContentView()
-            let index = stackView.arrangedSubviews.count
-            imageContentView.configure(index, asset: asset)
-            // imageContentView.configureMainImage(isFirstImage)
-            stackView.addArrangedSubview(imageContentView)
-            addTextContentView()
-            
-            imageContentView.onRemoveImage = { index in
-                self.removeImageContentView(index)
-            }
-        }
-    }
-    
-    func removeImageContentView(_ index: Int) {
-        for _ in 0..<2 {
-            let viewToRemove = stackView.arrangedSubviews[index]
-            stackView.removeArrangedSubview(viewToRemove)
-            viewToRemove.removeFromSuperview()
-        }
-    }
-    
-    func addTextContentView() {
-        let textContentView = TextContentView()
-        stackView.addArrangedSubview(textContentView)
+    func displayRecordImages(_ assets: [PHAsset]) {
+        contentImageView.configure(assets)
     }
     
     @objc func saveRecordButtonTapped() {
         let savingRecordViewController = SavingRecordViewController()
         savingRecordViewController.modalPresentationStyle = .overFullScreen
         savingRecordViewController.onSaveComplete = {
-            self.navigationController?.popViewController(animated: false)
+            self.navigateToRecordContentViewController()
         }
         present(savingRecordViewController, animated: false)
+    }
+    
+    private func navigateToRecordContentViewController() {
+        let myRecordContentViewController = MyRecordContentViewController()
+        myRecordContentViewController.isNewWrite = true
+        myRecordContentViewController.schedule = schedule
+        navigationController?.pushViewController(myRecordContentViewController, animated: true)
     }
 }
 

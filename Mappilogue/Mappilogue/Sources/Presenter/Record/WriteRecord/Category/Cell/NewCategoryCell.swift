@@ -22,6 +22,7 @@ class NewCategoryCell: BaseCollectionViewCell {
         categoryLabel.textColor = .color1C1C1C
         categoryLabel.font = .body02
         categoryLabel.returnKeyType = .done
+        categoryLabel.tintColor = .color2EBD3D
         
         categoryCountLabel.textColor = .color9B9791
         categoryCountLabel.font = .body02

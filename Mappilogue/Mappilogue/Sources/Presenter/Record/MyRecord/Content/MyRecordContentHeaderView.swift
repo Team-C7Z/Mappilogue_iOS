@@ -1,5 +1,5 @@
 //
-//  RecordContentHeaderView.swift
+//  MyRecordContentHeaderView.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/08/17.
@@ -7,32 +7,31 @@
 
 import UIKit
 
-class RecordContentHeaderView: BaseView {
+class MyRecordContentHeaderView: BaseView {
     private let categoryNameLabel = UILabel()
     private let titleLabel = UILabel()
     private let locationImage = UIImageView()
     private let locationLabel = UILabel()
     private let dateLabel = UILabel()
+    private let lineView = UIView()
     
     override func setupProperty() {
         super.setupProperty()
-        
-        categoryNameLabel.text = "여행"
+   
         categoryNameLabel.textColor = .color707070
         categoryNameLabel.font = .caption02
         
-        titleLabel.text = "제주 여행"
         titleLabel.textColor = .color1C1C1C
         titleLabel.font = .title01
         
         locationImage.image = UIImage(named: "record_location_fill")
-        locationLabel.text = "카멜리아힐"
         locationLabel.textColor = .color707070
         locationLabel.font = .body02
         
-        dateLabel.text = "2023년 7월 14일"
         dateLabel.textColor = .color707070
         dateLabel.font = .body02
+        
+        lineView.backgroundColor = .colorEAE6E1
     }
     
     override func setupHierarchy() {
@@ -43,6 +42,7 @@ class RecordContentHeaderView: BaseView {
         addSubview(locationImage)
         addSubview(locationLabel)
         addSubview(dateLabel)
+        addSubview(lineView)
     }
     
     override func setupLayout() {
@@ -78,5 +78,17 @@ class RecordContentHeaderView: BaseView {
             $0.trailing.equalTo(self)
             $0.centerY.equalTo(locationImage)
         }
+        
+        lineView.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalTo(self)
+            $0.height.equalTo(1)
+        }
+    }
+    
+    func configure(_ schedule: Schedule) {
+        categoryNameLabel.text = schedule.category
+        titleLabel.text = schedule.title
+        locationLabel.text = schedule.location
+        dateLabel.text = schedule.time
     }
 }

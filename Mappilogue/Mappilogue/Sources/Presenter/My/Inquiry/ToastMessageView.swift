@@ -1,5 +1,5 @@
 //
-//  EmailCopyToastMessageView.swift
+//  ToastMessageView.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/08/06.
@@ -7,19 +7,25 @@
 
 import UIKit
 
-class EmailCopyToastMessageView: BaseView {
+class ToastMessageView: BaseView {
     private let toastMessageImage = UIImageView()
     private let toastMessageLabel = UILabel()
+    private let undoButton = UIButton()
 
     override func setupProperty() {
         super.setupProperty()
         
         layer.cornerRadius = 12
         backgroundColor = .color404040
-        toastMessageImage.image = UIImage(named: "my_emailCopy")
-        toastMessageLabel.text = "이메일이 복사되었어요"
+        
+        toastMessageImage.image = UIImage(named: "common_toastMessage")
+        
         toastMessageLabel.textColor = .colorFFFFFF
         toastMessageLabel.font = .body02
+        
+        undoButton.setTitle("되돌리기", for: .normal)
+        undoButton.setTitleColor(.color43B54E, for: .normal)
+        undoButton.titleLabel?.font = .body03
     }
     
     override func setupHierarchy() {
@@ -27,6 +33,7 @@ class EmailCopyToastMessageView: BaseView {
         
         addSubview(toastMessageImage)
         addSubview(toastMessageLabel)
+        addSubview(undoButton)
     }
     
     override func setupLayout() {
@@ -47,5 +54,17 @@ class EmailCopyToastMessageView: BaseView {
             $0.leading.equalTo(toastMessageImage.snp.trailing).offset(6)
             $0.centerY.equalTo(self)
         }
+        
+        undoButton.snp.makeConstraints {
+            $0.trailing.equalTo(self).offset(-10)
+            $0.centerY.equalTo(self)
+            $0.width.equalTo(69)
+            $0.height.equalTo(41)
+        }
+    }
+    
+    func configure(_ title: String, showUndo: Bool) {
+        toastMessageLabel.text = title
+        undoButton.isHidden = !showUndo
     }
 }

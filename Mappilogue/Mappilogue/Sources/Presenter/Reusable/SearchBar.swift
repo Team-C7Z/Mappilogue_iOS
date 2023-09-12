@@ -21,6 +21,7 @@ class SearchBar: UISearchBar {
             textfield.attributedPlaceholder = NSAttributedString(string: textfield.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.colorC9C6C2])
             textfield.textColor = .color1C1C1C
             textfield.font = .body01
+            textfield.tintColor = .color2EBD3D
             textfield.leftView = .none
         }
     }

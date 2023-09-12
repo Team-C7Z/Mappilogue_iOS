@@ -9,7 +9,8 @@ import UIKit
 
 class ImageSaveRecordView: BaseView {
     private let lineView = UIView()
-    let galleryButton = UIButton()
+    let addImageButton = UIButton()
+    let addImageImage = UIImageView()
     let saveRecordButton = UIButton()
     let hideKeyboardButton = UIButton()
     
@@ -20,7 +21,8 @@ class ImageSaveRecordView: BaseView {
         
         lineView.backgroundColor = .colorEAE6E1
         
-        galleryButton.setImage(UIImage(named: "camera"), for: .normal)
+        addImageImage.image = UIImage(named: "record_addImage")
+        addImageImage.contentMode = .scaleAspectFit
         
         saveRecordButton.setTitle("기록 저장", for: .normal)
         saveRecordButton.setTitleColor(.colorFFFFFF, for: .normal)
@@ -36,7 +38,8 @@ class ImageSaveRecordView: BaseView {
         super.setupHierarchy()
 
         addSubview(lineView)
-        addSubview(galleryButton)
+        addSubview(addImageButton)
+        addImageButton.addSubview(addImageImage)
         addSubview(saveRecordButton)
         addSubview(hideKeyboardButton)
     }
@@ -49,11 +52,16 @@ class ImageSaveRecordView: BaseView {
             $0.height.equalTo(2)
         }
         
-        galleryButton.snp.makeConstraints {
-            $0.top.equalTo(self).offset(4)
-            $0.leading.equalTo(self).offset(6)
-            $0.width.equalTo(48)
-            $0.height.equalTo(40)
+        addImageButton.snp.makeConstraints {
+            $0.top.equalTo(self).offset(8)
+            $0.leading.equalTo(self).offset(16)
+            $0.width.height.equalTo(32)
+        }
+        
+        addImageImage.snp.makeConstraints {
+            $0.center.equalTo(addImageButton)
+            $0.width.equalTo(32)
+            $0.height.equalTo(24)
         }
         
         saveRecordButton.snp.makeConstraints {

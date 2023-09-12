@@ -14,7 +14,7 @@ class InquiryViewController: BaseViewController {
     private let emailImage = UIImageView()
     private let emailLabel = UILabel()
     private let emailCopyButton = UIButton()
-    private var emailCopyToastMessage = EmailCopyToastMessageView()
+    private var emailCopyToastMessage = ToastMessageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,6 +100,7 @@ class InquiryViewController: BaseViewController {
     }
     
     func setGatheringToastMessage() {
+        emailCopyToastMessage.configure("이메일이 복사되었어요", showUndo: false)
         view.addSubview(emailCopyToastMessage)
         
         emailCopyToastMessage.snp.makeConstraints {

@@ -1,5 +1,5 @@
 //
-//  RecordContentViewController.swift
+//  MyRecordContentViewController.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/08/17.
@@ -7,12 +7,16 @@
 
 import UIKit
 
-class RecordContentViewController: BaseViewController {
+class MyRecordContentViewController: BaseViewController {
+    var schedule: Schedule = Schedule()
+    var isNewWrite: Bool = false
+    
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     private let stackView = UIStackView()
-    private let recordContentHeaderView = RecordContentHeaderView()
-    private let recordContentView = TextContentView()
+    private let recordContentHeaderView = MyRecordContentHeaderView()
+    private let myRecordContentImageView = MyRecordContentImageView()
+    private let myRecordContentTextView = MyRecordContentTextView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,14 +27,20 @@ class RecordContentViewController: BaseViewController {
         super.setupProperty()
         
         setNavigationTitleAndItems(imageName: "menu", action: #selector(menuButtonTapped), isLeft: false)
-        setNavigationTitleAndBackButton("나의 기록", backButtonAction: #selector(backButtonTapped))
+        setNavigationTitleAndBackButton("나의 기록", backButtonAction: isNewWrite ? #selector(navigateToMyCategoryViewController) : #selector(backButtonTapped))
         
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
         stackView.spacing = 0
         
-        recordContentView.contentView.text = " "
-        recordContentView.contentView.isEditable = false
+        recordContentHeaderView.configure(schedule)
+        if let images = schedule.image {
+            myRecordContentImageView.configure(images, size: view.frame.width - 32)
+        }
+        myRecordContentTextView.configure(schedule.content ?? "", width: view.frame.width - 32)
+        myRecordContentTextView.stackViewHeightUpdated = {
+            self.stackView.layoutIfNeeded()
+        }
     }
     
     override func setupHierarchy() {
@@ -40,7 +50,8 @@ class RecordContentViewController: BaseViewController {
         scrollView.addSubview(contentView)
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(recordContentHeaderView)
-        stackView.addArrangedSubview(recordContentView)
+        stackView.addArrangedSubview(myRecordContentImageView)
+        stackView.addArrangedSubview(myRecordContentTextView)
     }
     
     override func setupLayout() {
@@ -62,6 +73,13 @@ class RecordContentViewController: BaseViewController {
             $0.bottom.equalTo(contentView).offset(-58)
         }
         
+    }
+    
+    @objc func navigateToMyCategoryViewController() {
+        let myCategoryViewController = MyCategoryViewController()
+        myCategoryViewController.isNewWrite = true
+        myCategoryViewController.categoryName = "전체" 
+        navigationController?.pushViewController(myCategoryViewController, animated: false)
     }
     
     @objc func menuButtonTapped() {
@@ -87,7 +105,13 @@ class RecordContentViewController: BaseViewController {
     }
     
     private func deleteRecord() {
-        self.navigationController?.popViewController(animated: false)
+        if isNewWrite {
+            if let viewControllerToPopTo = navigationController?.viewControllers.first(where: { $0 is SelectWriteRecordViewController }) {
+                
+                navigationController?.popToViewController(viewControllerToPopTo, animated: true)
+            }
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
     }
-
 }
