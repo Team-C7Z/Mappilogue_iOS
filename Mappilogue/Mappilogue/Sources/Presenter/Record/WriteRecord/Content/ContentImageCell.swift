@@ -77,7 +77,9 @@ class ContentImageCell: BaseCollectionViewCell {
     }
     
     func configure(_ asset: PHAsset, index: Int, isMain: Bool, isSelected: Bool) {
-        imageManager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: options) { image, _ in
+        let size = CGSize(width: self.frame.width * UIScreen.main.scale, height: self.frame.height * UIScreen.main.scale)
+        
+        imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFit, options: options) { image, _ in
             DispatchQueue.main.async {
                 self.contentImage.image = image
             }
