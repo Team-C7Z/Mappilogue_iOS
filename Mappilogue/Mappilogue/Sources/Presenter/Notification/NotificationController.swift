@@ -8,7 +8,7 @@
 import UIKit
 
 class NotificationController: BaseViewController {
-    let notificationData: [NotificationData] = []
+    let notificationData: [NotificationData] = dummyNotificaitonData()
     let announcementData: [AnnouncementData] = []
     
     var notificationType: NotificationType = .notification
@@ -21,7 +21,9 @@ class NotificationController: BaseViewController {
         tableView.sectionFooterHeight = 0
         tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         tableView.register(EmptyNotificationCell.self, forCellReuseIdentifier: EmptyNotificationCell.registerId)
+        tableView.register(NotificationCell.self, forCellReuseIdentifier: NotificationCell.registerId)
         tableView.register(NotificationAnnouncementHeaderView.self, forHeaderFooterViewReuseIdentifier: NotificationAnnouncementHeaderView.registerId)
+        tableView.register(LineHeaderView.self, forHeaderFooterViewReuseIdentifier: LineHeaderView.registerId)
         tableView.delegate = self
         tableView.dataSource = self
         return tableView
@@ -49,7 +51,7 @@ class NotificationController: BaseViewController {
 }
 
 extension NotificationController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         switch notificationType {
         case .notification:
             return notificationData.isEmpty ? 1 : notificationData.count
@@ -58,53 +60,63 @@ extension NotificationController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch notificationType {
         case .notification:
-            // if notificationData.isEmpty {
+            if notificationData.isEmpty {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: EmptyNotificationCell.registerId, for: indexPath) as? EmptyNotificationCell else { return UITableViewCell() }
-                cell.configure(notificationType: .notification)
                 cell.selectionStyle = .none
-            //}
-            return cell
+                cell.configure(notificationType: .notification)
+                
+                return cell
+             } else {
+                 guard let cell = tableView.dequeueReusableCell(withIdentifier: NotificationCell.registerId, for: indexPath) as? NotificationCell else { return UITableViewCell() }
+                 cell.selectionStyle = .none
+                 
+                 let notification = notificationData[indexPath.section]
+                 cell.configure(notification)
+                 
+                 return cell
+             }
         case .announcement:
            // if announcementData.isEmpty {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: EmptyNotificationCell.registerId, for: indexPath) as? EmptyNotificationCell else { return UITableViewCell() }
-                cell.configure(notificationType: .announcement)
                 cell.selectionStyle = .none
-           // }
+                cell.configure(notificationType: .announcement)
+            
             return cell
+           // }
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch notificationType {
         case .notification:
-            return notificationData.isEmpty ? tableView.frame.height - 100 : 50
+            return notificationData.isEmpty ? tableView.frame.height - 100 : 83
         case .announcement:
             return announcementData.isEmpty ? tableView.frame.height - 100 : 40
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: NotificationAnnouncementHeaderView.registerId) as? NotificationAnnouncementHeaderView else { return UIView() }
-        headerView.delegate = self
-        return headerView
+        if section == 0 {
+            guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: NotificationAnnouncementHeaderView.registerId) as? NotificationAnnouncementHeaderView else { return UIView() }
+            headerView.delegate = self
+            return headerView
+        } else {
+            guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: LineHeaderView.registerId) as? LineHeaderView else { return UIView() }
+            return headerView
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? 48 : 0
+        return section == 0 ? 66 : 1
     }
-    
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        guard let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: MaredRecordsFooterView.registerId) as? MaredRecordsFooterView else { return UIView() }
-//
-//        return footerView
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        return 0
-//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       
