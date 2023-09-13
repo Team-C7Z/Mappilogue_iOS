@@ -27,6 +27,7 @@ class NavigationBarViewController: BaseViewController {
     
     @objc func rightBarButtonItemTapped() {
         let notificationController = NotificationController()
+        notificationController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(notificationController, animated: true)
     }
 }

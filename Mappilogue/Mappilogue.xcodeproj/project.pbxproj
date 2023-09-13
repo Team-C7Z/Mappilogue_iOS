@@ -91,6 +91,10 @@
 		92139D7F2AB0B0F7005344AE /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D7E2AB0B0F7005344AE /* NotificationController.swift */; };
 		92139D832AB18D50005344AE /* NotificationAnnouncementHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D822AB18D50005344AE /* NotificationAnnouncementHeaderView.swift */; };
 		92139D852AB1B169005344AE /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D842AB1B169005344AE /* NotificationType.swift */; };
+		92139D872AB1BB2D005344AE /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D862AB1BB2D005344AE /* Notification.swift */; };
+		92139D892AB1BEBD005344AE /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D882AB1BEBD005344AE /* Announcement.swift */; };
+		92139D8B2AB1BFF8005344AE /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D8A2AB1BFF8005344AE /* NotificationCell.swift */; };
+		92139D8D2AB1C1BA005344AE /* EmptyNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D8C2AB1C1BA005344AE /* EmptyNotificationCell.swift */; };
 		9224FCEE2A5BEF80000A56A6 /* ScheduleTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */; };
 		9224FCF32A5C5E7A000A56A6 /* WeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */; };
 		9224FCF52A5D6C65000A56A6 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */; };
@@ -333,6 +337,10 @@
 		92139D7E2AB0B0F7005344AE /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		92139D822AB18D50005344AE /* NotificationAnnouncementHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAnnouncementHeaderView.swift; sourceTree = "<group>"; };
 		92139D842AB1B169005344AE /* NotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationType.swift; sourceTree = "<group>"; };
+		92139D862AB1BB2D005344AE /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		92139D882AB1BEBD005344AE /* Announcement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Announcement.swift; sourceTree = "<group>"; };
+		92139D8A2AB1BFF8005344AE /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		92139D8C2AB1C1BA005344AE /* EmptyNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyNotificationCell.swift; sourceTree = "<group>"; };
 		9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTitleCell.swift; sourceTree = "<group>"; };
 		9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCell.swift; sourceTree = "<group>"; };
 		9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
@@ -778,6 +786,8 @@
 				92139D7E2AB0B0F7005344AE /* NotificationController.swift */,
 				92139D822AB18D50005344AE /* NotificationAnnouncementHeaderView.swift */,
 				92139D842AB1B169005344AE /* NotificationType.swift */,
+				92139D8A2AB1BFF8005344AE /* NotificationCell.swift */,
+				92139D8C2AB1C1BA005344AE /* EmptyNotificationCell.swift */,
 			);
 			path = Notification;
 			sourceTree = "<group>";
@@ -1160,6 +1170,8 @@
 				927E7F202A66F64400E6A29F /* Schedule.swift */,
 				92011C152A7505F7009B047F /* Record.swift */,
 				92011C252A77A48B009B047F /* Category.swift */,
+				92139D862AB1BB2D005344AE /* Notification.swift */,
+				92139D882AB1BEBD005344AE /* Announcement.swift */,
 			);
 			path = Mappilogue;
 			sourceTree = "<group>";
@@ -1555,6 +1567,7 @@
 				92011B892A72B4BB009B047F /* ContentTextView.swift in Sources */,
 				92011C222A77907F009B047F /* CategoryCell.swift in Sources */,
 				92011C242A77A329009B047F /* AddCategoryCell.swift in Sources */,
+				92139D892AB1BEBD005344AE /* Announcement.swift in Sources */,
 				92011C662A78980E009B047F /* UIView.swift in Sources */,
 				92011C092A74AFCA009B047F /* SearchTextField.swift in Sources */,
 				92011C162A7505F7009B047F /* Record.swift in Sources */,
@@ -1655,6 +1668,7 @@
 				920031EF2A910F7800E3170D /* PhotoDirectoryPickerButton.swift in Sources */,
 				92011BF92A73D404009B047F /* ColorSelectionView.swift in Sources */,
 				920031C52A8B5D7D00E3170D /* MapMainLocationViewController.swift in Sources */,
+				92139D8B2AB1BFF8005344AE /* NotificationCell.swift in Sources */,
 				920031D72A8DAFD800E3170D /* MyRecordContentViewController.swift in Sources */,
 				920031F82A92467A00E3170D /* PhotoDirectoryCell.swift in Sources */,
 				920032052A97166700E3170D /* PermissionView.swift in Sources */,
@@ -1665,6 +1679,7 @@
 				92E7814C2A84B9B3000DAACD /* ScheduleDateHeaderView.swift in Sources */,
 				926378712A54E0E6004E5B6E /* RootUserDefaults.swift in Sources */,
 				925840CF2A7FCB5400997434 /* ScheduleTitleColorView.swift in Sources */,
+				92139D872AB1BB2D005344AE /* Notification.swift in Sources */,
 				92011B722A7127FC009B047F /* AlertViewController.swift in Sources */,
 				9224FCFD2A5FF185000A56A6 /* AddScheduleViewController.swift in Sources */,
 				9224FD252A638F01000A56A6 /* RepeatType.swift in Sources */,
@@ -1687,6 +1702,7 @@
 				9230BE452A57F01E0053E535 /* WeekdayCell.swift in Sources */,
 				928B7C1F2AA6DADA00E4F789 /* ProfileDTO.swift in Sources */,
 				92011C102A74F222009B047F /* SearchType.swift in Sources */,
+				92139D8D2AB1C1BA005344AE /* EmptyNotificationCell.swift in Sources */,
 				92A7B6592A4D01B3009C9293 /* TodayScheduleInfoCell.swift in Sources */,
 				925840A02A7BD4D700997434 /* CategoryOrderCell.swift in Sources */,
 				9224FCF32A5C5E7A000A56A6 /* WeekCell.swift in Sources */,

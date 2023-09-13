@@ -12,7 +12,7 @@ class NotificationAnnouncementHeaderView: BaseTableViewHeaderFooterView {
     
     weak var delegate: NotificationTypeDelegate?
     
-    var notificationType: NotificationType = .noti {
+    var notificationType: NotificationType = .notification {
         didSet {
             updateButtonTitleColor()
         }
@@ -87,24 +87,24 @@ class NotificationAnnouncementHeaderView: BaseTableViewHeaderFooterView {
     @objc private func scheduleButtonTapped(_ sender: UIButton) {
         switch sender {
         case notificationButton:
-            notificationType = .noti
+            notificationType = .notification
         case announcementButton:
             notificationType = .announcement
         default:
             break
         }
         
-        delegate?.categoryButtonTapped(notificationType: notificationType)
+        delegate?.categoryButtonTapped(notificationType)
     }
     
     private func updateButtonTitleColor() {
-        notificationButton.setTitleColor(notificationType == .noti ? .color1C1C1C : .colorC9C6C2, for: .normal)
-        notificationLineView.backgroundColor = notificationType == .noti ? .color1C1C1C : .colorC9C6C2
+        notificationButton.setTitleColor(notificationType == .notification ? .color1C1C1C : .colorC9C6C2, for: .normal)
+        notificationLineView.backgroundColor = notificationType == .notification ? .color1C1C1C : .colorC9C6C2
         announcementButton.setTitleColor(notificationType == .announcement ? .color1C1C1C : .colorC9C6C2, for: .normal)
         announcementLineView.backgroundColor = notificationType == .announcement ? .color1C1C1C : .colorC9C6C2
     }
 }
 
 protocol NotificationTypeDelegate: AnyObject {
-    func categoryButtonTapped(notificationType: NotificationType)
+    func categoryButtonTapped(_ notificationType: NotificationType)
 }
