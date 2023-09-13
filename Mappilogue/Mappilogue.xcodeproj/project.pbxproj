@@ -88,6 +88,9 @@
 		92139D752AAD67E8005344AE /* MyRecordContentImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D742AAD67E8005344AE /* MyRecordContentImageView.swift */; };
 		92139D772AAD6DCF005344AE /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D762AAD6DCF005344AE /* UITextView.swift */; };
 		92139D792AAD709E005344AE /* MyRecordContentImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D782AAD709E005344AE /* MyRecordContentImageCell.swift */; };
+		92139D7F2AB0B0F7005344AE /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D7E2AB0B0F7005344AE /* NotificationController.swift */; };
+		92139D832AB18D50005344AE /* NotificationAnnouncementHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D822AB18D50005344AE /* NotificationAnnouncementHeaderView.swift */; };
+		92139D852AB1B169005344AE /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D842AB1B169005344AE /* NotificationType.swift */; };
 		9224FCEE2A5BEF80000A56A6 /* ScheduleTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */; };
 		9224FCF32A5C5E7A000A56A6 /* WeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */; };
 		9224FCF52A5D6C65000A56A6 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */; };
@@ -184,7 +187,7 @@
 		928B7BEE2A9C603C00E4F789 /* TodaySchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BED2A9C603C00E4F789 /* TodaySchedule.swift */; };
 		928B7BF32A9C7B4400E4F789 /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BF22A9C7B4400E4F789 /* NetworkLoggerPlugin.swift */; };
 		928B7BF52A9CA51500E4F789 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BF42A9CA51500E4F789 /* ErrorResponse.swift */; };
-		928B7BF72A9CA92F00E4F789 /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BF62A9CA92F00E4F789 /* NotificationType.swift */; };
+		928B7BF72A9CA92F00E4F789 /* NotificationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BF62A9CA92F00E4F789 /* NotificationStatus.swift */; };
 		928B7BF92A9D944D00E4F789 /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BF82A9D944D00E4F789 /* Interceptor.swift */; };
 		928B7BFB2A9DC55600E4F789 /* AuthUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BFA2A9DC55600E4F789 /* AuthUserDefaults.swift */; };
 		928B7BFD2A9DD4DC00E4F789 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BFC2A9DD4DC00E4F789 /* BaseAPI.swift */; };
@@ -327,6 +330,9 @@
 		92139D742AAD67E8005344AE /* MyRecordContentImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordContentImageView.swift; sourceTree = "<group>"; };
 		92139D762AAD6DCF005344AE /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
 		92139D782AAD709E005344AE /* MyRecordContentImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordContentImageCell.swift; sourceTree = "<group>"; };
+		92139D7E2AB0B0F7005344AE /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		92139D822AB18D50005344AE /* NotificationAnnouncementHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAnnouncementHeaderView.swift; sourceTree = "<group>"; };
+		92139D842AB1B169005344AE /* NotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationType.swift; sourceTree = "<group>"; };
 		9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTitleCell.swift; sourceTree = "<group>"; };
 		9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCell.swift; sourceTree = "<group>"; };
 		9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
@@ -423,7 +429,7 @@
 		928B7BED2A9C603C00E4F789 /* TodaySchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodaySchedule.swift; sourceTree = "<group>"; };
 		928B7BF22A9C7B4400E4F789 /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
 		928B7BF42A9CA51500E4F789 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
-		928B7BF62A9CA92F00E4F789 /* NotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationType.swift; sourceTree = "<group>"; };
+		928B7BF62A9CA92F00E4F789 /* NotificationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStatus.swift; sourceTree = "<group>"; };
 		928B7BF82A9D944D00E4F789 /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
 		928B7BFA2A9DC55600E4F789 /* AuthUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUserDefaults.swift; sourceTree = "<group>"; };
 		928B7BFC2A9DD4DC00E4F789 /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
@@ -766,6 +772,16 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		92139D7D2AB0B08E005344AE /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				92139D7E2AB0B0F7005344AE /* NotificationController.swift */,
+				92139D822AB18D50005344AE /* NotificationAnnouncementHeaderView.swift */,
+				92139D842AB1B169005344AE /* NotificationType.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
 		9224FCFE2A5FF82F000A56A6 /* AddSchedule */ = {
 			isa = PBXGroup;
 			children = (
@@ -1050,6 +1066,7 @@
 			children = (
 				920032012A9715B800E3170D /* Permission */,
 				9263786C2A546BE3004E5B6E /* Onboarding */,
+				92139D7D2AB0B08E005344AE /* Notification */,
 				9200320D2A99A39A00E3170D /* Login */,
 				926999392A14F673003DDAD2 /* TabBar */,
 				9269993A2A14F689003DDAD2 /* Home */,
@@ -1228,7 +1245,7 @@
 			children = (
 				928B7BEC2A9C5C7A00E4F789 /* Mappilogue */,
 				928B7BDF2A9AEAE800E4F789 /* AuthVendor.swift */,
-				928B7BF62A9CA92F00E4F789 /* NotificationType.swift */,
+				928B7BF62A9CA92F00E4F789 /* NotificationStatus.swift */,
 				928B7BFE2A9F2D6600E4F789 /* AuthType.swift */,
 				920031B62A8B5BB000E3170D /* Dto */,
 			);
@@ -1544,6 +1561,7 @@
 				92FE26152A4B751000BCDB82 /* BaseCollectionReusableView.swift in Sources */,
 				928B7BE92A9B1C5B00E4F789 /* BaseResponse.swift in Sources */,
 				925840B52A7F2D3B00997434 /* MyCell.swift in Sources */,
+				92139D7F2AB0B0F7005344AE /* NotificationController.swift in Sources */,
 				92011C042A740C16009B047F /* NewCategoryCell.swift in Sources */,
 				920031BF2A8B5CD600E3170D /* MainLocationAlertViewController.swift in Sources */,
 				9224FCF52A5D6C65000A56A6 /* DatePickerViewController.swift in Sources */,
@@ -1607,6 +1625,7 @@
 				925840C32A7F61E800997434 /* InquiryViewController.swift in Sources */,
 				920032002A9504EE00E3170D /* MaredRecordsFooterView.swift in Sources */,
 				928B7C222AA83D2000E4F789 /* EditNicknameModalViewController.swift in Sources */,
+				92139D832AB18D50005344AE /* NotificationAnnouncementHeaderView.swift in Sources */,
 				9224FD052A600F42000A56A6 /* NotificationRepeatButton.swift in Sources */,
 				920031DB2A8DD29700E3170D /* SavingRecordViewController.swift in Sources */,
 				928B7BD92A99AFD700E4F789 /* SignUpCompletionViewController.swift in Sources */,
@@ -1703,6 +1722,7 @@
 				920032092A975EA400E3170D /* SelectPermissionViewController.swift in Sources */,
 				928B7BFD2A9DD4DC00E4F789 /* BaseAPI.swift in Sources */,
 				926998F92A14EC07003DDAD2 /* SceneDelegate.swift in Sources */,
+				92139D852AB1B169005344AE /* NotificationType.swift in Sources */,
 				92139D732AAD673A005344AE /* MyRecordContentTextView.swift in Sources */,
 				920031BD2A8B5C8E00E3170D /* MainLocationCell.swift in Sources */,
 				928B7BE02A9AEAE800E4F789 /* AuthVendor.swift in Sources */,
@@ -1717,7 +1737,7 @@
 				928B7C1B2AA4784500E4F789 /* TermsOfUserResponse.swift in Sources */,
 				9224FD1B2A61705D000A56A6 /* ColorSelection.swift in Sources */,
 				920031D32A8C832300E3170D /* SearchBar.swift in Sources */,
-				928B7BF72A9CA92F00E4F789 /* NotificationType.swift in Sources */,
+				928B7BF72A9CA92F00E4F789 /* NotificationStatus.swift in Sources */,
 				92011C642A788FBF009B047F /* MarkerView.swift in Sources */,
 				92011CBC2A7A19CA009B047F /* MyRecordCategoryCell.swift in Sources */,
 				920031B52A8B5B9100E3170D /* Environment.swift in Sources */,

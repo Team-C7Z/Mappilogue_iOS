@@ -144,14 +144,14 @@ class NotificationSettingViewController: BaseViewController {
     func switchToggle(_ notification: String?) -> String {
         guard let notification = notification else { return "" }
         
-        let currentType = NotificationType(rawValue: notification)
-        let newType: NotificationType = currentType == .active ? .inactive : .active
+        let currentType = NotificationStatus(rawValue: notification)
+        let newType: NotificationStatus = currentType == .active ? .inactive : .active
         
         return newType.rawValue
     }
     
     func setTotalNotificationControl() {
-        guard let notification = notificationDTO, let isTotalNotification = NotificationType(rawValue: notification.isTotalNotification) else { return }
+        guard let notification = notificationDTO, let isTotalNotification = NotificationStatus(rawValue: notification.isTotalNotification) else { return }
         
         notificationControlOffView.isHidden = isTotalNotification == .active
     }
