@@ -31,7 +31,7 @@ class EmptyNotificationCell: BaseTableViewCell {
     override func setupHierarchy() {
         super.setupHierarchy()
 
-        addSubview(stackView)
+        contentView.addSubview(stackView)
         stackView.addArrangedSubview(notificationImage)
         stackView.addArrangedSubview(notificationLabel)
     }
@@ -40,7 +40,7 @@ class EmptyNotificationCell: BaseTableViewCell {
         super.setupLayout()
         
         stackView.snp.makeConstraints {
-            $0.centerX.equalTo(self)
+            $0.centerX.equalTo(contentView)
             $0.top.equalTo(224)
         }
         

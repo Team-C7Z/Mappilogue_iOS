@@ -68,17 +68,18 @@ class NotificationAnnouncementHeaderView: BaseTableViewHeaderFooterView {
         super.setupLayout()
         
         stackView.snp.makeConstraints {
-            $0.top.bottom.leading.equalTo(contentView)
+            $0.top.leading.equalTo(contentView)
+            $0.height.equalTo(48)
         }
         
         notificationLineView.snp.makeConstraints {
-            $0.bottom.equalTo(self)
+            $0.bottom.equalTo(stackView)
             $0.leading.trailing.equalTo(notificationButton)
             $0.height.equalTo(2)
         }
         
         announcementLineView.snp.makeConstraints {
-            $0.bottom.equalTo(self)
+            $0.bottom.equalTo(stackView)
             $0.leading.trailing.equalTo(announcementButton)
             $0.height.equalTo(2)
         }
