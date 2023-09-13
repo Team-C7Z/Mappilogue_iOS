@@ -10,6 +10,9 @@ import UIKit
 class NotificationCell: BaseTableViewCell {
     static let registerId = "\(NotificationCell.self)"
     
+    var index: Int = 0
+    var onRemove: ((Int) -> Void)?
+    
     private let colorView = UIView()
     private let dateLabel = UILabel()
     private let timeLabel = UILabel()
@@ -37,6 +40,7 @@ class NotificationCell: BaseTableViewCell {
         titleLabel.font = .body02
         
         removeButton.setImage(UIImage(named: "removeNotification"), for: .normal)
+        removeButton.addTarget(self, action: #selector(removeButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -79,10 +83,16 @@ class NotificationCell: BaseTableViewCell {
         }
     }
     
-    func configure(_ notification: NotificationData) {
+    func configure(_ notification: NotificationData, index: Int) {
+        self.index = index
+        
         colorView.backgroundColor = notification.color
         dateLabel.text = notification.date
         timeLabel.text = notification.time
         titleLabel.text = notification.text
+    }
+    
+    @objc func removeButtonTapped() {
+        onRemove?(index)
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 class NotificationController: BaseViewController {
-    let notificationData: [NotificationData] = dummyNotificaitonData()
+    var notificationData: [NotificationData] = dummyNotificaitonData()
     let announcementData: [AnnouncementData] = []
     
     var notificationType: NotificationType = .notification
@@ -48,6 +48,12 @@ class NotificationController: BaseViewController {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
+    
+    private func removeNotification(_ index: Int) {
+        notificationData.remove(at: index)
+        
+        tableView.reloadData()
+    }
 }
 
 extension NotificationController: UITableViewDelegate, UITableViewDataSource {
@@ -78,7 +84,11 @@ extension NotificationController: UITableViewDelegate, UITableViewDataSource {
                  cell.selectionStyle = .none
                  
                  let notification = notificationData[indexPath.section]
-                 cell.configure(notification)
+                 cell.configure(notification, index: indexPath.section)
+                 
+                 cell.onRemove = { index in
+                     self.removeNotification(index)
+                 }
                  
                  return cell
              }
