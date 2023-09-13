@@ -8,6 +8,6 @@
 import UIKit
 
 enum NotificationType {
-    case noti
+    case notification
     case announcement
 }
