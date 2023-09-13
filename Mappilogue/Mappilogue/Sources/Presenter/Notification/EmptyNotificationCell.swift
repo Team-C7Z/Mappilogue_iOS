@@ -22,7 +22,7 @@ class EmptyNotificationCell: BaseTableViewCell {
         stackView.distribution = .equalSpacing
         stackView.spacing = 16
   
-        notificationImage.image = UIImage(named: "emptyNotification")
+        notificationImage.image = UIImage(named: "notification_empty")
         
         notificationLabel.textColor = .color000000
         notificationLabel.font = .title02

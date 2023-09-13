@@ -39,7 +39,7 @@ class NotificationCell: BaseTableViewCell {
         titleLabel.textColor = .color000000
         titleLabel.font = .body02
         
-        removeButton.setImage(UIImage(named: "removeNotification"), for: .normal)
+        removeButton.setImage(UIImage(named: "notification_remove"), for: .normal)
         removeButton.addTarget(self, action: #selector(removeButtonTapped), for: .touchUpInside)
     }
     

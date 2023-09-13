@@ -9,7 +9,7 @@ import UIKit
 
 class NotificationController: BaseViewController {
     var notificationData: [NotificationData] = dummyNotificaitonData()
-    let announcementData: [AnnouncementData] = []
+    let announcementData: [AnnouncementData] = dummyAnnouncementData()
     
     var notificationType: NotificationType = .notification
     
@@ -22,6 +22,7 @@ class NotificationController: BaseViewController {
         tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         tableView.register(EmptyNotificationCell.self, forCellReuseIdentifier: EmptyNotificationCell.registerId)
         tableView.register(NotificationCell.self, forCellReuseIdentifier: NotificationCell.registerId)
+        tableView.register(AnnouncementCell.self, forCellReuseIdentifier: AnnouncementCell.registerId)
         tableView.register(NotificationAnnouncementHeaderView.self, forHeaderFooterViewReuseIdentifier: NotificationAnnouncementHeaderView.registerId)
         tableView.register(LineHeaderView.self, forHeaderFooterViewReuseIdentifier: LineHeaderView.registerId)
         tableView.delegate = self
@@ -93,13 +94,18 @@ extension NotificationController: UITableViewDelegate, UITableViewDataSource {
                  return cell
              }
         case .announcement:
-           // if announcementData.isEmpty {
+            if announcementData.isEmpty {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: EmptyNotificationCell.registerId, for: indexPath) as? EmptyNotificationCell else { return UITableViewCell() }
                 cell.selectionStyle = .none
                 cell.configure(notificationType: .announcement)
             
-            return cell
-           // }
+                return cell
+            } else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: AnnouncementCell.registerId, for: indexPath) as? AnnouncementCell else { return UITableViewCell() }
+                cell.selectionStyle = .none
+            
+                return cell
+            }
         }
     }
     
@@ -108,7 +114,7 @@ extension NotificationController: UITableViewDelegate, UITableViewDataSource {
         case .notification:
             return notificationData.isEmpty ? tableView.frame.height - 100 : 83
         case .announcement:
-            return announcementData.isEmpty ? tableView.frame.height - 100 : 40
+            return announcementData.isEmpty ? tableView.frame.height - 100 : 75
         }
     }
     
@@ -121,7 +127,6 @@ extension NotificationController: UITableViewDelegate, UITableViewDataSource {
             guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: LineHeaderView.registerId) as? LineHeaderView else { return UIView() }
             return headerView
         }
-        
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
