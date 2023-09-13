@@ -9,7 +9,7 @@ import UIKit
 
 class EmptyNotificationCell: BaseTableViewCell {
     static let registerId = "\(EmptyNotificationCell.self)"
-    
+
     private let stackView = UIStackView()
     private let notificationImage = UIImageView()
     private let notificationLabel = UILabel()
