@@ -241,7 +241,7 @@ extension HomeViewController: ScheduleTypeDelegate, ExpandCellDelegate {
     
     func expandButtonTapped(in cell: UITableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
-        isScheduleExpanded[indexPath.section] = !isScheduleExpanded[indexPath.section]
+        isScheduleExpanded[indexPath.section].toggle()
         tableView.reloadSections([indexPath.section], with: .none)
     }
     
