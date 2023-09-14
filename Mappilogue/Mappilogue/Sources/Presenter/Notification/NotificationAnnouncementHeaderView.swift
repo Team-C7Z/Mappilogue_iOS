@@ -12,11 +12,7 @@ class NotificationAnnouncementHeaderView: BaseTableViewHeaderFooterView {
     
     weak var delegate: NotificationTypeDelegate?
     
-    var notificationType: NotificationType = .notification {
-        didSet {
-            updateButtonTitleColor()
-        }
-    }
+    var notificationType: NotificationType = .notification
     
     private let stackView = UIStackView()
     private let notificationButton = UIButton()
@@ -83,6 +79,12 @@ class NotificationAnnouncementHeaderView: BaseTableViewHeaderFooterView {
             $0.leading.trailing.equalTo(announcementButton)
             $0.height.equalTo(2)
         }
+    }
+    
+    func configure(_ notificationType: NotificationType) {
+        self.notificationType = notificationType
+        
+        updateButtonTitleColor()
     }
     
     @objc private func scheduleButtonTapped(_ sender: UIButton) {

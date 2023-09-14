@@ -10,10 +10,11 @@ import UIKit
 class AnnouncementCell: BaseTableViewCell {
     static let registerId = "\(AnnouncementCell.self)"
  
+    weak var delegate: ExpandCellDelegate?
+    
     private let titleLabel = UILabel()
     private let dateLabel = UILabel()
     private let expandButton = UIButton()
-    private let contentTextView = UITextView()
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -24,15 +25,13 @@ class AnnouncementCell: BaseTableViewCell {
     override func setupProperty() {
         super.setupProperty()
         
-        titleLabel.text = "기록 어플 ‘맵필로그’ 런칭 안내"
         titleLabel.textColor = .color000000
         titleLabel.font = .body03
         
-        dateLabel.text = "2023년 9월 13일"
         dateLabel.textColor = .color707070
         dateLabel.font = .caption02
         
-        expandButton.setImage(UIImage(named: "notification_expand"), for: .normal)
+        expandButton.addTarget(self, action: #selector(expandButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -41,7 +40,6 @@ class AnnouncementCell: BaseTableViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(dateLabel)
         contentView.addSubview(expandButton)
-
     }
     
     override func setupLayout() {
@@ -62,5 +60,15 @@ class AnnouncementCell: BaseTableViewCell {
             $0.trailing.equalTo(contentView)
             $0.width.height.equalTo(32)
         }
+    }
+    
+    func configure(_ announcement: AnnouncementData, isExpanded: Bool) {
+        titleLabel.text = announcement.title
+        dateLabel.text = announcement.date
+        expandButton.setImage(UIImage(named: isExpanded ? "notification_close" : "notification_expand"), for: .normal)
+    }
+    
+    @objc private func expandButtonTapped() {
+        delegate?.expandButtonTapped(in: self)
     }
 }
