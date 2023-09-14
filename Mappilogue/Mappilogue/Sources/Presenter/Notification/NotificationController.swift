@@ -8,8 +8,8 @@
 import UIKit
 
 class NotificationController: BaseViewController {
-    var notificationData: [NotificationData] = dummyNotificaitonData()
-    var announcementData: [AnnouncementData] = dummyAnnouncementData()
+    var notificationData: [NotificationData] = []
+    var announcementData: [AnnouncementData] = []
     var isAnnouncementExpanded = [Bool]()
     
     var notificationType: NotificationType = .notification
@@ -80,7 +80,11 @@ extension NotificationController: UITableViewDelegate, UITableViewDataSource {
         case .notification:
             return 1
         case .announcement:
-            return isAnnouncementExpanded[section] ? 2 : 1
+            if announcementData.isEmpty {
+                return 1
+            } else {
+                return isAnnouncementExpanded[section] ? 2 : 1
+            }
         }
     }
     
@@ -137,10 +141,6 @@ extension NotificationController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let content = announcementData[indexPath.section].content
-        let contentTextHeight = calculateTextHeight(text: content, font: UIFont.systemFont(ofSize: 17.8), width: tableView.frame.width)
-        let cellHeight = contentTextHeight + 16
-        
         switch notificationType {
         case .notification:
             return notificationData.isEmpty ? tableView.frame.height - 100 : 83
@@ -148,6 +148,10 @@ extension NotificationController: UITableViewDelegate, UITableViewDataSource {
             if announcementData.isEmpty {
                 return tableView.frame.height - 100
             } else {
+                let content = announcementData[indexPath.section].content
+                let contentTextHeight = calculateTextHeight(text: content, font: UIFont.systemFont(ofSize: 17.8), width: tableView.frame.width)
+                let cellHeight = contentTextHeight + 16
+                
                 return indexPath.row == 0 ? 70 : cellHeight
             }
         }
