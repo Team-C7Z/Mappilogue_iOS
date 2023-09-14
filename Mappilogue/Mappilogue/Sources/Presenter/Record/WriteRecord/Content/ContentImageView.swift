@@ -105,7 +105,7 @@ extension ContentImageView: UICollectionViewDelegate, UICollectionViewDataSource
         
         let asset = assets[indexPath.row]
         let isMain = indexPath.row == selectedMainImageIndex
-        var isSelected: Bool = indexPath.row == selectedImageIndex
+        let isSelected: Bool = indexPath.row == selectedImageIndex
         cell.configure(asset, index: indexPath.row, isMain: isMain, isSelected: isSelected)
         
         return cell
