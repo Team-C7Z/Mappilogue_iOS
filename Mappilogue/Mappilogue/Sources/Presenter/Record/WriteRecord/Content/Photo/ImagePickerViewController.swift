@@ -185,8 +185,29 @@ class ImagePickerViewController: BaseViewController {
                 }
             } else {
                 print("Camera: 권한 거부")
+                DispatchQueue.main.async {
+                    self.presentCameraPermissionAlert()
+                }
             }
         }
+    }
+    
+    func presentCameraPermissionAlert() {
+        let alertViewController = AlertViewController()
+        alertViewController.modalPresentationStyle = .overCurrentContext
+        let alert = Alert(titleText: "카메라 접근 권한을 허용해 주세요",
+                          messageText: "카메라 접근 권한을 허용하지 않을 경우\n일부 기능을 사용할 수 없어요",
+                          cancelText: "닫기",
+                          doneText: "설정으로 이동",
+                          buttonColor: .color2EBD3D,
+                          alertHeight: 182)
+        alertViewController.configureAlert(with: alert)
+        alertViewController.onDoneTapped = {
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+        self.present(alertViewController, animated: false)
     }
     
     private func presentCameraViewController() {
