@@ -13,10 +13,12 @@ class SignUpCompletionViewController: BaseViewController {
     private let completionRoundView = UIView()
     private let completionImage = UIImageView()
     private let completionLabel = UILabel()
+    private let goToHomeLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        dimissAfterDelay()
     }
     
     override func setupProperty() {
@@ -32,6 +34,10 @@ class SignUpCompletionViewController: BaseViewController {
         completionLabel.text = "회원가입이 완료되었어요"
         completionLabel.textColor = .color1C1C1C
         completionLabel.font = .title01
+        
+        goToHomeLabel.text = "3초 뒤에 홈으로 이동할게요"
+        goToHomeLabel.textColor = .color9B9791
+        goToHomeLabel.font = .body02
     }
 
     override func setupHierarchy() {
@@ -40,13 +46,14 @@ class SignUpCompletionViewController: BaseViewController {
         view.addSubview(completionRoundView)
         completionRoundView.addSubview(completionImage)
         view.addSubview(completionLabel)
+        view.addSubview(goToHomeLabel)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
         completionRoundView.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
+            $0.centerY.equalToSuperview().offset(-35)
             $0.centerX.equalToSuperview()
             $0.width.height.equalTo(35)
         }
@@ -61,9 +68,24 @@ class SignUpCompletionViewController: BaseViewController {
             $0.top.equalTo(completionRoundView.snp.bottom).offset(25)
             $0.centerX.equalToSuperview()
         }
+        
+        goToHomeLabel.snp.makeConstraints {
+            $0.top.equalTo(completionRoundView.snp.bottom).offset(55)
+            $0.centerX.equalToSuperview()
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.dimissViewController()
+    }
+    
+    private func dimissAfterDelay() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.dimissViewController()
+        }
+    }
+    
+    private func dimissViewController() {
         dismiss(animated: true) {
             self.onTapped?()
         }
