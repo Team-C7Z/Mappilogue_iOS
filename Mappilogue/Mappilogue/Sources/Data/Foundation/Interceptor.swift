@@ -17,7 +17,6 @@ class Interceptor: RequestInterceptor {
             completion(.success(urlRequest))
             return
         }
-
         var urlRequest = urlRequest
         urlRequest.setValue(accessToken, forHTTPHeaderField: "accessToken")
         urlRequest.setValue(refreshToken, forHTTPHeaderField: "refreshToken")
