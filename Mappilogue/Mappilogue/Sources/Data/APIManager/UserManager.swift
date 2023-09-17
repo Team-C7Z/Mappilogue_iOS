@@ -111,6 +111,22 @@ class UserManager {
         }
     }
     
+    func updateProfileImage(profileImage: Data, completion: @escaping (NetworkResult<Any>) -> Void) {
+        let formData = MultipartFormData(provider: .data(profileImage), name: "image", fileName: "image.jpg", mimeType: "image/jpg")
+
+        interceptorSessionProvider.request(.updateProfileImage(image: formData)) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(statusCode, data, BaseResponse<ProfileImageDTO>.self)
+                completion(networkResult)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     private func judgeStatus<T: Codable>(_ statusCode: Int, _ data: Data, _ dataModel: T.Type) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
         switch statusCode {
