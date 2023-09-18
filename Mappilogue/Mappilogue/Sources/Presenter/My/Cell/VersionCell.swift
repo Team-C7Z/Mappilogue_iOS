@@ -10,8 +10,14 @@ import UIKit
 class VersionCell: BaseCollectionViewCell {
     static let registerId = "\(VersionCell.self)"
     
+    var onVersionUpdate: (() -> Void)?
+        
     private let versionInfoLabel = UILabel()
-    private let versionLabel = UILabel()
+    private let stackView = UIStackView()
+    private let currentVersionLabel = UILabel()
+    private let versionSeparatorLabel = UILabel()
+    private let latestVersionLabel = UILabel()
+    private let updateButton = UIButton()
     private let updateLabel = UILabel()
     private let moveImage = UIImageView()
     
@@ -25,9 +31,23 @@ class VersionCell: BaseCollectionViewCell {
         versionInfoLabel.textColor = .color000000
         versionInfoLabel.font = .body02
         
-        versionLabel.text = "0.0.1 / 0.0.1"
-        versionLabel.textColor = .color707070
-        versionLabel.font = .body02
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 4
+        
+        currentVersionLabel.text = Utils.getAppVersion()
+        currentVersionLabel.textColor = .color707070
+        currentVersionLabel.font = .body02
+        
+        versionSeparatorLabel.text = "/"
+        versionSeparatorLabel.textColor = .color707070
+        versionSeparatorLabel.font = .body02
+        
+        latestVersionLabel.text = "1.0"  // Utils.loadAppStoreVersion()
+        latestVersionLabel.textColor = .color707070
+        latestVersionLabel.font = .body02
+        
+        updateButton.addTarget(self, action: #selector(updateButtonTapped), for: .touchUpInside)
         
         updateLabel.text = "업데이트"
         updateLabel.textColor = .colorC9C6C2
@@ -41,9 +61,13 @@ class VersionCell: BaseCollectionViewCell {
         super.setupHierarchy()
         
         contentView.addSubview(versionInfoLabel)
-        contentView.addSubview(versionLabel)
-        contentView.addSubview(updateLabel)
-        contentView.addSubview(moveImage)
+        contentView.addSubview(stackView)
+        stackView.addArrangedSubview(currentVersionLabel)
+        stackView.addArrangedSubview(versionSeparatorLabel)
+        stackView.addArrangedSubview(latestVersionLabel)
+        contentView.addSubview(updateButton)
+        updateButton.addSubview(updateLabel)
+        updateButton.addSubview(moveImage)
     }
     
     override func setupLayout() {
@@ -54,9 +78,15 @@ class VersionCell: BaseCollectionViewCell {
             $0.leading.equalTo(contentView).offset(12)
         }
         
-        versionLabel.snp.makeConstraints {
+        stackView.snp.makeConstraints {
             $0.centerY.equalTo(contentView)
             $0.leading.equalTo(versionInfoLabel.snp.trailing).offset(8)
+        }
+        
+        updateButton.snp.makeConstraints {
+            $0.leading.equalTo(updateLabel.snp.leading)
+            $0.trailing.equalTo(moveImage.snp.trailing)
+            $0.height.equalTo(contentView)
         }
         
         updateLabel.snp.makeConstraints {
@@ -72,6 +102,7 @@ class VersionCell: BaseCollectionViewCell {
         }
     }
     
-    func configure() {
+    @objc private func updateButtonTapped() {
+        onVersionUpdate?()
     }
 }

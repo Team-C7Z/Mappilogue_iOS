@@ -201,6 +201,7 @@
 		9291582A2A252CC20022BEF9 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929158292A252CC20022BEF9 /* UIColor.swift */; };
 		929158302A2537E40022BEF9 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9291582F2A2537E40022BEF9 /* SnapKit */; };
 		929E23152AB737DC003180B3 /* ProfileImageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23142AB737DC003180B3 /* ProfileImageDTO.swift */; };
+		929E23172AB7F6C4003180B3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23162AB7F6C4003180B3 /* Utils.swift */; };
 		92A7B64F2A4CCE29009C9293 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B64E2A4CCE29009C9293 /* AddButton.swift */; };
 		92A7B6532A4CDD4D009C9293 /* ScheduleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6522A4CDD4D009C9293 /* ScheduleType.swift */; };
 		92A7B6592A4D01B3009C9293 /* TodayScheduleInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6582A4D01B3009C9293 /* TodayScheduleInfoCell.swift */; };
@@ -435,6 +436,7 @@
 		9291581E2A2529660022BEF9 /* Pretendard-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.ttf"; sourceTree = "<group>"; };
 		929158292A252CC20022BEF9 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		929E23142AB737DC003180B3 /* ProfileImageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageDTO.swift; sourceTree = "<group>"; };
+		929E23162AB7F6C4003180B3 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		92A7B64B2A4CC0E6009C9293 /* HomeEmptyScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEmptyScheduleCell.swift; sourceTree = "<group>"; };
 		92A7B64E2A4CCE29009C9293 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		92A7B6522A4CDD4D009C9293 /* ScheduleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScheduleType.swift; path = Mappilogue/Sources/Presenter/Home/Schedule/ScheduleType.swift; sourceTree = SOURCE_ROOT; };
@@ -1017,6 +1019,7 @@
 				925840C82A7F805800997434 /* UILabel.swift */,
 				92E7814D2A850316000DAACD /* Date.swift */,
 				92E781512A85381D000DAACD /* String.swift */,
+				929E23162AB7F6C4003180B3 /* Utils.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1613,6 +1616,7 @@
 				92011B812A7271D0009B047F /* CategoryButton.swift in Sources */,
 				92011C122A74F8E6009B047F /* SearchRecordCell.swift in Sources */,
 				928B7BF52A9CA51500E4F789 /* ErrorResponse.swift in Sources */,
+				929E23172AB7F6C4003180B3 /* Utils.swift in Sources */,
 				92011B7D2A7174B6009B047F /* DateHeaderView.swift in Sources */,
 				9224FD482A6579ED000A56A6 /* LocationTimeCell.swift in Sources */,
 				92011C262A77A48B009B047F /* Category.swift in Sources */,
