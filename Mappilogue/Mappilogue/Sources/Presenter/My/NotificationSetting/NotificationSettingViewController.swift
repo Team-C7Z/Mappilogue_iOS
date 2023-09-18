@@ -94,7 +94,7 @@ class NotificationSettingViewController: BaseViewController {
     }
     
     private func handleNotificationSettingResponse(_ response: Any) {
-        guard let baseResponse = response as? BaseResponse<NotificationDTO>, let result = baseResponse.result else { return }
+        guard let baseResponse = response as? BaseDTO<NotificationDTO>, let result = baseResponse.result else { return }
         
         notificationDTO = result
         configureNotification()
