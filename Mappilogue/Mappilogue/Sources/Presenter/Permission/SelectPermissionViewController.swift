@@ -15,8 +15,15 @@ class SelectPermissionViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        checkoutLocationPermission()
         locationManager.delegate = self
+        
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound] // 필요한 알림 권한을 설정
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: authOptions,
+            completionHandler: { _, _ in
+                self.checkoutLocationPermission()
+            }
+        )
     }
     
     func presentOnboardingViewController() {

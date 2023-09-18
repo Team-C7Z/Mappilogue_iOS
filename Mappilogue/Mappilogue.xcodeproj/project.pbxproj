@@ -585,7 +585,7 @@
 			path = Global;
 			sourceTree = "<group>";
 		};
-		920031B62A8B5BB000E3170D /* Dto */ = {
+		920031B62A8B5BB000E3170D /* DTO */ = {
 			isa = PBXGroup;
 			children = (
 				928B7BE82A9B1C5B00E4F789 /* BaseDTO.swift */,
@@ -599,7 +599,7 @@
 				920031D42A8D021000E3170D /* KakaoSerachDTO.swift */,
 				920031B72A8B5BC700E3170D /* KakaoAddressDTO.swift */,
 			);
-			path = Dto;
+			path = DTO;
 			sourceTree = "<group>";
 		};
 		920031BB2A8B5C5300E3170D /* Cell */ = {
@@ -1292,7 +1292,7 @@
 				928B7BDF2A9AEAE800E4F789 /* AuthVendor.swift */,
 				928B7BF62A9CA92F00E4F789 /* NotificationStatus.swift */,
 				928B7BFE2A9F2D6600E4F789 /* AuthType.swift */,
-				920031B62A8B5BB000E3170D /* Dto */,
+				920031B62A8B5BB000E3170D /* DTO */,
 			);
 			path = Model;
 			sourceTree = "<group>";
