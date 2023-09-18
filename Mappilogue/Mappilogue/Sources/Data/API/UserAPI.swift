@@ -16,13 +16,10 @@ enum UserAPI: BaseAPI {
     case updateNotificationSetting(notification: NotificationDTO)
     case getProfile
     case updateNickname(nickname: String)
+    case updateProfileImage(image: MultipartFormData)
 }
 
 extension UserAPI: TargetType {
-    var baseURL: URL {
-        return URL(string: Environment.baseURL)!
-    }
-    
     var path: String {
         switch self {
         case .logout:
@@ -39,6 +36,8 @@ extension UserAPI: TargetType {
             return "/api/v1/users/profile"
         case .updateNickname:
             return "/api/v1/users/nickname"
+        case .updateProfileImage:
+            return "/api/v1/users/profile-image"
         }
     }
     
@@ -50,7 +49,7 @@ extension UserAPI: TargetType {
             return .get
         case .updateNotificationSetting:
             return .put
-        case .updateNickname:
+        case .updateNickname, .updateProfileImage:
             return .patch
         }
     }
@@ -78,13 +77,28 @@ extension UserAPI: TargetType {
             ]
             
             return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
-        
+            
         case let .updateNickname(nickname):
             let requestParameters: [String: String] = [
                 "nickname": nickname
             ]
             
             return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
+            
+        case let .updateProfileImage(image):
+            return .uploadMultipart([image])
+        }
+    }
+    
+    var headers: [String: String]? {
+        guard let token = AuthUserDefaults.accessToken else { return nil }
+        
+        switch self {
+        case .updateProfileImage:
+            return ["Authorization": "Bearer \(token)",
+                    "Content-Type": "multipart/form-data"]
+        default:
+            return ["Authorization": "Bearer \(token)"]
         }
     }
 }
