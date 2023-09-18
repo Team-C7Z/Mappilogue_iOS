@@ -76,7 +76,7 @@ class MyViewController: NavigationBarViewController {
         UserManager.shared.getProfile { result in
             switch result {
             case .success(let response):
-                guard let baseResponse = response as? BaseResponse<ProfileDTO>, let result = baseResponse.result else { return }
+                guard let baseResponse = response as? BaseDTO<ProfileDTO>, let result = baseResponse.result else { return }
                 self.profile = result
                 self.collectionView.reloadData()
             default:

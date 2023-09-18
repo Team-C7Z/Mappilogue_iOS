@@ -11,6 +11,8 @@ import KakaoSDKUser
 import KakaoSDKCommon
 
 class LoginViewController: BaseViewController {
+    private var isAlarmAccept: NotificationStatus = .inactive
+    
     private let logoImage = UIImageView()
     private let titleLabel = UILabel()
     private let kakaoLoginButton = UIButton()
@@ -19,6 +21,7 @@ class LoginViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        checkNotificationAuthorizationStatus()
     }
     
     override func setupProperty() {
@@ -85,7 +88,7 @@ class LoginViewController: BaseViewController {
             }
         }
     }
-    
+
     func handleKakaoTalkLogin(oauthToken: OAuthToken?, error: Error?) {
         if let error = error {
             print(error)
@@ -93,8 +96,9 @@ class LoginViewController: BaseViewController {
         } else {
             guard let oauthToken = oauthToken else { return }
             let accessToken = oauthToken.accessToken
-            
-            AuthManager.shared.logIn(token: accessToken, socialVendor: .kakao, isAlarm: .active) { result in
+
+            let auth = Auth(socialAccessToken: accessToken, socialVendor: .kakao, fcmToken: AuthUserDefaults.fcmToken, isAlarmAccept: isAlarmAccept)
+            AuthManager.shared.logIn(auth: auth) { result in
                 switch result {
                 case .success(let response):
                     self.handleLoginResponse(response)
@@ -106,7 +110,7 @@ class LoginViewController: BaseViewController {
     }
     
     private func handleLoginResponse(_ response: Any) {
-        guard let baseResponse = response as? BaseResponse<AuthResponse>, let result = baseResponse.result else { return }
+        guard let baseResponse = response as? BaseDTO<AuthDTO>, let result = baseResponse.result else { return }
         
         AuthUserDefaults.accessToken = result.accessToken
         AuthUserDefaults.refreshToken = result.refreshToken
@@ -137,4 +141,20 @@ class LoginViewController: BaseViewController {
         tabBarController.modalPresentationStyle = .fullScreen
         present(tabBarController, animated: false)
     }
+}
+
+extension LoginViewController {
+    func checkNotificationAuthorizationStatus() {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            switch settings.authorizationStatus {
+            case .authorized:
+                self.isAlarmAccept = .active
+            case .denied:
+                self.isAlarmAccept = .inactive
+            default:
+                break
+            }
+        }
+    }
+
 }

@@ -19,7 +19,7 @@ class UserManager {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseResponse<String>.self)
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<String>.self)
                 completion(networkResult)
             case .failure(let error):
                 print(error)
@@ -33,7 +33,7 @@ class UserManager {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseResponse<String>.self)
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<String>.self)
                 completion(networkResult)
             case .failure(let error):
                 print(error)
@@ -47,7 +47,7 @@ class UserManager {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseResponse<TermsOfUserResponse>.self)
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<TermsOfUserDTO>.self)
                 completion(networkResult)
             case .failure(let error):
                 print(error)
@@ -61,7 +61,7 @@ class UserManager {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseResponse<NotificationDTO>.self)
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<NotificationDTO>.self)
                 completion(networkResult)
             case .failure(let error):
                 print(error)
@@ -75,7 +75,7 @@ class UserManager {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseResponse<String>.self)
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<String>.self)
                 completion(networkResult)
             case .failure(let error):
                 print(error)
@@ -89,7 +89,7 @@ class UserManager {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseResponse<ProfileDTO>.self)
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<ProfileDTO>.self)
                 completion(networkResult)
             case .failure(let error):
                 print(error)
@@ -103,7 +103,7 @@ class UserManager {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseResponse<String>.self)
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<String>.self)
                 completion(networkResult)
             case .failure(let error):
                 print(error)
@@ -119,7 +119,7 @@ class UserManager {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseResponse<ProfileImageDTO>.self)
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<ProfileImageDTO>.self)
                 completion(networkResult)
             case .failure(let error):
                 print(error)
@@ -134,7 +134,7 @@ class UserManager {
             guard let decodedData = try? decoder.decode(dataModel.self, from: data) else { return .pathError }
             return .success(decodedData)
         case 400...401:
-            guard let decodedData = try? decoder.decode(ErrorResponse.self, from: data) else { return .pathError }
+            guard let decodedData = try? decoder.decode(ErrorDTO.self, from: data) else { return .pathError }
             return .requestError(decodedData)
         case 500:
             return .serverError

@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 enum AuthAPI {
-    case socialLogin(token: String, socialVendor: String, isAlarm: String?)
+    case socialLogin(token: String, socialVendor: String, fcmToken: String?, isAlarm: String?)
     case refreshToken(token: String)
 }
 
@@ -33,7 +33,7 @@ extension AuthAPI: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case let .socialLogin(token, socialVendor, isAlarm):
+        case let .socialLogin(token, socialVendor, fcmToken, isAlarm):
             var requestParameters: [String: Any] = [
                 "socialAccessToken": token,
                 "socialVendor": socialVendor
@@ -41,6 +41,10 @@ extension AuthAPI: TargetType {
             
             if let isAlarmValue = isAlarm {
                 requestParameters["isAlarmAccept"] = isAlarmValue
+            }
+            
+            if let fcmToken = fcmToken {
+                requestParameters["fcmToken"] = fcmToken
             }
             
             return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
