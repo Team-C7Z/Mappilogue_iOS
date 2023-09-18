@@ -13,7 +13,6 @@ class AuthManager {
     private let provider = MoyaProvider<AuthAPI>(plugins: [NetworkLoggerPlugin()])
   
     func logIn(auth: Auth, completion: @escaping (NetworkResult<Any>) -> Void) {
-        print(auth.fcmToken, 22222)
         provider.request(.socialLogin(token: auth.socialAccessToken, socialVendor: auth.socialVendor.rawValue, fcmToken: auth.fcmToken, isAlarm: auth.isAlarmAccept?.rawValue)) { result in
             switch result {
             case .success(let response):
