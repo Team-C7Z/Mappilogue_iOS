@@ -10,6 +10,7 @@ import Foundation
 class AuthUserDefaults {
     private static let accessTokenKey = "accessToken"
     private static let refreshTokenKey = "refreshToken"
+    private static let fcmTokenKey = "fcmToken"
     
     static var accessToken: String? {
         get {
@@ -26,6 +27,15 @@ class AuthUserDefaults {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: refreshTokenKey)
+        }
+    }
+    
+    static var fcmToken: String? {
+        get {
+            return UserDefaults.standard.string(forKey: fcmTokenKey)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: fcmTokenKey)
         }
     }
     
@@ -50,7 +60,7 @@ class AuthUserDefaults {
     }
     
     private static func handleRefreshTokenResponse(_ response: Any, completion: @escaping (Bool) -> Void) {
-        guard let baseResponse = response as? BaseResponse<RefreshTokenResponse>, let result = baseResponse.result else { return }
+        guard let baseResponse = response as? BaseDTO<RefreshTokenDTO>, let result = baseResponse.result else { return }
         
         AuthUserDefaults.accessToken = result.accessToken
         AuthUserDefaults.refreshToken = result.refreshToken
