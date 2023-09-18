@@ -1,5 +1,5 @@
 //
-//  KakaoSerachResponse.swift
+//  KakaoSerachDTO.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/08/16.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct KakaoSerachResponse: Codable {
+struct KakaoSerachDTO: Codable {
     let kakaoSearchPlaces: [KakaoSearchPlaces]
     
     enum CodingKeys: String, CodingKey {
