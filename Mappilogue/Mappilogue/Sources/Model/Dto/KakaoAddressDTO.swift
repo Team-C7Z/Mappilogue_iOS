@@ -1,5 +1,5 @@
 //
-//  KakaoAddressResponse.swift
+//  KakaoAddressDTO.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/08/15.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct KakaoAddressResponse: Codable {
+struct KakaoAddressDTO: Codable {
     let documents: [AddressDocuments]
 }
 

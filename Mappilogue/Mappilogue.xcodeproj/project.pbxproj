@@ -12,7 +12,7 @@
 		920031AF2A8B5AF600E3170D /* LocationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031AE2A8B5AF600E3170D /* LocationAPI.swift */; };
 		920031B22A8B5B4C00E3170D /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031B12A8B5B4C00E3170D /* LocationManager.swift */; };
 		920031B52A8B5B9100E3170D /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031B42A8B5B9100E3170D /* Environment.swift */; };
-		920031B82A8B5BC700E3170D /* KakaoAddressResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031B72A8B5BC700E3170D /* KakaoAddressResponse.swift */; };
+		920031B82A8B5BC700E3170D /* KakaoAddressDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031B72A8B5BC700E3170D /* KakaoAddressDTO.swift */; };
 		920031BA2A8B5C3000E3170D /* AddedLocationsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031B92A8B5C3000E3170D /* AddedLocationsHeaderView.swift */; };
 		920031BD2A8B5C8E00E3170D /* MainLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031BC2A8B5C8E00E3170D /* MainLocationCell.swift */; };
 		920031BF2A8B5CD600E3170D /* MainLocationAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031BE2A8B5CD600E3170D /* MainLocationAlertViewController.swift */; };
@@ -24,7 +24,7 @@
 		920031CF2A8B654F00E3170D /* SecureAPIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 920031CE2A8B654F00E3170D /* SecureAPIKeys.plist */; };
 		920031D12A8B65F000E3170D /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D02A8B65F000E3170D /* Bundle.swift */; };
 		920031D32A8C832300E3170D /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D22A8C832300E3170D /* SearchBar.swift */; };
-		920031D52A8D021000E3170D /* KakaoSerachResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D42A8D021000E3170D /* KakaoSerachResponse.swift */; };
+		920031D52A8D021000E3170D /* KakaoSerachDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D42A8D021000E3170D /* KakaoSerachDTO.swift */; };
 		920031D72A8DAFD800E3170D /* MyRecordContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D62A8DAFD800E3170D /* MyRecordContentViewController.swift */; };
 		920031D92A8DB50600E3170D /* MyRecordContentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D82A8DB50600E3170D /* MyRecordContentHeaderView.swift */; };
 		920031DB2A8DD29700E3170D /* SavingRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031DA2A8DD29700E3170D /* SavingRecordViewController.swift */; };
@@ -189,23 +189,23 @@
 		928B7BE22A9AF09E00E4F789 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BE12A9AF09E00E4F789 /* AuthAPI.swift */; };
 		928B7BE52A9AFE4A00E4F789 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BE42A9AFE4A00E4F789 /* NetworkResult.swift */; };
 		928B7BE72A9B1B3E00E4F789 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BE62A9B1B3E00E4F789 /* AuthManager.swift */; };
-		928B7BE92A9B1C5B00E4F789 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BE82A9B1C5B00E4F789 /* BaseResponse.swift */; };
-		928B7BEB2A9B27E800E4F789 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BEA2A9B27E800E4F789 /* AuthResponse.swift */; };
+		928B7BE92A9B1C5B00E4F789 /* BaseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BE82A9B1C5B00E4F789 /* BaseDTO.swift */; };
+		928B7BEB2A9B27E800E4F789 /* AuthDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BEA2A9B27E800E4F789 /* AuthDTO.swift */; };
 		928B7BEE2A9C603C00E4F789 /* TodaySchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BED2A9C603C00E4F789 /* TodaySchedule.swift */; };
 		928B7BF32A9C7B4400E4F789 /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BF22A9C7B4400E4F789 /* NetworkLoggerPlugin.swift */; };
-		928B7BF52A9CA51500E4F789 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BF42A9CA51500E4F789 /* ErrorResponse.swift */; };
+		928B7BF52A9CA51500E4F789 /* ErrorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BF42A9CA51500E4F789 /* ErrorDTO.swift */; };
 		928B7BF72A9CA92F00E4F789 /* NotificationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BF62A9CA92F00E4F789 /* NotificationStatus.swift */; };
 		928B7BF92A9D944D00E4F789 /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BF82A9D944D00E4F789 /* Interceptor.swift */; };
 		928B7BFB2A9DC55600E4F789 /* AuthUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BFA2A9DC55600E4F789 /* AuthUserDefaults.swift */; };
 		928B7BFD2A9DD4DC00E4F789 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BFC2A9DD4DC00E4F789 /* BaseAPI.swift */; };
 		928B7BFF2A9F2D6600E4F789 /* AuthType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BFE2A9F2D6600E4F789 /* AuthType.swift */; };
-		928B7C052A9F9CD900E4F789 /* RefreshTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C042A9F9CD900E4F789 /* RefreshTokenResponse.swift */; };
+		928B7C052A9F9CD900E4F789 /* RefreshTokenDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C042A9F9CD900E4F789 /* RefreshTokenDTO.swift */; };
 		928B7C072A9FA90500E4F789 /* BaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C062A9FA90500E4F789 /* BaseManager.swift */; };
 		928B7C0C2AA06F7400E4F789 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C0B2AA06F7400E4F789 /* EditProfileViewController.swift */; };
 		928B7C102AA19E7700E4F789 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C0F2AA19E7700E4F789 /* UserAPI.swift */; };
 		928B7C162AA1C62400E4F789 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C152AA1C62400E4F789 /* UserManager.swift */; };
 		928B7C192AA462CE00E4F789 /* TermsOfUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C182AA462CE00E4F789 /* TermsOfUseViewController.swift */; };
-		928B7C1B2AA4784500E4F789 /* TermsOfUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C1A2AA4784500E4F789 /* TermsOfUserResponse.swift */; };
+		928B7C1B2AA4784500E4F789 /* TermsOfUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C1A2AA4784500E4F789 /* TermsOfUserDTO.swift */; };
 		928B7C1D2AA489F600E4F789 /* NotificationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C1C2AA489F600E4F789 /* NotificationDTO.swift */; };
 		928B7C1F2AA6DADA00E4F789 /* ProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C1E2AA6DADA00E4F789 /* ProfileDTO.swift */; };
 		928B7C222AA83D2000E4F789 /* EditNicknameModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C212AA83D2000E4F789 /* EditNicknameModalViewController.swift */; };
@@ -219,6 +219,7 @@
 		929E23172AB7F6C4003180B3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23162AB7F6C4003180B3 /* Utils.swift */; };
 		929E23192AB81E40003180B3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 929E23182AB81E40003180B3 /* GoogleService-Info.plist */; };
 		929E231C2AB81EB1003180B3 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 929E231B2AB81EB1003180B3 /* FirebaseMessaging */; };
+		929E23212AB83920003180B3 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23202AB83920003180B3 /* Auth.swift */; };
 		92A7B64F2A4CCE29009C9293 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B64E2A4CCE29009C9293 /* AddButton.swift */; };
 		92A7B6532A4CDD4D009C9293 /* ScheduleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6522A4CDD4D009C9293 /* ScheduleType.swift */; };
 		92A7B6592A4D01B3009C9293 /* TodayScheduleInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6582A4D01B3009C9293 /* TodayScheduleInfoCell.swift */; };
@@ -267,7 +268,7 @@
 		920031AE2A8B5AF600E3170D /* LocationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAPI.swift; sourceTree = "<group>"; };
 		920031B12A8B5B4C00E3170D /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		920031B42A8B5B9100E3170D /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
-		920031B72A8B5BC700E3170D /* KakaoAddressResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoAddressResponse.swift; sourceTree = "<group>"; };
+		920031B72A8B5BC700E3170D /* KakaoAddressDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoAddressDTO.swift; sourceTree = "<group>"; };
 		920031B92A8B5C3000E3170D /* AddedLocationsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedLocationsHeaderView.swift; sourceTree = "<group>"; };
 		920031BC2A8B5C8E00E3170D /* MainLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLocationCell.swift; sourceTree = "<group>"; };
 		920031BE2A8B5CD600E3170D /* MainLocationAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLocationAlertViewController.swift; sourceTree = "<group>"; };
@@ -278,7 +279,7 @@
 		920031CE2A8B654F00E3170D /* SecureAPIKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = SecureAPIKeys.plist; sourceTree = "<group>"; };
 		920031D02A8B65F000E3170D /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		920031D22A8C832300E3170D /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
-		920031D42A8D021000E3170D /* KakaoSerachResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSerachResponse.swift; sourceTree = "<group>"; };
+		920031D42A8D021000E3170D /* KakaoSerachDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSerachDTO.swift; sourceTree = "<group>"; };
 		920031D62A8DAFD800E3170D /* MyRecordContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordContentViewController.swift; sourceTree = "<group>"; };
 		920031D82A8DB50600E3170D /* MyRecordContentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordContentHeaderView.swift; sourceTree = "<group>"; };
 		920031DA2A8DD29700E3170D /* SavingRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingRecordViewController.swift; sourceTree = "<group>"; };
@@ -442,23 +443,23 @@
 		928B7BE12A9AF09E00E4F789 /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		928B7BE42A9AFE4A00E4F789 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		928B7BE62A9B1B3E00E4F789 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
-		928B7BE82A9B1C5B00E4F789 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
-		928B7BEA2A9B27E800E4F789 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
+		928B7BE82A9B1C5B00E4F789 /* BaseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDTO.swift; sourceTree = "<group>"; };
+		928B7BEA2A9B27E800E4F789 /* AuthDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDTO.swift; sourceTree = "<group>"; };
 		928B7BED2A9C603C00E4F789 /* TodaySchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodaySchedule.swift; sourceTree = "<group>"; };
 		928B7BF22A9C7B4400E4F789 /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
-		928B7BF42A9CA51500E4F789 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
+		928B7BF42A9CA51500E4F789 /* ErrorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDTO.swift; sourceTree = "<group>"; };
 		928B7BF62A9CA92F00E4F789 /* NotificationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStatus.swift; sourceTree = "<group>"; };
 		928B7BF82A9D944D00E4F789 /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
 		928B7BFA2A9DC55600E4F789 /* AuthUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUserDefaults.swift; sourceTree = "<group>"; };
 		928B7BFC2A9DD4DC00E4F789 /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
 		928B7BFE2A9F2D6600E4F789 /* AuthType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthType.swift; sourceTree = "<group>"; };
-		928B7C042A9F9CD900E4F789 /* RefreshTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenResponse.swift; sourceTree = "<group>"; };
+		928B7C042A9F9CD900E4F789 /* RefreshTokenDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenDTO.swift; sourceTree = "<group>"; };
 		928B7C062A9FA90500E4F789 /* BaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseManager.swift; sourceTree = "<group>"; };
 		928B7C0B2AA06F7400E4F789 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		928B7C0F2AA19E7700E4F789 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		928B7C152AA1C62400E4F789 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		928B7C182AA462CE00E4F789 /* TermsOfUseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewController.swift; sourceTree = "<group>"; };
-		928B7C1A2AA4784500E4F789 /* TermsOfUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUserResponse.swift; sourceTree = "<group>"; };
+		928B7C1A2AA4784500E4F789 /* TermsOfUserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUserDTO.swift; sourceTree = "<group>"; };
 		928B7C1C2AA489F600E4F789 /* NotificationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDTO.swift; sourceTree = "<group>"; };
 		928B7C1E2AA6DADA00E4F789 /* ProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDTO.swift; sourceTree = "<group>"; };
 		928B7C212AA83D2000E4F789 /* EditNicknameModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNicknameModalViewController.swift; sourceTree = "<group>"; };
@@ -471,6 +472,7 @@
 		929E23162AB7F6C4003180B3 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		929E23182AB81E40003180B3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		929E231D2AB81EEE003180B3 /* Mappilogue.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Mappilogue.entitlements; sourceTree = "<group>"; };
+		929E23202AB83920003180B3 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		92A7B64B2A4CC0E6009C9293 /* HomeEmptyScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEmptyScheduleCell.swift; sourceTree = "<group>"; };
 		92A7B64E2A4CCE29009C9293 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		92A7B6522A4CDD4D009C9293 /* ScheduleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScheduleType.swift; path = Mappilogue/Sources/Presenter/Home/Schedule/ScheduleType.swift; sourceTree = SOURCE_ROOT; };
@@ -586,16 +588,16 @@
 		920031B62A8B5BB000E3170D /* Dto */ = {
 			isa = PBXGroup;
 			children = (
-				928B7BE82A9B1C5B00E4F789 /* BaseResponse.swift */,
-				928B7BF42A9CA51500E4F789 /* ErrorResponse.swift */,
-				928B7BEA2A9B27E800E4F789 /* AuthResponse.swift */,
-				928B7C042A9F9CD900E4F789 /* RefreshTokenResponse.swift */,
-				928B7C1A2AA4784500E4F789 /* TermsOfUserResponse.swift */,
+				928B7BE82A9B1C5B00E4F789 /* BaseDTO.swift */,
+				928B7BF42A9CA51500E4F789 /* ErrorDTO.swift */,
+				928B7BEA2A9B27E800E4F789 /* AuthDTO.swift */,
+				928B7C042A9F9CD900E4F789 /* RefreshTokenDTO.swift */,
+				928B7C1A2AA4784500E4F789 /* TermsOfUserDTO.swift */,
 				928B7C1C2AA489F600E4F789 /* NotificationDTO.swift */,
 				928B7C1E2AA6DADA00E4F789 /* ProfileDTO.swift */,
 				929E23142AB737DC003180B3 /* ProfileImageDTO.swift */,
-				920031D42A8D021000E3170D /* KakaoSerachResponse.swift */,
-				920031B72A8B5BC700E3170D /* KakaoAddressResponse.swift */,
+				920031D42A8D021000E3170D /* KakaoSerachDTO.swift */,
+				920031B72A8B5BC700E3170D /* KakaoAddressDTO.swift */,
 			);
 			path = Dto;
 			sourceTree = "<group>";
@@ -667,6 +669,7 @@
 			children = (
 				9200320E2A99A3A800E3170D /* LoginViewController.swift */,
 				928B7BD82A99AFD700E4F789 /* SignUpCompletionViewController.swift */,
+				929E23202AB83920003180B3 /* Auth.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1605,7 +1608,7 @@
 				92011C092A74AFCA009B047F /* SearchTextField.swift in Sources */,
 				92011C162A7505F7009B047F /* Record.swift in Sources */,
 				92FE26152A4B751000BCDB82 /* BaseCollectionReusableView.swift in Sources */,
-				928B7BE92A9B1C5B00E4F789 /* BaseResponse.swift in Sources */,
+				928B7BE92A9B1C5B00E4F789 /* BaseDTO.swift in Sources */,
 				925840B52A7F2D3B00997434 /* MyCell.swift in Sources */,
 				92139D7F2AB0B0F7005344AE /* NotificationController.swift in Sources */,
 				92011C042A740C16009B047F /* NewCategoryCell.swift in Sources */,
@@ -1640,7 +1643,7 @@
 				925840DB2A82144A00997434 /* EditViewController.swift in Sources */,
 				9224FCEE2A5BEF80000A56A6 /* ScheduleTitleCell.swift in Sources */,
 				925840C72A7F76A500997434 /* WithdrawalAlertViewController.swift in Sources */,
-				920031B82A8B5BC700E3170D /* KakaoAddressResponse.swift in Sources */,
+				920031B82A8B5BC700E3170D /* KakaoAddressDTO.swift in Sources */,
 				92011B782A71683E009B047F /* SelectWriteRecordViewController.swift in Sources */,
 				92011C1A2A755D02009B047F /* MyRecordButton.swift in Sources */,
 				92139D6F2AAC4737005344AE /* ContentImageCell.swift in Sources */,
@@ -1652,7 +1655,7 @@
 				9291582A2A252CC20022BEF9 /* UIColor.swift in Sources */,
 				925840CD2A7F8E1C00997434 /* WithdrawalReasonView.swift in Sources */,
 				928B7C162AA1C62400E4F789 /* UserManager.swift in Sources */,
-				928B7BEB2A9B27E800E4F789 /* AuthResponse.swift in Sources */,
+				928B7BEB2A9B27E800E4F789 /* AuthDTO.swift in Sources */,
 				92011B872A72B0A7009B047F /* MainLocatonView.swift in Sources */,
 				928B7C0C2AA06F7400E4F789 /* EditProfileViewController.swift in Sources */,
 				928B7BE22A9AF09E00E4F789 /* AuthAPI.swift in Sources */,
@@ -1662,7 +1665,7 @@
 				9258409E2A7BD30700997434 /* CategorySettingViewController.swift in Sources */,
 				92C2EC612A6924B5002DB0E3 /* LineCell.swift in Sources */,
 				92A7B65F2A4E07DB009C9293 /* TodayScheduleCell.swift in Sources */,
-				928B7C052A9F9CD900E4F789 /* RefreshTokenResponse.swift in Sources */,
+				928B7C052A9F9CD900E4F789 /* RefreshTokenDTO.swift in Sources */,
 				926999342A14F2A3003DDAD2 /* BaseViewController.swift in Sources */,
 				928B7C192AA462CE00E4F789 /* TermsOfUseViewController.swift in Sources */,
 				92139D8F2AB1E672005344AE /* LineHeaderView.swift in Sources */,
@@ -1694,7 +1697,7 @@
 				92011B812A7271D0009B047F /* CategoryButton.swift in Sources */,
 				92011C122A74F8E6009B047F /* SearchRecordCell.swift in Sources */,
 				92139D932AB2C842005344AE /* AnnouncementContentCell.swift in Sources */,
-				928B7BF52A9CA51500E4F789 /* ErrorResponse.swift in Sources */,
+				928B7BF52A9CA51500E4F789 /* ErrorDTO.swift in Sources */,
 				929E23172AB7F6C4003180B3 /* Utils.swift in Sources */,
 				92011B7D2A7174B6009B047F /* DateHeaderView.swift in Sources */,
 				9224FD482A6579ED000A56A6 /* LocationTimeCell.swift in Sources */,
@@ -1732,6 +1735,7 @@
 				928B7C102AA19E7700E4F789 /* UserAPI.swift in Sources */,
 				925840B72A7F2D5A00997434 /* VersionCell.swift in Sources */,
 				925840D72A80D4BD00997434 /* NotificationHeaderView.swift in Sources */,
+				929E23212AB83920003180B3 /* Auth.swift in Sources */,
 				92139D912AB1EF51005344AE /* AnnouncementCell.swift in Sources */,
 				9230BE512A59B45D0053E535 /* MonthlyCalendar.swift in Sources */,
 				92011B902A7364D0009B047F /* BaseButton.swift in Sources */,
@@ -1788,7 +1792,7 @@
 				9263786B2A546BDE004E5B6E /* OnboardingViewController.swift in Sources */,
 				92A7B6632A4E20BF009C9293 /* BaseTableViewCell.swift in Sources */,
 				92CD36FA2A7B505900768B61 /* MyCategoryViewController.swift in Sources */,
-				928B7C1B2AA4784500E4F789 /* TermsOfUserResponse.swift in Sources */,
+				928B7C1B2AA4784500E4F789 /* TermsOfUserDTO.swift in Sources */,
 				9224FD1B2A61705D000A56A6 /* ColorSelection.swift in Sources */,
 				920031D32A8C832300E3170D /* SearchBar.swift in Sources */,
 				928B7BF72A9CA92F00E4F789 /* NotificationStatus.swift in Sources */,
@@ -1796,7 +1800,7 @@
 				92011CBC2A7A19CA009B047F /* MyRecordCategoryCell.swift in Sources */,
 				920031B52A8B5B9100E3170D /* Environment.swift in Sources */,
 				9224FD232A62EC0B000A56A6 /* RepeatViewController.swift in Sources */,
-				920031D52A8D021000E3170D /* KakaoSerachResponse.swift in Sources */,
+				920031D52A8D021000E3170D /* KakaoSerachDTO.swift in Sources */,
 				92011B282A6E75F1009B047F /* WriteRecordButton.swift in Sources */,
 				92A7B64F2A4CCE29009C9293 /* AddButton.swift in Sources */,
 				92011C182A753AEB009B047F /* CALayer.swift in Sources */,

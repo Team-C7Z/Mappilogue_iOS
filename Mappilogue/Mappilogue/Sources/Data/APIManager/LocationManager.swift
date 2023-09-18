@@ -18,7 +18,7 @@ class LocationManager {
             switch result {
             case .success(let response):
                 do {
-                    let kakaoAddress = try response.map(KakaoAddressResponse.self)
+                    let kakaoAddress = try response.map(KakaoAddressDTO.self)
                     if let address = kakaoAddress.documents.first {
                         completion(address)
                     }
@@ -38,7 +38,7 @@ class LocationManager {
             switch result {
             case .success(let response):
                 do {
-                    let searchPlace = try response.map(KakaoSerachResponse.self)
+                    let searchPlace = try response.map(KakaoSerachDTO.self)
                     completion(searchPlace.kakaoSearchPlaces)
                 } catch {
                     print("Mapping error: \(error)")
