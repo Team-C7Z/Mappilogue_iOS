@@ -19,7 +19,9 @@ class ProfileCell: BaseCollectionViewCell {
         super.setupProperty()
         
         profileImage.layer.cornerRadius = 56 / 2
+        profileImage.layer.masksToBounds = true
         profileImage.backgroundColor = .colorF5F3F0
+        profileImage.contentMode = .scaleAspectFill
         
         profileNameLabel.textColor = .color000000
         profileNameLabel.font = .title02

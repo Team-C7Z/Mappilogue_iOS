@@ -249,6 +249,7 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
                 return
             } else {
                 self.handleUserManagerLogout()
+                self.presentLoginViewController()
             }
         }
     }
