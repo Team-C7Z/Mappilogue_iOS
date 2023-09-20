@@ -20,7 +20,7 @@ class RecordViewController: NavigationBarViewController {
     var topLeftCoord: NMGLatLng?
     var bottomRightCoord: NMGLatLng?
     var markers: [NMFMarker] = []
-    var selectedCategory: String?
+    var selectedCategoryIndex: [Int] = []
     var isZoomOut: Bool = false
     
     let minHeight: CGFloat = 44
@@ -190,13 +190,7 @@ class RecordViewController: NavigationBarViewController {
             let isWithinLngBounds = (lng >= topLeftCoord.lng) && (lng <= bottomRightCoord.lng)
             
             if isWithinLatBounds && isWithinLngBounds {
-                if let selectedCategory {
-                    if record.category == selectedCategory {
-                        createAndShowMarker(record: record, lat: lat, lng: lng, isZoomOut: isZoomOut)
-                    }
-                } else {
-                    createAndShowMarker(record: record, lat: lat, lng: lng, isZoomOut: isZoomOut)
-                }
+                createAndShowMarker(record: record, lat: lat, lng: lng, isZoomOut: isZoomOut)
             }
         }
     }
@@ -264,6 +258,12 @@ class RecordViewController: NavigationBarViewController {
         searchTextField.addGestureRecognizer(tap)
     }
     
+    private func navigateToCategorySettingViewController() {
+        let categorySettingViewController = CategorySettingViewController()
+        categorySettingViewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(categorySettingViewController, animated: true)
+    }
+    
     @objc private func currentLocationButtonTapped(_ sender: UIButton) {
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: locationManager.location?.coordinate.latitude ?? 37.49794, lng: locationManager.location?.coordinate.longitude ?? 127.02759))
         cameraUpdate.animation = .easeIn
@@ -275,7 +275,7 @@ class RecordViewController: NavigationBarViewController {
         getMapLatitudeLongitude()
     }
     
-    @objc private func myRecordButtonTapped(_ sender: UIButton) {
+    @objc private func myRecordButtonTapped() {
         let myRecordViewController = MyRecordViewController()
         myRecordViewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(myRecordViewController, animated: true)
@@ -456,7 +456,9 @@ extension RecordViewController: UICollectionViewDelegate, UICollectionViewDataSo
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.registerId, for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
             
             let category = dummyCategory[indexPath.row].title
-            cell.configure(with: category)
+            let isSelected = selectedCategoryIndex.contains(indexPath.row)
+            
+            cell.configure(category, isSelected: isSelected)
             
             return cell
         case 1:
@@ -475,7 +477,9 @@ extension RecordViewController: UICollectionViewDelegate, UICollectionViewDataSo
         switch indexPath.section {
         case 0:
             let cateogoryTitle = dummyCategory[indexPath.row].title
-            return CGSize(width: cateogoryTitle.size(withAttributes: [NSAttributedString.Key.font: UIFont.caption02]).width + 24, height: 32)
+            let isSelected = selectedCategoryIndex.contains(indexPath.row)
+            let width = cateogoryTitle.size(withAttributes: [NSAttributedString.Key.font: UIFont.caption02]).width + 24 + (isSelected ? 19 : 0)
+            return CGSize(width: width, height: 32)
         default:
             return CGSize(width: 108, height: 32)
         }
@@ -494,11 +498,18 @@ extension RecordViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            selectedCategory = dummyCategory[indexPath.row].title
+            if let index = selectedCategoryIndex.firstIndex(where: { $0 == indexPath.row }) {
+                selectedCategoryIndex.remove(at: index)
+            } else {
+                selectedCategoryIndex.append(indexPath.row)
+            }
+  
             clearMarker()
             setMarker()
+            
+            collectionView.reloadData()
         default:
-            selectedCategory = nil
+            navigateToCategorySettingViewController()
         }
     }
 }

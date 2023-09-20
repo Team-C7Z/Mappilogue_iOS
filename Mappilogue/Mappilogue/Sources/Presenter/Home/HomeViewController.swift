@@ -241,7 +241,7 @@ extension HomeViewController: ScheduleTypeDelegate, ExpandCellDelegate {
     
     func expandButtonTapped(in cell: UITableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
-        isScheduleExpanded[indexPath.section] = !isScheduleExpanded[indexPath.section]
+        isScheduleExpanded[indexPath.section].toggle()
         tableView.reloadSections([indexPath.section], with: .none)
     }
     
@@ -251,7 +251,7 @@ extension HomeViewController: ScheduleTypeDelegate, ExpandCellDelegate {
     }
     
     func navigateToRecordContentViewController() {
-        let recordContentViewController = RecordContentViewController()
+        let recordContentViewController = MyRecordContentViewController()
         navigationController?.pushViewController(recordContentViewController, animated: true)
     }
     

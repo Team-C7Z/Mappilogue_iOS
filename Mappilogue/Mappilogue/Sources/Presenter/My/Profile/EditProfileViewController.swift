@@ -50,6 +50,7 @@ class EditProfileViewController: BaseViewController {
         
         editNicknameTextField.textColor = .color1C1C1C
         editNicknameTextField.font = .title02
+        editNicknameTextField.tintColor = .color2EBD3D
         editNicknameTextField.delegate = self
         
         editNicknameImage.image = UIImage(named: "my_editNickname")
@@ -230,10 +231,21 @@ class EditProfileViewController: BaseViewController {
     private func updateProfileAssetImage(_ asset: PHAsset) {
         let imageManager = PHCachingImageManager()
         let options = PHImageRequestOptions()
-        
+       
         imageManager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: options) { image, _ in
             DispatchQueue.main.async {
                 self.profileImage.image = image
+            }
+            
+            if let image = image, let imageData = image.jpegData(compressionQuality: 1.0) {
+                UserManager.shared.updateProfileImage(profileImage: imageData) { result in
+                    switch result {
+                    case .success(let response):
+                        print(response)
+                    default:
+                        break
+                    }
+                }
             }
         }
     }

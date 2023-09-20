@@ -9,6 +9,7 @@ import UIKit
 
 class MyRecordViewController: BaseViewController {
     var dummyCategory = dummyCategoryData()
+    var isNewWrite: Bool = false
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -32,7 +33,7 @@ class MyRecordViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationTitleAndBackButton("나의 기록", backButtonAction: #selector(backButtonTapped))
+        setNavigationTitleAndBackButton("나의 기록", backButtonAction: #selector(popToRootViewController))
     }
     
     override func setupHierarchy() {
@@ -48,7 +49,10 @@ class MyRecordViewController: BaseViewController {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
-
+    
+    @objc func popToRootViewController() {
+        navigationController?.popToRootViewController(animated: true)
+    }
 }
 
 extension MyRecordViewController: UITableViewDelegate, UITableViewDataSource {

@@ -29,6 +29,7 @@ class ImagePickerCell: BaseCollectionViewCell {
         pickerImage.contentMode = .scaleAspectFill
         pickerImage.clipsToBounds = true
         options.deliveryMode = .highQualityFormat
+
     }
     
     override func setupHierarchy() {
@@ -53,19 +54,15 @@ class ImagePickerCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(_ asset: PHAsset?, isCamera: Bool, isSelected: Bool) {
-        if isCamera {
-            cameraImage.isHidden = false
-        } else {
-            guard let asset = asset else { return }
-            
-            imageManager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: options) { image, _ in
-                DispatchQueue.main.async {
-                    self.pickerImage.image = image
-                    
-                    self.contentView.layer.borderWidth = isSelected ? 4 : 0
-                }
+    func configure(_ asset: PHAsset, isSelected: Bool) {
+        let size = CGSize(width: self.frame.width * UIScreen.main.scale, height: self.frame.height * UIScreen.main.scale)
+        
+        imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFit, options: options) { image, _ in
+            DispatchQueue.main.async {
+                self.pickerImage.image = image
             }
         }
+        
+        contentView.layer.borderWidth = isSelected ? 4 : 0
     }
 }

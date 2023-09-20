@@ -8,13 +8,15 @@
 import UIKit
 
 class InquiryViewController: BaseViewController {
+    private let email = "mappilogue@naver.com"
+    
     private let inquiryTitleLabel = UILabel()
     private let inquiryContentLabel = UILabel()
     private let emailView = UIView()
     private let emailImage = UIImageView()
     private let emailLabel = UILabel()
     private let emailCopyButton = UIButton()
-    private var emailCopyToastMessage = EmailCopyToastMessageView()
+    private var emailCopyToastMessage = ToastMessageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +40,7 @@ class InquiryViewController: BaseViewController {
         emailView.layer.cornerRadius = 12
         emailView.backgroundColor = .colorF5F3F0
         emailImage.image = UIImage(named: "my_email")
-        emailLabel.text = "mappilogue@naver.com"
+        emailLabel.text = email
         emailCopyButton.setTitle("복사하기", for: .normal)
         emailCopyButton.setTitleColor(.color2EBD3D, for: .normal)
         emailCopyButton.titleLabel?.font = .body03
@@ -100,6 +102,7 @@ class InquiryViewController: BaseViewController {
     }
     
     func setGatheringToastMessage() {
+        emailCopyToastMessage.configure("이메일이 복사되었어요", showUndo: false)
         view.addSubview(emailCopyToastMessage)
         
         emailCopyToastMessage.snp.makeConstraints {
@@ -119,7 +122,13 @@ class InquiryViewController: BaseViewController {
             }, completion: { (_) in
                 self.emailCopyToastMessage.alpha = 1.0
                 self.emailCopyToastMessage.removeFromSuperview()
+                
+                self.copyEmail()
             })
         })
+    }
+    
+    private func copyEmail() {
+        UIPasteboard.general.string = email
     }
 }

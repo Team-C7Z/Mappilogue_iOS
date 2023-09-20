@@ -44,7 +44,7 @@ class MyViewController: NavigationBarViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -76,7 +76,7 @@ class MyViewController: NavigationBarViewController {
         UserManager.shared.getProfile { result in
             switch result {
             case .success(let response):
-                guard let baseResponse = response as? BaseResponse<ProfileDTO>, let result = baseResponse.result else { return }
+                guard let baseResponse = response as? BaseDTO<ProfileDTO>, let result = baseResponse.result else { return }
                 self.profile = result
                 self.collectionView.reloadData()
             default:
@@ -139,6 +139,9 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     
     private func configureVersionCell(for indexPath: IndexPath, in collectionView: UICollectionView) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VersionCell.registerId, for: indexPath) as? VersionCell else { return UICollectionViewCell() }
+        cell.onVersionUpdate = {
+            self.openAppStore("")
+        }
         return cell
     }
     
@@ -206,6 +209,13 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
         navigationController?.pushViewController(editProfileViewController, animated: true)
     }
     
+    private func openAppStore(_ appId: String) {
+        let url =  "itms-apps://itunes.apple.com/app/" + appId
+        if let url = URL(string: url), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
     private func presentLogoutAlert() {
         let alertViewController = AlertViewController()
         alertViewController.modalPresentationStyle = .overFullScreen
@@ -249,6 +259,7 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
                 return
             } else {
                 self.handleUserManagerLogout()
+                self.presentLoginViewController()
             }
         }
     }

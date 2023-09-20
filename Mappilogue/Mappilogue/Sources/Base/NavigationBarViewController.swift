@@ -8,6 +8,8 @@
 import UIKit
 
 class NavigationBarViewController: BaseViewController {
+    
+    private let notificationButton = UIButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,13 +19,15 @@ class NavigationBarViewController: BaseViewController {
     }
     
     func setUpRightBarButtonItem() {
-        let notificationImage = UIImage(named: "navigation_notification")
+        let notificationImage = UIImage(named: "notification")
         let notificationButtonItem = UIBarButtonItem(image: notificationImage, style: .plain, target: self, action: #selector(rightBarButtonItemTapped))
         notificationButtonItem.tintColor = .color1C1C1C
         navigationItem.rightBarButtonItem = notificationButtonItem
     }
     
     @objc func rightBarButtonItemTapped() {
-        print("notification")
+        let notificationController = NotificationController()
+        notificationController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(notificationController, animated: true)
     }
 }

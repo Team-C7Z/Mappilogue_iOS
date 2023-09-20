@@ -12,13 +12,13 @@ class AuthManager {
     static let shared = AuthManager()
     private let provider = MoyaProvider<AuthAPI>(plugins: [NetworkLoggerPlugin()])
   
-    func logIn(token: String, socialVendor: AuthVendor, isAlarm: NotificationType?, completion: @escaping (NetworkResult<Any>) -> Void) {
-        provider.request(.socialLogin(token: token, socialVendor: socialVendor.rawValue, isAlarm: isAlarm?.rawValue)) { result in
+    func logIn(auth: Auth, completion: @escaping (NetworkResult<Any>) -> Void) {
+        provider.request(.socialLogin(token: auth.socialAccessToken, socialVendor: auth.socialVendor.rawValue, fcmToken: auth.fcmToken, isAlarm: auth.isAlarmAccept?.rawValue)) { result in
             switch result {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseResponse<AuthResponse>.self)
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<AuthDTO>.self)
                 completion(networkResult)
             case .failure(let error):
                 print(error)
@@ -32,7 +32,7 @@ class AuthManager {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseResponse<RefreshTokenResponse>.self)
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<RefreshTokenDTO>.self)
                 completion(networkResult)
             case .failure(let error):
                 print(error)
@@ -47,7 +47,7 @@ class AuthManager {
             guard let decodedData = try? decoder.decode(dataModel.self, from: data) else { return .pathError }
             return .success(decodedData)
         case 400:
-            guard let decodedData = try? decoder.decode(ErrorResponse.self, from: data) else { return .pathError }
+            guard let decodedData = try? decoder.decode(ErrorDTO.self, from: data) else { return .pathError }
             return .requestError(decodedData)
         case 500:
             return .serverError

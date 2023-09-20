@@ -17,7 +17,6 @@ class Interceptor: RequestInterceptor {
             completion(.success(urlRequest))
             return
         }
-
         var urlRequest = urlRequest
         urlRequest.setValue(accessToken, forHTTPHeaderField: "accessToken")
         urlRequest.setValue(refreshToken, forHTTPHeaderField: "refreshToken")
@@ -39,7 +38,7 @@ class Interceptor: RequestInterceptor {
             print(4444)
             switch result {
             case .success(let response):
-                if let baseResponse = response as? BaseResponse<RefreshTokenResponse>, let result = baseResponse.result {
+                if let baseResponse = response as? BaseDTO<RefreshTokenDTO>, let result = baseResponse.result {
                     AuthUserDefaults.accessToken = result.accessToken
                     AuthUserDefaults.refreshToken = result.refreshToken
                 }
