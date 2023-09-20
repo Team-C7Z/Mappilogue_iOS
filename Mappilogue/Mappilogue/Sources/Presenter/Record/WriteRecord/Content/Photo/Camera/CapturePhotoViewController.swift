@@ -18,10 +18,12 @@ class CapturePhotoViewController: BaseViewController {
         retackButton.setTitle("다시 찍기", for: .normal)
         retackButton.setTitleColor(.color2EBD3D, for: .normal)
         retackButton.titleLabel?.font = .subtitle01
+        retackButton.addTarget(self, action: #selector(retakePhoto), for: .touchUpInside)
         
         usePhotoButton.setTitle("사진 사용", for: .normal)
         usePhotoButton.setTitleColor(.color2EBD3D, for: .normal)
         usePhotoButton.titleLabel?.font = .subtitle01
+        usePhotoButton.addTarget(self, action: #selector(usePhoto), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -56,5 +58,13 @@ class CapturePhotoViewController: BaseViewController {
     
     func configure(_ image: UIImage) {
         captureImage.image = image
+    }
+    
+    @objc private func retakePhoto() {
+        dismiss(animated: false)
+    }
+    
+    @objc private func usePhoto() {
+        
     }
 }
