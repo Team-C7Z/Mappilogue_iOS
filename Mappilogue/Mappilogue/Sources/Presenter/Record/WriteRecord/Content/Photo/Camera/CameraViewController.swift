@@ -17,6 +17,7 @@ class CameraViewController: BaseViewController {
     let sesstionQueue = DispatchQueue(label: "sesstion Queue")
     let videoDeviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInDualCamera, .builtInTrueDepthCamera, .builtInTrueDepthCamera], mediaType: .video, position: .unspecified)
     
+    private var flashButton = UIBarButtonItem()
     private let previewView = PreviewView()
     private let captureButton = UIButton()
     private let switchModeButton = UIButton()
@@ -35,6 +36,7 @@ class CameraViewController: BaseViewController {
         super.setupProperty()
         
         setNavigationTitleAndItems(imageName: "common_dismiss", action: #selector(dismissCameraViewController), isLeft: true)
+        setNavigationFlashButton()
         
         captureButton.setImage(UIImage(named: "capture"), for: .normal)
         captureButton.addTarget(self, action: #selector(capturePhoto), for: .touchUpInside)
@@ -73,11 +75,42 @@ class CameraViewController: BaseViewController {
         }
     }
     
-    @objc func dismissCameraViewController() {
+    @objc private func dismissCameraViewController() {
         dismiss(animated: true)
     }
     
-    @objc func capturePhoto() {
+    private func setNavigationFlashButton() {
+        flashButton = UIBarButtonItem(image: UIImage(named: "flashOff"), style: .plain, target: self, action: #selector(switchFlash))
+        navigationItem.rightBarButtonItem = flashButton
+    }
+    
+    @objc private func switchFlash(_ button: UIButton) {
+        button.isSelected = !button.isSelected
+        
+        flashButton.image = UIImage(named: button.isSelected ? "flashOn" : "flashOff")
+        
+        guard let device = AVCaptureDevice.default(for: .video) else { return }
+         
+        if device.hasTorch {
+            do {
+                try device.lockForConfiguration()
+                
+                if device.torchMode == .off {
+                    device.torchMode = .on
+                    self.flashButton.image = UIImage(named: "flashOn")
+                } else {
+                    device.torchMode = .off
+                    self.flashButton.image = UIImage(named: "flashOff")
+                }
+                
+                device.unlockForConfiguration()
+            } catch {
+                print("Torch could not be used")
+            }
+        }
+    }
+    
+    @objc private func capturePhoto() {
         let videoPreviewLayerOrientaion = self.previewView.videoPreviewLayer.connection?.videoOrientation
         sesstionQueue.async {
             let connection = self.photoOutput.connection(with: .video)
