@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomNavigationBar: BaseView {
+class ImagePickerNavigationBar: BaseView {
     var onDismiss: (() -> Void)?
     var onPhotoDirectoryPickerButtonTapped: (() -> Void)?
     var onCompletion: (() -> Void)?

@@ -54,7 +54,7 @@ class CameraViewController: BaseViewController {
         super.setupLayout()
         
         previewView.snp.makeConstraints {
-            $0.bottom.equalTo(captureButton.snp.top).offset(-48)
+            $0.top.equalToSuperview().offset(135)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(view.frame.width * (4 / 3))
         }
@@ -88,9 +88,8 @@ class CameraViewController: BaseViewController {
     
     private func presentCapturePhotoViewController(_ photo: UIImage) {
         let capturePhotoViewController = CapturePhotoViewController()
-        capturePhotoViewController.modalPresentationStyle = .fullScreen
         capturePhotoViewController.configure(photo)
-        present(capturePhotoViewController, animated: false)
+        navigationController?.pushViewController(capturePhotoViewController, animated: false)
     }
     
     @objc func switchMode() {
