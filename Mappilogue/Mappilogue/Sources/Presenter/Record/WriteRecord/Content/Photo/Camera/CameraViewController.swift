@@ -18,6 +18,7 @@ class CameraViewController: BaseViewController {
     
     private let previewView = PreviewView()
     private let captureButton = UIButton()
+    private let switchModeButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,9 +35,11 @@ class CameraViewController: BaseViewController {
         
         setNavigationTitleAndItems(imageName: "common_dismiss", action: #selector(dismissCameraViewController), isLeft: true)
         
-        captureButton.layer.cornerRadius = 30
-        captureButton.backgroundColor = .color2EBD3D
+        captureButton.setImage(UIImage(named: "capture"), for: .normal)
         captureButton.addTarget(self, action: #selector(capturePhoto), for: .touchUpInside)
+        
+        switchModeButton.setImage(UIImage(named: "switchCameraMode"), for: .normal)
+        switchModeButton.addTarget(self, action: #selector(switchMode), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -44,20 +47,28 @@ class CameraViewController: BaseViewController {
         
         view.addSubview(previewView)
         view.addSubview(captureButton)
+        view.addSubview(switchModeButton)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
         previewView.snp.makeConstraints {
-            $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(captureButton.snp.top).offset(-18)
+            $0.bottom.equalTo(captureButton.snp.top).offset(-48)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(view.frame.width * (4 / 3))
         }
         
         captureButton.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide)
-            $0.centerX.equalTo(view.safeAreaLayoutGuide)
-            $0.width.height.equalTo(60)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-26)
+            $0.centerX.equalToSuperview()
+            $0.width.height.equalTo(64)
+        }
+
+        switchModeButton.snp.makeConstraints {
+            $0.centerY.equalTo(captureButton)
+            $0.trailing.equalToSuperview().offset(-30)
+            $0.width.height.equalTo(48)
         }
     }
     
@@ -75,10 +86,50 @@ class CameraViewController: BaseViewController {
         }
     }
     
-    private func presentCaptureImageViewController(_ image: UIImage) {
-        let captureImageViewController = CaptureImageViewController()
-        captureImageViewController.configure(image)
-        navigationController?.pushViewController(captureImageViewController, animated: false)
+    private func presentCapturePhotoViewController(_ photo: UIImage) {
+        let capturePhotoViewController = CapturePhotoViewController()
+        capturePhotoViewController.modalPresentationStyle = .fullScreen
+        capturePhotoViewController.configure(photo)
+        present(capturePhotoViewController, animated: false)
+    }
+    
+    @objc func switchMode() {
+        guard videoDeviceDiscoverySession.devices.count > 1 else {
+            return
+        }
+
+        sesstionQueue.async {
+            let currentVideoDevice = self.videoDeviceInput.device
+            let currentPosition = currentVideoDevice.position
+            let isFront = currentPosition == .front
+            let preferredPosition: AVCaptureDevice.Position = isFront ? .back : .front
+            let devices = self.videoDeviceDiscoverySession.devices
+            var newVideoDevice: AVCaptureDevice?
+            
+            newVideoDevice = devices.first(where: { device in
+                return preferredPosition == device.position
+            })
+            
+            if let newDevice = newVideoDevice {
+                do {
+                    let videoDeviceInput = try AVCaptureDeviceInput(device: newDevice)
+                    self.captureSettion.beginConfiguration()
+                    self.captureSettion.removeInput(self.videoDeviceInput)
+                    
+                    if self.captureSettion.canAddInput(videoDeviceInput) {
+                        self.captureSettion.addInput(videoDeviceInput)
+                        self.videoDeviceInput = videoDeviceInput
+                    } else {
+                        self.captureSettion.addInput(self.videoDeviceInput)
+                    }
+                    self.captureSettion.commitConfiguration()
+                    
+                } catch let error {
+                    print("error occured while creating device input : \(error.localizedDescription)")
+                }
+            }
+            
+        }
     }
 }
 
@@ -136,10 +187,10 @@ extension CameraViewController {
 extension CameraViewController: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         guard error == nil else { return }
-        guard let imageData = photo.fileDataRepresentation() else { return }
-        guard let image = UIImage(data: imageData) else { return }
+        guard let photoData = photo.fileDataRepresentation() else { return }
+        guard let photo = UIImage(data: photoData) else { return }
         DispatchQueue.main.async {
-            self.presentCaptureImageViewController(image)
+            self.presentCapturePhotoViewController(photo)
         }
     }
 }
