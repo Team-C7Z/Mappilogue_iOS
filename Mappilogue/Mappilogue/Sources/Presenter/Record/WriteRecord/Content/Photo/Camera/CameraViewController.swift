@@ -12,6 +12,7 @@ class CameraViewController: BaseViewController {
     let captureSettion = AVCaptureSession()
     var videoDeviceInput: AVCaptureDeviceInput!
     let photoOutput = AVCapturePhotoOutput()
+    var isBack: Bool = true
     
     let sesstionQueue = DispatchQueue(label: "sesstion Queue")
     let videoDeviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInDualCamera, .builtInTrueDepthCamera, .builtInTrueDepthCamera], mediaType: .video, position: .unspecified)
@@ -100,8 +101,8 @@ class CameraViewController: BaseViewController {
         sesstionQueue.async {
             let currentVideoDevice = self.videoDeviceInput.device
             let currentPosition = currentVideoDevice.position
-            let isFront = currentPosition == .front
-            let preferredPosition: AVCaptureDevice.Position = isFront ? .back : .front
+            self.isBack = currentPosition == .front
+            let preferredPosition: AVCaptureDevice.Position = self.isBack ? .back : .front
             let devices = self.videoDeviceDiscoverySession.devices
             var newVideoDevice: AVCaptureDevice?
             
@@ -188,8 +189,10 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
         guard error == nil else { return }
         guard let photoData = photo.fileDataRepresentation() else { return }
         guard let photo = UIImage(data: photoData) else { return }
+        let flippedPhoto = UIImage(cgImage: photo.cgImage!, scale: photo.scale, orientation: .leftMirrored)
+
         DispatchQueue.main.async {
-            self.presentCapturePhotoViewController(photo)
+            self.presentCapturePhotoViewController(self.isBack ? photo : flippedPhoto)
         }
     }
 }
