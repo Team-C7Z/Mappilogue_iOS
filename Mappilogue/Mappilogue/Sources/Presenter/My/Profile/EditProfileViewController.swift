@@ -220,15 +220,14 @@ class EditProfileViewController: BaseViewController {
             imagePickerViewController.isProfile = true
             imagePickerViewController.onCompletion = { assets in
                 if let asset = assets.first {
-                    self.updateProfileImage(asset)
+                    self.updateProfileAssetImage(asset)
                 }
             }
-            imagePickerViewController.modalPresentationStyle = .fullScreen
-            self.present(imagePickerViewController, animated: true)
+            self.navigationController?.pushViewController(imagePickerViewController, animated: false)
         }
     }
     
-    private func updateProfileImage(_ asset: PHAsset) {
+    private func updateProfileAssetImage(_ asset: PHAsset) {
         let imageManager = PHCachingImageManager()
         let options = PHImageRequestOptions()
         
@@ -239,6 +238,10 @@ class EditProfileViewController: BaseViewController {
         }
     }
     
+    func updateProfilePhotoImage(_ photo: UIImage) {
+        profileImage.image = photo
+    }
+    
     func editNicknameTextFieldTapped() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(presentEditNicknameModalViewController))
         editNicknameTextField.addGestureRecognizer(tap)
@@ -246,12 +249,11 @@ class EditProfileViewController: BaseViewController {
     
     @objc func presentEditNicknameModalViewController() {
         let editNicknameModalViewController = EditNicknameModalViewController()
-        editNicknameModalViewController.modalPresentationStyle = .overFullScreen
         editNicknameModalViewController.configure(editNicknameTextField.text ?? "")
         editNicknameModalViewController.onChangeTapped = { nickname in
             self.changeNickname(nickname)
         }
-        present(editNicknameModalViewController, animated: false)
+        navigationController?.pushViewController(editNicknameModalViewController, animated: false)
     }
     
     private func changeNickname(_ nickname: String) {

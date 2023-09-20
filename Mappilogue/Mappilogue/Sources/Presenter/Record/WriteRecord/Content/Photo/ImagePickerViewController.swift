@@ -22,7 +22,7 @@ class ImagePickerViewController: BaseViewController {
     var isPhotoDirectory: Bool = false
     var onCompletion: (([PHAsset]) -> Void)?
     
-    private let navigationBar = CustomNavigationBar()
+    private let navigationBar = ImagePickerNavigationBar()
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -41,7 +41,7 @@ class ImagePickerViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         dismissButtonTapped()
         photoDirectoryPickerButtonTapped()
         completionButtonTapped()
@@ -65,6 +65,16 @@ class ImagePickerViewController: BaseViewController {
         photoDirectoryView.configure(authStatus, allPhotos: allPhotos, favoritePhotosAlbum: favoritePhotosAlbum, userCollections: userCollections)
         
         currentAlbum = allPhotos
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     override func setupProperty() {
@@ -106,7 +116,7 @@ class ImagePickerViewController: BaseViewController {
     
     private func dismissButtonTapped() {
         navigationBar.onDismiss = {
-            self.dismiss(animated: true)
+            self.navigationController?.popViewController(animated: false)
         }
     }
     
@@ -127,9 +137,8 @@ class ImagePickerViewController: BaseViewController {
     
     private func completionButtonTapped() {
         navigationBar.onCompletion = {
-            self.dismiss(animated: true) {
-                self.onCompletion?(self.selectedAssets)
-            }
+            self.onCompletion?(self.selectedAssets)
+            self.navigationController?.popViewController(animated: false)
         }
     }
     
@@ -212,9 +221,7 @@ class ImagePickerViewController: BaseViewController {
     
     private func presentCameraViewController() {
         let cameraViewController = CameraViewController()
-        let navigationController = UINavigationController(rootViewController: cameraViewController)
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true)
+        navigationController?.pushViewController(cameraViewController, animated: false)
     }
 }
 
