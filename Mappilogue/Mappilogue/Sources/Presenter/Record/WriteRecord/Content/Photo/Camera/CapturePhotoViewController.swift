@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Photos
 
 class CapturePhotoViewController: BaseViewController {
     var onDismiss: (() -> Void)?
@@ -78,6 +79,10 @@ class CapturePhotoViewController: BaseViewController {
     }
     
     @objc private func usePhoto() {
+        if let photo {
+            savePhotoLibrary(photo)
+        }
+        
         if let navigationController = self.navigationController {
             let viewControllers = navigationController.viewControllers
             
@@ -86,6 +91,16 @@ class CapturePhotoViewController: BaseViewController {
             
             if let editProfileViewController = viewController as? EditProfileViewController, let photo {
                 editProfileViewController.updateProfilePhotoImage(photo)
+            }
+        }
+    }
+    
+    private func savePhotoLibrary(_ photo: UIImage) {
+        PHPhotoLibrary.requestAuthorization { status in
+            if status == .authorized {
+                PHPhotoLibrary.shared().performChanges({
+                    PHAssetChangeRequest.creationRequestForAsset(from: photo)
+                })
             }
         }
     }
