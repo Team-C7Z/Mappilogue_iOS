@@ -7,15 +7,27 @@
 
 import UIKit
 
+struct ScheduleTitle {
+    var id: Int
+    var title: String
+    var color: UIColor
+    var dayCount: Int?
+}
+
 class WeekCell: BaseCollectionViewCell {
     static let registerId = "\(WeekCell.self)"
     
+    var preMonthScheduleList: [[ScheduleTitle?]] = Array(repeating: Array(repeating: nil, count: 10), count: 32)
+    var currentMonthScheduleList: [[ScheduleTitle?]] = Array(repeating: Array(repeating: nil, count: 10), count: 32)
+    var nextMonthScheduleList: [[ScheduleTitle?]] = Array(repeating: Array(repeating: nil, count: 10), count: 32)
     private var monthlyCalendar = MonthlyCalendar()
     private var dummySchedule = dummyScheduleData()
+    private var dummySchedule2222 = dummyScheduleData11()
     
     private var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0)
     private var weekIndex: Int = 0
     private var week: [String] = []
+    private var days: [String] = []
     private var isCurrentMonth: Bool = true
     private var year: Int = 0
     private var month: Int = 0
@@ -51,7 +63,7 @@ class WeekCell: BaseCollectionViewCell {
         super.setupHierarchy()
     
         contentView.addSubview(collectionView)
-        contentView.addSubview(stackView)
+       //contentView.addSubview(stackView)
     }
     
     override func setupLayout() {
@@ -61,9 +73,9 @@ class WeekCell: BaseCollectionViewCell {
             $0.top.leading.trailing.bottom.equalTo(contentView)
         }
         
-        stackView.snp.makeConstraints {
-            $0.width.height.equalTo(contentView)
-        }
+//        stackView.snp.makeConstraints {
+//            $0.width.height.equalTo(contentView)
+//        }
     }
     
     func configure(year: Int, month: Int, weekIndex: Int) {
@@ -71,17 +83,81 @@ class WeekCell: BaseCollectionViewCell {
         self.year = year
         self.month = month
         self.weekIndex = weekIndex
+        preMonthScheduleList = Array(repeating: Array(repeating: nil, count: 10), count: 32)
+        currentMonthScheduleList = Array(repeating: Array(repeating: nil, count: 10), count: 32)
+        nextMonthScheduleList = Array(repeating: Array(repeating: nil, count: 10), count: 32)
+        days = monthlyCalendar.getMonthlyCalendar(year: year, month: month).reduce([], +)
         week = monthlyCalendar.getWeek(year: year, month: month, weekIndex: weekIndex)
+        getDaySchedule111()
         collectionView.reloadData()
     }
     
+    func getDaySchedule111() {
+        for schedule in dummySchedule2222 {
+           
+            guard let dates = monthlyCalendar.datesBetween(startDate: schedule.startDate, endDate: schedule.endDate) else { return }
+            
+            var index = 0
+            for (dateIndex, date) in dates.enumerated() {
+                guard let day = monthlyCalendar.dayFromDate(date) else { return }
+                let dayCount = 0
+                switch monthlyCalendar.compareDateToCurrentMonth(selectedDate: selectedDate, date: date) {
+                case .lastMonth:
+                    while preMonthScheduleList[day][index] != nil && index < 2 {
+                        index += 1
+                    }
+                    
+                    guard let firstDay = days.first else { return }
+                    if firstDay == String(day) || dateIndex == 0 {
+                        preMonthScheduleList[day][index] = ScheduleTitle(id: schedule.id, title: schedule.title, color: schedule.color, dayCount: min(dates.count, monthlyCalendar.lastMonthRange))
+                    } else {
+                        preMonthScheduleList[day][index] = ScheduleTitle(id: schedule.id, title: "", color: schedule.color, dayCount: nil)
+                    }
+                    
+                case .currentMonth:
+                    if (day + monthlyCalendar.lastMonthRange - 1) % 7 == 0 {
+                        index = 0
+                    }
+                    
+                    while currentMonthScheduleList[day][index] != nil && index < 2 {
+                        index += 1
+                    }
+                    
+                    if (day + monthlyCalendar.lastMonthRange - 1) % 7 == 0 ||  dateIndex == 0 {
+                      //  currentMonthScheduleList[day][index] = ScheduleTitle(id: schedule.id, title: "", color: schedule.color, dayCount: dayCount)
+                      //  print(schedule.title, (day + monthlyCalendar.lastMonthRange - 1), 33)
+                 //   } else if dateIndex == 0 {
+                 //       var dayCount = 7 - ((day + monthlyCalendar.lastMonthRange - 1) % 7)
+                        currentMonthScheduleList[day][index] = ScheduleTitle(id: schedule.id, title: schedule.title, color: schedule.color, dayCount: dates.count)
+                    } else {
+                        currentMonthScheduleList[day][index] = ScheduleTitle(id: schedule.id, title: "", color: schedule.color, dayCount: nil)
+                    }
+             
+                case .nextMonth:
+                    while nextMonthScheduleList[day][index] != nil && index < 2 {
+                        index += 1
+                    }
+
+                    if dateIndex == 0 {
+                        nextMonthScheduleList[day][index] = ScheduleTitle(id: schedule.id, title: schedule.title, color: schedule.color, dayCount: min(date.count, monthlyCalendar.nextMonthRange))
+                    } else {
+                        nextMonthScheduleList[day][index] = ScheduleTitle(id: schedule.id, title: "", color: schedule.color, dayCount: 0)
+                    }
+                case .unknown:
+                    break
+                }
+
+            }
+        }
+    }
+
     func getDaySchedule(year: Int, month: Int, day: Int) -> [Schedule] {
         if let index = dummySchedule.firstIndex(where: {$0.year == year && $0.month == month && $0.day == day}) {
             return dummySchedule[index].schedules
         }
         return []
     }
-    
+
     func getPreviousDaySchedule(year: Int, month: Int, day: Int) -> [Schedule] {
         if week.contains(String(day-1)), let index = dummySchedule.firstIndex(where: {$0.year == year && $0.month == month && $0.day == day-1}) {
             return dummySchedule[index].schedules
@@ -144,26 +220,41 @@ extension WeekCell: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         default:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ScheduleTitleCell.registerId, for: indexPath) as? ScheduleTitleCell else { return UICollectionViewCell() }
             
-            let day = week[indexPath.row]
-            schedules = getDaySchedule(year: year, month: month, day: Int(day) ?? 0)
-            if schedules.count > indexPath.section-1 {
-                var scheduleTitle = schedules[indexPath.section-1].title
-                let previousDaySchedules = getPreviousDaySchedule(year: year, month: month, day: Int(day) ?? 0)
-                if previousDaySchedules.firstIndex(where: {$0.title == scheduleTitle}) != nil {
-                    scheduleTitle = ""
+            let day = Int(week[indexPath.row]) ?? 0
+          
+            if weekIndex == 0 {
+                if !monthlyCalendar.isLastMonth(indexPath.row) {
+                    if let schedule = preMonthScheduleList[day][indexPath.section-1] {
+                        cell.configure(with: schedule.title, color: schedule.color, scheduleCount: schedule.dayCount, row: indexPath.row)
+                    }
+                } else {
+                    if let schedule = currentMonthScheduleList[day][indexPath.section-1] {
+                        cell.configure(with: schedule.title, color: schedule.color, scheduleCount: schedule.dayCount, row: indexPath.row)
+                    }
                 }
-                
-                if let scheduleColor = schedules[indexPath.section-1].color {
-                    cell.configure(with: scheduleTitle, color: scheduleColor)
+            } else if weekIndex == monthlyCalendar.getWeekCount(year: selectedDate.year, month: selectedDate.month) - 1 {
+                if !monthlyCalendar.isNextMonth(indexPath.row) {
+                    if let schedule = nextMonthScheduleList[day][indexPath.section-1] {
+                        cell.configure(with: schedule.title, color: schedule.color, scheduleCount: schedule.dayCount, row: indexPath.row)
+                    }
+                } else {
+                    if let schedule = currentMonthScheduleList[day][indexPath.section-1] {
+                        cell.configure(with: schedule.title, color: schedule.color, scheduleCount: schedule.dayCount, row: indexPath.row)
+                    }
+                }
+            } else {
+                if let schedule = currentMonthScheduleList[day][indexPath.section-1] {
+                    cell.configure(with: schedule.title, color: schedule.color, scheduleCount: schedule.dayCount, row: indexPath.row)
+             
                 }
             }
-           
             return cell
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.bounds.width / 7
+        let day = Int(week[indexPath.row]) ?? 0
+        var width: CGFloat = collectionView.bounds.width / 7
         let height: CGFloat
 
         switch indexPath.section {
