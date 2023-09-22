@@ -19,18 +19,25 @@ class ScheduleTitleCell: BaseCollectionViewCell {
         scheduleColorView.backgroundColor = .clear
         scheduleLabel.text = nil
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        
+    }
 
     override func setupProperty() {
         super.setupProperty()
         
         scheduleColorView.layer.cornerRadius = 4
         scheduleLabel.font = .caption03
+
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        contentView.addSubview(scheduleColorView)
+        addSubview(scheduleColorView)
         scheduleColorView.addSubview(scheduleLabel)
     }
     
@@ -38,7 +45,7 @@ class ScheduleTitleCell: BaseCollectionViewCell {
         super.setupLayout()
         
         scheduleColorView.snp.makeConstraints {
-            $0.width.height.equalTo(contentView)
+            $0.width.height.equalTo(self)
         }
         
         scheduleLabel.snp.makeConstraints {
@@ -47,13 +54,17 @@ class ScheduleTitleCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(with schedule: String, color: UIColor) {
-//        if !isScheduleContinuous {
-//            scheduleLabel.text = schedule
-//            scheduleColorView.backgroundColor = color
-//            frame.size.width = contentView.bounds.width * CGFloat(continuousDay)
-//        }
-        scheduleLabel.text = schedule
-        scheduleColorView.backgroundColor = color
+    func configure(with schedule: String, color: UIColor, scheduleCount: Int?, row: Int) {
+
+        if let scheduleCount {
+            let count = min(scheduleCount, 7 - row)
+          
+            scheduleLabel.text = schedule
+            scheduleColorView.backgroundColor = color
+            frame.size.width = contentView.bounds.width * CGFloat(count)
+        } else {
+            scheduleColorView.backgroundColor = .blue
+            frame.size.width = 0
+        }
     }
 }
