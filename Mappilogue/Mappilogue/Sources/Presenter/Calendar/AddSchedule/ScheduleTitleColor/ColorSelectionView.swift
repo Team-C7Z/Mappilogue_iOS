@@ -8,7 +8,7 @@
 import UIKit
 
 class ColorSelectionView: BaseView {
-    private let dummyColorData = dummyColorSelectionData()
+    private var colorList: [UIColor] = []
     var selectedColorIndex = 0
     var onSelectedColor: ((Int) -> Void)?
     
@@ -25,6 +25,24 @@ class ColorSelectionView: BaseView {
        
         return collectionView
     }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+        ScheduleManager.shared.getColorList { result in
+            switch result {
+            case .success(let response):
+                guard let baseResponse = response as? BaseDTO<[ColorListDTO]>, let result = baseResponse.result else { return }
+                self.setColorList(result)
+            default:
+                break
+            }
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func setupProperty() {
         super.setupProperty()
@@ -49,19 +67,27 @@ class ColorSelectionView: BaseView {
     func configure(_ selectedColorIndex: Int) {
         self.selectedColorIndex = selectedColorIndex
     }
+    
+    func setColorList(_ colorList: [ColorListDTO]) {
+        for color in colorList {
+            self.colorList.append(UIColor.fromHex(color.code))
+        }
+        
+        collectionView.reloadData()
+    }
 }
 
 extension ColorSelectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dummyColorData.count
+        return colorList.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ColorCell.registerId, for: indexPath) as? ColorCell else { return UICollectionViewCell() }
         
-        let colors = dummyColorData[indexPath.row]
+        let color = colorList[indexPath.row]
         let isColorSelected = indexPath.row == selectedColorIndex
-        cell.configure(with: colors, isColorSelected: isColorSelected)
+        cell.configure(with: color, isColorSelected: isColorSelected)
         cell.isUserInteractionEnabled = true
         
         return cell
