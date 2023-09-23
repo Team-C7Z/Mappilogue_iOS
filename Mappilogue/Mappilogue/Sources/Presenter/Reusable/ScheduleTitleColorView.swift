@@ -55,7 +55,7 @@ class ScheduleTitleColorView: BaseView {
         }
     }
     
-    func configure(_ isAdd: Bool, title: String, color: UIColor, isColorSelection: Bool) {
+    func configure(_ isAdd: Bool, title: String, colorId: Int, color: UIColor, isColorSelection: Bool) {
         scheduleTitleTextField.text = title
         scheduleTitleTextField.textColor = isAdd ? .color1C1C1C : .colorC9C6C2
         
@@ -75,7 +75,10 @@ class ScheduleTitleColorView: BaseView {
 extension ScheduleTitleColorView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         scheduleTitleTextField.resignFirstResponder()
-        onNameEntered?(scheduleTitleTextField.text ?? "")
         return true
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        onNameEntered?(scheduleTitleTextField.text ?? "")
     }
 }

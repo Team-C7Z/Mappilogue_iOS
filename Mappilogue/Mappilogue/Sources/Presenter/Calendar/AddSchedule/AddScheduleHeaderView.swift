@@ -10,9 +10,14 @@ import UIKit
 class AddScheduleHeaderView: BaseCollectionReusableView {
     static let registerId = "\(AddScheduleHeaderView.self)"
     
-    private var schedule: Schedule = Schedule()
-    private var colorList = dummyColorSelectionData()
+    var title: String = ""
+    var colorList: [ColorListDTO] = []
+    var colorId: Int = -1
+    var isColorSelection: Bool = false
+    
+    var onScheduleTitle: ((String) -> Void)?
     var onColorSelectionButtonTapped: (() -> Void)?
+    var onColorIndex: ((Int) -> Void)?
     var onStartDateButtonTapped: ((AddScheduleDateType) -> Void)?
     var onEndDateButtonTapped: ((AddScheduleDateType) -> Void)?
     var onNotificationButtonTapped: (() -> Void)?
@@ -30,8 +35,8 @@ class AddScheduleHeaderView: BaseCollectionReusableView {
         super.init(frame: frame)
         
         enterNameTextField()
+        getColorList()
         toggleColorSelectionView()
-        configureScheduleTitleColorView()
         selectColor()
         setDateButtonAction()
         setNotificationRepeatButtonAction()
@@ -79,14 +84,38 @@ class AddScheduleHeaderView: BaseCollectionReusableView {
         }
     }
     
-    private func configureScheduleTitleColorView() {
-        if let color = schedule.color {
-            scheduleTitleColorView.configure(false, title: schedule.title, color: color, isColorSelection: false)
-        } else {
-            let randomColorIndex = Int.random(in: 0...14)
-            schedule.color = colorList[randomColorIndex]
-            colorSelectionView.selectedColorIndex = randomColorIndex
+    func configureTitleColor(title: String, isColorSelection: Bool, colorId: Int) {
+        self.title = title
+        self.isColorSelection = isColorSelection
+        self.colorId = colorId
+    }
+    
+    func getColorList() {
+        ScheduleManager.shared.getColorList { result in
+            switch result {
+            case .success(let response):
+                guard let baseResponse = response as? BaseDTO<[ColorListDTO]>, let result = baseResponse.result else { return }
+                self.colorList = result
+                self.configureScheduleTitleColorView()
+            default:
+                break
+            }
         }
+    }
+    
+    private func configureScheduleTitleColorView() {
+        if colorId >= 0 {
+            if let index = colorList.firstIndex(where: {$0.id == colorId}) {
+                let colorCode = colorList[index].code
+                let color = UIColor.fromHex(colorCode)
+                scheduleTitleColorView.configure(true, title: title, colorId: colorId, color: color, isColorSelection: isColorSelection)
+            }
+        } else {
+            guard let randomColorId = colorList.map({$0.id}).randomElement() else { return }
+            colorId = randomColorId
+        }
+        
+        colorSelectionView.configure(colorId, colorList: colorList)
     }
     
     func configureDate(startDate: SelectedDate, endDate: SelectedDate, dateType: AddScheduleDateType) {
@@ -124,8 +153,7 @@ extension AddScheduleHeaderView {
     func enterNameTextField() {
         scheduleTitleColorView.onNameEntered = { [weak self] name in
             guard let self = self else { return }
-            
-            schedule.title = name
+            onScheduleTitle?(name)
         }
     }
     
@@ -141,19 +169,22 @@ extension AddScheduleHeaderView {
                 self.layoutIfNeeded()
             }
             
-            if let color = schedule.color {
-                scheduleTitleColorView.configure(true, title: schedule.title, color: color, isColorSelection: isSelected)
+            print(colorId, 4)
+            if let index = colorList.firstIndex(where: {$0.id == self.colorId}) {
+                let colorCode = colorList[index].code
+                let color = UIColor.fromHex(colorCode)
+                scheduleTitleColorView.configure(true, title: title, colorId: colorId, color: color, isColorSelection: isColorSelection)
             }
-            
+
             onColorSelectionButtonTapped?()
         }
     }
     
     func selectColor() {
-        colorSelectionView.onSelectedColor = { [weak self] selectedColorIndex in
+        colorSelectionView.onSelectedColor = { [weak self] selectedColorId in
             guard let self = self else { return }
-            
-            schedule.color = colorList[selectedColorIndex]
+        
+            onColorIndex?(selectedColorId)
             configureScheduleTitleColorView()
         }
     }

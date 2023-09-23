@@ -10,6 +10,7 @@ import Moya
 
 enum ScheduleAPI: BaseAPI {
     case getColorList
+    case addSchedule(schedule: AddScheduleDTO)
 }
 
 extension ScheduleAPI: TargetType {
@@ -17,6 +18,8 @@ extension ScheduleAPI: TargetType {
         switch self {
         case .getColorList:
             return "/api/v1/schedules/colors"
+        case .addSchedule:
+            return "/api/v1/schedules/"
         }
     }
     
@@ -24,6 +27,8 @@ extension ScheduleAPI: TargetType {
         switch self {
         case .getColorList:
             return .get
+        case .addSchedule:
+            return .post
         }
     }
     
@@ -31,13 +36,49 @@ extension ScheduleAPI: TargetType {
         switch self {
         case .getColorList:
             return .requestPlain
+        case let .addSchedule(schedule):
+            var requestParameters: [String: Any] = [
+                "colorId": schedule.colorId,
+                "startDate": schedule.startDate,
+                "endDate": schedule.endDate
+            ]
+            
+            if let title = schedule.title {
+                requestParameters["title"] = title
+            }
+            
+            if let alarmOptions = schedule.alarmOptions {
+                requestParameters["alarmOptions"] = alarmOptions
+            }
+            
+            if let area = schedule.area {
+                requestParameters["area"] = area.map { areaList in
+                    return [
+                        "date": areaList.date,
+                        "value": areaList.value.map { location in
+                            return [
+                                "name": location.name,
+                                "streetAddress": location.streetAddress,
+                                "latitude": location.latitude,
+                                "longitude": location.longitude
+                            ]
+                        }
+                    ]
+                }
+            }
+            
+            return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
         }
     }
     
     var headers: [String: String]? {
+        guard let token = AuthUserDefaults.accessToken else { return nil }
+        
         switch self {
         case .getColorList:
             return nil
+        case .addSchedule:
+            return ["Authorization": "Bearer \(token)"]
         }
     }
 }

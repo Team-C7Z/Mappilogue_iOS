@@ -11,6 +11,7 @@ import Moya
 class ScheduleManager {
     static let shared = ScheduleManager()
     private let provider = MoyaProvider<ScheduleAPI>(plugins: [NetworkLoggerPlugin()])
+    private let interceptorSessionProvider = MoyaProvider<ScheduleAPI>(session: Session(interceptor: Interceptor()), plugins: [NetworkLoggerPlugin()])
     
     func getColorList(completion: @escaping (NetworkResult<Any>) -> Void) {
         provider.request(.getColorList) { result in
@@ -19,6 +20,20 @@ class ScheduleManager {
                 let statusCode = response.statusCode
                 let data = response.data
                 let networkResult = self.judgeStatus(statusCode, data, BaseDTO<[ColorListDTO]>.self)
+                completion(networkResult)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func addSchedule(schedule: AddScheduleDTO, completion: @escaping (NetworkResult<Any>) -> Void) {
+        interceptorSessionProvider.request(.addSchedule(schedule: schedule)) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<String>.self)
                 completion(networkResult)
             case .failure(let error):
                 print(error)
