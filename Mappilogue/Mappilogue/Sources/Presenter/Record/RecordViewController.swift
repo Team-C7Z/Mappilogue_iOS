@@ -297,7 +297,7 @@ class RecordViewController: NavigationBarViewController {
     }
     
     private func setBottomSheetHeight() {
-        maxHeight = view.frame.height - 200
+        maxHeight = view.frame.height - 250
 
         if dummyRecord.isEmpty {
             bottomSheetHeight = minHeight
@@ -315,8 +315,8 @@ class RecordViewController: NavigationBarViewController {
         let translation = gesture.translation(in: containerView)
         let newContainerHeight = containerView.frame.height - translation.y
         let clampedHeight = min(max(newContainerHeight, minHeight), maxHeight)
-        containerView.snp.updateConstraints { make in
-            make.height.equalTo(clampedHeight)
+        containerView.snp.updateConstraints {
+            $0.height.equalTo(clampedHeight)
         }
         
         var nearestHeight: CGFloat = minHeight
@@ -332,8 +332,8 @@ class RecordViewController: NavigationBarViewController {
         setButtonsVisibility(isHidden: clampedHeight > view.frame.height / 2, height: clampedHeight)
         
         if gesture.state == .ended || gesture.state == .cancelled {
-            containerView.snp.updateConstraints { make in
-                make.height.equalTo(nearestHeight)
+            containerView.snp.updateConstraints {
+                $0.height.equalTo(nearestHeight)
             }
             
             updateBottomSheet(nearestHeight)
