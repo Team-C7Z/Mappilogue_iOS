@@ -129,18 +129,18 @@ class WriteRecordViewController: BaseViewController {
     }
     
     private func configureScheduleTitleColorView() {
-        if let color = schedule.color {
-            scheduleTitleColorView.configure(false, title: schedule.title, color: color, isColorSelection: false)
-        } else {
-            let randomColorIndex = Int.random(in: 0...14)
-            schedule.color = colorList[randomColorIndex]
-            colorSelectionView.selectedColorIndex = randomColorIndex
-        }
+//        if color = schedule.color {
+//            scheduleTitleColorView.configure(false, title: schedule.title, color: color, isColorSelection: false)
+//        } else {
+//            let randomColorIndex = Int.random(in: 0...14)
+//            schedule.color = colorList[randomColorIndex]
+//            colorSelectionView.selectedColorIndex = randomColorIndex
+//        }
     }
     
     private func configureColorSelectionView() {
         if let index = colorList.firstIndex(where: { $0 == schedule.color }) {
-            colorSelectionView.configure(index)
+      //      colorSelectionView.configure(index, colorList: <#[ColorListDTO]#>)
         }
     }
     
@@ -290,7 +290,7 @@ extension WriteRecordViewController {
             }
             
             if let color = schedule.color {
-                scheduleTitleColorView.configure(false, title: schedule.title, color: color, isColorSelection: isSelected)
+//                scheduleTitleColorView.configure(false, title: schedule.title, color: color, isColorSelection: isSelected)
             }
         }
     }
