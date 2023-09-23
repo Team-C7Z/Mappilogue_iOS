@@ -12,7 +12,6 @@ class BottomSheetViewController: BaseViewController {
     var emptyCellHeight: CGFloat = 196
     
     private let barImage = UIImageView()
-    private let sortView = SortView()
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -23,6 +22,7 @@ class BottomSheetViewController: BaseViewController {
         collectionView.backgroundColor = .colorF9F8F7
         collectionView.register(EmptyRecordCell.self, forCellWithReuseIdentifier: EmptyRecordCell.registerId)
         collectionView.register(RecordCell.self, forCellWithReuseIdentifier: RecordCell.registerId)
+        collectionView.register(SortHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SortHeaderView.registerId)
         collectionView.delegate = self
         collectionView.dataSource = self
         return collectionView
@@ -47,7 +47,6 @@ class BottomSheetViewController: BaseViewController {
         super.setupHierarchy()
         
         view.addSubview(barImage)
-        view.addSubview(sortView)
         view.addSubview(collectionView)
     }
     
@@ -60,14 +59,9 @@ class BottomSheetViewController: BaseViewController {
             $0.width.equalTo(36)
             $0.height.equalTo(4)
         }
-        
-        sortView.snp.makeConstraints {
-            $0.top.equalTo(view).offset(24)
-            $0.leading.trailing.equalTo(view)
-        }
 
         collectionView.snp.makeConstraints {
-            $0.top.equalTo(sortView.snp.bottom).offset(12)
+            $0.top.equalTo(view).offset(24)
             $0.width.height.equalTo(view)
         }
     }
@@ -108,6 +102,15 @@ extension BottomSheetViewController: UICollectionViewDelegate, UICollectionViewD
     // 수직 간격
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 12
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SortHeaderView.registerId, for: indexPath) as? SortHeaderView else { return UICollectionReusableView() }
+        return headerView
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.bounds.width, height: 32)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
