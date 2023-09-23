@@ -43,10 +43,6 @@ class SortHeaderView: BaseCollectionReusableView {
     override func setupLayout() {
         super.setupLayout()
         
-        self.snp.makeConstraints {
-            $0.height.equalTo(32)
-        }
-        
         stackView.snp.makeConstraints {
             $0.top.equalTo(self)
             $0.trailing.equalTo(self).offset(-16)
