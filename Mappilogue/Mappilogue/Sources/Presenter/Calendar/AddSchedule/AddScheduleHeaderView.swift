@@ -13,8 +13,8 @@ class AddScheduleHeaderView: BaseCollectionReusableView {
     private var schedule: Schedule = Schedule()
     private var colorList = dummyColorSelectionData()
     var onColorSelectionButtonTapped: (() -> Void)?
-    var onStartDateButtonTapped: (() -> Void)?
-    var onEndDateButtonTapped: (() -> Void)?
+    var onStartDateButtonTapped: ((AddScheduleDateType) -> Void)?
+    var onEndDateButtonTapped: ((AddScheduleDateType) -> Void)?
     var onNotificationButtonTapped: (() -> Void)?
     var onRepeatButtonTapped: (() -> Void)?
     
@@ -89,8 +89,8 @@ class AddScheduleHeaderView: BaseCollectionReusableView {
         }
     }
     
-    func configureDate(startDate: SelectedDate, endDate: SelectedDate) {
-        scheduleDurationView.configure(startDate: startDate, endDate: endDate)
+    func configureDate(startDate: SelectedDate, endDate: SelectedDate, dateType: AddScheduleDateType) {
+        scheduleDurationView.configure(startDate: startDate, endDate: endDate, dateType: dateType)
     }
     
     private func setDateButtonAction() {
@@ -99,11 +99,11 @@ class AddScheduleHeaderView: BaseCollectionReusableView {
     }
     
     @objc private func startDateButtonTapped(_ sender: UIButton) {
-        onStartDateButtonTapped?()
+        onStartDateButtonTapped?(.startDate)
     }
     
     @objc private func endDateButtonTapped(_ sender: UIButton) {
-        onEndDateButtonTapped?()
+        onEndDateButtonTapped?(.endDate)
     }
     
     private func setNotificationRepeatButtonAction() {

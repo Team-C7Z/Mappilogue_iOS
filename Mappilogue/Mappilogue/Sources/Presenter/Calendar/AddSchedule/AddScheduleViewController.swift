@@ -16,7 +16,7 @@ class AddScheduleViewController: BaseViewController {
     var isColorSelection: Bool = false
     var selectedColor: UIColor = .color1C1C1C
 
-    var isStartDate: Bool = false
+    var scheduleDateType: AddScheduleDateType = .unKnown
     let years: [Int] = Array(1970...2050)
     let months: [Int] = Array(1...12)
     var days: [Int] = []
@@ -145,12 +145,33 @@ class AddScheduleViewController: BaseViewController {
         func selectedRow(_ value: Int, component: Int) {
             datePickerView.selectRow(value, inComponent: component, animated: false)
         }
-        selectedRow(years.firstIndex(of: isStartDate ? startDate.year : endDate.year) ?? 0, component: ComponentType.year.rawValue)
-        selectedRow(months.firstIndex(of: isStartDate ? startDate.month : endDate.month) ?? 0, component: ComponentType.month.rawValue)
-
-        if let day = isStartDate ? startDate.day : endDate.day, let currentDayIndex = days.firstIndex(of: day) {
-            selectedRow(currentDayIndex, component: ComponentType.day.rawValue)
+        if scheduleDateType == .startDate {
+            selectedRow(years.firstIndex(of: startDate.year) ?? 0, component: ComponentType.year.rawValue)
+            selectedRow(months.firstIndex(of: startDate.month) ?? 0, component: ComponentType.month.rawValue)
+        } else if scheduleDateType == .endDate {
+            selectedRow(years.firstIndex(of: endDate.year) ?? 0, component: ComponentType.year.rawValue)
+            selectedRow(months.firstIndex(of: endDate.month) ?? 0, component: ComponentType.month.rawValue)
         }
+
+        if scheduleDateType == .startDate {
+            if let day = startDate.day, let currentDayIndex = days.firstIndex(of: day) {
+                selectedRow(currentDayIndex, component: ComponentType.day.rawValue)
+            }
+        } else if scheduleDateType == .endDate {
+            if let day = endDate.day, let currentDayIndex = days.firstIndex(of: day) {
+                selectedRow(currentDayIndex, component: ComponentType.day.rawValue)
+            }
+        }
+        if scheduleDateType == .startDate {
+            if let day = startDate.day, let currentDayIndex = days.firstIndex(of: day) {
+                selectedRow(currentDayIndex, component: ComponentType.day.rawValue)
+            }
+        } else if scheduleDateType == .endDate {
+            if let day = endDate.day, let currentDayIndex = days.firstIndex(of: day) {
+                selectedRow(currentDayIndex, component: ComponentType.day.rawValue)
+            }
+        }
+        
     }
     
     func setKeyboardTap() {
@@ -180,6 +201,7 @@ class AddScheduleViewController: BaseViewController {
     @objc func dismissDatePicker(_ gesture: UITapGestureRecognizer) {
         let location = gesture.location(in: collectionView)
         if location.y < datePickerOuterView.frame.minY {
+            scheduleDateType = .unKnown
             datePickerOuterView.isHidden = true
             validateDateRange()
         }
@@ -189,9 +211,9 @@ class AddScheduleViewController: BaseViewController {
     
     func validateDateRange() {
         if daysBetween() < 0 {
-            if isStartDate {
+            if scheduleDateType == .startDate {
                 endDate = SelectedDate(year: startDate.year, month: startDate.month, day: startDate.day ?? 0)
-            } else {
+            } else if scheduleDateType == .endDate {
                 startDate = SelectedDate(year: endDate.year, month: endDate.month, day: endDate.day ?? 0)
             }
         }
@@ -364,11 +386,11 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
     }
 
     func configureAddScheduleHeaderView(_ headerView: AddScheduleHeaderView) {
-        headerView.configureDate(startDate: startDate, endDate: endDate)
+        headerView.configureDate(startDate: startDate, endDate: endDate, dateType: scheduleDateType)
         
         let dateButtonConfiguration = { isStartDate in
             self.validateDateRange()
-            self.isStartDate = isStartDate
+            self.scheduleDateType = isStartDate
             self.datePickerButtonTapped()
         }
         
@@ -376,12 +398,12 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
             self.isColorSelection.toggle()
             self.collectionView.performBatchUpdates(nil, completion: nil)
         }
-        headerView.onStartDateButtonTapped = {
-            dateButtonConfiguration(true)
+        headerView.onStartDateButtonTapped = { dateType in
+            dateButtonConfiguration(dateType)
             self.addDatePickerTapGesture()
         }
-        headerView.onEndDateButtonTapped = {
-            dateButtonConfiguration(false)
+        headerView.onEndDateButtonTapped = { dateType in
+            dateButtonConfiguration(dateType)
             self.addDatePickerTapGesture()
         }
         headerView.onNotificationButtonTapped = { self.navigateToNotificationViewController()}
@@ -495,25 +517,25 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
         guard let componentType = ComponentType(rawValue: component) else { return nil }
         switch componentType {
         case .year:
-            if isStartDate {
+            if scheduleDateType == .startDate {
                 if startDate.year == years[row] { return "\(years[row]) 년" }
-            } else {
+            } else if scheduleDateType == .endDate {
                 if endDate.year == years[row] { return "\(years[row]) 년" }
             }
             return "\(years[row])"
             
         case .month:
-            if isStartDate {
+            if scheduleDateType == .startDate {
                 if startDate.month == months[row] { return "\(months[row]) 월" }
-            } else {
+            } else if scheduleDateType == .endDate {
                 if endDate.month == months[row] { return "\(months[row]) 월" }
             }
             return "\(months[row])"
    
         case .day:
-            if isStartDate {
+            if scheduleDateType == .startDate {
                 if startDate.day == days[row] { return "\(days[row]) 일" }
-            } else {
+            } else if scheduleDateType == .endDate {
                 if endDate.day == days[row] { return "\(days[row]) 일" }
             }
             return "\(days[row])"
@@ -524,22 +546,32 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
         guard let componentType = ComponentType(rawValue: component) else { return }
         switch componentType {
         case .year:
-            if isStartDate {
+            if scheduleDateType == .startDate {
                 startDate.year = years[row]
-            } else { endDate.year = years[row] }
+            } else if scheduleDateType == .endDate {
+                endDate.year = years[row]
+            }
             
         case .month:
-            if isStartDate {
+            if scheduleDateType == .startDate {
                 startDate.month = months[row]
-            } else { endDate.month = months[row] }
+            } else if scheduleDateType == .endDate {
+                endDate.month = months[row]
+            }
         
         case .day:
-            if isStartDate {
+            if scheduleDateType == .startDate {
                 startDate.day = days[row]
-            } else { endDate.day = days[row] }
+            } else if scheduleDateType == .endDate {
+                endDate.day = days[row]
+            }
         }
         
-        updateDaysComponent(isStartDate ? startDate : endDate)
+        if scheduleDateType == .startDate {
+            updateDaysComponent(startDate)
+        } else if scheduleDateType == .endDate {
+            updateDaysComponent(endDate)
+        }
     }
     
     private func updateDaysComponent(_ selectedDate: SelectedDate) {
