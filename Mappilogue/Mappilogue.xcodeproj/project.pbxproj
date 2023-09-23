@@ -73,7 +73,7 @@
 		92011C1A2A755D02009B047F /* MyRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C192A755D02009B047F /* MyRecordButton.swift */; };
 		92011C1C2A75E484009B047F /* RecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C1B2A75E484009B047F /* RecordCell.swift */; };
 		92011C1E2A75EE79009B047F /* MarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C1D2A75EE79009B047F /* MarkView.swift */; };
-		92011C202A769C12009B047F /* SortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C1F2A769C12009B047F /* SortView.swift */; };
+		92011C202A769C12009B047F /* SortHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C1F2A769C12009B047F /* SortHeaderView.swift */; };
 		92011C222A77907F009B047F /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C212A77907F009B047F /* CategoryCell.swift */; };
 		92011C242A77A329009B047F /* AddCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C232A77A329009B047F /* AddCategoryCell.swift */; };
 		92011C262A77A48B009B047F /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C252A77A48B009B047F /* Category.swift */; };
@@ -328,7 +328,7 @@
 		92011C192A755D02009B047F /* MyRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordButton.swift; sourceTree = "<group>"; };
 		92011C1B2A75E484009B047F /* RecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCell.swift; sourceTree = "<group>"; };
 		92011C1D2A75EE79009B047F /* MarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkView.swift; sourceTree = "<group>"; };
-		92011C1F2A769C12009B047F /* SortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortView.swift; sourceTree = "<group>"; };
+		92011C1F2A769C12009B047F /* SortHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortHeaderView.swift; sourceTree = "<group>"; };
 		92011C212A77907F009B047F /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		92011C232A77A329009B047F /* AddCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryCell.swift; sourceTree = "<group>"; };
 		92011C252A77A48B009B047F /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -616,7 +616,7 @@
 			isa = PBXGroup;
 			children = (
 				92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */,
-				92011C1F2A769C12009B047F /* SortView.swift */,
+				92011C1F2A769C12009B047F /* SortHeaderView.swift */,
 				920031E42A8E1E9B00E3170D /* Cell */,
 			);
 			path = BottomSheet;
@@ -1757,7 +1757,7 @@
 				920031D12A8B65F000E3170D /* Bundle.swift in Sources */,
 				9224FD442A657150000A56A6 /* Location.swift in Sources */,
 				926999462A14F75F003DDAD2 /* RecordViewController.swift in Sources */,
-				92011C202A769C12009B047F /* SortView.swift in Sources */,
+				92011C202A769C12009B047F /* SortHeaderView.swift in Sources */,
 				928B7BF32A9C7B4400E4F789 /* NetworkLoggerPlugin.swift in Sources */,
 				928B7C1D2AA489F600E4F789 /* NotificationDTO.swift in Sources */,
 				92011B7B2A716C9D009B047F /* SelectScheduleCell.swift in Sources */,
