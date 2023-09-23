@@ -13,6 +13,8 @@ class AddScheduleViewController: BaseViewController {
     private var startDate: SelectedDate = SelectedDate(year: 0, month: 0, day: 0)
     private var endDate: SelectedDate  = SelectedDate(year: 0, month: 0, day: 0)
 
+    var schedule = AddScheduleDTO(colorId: -1, startDate: "", endDate: "")
+    
     var isColorSelection: Bool = false
     var selectedColor: UIColor = .color1C1C1C
 
@@ -55,7 +57,7 @@ class AddScheduleViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+ 
         setCurrentDate()
         setSelectedDate()
         setKeyboardTap()
@@ -138,9 +140,19 @@ class AddScheduleViewController: BaseViewController {
     }
     
     @objc func completionButtonTapped(_ sender: UIButton) {
+        print(schedule, "일정 추가")
+        ScheduleManager.shared.addSchedule(schedule: schedule) { result in
+            switch result {
+            case .success(let response):
+                print(response, 333)
+            default:
+                break
+            }
+        }
+        
         navigationController?.popViewController(animated: true)
     }
-    
+
     func setSelectedDate() {
         func selectedRow(_ value: Int, component: Int) {
             datePickerView.selectRow(value, inComponent: component, animated: false)
@@ -394,10 +406,20 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
             self.datePickerButtonTapped()
         }
         
+        headerView.onScheduleTitle = { title in
+            self.schedule.title = title
+        }
+        
         headerView.onColorSelectionButtonTapped = {
             self.isColorSelection.toggle()
             self.collectionView.performBatchUpdates(nil, completion: nil)
         }
+        
+        headerView.onColorIndex = { colorId in
+            self.schedule.colorId = colorId
+            headerView.configureTitleColor(title: self.schedule.title ?? "", isColorSelection: self.isColorSelection, colorId: self.schedule.colorId)
+        }
+        
         headerView.onStartDateButtonTapped = { dateType in
             dateButtonConfiguration(dateType)
             self.addDatePickerTapGesture()
