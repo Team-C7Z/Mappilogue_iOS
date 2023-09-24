@@ -15,6 +15,7 @@ class AddScheduleViewController: BaseViewController {
 
     var schedule = AddScheduleDTO(colorId: -1, startDate: "", endDate: "")
     
+    var colorList: [ColorListDTO] = []
     var isColorSelection: Bool = false
     var selectedColor: UIColor = .color1C1C1C
 
@@ -58,6 +59,7 @@ class AddScheduleViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
  
+        getColorList()
         setCurrentDate()
         setSelectedDate()
         setKeyboardTap()
@@ -140,6 +142,12 @@ class AddScheduleViewController: BaseViewController {
     }
     
     @objc func completionButtonTapped(_ sender: UIButton) {
+        schedule.startDate = startDate.stringFromSelectedDate()
+        schedule.endDate = endDate.stringFromSelectedDate()
+        if schedule.colorId == -1 {
+            schedule.colorId = colorList.map({$0.id}).randomElement() ?? 0
+        }
+        
         print(schedule, "일정 추가")
         ScheduleManager.shared.addSchedule(schedule: schedule) { result in
             switch result {
@@ -151,6 +159,19 @@ class AddScheduleViewController: BaseViewController {
         }
         
         navigationController?.popViewController(animated: true)
+    }
+        
+    func getColorList() {
+        ScheduleManager.shared.getColorList { result in
+            switch result {
+            case .success(let response):
+                guard let baseResponse = response as? BaseDTO<[ColorListDTO]>, let result = baseResponse.result else { return }
+                self.colorList = result
+                self.collectionView.reloadData()
+            default:
+                break
+            }
+        }
     }
 
     func setSelectedDate() {
@@ -399,6 +420,7 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
 
     func configureAddScheduleHeaderView(_ headerView: AddScheduleHeaderView) {
         headerView.configureDate(startDate: startDate, endDate: endDate, dateType: scheduleDateType)
+        headerView.configureColorList(colorList)
         
         let dateButtonConfiguration = { isStartDate in
             self.validateDateRange()
