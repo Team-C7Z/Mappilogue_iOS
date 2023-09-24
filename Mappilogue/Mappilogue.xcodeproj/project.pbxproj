@@ -184,6 +184,7 @@
 		9273C9522ABF040E00224DE1 /* ScheduleAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9273C9512ABF040E00224DE1 /* ScheduleAPI.swift */; };
 		9273C9542ABF05F300224DE1 /* ColorListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9273C9532ABF05F300224DE1 /* ColorListDTO.swift */; };
 		9273C9582ABF2D7800224DE1 /* AddScheduleDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9273C9572ABF2D7800224DE1 /* AddScheduleDTO.swift */; };
+		9273C95A2ABFDA8500224DE1 /* SelectedDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9273C9592ABFDA8500224DE1 /* SelectedDate.swift */; };
 		927C144BD1C3E8536A8EC3A1 /* Pods_Mappilogue_MappilogueUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65FB9F97A7DA9BC190F4E1BF /* Pods_Mappilogue_MappilogueUITests.framework */; };
 		927E7F212A66F64400E6A29F /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927E7F202A66F64400E6A29F /* Schedule.swift */; };
 		927E7F272A683DCD00E6A29F /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927E7F262A683DCD00E6A29F /* CalendarCell.swift */; };
@@ -446,6 +447,7 @@
 		9273C9512ABF040E00224DE1 /* ScheduleAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAPI.swift; sourceTree = "<group>"; };
 		9273C9532ABF05F300224DE1 /* ColorListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorListDTO.swift; sourceTree = "<group>"; };
 		9273C9572ABF2D7800224DE1 /* AddScheduleDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleDTO.swift; sourceTree = "<group>"; };
+		9273C9592ABFDA8500224DE1 /* SelectedDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedDate.swift; sourceTree = "<group>"; };
 		927E7F202A66F64400E6A29F /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		927E7F262A683DCD00E6A29F /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		928B7BD82A99AFD700E4F789 /* SignUpCompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCompletionViewController.swift; sourceTree = "<group>"; };
@@ -1220,6 +1222,7 @@
 				92011C252A77A48B009B047F /* Category.swift */,
 				92139D862AB1BB2D005344AE /* Notification.swift */,
 				92139D882AB1BEBD005344AE /* Announcement.swift */,
+				9273C9592ABFDA8500224DE1 /* SelectedDate.swift */,
 			);
 			path = Mappilogue;
 			sourceTree = "<group>";
@@ -1795,6 +1798,7 @@
 				920031C32A8B5D2F00E3170D /* MainLocationViewController.swift in Sources */,
 				9224FCF72A5FC4CA000A56A6 /* ScheduleViewController.swift in Sources */,
 				920031BA2A8B5C3000E3170D /* AddedLocationsHeaderView.swift in Sources */,
+				9273C95A2ABFDA8500224DE1 /* SelectedDate.swift in Sources */,
 				920032092A975EA400E3170D /* SelectPermissionViewController.swift in Sources */,
 				928B7BFD2A9DD4DC00E4F789 /* BaseAPI.swift in Sources */,
 				926998F92A14EC07003DDAD2 /* SceneDelegate.swift in Sources */,

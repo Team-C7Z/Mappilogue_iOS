@@ -10,10 +10,10 @@ import UIKit
 class AddScheduleHeaderView: BaseCollectionReusableView {
     static let registerId = "\(AddScheduleHeaderView.self)"
     
-    var title: String = ""
-    var colorList: [ColorListDTO] = []
-    var colorId: Int = -1
-    var isColorSelection: Bool = false
+    private var title: String = ""
+    private var colorList: [ColorListDTO] = []
+    private var colorId: Int = -1
+    private var isColorSelection: Bool = false
     
     var onScheduleTitle: ((String) -> Void)?
     var onColorSelectionButtonTapped: (() -> Void)?
@@ -35,7 +35,6 @@ class AddScheduleHeaderView: BaseCollectionReusableView {
         super.init(frame: frame)
         
         enterNameTextField()
-        getColorList()
         toggleColorSelectionView()
         selectColor()
         setDateButtonAction()
@@ -90,19 +89,11 @@ class AddScheduleHeaderView: BaseCollectionReusableView {
         self.colorId = colorId
     }
     
-    func getColorList() {
-        ScheduleManager.shared.getColorList { result in
-            switch result {
-            case .success(let response):
-                guard let baseResponse = response as? BaseDTO<[ColorListDTO]>, let result = baseResponse.result else { return }
-                self.colorList = result
-                self.configureScheduleTitleColorView()
-            default:
-                break
-            }
-        }
+    func configureColorList(_ colorList: [ColorListDTO]) {
+        self.colorList = colorList
+        configureScheduleTitleColorView()
     }
-    
+ 
     private func configureScheduleTitleColorView() {
         if colorId >= 0 {
             if let index = colorList.firstIndex(where: {$0.id == colorId}) {
