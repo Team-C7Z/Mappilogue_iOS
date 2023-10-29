@@ -38,7 +38,7 @@ struct LocationTime {
 
 struct LocationTimeDetail {
     var location: String
-    var time: String
+    var time: String?
 }
 
 func dummyMainLocationData() -> [Location] {
@@ -49,4 +49,16 @@ func dummyMainLocationData() -> [Location] {
     let mainLocation5 = Location(title: "제주국제공항", address: "제주 제주시 공항로 2 제주국제공항")
 
     return [mainLocation1, mainLocation2, mainLocation3, mainLocation4, mainLocation5]
+}
+
+func dummyLocationTimeData() -> [LocationTime] {
+    let locationTime1 = LocationTime(date: "5월 10일", locationDetail: [
+        LocationTimeDetail(location: "서울특별시청", time: "10:00 AM"),
+        LocationTimeDetail(location: "서울숲", time: "06:00 PM")
+    ])
+    let locationTime2 = LocationTime(date: "5월 11일", locationDetail: [
+        LocationTimeDetail(location: "서울틀벽시청", time: "11:00 AM")
+    ])
+    
+    return [locationTime1, locationTime2]
 }
