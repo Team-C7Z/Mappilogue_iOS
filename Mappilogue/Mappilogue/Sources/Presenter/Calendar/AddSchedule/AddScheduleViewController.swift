@@ -25,7 +25,7 @@ class AddScheduleViewController: BaseViewController {
     var days: [Int] = []
 
     private var selectedDateIndex = 0
-    var locations: [LocationTime] = dummyLocationTimeData()
+    var locations: [LocationTime] = []
     var selectedLocations: [IndexPath] = []
     var initialTime: String = "9:00 AM"
     var isDeleteMode: Bool = false
@@ -273,9 +273,11 @@ class AddScheduleViewController: BaseViewController {
     }
     
     func selectLocation(_ location: KakaoSearchPlaces) {
-        guard let selectedDate = setDateFormatter(date: startDate) else { return }
-        let date = selectedDate.formatToMMddDateString()
-        addLocation(date: date, place: location)
+        let dateRange = getDatesInRange(startDate: startDate, endDate: endDate)
+        for date in dateRange {
+            addLocation(date: date.formatToMMddDateString(), place: location)
+        }
+       
         collectionView.reloadData()
     }
     
@@ -288,21 +290,21 @@ class AddScheduleViewController: BaseViewController {
         }
     }
     
-    func getDatesInRange(startDate: SelectedDate, endDate: SelectedDate) -> [String] {
-        guard let startDate = setDateFormatter(date: startDate), let endDate = setDateFormatter(date: endDate) else { return [] }
-        var dates: [String] = []
-        var currentDate = startDate
-        dates.append(currentDate.formatToMMddDateString())
-   
-        while currentDate.formatToMMddDateString() != endDate.formatToMMddDateString() {
-            guard let newDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate) else { return [] }
-            currentDate = newDate
-            dates.append(currentDate.formatToMMddDateString())
-        }
-        
-        return dates
-    }
-    
+//    func getDatesInRange(startDate: SelectedDate, endDate: SelectedDate) -> [String] {
+//        guard let startDate = setDateFormatter(date: startDate), let endDate = setDateFormatter(date: endDate) else { return [] }
+//        var dates: [String] = []
+//        var currentDate = startDate
+//        dates.append(currentDate.formatToMMddDateString())
+//
+//        while currentDate.formatToMMddDateString() != endDate.formatToMMddDateString() {
+//            guard let newDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate) else { return [] }
+//            currentDate = newDate
+//            dates.append(currentDate.formatToMMddDateString())
+//        }
+//
+//        return dates
+//    }
+//
     func presentTimePicker(indexPath: IndexPath) {
         let timePickerViewController = TimePickerViewController()
         let selectedTime = locations[indexPath.section].locationDetail[indexPath.row].time
@@ -400,6 +402,7 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
                 return headerView
             default:
                 let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: DeleteLocationHeaderView.registerId, for: indexPath) as! DeleteLocationHeaderView
+                configureDeleteLocationHeaderView(headerView)
                 return headerView
             }
         } else if kind == UICollectionView.elementKindSectionFooter {
@@ -461,6 +464,7 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
     
     func configureDeleteLocationHeaderView(_ headerView: DeleteLocationHeaderView) {
         headerView.onDeleteMode = {
+            print("dfaadfsafdadfshkuadfshukadfshiu")
             self.isDeleteMode.toggle()
             self.collectionView.reloadData()
         }
@@ -647,5 +651,23 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
         let calendar = Calendar.current
         let dateComponents = calendar.dateComponents([.day], from: start, to: end)
         return dateComponents.day
+    }
+    
+    func getDatesInRange(startDate: SelectedDate, endDate: SelectedDate) -> [Date] {
+        let calendar = Calendar.current
+
+        let start = calendar.date(from: DateComponents(year: startDate.year, month: startDate.month, day: startDate.day))!
+        let end = calendar.date(from: DateComponents(year: endDate.year, month: endDate.month, day: endDate.day))!
+
+        var dates: [Date] = []
+
+        var currentDate = start
+
+        while currentDate <= end {
+            dates.append(currentDate)
+            currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
+        }
+
+        return dates
     }
 }
