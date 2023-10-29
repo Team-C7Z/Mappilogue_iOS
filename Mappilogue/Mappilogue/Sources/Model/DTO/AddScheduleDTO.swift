@@ -27,3 +27,7 @@ struct AddSchduleLocation {
     var latitude: String
     var longitude: String
 }
+
+struct AddSchduleResponse: Codable {
+    var newScheduleId: Int
+}

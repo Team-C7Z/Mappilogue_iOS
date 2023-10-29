@@ -19,7 +19,7 @@ extension ScheduleAPI: TargetType {
         case .getColorList:
             return "/api/v1/schedules/colors"
         case .addSchedule:
-            return "/api/v1/schedules/"
+            return "/api/v1/schedules"
         }
     }
     
@@ -46,11 +46,11 @@ extension ScheduleAPI: TargetType {
             if let title = schedule.title {
                 requestParameters["title"] = title
             }
-            
+
             if let alarmOptions = schedule.alarmOptions {
                 requestParameters["alarmOptions"] = alarmOptions
             }
-            
+
             if let area = schedule.area {
                 requestParameters["area"] = area.map { areaList in
                     return [
@@ -63,11 +63,11 @@ extension ScheduleAPI: TargetType {
                                 "longitude": location.longitude
                             ]
                         }
-                    ]
+                    ] as [String : Any]
                 }
             }
-            
-            return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
+
+            return .requestParameters(parameters: requestParameters, encoding: JSONEncoding.default)
         }
     }
     
