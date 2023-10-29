@@ -95,18 +95,11 @@ class AddScheduleHeaderView: BaseCollectionReusableView {
     }
  
     private func configureScheduleTitleColorView() {
-        if colorId >= 0 {
-            if let index = colorList.firstIndex(where: {$0.id == colorId}) {
-                let colorCode = colorList[index].code
-                let color = UIColor.fromHex(colorCode)
-                scheduleTitleColorView.configure(true, title: title, colorId: colorId, color: color, isColorSelection: isColorSelection)
-            }
-        } else {
-            guard let randomColorId = colorList.map({$0.id}).randomElement() else { return }
-            colorId = randomColorId
+        if let index = colorList.firstIndex(where: {$0.id == colorId}) {
+            let colorCode = colorList[index].code
+            let color = UIColor.fromHex(colorCode)
+            scheduleTitleColorView.configure(true, title: title, colorId: colorId, color: color, isColorSelection: isColorSelection)
         }
-        
-        colorSelectionView.configure(colorId, colorList: colorList)
     }
     
     func configureDate(startDate: SelectedDate, endDate: SelectedDate, dateType: AddScheduleDateType) {
@@ -160,12 +153,18 @@ extension AddScheduleHeaderView {
                 self.layoutIfNeeded()
             }
             
+            if colorId == -1 {
+                guard let randomColorId = colorList.map({$0.id}).randomElement() else { return }
+                colorId = randomColorId
+            }
+          
             if let index = colorList.firstIndex(where: {$0.id == self.colorId}) {
                 let colorCode = colorList[index].code
                 let color = UIColor.fromHex(colorCode)
                 scheduleTitleColorView.configure(true, title: title, colorId: colorId, color: color, isColorSelection: isColorSelection)
             }
-
+            
+            colorSelectionView.configure(colorId, colorList: colorList)
             onColorSelectionButtonTapped?()
         }
     }
