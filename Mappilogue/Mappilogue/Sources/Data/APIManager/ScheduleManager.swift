@@ -33,7 +33,7 @@ class ScheduleManager {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<String>.self)
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<AddSchduleResponse>.self)
                 completion(networkResult)
             case .failure(let error):
                 print(error)

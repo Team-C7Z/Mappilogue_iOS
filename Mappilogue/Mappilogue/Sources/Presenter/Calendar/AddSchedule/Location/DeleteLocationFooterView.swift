@@ -7,8 +7,8 @@
 
 import UIKit
 
-class DeleteLocationFooterView: BaseCollectionReusableView {
-    static let registerId = "\(DeleteLocationFooterView.self)"
+class DeleteLocationHeaderView: BaseCollectionReusableView {
+    static let registerId = "\(DeleteLocationHeaderView.self)"
     
     var onDeleteMode: (() -> Void)?
     var onDeleteLocation: (() -> Void)?

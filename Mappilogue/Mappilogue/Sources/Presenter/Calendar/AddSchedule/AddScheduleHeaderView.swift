@@ -160,7 +160,6 @@ extension AddScheduleHeaderView {
                 self.layoutIfNeeded()
             }
             
-            print(colorId, 4)
             if let index = colorList.firstIndex(where: {$0.id == self.colorId}) {
                 let colorCode = colorList[index].code
                 let color = UIColor.fromHex(colorCode)
