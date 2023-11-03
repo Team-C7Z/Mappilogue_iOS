@@ -22,7 +22,7 @@ class WeekCell: BaseCollectionViewCell {
     var nextMonthScheduleList: [[ScheduleTitle?]] = Array(repeating: Array(repeating: nil, count: 10), count: 32)
     private var monthlyCalendar = MonthlyCalendar()
     private var dummySchedule = dummyScheduleData()
-    private var dummySchedule2222 = dummyScheduleData11()
+    private var dummySchedule2222 = dummyScheduleData12()
     
     private var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0)
     private var weekIndex: Int = 0

@@ -11,7 +11,7 @@ import KakaoSDKUser
 import KakaoSDKCommon
 
 class LoginViewController: BaseViewController {
-    private var isAlarmAccept: NotificationStatus = .inactive
+    private var isAlarmAccept: ActiveStatus = .inactive
     
     private let logoImage = UIImageView()
     private let titleLabel = UILabel()

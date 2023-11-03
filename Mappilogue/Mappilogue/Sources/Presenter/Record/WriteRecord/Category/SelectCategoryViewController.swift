@@ -8,7 +8,7 @@
 import UIKit
 
 class SelectCategoryViewController: BaseViewController {
-    var dummyCategory: [CategoryData] = []
+    var categories: [Category] = []
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -28,6 +28,7 @@ class SelectCategoryViewController: BaseViewController {
         super.viewDidLoad()
         
         hideKeyboardWhenTappedAround()
+        getCategory()
     }
     
     override func setupProperty() {
@@ -49,6 +50,32 @@ class SelectCategoryViewController: BaseViewController {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
+    
+    private func addCategory(_ category: String) {
+        CategoryManager.shared.addCategory(title: category) { result in
+            switch result {
+            case .success(let response):
+                guard let baseResponse = response as? BaseDTO<AddCategoryDTO>, let result = baseResponse.result else { return }
+                self.categories[self.categories.count-1].title = result.title
+                self.collectionView.reloadData()
+            default:
+                break
+            }
+        }
+    }
+    
+    private func getCategory() {
+        CategoryManager.shared.getCategory { result in
+            switch result {
+            case .success(let response):
+                guard let baseResponse = response as? BaseDTO<GetCategoryDTO>, let result = baseResponse.result else { return }
+                self.categories = result.categories
+                self.collectionView.reloadData()
+            default:
+                break
+            }
+        }
+    }
 }
 
 extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -57,7 +84,7 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 ? dummyCategory.count : 1
+        return section == 0 ? categories.count : 1
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -65,7 +92,7 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
         case 0:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewCategoryCell.registerId, for: indexPath) as? NewCategoryCell else { return UICollectionViewCell() }
             
-            let cateogry = dummyCategory[indexPath.row]
+            let cateogry = categories[indexPath.row]
             cell.configure(with: cateogry)
             
             return cell
@@ -97,18 +124,18 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 1 {
-            self.dummyCategory.append(CategoryData(title: "새로운 카테고리", count: 0))
+            let status = ActiveStatus.inactive.rawValue
+            self.categories.append(Category(title: "새로운 카테고리", isMarkInMap: status, markCount: 0))
             collectionView.reloadData()
             
             let inputAlertViewController = InputAlertViewController()
             inputAlertViewController.modalPresentationStyle = .overCurrentContext
             inputAlertViewController.onCancelTapped = {
-                self.dummyCategory.removeLast()
+                self.categories.removeLast()
                 collectionView.reloadData()
             }
             inputAlertViewController.onCompletionTapped = { inputText in
-                self.dummyCategory[self.dummyCategory.count-1].title = inputText
-                collectionView.reloadData()
+                self.addCategory(inputText)
             }
             present(inputAlertViewController, animated: false)
         }

@@ -63,7 +63,7 @@ extension ScheduleAPI: TargetType {
                                 "longitude": location.longitude
                             ]
                         }
-                    ] as [String : Any]
+                    ] as [String: Any]
                 }
             }
 
