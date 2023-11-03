@@ -13,6 +13,7 @@ struct GetCategoryDTO: Codable {
 }
 
 struct Category: Codable {
+    var id: Int
     var title: String
     let isMarkInMap: String
     let markCount: Int

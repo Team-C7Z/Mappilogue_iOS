@@ -40,10 +40,24 @@ class CategoryManager {
         }
     }
     
+    func updateCategory(id: Int, title: String, completion: @escaping (NetworkResult<Any>) -> Void) {
+        provider.request(.updateCategory(id: id, title: title)) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<String>.self)
+                completion(networkResult)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     private func judgeStatus<T: Codable>(_ statusCode: Int, _ data: Data, _ dataModel: T.Type) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
         switch statusCode {
-        case 200...201:
+        case 200...204:
             guard let decodedData = try? decoder.decode(dataModel.self, from: data) else { return .pathError }
             return .success(decodedData)
         case 400:

@@ -26,10 +26,15 @@ class MyRecordViewController: BaseViewController {
         return tableView
     }()
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        getCategory()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        getCategory()
     }
     
     override func setupProperty() {
@@ -99,7 +104,7 @@ extension MyRecordViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.selectionStyle = .none
         
-        let totalCategory = Category(title: "전체", isMarkInMap: "", markCount: totalCategoryCount)
+        let totalCategory = Category(id: 0, title: "전체", isMarkInMap: "", markCount: totalCategoryCount)
         let category = indexPath.row == 0 ? totalCategory : categories[indexPath.row - 1]
         let isLast = indexPath.row == categories.count
         cell.configure(with: category, isLast: isLast)
@@ -133,6 +138,7 @@ extension MyRecordViewController: UITableViewDelegate, UITableViewDataSource {
     
     func didSelectMyRecordCategoryCell(_ indexPath: IndexPath) {
         let myCategoryViewController = MyCategoryViewController()
+        myCategoryViewController.categoryId = indexPath.row == 0 ? 0 : categories[indexPath.row-1].id
         myCategoryViewController.categoryName = indexPath.row == 0 ? "전체" : categories[indexPath.row-1].title
         myCategoryViewController.onModifyCategory = { categoryName in
             self.categories[indexPath.row-1].title = categoryName

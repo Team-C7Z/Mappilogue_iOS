@@ -11,6 +11,7 @@ import Moya
 enum CategoryAPI: BaseAPI {
     case addCategory(title: String)
     case getCategory
+    case updateCategory(id: Int, title: String)
 }
 
 extension CategoryAPI: TargetType {
@@ -20,6 +21,8 @@ extension CategoryAPI: TargetType {
             return "/api/v1/marks/categories"
         case .getCategory:
             return "/api/v1/marks/categories"
+        case .updateCategory:
+            return "/api/v1/marks/categories/titles"
         }
     }
     
@@ -29,6 +32,8 @@ extension CategoryAPI: TargetType {
             return .post
         case .getCategory:
             return .get
+        case .updateCategory:
+            return .patch
         }
     }
     
@@ -40,6 +45,14 @@ extension CategoryAPI: TargetType {
             ]
             
             return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
+            
+        case let .updateCategory(id, title):
+            let requestParameters: [String: Any] = [
+                "categoryId": id,
+                "title": title
+            ]
+            
+            return .requestParameters(parameters: requestParameters, encoding: JSONEncoding.default)
             
         default:
             return .requestPlain
