@@ -76,7 +76,6 @@
 		92011C202A769C12009B047F /* SortHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C1F2A769C12009B047F /* SortHeaderView.swift */; };
 		92011C222A77907F009B047F /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C212A77907F009B047F /* CategoryCell.swift */; };
 		92011C242A77A329009B047F /* AddCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C232A77A329009B047F /* AddCategoryCell.swift */; };
-		92011C262A77A48B009B047F /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C252A77A48B009B047F /* Category.swift */; };
 		92011C642A788FBF009B047F /* MarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C632A788FBF009B047F /* MarkerView.swift */; };
 		92011C662A78980E009B047F /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C652A78980E009B047F /* UIView.swift */; };
 		92011C682A78CB24009B047F /* InputAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C672A78CB24009B047F /* InputAlertViewController.swift */; };
@@ -341,7 +340,6 @@
 		92011C1F2A769C12009B047F /* SortHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortHeaderView.swift; sourceTree = "<group>"; };
 		92011C212A77907F009B047F /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		92011C232A77A329009B047F /* AddCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryCell.swift; sourceTree = "<group>"; };
-		92011C252A77A48B009B047F /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		92011C632A788FBF009B047F /* MarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerView.swift; sourceTree = "<group>"; };
 		92011C652A78980E009B047F /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		92011C672A78CB24009B047F /* InputAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAlertViewController.swift; sourceTree = "<group>"; };
@@ -1233,7 +1231,6 @@
 				9224FD432A657150000A56A6 /* Location.swift */,
 				927E7F202A66F64400E6A29F /* Schedule.swift */,
 				92011C152A7505F7009B047F /* Record.swift */,
-				92011C252A77A48B009B047F /* Category.swift */,
 				92139D862AB1BB2D005344AE /* Notification.swift */,
 				92139D882AB1BEBD005344AE /* Announcement.swift */,
 				9273C9592ABFDA8500224DE1 /* SelectedDate.swift */,
@@ -1739,7 +1736,6 @@
 				929E23172AB7F6C4003180B3 /* Utils.swift in Sources */,
 				92011B7D2A7174B6009B047F /* DateHeaderView.swift in Sources */,
 				9224FD482A6579ED000A56A6 /* LocationTimeCell.swift in Sources */,
-				92011C262A77A48B009B047F /* Category.swift in Sources */,
 				92139D772AAD6DCF005344AE /* UITextView.swift in Sources */,
 				926999482A14F76A003DDAD2 /* MyViewController.swift in Sources */,
 				920031C72A8B5DB700E3170D /* MapSettingsHeaderView.swift in Sources */,

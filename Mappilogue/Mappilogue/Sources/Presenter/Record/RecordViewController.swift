@@ -9,7 +9,7 @@ import UIKit
 import NMapsMap
 
 class RecordViewController: NavigationBarViewController {
-    let dummyCategory = dummyCategoryData()
+    let dummyCategory: [Category] = []
     let dummyRecord: [Record] = dummyRecordData()
     
     let locationManager = CLLocationManager()
