@@ -8,7 +8,7 @@
 import UIKit
 
 class CategorySettingViewController: BaseViewController {
-    var dummyCategory = dummyCategoryData()
+    var dummyCategory: [Category] = []
     var selectedCateogry: [Bool] = []
     
     private lazy var collectionView: UICollectionView = {
@@ -98,7 +98,7 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
             return UICollectionViewCell()
         }
         
-        let totalCategory = CategoryData(title: "전체", count: dummyCategory.map { $0.count }.reduce(0, +))
+        let totalCategory = Category(title: "전체", isMarkInMap: "", markCount: 0)
         let isTotal = indexPath.row == 0
         let category = isTotal ? totalCategory : dummyCategory[indexPath.row - 1]
         cell.configure(with: category, isTotal: isTotal)
@@ -185,7 +185,7 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
     }
     
     func addCategory(_ input: String) {
-        dummyCategory.append(CategoryData(title: input, count: 0))
+        dummyCategory.append(Category(title: input, isMarkInMap: "", markCount: 0))
         selectedCateogry.append(false)
         collectionView.reloadData()
     }

@@ -8,7 +8,8 @@
 import UIKit
 
 class MyRecordViewController: BaseViewController {
-    var dummyCategory = dummyCategoryData()
+    var categories: [Category] = []
+    var totalCategoryCount: Int = 0
     var isNewWrite: Bool = false
     
     private lazy var tableView: UITableView = {
@@ -28,6 +29,7 @@ class MyRecordViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        getCategory()
     }
     
     override func setupProperty() {
@@ -53,6 +55,20 @@ class MyRecordViewController: BaseViewController {
     @objc func popToRootViewController() {
         navigationController?.popToRootViewController(animated: true)
     }
+    
+    private func getCategory() {
+        CategoryManager.shared.getCategory { result in
+            switch result {
+            case .success(let response):
+                guard let baseResponse = response as? BaseDTO<GetCategoryDTO>, let result = baseResponse.result else { return }
+                self.categories = result.categories
+                self.totalCategoryCount = result.totalCategoryMarkCount
+                self.tableView.reloadData()
+            default:
+                break
+            }
+        }
+    }
 }
 
 extension MyRecordViewController: UITableViewDelegate, UITableViewDataSource {
@@ -61,7 +77,7 @@ extension MyRecordViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? dummyCategory.count + 1 : 1
+        return section == 0 ? categories.count + 1 : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -83,9 +99,9 @@ extension MyRecordViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.selectionStyle = .none
         
-        let totalCategory = CategoryData(title: "전체", count: dummyCategory.map { $0.count }.reduce(0, +))
-        let category = indexPath.row == 0 ? totalCategory : dummyCategory[indexPath.row - 1]
-        let isLast = indexPath.row == dummyCategory.count
+        let totalCategory = Category(title: "전체", isMarkInMap: "", markCount: totalCategoryCount)
+        let category = indexPath.row == 0 ? totalCategory : categories[indexPath.row - 1]
+        let isLast = indexPath.row == categories.count
         cell.configure(with: category, isLast: isLast)
         
         return cell
@@ -117,13 +133,13 @@ extension MyRecordViewController: UITableViewDelegate, UITableViewDataSource {
     
     func didSelectMyRecordCategoryCell(_ indexPath: IndexPath) {
         let myCategoryViewController = MyCategoryViewController()
-        myCategoryViewController.categoryName = indexPath.row == 0 ? "전체" : dummyCategory[indexPath.row-1].title
+        myCategoryViewController.categoryName = indexPath.row == 0 ? "전체" : categories[indexPath.row-1].title
         myCategoryViewController.onModifyCategory = { categoryName in
-            self.dummyCategory[indexPath.row-1].title = categoryName
+            self.categories[indexPath.row-1].title = categoryName
             self.tableView.reloadData()
         }
         myCategoryViewController.onDeleteCategory = {
-            self.dummyCategory.remove(at: indexPath.row-1)
+            self.categories.remove(at: indexPath.row-1)
             self.tableView.reloadData()
         }
         navigationController?.pushViewController(myCategoryViewController, animated: true)
