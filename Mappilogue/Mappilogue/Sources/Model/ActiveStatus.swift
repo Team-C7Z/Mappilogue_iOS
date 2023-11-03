@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum NotificationStatus: String, Codable {
+enum ActiveStatus: String, Codable {
     case active = "ACTIVE"
     case inactive = "INACTIVE"
 }
