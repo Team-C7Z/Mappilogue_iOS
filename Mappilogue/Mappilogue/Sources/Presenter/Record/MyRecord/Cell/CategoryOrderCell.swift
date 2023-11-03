@@ -61,9 +61,9 @@ class CategoryOrderCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(with category: CategoryData, isTotal: Bool) {
+    func configure(with category: Category, isTotal: Bool) {
         categoryLabel.text = category.title
-        categoryCountLabel.text = "(\(category.count))"
+        categoryCountLabel.text = "(\(category.markCount))"
         editImage.image = isTotal ? nil : UIImage(named: "editCategory")
     }
 }
