@@ -125,7 +125,7 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 1 {
             let status = ActiveStatus.inactive.rawValue
-            self.categories.append(Category(title: "새로운 카테고리", isMarkInMap: status, markCount: 0))
+            self.categories.append(Category(id: 0, title: "새로운 카테고리", isMarkInMap: status, markCount: 0))
             collectionView.reloadData()
             
             let inputAlertViewController = InputAlertViewController()
