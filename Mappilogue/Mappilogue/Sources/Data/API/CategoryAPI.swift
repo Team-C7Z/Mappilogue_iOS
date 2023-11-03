@@ -12,6 +12,7 @@ enum CategoryAPI: BaseAPI {
     case addCategory(title: String)
     case getCategory
     case updateCategory(id: Int, title: String)
+    case deleteCategory(id: Int)
 }
 
 extension CategoryAPI: TargetType {
@@ -23,6 +24,8 @@ extension CategoryAPI: TargetType {
             return "/api/v1/marks/categories"
         case .updateCategory:
             return "/api/v1/marks/categories/titles"
+        case .deleteCategory(let id):
+            return "/api/v1/marks/categories/\(id)"
         }
     }
     
@@ -34,6 +37,8 @@ extension CategoryAPI: TargetType {
             return .get
         case .updateCategory:
             return .patch
+        case .deleteCategory:
+            return .delete
         }
     }
     
@@ -53,7 +58,6 @@ extension CategoryAPI: TargetType {
             ]
             
             return .requestParameters(parameters: requestParameters, encoding: JSONEncoding.default)
-            
         default:
             return .requestPlain
         }
