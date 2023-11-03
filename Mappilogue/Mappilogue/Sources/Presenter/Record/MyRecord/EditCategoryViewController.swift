@@ -8,8 +8,8 @@
 import UIKit
 
 class EditCategoryViewController: BaseViewController {
+    var categoryId: Int = 0
     var categoryName: String = ""
-    var onModifyCategory: ((String) -> Void)?
     var onDeleteCategory: (() -> Void)?
     
     private let modalView = UIView()
@@ -128,7 +128,7 @@ class EditCategoryViewController: BaseViewController {
         }
         inputAlertViewController.onCompletionTapped = { inputText in
             self.dismiss(animated: false) {
-                self.onModifyCategory?(inputText)
+                self.updateCategory(id: self.categoryId, inputText)
             }
         }
         present(inputAlertViewController, animated: false)
@@ -150,5 +150,17 @@ class EditCategoryViewController: BaseViewController {
            }
         }
         present(alertViewController, animated: false)
+    }
+    
+    private func updateCategory(id: Int, _ category: String) {
+        CategoryManager.shared.updateCategory(id: id, title: category) { result in
+            switch result {
+            case .success(let response):
+                guard let baseResponse = response as? BaseDTO<String>, let result = baseResponse.result else { return }
+                print(result)
+            default:
+                break
+            }
+        }
     }
 }

@@ -98,7 +98,7 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
             return UICollectionViewCell()
         }
         
-        let totalCategory = Category(title: "전체", isMarkInMap: "", markCount: 0)
+        let totalCategory = Category(id: 0, title: "전체", isMarkInMap: "", markCount: 0)
         let isTotal = indexPath.row == 0
         let category = isTotal ? totalCategory : dummyCategory[indexPath.row - 1]
         cell.configure(with: category, isTotal: isTotal)
@@ -185,7 +185,7 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
     }
     
     func addCategory(_ input: String) {
-        dummyCategory.append(Category(title: input, isMarkInMap: "", markCount: 0))
+        dummyCategory.append(Category(id: 0, title: input, isMarkInMap: "", markCount: 0))
         selectedCateogry.append(false)
         collectionView.reloadData()
     }
