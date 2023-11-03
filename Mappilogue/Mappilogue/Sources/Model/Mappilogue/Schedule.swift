@@ -99,3 +99,13 @@ func dummyScheduleData11() -> [CalendarSchedule2] {
     
     return [schedule1, schedule2, schedule3, schedule4, schedule5, schedule6]
 }
+
+func dummyScheduleData12() -> [CalendarSchedule2] {
+    let schedule2 = CalendarSchedule2(id: 10, title: "부산 여행", color: .colorF0F1B0, startDate: "2023-09-03", endDate: "2023-09-07")
+    let schedule3 = CalendarSchedule2(id: 11, title: "티켓팅", color: .colorE6C3F2, startDate: "2023-09-04", endDate: "2023-09-05")
+    let schedule4 = CalendarSchedule2(id: 12, title: "생일", color: .colorF5DC82, startDate: "2023-09-06", endDate: "2023-09-06")
+    let schedule5 = CalendarSchedule2(id: 13, title: "서류 접수", color: .colorABD9F3, startDate: "2023-09-05", endDate: "2023-09-14")
+    let schedule6 = CalendarSchedule2(id: 14, title: "팝업스토어", color: .colorF0B4D5, startDate: "2023-09-07", endDate: "2023-09-11")
+
+    return [schedule2, schedule3, schedule4, schedule5, schedule6]
+}
