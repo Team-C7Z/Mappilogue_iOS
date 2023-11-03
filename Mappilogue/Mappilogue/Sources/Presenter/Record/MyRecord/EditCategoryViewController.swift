@@ -146,6 +146,7 @@ class EditCategoryViewController: BaseViewController {
         alertViewController.configureAlert(with: alert)
         alertViewController.onDoneTapped = {
             self.dismiss(animated: false) {
+                self.deleteCategory(id: self.categoryId)
                 self.onDeleteCategory?()
            }
         }
@@ -158,6 +159,17 @@ class EditCategoryViewController: BaseViewController {
             case .success(let response):
                 guard let baseResponse = response as? BaseDTO<String>, let result = baseResponse.result else { return }
                 print(result)
+            default:
+                break
+            }
+        }
+    }
+    
+    private func deleteCategory(id: Int) {
+        CategoryManager.shared.deleteCategory(id: id) { result in
+            switch result {
+            case .success:
+                print("success")
             default:
                 break
             }
