@@ -21,9 +21,9 @@ extension AuthAPI: TargetType {
     var path: String {
         switch self {
         case .socialLogin:
-            return "/api/v1/auth/social-login"
+            return "/api/v1/users/social-login"
         case .refreshToken:
-            return "/api/v1/auth/token-refresh"
+            return "/api/v1/users/token-refresh"
         }
     }
     
@@ -39,15 +39,15 @@ extension AuthAPI: TargetType {
                 "socialVendor": socialVendor
             ]
             
-            if let isAlarmValue = isAlarm {
-                requestParameters["isAlarmAccept"] = isAlarmValue
-            }
-            
             if let fcmToken = fcmToken {
                 requestParameters["fcmToken"] = fcmToken
             }
             
-            return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
+            if let isAlarmValue = isAlarm {
+                requestParameters["isAlarmAccept"] = isAlarmValue
+            }
+            
+            return .requestParameters(parameters: requestParameters, encoding: JSONEncoding.default)
             
         case let .refreshToken(token):
             let requestParameters: [String: String] = [

@@ -67,7 +67,7 @@ class MyRecordViewController: BaseViewController {
             switch result {
             case .success(let response):
                 guard let baseResponse = response as? BaseDTO<GetCategoryDTO>, let result = baseResponse.result else { return }
-                self.categories = result.categories
+                self.categories = result.markCategories
                 self.totalCategoryCount = result.totalCategoryMarkCount
                 self.tableView.reloadData()
             default:
@@ -105,7 +105,7 @@ extension MyRecordViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.selectionStyle = .none
         
-        let totalCategory = Category(id: 0, title: "전체", isMarkInMap: "", markCount: totalCategoryCount)
+        let totalCategory = Category(id: 0, title: "전체", isMarkedInMap: "", markCount: totalCategoryCount)
         let category = indexPath.row == 0 ? totalCategory : categories[indexPath.row - 1]
         let isLast = indexPath.row == categories.count
         cell.configure(with: category, isLast: isLast)

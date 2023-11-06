@@ -9,7 +9,6 @@ import UIKit
 
 class CategorySettingViewController: BaseViewController {
     var categories: [Category] = []
-    var selectedCateogry: [Bool] = []
     
     private lazy var collectionView: UICollectionView = {
         let layout = LeftAlignedCollectionViewFlowLayout()
@@ -98,7 +97,7 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
             return UICollectionViewCell()
         }
         
-        let totalCategory = Category(id: 0, title: "전체", isMarkInMap: "", markCount: 0)
+        let totalCategory = Category(id: 0, title: "전체", isMarkedInMap: "", markCount: 0)
         let isTotal = indexPath.row == 0
         let category = isTotal ? totalCategory : categories[indexPath.row - 1]
         cell.configure(with: category, isTotal: isTotal)
@@ -127,7 +126,7 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
         
         if indexPath.row > 0 {
             let categoryTitle = categories[indexPath.row-1].title
-            let mark = categories[indexPath.row-1].isMarkInMap
+            let mark = categories[indexPath.row-1].isMarkedInMap
             if let isSelection = ActiveStatus(rawValue: mark) {
                 cell.configure(categoryTitle, isSelection: isSelection == ActiveStatus.active)
             }
@@ -169,7 +168,9 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
             presentInputAlertViewController()
         } else if indexPath.section == 1 && indexPath.row > 0 {
             if collectionView.cellForItem(at: indexPath) is CategorySelectionCell {
-                selectedCateogry[indexPath.row-1] = !selectedCateogry[indexPath.row-1]
+                let status = categories[indexPath.row-1].isMarkedInMap == ActiveStatus.active.rawValue ? ActiveStatus.inactive.rawValue : ActiveStatus.active.rawValue
+                categories[indexPath.row-1].isMarkedInMap = status
+                updateCategoryOrder(categories: categories)
                 collectionView.reloadData()
             }
         }
@@ -188,12 +189,6 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
         present(inputAlertViewController, animated: false)
     }
     
-//    func addCategory(_ input: String) {
-//        categories.append(Category(id: 0, title: input, isMarkInMap: "", markCount: 0))
-//        selectedCateogry.append(false)
-//        collectionView.reloadData()
-//    }
-//
     private func isIndexPathValid(_ indexPath: IndexPath) -> Bool {
         return indexPath.section == 0 && indexPath.row > 0 && indexPath.row <= categories.count
     }
@@ -203,8 +198,7 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
             switch result {
             case .success(let response):
                 guard let baseResponse = response as? BaseDTO<GetCategoryDTO>, let result = baseResponse.result else { return }
-                self.categories = result.categories
-                self.selectedCateogry = Array(repeating: false, count: result.categories.count + 1)
+                self.categories = result.markCategories
                 self.collectionView.reloadData()
             default:
                 break
@@ -223,6 +217,18 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
             }
         }
     }
+    
+    func updateCategoryOrder(categories: [Category]) {
+        CategoryManager.shared.updateCategoryOrder(categories: categories) { result in
+            switch result {
+            case .success:
+                self.collectionView.reloadData()
+            default:
+                break
+            }
+        }
+    }
+    
 }
 
 extension CategorySettingViewController: UICollectionViewDragDelegate {
@@ -256,19 +262,17 @@ extension CategorySettingViewController: UICollectionViewDropDelegate {
             coordinator.items.forEach { dropItem in
                 guard let sourceIndexPath = dropItem.sourceIndexPath else { return }
                 let categoryCell = self.categories[sourceIndexPath.row-1]
-                let selectedCell = self.selectedCateogry[sourceIndexPath.row-1]
-                
+
                 collectionView.performBatchUpdates({
                     collectionView.deleteItems(at: [sourceIndexPath])
                     collectionView.insertItems(at: [destinationIndexPath])
                     self.categories.remove(at: sourceIndexPath.row-1)
                     self.categories.insert(categoryCell, at: destinationIndexPath.row-1)
-                    self.selectedCateogry.remove(at: sourceIndexPath.row-1)
-                    self.selectedCateogry.insert(selectedCell, at: destinationIndexPath.row-1)
                 }, completion: { _ in
                     coordinator.drop(dropItem.dragItem, toItemAt: destinationIndexPath)
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0) {
                         collectionView.reloadData()
+                        self.updateCategoryOrder(categories: self.categories)
                     }
                 })
             }
