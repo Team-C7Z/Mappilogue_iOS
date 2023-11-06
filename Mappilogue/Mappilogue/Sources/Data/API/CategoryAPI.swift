@@ -13,6 +13,7 @@ enum CategoryAPI: BaseAPI {
     case getCategory
     case updateCategory(id: Int, title: String)
     case deleteCategory(id: Int)
+    case updateCategoryOrder(categories: [Category])
 }
 
 extension CategoryAPI: TargetType {
@@ -26,6 +27,8 @@ extension CategoryAPI: TargetType {
             return "/api/v1/marks/categories/titles"
         case .deleteCategory(let id):
             return "/api/v1/marks/categories/\(id)"
+        case .updateCategoryOrder:
+            return "/api/v1/marks/categories"
         }
     }
     
@@ -39,6 +42,8 @@ extension CategoryAPI: TargetType {
             return .patch
         case .deleteCategory:
             return .delete
+        case .updateCategoryOrder:
+            return .put
         }
     }
     
@@ -58,6 +63,18 @@ extension CategoryAPI: TargetType {
             ]
             
             return .requestParameters(parameters: requestParameters, encoding: JSONEncoding.default)
+            
+        case let .updateCategoryOrder(categories):
+            var requestParameters: [String: Any] = [:]
+            requestParameters["categories"] = categories.map { category in
+                return [
+                    "id": category.id,
+                    "isMarkedInMap": category.isMarkedInMap
+                ] as [String: Any]
+            }
+             
+            return .requestParameters(parameters: requestParameters, encoding: JSONEncoding.default)
+            
         default:
             return .requestPlain
         }

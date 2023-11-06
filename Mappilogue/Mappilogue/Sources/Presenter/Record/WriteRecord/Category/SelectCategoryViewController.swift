@@ -69,7 +69,7 @@ class SelectCategoryViewController: BaseViewController {
             switch result {
             case .success(let response):
                 guard let baseResponse = response as? BaseDTO<GetCategoryDTO>, let result = baseResponse.result else { return }
-                self.categories = result.categories
+                self.categories = result.markCategories
                 self.collectionView.reloadData()
             default:
                 break
@@ -124,8 +124,8 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 1 {
-            let status = ActiveStatus.inactive.rawValue
-            self.categories.append(Category(id: 0, title: "새로운 카테고리", isMarkInMap: status, markCount: 0))
+            let status = ActiveStatus.active.rawValue
+            self.categories.append(Category(id: 0, title: "새로운 카테고리", isMarkedInMap: status, markCount: 0))
             collectionView.reloadData()
             
             let inputAlertViewController = InputAlertViewController()

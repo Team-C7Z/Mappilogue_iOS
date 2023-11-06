@@ -9,12 +9,12 @@ import Foundation
 
 struct GetCategoryDTO: Codable {
     let totalCategoryMarkCount: Int
-    let categories: [Category]
+    let markCategories: [Category]
 }
 
 struct Category: Codable {
     var id: Int
     var title: String
-    let isMarkInMap: String
+    var isMarkedInMap: String
     let markCount: Int
 }
