@@ -15,6 +15,11 @@ struct GetCategoryDTO: Codable {
 struct Category: Codable {
     var id: Int
     var title: String
-    var isMarkedInMap: String
+    var isMarkedInMap: MarkedInMapStatus
     let markCount: Int
+}
+
+enum MarkedInMapStatus: String, Codable {
+    case active = "ACTIVE"
+    case inactive = "INACTIVE"
 }
