@@ -8,6 +8,7 @@
 import UIKit
 
 class MyRecordViewController: BaseViewController {
+    private var categoryViewModel = CategoryViewModel()
     var categories: [Category] = []
     var totalCategoryCount: Int = 0
     var isNewWrite: Bool = false
@@ -29,8 +30,7 @@ class MyRecordViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        print("ㅎㅇ")
-        getCategory()
+        loadCategoryData()
     }
     
     override func viewDidLoad() {
@@ -60,20 +60,6 @@ class MyRecordViewController: BaseViewController {
     
     @objc func popToRootViewController() {
         navigationController?.popToRootViewController(animated: true)
-    }
-    
-    private func getCategory() {
-        CategoryManager.shared.getCategory { result in
-            switch result {
-            case .success(let response):
-                guard let baseResponse = response as? BaseDTO<GetCategoryDTO>, let result = baseResponse.result else { return }
-                self.categories = result.markCategories
-                self.totalCategoryCount = result.totalCategoryMarkCount
-                self.tableView.reloadData()
-            default:
-                break
-            }
-        }
     }
 }
 
@@ -105,7 +91,7 @@ extension MyRecordViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.selectionStyle = .none
         
-        let totalCategory = Category(id: 0, title: "전체", isMarkedInMap: "", markCount: totalCategoryCount)
+        let totalCategory = Category(id: 0, title: "전체", isMarkedInMap: .inactive, markCount: totalCategoryCount)
         let category = indexPath.row == 0 ? totalCategory : categories[indexPath.row - 1]
         let isLast = indexPath.row == categories.count
         cell.configure(with: category, isLast: isLast)
@@ -155,5 +141,26 @@ extension MyRecordViewController: UITableViewDelegate, UITableViewDataSource {
     func didSelectCategorySettingCell() {
         let categorySettingViewController = CategorySettingViewController()
         navigationController?.pushViewController(categorySettingViewController, animated: true)
+    }
+}
+
+extension MyRecordViewController {
+    private func loadCategoryData() {
+        categoryViewModel.getCategory()
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error: \(error.localizedDescription)")
+                }
+            } receiveValue: { response in
+                guard let result = response.result else { return }
+                
+                self.categories = result.markCategories
+                self.totalCategoryCount = result.totalCategoryMarkCount
+                self.tableView.reloadData()
+            }
+            .store(in: &categoryViewModel.cancellables)
     }
 }

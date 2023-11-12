@@ -8,6 +8,7 @@
 import UIKit
 
 class SelectCategoryViewController: BaseViewController {
+    private var categoryViewModel = CategoryViewModel()
     var categories: [Category] = []
     
     private lazy var collectionView: UICollectionView = {
@@ -28,7 +29,7 @@ class SelectCategoryViewController: BaseViewController {
         super.viewDidLoad()
         
         hideKeyboardWhenTappedAround()
-        getCategory()
+        loadCategoryData()
     }
     
     override func setupProperty() {
@@ -57,19 +58,6 @@ class SelectCategoryViewController: BaseViewController {
             case .success(let response):
                 guard let baseResponse = response as? BaseDTO<AddCategoryDTO>, let result = baseResponse.result else { return }
                 self.categories[self.categories.count-1].title = result.title
-                self.collectionView.reloadData()
-            default:
-                break
-            }
-        }
-    }
-    
-    private func getCategory() {
-        CategoryManager.shared.getCategory { result in
-            switch result {
-            case .success(let response):
-                guard let baseResponse = response as? BaseDTO<GetCategoryDTO>, let result = baseResponse.result else { return }
-                self.categories = result.markCategories
                 self.collectionView.reloadData()
             default:
                 break
@@ -125,7 +113,7 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 1 {
             let status = ActiveStatus.active.rawValue
-            self.categories.append(Category(id: 0, title: "새로운 카테고리", isMarkedInMap: status, markCount: 0))
+            self.categories.append(Category(id: 0, title: "새로운 카테고리", isMarkedInMap: .inactive, markCount: 0))
             collectionView.reloadData()
             
             let inputAlertViewController = InputAlertViewController()
@@ -139,5 +127,25 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
             }
             present(inputAlertViewController, animated: false)
         }
+    }
+}
+
+extension SelectCategoryViewController {
+    private func loadCategoryData() {
+        categoryViewModel.getCategory()
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error: \(error.localizedDescription)")
+                }
+            } receiveValue: { response in
+                guard let result = response.result else { return }
+                
+                self.categories = result.markCategories
+                self.collectionView.reloadData()
+            }
+            .store(in: &categoryViewModel.cancellables)
     }
 }

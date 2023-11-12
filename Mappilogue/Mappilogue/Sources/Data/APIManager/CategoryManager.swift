@@ -7,6 +7,7 @@
 
 import Foundation
 import Moya
+import Combine
 
 class CategoryManager {
     static let shared = CategoryManager()
@@ -19,20 +20,6 @@ class CategoryManager {
                 let statusCode = response.statusCode
                 let data = response.data
                 let networkResult = self.judgeStatus(statusCode, data, BaseDTO<AddCategoryDTO>.self)
-                completion(networkResult)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
-    func getCategory(completion: @escaping (NetworkResult<Any>) -> Void) {
-        provider.request(.getCategory) { result in
-            switch result {
-            case .success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<GetCategoryDTO>.self)
                 completion(networkResult)
             case .failure(let error):
                 print(error)
@@ -97,4 +84,39 @@ class CategoryManager {
             return .networkFail
         }
     }
+}
+
+class CategoryManager2: CategoryAPI2 {
+    private let baseURL = URL(string: "\(Environment.baseURL)/api/v1/marks/categories")!
+    
+    func getCategory() -> AnyPublisher<BaseDTO<GetCategoryDTO>, Error> {
+        let url = baseURL
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        if let headers = setupRequestHeaders() {
+            for (key, value) in headers {
+                request.addValue(value, forHTTPHeaderField: key)
+            }
+        }
+        
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .tryMap { data, response in
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                    throw URLError(.badServerResponse)
+                }
+                return data
+            }
+            .decode(type: BaseDTO<GetCategoryDTO>.self, decoder: JSONDecoder())
+
+            .eraseToAnyPublisher()
+    }
+    
+    private func setupRequestHeaders() -> [String: String]? {
+        guard let token = AuthUserDefaults.accessToken else {
+            return nil
+        }
+        return ["Authorization": "Bearer \(token)"]
+    }
+    
 }
