@@ -6,11 +6,19 @@
 //
 
 import Foundation
+import Combine
 import Moya
+
+protocol CategoryAPI2 {
+  //  func addCategory(title: String) -> AnyPublisher<Category, Error>
+    func getCategory() -> AnyPublisher<BaseDTO<GetCategoryDTO>, Error>
+//    func updateCategory(id: Int, title: String) -> AnyPublisher<Category, Error>
+//    func deleteCategory(id: Int) -> AnyPublisher<Void, Error>
+//    func updateCategoryOrder(categories: [Category]) -> AnyPublisher<[Category], Error>
+}
 
 enum CategoryAPI: BaseAPI {
     case addCategory(title: String)
-    case getCategory
     case updateCategory(id: Int, title: String)
     case deleteCategory(id: Int)
     case updateCategoryOrder(categories: [Category])
@@ -20,8 +28,6 @@ extension CategoryAPI: TargetType {
     var path: String {
         switch self {
         case .addCategory:
-            return "/api/v1/marks/categories"
-        case .getCategory:
             return "/api/v1/marks/categories"
         case .updateCategory:
             return "/api/v1/marks/categories/titles"
@@ -36,8 +42,6 @@ extension CategoryAPI: TargetType {
         switch self {
         case .addCategory:
             return .post
-        case .getCategory:
-            return .get
         case .updateCategory:
             return .patch
         case .deleteCategory:

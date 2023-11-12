@@ -8,6 +8,7 @@
 import UIKit
 
 class CategorySettingViewController: BaseViewController {
+    private var categoryViewModel = CategoryViewModel()
     var categories: [Category] = []
     
     private lazy var collectionView: UICollectionView = {
@@ -32,7 +33,7 @@ class CategorySettingViewController: BaseViewController {
      override func viewDidLoad() {
          super.viewDidLoad()
          
-         getCategory()
+         loadCategoryData()
      }
      
      override func setupProperty() {
@@ -97,7 +98,7 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
             return UICollectionViewCell()
         }
         
-        let totalCategory = Category(id: 0, title: "전체", isMarkedInMap: "", markCount: 0)
+        let totalCategory = Category(id: 0, title: "전체", isMarkedInMap: .inactive, markCount: 0)
         let isTotal = indexPath.row == 0
         let category = isTotal ? totalCategory : categories[indexPath.row - 1]
         cell.configure(with: category, isTotal: isTotal)
@@ -127,7 +128,7 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
         if indexPath.row > 0 {
             let categoryTitle = categories[indexPath.row-1].title
             let mark = categories[indexPath.row-1].isMarkedInMap
-            if let isSelection = ActiveStatus(rawValue: mark) {
+            if let isSelection = ActiveStatus(rawValue: mark.rawValue) {
                 cell.configure(categoryTitle, isSelection: isSelection == ActiveStatus.active)
             }
         }
@@ -168,7 +169,7 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
             presentInputAlertViewController()
         } else if indexPath.section == 1 && indexPath.row > 0 {
             if collectionView.cellForItem(at: indexPath) is CategorySelectionCell {
-                let status = categories[indexPath.row-1].isMarkedInMap == ActiveStatus.active.rawValue ? ActiveStatus.inactive.rawValue : ActiveStatus.active.rawValue
+                let status = categories[indexPath.row-1].isMarkedInMap
                 categories[indexPath.row-1].isMarkedInMap = status
                 updateCategoryOrder(categories: categories)
                 collectionView.reloadData()
@@ -193,24 +194,11 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
         return indexPath.section == 0 && indexPath.row > 0 && indexPath.row <= categories.count
     }
     
-    private func getCategory() {
-        CategoryManager.shared.getCategory { result in
-            switch result {
-            case .success(let response):
-                guard let baseResponse = response as? BaseDTO<GetCategoryDTO>, let result = baseResponse.result else { return }
-                self.categories = result.markCategories
-                self.collectionView.reloadData()
-            default:
-                break
-            }
-        }
-    }
-    
     private func addCategory(_ category: String) {
         CategoryManager.shared.addCategory(title: category) { result in
             switch result {
             case .success:
-                self.getCategory()
+                self.loadCategoryData()
                 self.collectionView.reloadData()
             default:
                 break
@@ -299,5 +287,25 @@ class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
             }
         }
         return attributes
+    }
+}
+
+extension CategorySettingViewController {
+    private func loadCategoryData() {
+        categoryViewModel.getCategory()
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error: \(error.localizedDescription)")
+                }
+            } receiveValue: { response in
+                guard let result = response.result else { return }
+                
+                self.categories = result.markCategories
+                self.collectionView.reloadData()
+            }
+            .store(in: &categoryViewModel.cancellables)
     }
 }
