@@ -94,10 +94,9 @@ class CategoryManager2: CategoryAPI2 {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
-        if let headers = setupRequestHeaders() {
-            for (key, value) in headers {
-                request.addValue(value, forHTTPHeaderField: key)
-            }
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        if let token = AuthUserDefaults.accessToken {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
         
         return URLSession.shared.dataTaskPublisher(for: request)
@@ -108,7 +107,38 @@ class CategoryManager2: CategoryAPI2 {
                 return data
             }
             .decode(type: BaseDTO<GetCategoryDTO>.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+    }
+    
+    func addCategory(title: String) -> AnyPublisher<BaseDTO<AddCategoryDTO>, Error> {
+        let url = baseURL
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        if let token = AuthUserDefaults.accessToken {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+        
+        let requestParameters: [String: Any] = [
+            "title": title
+        ]
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: requestParameters)
+        } catch {
+            return Fail(error: CategoryAPIError.serializationError(error)).eraseToAnyPublisher()
+        }
 
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .tryMap { data, response in
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 201 else {
+                    throw URLError(.badServerResponse)
+                }
+            
+                return data
+            }
+            .decode(type: BaseDTO<AddCategoryDTO>.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
     
@@ -118,5 +148,10 @@ class CategoryManager2: CategoryAPI2 {
         }
         return ["Authorization": "Bearer \(token)"]
     }
-    
+}
+
+enum CategoryAPIError: Error {
+    case networkError(Error)
+    case serializationError(Error)
+    case decodingError(Error)
 }

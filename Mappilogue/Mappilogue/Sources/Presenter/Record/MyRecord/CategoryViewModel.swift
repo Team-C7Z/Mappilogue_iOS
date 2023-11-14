@@ -17,4 +17,20 @@ class CategoryViewModel {
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
+    
+    func addCategory(title: String) {
+        categoryManager.addCategory(title: title)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure:
+                    print("error")
+                }
+            }, receiveValue: { _ in
+                
+            })
+            .store(in: &cancellables)
+    }
 }

@@ -185,25 +185,13 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
         let inputAlertViewController = InputAlertViewController()
         inputAlertViewController.modalPresentationStyle = .overCurrentContext
         inputAlertViewController.onCompletionTapped = { inputText in
-            self.addCategory(inputText)
+            self.categoryViewModel.addCategory(title: inputText)
         }
         present(inputAlertViewController, animated: false)
     }
     
     private func isIndexPathValid(_ indexPath: IndexPath) -> Bool {
         return indexPath.section == 0 && indexPath.row > 0 && indexPath.row <= categories.count
-    }
-    
-    private func addCategory(_ category: String) {
-        CategoryManager.shared.addCategory(title: category) { result in
-            switch result {
-            case .success:
-                self.loadCategoryData()
-                self.collectionView.reloadData()
-            default:
-                break
-            }
-        }
     }
     
     func updateCategoryOrder(categories: [Category]) {
@@ -302,7 +290,7 @@ extension CategorySettingViewController {
                 }
             } receiveValue: { response in
                 guard let result = response.result else { return }
-                
+
                 self.categories = result.markCategories
                 self.collectionView.reloadData()
             }
