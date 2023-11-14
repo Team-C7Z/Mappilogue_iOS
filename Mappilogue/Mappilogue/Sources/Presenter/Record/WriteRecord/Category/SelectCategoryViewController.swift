@@ -51,19 +51,6 @@ class SelectCategoryViewController: BaseViewController {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
-    
-    private func addCategory(_ category: String) {
-        CategoryManager.shared.addCategory(title: category) { result in
-            switch result {
-            case .success(let response):
-                guard let baseResponse = response as? BaseDTO<AddCategoryDTO>, let result = baseResponse.result else { return }
-                self.categories[self.categories.count-1].title = result.title
-                self.collectionView.reloadData()
-            default:
-                break
-            }
-        }
-    }
 }
 
 extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -123,7 +110,9 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
                 collectionView.reloadData()
             }
             inputAlertViewController.onCompletionTapped = { inputText in
-                self.addCategory(inputText)
+                self.categoryViewModel.addCategory(title: inputText)
+                self.categories[self.categories.count-1].title = inputText
+                self.collectionView.reloadData()
             }
             present(inputAlertViewController, animated: false)
         }
