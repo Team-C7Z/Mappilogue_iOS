@@ -13,7 +13,7 @@ protocol CategoryAPI2 {
     func addCategory(title: String) -> AnyPublisher<BaseDTO<AddCategoryDTO>, Error>
     func getCategory() -> AnyPublisher<BaseDTO<GetCategoryDTO>, Error>
 //    func updateCategory(id: Int, title: String) -> AnyPublisher<Category, Error>
-//    func deleteCategory(id: Int) -> AnyPublisher<Void, Error>
+    func deleteCategory(id: Int) -> AnyPublisher<Void, Error>
 //    func updateCategoryOrder(categories: [Category]) -> AnyPublisher<[Category], Error>
 }
 
