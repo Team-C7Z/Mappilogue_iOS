@@ -8,6 +8,8 @@
 import UIKit
 
 class EditCategoryViewController: BaseViewController {
+    private var categoryViewModel = CategoryViewModel()
+    
     var categoryId: Int = 0
     var categoryName: String = ""
     var editMode: Bool = true
@@ -150,13 +152,15 @@ class EditCategoryViewController: BaseViewController {
             self.editMode = true
         }
         
-        alertViewController.onDoneTapped = {
+        alertViewController.onDoneTapped = { option in
             self.editMode = true
-//            self.dismiss(animated: false) {
-//                self.deleteCategory(id: self.categoryId)
-//                self.onDeleteCategory?()
-           }
- //       }
+            
+            let deleteCategory = DeleteCategory(markCategoryId: self.categoryId, option: option)
+            self.dismiss(animated: false) {
+                self.categoryViewModel.deleteCategory(deleteCategory: deleteCategory)
+                self.onDeleteCategory?()
+            }
+        }
         present(alertViewController, animated: false)
     }
     
@@ -166,17 +170,6 @@ class EditCategoryViewController: BaseViewController {
             case .success(let response):
                 guard let baseResponse = response as? BaseDTO<String>, let result = baseResponse.result else { return }
                 print(result)
-            default:
-                break
-            }
-        }
-    }
-    
-    private func deleteCategory(id: Int) {
-        CategoryManager.shared.deleteCategory(id: id) { result in
-            switch result {
-            case .success:
-                print("success")
             default:
                 break
             }

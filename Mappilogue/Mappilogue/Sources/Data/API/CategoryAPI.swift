@@ -13,26 +13,20 @@ protocol CategoryAPI2 {
     func addCategory(title: String) -> AnyPublisher<BaseDTO<AddCategoryDTO>, Error>
     func getCategory() -> AnyPublisher<BaseDTO<GetCategoryDTO>, Error>
 //    func updateCategory(id: Int, title: String) -> AnyPublisher<Category, Error>
-    func deleteCategory(id: Int) -> AnyPublisher<Void, Error>
+    func deleteCategory(deleteCategory: DeleteCategory) -> AnyPublisher<Void, Error>
 //    func updateCategoryOrder(categories: [Category]) -> AnyPublisher<[Category], Error>
 }
 
 enum CategoryAPI: BaseAPI {
-    case addCategory(title: String)
     case updateCategory(id: Int, title: String)
-    case deleteCategory(id: Int)
     case updateCategoryOrder(categories: [Category])
 }
 
 extension CategoryAPI: TargetType {
     var path: String {
         switch self {
-        case .addCategory:
-            return "/api/v1/marks/categories"
         case .updateCategory:
             return "/api/v1/marks/categories/titles"
-        case .deleteCategory(let id):
-            return "/api/v1/marks/categories/\(id)"
         case .updateCategoryOrder:
             return "/api/v1/marks/categories"
         }
@@ -40,12 +34,8 @@ extension CategoryAPI: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .addCategory:
-            return .post
         case .updateCategory:
             return .patch
-        case .deleteCategory:
-            return .delete
         case .updateCategoryOrder:
             return .put
         }
@@ -53,13 +43,6 @@ extension CategoryAPI: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case let .addCategory(title):
-            let requestParameters: [String: String] = [
-                "title": title
-            ]
-            
-            return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
-            
         case let .updateCategory(id, title):
             let requestParameters: [String: Any] = [
                 "categoryId": id,
