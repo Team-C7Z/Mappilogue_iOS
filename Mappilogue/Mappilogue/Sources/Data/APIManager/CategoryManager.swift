@@ -86,7 +86,7 @@ class CategoryManager {
     }
 }
 
-class CategoryManager2: CategoryAPI2 {
+class CategoryManager2 { // : CategoryAPI2
     private let baseURL = URL(string: "\(Environment.baseURL)/api/v1/marks/categories")!
     
     func getCategory() -> AnyPublisher<BaseDTO<GetCategoryDTO>, Error> {
@@ -141,6 +141,11 @@ class CategoryManager2: CategoryAPI2 {
             .decode(type: BaseDTO<AddCategoryDTO>.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
+//    
+//    func deleteCategory(id: Int) -> AnyPublisher<Void, Error> {
+//        
+//    }
+    
     
     private func setupRequestHeaders() -> [String: String]? {
         guard let token = AuthUserDefaults.accessToken else {
