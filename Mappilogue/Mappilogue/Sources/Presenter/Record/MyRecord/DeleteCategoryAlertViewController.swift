@@ -9,7 +9,7 @@ import UIKit
 
 class DeleteCategoryAlertViewController: BaseViewController {
     var onCancelTapped: (() -> Void)?
-    var onDoneTapped: (() -> Void)?
+    var onDoneTapped: ((String) -> Void)?
     
     private let alertView = UIView()
     private let titleLabel = UILabel()
@@ -132,8 +132,9 @@ class DeleteCategoryAlertViewController: BaseViewController {
     }
     
     @objc private func deleteButtonTapped(_ sender: UIButton) {
+        let option = self.checkButton.isSelected ? "all" : "only"
         dismiss(animated: false) {
-            self.onDoneTapped?()
+            self.onDoneTapped?(option)
         }
     }
 }

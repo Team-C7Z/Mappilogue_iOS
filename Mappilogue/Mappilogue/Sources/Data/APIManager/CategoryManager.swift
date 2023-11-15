@@ -13,36 +13,8 @@ class CategoryManager {
     static let shared = CategoryManager()
     private let provider = MoyaProvider<CategoryAPI>(session: Session(interceptor: Interceptor()), plugins: [NetworkLoggerPlugin()])
     
-    func addCategory(title: String, completion: @escaping (NetworkResult<Any>) -> Void) {
-        provider.request(.addCategory(title: title)) { result in
-            switch result {
-            case .success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<AddCategoryDTO>.self)
-                completion(networkResult)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
     func updateCategory(id: Int, title: String, completion: @escaping (NetworkResult<Any>) -> Void) {
         provider.request(.updateCategory(id: id, title: title)) { result in
-            switch result {
-            case .success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<String>.self)
-                completion(networkResult)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
-    func deleteCategory(id: Int, completion: @escaping (NetworkResult<Any>) -> Void) {
-        provider.request(.deleteCategory(id: id)) { result in
             switch result {
             case .success(let response):
                 let statusCode = response.statusCode
@@ -86,7 +58,7 @@ class CategoryManager {
     }
 }
 
-class CategoryManager2 { // : CategoryAPI2
+class CategoryManager2: CategoryAPI2 {
     private let baseURL = URL(string: "\(Environment.baseURL)/api/v1/marks/categories")!
     
     func getCategory() -> AnyPublisher<BaseDTO<GetCategoryDTO>, Error> {
@@ -141,11 +113,27 @@ class CategoryManager2 { // : CategoryAPI2
             .decode(type: BaseDTO<AddCategoryDTO>.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
-//    
-//    func deleteCategory(id: Int) -> AnyPublisher<Void, Error> {
-//        
-//    }
-    
+
+    func deleteCategory(deleteCategory: DeleteCategory) -> AnyPublisher<Void, Error> {
+        let url = URL(string: "\(Environment.baseURL)/api/v1/marks/categories/\(deleteCategory.markCategoryId)?option=\(deleteCategory.option)")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        if let token = AuthUserDefaults.accessToken {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .tryMap { _, response in
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 204 else {
+                    throw URLError(.badServerResponse)
+                }
+            
+                return
+            }
+            .eraseToAnyPublisher()
+    }
     
     private func setupRequestHeaders() -> [String: String]? {
         guard let token = AuthUserDefaults.accessToken else {
