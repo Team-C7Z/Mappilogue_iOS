@@ -12,21 +12,18 @@ import Moya
 protocol CategoryAPI2 {
     func addCategory(title: String) -> AnyPublisher<BaseDTO<AddCategoryDTO>, Error>
     func getCategory() -> AnyPublisher<BaseDTO<GetCategoryDTO>, Error>
-//    func updateCategory(id: Int, title: String) -> AnyPublisher<Category, Error>
+    func updateCategory(updateCategory: UpdateCategory) -> AnyPublisher<Void, Error>
     func deleteCategory(deleteCategory: DeleteCategory) -> AnyPublisher<Void, Error>
 //    func updateCategoryOrder(categories: [Category]) -> AnyPublisher<[Category], Error>
 }
 
 enum CategoryAPI: BaseAPI {
-    case updateCategory(id: Int, title: String)
     case updateCategoryOrder(categories: [Category])
 }
 
 extension CategoryAPI: TargetType {
     var path: String {
         switch self {
-        case .updateCategory:
-            return "/api/v1/marks/categories/titles"
         case .updateCategoryOrder:
             return "/api/v1/marks/categories"
         }
@@ -34,8 +31,6 @@ extension CategoryAPI: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .updateCategory:
-            return .patch
         case .updateCategoryOrder:
             return .put
         }
@@ -43,14 +38,6 @@ extension CategoryAPI: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case let .updateCategory(id, title):
-            let requestParameters: [String: Any] = [
-                "categoryId": id,
-                "title": title
-            ]
-            
-            return .requestParameters(parameters: requestParameters, encoding: JSONEncoding.default)
-            
         case let .updateCategoryOrder(categories):
             var requestParameters: [String: Any] = [:]
             requestParameters["categories"] = categories.map { category in
@@ -59,11 +46,8 @@ extension CategoryAPI: TargetType {
                     "isMarkedInMap": category.isMarkedInMap
                 ] as [String: Any]
             }
-             
-            return .requestParameters(parameters: requestParameters, encoding: JSONEncoding.default)
             
-        default:
-            return .requestPlain
+            return .requestParameters(parameters: requestParameters, encoding: JSONEncoding.default)
         }
     }
     

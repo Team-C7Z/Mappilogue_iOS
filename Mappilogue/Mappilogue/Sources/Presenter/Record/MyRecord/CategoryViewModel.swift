@@ -34,6 +34,22 @@ class CategoryViewModel {
             .store(in: &cancellables)
     }
     
+    func updateCategory(updateCategory: UpdateCategory) {
+        categoryManager.updateCategory(updateCategory: updateCategory)
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure:
+                    print("error")
+                }
+            } receiveValue: { _ in
+    
+            }
+            .store(in: &cancellables)
+    }
+    
     func deleteCategory(deleteCategory: DeleteCategory) {
         categoryManager.deleteCategory(deleteCategory: deleteCategory)
             .receive(on: DispatchQueue.main)
@@ -41,13 +57,11 @@ class CategoryViewModel {
                 switch completion {
                 case .finished:
                     break
-                case .failure(let error):
-                    print("Error deleting category: \(error)")
-                    // 에러 처리
+                case .failure:
+                    print("error")
                 }
-            } receiveValue: {
-                // 성공적으로 삭제된 경우 추가 작업 수행
-                print("Category deleted successfully")
+            } receiveValue: { _ in
+    
             }
             .store(in: &cancellables)
     }
