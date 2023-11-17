@@ -28,25 +28,21 @@ class CategoryViewModel {
                 case .failure:
                     print("error")
                 }
-            }, receiveValue: { _ in
-                
-            })
+            }, receiveValue: { _ in })
             .store(in: &cancellables)
     }
     
-    func updateCategory(updateCategory: UpdateCategory) {
+    func updateCategory(updateCategory: UpdatedCategory) {
         categoryManager.updateCategory(updateCategory: updateCategory)
             .receive(on: DispatchQueue.main)
-            .sink { completion in
+            .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
                     break
                 case .failure:
                     print("error")
                 }
-            } receiveValue: { _ in
-    
-            }
+            }, receiveValue: { _ in })
             .store(in: &cancellables)
     }
     
@@ -56,19 +52,17 @@ class CategoryViewModel {
             .eraseToAnyPublisher()
     }
     
-    func deleteCategory(deleteCategory: DeleteCategory) {
+    func deleteCategory(deleteCategory: DeletedCategory) {
         categoryManager.deleteCategory(deleteCategory: deleteCategory)
             .receive(on: DispatchQueue.main)
-            .sink { completion in
+            .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
                     break
                 case .failure:
                     print("error")
                 }
-            } receiveValue: { _ in
-    
-            }
+            }, receiveValue: { _ in })
             .store(in: &cancellables)
     }
 }

@@ -136,7 +136,7 @@ class EditCategoryViewController: BaseViewController {
         inputAlertViewController.onCompletionTapped = { inputText in
             self.editMode = true
             
-            let updateCategory = UpdateCategory(markCategoryId: self.categoryId, title: inputText)
+            let updateCategory = UpdatedCategory(markCategoryId: self.categoryId, title: inputText)
             self.categoryViewModel.updateCategory(updateCategory: updateCategory)
             
             self.dismiss(animated: false)
@@ -157,7 +157,7 @@ class EditCategoryViewController: BaseViewController {
         alertViewController.onDoneTapped = { option in
             self.editMode = true
             
-            let deleteCategory = DeleteCategory(markCategoryId: self.categoryId, option: option)
+            let deleteCategory = DeletedCategory(markCategoryId: self.categoryId, option: option)
             self.dismiss(animated: false) {
                 self.categoryViewModel.deleteCategory(deleteCategory: deleteCategory)
                 self.onDeleteCategory?()
