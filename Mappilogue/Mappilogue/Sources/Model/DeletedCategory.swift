@@ -1,5 +1,5 @@
 //
-//  DeleteCategory.swift
+//  CategoryDeletion.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/11/15.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DeleteCategory {
+struct DeletedCategory {
     var markCategoryId: Int
     var option: String
 }
