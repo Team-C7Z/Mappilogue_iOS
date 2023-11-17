@@ -134,6 +134,7 @@
 		9245BBC82AFB926900383F4D /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BBC72AFB926900383F4D /* CategoryViewModel.swift */; };
 		9245BBD42B049EAC00383F4D /* DeleteCategoryAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BBD32B049EAC00383F4D /* DeleteCategoryAlertViewController.swift */; };
 		9245BBD62B04E40A00383F4D /* DeleteCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BBD52B04E40A00383F4D /* DeleteCategory.swift */; };
+		9245BBDA2B05088700383F4D /* UpdateCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BBD92B05088700383F4D /* UpdateCategory.swift */; };
 		924BE0CA2A51AE25002C70FF /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 924BE0C92A51AE25002C70FF /* .swiftlint.yml */; };
 		9258409E2A7BD30700997434 /* CategorySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258409D2A7BD30700997434 /* CategorySettingViewController.swift */; };
 		925840A02A7BD4D700997434 /* CategoryOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258409F2A7BD4D700997434 /* CategoryOrderCell.swift */; };
@@ -402,6 +403,7 @@
 		9245BBC72AFB926900383F4D /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		9245BBD32B049EAC00383F4D /* DeleteCategoryAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCategoryAlertViewController.swift; sourceTree = "<group>"; };
 		9245BBD52B04E40A00383F4D /* DeleteCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCategory.swift; sourceTree = "<group>"; };
+		9245BBD92B05088700383F4D /* UpdateCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCategory.swift; sourceTree = "<group>"; };
 		924BE0C92A51AE25002C70FF /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		9258409D2A7BD30700997434 /* CategorySettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingViewController.swift; sourceTree = "<group>"; };
 		9258409F2A7BD4D700997434 /* CategoryOrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryOrderCell.swift; sourceTree = "<group>"; };
@@ -1330,6 +1332,7 @@
 				928B7BF62A9CA92F00E4F789 /* ActiveStatus.swift */,
 				928B7BFE2A9F2D6600E4F789 /* AuthType.swift */,
 				9245BBD52B04E40A00383F4D /* DeleteCategory.swift */,
+				9245BBD92B05088700383F4D /* UpdateCategory.swift */,
 				920031B62A8B5BB000E3170D /* DTO */,
 			);
 			path = Model;
@@ -1803,6 +1806,7 @@
 				926999462A14F75F003DDAD2 /* RecordViewController.swift in Sources */,
 				92011C202A769C12009B047F /* SortHeaderView.swift in Sources */,
 				928B7BF32A9C7B4400E4F789 /* NetworkLoggerPlugin.swift in Sources */,
+				9245BBDA2B05088700383F4D /* UpdateCategory.swift in Sources */,
 				928B7C1D2AA489F600E4F789 /* NotificationDTO.swift in Sources */,
 				92011B7B2A716C9D009B047F /* SelectScheduleCell.swift in Sources */,
 				928B7C072A9FA90500E4F789 /* BaseManager.swift in Sources */,

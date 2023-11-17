@@ -135,9 +135,11 @@ class EditCategoryViewController: BaseViewController {
         }
         inputAlertViewController.onCompletionTapped = { inputText in
             self.editMode = true
-            self.dismiss(animated: false) {
-                self.updateCategory(id: self.categoryId, inputText)
-            }
+            
+            let updateCategory = UpdateCategory(markCategoryId: self.categoryId, title: inputText)
+            self.categoryViewModel.updateCategory(updateCategory: updateCategory)
+            
+            self.dismiss(animated: false)
         }
         present(inputAlertViewController, animated: false)
     }
@@ -162,17 +164,5 @@ class EditCategoryViewController: BaseViewController {
             }
         }
         present(alertViewController, animated: false)
-    }
-    
-    private func updateCategory(id: Int, _ category: String) {
-        CategoryManager.shared.updateCategory(id: id, title: category) { result in
-            switch result {
-            case .success(let response):
-                guard let baseResponse = response as? BaseDTO<String>, let result = baseResponse.result else { return }
-                print(result)
-            default:
-                break
-            }
-        }
     }
 }
