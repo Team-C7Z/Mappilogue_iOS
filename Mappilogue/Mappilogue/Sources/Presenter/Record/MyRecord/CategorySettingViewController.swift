@@ -170,9 +170,8 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
         } else if indexPath.section == 1 && indexPath.row > 0 {
             if collectionView.cellForItem(at: indexPath) is CategorySelectionCell {
                 let status = categories[indexPath.row-1].isMarkedInMap
-                categories[indexPath.row-1].isMarkedInMap = status
-                updateCategoryOrder(categories: categories)
-                collectionView.reloadData()
+                categories[indexPath.row-1].isMarkedInMap = status == .active ? .inactive : .active
+                updateCategoryOrder(categories)
             }
         }
     }
@@ -193,18 +192,6 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
     private func isIndexPathValid(_ indexPath: IndexPath) -> Bool {
         return indexPath.section == 0 && indexPath.row > 0 && indexPath.row <= categories.count
     }
-    
-    func updateCategoryOrder(categories: [Category]) {
-        CategoryManager.shared.updateCategoryOrder(categories: categories) { result in
-            switch result {
-            case .success:
-                self.collectionView.reloadData()
-            default:
-                break
-            }
-        }
-    }
-    
 }
 
 extension CategorySettingViewController: UICollectionViewDragDelegate {
@@ -247,8 +234,7 @@ extension CategorySettingViewController: UICollectionViewDropDelegate {
                 }, completion: { _ in
                     coordinator.drop(dropItem.dragItem, toItemAt: destinationIndexPath)
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0) {
-                        collectionView.reloadData()
-                        self.updateCategoryOrder(categories: self.categories)
+                        self.updateCategoryOrder(self.categories)
                     }
                 })
             }
@@ -292,6 +278,21 @@ extension CategorySettingViewController {
                 guard let result = response.result else { return }
 
                 self.categories = result.markCategories
+                self.collectionView.reloadData()
+            }
+            .store(in: &categoryViewModel.cancellables)
+    }
+    
+    private func updateCategoryOrder(_ categories: [Category]) {
+        categoryViewModel.updateCategoryOrder(categories: categories)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error: \(error.localizedDescription)")
+                }
+            } receiveValue: { _ in
                 self.collectionView.reloadData()
             }
             .store(in: &categoryViewModel.cancellables)
