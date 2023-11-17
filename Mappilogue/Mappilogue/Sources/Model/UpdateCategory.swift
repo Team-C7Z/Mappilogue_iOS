@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UpdateCategory: Codable {
+struct UpdatedCategory {
     let markCategoryId: Int
     let title: String
 }

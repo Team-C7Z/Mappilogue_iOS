@@ -12,14 +12,7 @@ class CategoryManager: CategoryAPI {
     private let baseURL = URL(string: "\(Environment.baseURL)/api/v1/marks/categories")!
     
     func getCategory() -> AnyPublisher<BaseDTO<GetCategoryDTO>, Error> {
-        let url = baseURL
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        if let token = AuthUserDefaults.accessToken {
-            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        }
+        let request = setupRequest(for: baseURL, method: "GET")
         
         return URLSession.shared.dataTaskPublisher(for: request)
             .tryMap { data, response in
@@ -33,14 +26,7 @@ class CategoryManager: CategoryAPI {
     }
     
     func addCategory(title: String) -> AnyPublisher<BaseDTO<AddCategoryDTO>, Error> {
-        let url = baseURL
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        if let token = AuthUserDefaults.accessToken {
-            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        }
+        var request = setupRequest(for: baseURL, method: "POST")
         
         let requestParameters: [String: Any] = [
             "title": title
@@ -54,7 +40,6 @@ class CategoryManager: CategoryAPI {
 
         return URLSession.shared.dataTaskPublisher(for: request)
             .tryMap { data, response in
-                print(data, response, 44)
                 guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 201 else {
                     throw URLError(.badServerResponse)
                 }
@@ -65,14 +50,8 @@ class CategoryManager: CategoryAPI {
             .eraseToAnyPublisher()
     }
     
-    func updateCategory(updateCategory: UpdateCategory) -> AnyPublisher<Void, Error> {
-        var request = URLRequest(url: baseURL)
-        request.httpMethod = "PATCH"
-        
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        if let token = AuthUserDefaults.accessToken {
-            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        }
+    func updateCategory(updateCategory: UpdatedCategory) -> AnyPublisher<Void, Error> {
+        var request = setupRequest(for: baseURL, method: "PATCH")
         
         let requestParameters: [String: Any] = [
             "markCategoryId": updateCategory.markCategoryId,
@@ -98,13 +77,7 @@ class CategoryManager: CategoryAPI {
     }
     
     func updateCategoryOrder(categories: [Category]) -> AnyPublisher<Void, Error> {
-        var request = URLRequest(url: baseURL)
-        request.httpMethod = "PUT"
-        
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        if let token = AuthUserDefaults.accessToken {
-            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        }
+        var request = setupRequest(for: baseURL, method: "PUT")
         
         let requestParameters: [String: Any] = [
             "categories": categories.map { category in
@@ -132,15 +105,10 @@ class CategoryManager: CategoryAPI {
             .eraseToAnyPublisher()
     }
     
-    func deleteCategory(deleteCategory: DeleteCategory) -> AnyPublisher<Void, Error> {
-        let url = URL(string: "\(Environment.baseURL)/api/v1/marks/categories/titles)")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "DELETE"
-        
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        if let token = AuthUserDefaults.accessToken {
-            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        }
+    func deleteCategory(deleteCategory: DeletedCategory) -> AnyPublisher<Void, Error> {
+        let url = URL(string: "\(baseURL)\(deleteCategory.markCategoryId)?option=\(deleteCategory.option)")!
+
+        let request = setupRequest(for: url, method: "DELETE")
         
         return URLSession.shared.dataTaskPublisher(for: request)
             .tryMap { _, response in
@@ -153,11 +121,16 @@ class CategoryManager: CategoryAPI {
             .eraseToAnyPublisher()
     }
     
-    private func setupRequestHeaders() -> [String: String]? {
-        guard let token = AuthUserDefaults.accessToken else {
-            return nil
+    private func setupRequest(for url: URL, method: String) -> URLRequest {
+        var request = URLRequest(url: url)
+        request.httpMethod = method
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        if let token = AuthUserDefaults.accessToken {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
-        return ["Authorization": "Bearer \(token)"]
+        
+        return request
     }
 }
 
