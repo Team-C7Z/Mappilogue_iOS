@@ -6,45 +6,9 @@
 //
 
 import Foundation
-import Moya
 import Combine
 
-class CategoryManager {
-    static let shared = CategoryManager()
-    private let provider = MoyaProvider<CategoryAPI>(session: Session(interceptor: Interceptor()), plugins: [NetworkLoggerPlugin()])
-  
-    func updateCategoryOrder(categories: [Category], completion: @escaping (NetworkResult<Any>) -> Void) {
-        provider.request(.updateCategoryOrder(categories: categories)) { result in
-            switch result {
-            case .success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<String>.self)
-                completion(networkResult)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
-    private func judgeStatus<T: Codable>(_ statusCode: Int, _ data: Data, _ dataModel: T.Type) -> NetworkResult<Any> {
-        let decoder = JSONDecoder()
-        switch statusCode {
-        case 200...204:
-            guard let decodedData = try? decoder.decode(dataModel.self, from: data) else { return .pathError }
-            return .success(decodedData)
-        case 400:
-            guard let decodedData = try? decoder.decode(ErrorDTO.self, from: data) else { return .pathError }
-            return .requestError(decodedData)
-        case 500:
-            return .serverError
-        default:
-            return .networkFail
-        }
-    }
-}
-
-class CategoryManager2 {
+class CategoryManager: CategoryAPI {
     private let baseURL = URL(string: "\(Environment.baseURL)/api/v1/marks/categories")!
     
     func getCategory() -> AnyPublisher<BaseDTO<GetCategoryDTO>, Error> {
@@ -102,7 +66,6 @@ class CategoryManager2 {
     }
     
     func updateCategory(updateCategory: UpdateCategory) -> AnyPublisher<Void, Error> {
-        let url = baseURL
         var request = URLRequest(url: baseURL)
         request.httpMethod = "PATCH"
         
@@ -124,7 +87,7 @@ class CategoryManager2 {
 
         return URLSession.shared.dataTaskPublisher(for: request)
             .tryMap { _, response in
-                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode >= 200 else {
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 204 else {
                     throw URLError(.badServerResponse)
                 }
                 
@@ -133,26 +96,61 @@ class CategoryManager2 {
             .eraseToAnyPublisher()
         
     }
-
-        func deleteCategory(deleteCategory: DeleteCategory) -> AnyPublisher<Void, Error> {
-            let url = URL(string: "\(Environment.baseURL)/api/v1/marks/categories/titles)")!
-            var request = URLRequest(url: url)
-            request.httpMethod = "DELETE"
-            
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            if let token = AuthUserDefaults.accessToken {
-                request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+    
+    func updateCategoryOrder(categories: [Category]) -> AnyPublisher<Void, Error> {
+        var request = URLRequest(url: baseURL)
+        request.httpMethod = "PUT"
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        if let token = AuthUserDefaults.accessToken {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+        
+        let requestParameters: [String: Any] = [
+            "categories": categories.map { category in
+                return [
+                    "id": category.id,
+                    "isMarkedInMap": category.isMarkedInMap.rawValue
+                ] as [String: Any]
             }
-            
-            return URLSession.shared.dataTaskPublisher(for: request)
-                .tryMap { _, response in
-                    guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 204 else {
-                        throw URLError(.badServerResponse)
-                    }
-                    
-                    return
+        ]
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: requestParameters)
+        } catch {
+            return Fail(error: CategoryAPIError.serializationError(error)).eraseToAnyPublisher()
+        }
+
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .tryMap { _, response in
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 204 else {
+                    throw URLError(.badServerResponse)
                 }
-                .eraseToAnyPublisher()
+                
+                return
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func deleteCategory(deleteCategory: DeleteCategory) -> AnyPublisher<Void, Error> {
+        let url = URL(string: "\(Environment.baseURL)/api/v1/marks/categories/titles)")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        if let token = AuthUserDefaults.accessToken {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+        
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .tryMap { _, response in
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 204 else {
+                    throw URLError(.badServerResponse)
+                }
+                
+                return
+            }
+            .eraseToAnyPublisher()
     }
     
     private func setupRequestHeaders() -> [String: String]? {
@@ -171,5 +169,4 @@ enum CategoryAPIError: Error {
 }
 
 struct EmptyResponse: Decodable {
-    // No properties needed since the server doesn't return any data.
 }

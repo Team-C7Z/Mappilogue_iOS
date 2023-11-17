@@ -10,7 +10,7 @@ import Combine
 
 class CategoryViewModel {
     var cancellables: Set<AnyCancellable> = []
-    private let categoryManager = CategoryManager2()
+    private let categoryManager = CategoryManager()
     
     func getCategory() -> AnyPublisher<BaseDTO<GetCategoryDTO>, Error> {
         return categoryManager.getCategory()
@@ -48,6 +48,12 @@ class CategoryViewModel {
     
             }
             .store(in: &cancellables)
+    }
+    
+    func updateCategoryOrder(categories: [Category]) -> AnyPublisher<Void, Error> {
+        categoryManager.updateCategoryOrder(categories: categories)
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
     }
     
     func deleteCategory(deleteCategory: DeleteCategory) {
