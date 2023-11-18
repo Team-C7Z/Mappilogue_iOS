@@ -134,7 +134,9 @@
 		9245BBC82AFB926900383F4D /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BBC72AFB926900383F4D /* CategoryViewModel.swift */; };
 		9245BBD42B049EAC00383F4D /* DeleteCategoryAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BBD32B049EAC00383F4D /* DeleteCategoryAlertViewController.swift */; };
 		9245BBD62B04E40A00383F4D /* DeletedCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BBD52B04E40A00383F4D /* DeletedCategory.swift */; };
-		9245BBDA2B05088700383F4D /* UpdateCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BBD92B05088700383F4D /* UpdateCategory.swift */; };
+		9245BBDA2B05088700383F4D /* UpdatedCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BBD92B05088700383F4D /* UpdatedCategory.swift */; };
+		9245BBE02B0873E500383F4D /* ColorAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BBDF2B0873E500383F4D /* ColorAPI.swift */; };
+		9245BBE22B087FF400383F4D /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BBE12B087FF400383F4D /* ColorManager.swift */; };
 		924BE0CA2A51AE25002C70FF /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 924BE0C92A51AE25002C70FF /* .swiftlint.yml */; };
 		9258409E2A7BD30700997434 /* CategorySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258409D2A7BD30700997434 /* CategorySettingViewController.swift */; };
 		925840A02A7BD4D700997434 /* CategoryOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258409F2A7BD4D700997434 /* CategoryOrderCell.swift */; };
@@ -403,7 +405,9 @@
 		9245BBC72AFB926900383F4D /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		9245BBD32B049EAC00383F4D /* DeleteCategoryAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCategoryAlertViewController.swift; sourceTree = "<group>"; };
 		9245BBD52B04E40A00383F4D /* DeletedCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedCategory.swift; sourceTree = "<group>"; };
-		9245BBD92B05088700383F4D /* UpdateCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCategory.swift; sourceTree = "<group>"; };
+		9245BBD92B05088700383F4D /* UpdatedCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatedCategory.swift; sourceTree = "<group>"; };
+		9245BBDF2B0873E500383F4D /* ColorAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorAPI.swift; sourceTree = "<group>"; };
+		9245BBE12B087FF400383F4D /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
 		924BE0C92A51AE25002C70FF /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		9258409D2A7BD30700997434 /* CategorySettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingViewController.swift; sourceTree = "<group>"; };
 		9258409F2A7BD4D700997434 /* CategoryOrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryOrderCell.swift; sourceTree = "<group>"; };
@@ -498,7 +502,7 @@
 		929E23202AB83920003180B3 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		92A7B64B2A4CC0E6009C9293 /* HomeEmptyScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEmptyScheduleCell.swift; sourceTree = "<group>"; };
 		92A7B64E2A4CCE29009C9293 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
-		92A7B6522A4CDD4D009C9293 /* ScheduleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScheduleType.swift; path = Mappilogue/Sources/Presenter/Home/Schedule/ScheduleType.swift; sourceTree = SOURCE_ROOT; };
+		92A7B6522A4CDD4D009C9293 /* ScheduleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScheduleType.swift; path = Mappilogue/Sources/Presenter/Home/Model/ScheduleType.swift; sourceTree = SOURCE_ROOT; };
 		92A7B6582A4D01B3009C9293 /* TodayScheduleInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayScheduleInfoCell.swift; sourceTree = "<group>"; };
 		92A7B65E2A4E07DB009C9293 /* TodayScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayScheduleCell.swift; sourceTree = "<group>"; };
 		92A7B6602A4E2039009C9293 /* BaseTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
@@ -571,23 +575,13 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		920031902A85FAF700E3170D /* Withdrawal */ = {
-			isa = PBXGroup;
-			children = (
-				925840C62A7F76A500997434 /* WithdrawalAlertViewController.swift */,
-				925840CA2A7F86F900997434 /* WithdrawalViewController.swift */,
-				925840CC2A7F8E1C00997434 /* WithdrawalReasonView.swift */,
-				9200318E2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift */,
-			);
-			path = Withdrawal;
-			sourceTree = "<group>";
-		};
 		920031AD2A8B5AD700E3170D /* API */ = {
 			isa = PBXGroup;
 			children = (
 				928B7BFC2A9DD4DC00E4F789 /* BaseAPI.swift */,
 				928B7BE12A9AF09E00E4F789 /* AuthAPI.swift */,
 				928B7C0F2AA19E7700E4F789 /* UserAPI.swift */,
+				9245BBDF2B0873E500383F4D /* ColorAPI.swift */,
 				9273C9512ABF040E00224DE1 /* ScheduleAPI.swift */,
 				920031AE2A8B5AF600E3170D /* LocationAPI.swift */,
 				92F00AAE2AF4B53D001FE43F /* CategoryAPI.swift */,
@@ -601,6 +595,7 @@
 				928B7C062A9FA90500E4F789 /* BaseManager.swift */,
 				928B7BE62A9B1B3E00E4F789 /* AuthManager.swift */,
 				928B7C152AA1C62400E4F789 /* UserManager.swift */,
+				9245BBE12B087FF400383F4D /* ColorManager.swift */,
 				9273C94F2ABF040400224DE1 /* ScheduleManager.swift */,
 				920031B12A8B5B4C00E3170D /* LocationManager.swift */,
 				92F00AB02AF4B897001FE43F /* CategoryManager.swift */,
@@ -638,20 +633,11 @@
 			path = DTO;
 			sourceTree = "<group>";
 		};
-		920031BB2A8B5C5300E3170D /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				920031BC2A8B5C8E00E3170D /* MainLocationCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
 		920031E32A8E1E8100E3170D /* BottomSheet */ = {
 			isa = PBXGroup;
 			children = (
-				92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */,
-				92011C1F2A769C12009B047F /* SortHeaderView.swift */,
-				920031E42A8E1E9B00E3170D /* Cell */,
+				9245BC082B08C44600383F4D /* ViewController */,
+				9245BC092B08C44F00383F4D /* View */,
 			);
 			path = BottomSheet;
 			sourceTree = "<group>";
@@ -668,11 +654,8 @@
 		920031E52A8E1EBC00E3170D /* Content */ = {
 			isa = PBXGroup;
 			children = (
-				920031D62A8DAFD800E3170D /* MyRecordContentViewController.swift */,
-				920031D82A8DB50600E3170D /* MyRecordContentHeaderView.swift */,
-				92139D742AAD67E8005344AE /* MyRecordContentImageView.swift */,
-				92139D722AAD673A005344AE /* MyRecordContentTextView.swift */,
-				92139D782AAD709E005344AE /* MyRecordContentImageCell.swift */,
+				9245BC102B08C4F600383F4D /* ViewController */,
+				9245BC112B08C4FE00383F4D /* View */,
 			);
 			path = Content;
 			sourceTree = "<group>";
@@ -693,9 +676,8 @@
 		920032012A9715B800E3170D /* Permission */ = {
 			isa = PBXGroup;
 			children = (
-				920032022A9715D600E3170D /* PermissionViewController.swift */,
-				920032042A97166700E3170D /* PermissionView.swift */,
-				920032082A975EA400E3170D /* SelectPermissionViewController.swift */,
+				9245BBF32B08C1E700383F4D /* ViewController */,
+				9245BBF42B08C20500383F4D /* View */,
 			);
 			path = Permission;
 			sourceTree = "<group>";
@@ -703,9 +685,8 @@
 		9200320D2A99A39A00E3170D /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				9200320E2A99A3A800E3170D /* LoginViewController.swift */,
-				928B7BD82A99AFD700E4F789 /* SignUpCompletionViewController.swift */,
-				929E23202AB83920003180B3 /* Auth.swift */,
+				9245BBFA2B08C26800383F4D /* Model */,
+				9245BBFB2B08C26F00383F4D /* ViewController */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -722,15 +703,8 @@
 		92011B762A716801009B047F /* WriteRecord */ = {
 			isa = PBXGroup;
 			children = (
-				92011B772A71683E009B047F /* SelectWriteRecordViewController.swift */,
-				92011B7C2A7174B6009B047F /* DateHeaderView.swift */,
-				92011B8A2A72B7DA009B047F /* NewWriteButton.swift */,
-				92011B7E2A726031009B047F /* WriteRecordViewController.swift */,
-				92011B8C2A72BBE8009B047F /* ImageSaveRecordView.swift */,
-				920031DA2A8DD29700E3170D /* SavingRecordViewController.swift */,
-				92011B792A716C35009B047F /* Cell */,
-				92011BFA2A7402DD009B047F /* Category */,
-				92011BFC2A740304009B047F /* MainLocation */,
+				9245BC0D2B08C48B00383F4D /* ViewController */,
+				9245BC0E2B08C49200383F4D /* View */,
 				92011BFD2A74031B009B047F /* Content */,
 			);
 			path = WriteRecord;
@@ -740,34 +714,9 @@
 			isa = PBXGroup;
 			children = (
 				92011B7A2A716C9D009B047F /* SelectScheduleCell.swift */,
+				920031BC2A8B5C8E00E3170D /* MainLocationCell.swift */,
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		92011BFA2A7402DD009B047F /* Category */ = {
-			isa = PBXGroup;
-			children = (
-				92011B802A7271D0009B047F /* CategoryButton.swift */,
-				92011BFE2A7407D3009B047F /* SelectCategoryViewController.swift */,
-				92011C022A740A0B009B047F /* Cell */,
-			);
-			path = Category;
-			sourceTree = "<group>";
-		};
-		92011BFC2A740304009B047F /* MainLocation */ = {
-			isa = PBXGroup;
-			children = (
-				92011B912A7367E5009B047F /* MainLocationButton.swift */,
-				92011B862A72B0A7009B047F /* MainLocatonView.swift */,
-				920031C22A8B5D2F00E3170D /* MainLocationViewController.swift */,
-				920031C62A8B5DB700E3170D /* MapSettingsHeaderView.swift */,
-				920031B92A8B5C3000E3170D /* AddedLocationsHeaderView.swift */,
-				920031C42A8B5D7D00E3170D /* MapMainLocationViewController.swift */,
-				920031C02A8B5D0800E3170D /* MainLocationSettingView.swift */,
-				920031BE2A8B5CD600E3170D /* MainLocationAlertViewController.swift */,
-				920031BB2A8B5C5300E3170D /* Cell */,
-			);
-			path = MainLocation;
 			sourceTree = "<group>";
 		};
 		92011BFD2A74031B009B047F /* Content */ = {
@@ -781,21 +730,12 @@
 			path = Content;
 			sourceTree = "<group>";
 		};
-		92011C022A740A0B009B047F /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				92011C032A740C16009B047F /* NewCategoryCell.swift */,
-				92011C002A740A08009B047F /* AddNewCategoryCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
 		92011C052A74A0FE009B047F /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				92011C062A74AD97009B047F /* SearchViewController.swift */,
-				92011C0F2A74F222009B047F /* SearchType.swift */,
-				92011C0C2A74C1DD009B047F /* Cell */,
+				9245BC0B2B08C46500383F4D /* Model */,
+				9245BC0A2B08C45D00383F4D /* ViewController */,
+				9245BC0C2B08C46E00383F4D /* View */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -810,27 +750,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		92011CB72A7A16F8009B047F /* MyRecord */ = {
-			isa = PBXGroup;
-			children = (
-				92011CB82A7A1718009B047F /* MyRecordViewController.swift */,
-				92CD36F92A7B505900768B61 /* MyCategoryViewController.swift */,
-				925840AD2A7CD17E00997434 /* EditCategoryViewController.swift */,
-				9245BBD32B049EAC00383F4D /* DeleteCategoryAlertViewController.swift */,
-				9258409D2A7BD30700997434 /* CategorySettingViewController.swift */,
-				9245BBC72AFB926900383F4D /* CategoryViewModel.swift */,
-				92011CBA2A7A199F009B047F /* Cell */,
-				920031E52A8E1EBC00E3170D /* Content */,
-			);
-			path = MyRecord;
-			sourceTree = "<group>";
-		};
 		92011CBA2A7A199F009B047F /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				92011C032A740C16009B047F /* NewCategoryCell.swift */,
+				92011C002A740A08009B047F /* AddNewCategoryCell.swift */,
+				9258409F2A7BD4D700997434 /* CategoryOrderCell.swift */,
 				92011CBB2A7A19CA009B047F /* MyRecordCategoryCell.swift */,
 				925840A92A7CC92E00997434 /* CategorySettingCell.swift */,
-				9258409F2A7BD4D700997434 /* CategoryOrderCell.swift */,
 				925840A72A7CBF3B00997434 /* CategorySelectionLabelCell.swift */,
 				925840A32A7C890100997434 /* CategorySelectionCell.swift */,
 			);
@@ -840,11 +767,9 @@
 		92139D7D2AB0B08E005344AE /* Notification */ = {
 			isa = PBXGroup;
 			children = (
-				92139D842AB1B169005344AE /* NotificationType.swift */,
-				92139D7E2AB0B0F7005344AE /* NotificationController.swift */,
-				92139D822AB18D50005344AE /* NotificationAnnouncementHeaderView.swift */,
-				92139D8E2AB1E672005344AE /* LineHeaderView.swift */,
-				92139D942AB2FCB3005344AE /* Cell */,
+				9245BBF92B08C25300383F4D /* Model */,
+				9245BBF72B08C22E00383F4D /* ViewController */,
+				9245BBF82B08C24000383F4D /* View */,
 			);
 			path = Notification;
 			sourceTree = "<group>";
@@ -863,70 +788,20 @@
 		9224FCFE2A5FF82F000A56A6 /* AddSchedule */ = {
 			isa = PBXGroup;
 			children = (
-				9224FCFC2A5FF185000A56A6 /* AddScheduleViewController.swift */,
-				925840D02A7FCE6800997434 /* AddScheduleHeaderView.swift */,
-				9273C94D2ABEEFC300224DE1 /* AddScheduleDateType.swift */,
-				9224FD282A6394B0000A56A6 /* ScheduleTitleColor */,
-				9224FD292A639508000A56A6 /* ScheduleDuration */,
-				9224FD2A2A639547000A56A6 /* NotificationRepeat */,
-				9224FD402A6563CF000A56A6 /* Location */,
+				9245BC002B08C32500383F4D /* Model */,
+				9245BBFF2B08C31D00383F4D /* ViewController */,
+				9245BC012B08C32E00383F4D /* View */,
 			);
 			path = AddSchedule;
-			sourceTree = "<group>";
-		};
-		9224FD282A6394B0000A56A6 /* ScheduleTitleColor */ = {
-			isa = PBXGroup;
-			children = (
-				92011BF82A73D404009B047F /* ColorSelectionView.swift */,
-				9224FD2B2A639593000A56A6 /* Cell */,
-			);
-			path = ScheduleTitleColor;
-			sourceTree = "<group>";
-		};
-		9224FD292A639508000A56A6 /* ScheduleDuration */ = {
-			isa = PBXGroup;
-			children = (
-				9224FD022A600ACF000A56A6 /* ScheduleDurationView.swift */,
-			);
-			path = ScheduleDuration;
-			sourceTree = "<group>";
-		};
-		9224FD2A2A639547000A56A6 /* NotificationRepeat */ = {
-			isa = PBXGroup;
-			children = (
-				9224FD042A600F42000A56A6 /* NotificationRepeatButton.swift */,
-				9224FD382A653038000A56A6 /* Notification */,
-				9224FD392A65304A000A56A6 /* Repeat */,
-			);
-			path = NotificationRepeat;
 			sourceTree = "<group>";
 		};
 		9224FD2B2A639593000A56A6 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
 				9224FD182A616EB1000A56A6 /* ColorCell.swift */,
+				925840D82A80D84300997434 /* SelectedNotificationCell.swift */,
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		9224FD2D2A6395EE000A56A6 /* Schedule */ = {
-			isa = PBXGroup;
-			children = (
-				92A7B6522A4CDD4D009C9293 /* ScheduleType.swift */,
-				92FE26122A4B74D800BCDB82 /* ScheduleTypeHeaderView.swift */,
-				9224FD2F2A639627000A56A6 /* Cell */,
-			);
-			path = Schedule;
-			sourceTree = "<group>";
-		};
-		9224FD2E2A6395F9000A56A6 /* MarkedRecord */ = {
-			isa = PBXGroup;
-			children = (
-				920031FF2A9504EE00E3170D /* MaredRecordsFooterView.swift */,
-				92459ED92A530D1100493941 /* MarkedRecordCell.swift */,
-				92459ED72A52494200493941 /* AddMarkedRecordCell.swift */,
-			);
-			path = MarkedRecord;
 			sourceTree = "<group>";
 		};
 		9224FD2F2A639627000A56A6 /* Cell */ = {
@@ -936,43 +811,17 @@
 				92A7B65E2A4E07DB009C9293 /* TodayScheduleCell.swift */,
 				92A7B6582A4D01B3009C9293 /* TodayScheduleInfoCell.swift */,
 				92A7B6672A4E6154009C9293 /* UpcomingScheduleCell.swift */,
+				92459ED92A530D1100493941 /* MarkedRecordCell.swift */,
+				92459ED72A52494200493941 /* AddMarkedRecordCell.swift */,
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		9224FD382A653038000A56A6 /* Notification */ = {
-			isa = PBXGroup;
-			children = (
-				9224FD1E2A62B4E9000A56A6 /* NotificationViewController.swift */,
-				925840D62A80D4BD00997434 /* NotificationHeaderView.swift */,
-				925840D82A80D84300997434 /* SelectedNotificationCell.swift */,
-			);
-			path = Notification;
-			sourceTree = "<group>";
-		};
-		9224FD392A65304A000A56A6 /* Repeat */ = {
-			isa = PBXGroup;
-			children = (
-				9224FD222A62EC0B000A56A6 /* RepeatViewController.swift */,
-				9224FD242A638F01000A56A6 /* RepeatType.swift */,
-				9224FD262A6394A9000A56A6 /* WeekdayRepeatViewController.swift */,
-				9224FD342A652A96000A56A6 /* WeekdayView.swift */,
-				9224FD362A653024000A56A6 /* SpacingView.swift */,
-				9224FD3A2A6532E3000A56A6 /* EndView.swift */,
-				9224FD302A6397BD000A56A6 /* CycleRepeatViewController.swift */,
-			);
-			path = Repeat;
 			sourceTree = "<group>";
 		};
 		9224FD402A6563CF000A56A6 /* Location */ = {
 			isa = PBXGroup;
 			children = (
-				9224FD3C2A6559A0000A56A6 /* AddLocationViewController.swift */,
-				92E7814B2A84B9B3000DAACD /* ScheduleDateFooterView.swift */,
-				925840D42A80957900997434 /* AddLocationFooterView.swift */,
-				9224FD452A6579A7000A56A6 /* DeleteLocationFooterView.swift */,
-				9224FD492A667F7E000A56A6 /* TimePickerViewController.swift */,
-				92E7814A2A849AB9000DAACD /* Cell */,
+				9245BC022B08C3E800383F4D /* ViewController */,
+				9245BC032B08C3F200383F4D /* View */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -992,6 +841,424 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		9245BBE32B08827E00383F4D /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				9245BC142B08C65800383F4D /* Model */,
+				9245BBE52B08835900383F4D /* ViewModel */,
+				9245BBE72B088E7F00383F4D /* ViewController */,
+				9245BBE62B088E6600383F4D /* View */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		9245BBE52B08835900383F4D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9245BBC72AFB926900383F4D /* CategoryViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9245BBE62B088E6600383F4D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				92011B802A7271D0009B047F /* CategoryButton.swift */,
+				92011CBA2A7A199F009B047F /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9245BBE72B088E7F00383F4D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9245BBEA2B08906700383F4D /* SelectCategory */,
+				9245BBEB2B08907B00383F4D /* MyRecord */,
+				9245BBEC2B08908D00383F4D /* Setting */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		9245BBEA2B08906700383F4D /* SelectCategory */ = {
+			isa = PBXGroup;
+			children = (
+				92011BFE2A7407D3009B047F /* SelectCategoryViewController.swift */,
+			);
+			path = SelectCategory;
+			sourceTree = "<group>";
+		};
+		9245BBEB2B08907B00383F4D /* MyRecord */ = {
+			isa = PBXGroup;
+			children = (
+				92011CB82A7A1718009B047F /* MyRecordViewController.swift */,
+				92CD36F92A7B505900768B61 /* MyCategoryViewController.swift */,
+				925840AD2A7CD17E00997434 /* EditCategoryViewController.swift */,
+				9245BBD32B049EAC00383F4D /* DeleteCategoryAlertViewController.swift */,
+			);
+			path = MyRecord;
+			sourceTree = "<group>";
+		};
+		9245BBEC2B08908D00383F4D /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				9258409D2A7BD30700997434 /* CategorySettingViewController.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		9245BBEF2B08BF9200383F4D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				926999412A14F74B003DDAD2 /* CalendarViewController.swift */,
+				9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */,
+				9224FCF62A5FC4CA000A56A6 /* ScheduleViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		9245BBF02B08C06000383F4D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9230BE502A59B45D0053E535 /* CalendarViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9245BBF12B08C06D00383F4D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9230BE432A57EFF10053E535 /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9245BBF22B08C0C700383F4D /* Color */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Color;
+			sourceTree = "<group>";
+		};
+		9245BBF32B08C1E700383F4D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				920032022A9715D600E3170D /* PermissionViewController.swift */,
+				920032082A975EA400E3170D /* SelectPermissionViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		9245BBF42B08C20500383F4D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				920032042A97166700E3170D /* PermissionView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9245BBF52B08C21500383F4D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9263786A2A546BDE004E5B6E /* OnboardingViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		9245BBF62B08C21B00383F4D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9263786D2A5475AF004E5B6E /* OnboardingCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9245BBF72B08C22E00383F4D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				92139D7E2AB0B0F7005344AE /* NotificationController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		9245BBF82B08C24000383F4D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				92139D8E2AB1E672005344AE /* LineHeaderView.swift */,
+				92139D822AB18D50005344AE /* NotificationAnnouncementHeaderView.swift */,
+				92139D942AB2FCB3005344AE /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9245BBF92B08C25300383F4D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				92139D842AB1B169005344AE /* NotificationType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9245BBFA2B08C26800383F4D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				929E23202AB83920003180B3 /* Auth.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9245BBFB2B08C26F00383F4D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9200320E2A99A3A800E3170D /* LoginViewController.swift */,
+				928B7BD82A99AFD700E4F789 /* SignUpCompletionViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		9245BBFC2B08C29600383F4D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9269993F2A14F73C003DDAD2 /* HomeViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		9245BBFD2B08C2AA00383F4D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				92A7B6522A4CDD4D009C9293 /* ScheduleType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9245BBFE2B08C2B300383F4D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				92FE26122A4B74D800BCDB82 /* ScheduleTypeHeaderView.swift */,
+				920031FF2A9504EE00E3170D /* MaredRecordsFooterView.swift */,
+				9224FD2F2A639627000A56A6 /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9245BBFF2B08C31D00383F4D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9224FCFC2A5FF185000A56A6 /* AddScheduleViewController.swift */,
+				9224FD1E2A62B4E9000A56A6 /* NotificationViewController.swift */,
+				9224FD222A62EC0B000A56A6 /* RepeatViewController.swift */,
+				9224FD262A6394A9000A56A6 /* WeekdayRepeatViewController.swift */,
+				9224FD302A6397BD000A56A6 /* CycleRepeatViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		9245BC002B08C32500383F4D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9273C94D2ABEEFC300224DE1 /* AddScheduleDateType.swift */,
+				9224FD242A638F01000A56A6 /* RepeatType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9245BC012B08C32E00383F4D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				925840D02A7FCE6800997434 /* AddScheduleHeaderView.swift */,
+				92011BF82A73D404009B047F /* ColorSelectionView.swift */,
+				9224FD022A600ACF000A56A6 /* ScheduleDurationView.swift */,
+				9224FD042A600F42000A56A6 /* NotificationRepeatButton.swift */,
+				925840D62A80D4BD00997434 /* NotificationHeaderView.swift */,
+				9224FD342A652A96000A56A6 /* WeekdayView.swift */,
+				9224FD362A653024000A56A6 /* SpacingView.swift */,
+				9224FD3A2A6532E3000A56A6 /* EndView.swift */,
+				9224FD2B2A639593000A56A6 /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9245BC022B08C3E800383F4D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9224FD3C2A6559A0000A56A6 /* AddLocationViewController.swift */,
+				9224FD492A667F7E000A56A6 /* TimePickerViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		9245BC032B08C3F200383F4D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				92E7814A2A849AB9000DAACD /* Cell */,
+				92E7814B2A84B9B3000DAACD /* ScheduleDateFooterView.swift */,
+				925840D42A80957900997434 /* AddLocationFooterView.swift */,
+				9224FD452A6579A7000A56A6 /* DeleteLocationFooterView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9245BC042B08C41700383F4D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				926999432A14F756003DDAD2 /* GatheringViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		9245BC052B08C41F00383F4D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				926382B32A6CC9760064C1A8 /* GatheringToastMessageView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9245BC062B08C42B00383F4D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				926999452A14F75F003DDAD2 /* RecordViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		9245BC072B08C43100383F4D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				92011B732A71386F009B047F /* Cell */,
+				92011C082A74AFCA009B047F /* SearchTextField.swift */,
+				92011C632A788FBF009B047F /* MarkerView.swift */,
+				920031E12A8E1E7700E3170D /* FindMarkersButton.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9245BC082B08C44600383F4D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		9245BC092B08C44F00383F4D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				920031E42A8E1E9B00E3170D /* Cell */,
+				92011C1F2A769C12009B047F /* SortHeaderView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9245BC0A2B08C45D00383F4D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				92011C062A74AD97009B047F /* SearchViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		9245BC0B2B08C46500383F4D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				92011C0F2A74F222009B047F /* SearchType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9245BC0C2B08C46E00383F4D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				92011C0C2A74C1DD009B047F /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9245BC0D2B08C48B00383F4D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				92011B772A71683E009B047F /* SelectWriteRecordViewController.swift */,
+				92011B7E2A726031009B047F /* WriteRecordViewController.swift */,
+				920031DA2A8DD29700E3170D /* SavingRecordViewController.swift */,
+				920031C22A8B5D2F00E3170D /* MainLocationViewController.swift */,
+				920031C42A8B5D7D00E3170D /* MapMainLocationViewController.swift */,
+				920031BE2A8B5CD600E3170D /* MainLocationAlertViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		9245BC0E2B08C49200383F4D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				92011B7C2A7174B6009B047F /* DateHeaderView.swift */,
+				92011B8A2A72B7DA009B047F /* NewWriteButton.swift */,
+				92011B8C2A72BBE8009B047F /* ImageSaveRecordView.swift */,
+				92011B912A7367E5009B047F /* MainLocationButton.swift */,
+				92011B862A72B0A7009B047F /* MainLocatonView.swift */,
+				920031C62A8B5DB700E3170D /* MapSettingsHeaderView.swift */,
+				920031B92A8B5C3000E3170D /* AddedLocationsHeaderView.swift */,
+				920031C02A8B5D0800E3170D /* MainLocationSettingView.swift */,
+				92011B792A716C35009B047F /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9245BC102B08C4F600383F4D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				920031D62A8DAFD800E3170D /* MyRecordContentViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		9245BC112B08C4FE00383F4D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				92139D722AAD673A005344AE /* MyRecordContentTextView.swift */,
+				92139D742AAD67E8005344AE /* MyRecordContentImageView.swift */,
+				920031D82A8DB50600E3170D /* MyRecordContentHeaderView.swift */,
+				92139D782AAD709E005344AE /* MyRecordContentImageCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9245BC122B08C53600383F4D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				926999472A14F76A003DDAD2 /* MyViewController.swift */,
+				928B7C0B2AA06F7400E4F789 /* EditProfileViewController.swift */,
+				928B7C212AA83D2000E4F789 /* EditNicknameModalViewController.swift */,
+				925840BA2A7F455D00997434 /* NotificationSettingViewController.swift */,
+				928B7C182AA462CE00E4F789 /* TermsOfUseViewController.swift */,
+				925840C22A7F61E800997434 /* InquiryViewController.swift */,
+				925840C62A7F76A500997434 /* WithdrawalAlertViewController.swift */,
+				925840CA2A7F86F900997434 /* WithdrawalViewController.swift */,
+				9200318E2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		9245BC132B08C54D00383F4D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				925840BC2A7F459600997434 /* NotificationSettingView.swift */,
+				925840C02A7F5B2200997434 /* NotificationSwitchButton.swift */,
+				925840C42A7F71E600997434 /* ToastMessageView.swift */,
+				925840CC2A7F8E1C00997434 /* WithdrawalReasonView.swift */,
+				925840B32A7F281A00997434 /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9245BC142B08C65800383F4D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9245BBD92B05088700383F4D /* UpdatedCategory.swift */,
+				9245BBD52B04E40A00383F4D /* DeletedCategory.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		925840B32A7F281A00997434 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1005,8 +1272,8 @@
 		9263786C2A546BE3004E5B6E /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				9263786A2A546BDE004E5B6E /* OnboardingViewController.swift */,
-				9263786D2A5475AF004E5B6E /* OnboardingCell.swift */,
+				9245BBF52B08C21500383F4D /* ViewController */,
+				9245BBF62B08C21B00383F4D /* View */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -1083,7 +1350,7 @@
 				92A7B6642A4E52A6009C9293 /* Model */,
 				9269992B2A14F157003DDAD2 /* Data */,
 				920031B32A8B5B7D00E3170D /* Global */,
-				9269992C2A14F164003DDAD2 /* Presenter */,
+				9269992C2A14F164003DDAD2 /* Scene */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -1135,6 +1402,7 @@
 		9269992B2A14F157003DDAD2 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				920031B62A8B5BB000E3170D /* DTO */,
 				920031AD2A8B5AD700E3170D /* API */,
 				920031B02A8B5B2A00E3170D /* APIManager */,
 				928B7BEF2A9C623A00E4F789 /* Foundation */,
@@ -1143,7 +1411,7 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		9269992C2A14F164003DDAD2 /* Presenter */ = {
+		9269992C2A14F164003DDAD2 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
 				920032012A9715B800E3170D /* Permission */,
@@ -1153,12 +1421,20 @@
 				926999392A14F673003DDAD2 /* TabBar */,
 				9269993A2A14F689003DDAD2 /* Home */,
 				9269993B2A14F6A4003DDAD2 /* Calendar */,
+				9224FCFE2A5FF82F000A56A6 /* AddSchedule */,
+				9245BBF22B08C0C700383F4D /* Color */,
+				9224FD402A6563CF000A56A6 /* Location */,
 				9269993C2A14F6BF003DDAD2 /* Gathering */,
 				9269993E2A14F71D003DDAD2 /* Record */,
+				920031E32A8E1E8100E3170D /* BottomSheet */,
+				92011C052A74A0FE009B047F /* Search */,
+				9245BBE32B08827E00383F4D /* Category */,
+				92011B762A716801009B047F /* WriteRecord */,
+				920031E52A8E1EBC00E3170D /* Content */,
 				9269993D2A14F6F9003DDAD2 /* My */,
 				92A7B64D2A4CCDB7009C9293 /* Reusable */,
 			);
-			path = Presenter;
+			path = Scene;
 			sourceTree = "<group>";
 		};
 		926999392A14F673003DDAD2 /* TabBar */ = {
@@ -1172,9 +1448,9 @@
 		9269993A2A14F689003DDAD2 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				9269993F2A14F73C003DDAD2 /* HomeViewController.swift */,
-				9224FD2D2A6395EE000A56A6 /* Schedule */,
-				9224FD2E2A6395F9000A56A6 /* MarkedRecord */,
+				9245BBFD2B08C2AA00383F4D /* Model */,
+				9245BBFC2B08C29600383F4D /* ViewController */,
+				9245BBFE2B08C2B300383F4D /* View */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1182,12 +1458,9 @@
 		9269993B2A14F6A4003DDAD2 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
-				926999412A14F74B003DDAD2 /* CalendarViewController.swift */,
-				9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */,
-				9224FCF62A5FC4CA000A56A6 /* ScheduleViewController.swift */,
-				9230BE502A59B45D0053E535 /* CalendarViewModel.swift */,
-				9230BE432A57EFF10053E535 /* Cell */,
-				9224FCFE2A5FF82F000A56A6 /* AddSchedule */,
+				9245BBF02B08C06000383F4D /* ViewModel */,
+				9245BBEF2B08BF9200383F4D /* ViewController */,
+				9245BBF12B08C06D00383F4D /* View */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -1195,8 +1468,8 @@
 		9269993C2A14F6BF003DDAD2 /* Gathering */ = {
 			isa = PBXGroup;
 			children = (
-				926999432A14F756003DDAD2 /* GatheringViewController.swift */,
-				926382B32A6CC9760064C1A8 /* GatheringToastMessageView.swift */,
+				9245BC042B08C41700383F4D /* ViewController */,
+				9245BC052B08C41F00383F4D /* View */,
 			);
 			path = Gathering;
 			sourceTree = "<group>";
@@ -1204,13 +1477,8 @@
 		9269993D2A14F6F9003DDAD2 /* My */ = {
 			isa = PBXGroup;
 			children = (
-				926999472A14F76A003DDAD2 /* MyViewController.swift */,
-				928B7C0A2AA06F4400E4F789 /* Profile */,
-				928B7C082AA06DE500E4F789 /* NotificationSetting */,
-				928B7C172AA4629F00E4F789 /* TermsOfUse */,
-				928B7C092AA06E1900E4F789 /* Inquiry */,
-				920031902A85FAF700E3170D /* Withdrawal */,
-				925840B32A7F281A00997434 /* Cell */,
+				9245BC122B08C53600383F4D /* ViewController */,
+				9245BC132B08C54D00383F4D /* View */,
 			);
 			path = My;
 			sourceTree = "<group>";
@@ -1218,15 +1486,8 @@
 		9269993E2A14F71D003DDAD2 /* Record */ = {
 			isa = PBXGroup;
 			children = (
-				926999452A14F75F003DDAD2 /* RecordViewController.swift */,
-				92011C082A74AFCA009B047F /* SearchTextField.swift */,
-				92011C632A788FBF009B047F /* MarkerView.swift */,
-				920031E12A8E1E7700E3170D /* FindMarkersButton.swift */,
-				92011B732A71386F009B047F /* Cell */,
-				920031E32A8E1E8100E3170D /* BottomSheet */,
-				92011C052A74A0FE009B047F /* Search */,
-				92011CB72A7A16F8009B047F /* MyRecord */,
-				92011B762A716801009B047F /* WriteRecord */,
+				9245BC062B08C42B00383F4D /* ViewController */,
+				9245BC072B08C43100383F4D /* View */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -1256,42 +1517,6 @@
 				928B7BF82A9D944D00E4F789 /* Interceptor.swift */,
 			);
 			path = Foundation;
-			sourceTree = "<group>";
-		};
-		928B7C082AA06DE500E4F789 /* NotificationSetting */ = {
-			isa = PBXGroup;
-			children = (
-				925840BA2A7F455D00997434 /* NotificationSettingViewController.swift */,
-				925840BC2A7F459600997434 /* NotificationSettingView.swift */,
-				925840C02A7F5B2200997434 /* NotificationSwitchButton.swift */,
-			);
-			path = NotificationSetting;
-			sourceTree = "<group>";
-		};
-		928B7C092AA06E1900E4F789 /* Inquiry */ = {
-			isa = PBXGroup;
-			children = (
-				925840C22A7F61E800997434 /* InquiryViewController.swift */,
-				925840C42A7F71E600997434 /* ToastMessageView.swift */,
-			);
-			path = Inquiry;
-			sourceTree = "<group>";
-		};
-		928B7C0A2AA06F4400E4F789 /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				928B7C0B2AA06F7400E4F789 /* EditProfileViewController.swift */,
-				928B7C212AA83D2000E4F789 /* EditNicknameModalViewController.swift */,
-			);
-			path = Profile;
-			sourceTree = "<group>";
-		};
-		928B7C172AA4629F00E4F789 /* TermsOfUse */ = {
-			isa = PBXGroup;
-			children = (
-				928B7C182AA462CE00E4F789 /* TermsOfUseViewController.swift */,
-			);
-			path = TermsOfUse;
 			sourceTree = "<group>";
 		};
 		929158162A25292A0022BEF9 /* Fonts */ = {
@@ -1331,9 +1556,6 @@
 				928B7BDF2A9AEAE800E4F789 /* AuthVendor.swift */,
 				928B7BF62A9CA92F00E4F789 /* ActiveStatus.swift */,
 				928B7BFE2A9F2D6600E4F789 /* AuthType.swift */,
-				9245BBD52B04E40A00383F4D /* DeletedCategory.swift */,
-				9245BBD92B05088700383F4D /* UpdateCategory.swift */,
-				920031B62A8B5BB000E3170D /* DTO */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1705,6 +1927,7 @@
 				92F00AAD2AEE161C001FE43F /* ScheduleDateCell.swift in Sources */,
 				928B7C0C2AA06F7400E4F789 /* EditProfileViewController.swift in Sources */,
 				928B7BE22A9AF09E00E4F789 /* AuthAPI.swift in Sources */,
+				9245BBE02B0873E500383F4D /* ColorAPI.swift in Sources */,
 				92139D792AAD709E005344AE /* MyRecordContentImageCell.swift in Sources */,
 				926999382A14F4AA003DDAD2 /* TabBarControllerController.swift in Sources */,
 				920032032A9715D600E3170D /* PermissionViewController.swift in Sources */,
@@ -1806,7 +2029,7 @@
 				926999462A14F75F003DDAD2 /* RecordViewController.swift in Sources */,
 				92011C202A769C12009B047F /* SortHeaderView.swift in Sources */,
 				928B7BF32A9C7B4400E4F789 /* NetworkLoggerPlugin.swift in Sources */,
-				9245BBDA2B05088700383F4D /* UpdateCategory.swift in Sources */,
+				9245BBDA2B05088700383F4D /* UpdatedCategory.swift in Sources */,
 				928B7C1D2AA489F600E4F789 /* NotificationDTO.swift in Sources */,
 				92011B7B2A716C9D009B047F /* SelectScheduleCell.swift in Sources */,
 				928B7C072A9FA90500E4F789 /* BaseManager.swift in Sources */,
@@ -1824,6 +2047,7 @@
 				928B7BE72A9B1B3E00E4F789 /* AuthManager.swift in Sources */,
 				928B7BEE2A9C603C00E4F789 /* TodaySchedule.swift in Sources */,
 				92011C142A74F9DE009B047F /* SearchLocationCell.swift in Sources */,
+				9245BBE22B087FF400383F4D /* ColorManager.swift in Sources */,
 				92459EDA2A530D1100493941 /* MarkedRecordCell.swift in Sources */,
 				920031C32A8B5D2F00E3170D /* MainLocationViewController.swift in Sources */,
 				9224FCF72A5FC4CA000A56A6 /* ScheduleViewController.swift in Sources */,
