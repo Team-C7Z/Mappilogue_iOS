@@ -9,9 +9,9 @@ import Foundation
 import Combine
 
 class ColorManager: ColorAPI {
-    private let baseURL = URL(string: "\(Environment.baseURL)/api/v1/schedules/colors")!
+    private let baseURL = URL(string: "\(Environment.baseURL)/api/v1/colors")!
     
-    func getCategory(title: String) -> AnyPublisher<BaseDTO<[ColorListDTO]>, Error> {
+    func getColorList() -> AnyPublisher<BaseDTO<[ColorListDTO]>, Error> {
         var request = URLRequest(url: baseURL)
         request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
