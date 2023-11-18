@@ -66,9 +66,9 @@ class MyRecordCategoryCell: BaseTableViewCell {
         }
     }
     
-    func configure(with category: CategoryData, isLast: Bool) {
+    func configure(with category: Category, isLast: Bool) {
         categoryLabel.text = category.title
-        categoryCountLabel.text = "(\(category.count))"
+        categoryCountLabel.text = "(\(category.markCount))"
         lineView.backgroundColor = isLast ? .clear : .colorEAE6E1
     }
 }

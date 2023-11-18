@@ -130,4 +130,12 @@ extension InputAlertViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+    
+        if text.count > 50 {
+            textField.text = String(text.prefix(50))
+        }
+    }
 }

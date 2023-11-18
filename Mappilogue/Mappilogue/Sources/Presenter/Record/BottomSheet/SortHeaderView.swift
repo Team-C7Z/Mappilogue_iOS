@@ -1,5 +1,5 @@
 //
-//  SortView.swift
+//  SortHeaderView.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/07/30.
@@ -7,7 +7,9 @@
 
 import UIKit
 
-class SortView: BaseView {
+class SortHeaderView: BaseCollectionReusableView {
+    static let registerId = "\(SortHeaderView.self)"
+    
     private let stackView = UIStackView()
     private let sortImage = UIImageView()
     private let sortLabel = UILabel()
@@ -40,10 +42,6 @@ class SortView: BaseView {
     
     override func setupLayout() {
         super.setupLayout()
-        
-        self.snp.makeConstraints {
-            $0.height.equalTo(32)
-        }
         
         stackView.snp.makeConstraints {
             $0.top.equalTo(self)
