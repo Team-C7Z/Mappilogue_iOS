@@ -11,5 +11,5 @@ struct Auth {
     var socialAccessToken: String
     var socialVendor: AuthVendor
     var fcmToken: String?
-    var isAlarmAccept: NotificationStatus?
+    var isAlarmAccept: ActiveStatus?
 }

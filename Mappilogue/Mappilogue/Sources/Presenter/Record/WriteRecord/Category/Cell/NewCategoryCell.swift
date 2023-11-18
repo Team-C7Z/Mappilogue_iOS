@@ -57,9 +57,9 @@ class NewCategoryCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(with category: CategoryData) {
+    func configure(with category: Category) {
         categoryLabel.text = category.title
-        categoryCountLabel.text = "(\(category.count))"
+        categoryCountLabel.text = "(\(category.markCount))"
     }
     
     @objc func checkCategoryButtonTapped(_ button: UIButton) {

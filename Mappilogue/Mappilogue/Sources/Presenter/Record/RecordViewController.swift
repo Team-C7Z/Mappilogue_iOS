@@ -9,7 +9,7 @@ import UIKit
 import NMapsMap
 
 class RecordViewController: NavigationBarViewController {
-    let dummyCategory = dummyCategoryData()
+    let dummyCategory: [Category] = []
     let dummyRecord: [Record] = dummyRecordData()
     
     let locationManager = CLLocationManager()
@@ -20,7 +20,7 @@ class RecordViewController: NavigationBarViewController {
     var topLeftCoord: NMGLatLng?
     var bottomRightCoord: NMGLatLng?
     var markers: [NMFMarker] = []
-    var selectedCategoryIndex: [Int] = []
+    var selectedCategoryIndex: Int?
     var isZoomOut: Bool = false
     
     let minHeight: CGFloat = 44
@@ -297,7 +297,7 @@ class RecordViewController: NavigationBarViewController {
     }
     
     private func setBottomSheetHeight() {
-        maxHeight = view.frame.height - 200
+        maxHeight = view.frame.height - 250
 
         if dummyRecord.isEmpty {
             bottomSheetHeight = minHeight
@@ -315,8 +315,8 @@ class RecordViewController: NavigationBarViewController {
         let translation = gesture.translation(in: containerView)
         let newContainerHeight = containerView.frame.height - translation.y
         let clampedHeight = min(max(newContainerHeight, minHeight), maxHeight)
-        containerView.snp.updateConstraints { make in
-            make.height.equalTo(clampedHeight)
+        containerView.snp.updateConstraints {
+            $0.height.equalTo(clampedHeight)
         }
         
         var nearestHeight: CGFloat = minHeight
@@ -332,8 +332,8 @@ class RecordViewController: NavigationBarViewController {
         setButtonsVisibility(isHidden: clampedHeight > view.frame.height / 2, height: clampedHeight)
         
         if gesture.state == .ended || gesture.state == .cancelled {
-            containerView.snp.updateConstraints { make in
-                make.height.equalTo(nearestHeight)
+            containerView.snp.updateConstraints {
+                $0.height.equalTo(nearestHeight)
             }
             
             updateBottomSheet(nearestHeight)
@@ -456,7 +456,7 @@ extension RecordViewController: UICollectionViewDelegate, UICollectionViewDataSo
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.registerId, for: indexPath) as? CategoryCell else { return UICollectionViewCell() }
             
             let category = dummyCategory[indexPath.row].title
-            let isSelected = selectedCategoryIndex.contains(indexPath.row)
+            let isSelected = selectedCategoryIndex == indexPath.row
             
             cell.configure(category, isSelected: isSelected)
             
@@ -477,7 +477,7 @@ extension RecordViewController: UICollectionViewDelegate, UICollectionViewDataSo
         switch indexPath.section {
         case 0:
             let cateogoryTitle = dummyCategory[indexPath.row].title
-            let isSelected = selectedCategoryIndex.contains(indexPath.row)
+            let isSelected = selectedCategoryIndex == indexPath.row
             let width = cateogoryTitle.size(withAttributes: [NSAttributedString.Key.font: UIFont.caption02]).width + 24 + (isSelected ? 19 : 0)
             return CGSize(width: width, height: 32)
         default:
@@ -498,12 +498,12 @@ extension RecordViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            if let index = selectedCategoryIndex.firstIndex(where: { $0 == indexPath.row }) {
-                selectedCategoryIndex.remove(at: index)
+            if selectedCategoryIndex == indexPath.row {
+                selectedCategoryIndex = nil
             } else {
-                selectedCategoryIndex.append(indexPath.row)
+                selectedCategoryIndex = indexPath.row
             }
-  
+            
             clearMarker()
             setMarker()
             

@@ -24,8 +24,8 @@ func dummyTodayScheduleData(scheduleCount: Int) -> [TodaySchedule] {
         let schedule = TodaySchedule(title: "아빠랑 데이트 🏃🏻", location: ["춘배식당", "카페 문", "아주 건강해지는 제이슨 건강어쩌구어쩌구냠냠냠"], time: [nil, "10:00 AM", "1:00 PM"], color: .colorB1E9BE)
         schedules = [schedule]
     } else if scheduleCount == 2 {
-        let schedule1 = TodaySchedule(title: "아빠랑 데이트 🏃🏻", location: ["춘배식당", "카페 문", "아주 건강해지는 제이슨 건강어쩌구어쩌구냠냠냠냠"], time: [nil, "10:00 AM", "1:00 PM"], color: .colorB1E9BE)
-        let schedule2 = TodaySchedule(title: "러닝메이트 회의", location: ["공간대여 산", "에나 파스타"], time: ["3:00 PM", "6:00 PM"], color: .colorBAD7FA)
+        let schedule1 = TodaySchedule(title: "아빠랑 데이트", location: ["춘배식당", "카페 문"], time: [nil, "10:00 AM"], color: .colorB1E9BE)
+        let schedule2 = TodaySchedule(title: "러닝메이트 회의 🏃🏻", location: ["공간대여 산", "에나 파스타"], time: ["3:00 PM", "6:00 PM"], color: .colorBAD7FA)
         
         schedules = [schedule1, schedule2]
     } else {
