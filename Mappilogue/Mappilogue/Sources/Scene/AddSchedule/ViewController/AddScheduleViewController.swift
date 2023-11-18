@@ -8,6 +8,7 @@
 import UIKit
 
 class AddScheduleViewController: BaseViewController {
+    private var colorViewModel = ColorViewModel()
     private var monthlyCalendar = MonthlyCalendar()
     private var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0, day: 0)
     private var startDate: SelectedDate = SelectedDate(year: 0, month: 0, day: 0)
@@ -163,19 +164,6 @@ class AddScheduleViewController: BaseViewController {
         }
         
         navigationController?.popViewController(animated: true)
-    }
-        
-    func getColorList() {
-        ScheduleManager.shared.getColorList { result in
-            switch result {
-            case .success(let response):
-                guard let baseResponse = response as? BaseDTO<[ColorListDTO]>, let result = baseResponse.result else { return }
-                self.colorList = result
-                self.collectionView.reloadData()
-            default:
-                break
-            }
-        }
     }
 
     func setSelectedDate() {
@@ -672,5 +660,25 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
         }
 
         return dates
+    }
+}
+
+extension AddScheduleViewController {
+    private func getColorList() {
+        colorViewModel.getColorList()
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error: \(error.localizedDescription)")
+                }
+            } receiveValue: { response in
+                guard let result = response.result else { return }
+
+                self.colorList = result
+                self.collectionView.reloadData()
+            }
+            .store(in: &colorViewModel.cancellables)
     }
 }

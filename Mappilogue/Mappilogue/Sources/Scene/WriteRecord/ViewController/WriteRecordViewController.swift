@@ -9,9 +9,10 @@ import UIKit
 import Photos
 
 class WriteRecordViewController: BaseViewController {
+    private var colorViewModel = ColorViewModel()
+    private var colorList: [ColorListDTO] = []
     var schedule: Schedule = Schedule()
     var onColorSelectionButtonTapped: (() -> Void)?
-    private var colorList = dummyColorSelectionData()
  
     private let titleColorStackView = UIStackView()
     private let scrollView = UIScrollView()
@@ -139,9 +140,9 @@ class WriteRecordViewController: BaseViewController {
     }
     
     private func configureColorSelectionView() {
-        if let index = colorList.firstIndex(where: { $0 == schedule.color }) {
-      //      colorSelectionView.configure(index, colorList: <#[ColorListDTO]#>)
-        }
+//        if let index = colorList.firstIndex(where: { $0 == schedule.color }) {
+//            colorSelectionView.configure(index, colorList: colorList)
+//        }
     }
     
     private func configureMainLocationButton() {
@@ -298,8 +299,8 @@ extension WriteRecordViewController {
     func selectColor() {
         colorSelectionView.onSelectedColor = { [weak self] selectedColorIndex in
             guard let self = self else { return }
-            
-            schedule.color = colorList[selectedColorIndex]
+     
+          //  schedule.color = colorList[selectedColorIndex]
             configureScheduleTitleColorView()
         }
     }
@@ -308,5 +309,24 @@ extension WriteRecordViewController {
 extension WriteRecordViewController: UITextViewDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return true
+    }
+}
+
+extension WriteRecordViewController {
+    private func getColorList() {
+        colorViewModel.getColorList()
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error: \(error.localizedDescription)")
+                }
+            } receiveValue: { response in
+                guard let result = response.result else { return }
+
+                
+            }
+            .store(in: &colorViewModel.cancellables)
     }
 }

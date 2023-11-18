@@ -137,6 +137,8 @@
 		9245BBDA2B05088700383F4D /* UpdatedCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BBD92B05088700383F4D /* UpdatedCategory.swift */; };
 		9245BBE02B0873E500383F4D /* ColorAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BBDF2B0873E500383F4D /* ColorAPI.swift */; };
 		9245BBE22B087FF400383F4D /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BBE12B087FF400383F4D /* ColorManager.swift */; };
+		9245BC172B08D1EE00383F4D /* ColorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BC162B08D1EE00383F4D /* ColorViewModel.swift */; };
+		9245BC192B08DA7A00383F4D /* ScheduleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BC182B08DA7900383F4D /* ScheduleType.swift */; };
 		924BE0CA2A51AE25002C70FF /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 924BE0C92A51AE25002C70FF /* .swiftlint.yml */; };
 		9258409E2A7BD30700997434 /* CategorySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258409D2A7BD30700997434 /* CategorySettingViewController.swift */; };
 		925840A02A7BD4D700997434 /* CategoryOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258409F2A7BD4D700997434 /* CategoryOrderCell.swift */; };
@@ -232,7 +234,6 @@
 		929E231C2AB81EB1003180B3 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 929E231B2AB81EB1003180B3 /* FirebaseMessaging */; };
 		929E23212AB83920003180B3 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23202AB83920003180B3 /* Auth.swift */; };
 		92A7B64F2A4CCE29009C9293 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B64E2A4CCE29009C9293 /* AddButton.swift */; };
-		92A7B6532A4CDD4D009C9293 /* ScheduleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6522A4CDD4D009C9293 /* ScheduleType.swift */; };
 		92A7B6592A4D01B3009C9293 /* TodayScheduleInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6582A4D01B3009C9293 /* TodayScheduleInfoCell.swift */; };
 		92A7B65F2A4E07DB009C9293 /* TodayScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B65E2A4E07DB009C9293 /* TodayScheduleCell.swift */; };
 		92A7B6612A4E2039009C9293 /* BaseTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6602A4E2039009C9293 /* BaseTableViewHeaderFooterView.swift */; };
@@ -408,6 +409,8 @@
 		9245BBD92B05088700383F4D /* UpdatedCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatedCategory.swift; sourceTree = "<group>"; };
 		9245BBDF2B0873E500383F4D /* ColorAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorAPI.swift; sourceTree = "<group>"; };
 		9245BBE12B087FF400383F4D /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
+		9245BC162B08D1EE00383F4D /* ColorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorViewModel.swift; sourceTree = "<group>"; };
+		9245BC182B08DA7900383F4D /* ScheduleType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleType.swift; sourceTree = "<group>"; };
 		924BE0C92A51AE25002C70FF /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		9258409D2A7BD30700997434 /* CategorySettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingViewController.swift; sourceTree = "<group>"; };
 		9258409F2A7BD4D700997434 /* CategoryOrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryOrderCell.swift; sourceTree = "<group>"; };
@@ -502,7 +505,6 @@
 		929E23202AB83920003180B3 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		92A7B64B2A4CC0E6009C9293 /* HomeEmptyScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEmptyScheduleCell.swift; sourceTree = "<group>"; };
 		92A7B64E2A4CCE29009C9293 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
-		92A7B6522A4CDD4D009C9293 /* ScheduleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScheduleType.swift; path = Mappilogue/Sources/Presenter/Home/Model/ScheduleType.swift; sourceTree = SOURCE_ROOT; };
 		92A7B6582A4D01B3009C9293 /* TodayScheduleInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayScheduleInfoCell.swift; sourceTree = "<group>"; };
 		92A7B65E2A4E07DB009C9293 /* TodayScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayScheduleCell.swift; sourceTree = "<group>"; };
 		92A7B6602A4E2039009C9293 /* BaseTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
@@ -935,6 +937,8 @@
 		9245BBF22B08C0C700383F4D /* Color */ = {
 			isa = PBXGroup;
 			children = (
+				9245BC152B08D1E000383F4D /* ViewModel */,
+				9245BC1A2B08DB4800383F4D /* View */,
 			);
 			path = Color;
 			sourceTree = "<group>";
@@ -1026,7 +1030,7 @@
 		9245BBFD2B08C2AA00383F4D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				92A7B6522A4CDD4D009C9293 /* ScheduleType.swift */,
+				9245BC182B08DA7900383F4D /* ScheduleType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1066,7 +1070,6 @@
 			isa = PBXGroup;
 			children = (
 				925840D02A7FCE6800997434 /* AddScheduleHeaderView.swift */,
-				92011BF82A73D404009B047F /* ColorSelectionView.swift */,
 				9224FD022A600ACF000A56A6 /* ScheduleDurationView.swift */,
 				9224FD042A600F42000A56A6 /* NotificationRepeatButton.swift */,
 				925840D62A80D4BD00997434 /* NotificationHeaderView.swift */,
@@ -1257,6 +1260,22 @@
 				9245BBD52B04E40A00383F4D /* DeletedCategory.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		9245BC152B08D1E000383F4D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9245BC162B08D1EE00383F4D /* ColorViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9245BC1A2B08DB4800383F4D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				92011BF82A73D404009B047F /* ColorSelectionView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		925840B32A7F281A00997434 /* Cell */ = {
@@ -1893,6 +1912,7 @@
 				9200318F2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift in Sources */,
 				9224FD3B2A6532E3000A56A6 /* EndView.swift in Sources */,
 				9230BE472A57FEB80053E535 /* DayCell.swift in Sources */,
+				9245BC192B08DA7A00383F4D /* ScheduleType.swift in Sources */,
 				92F00AAF2AF4B53D001FE43F /* CategoryAPI.swift in Sources */,
 				9224FD422A656407000A56A6 /* LocationCell.swift in Sources */,
 				928B7BE52A9AFE4A00E4F789 /* NetworkResult.swift in Sources */,
@@ -1953,7 +1973,6 @@
 				9224FCF92A5FCF72000A56A6 /* ScheduleCell.swift in Sources */,
 				9263786E2A5475AF004E5B6E /* OnboardingCell.swift in Sources */,
 				92139D752AAD67E8005344AE /* MyRecordContentImageView.swift in Sources */,
-				92A7B6532A4CDD4D009C9293 /* ScheduleType.swift in Sources */,
 				9224FD352A652A96000A56A6 /* WeekdayView.swift in Sources */,
 				926999362A14F443003DDAD2 /* BaseView.swift in Sources */,
 				920031F32A92274100E3170D /* LimitedPhotoSelectionView.swift in Sources */,
@@ -2019,6 +2038,7 @@
 				92011C102A74F222009B047F /* SearchType.swift in Sources */,
 				92139D8D2AB1C1BA005344AE /* EmptyNotificationCell.swift in Sources */,
 				92A7B6592A4D01B3009C9293 /* TodayScheduleInfoCell.swift in Sources */,
+				9245BC172B08D1EE00383F4D /* ColorViewModel.swift in Sources */,
 				925840A02A7BD4D700997434 /* CategoryOrderCell.swift in Sources */,
 				9224FCF32A5C5E7A000A56A6 /* WeekCell.swift in Sources */,
 				9224FD092A601B00000A56A6 /* ColorSelectionButton.swift in Sources */,
