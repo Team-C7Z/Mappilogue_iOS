@@ -8,7 +8,9 @@
 import UIKit
 
 class MyRecordViewController: BaseViewController {
-    var dummyCategory = dummyCategoryData()
+    private var categoryViewModel = CategoryViewModel()
+    var categories: [Category] = []
+    var totalCategoryCount: Int = 0
     var isNewWrite: Bool = false
     
     private lazy var tableView: UITableView = {
@@ -25,6 +27,12 @@ class MyRecordViewController: BaseViewController {
         return tableView
     }()
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loadCategoryData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -61,7 +69,7 @@ extension MyRecordViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? dummyCategory.count + 1 : 1
+        return section == 0 ? categories.count + 1 : 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -83,9 +91,9 @@ extension MyRecordViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.selectionStyle = .none
         
-        let totalCategory = CategoryData(title: "전체", count: dummyCategory.map { $0.count }.reduce(0, +))
-        let category = indexPath.row == 0 ? totalCategory : dummyCategory[indexPath.row - 1]
-        let isLast = indexPath.row == dummyCategory.count
+        let totalCategory = Category(id: 0, title: "전체", isMarkedInMap: .inactive, markCount: totalCategoryCount)
+        let category = indexPath.row == 0 ? totalCategory : categories[indexPath.row - 1]
+        let isLast = indexPath.row == categories.count
         cell.configure(with: category, isLast: isLast)
         
         return cell
@@ -117,13 +125,14 @@ extension MyRecordViewController: UITableViewDelegate, UITableViewDataSource {
     
     func didSelectMyRecordCategoryCell(_ indexPath: IndexPath) {
         let myCategoryViewController = MyCategoryViewController()
-        myCategoryViewController.categoryName = indexPath.row == 0 ? "전체" : dummyCategory[indexPath.row-1].title
+        myCategoryViewController.categoryId = indexPath.row == 0 ? 0 : categories[indexPath.row-1].id
+        myCategoryViewController.categoryName = indexPath.row == 0 ? "전체" : categories[indexPath.row-1].title
         myCategoryViewController.onModifyCategory = { categoryName in
-            self.dummyCategory[indexPath.row-1].title = categoryName
+            self.categories[indexPath.row-1].title = categoryName
             self.tableView.reloadData()
         }
         myCategoryViewController.onDeleteCategory = {
-            self.dummyCategory.remove(at: indexPath.row-1)
+            self.categories.remove(at: indexPath.row-1)
             self.tableView.reloadData()
         }
         navigationController?.pushViewController(myCategoryViewController, animated: true)
@@ -132,5 +141,26 @@ extension MyRecordViewController: UITableViewDelegate, UITableViewDataSource {
     func didSelectCategorySettingCell() {
         let categorySettingViewController = CategorySettingViewController()
         navigationController?.pushViewController(categorySettingViewController, animated: true)
+    }
+}
+
+extension MyRecordViewController {
+    private func loadCategoryData() {
+        categoryViewModel.getCategory()
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error: \(error.localizedDescription)")
+                }
+            } receiveValue: { response in
+                guard let result = response.result else { return }
+                
+                self.categories = result.markCategories
+                self.totalCategoryCount = result.totalCategoryMarkCount
+                self.tableView.reloadData()
+            }
+            .store(in: &categoryViewModel.cancellables)
     }
 }

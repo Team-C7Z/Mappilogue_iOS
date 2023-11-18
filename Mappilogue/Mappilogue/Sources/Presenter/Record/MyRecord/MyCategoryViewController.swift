@@ -9,6 +9,7 @@ import UIKit
 
 class MyCategoryViewController: BaseViewController {
     let dummyRecord = dummyRecordData()
+    var categoryId: Int = 0
     var categoryName: String = ""
     var onModifyCategory: ((String) -> Void)?
     var onDeleteCategory: (() -> Void)?
@@ -65,11 +66,12 @@ class MyCategoryViewController: BaseViewController {
     @objc func menuButtonItemTapped() {
         let editCategoryViewController = EditCategoryViewController()
         editCategoryViewController.modalPresentationStyle = .overFullScreen
+        editCategoryViewController.categoryId = categoryId
         editCategoryViewController.categoryName = categoryName
-        editCategoryViewController.onModifyCategory = { categoryName in
-            self.title = categoryName
-            self.onModifyCategory?(categoryName)
-        }
+//        editCategoryViewController.onModifyCategory = { categoryName in
+//            self.title = categoryName
+//            self.onModifyCategory?(categoryName)
+//        }
         editCategoryViewController.onDeleteCategory = {
             self.onDeleteCategory?()
             self.navigationController?.popViewController(animated: false)

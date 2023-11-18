@@ -38,7 +38,7 @@ struct LocationTime {
 
 struct LocationTimeDetail {
     var location: String
-    var time: String
+    var time: String?
 }
 
 func dummyMainLocationData() -> [Location] {

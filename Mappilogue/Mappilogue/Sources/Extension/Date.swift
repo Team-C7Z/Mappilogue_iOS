@@ -13,6 +13,12 @@ extension Date {
         dateFormatter.dateFormat = "MM월 dd일"
         return dateFormatter.string(from: self)
     }
+    
+    func formatToyyyyMMddDateString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: self)
+    }
 
     func formatTohmmaDateToString() -> String {
         let formatter = DateFormatter()

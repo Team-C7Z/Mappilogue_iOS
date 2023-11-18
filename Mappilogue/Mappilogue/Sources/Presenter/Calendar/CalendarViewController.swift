@@ -7,12 +7,6 @@
 
 import UIKit
 
-struct SelectedDate {
-    var year: Int
-    var month: Int
-    var day: Int?
-}
-
 class CalendarViewController: NavigationBarViewController {
     private var monthlyCalendar = MonthlyCalendar()
     private var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0)

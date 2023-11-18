@@ -8,8 +8,8 @@
 import UIKit
 
 class ColorSelectionView: BaseView {
-    private let dummyColorData = dummyColorSelectionData()
-    var selectedColorIndex = 0
+    private var colorList: [ColorListDTO] = []
+    private var selectedColorId = 0
     var onSelectedColor: ((Int) -> Void)?
     
     private lazy var collectionView: UICollectionView = {
@@ -26,6 +26,15 @@ class ColorSelectionView: BaseView {
         return collectionView
     }()
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func setupProperty() {
         super.setupProperty()
         
@@ -34,7 +43,7 @@ class ColorSelectionView: BaseView {
     
     override func setupHierarchy() {
         super.setupHierarchy()
-        
+
         self.addSubview(collectionView)
     }
     
@@ -46,22 +55,26 @@ class ColorSelectionView: BaseView {
         }
     }
     
-    func configure(_ selectedColorIndex: Int) {
-        self.selectedColorIndex = selectedColorIndex
+    func configure(_ selectedColorId: Int, colorList: [ColorListDTO]) {
+        self.selectedColorId = selectedColorId
+        self.colorList = colorList
+        
+        collectionView.reloadData()
     }
 }
 
 extension ColorSelectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dummyColorData.count
+        return colorList.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ColorCell.registerId, for: indexPath) as? ColorCell else { return UICollectionViewCell() }
         
-        let colors = dummyColorData[indexPath.row]
-        let isColorSelected = indexPath.row == selectedColorIndex
-        cell.configure(with: colors, isColorSelected: isColorSelected)
+        let color = colorList[indexPath.row]
+        let isColorSelected = color.id == selectedColorId
+        let colorCode = UIColor.fromHex(color.code)
+        cell.configure(with: colorCode, isColorSelected: isColorSelected)
         cell.isUserInteractionEnabled = true
         
         return cell
@@ -86,8 +99,8 @@ extension ColorSelectionView: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedColorIndex = indexPath.row
-        onSelectedColor?(indexPath.row)
+        selectedColorId = colorList[indexPath.row].id
+        onSelectedColor?(selectedColorId)
         
         collectionView.reloadData()
     }

@@ -86,8 +86,19 @@ class ScheduleDurationView: BaseView {
         }
     }
     
-    func configure(startDate: SelectedDate, endDate: SelectedDate) {
+    func configure(startDate: SelectedDate, endDate: SelectedDate, dateType: AddScheduleDateType) {
         startDateLabel.text = "\(startDate.year)년 \(startDate.month)월 \(startDate.day ?? 1)일"
         endDateLabel.text = "\(endDate.year)년 \(endDate.month)월 \(endDate.day ?? 1)일"
+        
+        if dateType == .startDate {
+            startDateButton.backgroundColor = .colorF5F3F0
+            endDateButton.backgroundColor = .colorF9F8F7
+        } else if dateType == .endDate {
+            startDateButton.backgroundColor = .colorF9F8F7
+            endDateButton.backgroundColor = .colorF5F3F0
+        } else {
+            startDateButton.backgroundColor = .colorF9F8F7
+            endDateButton.backgroundColor = .colorF9F8F7
+        }
     }
 }

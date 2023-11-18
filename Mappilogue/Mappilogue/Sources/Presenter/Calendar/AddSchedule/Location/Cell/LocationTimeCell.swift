@@ -118,9 +118,9 @@ class LocationTimeCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(_ indexPath: IndexPath, schedule: LocationTimeDetail, isDeleteMode: Bool) {
+    func configure(_ indexPath: IndexPath, schedule: AddSchduleLocation, isDeleteMode: Bool) {
         self.indexPath = indexPath
-        locationLabel.text = schedule.location
+        locationLabel.text = schedule.name
         timeLabel.text = schedule.time
         checkButton.isHidden = !isDeleteMode
         editImage.isHidden = isDeleteMode

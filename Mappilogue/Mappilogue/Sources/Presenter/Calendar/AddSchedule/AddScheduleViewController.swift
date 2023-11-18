@@ -13,15 +13,19 @@ class AddScheduleViewController: BaseViewController {
     private var startDate: SelectedDate = SelectedDate(year: 0, month: 0, day: 0)
     private var endDate: SelectedDate  = SelectedDate(year: 0, month: 0, day: 0)
 
+    var schedule = AddScheduleDTO(colorId: -1, startDate: "", endDate: "")
+    
+    var colorList: [ColorListDTO] = []
     var isColorSelection: Bool = false
     var selectedColor: UIColor = .color1C1C1C
 
-    var isStartDate: Bool = false
+    var scheduleDateType: AddScheduleDateType = .unKnown
     let years: [Int] = Array(1970...2050)
     let months: [Int] = Array(1...12)
     var days: [Int] = []
 
-    var locations: [LocationTime] = []
+    private var selectedDateIndex = 0
+    var addSchedule: [AddSchedule] = []
     var selectedLocations: [IndexPath] = []
     var initialTime: String = "9:00 AM"
     var isDeleteMode: Bool = false
@@ -37,8 +41,8 @@ class AddScheduleViewController: BaseViewController {
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         collectionView.register(LocationTimeCell.self, forCellWithReuseIdentifier: LocationTimeCell.registerId)
         collectionView.register(AddScheduleHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: AddScheduleHeaderView.registerId)
-        collectionView.register(ScheduleDateHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ScheduleDateHeaderView.registerId)
-        collectionView.register(DeleteLocationFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: DeleteLocationFooterView.registerId)
+        collectionView.register(ScheduleDateFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: ScheduleDateFooterView.registerId)
+        collectionView.register(DeleteLocationHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: DeleteLocationHeaderView.registerId)
         collectionView.register(AddLocationFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: AddLocationFooterView.registerId)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -55,10 +59,13 @@ class AddScheduleViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+ 
+        getColorList()
         setCurrentDate()
         setSelectedDate()
         setKeyboardTap()
+        
+        addSchedule = schedule.area ?? []
     }
 
     override func setupProperty() {
@@ -125,7 +132,7 @@ class AddScheduleViewController: BaseViewController {
         let alert = Alert(titleText: "일정 작성을 중단할까요?",
                           messageText: "저장하지 않은 일정은 사라져요",
                           cancelText: "취소",
-                          doneText: "삭제",
+                          doneText: "나가기",
                           buttonColor: .colorF14C4C,
                           alertHeight: 160)
         alertViewController.configureAlert(with: alert)
@@ -138,18 +145,68 @@ class AddScheduleViewController: BaseViewController {
     }
     
     @objc func completionButtonTapped(_ sender: UIButton) {
+        schedule.startDate = startDate.stringFromSelectedDate()
+        schedule.endDate = endDate.stringFromSelectedDate()
+        if schedule.colorId == -1 {
+            schedule.colorId = colorList.map({$0.id}).randomElement() ?? 0
+        }
+        
+        schedule.area = addSchedule
+        print(schedule, "일정 추가")
+        ScheduleManager.shared.addSchedule(schedule: schedule) { result in
+            switch result {
+            case .success(let response):
+                print(response, 333)
+            default:
+                break
+            }
+        }
+        
         navigationController?.popViewController(animated: true)
     }
-    
+        
+    func getColorList() {
+        ScheduleManager.shared.getColorList { result in
+            switch result {
+            case .success(let response):
+                guard let baseResponse = response as? BaseDTO<[ColorListDTO]>, let result = baseResponse.result else { return }
+                self.colorList = result
+                self.collectionView.reloadData()
+            default:
+                break
+            }
+        }
+    }
+
     func setSelectedDate() {
         func selectedRow(_ value: Int, component: Int) {
             datePickerView.selectRow(value, inComponent: component, animated: false)
         }
-        selectedRow(years.firstIndex(of: isStartDate ? startDate.year : endDate.year) ?? 0, component: ComponentType.year.rawValue)
-        selectedRow(months.firstIndex(of: isStartDate ? startDate.month : endDate.month) ?? 0, component: ComponentType.month.rawValue)
+        if scheduleDateType == .startDate {
+            selectedRow(years.firstIndex(of: startDate.year) ?? 0, component: ComponentType.year.rawValue)
+            selectedRow(months.firstIndex(of: startDate.month) ?? 0, component: ComponentType.month.rawValue)
+        } else if scheduleDateType == .endDate {
+            selectedRow(years.firstIndex(of: endDate.year) ?? 0, component: ComponentType.year.rawValue)
+            selectedRow(months.firstIndex(of: endDate.month) ?? 0, component: ComponentType.month.rawValue)
+        }
 
-        if let day = isStartDate ? startDate.day : endDate.day, let currentDayIndex = days.firstIndex(of: day) {
-            selectedRow(currentDayIndex, component: ComponentType.day.rawValue)
+        if scheduleDateType == .startDate {
+            if let day = startDate.day, let currentDayIndex = days.firstIndex(of: day) {
+                selectedRow(currentDayIndex, component: ComponentType.day.rawValue)
+            }
+        } else if scheduleDateType == .endDate {
+            if let day = endDate.day, let currentDayIndex = days.firstIndex(of: day) {
+                selectedRow(currentDayIndex, component: ComponentType.day.rawValue)
+            }
+        }
+        if scheduleDateType == .startDate {
+            if let day = startDate.day, let currentDayIndex = days.firstIndex(of: day) {
+                selectedRow(currentDayIndex, component: ComponentType.day.rawValue)
+            }
+        } else if scheduleDateType == .endDate {
+            if let day = endDate.day, let currentDayIndex = days.firstIndex(of: day) {
+                selectedRow(currentDayIndex, component: ComponentType.day.rawValue)
+            }
         }
     }
     
@@ -180,6 +237,7 @@ class AddScheduleViewController: BaseViewController {
     @objc func dismissDatePicker(_ gesture: UITapGestureRecognizer) {
         let location = gesture.location(in: collectionView)
         if location.y < datePickerOuterView.frame.minY {
+            scheduleDateType = .unKnown
             datePickerOuterView.isHidden = true
             validateDateRange()
         }
@@ -189,9 +247,9 @@ class AddScheduleViewController: BaseViewController {
     
     func validateDateRange() {
         if daysBetween() < 0 {
-            if isStartDate {
+            if scheduleDateType == .startDate {
                 endDate = SelectedDate(year: startDate.year, month: startDate.month, day: startDate.day ?? 0)
-            } else {
+            } else if scheduleDateType == .endDate {
                 startDate = SelectedDate(year: endDate.year, month: endDate.month, day: endDate.day ?? 0)
             }
         }
@@ -217,43 +275,46 @@ class AddScheduleViewController: BaseViewController {
     }
     
     func selectLocation(_ location: KakaoSearchPlaces) {
-        guard let selectedDate = setDateFormatter(date: startDate) else { return }
-        let date = selectedDate.formatToMMddDateString()
-        addLocation(date: date, place: location)
+        let dateRange = getDatesInRange(startDate: startDate, endDate: endDate)
+        for date in dateRange {
+            addLocation(date: date, place: location)
+        }
+       
         collectionView.reloadData()
     }
     
-    func addLocation(date: String, place: KakaoSearchPlaces) {
-        let locationTime = LocationTimeDetail(location: place.placeName, time: initialTime)
-        if let index = locations.firstIndex(where: {$0.date == date}) {
-            locations[index].locationDetail.append(locationTime)
+    func addLocation(date: Date, place: KakaoSearchPlaces) {
+        let location = AddSchduleLocation(name: place.placeName, streetAddress: place.addressName, latitude: place.lat, longitude: place.long, time: initialTime)
+        if let index = addSchedule.firstIndex(where: {$0.date == date.formatToMMddDateString()}) {
+            addSchedule[index].value.append(location)
         } else {
-            locations.append(LocationTime(date: date, locationDetail: [locationTime]))
+            let schedule = AddSchedule(date: date.formatToMMddDateString(), value: [location])
+            addSchedule.append(schedule)
         }
     }
     
-    func getDatesInRange(startDate: SelectedDate, endDate: SelectedDate) -> [String] {
-        guard let startDate = setDateFormatter(date: startDate), let endDate = setDateFormatter(date: endDate) else { return [] }
-        var dates: [String] = []
-        var currentDate = startDate
-        dates.append(currentDate.formatToMMddDateString())
-   
-        while currentDate.formatToMMddDateString() != endDate.formatToMMddDateString() {
-            guard let newDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate) else { return [] }
-            currentDate = newDate
-            dates.append(currentDate.formatToMMddDateString())
-        }
-        
-        return dates
-    }
-    
+//    func getDatesInRange(startDate: SelectedDate, endDate: SelectedDate) -> [String] {
+//        guard let startDate = setDateFormatter(date: startDate), let endDate = setDateFormatter(date: endDate) else { return [] }
+//        var dates: [String] = []
+//        var currentDate = startDate
+//        dates.append(currentDate.formatToMMddDateString())
+//
+//        while currentDate.formatToMMddDateString() != endDate.formatToMMddDateString() {
+//            guard let newDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate) else { return [] }
+//            currentDate = newDate
+//            dates.append(currentDate.formatToMMddDateString())
+//        }
+//
+//        return dates
+//    }
+//
     func presentTimePicker(indexPath: IndexPath) {
         let timePickerViewController = TimePickerViewController()
-        let selectedTime = locations[indexPath.section].locationDetail[indexPath.row].time
-        timePickerViewController.selectedTime = selectedTime == "설정 안 함" ? initialTime : selectedTime
+        let selectedTime = addSchedule[indexPath.section].value[indexPath.row].time
+        timePickerViewController.selectedTime = (selectedTime == "설정 안 함" ? initialTime : selectedTime) ?? ""
         timePickerViewController.modalPresentationStyle = .overFullScreen
         timePickerViewController.onSelectedTime = { selectedTime in
-            self.locations[indexPath.section].locationDetail[indexPath.row].time = self.formatTime(selectedTime)
+            self.addSchedule[indexPath.section].value[indexPath.row].time = self.formatTime(selectedTime)
             self.collectionView.reloadData()
         }
         present(timePickerViewController, animated: false)
@@ -290,11 +351,11 @@ class AddScheduleViewController: BaseViewController {
     
     private func deleteSelectedLocations() {
         selectedLocations.sorted(by: >).forEach { indexPath in
-            if indexPath.section < locations.count && indexPath.row < locations[indexPath.section].locationDetail.count {
-                locations[indexPath.section].locationDetail.remove(at: indexPath.row)
+            if indexPath.section < addSchedule.count && indexPath.row < addSchedule[indexPath.section].value.count {
+                addSchedule[indexPath.section].value.remove(at: indexPath.row)
             }
-            if locations[indexPath.section].locationDetail.isEmpty {
-                locations.remove(at: indexPath.section)
+            if addSchedule[indexPath.section].value.isEmpty {
+                addSchedule.remove(at: indexPath.section)
             }
         }
         selectedLocations = []
@@ -304,19 +365,19 @@ class AddScheduleViewController: BaseViewController {
 
 extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return locations.isEmpty ? 1 : locations.count + 1
+        return addSchedule.isEmpty ? 1 : 2
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return locations.isEmpty ? 0 : section == 0 ? 0 : locations[section-1].locationDetail.count
+        return section == 0 ? 0 : addSchedule[selectedDateIndex].value.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LocationTimeCell.registerId, for: indexPath) as? LocationTimeCell else { return UICollectionViewCell() }
         
-        let location = locations[indexPath.section-1].locationDetail[indexPath.row]
-        cell.configure([indexPath.section-1, indexPath.row], schedule: location, isDeleteMode: isDeleteMode)
-        
+        let location = addSchedule[selectedDateIndex].value[indexPath.row]
+        cell.configure([selectedDateIndex, indexPath.row], schedule: location, isDeleteMode: isDeleteMode)
+
         cell.onSelectedLocation = { indexPath in
             self.checkButtonTapped(indexPath)
         }
@@ -343,15 +404,18 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
                 configureAddScheduleHeaderView(headerView)
                 return headerView
             default:
-                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ScheduleDateHeaderView.registerId, for: indexPath) as! ScheduleDateHeaderView
-                let date = locations[indexPath.section-1].date
-                headerView.configure(date)
+                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: DeleteLocationHeaderView.registerId, for: indexPath) as! DeleteLocationHeaderView
+                configureDeleteLocationHeaderView(headerView)
                 return headerView
             }
         } else if kind == UICollectionView.elementKindSectionFooter {
-            if !locations.isEmpty && indexPath.section == 0 {
-                let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: DeleteLocationFooterView.registerId, for: indexPath) as! DeleteLocationFooterView
-                configureDeleteLocationFooterView(footerView)
+            if !addSchedule.isEmpty && indexPath.section == 0 {
+                let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ScheduleDateFooterView.registerId, for: indexPath) as! ScheduleDateFooterView
+                footerView.configure(addSchedule)
+                footerView.onDateTapped = { index in
+                    self.selectedDateIndex = index
+                    self.collectionView.reloadData()
+                }
                 return footerView
             }
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: AddLocationFooterView.registerId, for: indexPath) as! AddLocationFooterView
@@ -364,46 +428,60 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
     }
 
     func configureAddScheduleHeaderView(_ headerView: AddScheduleHeaderView) {
-        headerView.configureDate(startDate: startDate, endDate: endDate)
+        headerView.configureDate(startDate: startDate, endDate: endDate, dateType: scheduleDateType)
+        headerView.configureColorList(colorList)
         
         let dateButtonConfiguration = { isStartDate in
             self.validateDateRange()
-            self.isStartDate = isStartDate
+            self.scheduleDateType = isStartDate
             self.datePickerButtonTapped()
+        }
+        
+        headerView.onScheduleTitle = { title in
+            self.schedule.title = title
         }
         
         headerView.onColorSelectionButtonTapped = {
             self.isColorSelection.toggle()
             self.collectionView.performBatchUpdates(nil, completion: nil)
         }
-        headerView.onStartDateButtonTapped = {
-            dateButtonConfiguration(true)
+        
+        headerView.onColorIndex = { colorId in
+            self.schedule.colorId = colorId
+            headerView.configureTitleColor(title: self.schedule.title ?? "", isColorSelection: self.isColorSelection, colorId: self.schedule.colorId)
+        }
+        
+        headerView.onStartDateButtonTapped = { dateType in
+            dateButtonConfiguration(dateType)
             self.addDatePickerTapGesture()
         }
-        headerView.onEndDateButtonTapped = {
-            dateButtonConfiguration(false)
+        
+        headerView.onEndDateButtonTapped = { dateType in
+            dateButtonConfiguration(dateType)
             self.addDatePickerTapGesture()
         }
+        
         headerView.onNotificationButtonTapped = { self.navigateToNotificationViewController()}
         headerView.onRepeatButtonTapped = { self.presentRepeatViewController() }
     }
     
-    func configureDeleteLocationFooterView(_ footerView: DeleteLocationFooterView) {
-        footerView.onDeleteMode = {
+    func configureDeleteLocationHeaderView(_ headerView: DeleteLocationHeaderView) {
+        headerView.onDeleteMode = {
+            print("dfaadfsafdadfshkuadfshukadfshiu")
             self.isDeleteMode.toggle()
             self.collectionView.reloadData()
         }
-        footerView.onDeleteLocation = {
+        headerView.onDeleteLocation = {
             self.presentDeleteLocationAlert()
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: section == 0 ? (isColorSelection ? 411 : 225) : locations.count > 1 ? 32 : 0)
+        return CGSize(width: collectionView.bounds.width, height: section == 0 ? (isColorSelection ? 411 : 225) : 32)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: !locations.isEmpty && section == 0 ? 32 : 53 + 16)
+        return CGSize(width: collectionView.bounds.width, height: !addSchedule.isEmpty && section == 0 ? 72 : 53)
     }
     
     // 수평 간격
@@ -455,9 +533,9 @@ extension AddScheduleViewController: UICollectionViewDropDelegate {
                 collectionView.deleteItems(at: [sourceIndexPath])
                 collectionView.insertItems(at: [destinationIndexPath])
                 
-                let moveLocation = locations[sourceIndexPath.section-1].locationDetail[sourceIndexPath.row]
-                locations[sourceIndexPath.section-1].locationDetail.remove(at: sourceIndexPath.row)
-                locations[destinationIndexPath.section-1].locationDetail.insert(moveLocation, at: destinationIndexPath.row)
+                let moveLocation = addSchedule[sourceIndexPath.section-1].value[sourceIndexPath.row]
+                addSchedule[sourceIndexPath.section-1].value.remove(at: sourceIndexPath.row)
+                addSchedule[destinationIndexPath.section-1].value.insert(moveLocation, at: destinationIndexPath.row)
             }, completion: { _ in
                 coordinator.drop(dropItem.dragItem, toItemAt: destinationIndexPath)
                     collectionView.reloadData()
@@ -495,25 +573,25 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
         guard let componentType = ComponentType(rawValue: component) else { return nil }
         switch componentType {
         case .year:
-            if isStartDate {
+            if scheduleDateType == .startDate {
                 if startDate.year == years[row] { return "\(years[row]) 년" }
-            } else {
+            } else if scheduleDateType == .endDate {
                 if endDate.year == years[row] { return "\(years[row]) 년" }
             }
             return "\(years[row])"
             
         case .month:
-            if isStartDate {
+            if scheduleDateType == .startDate {
                 if startDate.month == months[row] { return "\(months[row]) 월" }
-            } else {
+            } else if scheduleDateType == .endDate {
                 if endDate.month == months[row] { return "\(months[row]) 월" }
             }
             return "\(months[row])"
    
         case .day:
-            if isStartDate {
+            if scheduleDateType == .startDate {
                 if startDate.day == days[row] { return "\(days[row]) 일" }
-            } else {
+            } else if scheduleDateType == .endDate {
                 if endDate.day == days[row] { return "\(days[row]) 일" }
             }
             return "\(days[row])"
@@ -524,22 +602,32 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
         guard let componentType = ComponentType(rawValue: component) else { return }
         switch componentType {
         case .year:
-            if isStartDate {
+            if scheduleDateType == .startDate {
                 startDate.year = years[row]
-            } else { endDate.year = years[row] }
+            } else if scheduleDateType == .endDate {
+                endDate.year = years[row]
+            }
             
         case .month:
-            if isStartDate {
+            if scheduleDateType == .startDate {
                 startDate.month = months[row]
-            } else { endDate.month = months[row] }
+            } else if scheduleDateType == .endDate {
+                endDate.month = months[row]
+            }
         
         case .day:
-            if isStartDate {
+            if scheduleDateType == .startDate {
                 startDate.day = days[row]
-            } else { endDate.day = days[row] }
+            } else if scheduleDateType == .endDate {
+                endDate.day = days[row]
+            }
         }
         
-        updateDaysComponent(isStartDate ? startDate : endDate)
+        if scheduleDateType == .startDate {
+            updateDaysComponent(startDate)
+        } else if scheduleDateType == .endDate {
+            updateDaysComponent(endDate)
+        }
     }
     
     private func updateDaysComponent(_ selectedDate: SelectedDate) {
@@ -566,5 +654,23 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
         let calendar = Calendar.current
         let dateComponents = calendar.dateComponents([.day], from: start, to: end)
         return dateComponents.day
+    }
+    
+    func getDatesInRange(startDate: SelectedDate, endDate: SelectedDate) -> [Date] {
+        let calendar = Calendar.current
+
+        let start = calendar.date(from: DateComponents(year: startDate.year, month: startDate.month, day: startDate.day))!
+        let end = calendar.date(from: DateComponents(year: endDate.year, month: endDate.month, day: endDate.day))!
+
+        var dates: [Date] = []
+
+        var currentDate = start
+
+        while currentDate <= end {
+            dates.append(currentDate)
+            currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
+        }
+
+        return dates
     }
 }

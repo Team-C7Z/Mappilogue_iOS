@@ -8,8 +8,8 @@
 import UIKit
 
 class CategorySettingViewController: BaseViewController {
-    var dummyCategory = dummyCategoryData()
-    var selectedCateogry: [Bool] = []
+    private var categoryViewModel = CategoryViewModel()
+    var categories: [Category] = []
     
     private lazy var collectionView: UICollectionView = {
         let layout = LeftAlignedCollectionViewFlowLayout()
@@ -33,7 +33,7 @@ class CategorySettingViewController: BaseViewController {
      override func viewDidLoad() {
          super.viewDidLoad()
          
-         selectedCateogry = Array(repeating: false, count: dummyCategory.count)
+         loadCategoryData()
      }
      
      override func setupProperty() {
@@ -65,9 +65,9 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return dummyCategory.count + 2
+            return categories.count + 2
         case 1:
-            return dummyCategory.count + 1
+            return categories.count + 1
         default:
             return 0
         }
@@ -76,7 +76,7 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
-            if indexPath.row <= dummyCategory.count {
+            if indexPath.row <= categories.count {
                 return configureCategoryOrderCell(for: indexPath, in: collectionView)
             } else {
                 return configureAddNewCategoryCell(for: indexPath, in: collectionView)
@@ -98,9 +98,9 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
             return UICollectionViewCell()
         }
         
-        let totalCategory = CategoryData(title: "전체", count: dummyCategory.map { $0.count }.reduce(0, +))
+        let totalCategory = Category(id: 0, title: "전체", isMarkedInMap: .inactive, markCount: 0)
         let isTotal = indexPath.row == 0
-        let category = isTotal ? totalCategory : dummyCategory[indexPath.row - 1]
+        let category = isTotal ? totalCategory : categories[indexPath.row - 1]
         cell.configure(with: category, isTotal: isTotal)
 
         return cell
@@ -125,9 +125,13 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
             return UICollectionViewCell()
         }
         
-        let categoryTitle = dummyCategory[indexPath.row-1].title
-        let isSelection = selectedCateogry[indexPath.row-1]
-        cell.configure(categoryTitle, isSelection: isSelection)
+        if indexPath.row > 0 {
+            let categoryTitle = categories[indexPath.row-1].title
+            let mark = categories[indexPath.row-1].isMarkedInMap
+            if let isSelection = ActiveStatus(rawValue: mark.rawValue) {
+                cell.configure(categoryTitle, isSelection: isSelection == ActiveStatus.active)
+            }
+        }
         
         return cell
     }
@@ -144,7 +148,7 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
             if indexPath.row == 0 {
                 return CGSize(width: collectionView.frame.width - 32, height: 18)
             } else {
-                let cateogoryTitle = dummyCategory[indexPath.row-1].title
+                let cateogoryTitle = categories[indexPath.row-1].title
                 return CGSize(width: cateogoryTitle.size(withAttributes: [NSAttributedString.Key.font: UIFont.caption02]).width + 12 + 28, height: 32)
             }
         }
@@ -161,12 +165,13 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.section == 0 && indexPath.row == dummyCategory.count + 1 {
+        if indexPath.section == 0 && indexPath.row == categories.count + 1 {
             presentInputAlertViewController()
         } else if indexPath.section == 1 && indexPath.row > 0 {
             if collectionView.cellForItem(at: indexPath) is CategorySelectionCell {
-                selectedCateogry[indexPath.row-1] = !selectedCateogry[indexPath.row-1]
-                collectionView.reloadData()
+                let status = categories[indexPath.row-1].isMarkedInMap
+                categories[indexPath.row-1].isMarkedInMap = status == .active ? .inactive : .active
+                updateCategoryOrder(categories)
             }
         }
     }
@@ -179,19 +184,13 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
         let inputAlertViewController = InputAlertViewController()
         inputAlertViewController.modalPresentationStyle = .overCurrentContext
         inputAlertViewController.onCompletionTapped = { inputText in
-            self.addCategory(inputText)
+            self.categoryViewModel.addCategory(title: inputText)
         }
         present(inputAlertViewController, animated: false)
     }
     
-    func addCategory(_ input: String) {
-        dummyCategory.append(CategoryData(title: input, count: 0))
-        selectedCateogry.append(false)
-        collectionView.reloadData()
-    }
-    
     private func isIndexPathValid(_ indexPath: IndexPath) -> Bool {
-        return indexPath.section == 0 && indexPath.row > 0 && indexPath.row <= dummyCategory.count
+        return indexPath.section == 0 && indexPath.row > 0 && indexPath.row <= categories.count
     }
 }
 
@@ -225,20 +224,17 @@ extension CategorySettingViewController: UICollectionViewDropDelegate {
         if isIndexPathValid(destinationIndexPath) {
             coordinator.items.forEach { dropItem in
                 guard let sourceIndexPath = dropItem.sourceIndexPath else { return }
-                let categoryCell = self.dummyCategory[sourceIndexPath.row-1]
-                let selectedCell = self.selectedCateogry[sourceIndexPath.row-1]
-                
+                let categoryCell = self.categories[sourceIndexPath.row-1]
+
                 collectionView.performBatchUpdates({
                     collectionView.deleteItems(at: [sourceIndexPath])
                     collectionView.insertItems(at: [destinationIndexPath])
-                    self.dummyCategory.remove(at: sourceIndexPath.row-1)
-                    self.dummyCategory.insert(categoryCell, at: destinationIndexPath.row-1)
-                    self.selectedCateogry.remove(at: sourceIndexPath.row-1)
-                    self.selectedCateogry.insert(selectedCell, at: destinationIndexPath.row-1)
+                    self.categories.remove(at: sourceIndexPath.row-1)
+                    self.categories.insert(categoryCell, at: destinationIndexPath.row-1)
                 }, completion: { _ in
                     coordinator.drop(dropItem.dragItem, toItemAt: destinationIndexPath)
                     DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0) {
-                        collectionView.reloadData()
+                        self.updateCategoryOrder(self.categories)
                     }
                 })
             }
@@ -265,5 +261,40 @@ class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
             }
         }
         return attributes
+    }
+}
+
+extension CategorySettingViewController {
+    private func loadCategoryData() {
+        categoryViewModel.getCategory()
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error: \(error.localizedDescription)")
+                }
+            } receiveValue: { response in
+                guard let result = response.result else { return }
+
+                self.categories = result.markCategories
+                self.collectionView.reloadData()
+            }
+            .store(in: &categoryViewModel.cancellables)
+    }
+    
+    private func updateCategoryOrder(_ categories: [Category]) {
+        categoryViewModel.updateCategoryOrder(categories: categories)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error: \(error.localizedDescription)")
+                }
+            } receiveValue: { _ in
+                self.collectionView.reloadData()
+            }
+            .store(in: &categoryViewModel.cancellables)
     }
 }
