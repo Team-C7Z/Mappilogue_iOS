@@ -20,7 +20,7 @@ class WeekCell: BaseCollectionViewCell {
     var preMonthScheduleList: [[ScheduleTitle?]] = Array(repeating: Array(repeating: nil, count: 10), count: 32)
     var currentMonthScheduleList: [[ScheduleTitle?]] = Array(repeating: Array(repeating: nil, count: 10), count: 32)
     var nextMonthScheduleList: [[ScheduleTitle?]] = Array(repeating: Array(repeating: nil, count: 10), count: 32)
-    private var monthlyCalendar = MonthlyCalendar()
+    private var monthlyCalendar = CalendarViewModel()
     private var dummySchedule = dummyScheduleData()
     private var dummySchedule2222 = dummyScheduleData12()
     

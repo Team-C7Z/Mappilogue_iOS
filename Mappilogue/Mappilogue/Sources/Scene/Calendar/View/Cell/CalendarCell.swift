@@ -10,7 +10,7 @@ import UIKit
 class CalendarCell: BaseCollectionViewCell {
     static let registerId = "\(CalendarCell.self)"
     
-    private var monthlyCalendar = MonthlyCalendar()
+    private var monthlyCalendar = CalendarViewModel()
     private var selectedDate: SelectedDate?
     private var weekCount: Int = 0
     

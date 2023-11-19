@@ -8,7 +8,7 @@
 import UIKit
 
 class WeekdayRepeatViewController: BaseViewController {
-    private var monthlyCalendar = MonthlyCalendar()
+    private var monthlyCalendar = CalendarViewModel()
     private var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0, day: 0)
     
     weak var delegate: WeekdayRepeatDelegate?

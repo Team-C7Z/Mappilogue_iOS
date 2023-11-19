@@ -8,7 +8,7 @@
 import UIKit
 
 class CalendarViewController: NavigationBarViewController {
-    private var monthlyCalendar = MonthlyCalendar()
+    private var monthlyCalendar = CalendarViewModel()
     private var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0)
     
     private var currentPage = 1

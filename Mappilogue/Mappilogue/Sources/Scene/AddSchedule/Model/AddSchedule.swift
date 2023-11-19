@@ -28,4 +28,3 @@ struct AddSchduleLocation: Codable {
     var longitude: String?
     var time: String?
 }
-
