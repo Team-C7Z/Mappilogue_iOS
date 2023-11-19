@@ -12,7 +12,7 @@ class ScheduleDateFooterView: BaseCollectionReusableView {
     
     var onDateTapped: ((Int) -> Void)?
     
-    private var locations: [AddSchedule] = []
+    private var locations: [Area] = []
     private var selectedDateIndex = 0
     
     private lazy var collectionView: UICollectionView = {
@@ -47,7 +47,7 @@ class ScheduleDateFooterView: BaseCollectionReusableView {
         }
     }
     
-    func configure(_ locations: [AddSchedule]) {
+    func configure(_ locations: [Area]) {
         self.locations = locations
     }
 }

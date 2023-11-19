@@ -155,6 +155,7 @@ extension AddLocationViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let location = searchPlaces[indexPath.row]
+        
         dismiss(animated: false) {
             self.onLocationSelected?(location)
         }
