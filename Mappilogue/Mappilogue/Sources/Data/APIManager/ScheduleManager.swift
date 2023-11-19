@@ -24,6 +24,10 @@ class ScheduleManager: ScheduleAPI2 {
             requestParameters["title"] = title
         }
         
+        if let alarmOptions = schedule.alarmOptions {
+            requestParameters["alarmOptions"] = alarmOptions
+        }
+        
         if let area = schedule.area {
             requestParameters["area"] = area.map { areaList in
                 return [
@@ -32,19 +36,19 @@ class ScheduleManager: ScheduleAPI2 {
                         var locationInfo: [String: Any] = [
                             "name": location.name
                         ]
-//                        if let streetAddress = location.streetAddress {
-//                            locationInfo["streetAddress"] = streetAddress
-//                        }
-//                        if let latitude = location.latitude {
-//                            locationInfo["latitude"] = latitude
-//                        }
-//                        if let longitude = location.longitude {
-//                            locationInfo["longitude"] = longitude
-//                        }
-//                        if let time = location.time {
-//                            locationInfo["time"] = time
-//                        }
-                        
+                        if let streetAddress = location.streetAddress {
+                            locationInfo["streetAddress"] = streetAddress
+                        }
+                        if let latitude = location.latitude {
+                            locationInfo["latitude"] = latitude
+                        }
+                        if let longitude = location.longitude {
+                            locationInfo["longitude"] = longitude
+                        }
+                        if let time = location.time {
+                            locationInfo["time"] = time
+                        }
+
                         return locationInfo
                     }
                 ] as [String: Any]
@@ -56,16 +60,12 @@ class ScheduleManager: ScheduleAPI2 {
         } catch {
             return Fail(error: CategoryAPIError.serializationError(error)).eraseToAnyPublisher()
         }
-        print(requestParameters, 77)
 
         return URLSession.shared.dataTaskPublisher(for: request)
             .tryMap { data, response in
-               
                 guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 201 else {
                     throw URLError(.badServerResponse)
                 }
-                
-                print(httpResponse.statusCode)
             
                 return data
             }

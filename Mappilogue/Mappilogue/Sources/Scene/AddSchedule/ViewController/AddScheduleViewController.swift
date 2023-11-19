@@ -11,7 +11,7 @@ class AddScheduleViewController: BaseViewController {
     private var colorViewModel = ColorViewModel()
     private var scheduleViewModel = ScheduleViewModel()
     private var scheduleId: Int = 0
-    private var monthlyCalendar = MonthlyCalendar()
+    private var monthlyCalendar = CalendarViewModel()
     private var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0, day: 0)
     private var startDate: SelectedDate = SelectedDate(year: 0, month: 0, day: 0)
     private var endDate: SelectedDate  = SelectedDate(year: 0, month: 0, day: 0)
@@ -154,8 +154,7 @@ class AddScheduleViewController: BaseViewController {
             schedule.colorId = colorList.map({$0.id}).randomElement() ?? 0
         }
         
-        schedule.area = area
-        print(schedule, "일정 추가")
+        schedule.area = area.isEmpty ? nil : area
         scheduleViewModel.addSchedule(schedule: schedule)
         
         navigationController?.popViewController(animated: true)
@@ -240,6 +239,9 @@ class AddScheduleViewController: BaseViewController {
 
     func navigateToNotificationViewController() {
         let notificationViewController = NotificationViewController()
+        notificationViewController.onNotificationSelected = { alarmOptions in
+            self.schedule.alarmOptions = alarmOptions
+        }
         navigationController?.pushViewController(notificationViewController, animated: true)
     }
     
@@ -281,25 +283,8 @@ class AddScheduleViewController: BaseViewController {
             let schedule = Area(date: date.formatToyyyyMMddDateString(), value: [location])
             area.append(schedule)
         }
-        
-        print(area, 887)
     }
-    
-//    func getDatesInRange(startDate: SelectedDate, endDate: SelectedDate) -> [String] {
-//        guard let startDate = setDateFormatter(date: startDate), let endDate = setDateFormatter(date: endDate) else { return [] }
-//        var dates: [String] = []
-//        var currentDate = startDate
-//        dates.append(currentDate.formatToMMddDateString())
-//
-//        while currentDate.formatToMMddDateString() != endDate.formatToMMddDateString() {
-//            guard let newDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate) else { return [] }
-//            currentDate = newDate
-//            dates.append(currentDate.formatToMMddDateString())
-//        }
-//
-//        return dates
-//    }
-//
+
     func presentTimePicker(indexPath: IndexPath) {
         let timePickerViewController = TimePickerViewController()
         let selectedTime = area[indexPath.section].value[indexPath.row].time
@@ -459,7 +444,6 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
     
     func configureDeleteLocationHeaderView(_ headerView: DeleteLocationHeaderView) {
         headerView.onDeleteMode = {
-            print("dfaadfsafdadfshkuadfshukadfshiu")
             self.isDeleteMode.toggle()
             self.collectionView.reloadData()
         }

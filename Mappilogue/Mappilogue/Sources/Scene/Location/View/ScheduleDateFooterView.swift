@@ -59,7 +59,7 @@ extension ScheduleDateFooterView: UICollectionViewDelegate, UICollectionViewData
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ScheduleDateCell.registerId, for: indexPath) as? ScheduleDateCell else { return ScheduleDateCell() }
-        let date = locations[indexPath.row].date
+        let date = locations[indexPath.row].date.formatToyyyyMMddDateString()
         let isSelected = selectedDateIndex == indexPath.row
         cell.configure(date, isSelected: isSelected)
         return cell

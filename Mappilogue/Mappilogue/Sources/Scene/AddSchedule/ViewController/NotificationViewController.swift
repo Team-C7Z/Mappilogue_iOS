@@ -8,6 +8,7 @@
 import UIKit
 
 struct SelectedNotification {
+    var notification: String?
     var date: String?
     var hour: Int?
     var minute: Int?
@@ -15,10 +16,12 @@ struct SelectedNotification {
 }
 
 class NotificationViewController: BaseViewController {
-    private var monthlyCalendar = MonthlyCalendar()
+    private var monthlyCalendar = CalendarViewModel()
+    var onNotificationSelected: (([String]) -> Void)?
     
     var dates = ["7일 전", "3일 전", "이틀 전", "전날", "당일"]
     var beforDay = [7, 3, 2, 1, 0]
+    var convertedDate: [String] = []
     var selectedBeforeDayIndex: Int = 0
     let hours = Array(1...12)
     var minutes = Array(0...59).map {String(format: "%02d", $0)}
@@ -27,6 +30,7 @@ class NotificationViewController: BaseViewController {
     var isDate: Bool = false
     var selectedNotification = SelectedNotification()
     var notificationList: [SelectedNotification] = []
+    var alarmOptions: [String] = []
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -56,7 +60,7 @@ class NotificationViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationTitleAndBackButton("알림", backButtonAction: #selector(backButtonTapped))
+        setNavigationTitleAndBackButton("알림", backButtonAction: #selector(popToAddScheduleViewController))
         
         pickerOuterView.backgroundColor = .colorF5F3F0
         pickerView.delegate = self
@@ -94,15 +98,38 @@ class NotificationViewController: BaseViewController {
         }
     }
     
+    @objc func popToAddScheduleViewController() {
+        notificationList.forEach {
+            if let time = monthlyCalendar.convertTimeIntToDate(
+                hour: $0.hour ?? 0,
+                minute: $0.minute ?? 0,
+                timePeriod: $0.timePeriod ?? "AM"
+            ) {
+                let alarm = "\($0.notification ?? "")T\(time)"
+                alarmOptions.append(alarm)
+            }
+        }
+        
+        onNotificationSelected?(alarmOptions)
+        navigationController?.popViewController(animated: true)
+    }
+    
     func setCurrentDate() -> SelectedNotification {
         let todayDate = "당일 (\(monthlyCalendar.currentMonth)월 \(monthlyCalendar.currentDay)일)"
-        return SelectedNotification(date: todayDate, hour: 9, minute: 0, timePeriod: "AM")
+        let notification = monthlyCalendar.convertIntToDate(
+            year: monthlyCalendar.currentYear,
+            month: monthlyCalendar.currentMonth,
+            day: monthlyCalendar.currentDay
+        )?.formatToyyyyMMddDateString()
+        return SelectedNotification(notification: notification, date: todayDate, hour: 9, minute: 0, timePeriod: "AM")
     }
     
     func setDateList() {
         selectedBeforeDayIndex = dates.count-1
         for index in dates.indices {
-            dates[index] += " (\(monthlyCalendar.getDateBefore(beforeDay: beforDay[index])))"
+            let date = monthlyCalendar.getDateBefore(beforeDay: beforDay[index])
+            convertedDate.append(date)
+            dates[index] += " (\(date.formatToyyyyMMddDateString()))"
         }
     }
     
@@ -228,6 +255,7 @@ extension NotificationViewController: UIPickerViewDelegate, UIPickerViewDataSour
         switch component {
         case 0:
             if isDate {
+                selectedNotification.notification = convertedDate[row]
                 selectedNotification.date = dates[row]
                 selectedBeforeDayIndex = row
             } else {

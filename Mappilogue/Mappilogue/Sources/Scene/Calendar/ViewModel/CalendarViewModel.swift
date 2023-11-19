@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MonthlyCalendar {
+struct CalendarViewModel {
     let weekday: [String] = ["일", "월", "화", "수", "목", "금", "토"]
     
     var lastMonthRange: Int = 0
@@ -168,7 +168,7 @@ struct MonthlyCalendar {
     func getDateBefore(beforeDay: Int) -> String {
         let calendar = Calendar.current
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM월 d일"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
     
         let date = calendar.date(byAdding: .day, value: -beforeDay, to: Date())
         return dateFormatter.string(from: date!)
@@ -183,7 +183,7 @@ struct MonthlyCalendar {
         }
         
         let calendar = Calendar.current
-        guard let currentDate = convertIntToDate(year: selectedDate.year, month: selectedDate.month) else { return .unknown }
+        guard let currentDate = convertIntToDate(year: selectedDate.year, month: selectedDate.month, day: nil) else { return .unknown }
         
         let inputYear = calendar.component(.year, from: inputDate)
         let inputMonth = calendar.component(.month, from: inputDate)
@@ -235,14 +235,33 @@ struct MonthlyCalendar {
         return nil
     }
     
-    func convertIntToDate(year: Int, month: Int) -> Date? {
+    func convertIntToDate(year: Int, month: Int, day: Int?) -> Date? {
         var dateComponents = DateComponents()
         dateComponents.year = year
         dateComponents.month = month
         
+        if let day {
+            dateComponents.day = day
+        }
+        
         let calendar = Calendar.current
         if let date = calendar.date(from: dateComponents) {
             return date
+        } else {
+            return nil
+        }
+    }
+    
+    func convertTimeIntToDate(hour: Int, minute: Int, timePeriod: String) -> String? {
+        var dateComponents = DateComponents()
+        dateComponents.hour = timePeriod == "AM" ? hour : hour + 12
+        dateComponents.minute = minute
+        
+        let calendar = Calendar.current
+        if let date = calendar.date(from: dateComponents) {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "HH:mm:ss"
+            return dateFormatter.string(from: date)
         } else {
             return nil
         }
