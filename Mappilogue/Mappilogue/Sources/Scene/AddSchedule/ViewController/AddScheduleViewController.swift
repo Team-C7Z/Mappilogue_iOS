@@ -9,12 +9,14 @@ import UIKit
 
 class AddScheduleViewController: BaseViewController {
     private var colorViewModel = ColorViewModel()
+    private var scheduleViewModel = ScheduleViewModel()
+    private var scheduleId: Int = 0
     private var monthlyCalendar = MonthlyCalendar()
     private var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0, day: 0)
     private var startDate: SelectedDate = SelectedDate(year: 0, month: 0, day: 0)
     private var endDate: SelectedDate  = SelectedDate(year: 0, month: 0, day: 0)
 
-    var schedule = AddScheduleDTO(colorId: -1, startDate: "", endDate: "")
+    var schedule = AddSchedule(colorId: -1, startDate: "", endDate: "")
     
     var colorList: [ColorListDTO] = []
     var isColorSelection: Bool = false
@@ -26,7 +28,7 @@ class AddScheduleViewController: BaseViewController {
     var days: [Int] = []
 
     private var selectedDateIndex = 0
-    var addSchedule: [AddSchedule] = []
+    var area: [Area] = []
     var selectedLocations: [IndexPath] = []
     var initialTime: String = "9:00 AM"
     var isDeleteMode: Bool = false
@@ -66,7 +68,7 @@ class AddScheduleViewController: BaseViewController {
         setSelectedDate()
         setKeyboardTap()
         
-        addSchedule = schedule.area ?? []
+        area = schedule.area ?? []
     }
 
     override func setupProperty() {
@@ -152,16 +154,9 @@ class AddScheduleViewController: BaseViewController {
             schedule.colorId = colorList.map({$0.id}).randomElement() ?? 0
         }
         
-        schedule.area = addSchedule
+        schedule.area = area
         print(schedule, "일정 추가")
-        ScheduleManager.shared.addSchedule(schedule: schedule) { result in
-            switch result {
-            case .success(let response):
-                print(response, 333)
-            default:
-                break
-            }
-        }
+        scheduleViewModel.addSchedule(schedule: schedule)
         
         navigationController?.popViewController(animated: true)
     }
@@ -272,13 +267,22 @@ class AddScheduleViewController: BaseViewController {
     }
     
     func addLocation(date: Date, place: KakaoSearchPlaces) {
-        let location = AddSchduleLocation(name: place.placeName, streetAddress: place.addressName, latitude: place.lat, longitude: place.long, time: initialTime)
-        if let index = addSchedule.firstIndex(where: {$0.date == date.formatToMMddDateString()}) {
-            addSchedule[index].value.append(location)
+        let location = AddSchduleLocation(
+            name: place.placeName,
+            streetAddress: place.addressName,
+            latitude: place.lat.isEmpty ? nil : place.lat,
+            longitude: place.long.isEmpty ? nil : place.long,
+            time: initialTime
+        )
+  
+        if let index = area.firstIndex(where: {$0.date == date.formatToMMddDateString()}) {
+            area[index].value.append(location)
         } else {
-            let schedule = AddSchedule(date: date.formatToMMddDateString(), value: [location])
-            addSchedule.append(schedule)
+            let schedule = Area(date: date.formatToyyyyMMddDateString(), value: [location])
+            area.append(schedule)
         }
+        
+        print(area, 887)
     }
     
 //    func getDatesInRange(startDate: SelectedDate, endDate: SelectedDate) -> [String] {
@@ -298,11 +302,11 @@ class AddScheduleViewController: BaseViewController {
 //
     func presentTimePicker(indexPath: IndexPath) {
         let timePickerViewController = TimePickerViewController()
-        let selectedTime = addSchedule[indexPath.section].value[indexPath.row].time
+        let selectedTime = area[indexPath.section].value[indexPath.row].time
         timePickerViewController.selectedTime = (selectedTime == "설정 안 함" ? initialTime : selectedTime) ?? ""
         timePickerViewController.modalPresentationStyle = .overFullScreen
         timePickerViewController.onSelectedTime = { selectedTime in
-            self.addSchedule[indexPath.section].value[indexPath.row].time = self.formatTime(selectedTime)
+            self.area[indexPath.section].value[indexPath.row].time = self.formatTime(selectedTime)
             self.collectionView.reloadData()
         }
         present(timePickerViewController, animated: false)
@@ -339,11 +343,11 @@ class AddScheduleViewController: BaseViewController {
     
     private func deleteSelectedLocations() {
         selectedLocations.sorted(by: >).forEach { indexPath in
-            if indexPath.section < addSchedule.count && indexPath.row < addSchedule[indexPath.section].value.count {
-                addSchedule[indexPath.section].value.remove(at: indexPath.row)
+            if indexPath.section < area.count && indexPath.row < area[indexPath.section].value.count {
+                area[indexPath.section].value.remove(at: indexPath.row)
             }
-            if addSchedule[indexPath.section].value.isEmpty {
-                addSchedule.remove(at: indexPath.section)
+            if area[indexPath.section].value.isEmpty {
+                area.remove(at: indexPath.section)
             }
         }
         selectedLocations = []
@@ -353,17 +357,17 @@ class AddScheduleViewController: BaseViewController {
 
 extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return addSchedule.isEmpty ? 1 : 2
+        return area.isEmpty ? 1 : 2
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 ? 0 : addSchedule[selectedDateIndex].value.count
+        return section == 0 ? 0 : area[selectedDateIndex].value.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LocationTimeCell.registerId, for: indexPath) as? LocationTimeCell else { return UICollectionViewCell() }
         
-        let location = addSchedule[selectedDateIndex].value[indexPath.row]
+        let location = area[selectedDateIndex].value[indexPath.row]
         cell.configure([selectedDateIndex, indexPath.row], schedule: location, isDeleteMode: isDeleteMode)
 
         cell.onSelectedLocation = { indexPath in
@@ -397,9 +401,9 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
                 return headerView
             }
         } else if kind == UICollectionView.elementKindSectionFooter {
-            if !addSchedule.isEmpty && indexPath.section == 0 {
+            if !area.isEmpty && indexPath.section == 0 {
                 let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ScheduleDateFooterView.registerId, for: indexPath) as! ScheduleDateFooterView
-                footerView.configure(addSchedule)
+                footerView.configure(area)
                 footerView.onDateTapped = { index in
                     self.selectedDateIndex = index
                     self.collectionView.reloadData()
@@ -469,7 +473,7 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: !addSchedule.isEmpty && section == 0 ? 72 : 53)
+        return CGSize(width: collectionView.bounds.width, height: !area.isEmpty && section == 0 ? 72 : 53)
     }
     
     // 수평 간격
@@ -521,9 +525,9 @@ extension AddScheduleViewController: UICollectionViewDropDelegate {
                 collectionView.deleteItems(at: [sourceIndexPath])
                 collectionView.insertItems(at: [destinationIndexPath])
                 
-                let moveLocation = addSchedule[sourceIndexPath.section-1].value[sourceIndexPath.row]
-                addSchedule[sourceIndexPath.section-1].value.remove(at: sourceIndexPath.row)
-                addSchedule[destinationIndexPath.section-1].value.insert(moveLocation, at: destinationIndexPath.row)
+                let moveLocation = area[sourceIndexPath.section-1].value[sourceIndexPath.row]
+                area[sourceIndexPath.section-1].value.remove(at: sourceIndexPath.row)
+                area[destinationIndexPath.section-1].value.insert(moveLocation, at: destinationIndexPath.row)
             }, completion: { _ in
                 coordinator.drop(dropItem.dragItem, toItemAt: destinationIndexPath)
                     collectionView.reloadData()
@@ -682,3 +686,5 @@ extension AddScheduleViewController {
             .store(in: &colorViewModel.cancellables)
     }
 }
+
+
