@@ -82,30 +82,5 @@ struct CalendarSchedule2 {
             return SelectedDate(year: components.year ?? 0, month: components.month ?? 0, day: components.day)
         }
         return nil
-    }
-    
-}
-
-func dummyScheduleData11() -> [CalendarSchedule2] {
-    let schedule1 = CalendarSchedule2(id: 9, title: "문", color: .colorB1E9BE, startDate: "2023-08-20", endDate: "2023-09-01")
-    let schedule2 = CalendarSchedule2(id: 10, title: "부산 여행", color: .colorF0F1B0, startDate: "2023-09-03", endDate: "2023-09-07")
-    let schedule3 = CalendarSchedule2(id: 11, title: "일정2222323222", color: .colorE6C3F2, startDate: "2023-09-04", endDate: "2023-09-05")
-    let schedule4 = CalendarSchedule2(id: 12, title: "제이슨", color: .colorF5DC82, startDate: "2023-09-06", endDate: "2023-09-06")
-    let schedule5 = CalendarSchedule2(id: 13, title: "일정4", color: .colorABD9F3, startDate: "2023-09-05", endDate: "2023-09-14")
-    let schedule6 = CalendarSchedule2(id: 14, title: "냠냠", color: .colorF0B4D5, startDate: "2023-09-07", endDate: "2023-09-11")
-    let schedule7 = CalendarSchedule2(id: 15, title: "ㅠㅠ", color: .colorFFAF82, startDate: "2023-09-09", endDate: "2023-09-12")
-    let schedule8 = CalendarSchedule2(id: 16, title: "스케줄2323", color: .colorFFAF82, startDate: "2023-10-30", endDate: "2023-11-04")
-    let schedule9 = CalendarSchedule2(id: 17, title: "스케줄ㅇㄹㄴㅁㄹㄴㅁ", color: .colorFFAF82, startDate: "2023-11-01", endDate: "2023-11-10")
-    
-    return [schedule1, schedule2, schedule3, schedule4, schedule5, schedule6]
-}
-
-func dummyScheduleData12() -> [CalendarSchedule2] {
-    let schedule2 = CalendarSchedule2(id: 10, title: "부산 여행", color: .colorF0F1B0, startDate: "2023-09-03", endDate: "2023-09-07")
-    let schedule3 = CalendarSchedule2(id: 11, title: "티켓팅", color: .colorE6C3F2, startDate: "2023-09-04", endDate: "2023-09-05")
-    let schedule4 = CalendarSchedule2(id: 12, title: "생일", color: .colorF5DC82, startDate: "2023-09-06", endDate: "2023-09-06")
-    let schedule5 = CalendarSchedule2(id: 13, title: "서류 접수", color: .colorABD9F3, startDate: "2023-09-05", endDate: "2023-09-14")
-    let schedule6 = CalendarSchedule2(id: 14, title: "팝업스토어", color: .colorF0B4D5, startDate: "2023-09-07", endDate: "2023-09-11")
-
-    return [schedule2, schedule3, schedule4, schedule5, schedule6]
+    }    
 }
