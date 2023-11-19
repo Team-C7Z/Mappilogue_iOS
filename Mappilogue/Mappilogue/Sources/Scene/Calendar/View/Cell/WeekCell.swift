@@ -22,7 +22,6 @@ class WeekCell: BaseCollectionViewCell {
     var nextMonthScheduleList: [[ScheduleTitle?]] = Array(repeating: Array(repeating: nil, count: 10), count: 32)
     private var monthlyCalendar = CalendarViewModel()
     private var dummySchedule = dummyScheduleData()
-    private var dummySchedule2222 = dummyScheduleData12()
     
     private var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0)
     private var weekIndex: Int = 0
@@ -40,7 +39,7 @@ class WeekCell: BaseCollectionViewCell {
         collectionView.backgroundColor = .colorF9F8F7
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(DayCell.self, forCellWithReuseIdentifier: DayCell.registerId)
-        collectionView.register(ScheduleTitleCell.self, forCellWithReuseIdentifier: ScheduleTitleCell.registerId)
+        collectionView.register(ScheduleDotCell.self, forCellWithReuseIdentifier: ScheduleDotCell.registerId)
         collectionView.delegate = self
         collectionView.dataSource = self
        
@@ -88,67 +87,7 @@ class WeekCell: BaseCollectionViewCell {
         nextMonthScheduleList = Array(repeating: Array(repeating: nil, count: 10), count: 32)
         days = monthlyCalendar.getMonthlyCalendar(year: year, month: month).reduce([], +)
         week = monthlyCalendar.getWeek(year: year, month: month, weekIndex: weekIndex)
-        getDaySchedule111()
         collectionView.reloadData()
-    }
-    
-    func getDaySchedule111() {
-        for schedule in dummySchedule2222 {
-           
-            guard let dates = monthlyCalendar.datesBetween(startDate: schedule.startDate, endDate: schedule.endDate) else { return }
-            
-            var index = 0
-            for (dateIndex, date) in dates.enumerated() {
-                guard let day = monthlyCalendar.dayFromDate(date) else { return }
-                let dayCount = 0
-                switch monthlyCalendar.compareDateToCurrentMonth(selectedDate: selectedDate, date: date) {
-                case .lastMonth:
-                    while preMonthScheduleList[day][index] != nil && index < 2 {
-                        index += 1
-                    }
-                    
-                    guard let firstDay = days.first else { return }
-                    if firstDay == String(day) || dateIndex == 0 {
-                        preMonthScheduleList[day][index] = ScheduleTitle(id: schedule.id, title: schedule.title, color: schedule.color, dayCount: min(dates.count, monthlyCalendar.lastMonthRange))
-                    } else {
-                        preMonthScheduleList[day][index] = ScheduleTitle(id: schedule.id, title: "", color: schedule.color, dayCount: nil)
-                    }
-                    
-                case .currentMonth:
-                    if (day + monthlyCalendar.lastMonthRange - 1) % 7 == 0 {
-                        index = 0
-                    }
-                    
-                    while currentMonthScheduleList[day][index] != nil && index < 2 {
-                        index += 1
-                    }
-                    
-                    if (day + monthlyCalendar.lastMonthRange - 1) % 7 == 0 ||  dateIndex == 0 {
-                      //  currentMonthScheduleList[day][index] = ScheduleTitle(id: schedule.id, title: "", color: schedule.color, dayCount: dayCount)
-                      //  print(schedule.title, (day + monthlyCalendar.lastMonthRange - 1), 33)
-                 //   } else if dateIndex == 0 {
-                 //       var dayCount = 7 - ((day + monthlyCalendar.lastMonthRange - 1) % 7)
-                        currentMonthScheduleList[day][index] = ScheduleTitle(id: schedule.id, title: schedule.title, color: schedule.color, dayCount: dates.count)
-                    } else {
-                        currentMonthScheduleList[day][index] = ScheduleTitle(id: schedule.id, title: "", color: schedule.color, dayCount: nil)
-                    }
-             
-                case .nextMonth:
-                    while nextMonthScheduleList[day][index] != nil && index < 2 {
-                        index += 1
-                    }
-
-                    if dateIndex == 0 {
-                        nextMonthScheduleList[day][index] = ScheduleTitle(id: schedule.id, title: schedule.title, color: schedule.color, dayCount: min(date.count, monthlyCalendar.nextMonthRange))
-                    } else {
-                        nextMonthScheduleList[day][index] = ScheduleTitle(id: schedule.id, title: "", color: schedule.color, dayCount: 0)
-                    }
-                case .unknown:
-                    break
-                }
-
-            }
-        }
     }
 
     func getDaySchedule(year: Int, month: Int, day: Int) -> [Schedule] {
@@ -189,7 +128,7 @@ class WeekCell: BaseCollectionViewCell {
 
 extension WeekCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 4
+        return 2
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -218,52 +157,21 @@ extension WeekCell: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 
             return cell
         default:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ScheduleTitleCell.registerId, for: indexPath) as? ScheduleTitleCell else { return UICollectionViewCell() }
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ScheduleDotCell.registerId, for: indexPath) as? ScheduleDotCell else { return UICollectionViewCell() }
             
             let day = Int(week[indexPath.row]) ?? 0
-          
-            if weekIndex == 0 {
-                if !monthlyCalendar.isLastMonth(indexPath.row) {
-                    if let schedule = preMonthScheduleList[day][indexPath.section-1] {
-                        cell.configure(with: schedule.title, color: schedule.color, scheduleCount: schedule.dayCount, row: indexPath.row)
-                    }
-                } else {
-                    if let schedule = currentMonthScheduleList[day][indexPath.section-1] {
-                        cell.configure(with: schedule.title, color: schedule.color, scheduleCount: schedule.dayCount, row: indexPath.row)
-                    }
-                }
-            } else if weekIndex == monthlyCalendar.getWeekCount(year: selectedDate.year, month: selectedDate.month) - 1 {
-                if !monthlyCalendar.isNextMonth(indexPath.row) {
-                    if let schedule = nextMonthScheduleList[day][indexPath.section-1] {
-                        cell.configure(with: schedule.title, color: schedule.color, scheduleCount: schedule.dayCount, row: indexPath.row)
-                    }
-                } else {
-                    if let schedule = currentMonthScheduleList[day][indexPath.section-1] {
-                        cell.configure(with: schedule.title, color: schedule.color, scheduleCount: schedule.dayCount, row: indexPath.row)
-                    }
-                }
-            } else {
-                if let schedule = currentMonthScheduleList[day][indexPath.section-1] {
-                    cell.configure(with: schedule.title, color: schedule.color, scheduleCount: schedule.dayCount, row: indexPath.row)
-             
-                }
-            }
+            
             return cell
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let day = Int(week[indexPath.row]) ?? 0
-        var width: CGFloat = collectionView.bounds.width / 7
-        let height: CGFloat
-
         switch indexPath.section {
         case 0:
-            height = 30
+            return CGSize(width: collectionView.bounds.width / 7, height: 30)
         default:
-            height = 16
+            return CGSize(width: collectionView.bounds.width / 7, height: 12)
         }
-        return CGSize(width: width, height: height)
     }
 
     // 수평 간격

@@ -23,7 +23,6 @@ class ScheduleTitleCell: BaseCollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        
     }
 
     override func setupProperty() {
@@ -55,7 +54,6 @@ class ScheduleTitleCell: BaseCollectionViewCell {
     }
     
     func configure(with schedule: String, color: UIColor, scheduleCount: Int?, row: Int) {
-
         if let scheduleCount {
             let count = min(scheduleCount, 7 - row)
           
