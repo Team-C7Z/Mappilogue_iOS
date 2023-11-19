@@ -7,17 +7,15 @@
 
 import Foundation
 import Moya
+import Combine
 
 enum ScheduleAPI: BaseAPI {
-    case getColorList
-    case addSchedule(schedule: AddScheduleDTO)
+    case addSchedule(schedule: AddSchedule)
 }
 
 extension ScheduleAPI: TargetType {
     var path: String {
         switch self {
-        case .getColorList:
-            return "/api/v1/schedules/colors"
         case .addSchedule:
             return "/api/v1/schedules"
         }
@@ -25,8 +23,6 @@ extension ScheduleAPI: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .getColorList:
-            return .get
         case .addSchedule:
             return .post
         }
@@ -34,8 +30,6 @@ extension ScheduleAPI: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case .getColorList:
-            return .requestPlain
         case let .addSchedule(schedule):
             var requestParameters: [String: Any] = [
                 "colorId": schedule.colorId,
@@ -75,10 +69,12 @@ extension ScheduleAPI: TargetType {
         guard let token = AuthUserDefaults.accessToken else { return nil }
         
         switch self {
-        case .getColorList:
-            return nil
         case .addSchedule:
             return ["Authorization": "Bearer \(token)"]
         }
     }
+}
+
+protocol ScheduleAPI2 {
+    func addSchedule(schedule: AddSchedule) -> AnyPublisher<BaseDTO<AddScheduleDTO>, Error>
 }
