@@ -129,7 +129,7 @@ class NotificationViewController: BaseViewController {
         for index in dates.indices {
             let date = monthlyCalendar.getDateBefore(beforeDay: beforDay[index])
             convertedDate.append(date)
-            dates[index] += " (\(date.formatToyyyyMMddDateString()))"
+            dates[index] += " (\(date.formatToMMddDateString()))"
         }
     }
     

@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class ScheduleManager: ScheduleAPI2 {
+class ScheduleManager: ScheduleAPI {
     private let baseURL = URL(string: "\(Environment.baseURL)/api/v1/schedules")!
     
     func addSchedule(schedule: AddSchedule) -> AnyPublisher<BaseDTO<AddScheduleDTO>, Error> {

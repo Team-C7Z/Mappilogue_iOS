@@ -8,7 +8,8 @@
 import UIKit
 
 class CalendarViewController: NavigationBarViewController {
-    private var monthlyCalendar = CalendarViewModel()
+    private var calendarViewModel = CalendarViewModel()
+    private var calendarSchedules: [CalendarSchedules] = []
     private var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0)
     
     private var currentPage = 1
@@ -36,7 +37,9 @@ class CalendarViewController: NavigationBarViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+
+        loadCalendarData()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(presentScheduleViewContoller), name: Notification.Name("PresentScheduleViewController"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(dismissScheduleViewController), name: Notification.Name("DismissScheduleViewController"), object: nil)
@@ -105,9 +108,22 @@ class CalendarViewController: NavigationBarViewController {
     }
     
     func setCalendarDate() {
-        selectedDate = SelectedDate(year: monthlyCalendar.currentYear, month: monthlyCalendar.currentMonth)
+        selectedDate = SelectedDate(year: calendarViewModel.currentYear, month: calendarViewModel.currentMonth)
     }
     
+    func loadCalendarData() {
+        let currentMonthCalendar = Calendar1(year: calendarViewModel.currentYear, month: calendarViewModel.currentMonth)
+
+        calendarViewModel.getCalendar(calendar: currentMonthCalendar)
+     
+        calendarViewModel.$calendarResult
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { result in
+                self.calendarSchedules = result?.calenderSchedules ?? []
+            })
+            .store(in: &calendarViewModel.cancellables)
+    }
+
     func setCurrentPage() {
         let indexPath = IndexPath(item: currentPage, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
@@ -129,18 +145,18 @@ class CalendarViewController: NavigationBarViewController {
     
     @objc func presentScheduleViewContoller(_ notification: Notification) {
         addScheduleButton.isHidden = true
-        if let calendarSchedule = notification.object as? CalendarSchedule {
-            let scheduleViewController = ScheduleViewController()
-            scheduleViewController.calendarSchedule = calendarSchedule
-            scheduleViewController.addButtonLocation = addScheduleButton.frame
-            scheduleViewController.onWriteRecordButtonTapped = { schedule in
+        if let date = notification.object as? String {
+            let scheduleDetailViewController = ScheduleDetailViewController()
+            scheduleDetailViewController.date = date
+            scheduleDetailViewController.addButtonLocation = addScheduleButton.frame
+            scheduleDetailViewController.onWriteRecordButtonTapped = { schedule in
                 self.navigationToWriteRecordViewController(schedule)
             }
-            scheduleViewController.onAddScheduleButtonTapped = {
+            scheduleDetailViewController.onAddScheduleButtonTapped = {
                 self.navigationToAddScheduleViewController()
             }
-            scheduleViewController.modalPresentationStyle = .overFullScreen
-            present(scheduleViewController, animated: false)
+            scheduleDetailViewController.modalPresentationStyle = .overFullScreen
+            present(scheduleDetailViewController, animated: false)
         }
     }
     

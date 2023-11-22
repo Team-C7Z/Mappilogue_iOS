@@ -100,7 +100,7 @@
 		9224FCEE2A5BEF80000A56A6 /* ScheduleTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */; };
 		9224FCF32A5C5E7A000A56A6 /* WeekCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */; };
 		9224FCF52A5D6C65000A56A6 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */; };
-		9224FCF72A5FC4CA000A56A6 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF62A5FC4CA000A56A6 /* ScheduleViewController.swift */; };
+		9224FCF72A5FC4CA000A56A6 /* ScheduleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF62A5FC4CA000A56A6 /* ScheduleDetailViewController.swift */; };
 		9224FCF92A5FCF72000A56A6 /* ScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF82A5FCF72000A56A6 /* ScheduleCell.swift */; };
 		9224FCFB2A5FDD90000A56A6 /* AddScheduleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCFA2A5FDD90000A56A6 /* AddScheduleButton.swift */; };
 		9224FCFD2A5FF185000A56A6 /* AddScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCFC2A5FF185000A56A6 /* AddScheduleViewController.swift */; };
@@ -142,6 +142,11 @@
 		9245BC1C2B09CA3400383F4D /* AddScheduleDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BC1B2B09CA3400383F4D /* AddScheduleDTO.swift */; };
 		9245BC1F2B09CDF300383F4D /* ScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BC1E2B09CDF200383F4D /* ScheduleViewModel.swift */; };
 		9245BC212B0A445C00383F4D /* ScheduleDotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BC202B0A445C00383F4D /* ScheduleDotCell.swift */; };
+		9245BC232B0A4B5700383F4D /* CalendarAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BC222B0A4B5700383F4D /* CalendarAPI.swift */; };
+		9245BC262B0A4C5400383F4D /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BC252B0A4C5400383F4D /* Calendar.swift */; };
+		9245BC282B0A4D3400383F4D /* CalendarDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BC272B0A4D3400383F4D /* CalendarDTO.swift */; };
+		9245BC2A2B0A501900383F4D /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BC292B0A501900383F4D /* CalendarManager.swift */; };
+		9245BC2C2B0BBBFF00383F4D /* ScheduleDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BC2B2B0BBBFF00383F4D /* ScheduleDetailDTO.swift */; };
 		924BE0CA2A51AE25002C70FF /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 924BE0C92A51AE25002C70FF /* .swiftlint.yml */; };
 		9258409E2A7BD30700997434 /* CategorySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258409D2A7BD30700997434 /* CategorySettingViewController.swift */; };
 		925840A02A7BD4D700997434 /* CategoryOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258409F2A7BD4D700997434 /* CategoryOrderCell.swift */; };
@@ -374,7 +379,7 @@
 		9224FCED2A5BEF80000A56A6 /* ScheduleTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTitleCell.swift; sourceTree = "<group>"; };
 		9224FCF22A5C5E7A000A56A6 /* WeekCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekCell.swift; sourceTree = "<group>"; };
 		9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
-		9224FCF62A5FC4CA000A56A6 /* ScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
+		9224FCF62A5FC4CA000A56A6 /* ScheduleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailViewController.swift; sourceTree = "<group>"; };
 		9224FCF82A5FCF72000A56A6 /* ScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCell.swift; sourceTree = "<group>"; };
 		9224FCFA2A5FDD90000A56A6 /* AddScheduleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleButton.swift; sourceTree = "<group>"; };
 		9224FCFC2A5FF185000A56A6 /* AddScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleViewController.swift; sourceTree = "<group>"; };
@@ -417,6 +422,11 @@
 		9245BC1B2B09CA3400383F4D /* AddScheduleDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleDTO.swift; sourceTree = "<group>"; };
 		9245BC1E2B09CDF200383F4D /* ScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewModel.swift; sourceTree = "<group>"; };
 		9245BC202B0A445C00383F4D /* ScheduleDotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDotCell.swift; sourceTree = "<group>"; };
+		9245BC222B0A4B5700383F4D /* CalendarAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAPI.swift; sourceTree = "<group>"; };
+		9245BC252B0A4C5400383F4D /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
+		9245BC272B0A4D3400383F4D /* CalendarDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDTO.swift; sourceTree = "<group>"; };
+		9245BC292B0A501900383F4D /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
+		9245BC2B2B0BBBFF00383F4D /* ScheduleDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailDTO.swift; sourceTree = "<group>"; };
 		924BE0C92A51AE25002C70FF /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		9258409D2A7BD30700997434 /* CategorySettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingViewController.swift; sourceTree = "<group>"; };
 		9258409F2A7BD4D700997434 /* CategoryOrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryOrderCell.swift; sourceTree = "<group>"; };
@@ -589,8 +599,9 @@
 				928B7BFC2A9DD4DC00E4F789 /* BaseAPI.swift */,
 				928B7BE12A9AF09E00E4F789 /* AuthAPI.swift */,
 				928B7C0F2AA19E7700E4F789 /* UserAPI.swift */,
-				9245BBDF2B0873E500383F4D /* ColorAPI.swift */,
+				9245BC222B0A4B5700383F4D /* CalendarAPI.swift */,
 				9273C9512ABF040E00224DE1 /* ScheduleAPI.swift */,
+				9245BBDF2B0873E500383F4D /* ColorAPI.swift */,
 				920031AE2A8B5AF600E3170D /* LocationAPI.swift */,
 				92F00AAE2AF4B53D001FE43F /* CategoryAPI.swift */,
 			);
@@ -603,8 +614,9 @@
 				928B7C062A9FA90500E4F789 /* BaseManager.swift */,
 				928B7BE62A9B1B3E00E4F789 /* AuthManager.swift */,
 				928B7C152AA1C62400E4F789 /* UserManager.swift */,
-				9245BBE12B087FF400383F4D /* ColorManager.swift */,
+				9245BC292B0A501900383F4D /* CalendarManager.swift */,
 				9273C94F2ABF040400224DE1 /* ScheduleManager.swift */,
+				9245BBE12B087FF400383F4D /* ColorManager.swift */,
 				920031B12A8B5B4C00E3170D /* LocationManager.swift */,
 				92F00AB02AF4B897001FE43F /* CategoryManager.swift */,
 			);
@@ -630,6 +642,7 @@
 				928B7C1A2AA4784500E4F789 /* TermsOfUserDTO.swift */,
 				928B7C1C2AA489F600E4F789 /* NotificationDTO.swift */,
 				928B7C1E2AA6DADA00E4F789 /* ProfileDTO.swift */,
+				9245BC272B0A4D3400383F4D /* CalendarDTO.swift */,
 				9273C9532ABF05F300224DE1 /* ColorListDTO.swift */,
 				929E23142AB737DC003180B3 /* ProfileImageDTO.swift */,
 				920031D42A8D021000E3170D /* KakaoSerachDTO.swift */,
@@ -637,6 +650,7 @@
 				92F00AB22AF4B996001FE43F /* AddCategoryDTO.swift */,
 				92F00AB42AF4E880001FE43F /* GetCategoryDTO.swift */,
 				9245BC1B2B09CA3400383F4D /* AddScheduleDTO.swift */,
+				9245BC2B2B0BBBFF00383F4D /* ScheduleDetailDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -921,7 +935,7 @@
 			children = (
 				926999412A14F74B003DDAD2 /* CalendarViewController.swift */,
 				9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */,
-				9224FCF62A5FC4CA000A56A6 /* ScheduleViewController.swift */,
+				9224FCF62A5FC4CA000A56A6 /* ScheduleDetailViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1295,6 +1309,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		9245BC242B0A4C4200383F4D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9245BC252B0A4C5400383F4D /* Calendar.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		925840B32A7F281A00997434 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1494,6 +1516,7 @@
 		9269993B2A14F6A4003DDAD2 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				9245BC242B0A4C4200383F4D /* Model */,
 				9245BBF02B08C06000383F4D /* ViewModel */,
 				9245BBEF2B08BF9200383F4D /* ViewController */,
 				9245BBF12B08C06D00383F4D /* View */,
@@ -1914,6 +1937,7 @@
 				92139D7F2AB0B0F7005344AE /* NotificationController.swift in Sources */,
 				92011C042A740C16009B047F /* NewCategoryCell.swift in Sources */,
 				920031BF2A8B5CD600E3170D /* MainLocationAlertViewController.swift in Sources */,
+				9245BC2C2B0BBBFF00383F4D /* ScheduleDetailDTO.swift in Sources */,
 				9224FCF52A5D6C65000A56A6 /* DatePickerViewController.swift in Sources */,
 				926382B42A6CC9760064C1A8 /* GatheringToastMessageView.swift in Sources */,
 				925840D12A7FCE6800997434 /* AddScheduleHeaderView.swift in Sources */,
@@ -1952,11 +1976,13 @@
 				92011C1A2A755D02009B047F /* MyRecordButton.swift in Sources */,
 				92139D6F2AAC4737005344AE /* ContentImageCell.swift in Sources */,
 				9224FD3D2A6559A0000A56A6 /* AddLocationViewController.swift in Sources */,
+				9245BC262B0A4C5400383F4D /* Calendar.swift in Sources */,
 				9224FD1F2A62B4E9000A56A6 /* NotificationViewController.swift in Sources */,
 				92011C1E2A75EE79009B047F /* MarkView.swift in Sources */,
 				9224FD372A653024000A56A6 /* SpacingView.swift in Sources */,
 				925840AA2A7CC92E00997434 /* CategorySettingCell.swift in Sources */,
 				9291582A2A252CC20022BEF9 /* UIColor.swift in Sources */,
+				9245BC282B0A4D3400383F4D /* CalendarDTO.swift in Sources */,
 				925840CD2A7F8E1C00997434 /* WithdrawalReasonView.swift in Sources */,
 				928B7C162AA1C62400E4F789 /* UserManager.swift in Sources */,
 				928B7BEB2A9B27E800E4F789 /* AuthDTO.swift in Sources */,
@@ -1967,6 +1993,7 @@
 				9245BC1F2B09CDF300383F4D /* ScheduleViewModel.swift in Sources */,
 				9245BBE02B0873E500383F4D /* ColorAPI.swift in Sources */,
 				92139D792AAD709E005344AE /* MyRecordContentImageCell.swift in Sources */,
+				9245BC232B0A4B5700383F4D /* CalendarAPI.swift in Sources */,
 				926999382A14F4AA003DDAD2 /* TabBarControllerController.swift in Sources */,
 				920032032A9715D600E3170D /* PermissionViewController.swift in Sources */,
 				9258409E2A7BD30700997434 /* CategorySettingViewController.swift in Sources */,
@@ -2034,6 +2061,7 @@
 				9224FD252A638F01000A56A6 /* RepeatType.swift in Sources */,
 				92E781522A85381D000DAACD /* String.swift in Sources */,
 				9245BC1C2B09CA3400383F4D /* AddScheduleDTO.swift in Sources */,
+				9245BC2A2B0A501900383F4D /* CalendarManager.swift in Sources */,
 				9273C9522ABF040E00224DE1 /* ScheduleAPI.swift in Sources */,
 				920031F12A918B4700E3170D /* CustomNavigationBar.swift in Sources */,
 				9224FD192A616EB1000A56A6 /* ColorCell.swift in Sources */,
@@ -2090,7 +2118,7 @@
 				9245BBE22B087FF400383F4D /* ColorManager.swift in Sources */,
 				92459EDA2A530D1100493941 /* MarkedRecordCell.swift in Sources */,
 				920031C32A8B5D2F00E3170D /* MainLocationViewController.swift in Sources */,
-				9224FCF72A5FC4CA000A56A6 /* ScheduleViewController.swift in Sources */,
+				9224FCF72A5FC4CA000A56A6 /* ScheduleDetailViewController.swift in Sources */,
 				920031BA2A8B5C3000E3170D /* AddedLocationsHeaderView.swift in Sources */,
 				9273C95A2ABFDA8500224DE1 /* SelectedDate.swift in Sources */,
 				920032092A975EA400E3170D /* SelectPermissionViewController.swift in Sources */,
