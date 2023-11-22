@@ -14,7 +14,7 @@ extension String {
         return dateFormatter.date(from: self) ?? Date()
     }
     
-    func formatToyyyyMMddDateString() -> String {
+    func formatToMMddDateString() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         

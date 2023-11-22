@@ -78,12 +78,12 @@ class ScheduleCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(_ index: Int, schedule: Schedule) {
+    func configure(_ index: Int, schedule: SchedulesOnSpecificDate) {
         self.index = index
         scheduleLabel.text = schedule.title
-        scheduleColorView.backgroundColor = schedule.color
-        scheduleTimeLabel.text = schedule.time
-        scheduleLocationLabel.text = ", \(schedule.location ?? "")"
+        scheduleColorView.backgroundColor = UIColor.fromHex(schedule.colorCode)
+        scheduleTimeLabel.text = schedule.areaTime
+        scheduleLocationLabel.text = schedule.areaTime.isEmpty ? schedule.areaName : ", \(schedule.areaName)"
     }
     
     @objc func editButtonTapped() {

@@ -17,6 +17,8 @@ struct ScheduleTitle {
 class WeekCell: BaseCollectionViewCell {
     static let registerId = "\(WeekCell.self)"
     
+    var calendarViewModel = CalendarViewModel()
+    
     var preMonthScheduleList: [[ScheduleTitle?]] = Array(repeating: Array(repeating: nil, count: 10), count: 32)
     var currentMonthScheduleList: [[ScheduleTitle?]] = Array(repeating: Array(repeating: nil, count: 10), count: 32)
     var nextMonthScheduleList: [[ScheduleTitle?]] = Array(repeating: Array(repeating: nil, count: 10), count: 32)
@@ -62,7 +64,7 @@ class WeekCell: BaseCollectionViewCell {
         super.setupHierarchy()
     
         contentView.addSubview(collectionView)
-       //contentView.addSubview(stackView)
+        contentView.addSubview(stackView)
     }
     
     override func setupLayout() {
@@ -72,9 +74,9 @@ class WeekCell: BaseCollectionViewCell {
             $0.top.leading.trailing.bottom.equalTo(contentView)
         }
         
-//        stackView.snp.makeConstraints {
-//            $0.width.height.equalTo(contentView)
-//        }
+        stackView.snp.makeConstraints {
+            $0.width.height.equalTo(contentView)
+        }
     }
     
     func configure(year: Int, month: Int, weekIndex: Int) {
@@ -120,9 +122,9 @@ class WeekCell: BaseCollectionViewCell {
     }
     
     @objc private func dayButtonTapped(_ button: UIButton) {
-        let schedules = getDaySchedule(year: year, month: month, day: Int(week[button.tag]) ?? 0)
-        let calendarSchedule = CalendarSchedule(year: year, month: month, day: Int(week[button.tag]) ?? 0, schedules: schedules)
-        NotificationCenter.default.post(name: Notification.Name("PresentScheduleViewController"), object: calendarSchedule)
+        let date = calendarViewModel.convertIntToDate(year: year, month: month, day: Int(week[button.tag]) ?? 0)
+        let convertedDate = date?.formatToyyyyMMddDateString()
+        NotificationCenter.default.post(name: Notification.Name("PresentScheduleViewController"), object: convertedDate)
     }
 }
 
