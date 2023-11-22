@@ -6,8 +6,14 @@
 //
 
 import Foundation
+import Combine
 
-struct CalendarViewModel {
+class CalendarViewModel {
+    @Published var calendarResult: CalendarDTO?
+    @Published var scheduleDetailResult: ScheduleDetailDTO?
+    var cancellables: Set<AnyCancellable> = []
+    private let calendarManager = CalendarManager()
+    
     let weekday: [String] = ["일", "월", "화", "수", "목", "금", "토"]
     
     var lastMonthRange: Int = 0
@@ -25,7 +31,7 @@ struct CalendarViewModel {
         Calendar.current.component(.day, from: Date())
     }
     
-    mutating func getMonthlyCalendar(year: Int, month: Int) -> [[String]] {
+    func getMonthlyCalendar(year: Int, month: Int) -> [[String]] {
         let calendar = Calendar.current
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "d"
@@ -103,12 +109,12 @@ struct CalendarViewModel {
         return weeks
     }
     
-    mutating func getWeekCount(year: Int, month: Int) -> Int {
+    func getWeekCount(year: Int, month: Int) -> Int {
         let weeks = getMonthlyCalendar(year: year, month: month)
         return weeks.count
     }
     
-    mutating func getWeek(year: Int, month: Int, weekIndex: Int) -> [String] {
+    func getWeek(year: Int, month: Int, weekIndex: Int) -> [String] {
         let weeks = getMonthlyCalendar(year: year, month: month)
         let week = weeks[weekIndex]
         return week
@@ -134,7 +140,35 @@ struct CalendarViewModel {
         return row < nextMonthRange
     }
     
-    mutating func getDays(year: Int, month: Int) -> [Int] {
+    func getPreviousMonth() -> (year: Int, month: Int) {
+        let calendar = Calendar.current
+        let currentDate = Date()
+        
+        if let previousMonthDate = calendar.date(byAdding: .month, value: -1, to: currentDate) {
+            let components = calendar.dateComponents([.year, .month], from: previousMonthDate)
+            if let year = components.year, let month = components.month {
+                return (year, month)
+            }
+        }
+        
+        return (currentYear, currentMonth)
+    }
+    
+    func getNextMonth() -> (year: Int, month: Int) {
+        let calendar = Calendar.current
+        let currentDate = Date()
+        
+        if let previousMonthDate = calendar.date(byAdding: .month, value: 1, to: currentDate) {
+            let components = calendar.dateComponents([.year, .month], from: previousMonthDate)
+            if let year = components.year, let month = components.month {
+                return (year, month)
+            }
+        }
+        
+        return (currentYear, currentMonth)
+    }
+    
+    func getDays(year: Int, month: Int) -> [Int] {
         let calendar = Calendar.current
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "d"
@@ -273,4 +307,38 @@ enum MonthType: String, Codable {
     case currentMonth
     case nextMonth
     case unknown
+}
+
+extension CalendarViewModel {
+    func getCalendar(calendar: Calendar1) {
+        calendarManager.getCalendar(calendar: calendar)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure:
+                    print("error")
+                }
+            }, receiveValue: { response in
+                self.calendarResult = response.result
+            })
+            .store(in: &cancellables)
+    }
+    
+    func getScheduleDetail(date: String) {
+        calendarManager.getScheduleDetail(date: date)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure:
+                    print("error")
+                }
+            }, receiveValue: { response in
+                self.scheduleDetailResult = response.result
+            })
+            .store(in: &cancellables)
+    }
 }
