@@ -44,4 +44,20 @@ class ScheduleViewModel {
             })
             .store(in: &cancellables)
     }
+    
+    func updateSchedule(id: Int, schedule: Schedule) {
+        scheduleManager.updateSchedule(id: id, schedule: schedule)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure:
+                    print("error")
+                }
+            }, receiveValue: { result in
+                print(result)
+            })
+            .store(in: &cancellables)
+    }
 }

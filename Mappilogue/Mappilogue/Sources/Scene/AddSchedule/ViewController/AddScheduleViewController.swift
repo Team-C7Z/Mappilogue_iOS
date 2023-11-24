@@ -155,7 +155,12 @@ class AddScheduleViewController: BaseViewController {
         }
         
         schedule.area = area.isEmpty ? nil : area
-        scheduleViewModel.addSchedule(schedule: schedule)
+        
+        if let scheduleId {
+            scheduleViewModel.updateSchedule(id: scheduleId, schedule: schedule)
+        } else {
+            scheduleViewModel.addSchedule(schedule: schedule)
+        }
         
         navigationController?.popViewController(animated: true)
     }
