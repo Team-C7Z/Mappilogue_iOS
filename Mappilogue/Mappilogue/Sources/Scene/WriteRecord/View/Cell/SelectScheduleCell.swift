@@ -86,13 +86,13 @@ class SelectScheduleCell: BaseCollectionViewCell {
     }
     
     func configure(with schedule: Schedule) {
-        scheduleColorView.backgroundColor = schedule.color
-        scheduleTitleLabel.text = schedule.title
-        scheduleTimeLabel.text = schedule.time
-        scheduleLocationLabel.text = schedule.location
-        
-        if schedule.time != nil && schedule.location != nil {
-            separatorLabel.text = ", "
-        }
+//        scheduleColorView.backgroundColor = schedule.color
+//        scheduleTitleLabel.text = schedule.title
+//        scheduleTimeLabel.text = schedule.time
+//        scheduleLocationLabel.text = schedule.location
+//        
+//        if schedule.time != nil && schedule.location != nil {
+//            separatorLabel.text = ", "
+//        }
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AddSchedule: Codable {
+struct Schedule: Codable {
     var title: String?
     var colorId: Int
     var startDate: String

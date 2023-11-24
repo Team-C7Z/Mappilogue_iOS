@@ -9,5 +9,6 @@ import Foundation
 import Combine
 
 protocol ScheduleAPI {
-    func addSchedule(schedule: AddSchedule) -> AnyPublisher<BaseDTO<AddScheduleDTO>, Error>
+    func addSchedule(schedule: Schedule) -> AnyPublisher<BaseDTO<AddScheduleDTO>, Error>
+    func getSchedule(id: Int) -> AnyPublisher<BaseDTO<GetScheduleDTO>, Error>
 }

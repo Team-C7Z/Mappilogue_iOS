@@ -10,13 +10,14 @@ import UIKit
 class AddScheduleViewController: BaseViewController {
     private var colorViewModel = ColorViewModel()
     private var scheduleViewModel = ScheduleViewModel()
-    private var scheduleId: Int = 0
+    private var calendarViewModel = CalendarViewModel()
+    var scheduleId: Int?
     private var monthlyCalendar = CalendarViewModel()
     private var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0, day: 0)
     private var startDate: SelectedDate = SelectedDate(year: 0, month: 0, day: 0)
     private var endDate: SelectedDate  = SelectedDate(year: 0, month: 0, day: 0)
 
-    var schedule = AddSchedule(colorId: -1, startDate: "", endDate: "")
+    var schedule = Schedule(colorId: -1, startDate: "", endDate: "")
     
     var colorList: [ColorListDTO] = []
     var isColorSelection: Bool = false
@@ -67,8 +68,7 @@ class AddScheduleViewController: BaseViewController {
         setCurrentDate()
         setSelectedDate()
         setKeyboardTap()
-        
-        area = schedule.area ?? []
+        loadScheduleData()
     }
 
     override func setupProperty() {
@@ -199,11 +199,53 @@ class AddScheduleViewController: BaseViewController {
     
     @objc func keyboardWillShow(_ notification: Notification) {
         view.addGestureRecognizer(keyboardTap)
-     }
-     
-     @objc func keyboardWillHide(_ notification: Notification) {
-         view.removeGestureRecognizer(keyboardTap)
-     }
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        view.removeGestureRecognizer(keyboardTap)
+    }
+    
+    func loadScheduleData() {
+        guard let id = scheduleId else { return }
+        scheduleViewModel.getSchedule(id: id)
+        
+        scheduleViewModel.$scheduleResult
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { result in
+                guard let schedule = result else { return }
+                self.setScheduleData(getSchedule: schedule)
+            })
+            .store(in: &scheduleViewModel.cancellables)
+    }
+    
+    func setScheduleData(getSchedule: GetScheduleDTO) {
+        schedule.title = getSchedule.scheduleBaseInfo.title
+        schedule.colorId = getSchedule.scheduleBaseInfo.colorId
+        schedule.startDate = getSchedule.scheduleBaseInfo.startDate
+        schedule.endDate = getSchedule.scheduleBaseInfo.endDate
+        schedule.alarmOptions = getSchedule.scheduleAlarmInfo
+        
+        startDate = calendarViewModel.convertStringToInt(date: schedule.startDate)
+        endDate = calendarViewModel.convertStringToInt(date: schedule.endDate)
+        
+        collectionView.reloadData()
+
+        for areaInfo in getSchedule.scheduleAreaInfo {
+            var date = areaInfo.date
+            var locations = [AddSchduleLocation]()
+            for locationInfo in areaInfo.value {
+                let location = AddSchduleLocation(
+                    name: locationInfo.name,
+                    streetAddress: locationInfo.streetAddress,
+                    latitude: locationInfo.latitude,
+                    longitude: locationInfo.longitude,
+                    time: locationInfo.time
+                )
+                locations.append(location)
+            }
+            area.append(Area(date: date, value: locations))
+        }
+    }
     
     func addDatePickerTapGesture() {
         view.addGestureRecognizer(datePickerTap)
@@ -228,7 +270,7 @@ class AddScheduleViewController: BaseViewController {
     }
     
     func validateDateRange() {
-        if daysBetween() < 0 {
+        if calendarViewModel.daysBetween(start: startDate, end: endDate) < 0 {
             if scheduleDateType == .startDate {
                 endDate = SelectedDate(year: startDate.year, month: startDate.month, day: startDate.day ?? 0)
             } else if scheduleDateType == .endDate {
@@ -260,7 +302,7 @@ class AddScheduleViewController: BaseViewController {
     }
     
     func selectLocation(_ location: KakaoSearchPlaces) {
-        let dateRange = getDatesInRange(startDate: startDate, endDate: endDate)
+        let dateRange = calendarViewModel.getDatesInRange(startDate: startDate, endDate: endDate)
         for date in dateRange {
             addLocation(date: date, place: location)
         }
@@ -405,6 +447,7 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
     }
 
     func configureAddScheduleHeaderView(_ headerView: AddScheduleHeaderView) {
+        headerView.configureTitleColor(title: schedule.title ?? "", isColorSelection: false, colorId: schedule.colorId)
         headerView.configureDate(startDate: startDate, endDate: endDate, dateType: scheduleDateType)
         headerView.configureColorList(colorList)
         
@@ -611,44 +654,6 @@ extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSourc
         datePickerView.reloadAllComponents()
     }
     
-    func daysBetween() -> Int {
-        let startDate = setDateFormatter(date: startDate)
-        let endDate = setDateFormatter(date: endDate)
-        if let start = startDate, let end = endDate, let daysDifference = daysBetweenDates(start: start, end: end) {
-            return daysDifference
-        }
-        return 0
-    }
-    
-    func setDateFormatter(date: SelectedDate) -> Date? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyyMMdd"
-        return dateFormatter.date(from: "\(date.year)\(String(format: "%02d", date.month))\(String(format: "%02d", date.day ?? 0))")
-    }
-    
-    func daysBetweenDates(start: Date, end: Date) -> Int? {
-        let calendar = Calendar.current
-        let dateComponents = calendar.dateComponents([.day], from: start, to: end)
-        return dateComponents.day
-    }
-    
-    func getDatesInRange(startDate: SelectedDate, endDate: SelectedDate) -> [Date] {
-        let calendar = Calendar.current
-
-        let start = calendar.date(from: DateComponents(year: startDate.year, month: startDate.month, day: startDate.day))!
-        let end = calendar.date(from: DateComponents(year: endDate.year, month: endDate.month, day: endDate.day))!
-
-        var dates: [Date] = []
-
-        var currentDate = start
-
-        while currentDate <= end {
-            dates.append(currentDate)
-            currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
-        }
-
-        return dates
-    }
 }
 
 extension AddScheduleViewController {
@@ -670,5 +675,3 @@ extension AddScheduleViewController {
             .store(in: &colorViewModel.cancellables)
     }
 }
-
-

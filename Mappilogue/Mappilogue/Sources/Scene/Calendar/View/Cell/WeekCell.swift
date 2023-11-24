@@ -32,7 +32,7 @@ class WeekCell: BaseCollectionViewCell {
     private var isCurrentMonth: Bool = true
     private var year: Int = 0
     private var month: Int = 0
-    private var schedules: [Schedule] = []
+    private var schedules: [Schedule2222] = []
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -92,14 +92,14 @@ class WeekCell: BaseCollectionViewCell {
         collectionView.reloadData()
     }
 
-    func getDaySchedule(year: Int, month: Int, day: Int) -> [Schedule] {
+    func getDaySchedule(year: Int, month: Int, day: Int) -> [Schedule2222] {
         if let index = dummySchedule.firstIndex(where: {$0.year == year && $0.month == month && $0.day == day}) {
             return dummySchedule[index].schedules
         }
         return []
     }
 
-    func getPreviousDaySchedule(year: Int, month: Int, day: Int) -> [Schedule] {
+    func getPreviousDaySchedule(year: Int, month: Int, day: Int) -> [Schedule2222] {
         if week.contains(String(day-1)), let index = dummySchedule.firstIndex(where: {$0.year == year && $0.month == month && $0.day == day-1}) {
             return dummySchedule[index].schedules
         }

@@ -8,7 +8,7 @@
 import UIKit
 
 class MyRecordContentViewController: BaseViewController {
-    var schedule: Schedule = Schedule()
+    var schedule = Schedule2222()
     var isNewWrite: Bool = false
     
     private let scrollView = UIScrollView()

@@ -10,6 +10,7 @@ import UIKit
 class CalendarViewController: NavigationBarViewController {
     private var calendarViewModel = CalendarViewModel()
     private var calendarSchedules: [CalendarSchedules] = []
+    private var scheduleId: Int?
     private var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0)
     
     private var currentPage = 1
@@ -149,10 +150,11 @@ class CalendarViewController: NavigationBarViewController {
             let scheduleDetailViewController = ScheduleDetailViewController()
             scheduleDetailViewController.date = date
             scheduleDetailViewController.addButtonLocation = addScheduleButton.frame
-            scheduleDetailViewController.onWriteRecordButtonTapped = { schedule in
-                self.navigationToWriteRecordViewController(schedule)
-            }
-            scheduleDetailViewController.onAddScheduleButtonTapped = {
+//            scheduleDetailViewController.onWriteRecordButtonTapped = { schedule in
+//                self.navigationToWriteRecordViewController(schedule)
+//            }
+            scheduleDetailViewController.onAddScheduleButtonTapped = { id in
+                self.scheduleId = id
                 self.navigationToAddScheduleViewController()
             }
             scheduleDetailViewController.modalPresentationStyle = .overFullScreen
@@ -160,7 +162,7 @@ class CalendarViewController: NavigationBarViewController {
         }
     }
     
-    func navigationToWriteRecordViewController(_ schedule: Schedule) {
+    func navigationToWriteRecordViewController(_ schedule: Schedule2222) {
         let writeRecordViewController = WriteRecordViewController()
         writeRecordViewController.hidesBottomBarWhenPushed = true
         writeRecordViewController.schedule = schedule
@@ -175,6 +177,7 @@ class CalendarViewController: NavigationBarViewController {
         addScheduleButton.isHidden = false
         let addScheduleViewController = AddScheduleViewController()
         addScheduleViewController.hidesBottomBarWhenPushed = true
+        addScheduleViewController.scheduleId = scheduleId
         navigationController?.pushViewController(addScheduleViewController, animated: true)
     }
 }
