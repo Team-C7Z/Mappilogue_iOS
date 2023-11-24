@@ -85,7 +85,7 @@ class MyRecordContentHeaderView: BaseView {
         }
     }
     
-    func configure(_ schedule: Schedule) {
+    func configure(_ schedule: Schedule2222) {
         categoryNameLabel.text = schedule.category
         titleLabel.text = schedule.title
         locationLabel.text = schedule.location

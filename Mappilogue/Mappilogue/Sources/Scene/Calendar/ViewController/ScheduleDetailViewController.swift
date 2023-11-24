@@ -13,7 +13,7 @@ class ScheduleDetailViewController: BaseViewController {
     var schedules = ScheduleDetailDTO(solarDate: "", lunarDate: "", schedulesOnSpecificDate: [])
     var selectedScheduleIndex: Int?
     var onWriteRecordButtonTapped: ((Schedule) -> Void)?
-    var onAddScheduleButtonTapped: (() -> Void)?
+    var onAddScheduleButtonTapped: ((Int?) -> Void)?
     
     var addButtonLocation: CGRect?
     
@@ -164,7 +164,7 @@ class ScheduleDetailViewController: BaseViewController {
     
     @objc func addScheduleButtonTapped(_ sender: UIButton) {
         dismiss(animated: false) {
-            self.onAddScheduleButtonTapped?()
+            self.onAddScheduleButtonTapped?(nil)
         }
     }
     
@@ -242,6 +242,8 @@ extension ScheduleDetailViewController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        let id = schedules.schedulesOnSpecificDate[indexPath.row].scheduleId
+        onAddScheduleButtonTapped?(id)
+        dismiss(animated: false)
     }
 }
