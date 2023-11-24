@@ -147,6 +147,7 @@
 		9245BC282B0A4D3400383F4D /* CalendarDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BC272B0A4D3400383F4D /* CalendarDTO.swift */; };
 		9245BC2A2B0A501900383F4D /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BC292B0A501900383F4D /* CalendarManager.swift */; };
 		9245BC2C2B0BBBFF00383F4D /* ScheduleDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BC2B2B0BBBFF00383F4D /* ScheduleDetailDTO.swift */; };
+		9245BC2E2B0DCA2300383F4D /* GetScheduleDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BC2D2B0DCA2300383F4D /* GetScheduleDTO.swift */; };
 		924BE0CA2A51AE25002C70FF /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 924BE0C92A51AE25002C70FF /* .swiftlint.yml */; };
 		9258409E2A7BD30700997434 /* CategorySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258409D2A7BD30700997434 /* CategorySettingViewController.swift */; };
 		925840A02A7BD4D700997434 /* CategoryOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258409F2A7BD4D700997434 /* CategoryOrderCell.swift */; };
@@ -198,10 +199,10 @@
 		9273C9502ABF040400224DE1 /* ScheduleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9273C94F2ABF040400224DE1 /* ScheduleManager.swift */; };
 		9273C9522ABF040E00224DE1 /* ScheduleAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9273C9512ABF040E00224DE1 /* ScheduleAPI.swift */; };
 		9273C9542ABF05F300224DE1 /* ColorListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9273C9532ABF05F300224DE1 /* ColorListDTO.swift */; };
-		9273C9582ABF2D7800224DE1 /* AddSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9273C9572ABF2D7800224DE1 /* AddSchedule.swift */; };
+		9273C9582ABF2D7800224DE1 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9273C9572ABF2D7800224DE1 /* Schedule.swift */; };
 		9273C95A2ABFDA8500224DE1 /* SelectedDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9273C9592ABFDA8500224DE1 /* SelectedDate.swift */; };
 		927C144BD1C3E8536A8EC3A1 /* Pods_Mappilogue_MappilogueUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65FB9F97A7DA9BC190F4E1BF /* Pods_Mappilogue_MappilogueUITests.framework */; };
-		927E7F212A66F64400E6A29F /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927E7F202A66F64400E6A29F /* Schedule.swift */; };
+		927E7F212A66F64400E6A29F /* Schedule2222.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927E7F202A66F64400E6A29F /* Schedule2222.swift */; };
 		927E7F272A683DCD00E6A29F /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927E7F262A683DCD00E6A29F /* CalendarCell.swift */; };
 		928B7BD92A99AFD700E4F789 /* SignUpCompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BD82A99AFD700E4F789 /* SignUpCompletionViewController.swift */; };
 		928B7BDC2A99B50400E4F789 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 928B7BDB2A99B50400E4F789 /* KakaoSDKAuth */; };
@@ -427,6 +428,7 @@
 		9245BC272B0A4D3400383F4D /* CalendarDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDTO.swift; sourceTree = "<group>"; };
 		9245BC292B0A501900383F4D /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		9245BC2B2B0BBBFF00383F4D /* ScheduleDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailDTO.swift; sourceTree = "<group>"; };
+		9245BC2D2B0DCA2300383F4D /* GetScheduleDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetScheduleDTO.swift; sourceTree = "<group>"; };
 		924BE0C92A51AE25002C70FF /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		9258409D2A7BD30700997434 /* CategorySettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingViewController.swift; sourceTree = "<group>"; };
 		9258409F2A7BD4D700997434 /* CategoryOrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryOrderCell.swift; sourceTree = "<group>"; };
@@ -480,9 +482,9 @@
 		9273C94F2ABF040400224DE1 /* ScheduleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleManager.swift; sourceTree = "<group>"; };
 		9273C9512ABF040E00224DE1 /* ScheduleAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleAPI.swift; sourceTree = "<group>"; };
 		9273C9532ABF05F300224DE1 /* ColorListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorListDTO.swift; sourceTree = "<group>"; };
-		9273C9572ABF2D7800224DE1 /* AddSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSchedule.swift; sourceTree = "<group>"; };
+		9273C9572ABF2D7800224DE1 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		9273C9592ABFDA8500224DE1 /* SelectedDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedDate.swift; sourceTree = "<group>"; };
-		927E7F202A66F64400E6A29F /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		927E7F202A66F64400E6A29F /* Schedule2222.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule2222.swift; sourceTree = "<group>"; };
 		927E7F262A683DCD00E6A29F /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		928B7BD82A99AFD700E4F789 /* SignUpCompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCompletionViewController.swift; sourceTree = "<group>"; };
 		928B7BDF2A9AEAE800E4F789 /* AuthVendor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVendor.swift; sourceTree = "<group>"; };
@@ -650,6 +652,7 @@
 				92F00AB22AF4B996001FE43F /* AddCategoryDTO.swift */,
 				92F00AB42AF4E880001FE43F /* GetCategoryDTO.swift */,
 				9245BC1B2B09CA3400383F4D /* AddScheduleDTO.swift */,
+				9245BC2D2B0DCA2300383F4D /* GetScheduleDTO.swift */,
 				9245BC2B2B0BBBFF00383F4D /* ScheduleDetailDTO.swift */,
 			);
 			path = DTO;
@@ -1082,7 +1085,7 @@
 		9245BC002B08C32500383F4D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				9273C9572ABF2D7800224DE1 /* AddSchedule.swift */,
+				9273C9572ABF2D7800224DE1 /* Schedule.swift */,
 				9273C94D2ABEEFC300224DE1 /* AddScheduleDateType.swift */,
 				9224FD242A638F01000A56A6 /* RepeatType.swift */,
 			);
@@ -1559,7 +1562,7 @@
 				92459EDB2A53158A00493941 /* MarkedRecord.swift */,
 				9224FD1A2A61705D000A56A6 /* ColorSelection.swift */,
 				9224FD432A657150000A56A6 /* Location.swift */,
-				927E7F202A66F64400E6A29F /* Schedule.swift */,
+				927E7F202A66F64400E6A29F /* Schedule2222.swift */,
 				92011C152A7505F7009B047F /* Record.swift */,
 				92139D862AB1BB2D005344AE /* Notification.swift */,
 				92139D882AB1BEBD005344AE /* Announcement.swift */,
@@ -2003,7 +2006,7 @@
 				926999342A14F2A3003DDAD2 /* BaseViewController.swift in Sources */,
 				928B7C192AA462CE00E4F789 /* TermsOfUseViewController.swift in Sources */,
 				92139D8F2AB1E672005344AE /* LineHeaderView.swift in Sources */,
-				9273C9582ABF2D7800224DE1 /* AddSchedule.swift in Sources */,
+				9273C9582ABF2D7800224DE1 /* Schedule.swift in Sources */,
 				92459ED82A52494200493941 /* AddMarkedRecordCell.swift in Sources */,
 				920031ED2A91085300E3170D /* ImagePickerCell.swift in Sources */,
 				925840B92A7F2DA300997434 /* ProfileCell.swift in Sources */,
@@ -2110,7 +2113,7 @@
 				92011C1C2A75E484009B047F /* RecordCell.swift in Sources */,
 				926999402A14F73C003DDAD2 /* HomeViewController.swift in Sources */,
 				92011B8D2A72BBE8009B047F /* ImageSaveRecordView.swift in Sources */,
-				927E7F212A66F64400E6A29F /* Schedule.swift in Sources */,
+				927E7F212A66F64400E6A29F /* Schedule2222.swift in Sources */,
 				925840BD2A7F459600997434 /* NotificationSettingView.swift in Sources */,
 				928B7BE72A9B1B3E00E4F789 /* AuthManager.swift in Sources */,
 				928B7BEE2A9C603C00E4F789 /* TodaySchedule.swift in Sources */,
@@ -2134,6 +2137,7 @@
 				9224FD332A641B64000A56A6 /* UIViewController.swift in Sources */,
 				925840C92A7F805800997434 /* UILabel.swift in Sources */,
 				9263786B2A546BDE004E5B6E /* OnboardingViewController.swift in Sources */,
+				9245BC2E2B0DCA2300383F4D /* GetScheduleDTO.swift in Sources */,
 				92A7B6632A4E20BF009C9293 /* BaseTableViewCell.swift in Sources */,
 				92CD36FA2A7B505900768B61 /* MyCategoryViewController.swift in Sources */,
 				928B7C1B2AA4784500E4F789 /* TermsOfUserDTO.swift in Sources */,

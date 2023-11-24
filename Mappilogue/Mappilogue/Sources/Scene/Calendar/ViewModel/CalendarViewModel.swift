@@ -286,6 +286,45 @@ class CalendarViewModel {
         }
     }
     
+    func daysBetween(start: SelectedDate, end: SelectedDate) -> Int {
+        let startDate = setDateFormatter(date: start)
+        let endDate = setDateFormatter(date: end)
+        if let start = startDate, let end = endDate, let daysDifference = daysBetweenDates(start: start, end: end) {
+            return daysDifference
+        }
+        return 0
+    }
+    
+    func setDateFormatter(date: SelectedDate) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMdd"
+        return dateFormatter.date(from: "\(date.year)\(String(format: "%02d", date.month))\(String(format: "%02d", date.day ?? 0))")
+    }
+    
+    func daysBetweenDates(start: Date, end: Date) -> Int? {
+        let calendar = Calendar.current
+        let dateComponents = calendar.dateComponents([.day], from: start, to: end)
+        return dateComponents.day
+    }
+    
+    func getDatesInRange(startDate: SelectedDate, endDate: SelectedDate) -> [Date] {
+        let calendar = Calendar.current
+
+        let start = calendar.date(from: DateComponents(year: startDate.year, month: startDate.month, day: startDate.day))!
+        let end = calendar.date(from: DateComponents(year: endDate.year, month: endDate.month, day: endDate.day))!
+
+        var dates: [Date] = []
+
+        var currentDate = start
+
+        while currentDate <= end {
+            dates.append(currentDate)
+            currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
+        }
+
+        return dates
+    }
+    
     func convertTimeIntToDate(hour: Int, minute: Int, timePeriod: String) -> String? {
         var dateComponents = DateComponents()
         dateComponents.hour = timePeriod == "AM" ? hour : hour + 12
@@ -299,6 +338,21 @@ class CalendarViewModel {
         } else {
             return nil
         }
+    }
+    
+    func convertStringToInt(date: String) -> SelectedDate {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy년 MM월 dd일"
+        
+        if let convertedDate = dateFormatter.date(from: date) {
+            let calendar = Calendar.current
+            let components = calendar.dateComponents([.year, .month, .day], from: convertedDate)
+            
+            let date = SelectedDate(year: components.year ?? 0, month: components.month ?? 0, day: components.day)
+            
+            return date
+        }
+        return SelectedDate(year: 0, month: 0)
     }
 }
 

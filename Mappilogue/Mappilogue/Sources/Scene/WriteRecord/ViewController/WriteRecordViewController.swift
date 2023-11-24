@@ -11,7 +11,7 @@ import Photos
 class WriteRecordViewController: BaseViewController {
     private var colorViewModel = ColorViewModel()
     private var colorList: [ColorListDTO] = []
-    var schedule: Schedule = Schedule()
+    var schedule = Schedule2222()
     var onColorSelectionButtonTapped: (() -> Void)?
  
     private let titleColorStackView = UIStackView()

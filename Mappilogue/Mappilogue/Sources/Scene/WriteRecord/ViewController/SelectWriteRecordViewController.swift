@@ -89,7 +89,7 @@ extension SelectWriteRecordViewController: UICollectionViewDelegate, UICollectio
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectScheduleCell.registerId, for: indexPath) as? SelectScheduleCell else { return UICollectionViewCell() }
         
         let schedule = dummyData[indexPath.section].schedules[indexPath.row]
-        cell.configure(with: schedule)
+    //    cell.configure(with: schedule)
         
         return cell
     }
