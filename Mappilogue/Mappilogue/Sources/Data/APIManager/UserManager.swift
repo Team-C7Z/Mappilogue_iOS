@@ -7,6 +7,7 @@
 
 import Foundation
 import Moya
+import Combine
 
 class UserManager {
     static let shared = UserManager()
@@ -83,20 +84,6 @@ class UserManager {
         }
     }
     
-    func getProfile(completion: @escaping (NetworkResult<Any>) -> Void) {
-        interceptorSessionProvider.request(.getProfile) { result in
-            switch result {
-            case .success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<ProfileDTO>.self)
-                completion(networkResult)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
     func updateNickname(nickname: String, completion: @escaping (NetworkResult<Any>) -> Void) {
         interceptorSessionProvider.request(.updateNickname(nickname: nickname)) { result in
             switch result {
@@ -141,5 +128,35 @@ class UserManager {
         default:
             return .networkFail
         }
+    }
+}
+
+class UserManager2: UserAPI2 {
+    private let baseURL = URL(string: "\(Environment.baseURL)/api/v1/users/profiles")!
+    
+    func getProfile() -> AnyPublisher<BaseDTO<ProfileDTO>, Error> {
+        let request = setupRequest(for: baseURL, method: "GET")
+        
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .tryMap { data, response in
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                    throw URLError(.badServerResponse)
+                }
+                return data
+            }
+            .decode(type: BaseDTO<ProfileDTO>.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+    }
+    
+    private func setupRequest(for url: URL, method: String) -> URLRequest {
+        var request = URLRequest(url: url)
+        request.httpMethod = method
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        if let token = AuthUserDefaults.accessToken {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+        
+        return request
     }
 }
