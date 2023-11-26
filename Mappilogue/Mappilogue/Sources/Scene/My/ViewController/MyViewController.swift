@@ -15,6 +15,7 @@ struct MyInfo {
 
 class MyViewController: NavigationBarViewController {
     var userViewModel = UserViewModel()
+    var authViewModel = AuthViewModel()
     
     var myInfoData: [[MyInfo]] = [
         [
@@ -255,26 +256,19 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func logout() {
-        UserApi.shared.logout { error in
-            if let error = error {
-                print(error)
-                return
-            } else {
-                self.handleUserManagerLogout()
+        authViewModel.logout()
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error: \(error.localizedDescription)")
+                }
+            } receiveValue: { _ in
+                self.clearAuthUserDefaults()
                 self.presentLoginViewController()
             }
-        }
-    }
-    
-    private func handleUserManagerLogout() {
-        UserManager.shared.logout { result in
-            switch result {
-            case .success:
-                self.clearAuthUserDefaults()
-            default:
-                break
-            }
-        }
+            .store(in: &authViewModel.cancellables)
     }
     
     private func clearAuthUserDefaults() {

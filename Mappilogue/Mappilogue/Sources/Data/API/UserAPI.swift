@@ -10,15 +10,12 @@ import Moya
 import Combine
 
 enum UserAPI: BaseAPI {
-    case logout
     case withdrawal(reason: String?)
 }
 
 extension UserAPI: TargetType {
     var path: String {
         switch self {
-        case .logout:
-            return "/api/v1/users/logout"
         case .withdrawal:
             return "/api/v1/users/withdrawal"
         }
@@ -26,16 +23,13 @@ extension UserAPI: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .logout, .withdrawal:
+        case .withdrawal:
             return .post
         }
     }
     
     var task: Moya.Task {
         switch self {
-        case .logout:
-            return .requestPlain
-            
         case let .withdrawal(reason):
             var requestParameters: [String: String] = [:]
             
