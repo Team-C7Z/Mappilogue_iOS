@@ -41,20 +41,6 @@ class UserManager {
             }
         }
     }
-    
-    func termsOfUse(completion: @escaping (NetworkResult<Any>) -> Void) {
-        provider.request(.termsOfUse) { result in
-            switch result {
-            case .success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<TermsOfUserDTO>.self)
-                completion(networkResult)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
 
     private func judgeStatus<T: Codable>(_ statusCode: Int, _ data: Data, _ dataModel: T.Type) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
@@ -185,6 +171,22 @@ class UserManager2: UserAPI2 {
             }
             .eraseToAnyPublisher()
     }
+    
+    func getTermsOfUse() -> AnyPublisher<BaseDTO<TermsOfUserDTO>, Error> {
+        let url = URL(string: "\(baseURL)/terms-of-services")!
+        let request = setupRequest(for: url, method: "GET")
+        
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .tryMap { data, response in
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                    throw URLError(.badServerResponse)
+                }
+                return data
+            }
+            .decode(type: BaseDTO<TermsOfUserDTO>.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+    }
+    
     
     private func setupRequest(for url: URL, method: String) -> URLRequest {
         var request = URLRequest(url: url)

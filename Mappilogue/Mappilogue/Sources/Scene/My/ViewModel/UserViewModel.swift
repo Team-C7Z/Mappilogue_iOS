@@ -11,6 +11,7 @@ import Combine
 class UserViewModel {
     @Published var profileResult: ProfileDTO?
     @Published var notificationResult: NotificationDTO?
+    @Published var termsOfUserResult: TermsOfUserDTO?
     
     var cancellables: Set<AnyCancellable> = []
     private let userManager = UserManager2()
@@ -87,5 +88,22 @@ class UserViewModel {
                 }
             }, receiveValue: { _ in })
             .store(in: &cancellables)
+    }
+    
+    func getTermsOfUse() {
+        userManager.getTermsOfUse()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure:
+                    print("error")
+                }
+            }, receiveValue: { response in
+                self.termsOfUserResult = response.result
+            })
+            .store(in: &cancellables)
+        
     }
 }

@@ -12,7 +12,6 @@ import Combine
 enum UserAPI: BaseAPI {
     case logout
     case withdrawal(reason: String?)
-    case termsOfUse
 }
 
 extension UserAPI: TargetType {
@@ -22,8 +21,6 @@ extension UserAPI: TargetType {
             return "/api/v1/users/logout"
         case .withdrawal:
             return "/api/v1/users/withdrawal"
-        case .termsOfUse:
-            return "/api/v1/users/tos"
         }
     }
     
@@ -31,14 +28,12 @@ extension UserAPI: TargetType {
         switch self {
         case .logout, .withdrawal:
             return .post
-        case .termsOfUse:
-            return .get
         }
     }
     
     var task: Moya.Task {
         switch self {
-        case .logout, .termsOfUse:
+        case .logout:
             return .requestPlain
             
         case let .withdrawal(reason):
@@ -66,4 +61,5 @@ protocol UserAPI2 {
     func updateProfileImage(image: Data) -> AnyPublisher<BaseDTO<ProfileImageDTO>, Error>
     func getNotificationSetting() -> AnyPublisher<BaseDTO<NotificationDTO>, Error>
     func updateNotificationSetting(notification: NotificationDTO) -> AnyPublisher<Void, Error>
+    func getTermsOfUse() -> AnyPublisher<BaseDTO<TermsOfUserDTO>, Error>
 }

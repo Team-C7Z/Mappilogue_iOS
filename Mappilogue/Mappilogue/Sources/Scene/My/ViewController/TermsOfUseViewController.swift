@@ -9,6 +9,8 @@ import UIKit
 import WebKit
 
 class TermsOfUseViewController: BaseViewController {
+    var userViewModel = UserViewModel()
+    
     private let webView = WKWebView()
     
     override func viewDidLoad() {
@@ -45,14 +47,15 @@ class TermsOfUseViewController: BaseViewController {
     }
     
     func getTermsOfUserURL() {
-        UserManager.shared.termsOfUse { result in
-            switch result {
-            case .success(let response):
-                self.handleTermsOfUserResponse(response)
-            default:
-                break
-            }
-        }
+        userViewModel.getTermsOfUse()
+        
+        userViewModel.$termsOfUserResult
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { result in
+                guard let result else { return }
+                self.handleTermsOfUserResponse(result)
+            })
+            .store(in: &userViewModel.cancellables)
     }
     
     func handleTermsOfUserResponse(_ response: Any) {
