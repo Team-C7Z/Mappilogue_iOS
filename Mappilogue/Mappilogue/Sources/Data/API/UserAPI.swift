@@ -15,7 +15,6 @@ enum UserAPI: BaseAPI {
     case termsOfUse
     case getNotificationSetting
     case updateNotificationSetting(notification: NotificationDTO)
-    case updateNickname(nickname: String)
     case updateProfileImage(image: MultipartFormData)
 }
 
@@ -32,8 +31,6 @@ extension UserAPI: TargetType {
             return "/api/v1/users/alarms-setting"
         case .updateNotificationSetting:
             return "/api/v1/users/alarms-setting"
-        case .updateNickname:
-            return "/api/v1/users/nickname"
         case .updateProfileImage:
             return "/api/v1/users/profile-image"
         }
@@ -47,7 +44,7 @@ extension UserAPI: TargetType {
             return .get
         case .updateNotificationSetting:
             return .put
-        case .updateNickname, .updateProfileImage:
+        case .updateProfileImage:
             return .patch
         }
     }
@@ -76,13 +73,6 @@ extension UserAPI: TargetType {
             
             return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
             
-        case let .updateNickname(nickname):
-            let requestParameters: [String: String] = [
-                "nickname": nickname
-            ]
-            
-            return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
-            
         case let .updateProfileImage(image):
             return .uploadMultipart([image])
         }
@@ -103,4 +93,5 @@ extension UserAPI: TargetType {
 
 protocol UserAPI2 {
     func getProfile() -> AnyPublisher<BaseDTO<ProfileDTO>, Error>
+    func updateNickname(nickname: String) -> AnyPublisher<Void, Error>
 }
