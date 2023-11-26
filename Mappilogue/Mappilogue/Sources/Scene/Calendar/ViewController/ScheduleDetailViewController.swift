@@ -192,9 +192,7 @@ class ScheduleDetailViewController: BaseViewController {
     }
     
     private func deleteSchedule() {
-        guard let index = selectedScheduleIndex else { return }
-      //  schedules.remove(at: index)
-        collectionView.reloadData()
+        calendarViewModel.deleteSchedule(id: self.selectedScheduleIndex ?? -1, date: date)
     }
 }
 
@@ -211,14 +209,13 @@ extension ScheduleDetailViewController: UICollectionViewDelegate, UICollectionVi
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ScheduleCell.registerId, for: indexPath) as? ScheduleCell else { return UICollectionViewCell() }
         
+            let schedule = schedules.schedulesOnSpecificDate[indexPath.row]
+            cell.configure(schedule.scheduleId, schedule: schedule)
+            
             cell.onEditButtonTapped = { index in
                 self.selectedScheduleIndex = index
                 self.presentEditScheduleViewController()
             }
-            
-            let schedule = schedules.schedulesOnSpecificDate[indexPath.row]
-            cell.configure(selectedScheduleIndex ?? -1, schedule: schedule)
-            
             return cell
         }
     }
