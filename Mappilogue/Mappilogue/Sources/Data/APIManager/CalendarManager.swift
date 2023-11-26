@@ -40,6 +40,21 @@ struct CalendarManager: CalendarAPI {
             .decode(type: BaseDTO<ScheduleDetailDTO>.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
+
+    func deleteSchedule(id: Int) -> AnyPublisher<Void, Error> {
+        let url = URL(string: "\(baseURL)\(id)")!
+        let request = setupRequest(for: url, method: "DELETE")
+
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .tryMap { _, response in
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 204 else {
+                    throw URLError(.badServerResponse)
+                }
+              
+                return
+            }
+            .eraseToAnyPublisher()
+    }
     
     private func setupRequest(for url: URL, method: String) -> URLRequest {
         var request = URLRequest(url: url)
