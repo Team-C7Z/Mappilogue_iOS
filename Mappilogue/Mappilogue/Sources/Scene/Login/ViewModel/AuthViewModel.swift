@@ -19,4 +19,10 @@ class AuthViewModel {
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
+    
+    func withdrawal(reason: String?) -> AnyPublisher<Void, Error> {
+        authManager.withdrawal(reason: reason)
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
 }
