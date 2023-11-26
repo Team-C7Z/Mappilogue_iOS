@@ -13,7 +13,6 @@ enum UserAPI: BaseAPI {
     case logout
     case withdrawal(reason: String?)
     case termsOfUse
-    case updateNotificationSetting(notification: NotificationDTO)
 }
 
 extension UserAPI: TargetType {
@@ -25,8 +24,6 @@ extension UserAPI: TargetType {
             return "/api/v1/users/withdrawal"
         case .termsOfUse:
             return "/api/v1/users/tos"
-        case .updateNotificationSetting:
-            return "/api/v1/users/alarms-setting"
         }
     }
     
@@ -36,8 +33,6 @@ extension UserAPI: TargetType {
             return .post
         case .termsOfUse:
             return .get
-        case .updateNotificationSetting:
-            return .put
         }
     }
     
@@ -52,16 +47,6 @@ extension UserAPI: TargetType {
             if let reason = reason {
                 requestParameters["reason"] = reason
             }
-            
-            return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
-            
-        case let .updateNotificationSetting(notification):
-            let requestParameters: [String: String] = [
-                "isTotalAlarm": notification.isTotalNotification,
-                "isNoticeAlarm": notification.isNoticeNotification,
-                "isMarketingAlarm": notification.isMarketingNotification,
-                "isScheduleReminderAlarm": notification.isScheduleReminderNotification
-            ]
             
             return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
         }
@@ -80,4 +65,5 @@ protocol UserAPI2 {
     func updateNickname(nickname: String) -> AnyPublisher<Void, Error>
     func updateProfileImage(image: Data) -> AnyPublisher<BaseDTO<ProfileImageDTO>, Error>
     func getNotificationSetting() -> AnyPublisher<BaseDTO<NotificationDTO>, Error>
+    func updateNotificationSetting(notification: NotificationDTO) -> AnyPublisher<Void, Error>
 }
