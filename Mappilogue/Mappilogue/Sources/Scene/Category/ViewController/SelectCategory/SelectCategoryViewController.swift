@@ -122,19 +122,15 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
 extension SelectCategoryViewController {
     private func loadCategoryData() {
         categoryViewModel.getCategory()
-            .sink { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(let error):
-                    print("error: \(error.localizedDescription)")
-                }
-            } receiveValue: { response in
-                guard let result = response.result else { return }
+     
+        categoryViewModel.$categoryResult
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { result in
+                guard let result else { return }
                 
                 self.categories = result.markCategories
                 self.collectionView.reloadData()
-            }
+            })
             .store(in: &categoryViewModel.cancellables)
     }
 }
