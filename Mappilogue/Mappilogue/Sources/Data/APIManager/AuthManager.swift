@@ -7,6 +7,7 @@
 
 import Foundation
 import Moya
+import Combine
 
 class AuthManager {
     static let shared = AuthManager()
@@ -54,5 +55,36 @@ class AuthManager {
         default:
             return .networkFail
         }
+    }
+}
+
+class AuthManager2: AuthAPI2 {
+    private let baseURL = "\(Environment.baseURL)/api/v1/users"
+    
+    func logout() -> AnyPublisher<Void, Error> {
+        let url = URL(string: "\(baseURL)/logout")!
+        let request = setupRequest(for: url, method: "POST")
+        
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .tryMap { _, response in
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 204 else {
+                    throw URLError(.badServerResponse)
+                }
+                return
+            }
+            .eraseToAnyPublisher()
+        
+    }
+    
+    private func setupRequest(for url: URL, method: String) -> URLRequest {
+        var request = URLRequest(url: url)
+        request.httpMethod = method
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        if let token = AuthUserDefaults.accessToken {
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+        
+        return request
     }
 }

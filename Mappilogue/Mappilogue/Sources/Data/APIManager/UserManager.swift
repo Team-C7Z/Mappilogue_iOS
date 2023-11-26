@@ -14,20 +14,6 @@ class UserManager {
     private let provider = MoyaProvider<UserAPI>(plugins: [NetworkLoggerPlugin()])
     private let interceptorSessionProvider = MoyaProvider<UserAPI>(session: Session(interceptor: Interceptor()), plugins: [NetworkLoggerPlugin()])
   
-    func logout(completion: @escaping (NetworkResult<Any>) -> Void) {
-        provider.request(.logout) { result in
-            switch result {
-            case .success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<String>.self)
-                completion(networkResult)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-
     func withdrawal(reason: String?, completion: @escaping (NetworkResult<Any>) -> Void) {
         provider.request(.withdrawal(reason: reason)) { result in
             switch result {
@@ -186,7 +172,6 @@ class UserManager2: UserAPI2 {
             .decode(type: BaseDTO<TermsOfUserDTO>.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
-    
     
     private func setupRequest(for url: URL, method: String) -> URLRequest {
         var request = URLRequest(url: url)
