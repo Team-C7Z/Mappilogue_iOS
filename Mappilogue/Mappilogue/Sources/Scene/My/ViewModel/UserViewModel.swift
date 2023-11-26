@@ -74,4 +74,18 @@ class UserViewModel {
             })
             .store(in: &cancellables)
     }
+    
+    func updateNotificationSetting(notification: NotificationDTO) {
+        userManager.updateNotificationSetting(notification: notification)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure:
+                    print("error")
+                }
+            }, receiveValue: { _ in })
+            .store(in: &cancellables)
+    }
 }

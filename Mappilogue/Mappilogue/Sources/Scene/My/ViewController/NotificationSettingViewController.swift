@@ -71,15 +71,10 @@ class NotificationSettingViewController: BaseViewController {
     }
     
     @objc private func updateNotification() {
-//        UserManager.shared.updateNotificationSetting { result in
-//            switch result {
-//            case .success(let response):
-//                print(response)
-//            default:
-//                break
-//            }
-//        }
-//        
+        if let notification = notificationDTO {
+            userViewModel.updateNotificationSetting(notification: notification)
+        }
+        
         backButtonTapped()
     }
     
