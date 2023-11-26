@@ -84,6 +84,7 @@ class MyViewController: NavigationBarViewController {
                 self.collectionView.reloadData()
             })
             .store(in: &userViewModel.cancellables)
+        
     }
     
     @objc func checkWithdrawalStatus(_ notification: Notification) {

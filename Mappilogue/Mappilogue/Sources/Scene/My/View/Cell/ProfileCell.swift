@@ -70,7 +70,7 @@ class ProfileCell: BaseCollectionViewCell {
     
     func configure(_ profile: ProfileDTO?) {
         guard let profile else { return }
-        
+
         profileNameLabel.text = profile.nickname
         profileEmailLabel.text = profile.email
         

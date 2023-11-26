@@ -55,51 +55,7 @@ class UserManager {
             }
         }
     }
-    
-    func getNotificationSetting(completion: @escaping (NetworkResult<Any>) -> Void) {
-        interceptorSessionProvider.request(.getNotificationSetting) { result in
-            switch result {
-            case .success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<NotificationDTO>.self)
-                completion(networkResult)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
-    func updateNotificationSetting(completion: @escaping (NetworkResult<Any>) -> Void) {
-        interceptorSessionProvider.request(.getNotificationSetting) { result in
-            switch result {
-            case .success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<String>.self)
-                completion(networkResult)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
-    func updateProfileImage(profileImage: Data, completion: @escaping (NetworkResult<Any>) -> Void) {
-        let formData = MultipartFormData(provider: .data(profileImage), name: "image", fileName: "image.jpg", mimeType: "image/jpg")
 
-        interceptorSessionProvider.request(.updateProfileImage(image: formData)) { result in
-            switch result {
-            case .success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<ProfileImageDTO>.self)
-                completion(networkResult)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
     private func judgeStatus<T: Codable>(_ statusCode: Int, _ data: Data, _ dataModel: T.Type) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
         switch statusCode {
@@ -139,7 +95,7 @@ class UserManager2: UserAPI2 {
         let url = URL(string: "\(baseURL)/nicknames")!
         var request = setupRequest(for: url, method: "PATCH")
         
-        var requestParameters: [String: Any] = [
+        let requestParameters: [String: Any] = [
             "nickname": nickname
         ]
         
@@ -156,6 +112,50 @@ class UserManager2: UserAPI2 {
                 }
                 return
             }
+            .eraseToAnyPublisher()
+    }
+    
+    func updateProfileImage(image: Data) -> AnyPublisher<BaseDTO<ProfileImageDTO>, Error> {
+        let url = URL(string: "\(baseURL)/images")!
+        var request = setupRequest(for: url, method: "PATCH")
+        let boundary = UUID().uuidString
+        
+        request.httpMethod = "PATCH"
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        
+        var body = Data()
+        
+        body.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
+        body.append("Content-Disposition: form-data; name=\"image\"; filename=\"profile.jpg\"\r\n".data(using: .utf8)!)
+        body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+        body.append(image)
+        body.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
+        
+        request.httpBody = body
+        
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .tryMap { data, response in
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                    throw URLError(.badServerResponse)
+                }
+                return data
+            }
+            .decode(type: BaseDTO<ProfileImageDTO>.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+    }
+    
+    func getNotificationSetting() -> AnyPublisher<BaseDTO<NotificationDTO>, Error> {
+        let url = URL(string: "\(baseURL)/alarm-settings")!
+        let request = setupRequest(for: url, method: "GET")
+        
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .tryMap { data, response in
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                    throw URLError(.badServerResponse)
+                }
+                return data
+            }
+            .decode(type: BaseDTO<NotificationDTO>.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
     
