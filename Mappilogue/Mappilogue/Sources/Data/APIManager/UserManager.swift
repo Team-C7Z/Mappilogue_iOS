@@ -159,6 +159,33 @@ class UserManager2: UserAPI2 {
             .eraseToAnyPublisher()
     }
     
+    func updateNotificationSetting(notification: NotificationDTO) -> AnyPublisher<Void, Error> {
+        let url = URL(string: "\(baseURL)/alarm-settings")!
+        var request = setupRequest(for: url, method: "PUT")
+        
+        let requestParameters: [String: Any] = [
+            "isTotalAlarm": notification.isTotalNotification,
+            "isNoticeAlarm": notification.isNoticeNotification,
+            "isMarketingAlarm": notification.isMarketingNotification,
+            "isScheduleReminderAlarm": notification.isScheduleReminderNotification
+        ]
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: requestParameters)
+        } catch {
+            return Fail(error: CategoryAPIError.serializationError(error)).eraseToAnyPublisher()
+        }
+
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .tryMap { _, response in
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 204 else {
+                    throw URLError(.badServerResponse)
+                }
+                return
+            }
+            .eraseToAnyPublisher()
+    }
+    
     private func setupRequest(for url: URL, method: String) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = method
