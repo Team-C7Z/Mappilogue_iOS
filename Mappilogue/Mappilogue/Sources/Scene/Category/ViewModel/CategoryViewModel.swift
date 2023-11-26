@@ -9,13 +9,24 @@ import Foundation
 import Combine
 
 class CategoryViewModel {
+    @Published var categoryResult: GetCategoryDTO?
     var cancellables: Set<AnyCancellable> = []
     private let categoryManager = CategoryManager()
     
-    func getCategory() -> AnyPublisher<BaseDTO<GetCategoryDTO>, Error> {
+    func getCategory() {
         return categoryManager.getCategory()
             .receive(on: DispatchQueue.main)
-            .eraseToAnyPublisher()
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure:
+                    print("error")
+                }
+            }, receiveValue: { response in
+                self.categoryResult = response.result
+            })
+            .store(in: &cancellables)
     }
     
     func addCategory(title: String) {
