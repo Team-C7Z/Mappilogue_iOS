@@ -251,6 +251,7 @@
 		92A7B6682A4E6154009C9293 /* UpcomingScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6672A4E6154009C9293 /* UpcomingScheduleCell.swift */; };
 		92C2EC612A6924B5002DB0E3 /* LineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2EC602A6924B5002DB0E3 /* LineCell.swift */; };
 		92CD36FA2A7B505900768B61 /* MyCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CD36F92A7B505900768B61 /* MyCategoryViewController.swift */; };
+		92E20F462B137B3600380FA5 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E20F452B137B3600380FA5 /* UserViewModel.swift */; };
 		92E7814C2A84B9B3000DAACD /* ScheduleDateFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7814B2A84B9B3000DAACD /* ScheduleDateFooterView.swift */; };
 		92E7814E2A850316000DAACD /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7814D2A850316000DAACD /* Date.swift */; };
 		92E781522A85381D000DAACD /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E781512A85381D000DAACD /* String.swift */; };
@@ -531,6 +532,7 @@
 		92A7B6672A4E6154009C9293 /* UpcomingScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingScheduleCell.swift; sourceTree = "<group>"; };
 		92C2EC602A6924B5002DB0E3 /* LineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineCell.swift; sourceTree = "<group>"; };
 		92CD36F92A7B505900768B61 /* MyCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCategoryViewController.swift; sourceTree = "<group>"; };
+		92E20F452B137B3600380FA5 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		92E7814B2A84B9B3000DAACD /* ScheduleDateFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDateFooterView.swift; sourceTree = "<group>"; };
 		92E7814D2A850316000DAACD /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		92E781512A85381D000DAACD /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -1539,6 +1541,7 @@
 		9269993D2A14F6F9003DDAD2 /* My */ = {
 			isa = PBXGroup;
 			children = (
+				92E20F442B137B1400380FA5 /* ViewModel */,
 				9245BC122B08C53600383F4D /* ViewController */,
 				9245BC132B08C54D00383F4D /* View */,
 			);
@@ -1620,6 +1623,14 @@
 				928B7BFE2A9F2D6600E4F789 /* AuthType.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		92E20F442B137B1400380FA5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				92E20F452B137B3600380FA5 /* UserViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		92E7814A2A849AB9000DAACD /* Cell */ = {
@@ -1949,6 +1960,7 @@
 				925840BB2A7F455D00997434 /* NotificationSettingViewController.swift in Sources */,
 				92011C012A740A08009B047F /* AddNewCategoryCell.swift in Sources */,
 				92011B752A7138B0009B047F /* EmptyRecordCell.swift in Sources */,
+				92E20F462B137B3600380FA5 /* UserViewModel.swift in Sources */,
 				920031D92A8DB50600E3170D /* MyRecordContentHeaderView.swift in Sources */,
 				925840D52A80957900997434 /* AddLocationFooterView.swift in Sources */,
 				92011BFF2A7407D3009B047F /* SelectCategoryViewController.swift in Sources */,

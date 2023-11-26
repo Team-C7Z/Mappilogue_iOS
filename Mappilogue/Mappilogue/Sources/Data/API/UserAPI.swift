@@ -7,6 +7,7 @@
 
 import Foundation
 import Moya
+import Combine
 
 enum UserAPI: BaseAPI {
     case logout
@@ -14,7 +15,6 @@ enum UserAPI: BaseAPI {
     case termsOfUse
     case getNotificationSetting
     case updateNotificationSetting(notification: NotificationDTO)
-    case getProfile
     case updateNickname(nickname: String)
     case updateProfileImage(image: MultipartFormData)
 }
@@ -32,8 +32,6 @@ extension UserAPI: TargetType {
             return "/api/v1/users/alarms-setting"
         case .updateNotificationSetting:
             return "/api/v1/users/alarms-setting"
-        case .getProfile:
-            return "/api/v1/users/profile"
         case .updateNickname:
             return "/api/v1/users/nickname"
         case .updateProfileImage:
@@ -45,7 +43,7 @@ extension UserAPI: TargetType {
         switch self {
         case .logout, .withdrawal:
             return .post
-        case .termsOfUse, .getNotificationSetting, .getProfile:
+        case .termsOfUse, .getNotificationSetting:
             return .get
         case .updateNotificationSetting:
             return .put
@@ -56,7 +54,7 @@ extension UserAPI: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case .logout, .termsOfUse, .getNotificationSetting, .getProfile:
+        case .logout, .termsOfUse, .getNotificationSetting:
             return .requestPlain
             
         case let .withdrawal(reason):
@@ -101,4 +99,8 @@ extension UserAPI: TargetType {
             return ["Authorization": "Bearer \(token)"]
         }
     }
+}
+
+protocol UserAPI2 {
+    func getProfile() -> AnyPublisher<BaseDTO<ProfileDTO>, Error>
 }

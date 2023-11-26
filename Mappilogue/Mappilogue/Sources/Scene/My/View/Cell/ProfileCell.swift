@@ -67,23 +67,21 @@ class ProfileCell: BaseCollectionViewCell {
             $0.height.equalTo(14)
         }
     }
-
+    
     func configure(_ profile: ProfileDTO?) {
         guard let profile else { return }
         
         profileNameLabel.text = profile.nickname
         profileEmailLabel.text = profile.email
         
-        if let profileImageUrl = profile.profileImageUrl, let url = URL(string: profileImageUrl) {
-            DispatchQueue.global().async { [weak self] in
-                if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self?.profileImage.image = image
-                    }
+        let url = URL(string: profile.profileImageUrl)!
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    self?.profileImage.image = image
                 }
             }
-        } else {
-            profileImage.image = UIImage(named: "my_profile")
+            
         }
     }
 }

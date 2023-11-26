@@ -14,6 +14,8 @@ struct MyInfo {
 }
 
 class MyViewController: NavigationBarViewController {
+    var userViewModel = UserViewModel()
+    
     var myInfoData: [[MyInfo]] = [
         [
             MyInfo(image: "my_notification", title: "알림 설정"),
@@ -73,16 +75,15 @@ class MyViewController: NavigationBarViewController {
     }
     
     private func getProfile() {
-        UserManager.shared.getProfile { result in
-            switch result {
-            case .success(let response):
-                guard let baseResponse = response as? BaseDTO<ProfileDTO>, let result = baseResponse.result else { return }
+        userViewModel.getCategory()
+        
+        userViewModel.$profileResult
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { result in
                 self.profile = result
                 self.collectionView.reloadData()
-            default:
-                break
-            }
-        }
+            })
+            .store(in: &userViewModel.cancellables)
     }
     
     @objc func checkWithdrawalStatus(_ notification: Notification) {
