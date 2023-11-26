@@ -13,9 +13,7 @@ enum UserAPI: BaseAPI {
     case logout
     case withdrawal(reason: String?)
     case termsOfUse
-    case getNotificationSetting
     case updateNotificationSetting(notification: NotificationDTO)
-    case updateProfileImage(image: MultipartFormData)
 }
 
 extension UserAPI: TargetType {
@@ -27,12 +25,8 @@ extension UserAPI: TargetType {
             return "/api/v1/users/withdrawal"
         case .termsOfUse:
             return "/api/v1/users/tos"
-        case .getNotificationSetting:
-            return "/api/v1/users/alarms-setting"
         case .updateNotificationSetting:
             return "/api/v1/users/alarms-setting"
-        case .updateProfileImage:
-            return "/api/v1/users/profile-image"
         }
     }
     
@@ -40,18 +34,16 @@ extension UserAPI: TargetType {
         switch self {
         case .logout, .withdrawal:
             return .post
-        case .termsOfUse, .getNotificationSetting:
+        case .termsOfUse:
             return .get
         case .updateNotificationSetting:
             return .put
-        case .updateProfileImage:
-            return .patch
         }
     }
     
     var task: Moya.Task {
         switch self {
-        case .logout, .termsOfUse, .getNotificationSetting:
+        case .logout, .termsOfUse:
             return .requestPlain
             
         case let .withdrawal(reason):
@@ -72,26 +64,20 @@ extension UserAPI: TargetType {
             ]
             
             return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
-            
-        case let .updateProfileImage(image):
-            return .uploadMultipart([image])
         }
     }
     
     var headers: [String: String]? {
         guard let token = AuthUserDefaults.accessToken else { return nil }
+    
+        return ["Authorization": "Bearer \(token)"]
         
-        switch self {
-        case .updateProfileImage:
-            return ["Authorization": "Bearer \(token)",
-                    "Content-Type": "multipart/form-data"]
-        default:
-            return ["Authorization": "Bearer \(token)"]
-        }
     }
 }
 
 protocol UserAPI2 {
     func getProfile() -> AnyPublisher<BaseDTO<ProfileDTO>, Error>
     func updateNickname(nickname: String) -> AnyPublisher<Void, Error>
+    func updateProfileImage(image: Data) -> AnyPublisher<BaseDTO<ProfileImageDTO>, Error>
+    func getNotificationSetting() -> AnyPublisher<BaseDTO<NotificationDTO>, Error>
 }
