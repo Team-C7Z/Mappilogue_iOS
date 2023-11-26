@@ -75,7 +75,7 @@ class MyViewController: NavigationBarViewController {
     }
     
     private func getProfile() {
-        userViewModel.getCategory()
+        userViewModel.getProfile()
         
         userViewModel.$profileResult
             .receive(on: DispatchQueue.main)

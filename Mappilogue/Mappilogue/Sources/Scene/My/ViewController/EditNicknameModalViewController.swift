@@ -8,6 +8,7 @@
 import UIKit
 
 class EditNicknameModalViewController: BaseViewController {
+    var userViewModel = UserViewModel()
     var onChangeTapped: ((String) -> Void)?
     
     private let alertView = UIView()
@@ -159,14 +160,7 @@ class EditNicknameModalViewController: BaseViewController {
     }
     
     private func updateNickname(_ nickname: String) {
-        UserManager.shared.updateNickname(nickname: nickname) { result in
-            switch result {
-            case .success(let response):
-                print(response)
-            default:
-                break
-            }
-        }
+        userViewModel.updateNickname(nickname: nickname)
     }
 }
 
