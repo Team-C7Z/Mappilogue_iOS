@@ -14,7 +14,7 @@ class UserViewModel {
     @Published var termsOfUserResult: TermsOfUserDTO?
     
     var cancellables: Set<AnyCancellable> = []
-    private let userManager = UserManager2()
+    private let userManager = UserManager()
     
     func getProfile() {
         userManager.getProfile()

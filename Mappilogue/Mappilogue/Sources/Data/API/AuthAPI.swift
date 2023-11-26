@@ -66,4 +66,5 @@ extension AuthAPI: TargetType {
 
 protocol AuthAPI2 {
     func logout() -> AnyPublisher<Void, Error>
+    func withdrawal(reason: String?) -> AnyPublisher<Void, Error>
 }
