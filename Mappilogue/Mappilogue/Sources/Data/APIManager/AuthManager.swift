@@ -73,7 +73,32 @@ class AuthManager2: AuthAPI2 {
                 return
             }
             .eraseToAnyPublisher()
+    }
+    
+    func withdrawal(reason: String?) -> AnyPublisher<Void, Error> {
+        let url = URL(string: "\(baseURL)/withdrawal")!
+        var request = setupRequest(for: url, method: "POST")
         
+        var requestParameters: [String: Any] = [:]
+        
+        if let reason = reason {
+            requestParameters["reason"] = reason
+        }
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: requestParameters)
+        } catch {
+            return Fail(error: CategoryAPIError.serializationError(error)).eraseToAnyPublisher()
+        }
+
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .tryMap { _, response in
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 204 else {
+                    throw URLError(.badServerResponse)
+                }
+                return
+            }
+            .eraseToAnyPublisher()
     }
     
     private func setupRequest(for url: URL, method: String) -> URLRequest {
