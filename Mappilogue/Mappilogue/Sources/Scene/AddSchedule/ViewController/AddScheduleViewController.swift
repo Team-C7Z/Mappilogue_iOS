@@ -159,6 +159,7 @@ class AddScheduleViewController: BaseViewController {
         if let scheduleId {
             scheduleViewModel.updateSchedule(id: scheduleId, schedule: schedule)
         } else {
+            print("ㅋㅋ")
             scheduleViewModel.addSchedule(schedule: schedule)
         }
         

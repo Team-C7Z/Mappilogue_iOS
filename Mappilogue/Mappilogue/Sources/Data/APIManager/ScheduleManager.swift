@@ -151,7 +151,7 @@ class ScheduleManager: ScheduleAPI {
             }
             .eraseToAnyPublisher()
     }
-    
+   
     private func setupRequest(for url: URL, method: String) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = method

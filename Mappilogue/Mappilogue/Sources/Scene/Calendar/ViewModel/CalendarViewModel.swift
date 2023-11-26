@@ -395,4 +395,18 @@ extension CalendarViewModel {
             })
             .store(in: &cancellables)
     }
+    
+    func deleteSchedule(id: Int, date: String) {
+        calendarManager.deleteSchedule(id: id)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    self.getScheduleDetail(date: date)
+                case .failure:
+                    print("error")
+                }
+            }, receiveValue: { _ in })
+            .store(in: &cancellables)
+    }
 }
