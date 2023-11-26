@@ -84,20 +84,6 @@ class UserManager {
         }
     }
     
-    func updateNickname(nickname: String, completion: @escaping (NetworkResult<Any>) -> Void) {
-        interceptorSessionProvider.request(.updateNickname(nickname: nickname)) { result in
-            switch result {
-            case .success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<String>.self)
-                completion(networkResult)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
     func updateProfileImage(profileImage: Data, completion: @escaping (NetworkResult<Any>) -> Void) {
         let formData = MultipartFormData(provider: .data(profileImage), name: "image", fileName: "image.jpg", mimeType: "image/jpg")
 
@@ -132,10 +118,11 @@ class UserManager {
 }
 
 class UserManager2: UserAPI2 {
-    private let baseURL = URL(string: "\(Environment.baseURL)/api/v1/users/profiles")!
+    private let baseURL = "\(Environment.baseURL)/api/v1/users/profiles"
     
     func getProfile() -> AnyPublisher<BaseDTO<ProfileDTO>, Error> {
-        let request = setupRequest(for: baseURL, method: "GET")
+        let url = URL(string: baseURL)!
+        let request = setupRequest(for: url, method: "GET")
         
         return URLSession.shared.dataTaskPublisher(for: request)
             .tryMap { data, response in
@@ -145,6 +132,30 @@ class UserManager2: UserAPI2 {
                 return data
             }
             .decode(type: BaseDTO<ProfileDTO>.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+    }
+    
+    func updateNickname(nickname: String) -> AnyPublisher<Void, Error> {
+        let url = URL(string: "\(baseURL)/nicknames")!
+        var request = setupRequest(for: url, method: "PATCH")
+        
+        var requestParameters: [String: Any] = [
+            "nickname": nickname
+        ]
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: requestParameters)
+        } catch {
+            return Fail(error: CategoryAPIError.serializationError(error)).eraseToAnyPublisher()
+        }
+
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .tryMap { _, response in
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 204 else {
+                    throw URLError(.badServerResponse)
+                }
+                return
+            }
             .eraseToAnyPublisher()
     }
     
