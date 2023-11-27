@@ -7,16 +7,11 @@
 
 import UIKit
 
-struct OnboardingPage {
-    let title: String
-    let image: String
-}
-
 class OnboardingViewController: BaseViewController {
     private let onboardingPages = [
-        OnboardingPage(title: "일정에 여러 장소를 추가해 보세요", image: "markedRecordTest"),
-        OnboardingPage(title: "내 일정을 기반으로 하루를 기록해 보세요", image: "markedRecordTest"),
-        OnboardingPage(title: "지도로 내 기록을 한 눈에 볼 수 있어요", image: "markedRecordTest")
+        Onboarding(title: "일정에 여러 장소를 추가해 보세요", image: "onboarding1"),
+        Onboarding(title: "내 일정을 기반으로 하루를 기록해 보세요", image: "onboarding2"),
+        Onboarding(title: "지도로 내 기록을 한 눈에 볼 수 있어요", image: "onboarding3")
     ]
     
     private let onboardingLabel = UILabel()
@@ -79,14 +74,14 @@ class OnboardingViewController: BaseViewController {
         super.setupLayout()
         
         onboardingLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(68)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(48)
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
         }
         
         collectionView.snp.makeConstraints {
-            $0.top.equalTo(onboardingLabel.snp.bottom).offset(46)
+            $0.top.equalTo(onboardingLabel.snp.bottom).offset(71)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(pageControl.snp.top).offset(-56)
+            $0.bottom.equalTo(pageControl.snp.top).offset(-39)
         }
         
         pageControl.snp.makeConstraints {

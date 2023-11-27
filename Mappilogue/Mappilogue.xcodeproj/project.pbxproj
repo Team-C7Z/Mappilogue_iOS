@@ -253,6 +253,7 @@
 		92CD36FA2A7B505900768B61 /* MyCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CD36F92A7B505900768B61 /* MyCategoryViewController.swift */; };
 		92E20F462B137B3600380FA5 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E20F452B137B3600380FA5 /* UserViewModel.swift */; };
 		92E20F492B13B8AB00380FA5 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E20F482B13B8AB00380FA5 /* AuthViewModel.swift */; };
+		92E20F4C2B1429F400380FA5 /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E20F4B2B1429F400380FA5 /* Onboarding.swift */; };
 		92E7814C2A84B9B3000DAACD /* ScheduleDateFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7814B2A84B9B3000DAACD /* ScheduleDateFooterView.swift */; };
 		92E7814E2A850316000DAACD /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7814D2A850316000DAACD /* Date.swift */; };
 		92E781522A85381D000DAACD /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E781512A85381D000DAACD /* String.swift */; };
@@ -535,6 +536,7 @@
 		92CD36F92A7B505900768B61 /* MyCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCategoryViewController.swift; sourceTree = "<group>"; };
 		92E20F452B137B3600380FA5 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		92E20F482B13B8AB00380FA5 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		92E20F4B2B1429F400380FA5 /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		92E7814B2A84B9B3000DAACD /* ScheduleDateFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDateFooterView.swift; sourceTree = "<group>"; };
 		92E7814D2A850316000DAACD /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		92E781512A85381D000DAACD /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -1338,6 +1340,7 @@
 		9263786C2A546BE3004E5B6E /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				92E20F4A2B1429EA00380FA5 /* Model */,
 				9245BBF52B08C21500383F4D /* ViewController */,
 				9245BBF62B08C21B00383F4D /* View */,
 			);
@@ -1642,6 +1645,14 @@
 				92E20F482B13B8AB00380FA5 /* AuthViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		92E20F4A2B1429EA00380FA5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				92E20F4B2B1429F400380FA5 /* Onboarding.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		92E7814A2A849AB9000DAACD /* Cell */ = {
@@ -2137,6 +2148,7 @@
 				92011C1C2A75E484009B047F /* RecordCell.swift in Sources */,
 				926999402A14F73C003DDAD2 /* HomeViewController.swift in Sources */,
 				92011B8D2A72BBE8009B047F /* ImageSaveRecordView.swift in Sources */,
+				92E20F4C2B1429F400380FA5 /* Onboarding.swift in Sources */,
 				927E7F212A66F64400E6A29F /* Schedule2222.swift in Sources */,
 				925840BD2A7F459600997434 /* NotificationSettingView.swift in Sources */,
 				928B7BE72A9B1B3E00E4F789 /* AuthManager.swift in Sources */,
