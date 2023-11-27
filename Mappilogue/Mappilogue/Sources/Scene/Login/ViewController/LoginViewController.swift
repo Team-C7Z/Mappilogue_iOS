@@ -178,10 +178,8 @@ extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        //로그인 성공
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
-            // You can create an account in your system.
             let userIdentifier = appleIDCredential.user
             let fullName = appleIDCredential.fullName
             let email = appleIDCredential.email
@@ -200,13 +198,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
             print("fullName: \(fullName)")
             print("email: \(email)")
             
-            //Move to MainPage
-            //let validVC = SignValidViewController()
-            //validVC.modalPresentationStyle = .fullScreen
-            //present(validVC, animated: true, completion: nil)
-            
         case let passwordCredential as ASPasswordCredential:
-            // Sign in using an existing iCloud Keychain credential.
             let username = passwordCredential.user
             let password = passwordCredential.password
             
