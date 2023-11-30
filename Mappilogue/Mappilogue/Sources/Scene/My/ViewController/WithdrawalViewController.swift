@@ -9,6 +9,8 @@ import UIKit
 import KakaoSDKUser
 
 class WithdrawalViewController: BaseViewController {
+    var authViewModel = AuthViewModel()
+    
     let withdrawalReasons = [
         "이제 이 서비스가 필요하지 않아요",
         "어플이 사용하기 어려워요",
@@ -138,15 +140,19 @@ class WithdrawalViewController: BaseViewController {
     }
     
     private func handleUserManagerWithdrawal() {
-        UserManager.shared.withdrawal(reason: self.withdrawalReason()) { result in
-            switch result {
-            case .success:
+        authViewModel.withdrawal(reason: self.withdrawalReason())
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("error: \(error.localizedDescription)")
+                }
+            } receiveValue: { _ in
                 self.clearAuthUserDefaults()
                 self.completeWithdrawal()
-            default:
-                break
             }
-        }
+            .store(in: &authViewModel.cancellables)
     }
     
     private func clearAuthUserDefaults() {

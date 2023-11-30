@@ -8,6 +8,7 @@
 import UIKit
 
 class NotificationSettingViewController: BaseViewController {
+    var userViewModel = UserViewModel()
     private var notificationDTO: NotificationDTO?
     
     private let totalNotiviationView = NotificationSettingView()
@@ -70,32 +71,27 @@ class NotificationSettingViewController: BaseViewController {
     }
     
     @objc private func updateNotification() {
-        UserManager.shared.updateNotificationSetting { result in
-            switch result {
-            case .success(let response):
-                print(response)
-            default:
-                break
-            }
+        if let notification = notificationDTO {
+            userViewModel.updateNotificationSetting(notification: notification)
         }
         
         backButtonTapped()
     }
     
     func getNotificationSetting() {
-        UserManager.shared.getNotificationSetting { result in
-            switch result {
-            case .success(let response):
-                self.handleNotificationSettingResponse(response)
-            default:
-                break
-            }
-        }
+        userViewModel.getNotificationSetting()
+        
+        userViewModel.$notificationResult
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { result in
+                guard let result else { return }
+                
+                self.handleNotificationSettingResponse(result)
+            })
+            .store(in: &userViewModel.cancellables)
     }
     
-    private func handleNotificationSettingResponse(_ response: Any) {
-        guard let baseResponse = response as? BaseDTO<NotificationDTO>, let result = baseResponse.result else { return }
-        
+    private func handleNotificationSettingResponse(_ result: NotificationDTO) {
         notificationDTO = result
         configureNotification()
         setTotalNotificationControl()
@@ -103,7 +99,7 @@ class NotificationSettingViewController: BaseViewController {
     
     func configureNotification() {
         guard let notification = notificationDTO else { return }
-        
+ 
         totalNotiviationView.configure(title: "알림 받기", isSwitch: notification.isTotalNotification)
         noticeNotification.configure(title: "공지사항 알림", isSwitch: notification.isNoticeNotification)
         scheduleReminderNotification.configure(title: "일정 미리 알림", isSwitch: notification.isScheduleReminderNotification)
