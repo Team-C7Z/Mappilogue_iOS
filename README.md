@@ -18,3 +18,4 @@ Mappilogue의 iOS 레포지토리 입니다.
 - Lottie
 - KakaoOpenSDK
 - Firebase
+- NaverMap
