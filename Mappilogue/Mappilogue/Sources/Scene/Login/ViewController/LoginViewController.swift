@@ -15,7 +15,6 @@ class LoginViewController: BaseViewController {
     private var isAlarmAccept: ActiveStatus = .inactive
     
     private let logoImage = UIImageView()
-    private let titleLabel = UILabel()
     private let kakaoLoginButton = UIButton()
     private let appleLoginButton = UIButton()
     
@@ -30,10 +29,6 @@ class LoginViewController: BaseViewController {
     
         logoImage.image = UIImage(named: "common_logo")
         
-        titleLabel.text = "맵필로그, 기억의 시작"
-        titleLabel.textColor = .color1C1C1C
-        titleLabel.font = .title01
-        
         kakaoLoginButton.setImage(UIImage(named: "login_kakao"), for: .normal)
         kakaoLoginButton.addTarget(self, action: #selector(kakaoLoginButtonTapped), for: .touchUpInside)
         appleLoginButton.setImage(UIImage(named: "login_apple"), for: .normal)
@@ -44,7 +39,6 @@ class LoginViewController: BaseViewController {
         super.setupHierarchy()
         
         view.addSubview(logoImage)
-        view.addSubview(titleLabel)
         view.addSubview(kakaoLoginButton)
         view.addSubview(appleLoginButton)
     }
@@ -54,14 +48,9 @@ class LoginViewController: BaseViewController {
         
         logoImage.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(titleLabel.snp.top).offset(-17)
-            $0.width.equalTo(82)
-            $0.height.equalTo(40)
-        }
-        
-        titleLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(kakaoLoginButton.snp.top).offset(-266)
+            $0.centerY.equalToSuperview().offset(-113)
+            $0.width.equalTo(256)
+            $0.height.equalTo(56)
         }
         
         kakaoLoginButton.snp.makeConstraints {
@@ -178,10 +167,8 @@ extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        //로그인 성공
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
-            // You can create an account in your system.
             let userIdentifier = appleIDCredential.user
             let fullName = appleIDCredential.fullName
             let email = appleIDCredential.email
@@ -200,13 +187,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
             print("fullName: \(fullName)")
             print("email: \(email)")
             
-            //Move to MainPage
-            //let validVC = SignValidViewController()
-            //validVC.modalPresentationStyle = .fullScreen
-            //present(validVC, animated: true, completion: nil)
-            
         case let passwordCredential as ASPasswordCredential:
-            // Sign in using an existing iCloud Keychain credential.
             let username = passwordCredential.user
             let password = passwordCredential.password
             

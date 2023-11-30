@@ -7,6 +7,7 @@
 
 import Foundation
 import Moya
+import Combine
 
 enum AuthAPI {
     case socialLogin(token: String, socialVendor: String, fcmToken: String?, isAlarm: String?)
@@ -63,8 +64,7 @@ extension AuthAPI: TargetType {
     }
 }
 
-//extension AuthAPI {
-//    var validationType: ValidationType {
-//        return .successCodes
-//    }
-//}
+protocol AuthAPI2 {
+    func logout() -> AnyPublisher<Void, Error>
+    func withdrawal(reason: String?) -> AnyPublisher<Void, Error>
+}
