@@ -21,7 +21,6 @@
 		920031C52A8B5D7D00E3170D /* MapMainLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031C42A8B5D7D00E3170D /* MapMainLocationViewController.swift */; };
 		920031C72A8B5DB700E3170D /* MapSettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031C62A8B5DB700E3170D /* MapSettingsHeaderView.swift */; };
 		920031CD2A8B626B00E3170D /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 920031CC2A8B626B00E3170D /* Moya */; };
-		920031CF2A8B654F00E3170D /* SecureAPIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 920031CE2A8B654F00E3170D /* SecureAPIKeys.plist */; };
 		920031D12A8B65F000E3170D /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D02A8B65F000E3170D /* Bundle.swift */; };
 		920031D32A8C832300E3170D /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D22A8C832300E3170D /* SearchBar.swift */; };
 		920031D52A8D021000E3170D /* KakaoSerachDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D42A8D021000E3170D /* KakaoSerachDTO.swift */; };
@@ -250,6 +249,9 @@
 		92A7B6662A4E5B3A009C9293 /* UpcomingSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6652A4E5B3A009C9293 /* UpcomingSchedule.swift */; };
 		92A7B6682A4E6154009C9293 /* UpcomingScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6672A4E6154009C9293 /* UpcomingScheduleCell.swift */; };
 		92C2EC612A6924B5002DB0E3 /* LineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2EC602A6924B5002DB0E3 /* LineCell.swift */; };
+		92CBB03C2B18905300587BED /* SecureAPIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92CBB03B2B18905200587BED /* SecureAPIKeys.plist */; };
+		92CBB0852B18A20800587BED /* MappilgueKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CBB0822B18A16C00587BED /* MappilgueKit.framework */; };
+		92CBB0862B18A20800587BED /* MappilgueKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 92CBB0822B18A16C00587BED /* MappilgueKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		92CD36FA2A7B505900768B61 /* MyCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CD36F92A7B505900768B61 /* MyCategoryViewController.swift */; };
 		92E20F462B137B3600380FA5 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E20F452B137B3600380FA5 /* UserViewModel.swift */; };
 		92E20F492B13B8AB00380FA5 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E20F482B13B8AB00380FA5 /* AuthViewModel.swift */; };
@@ -284,7 +286,35 @@
 			remoteGlobalIDString = 926998F22A14EC07003DDAD2;
 			remoteInfo = Mappilogue;
 		};
+		92CBB0812B18A16C00587BED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 92CBB07B2B18A16C00587BED /* MappilgueKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 92CBB0472B18994600587BED;
+			remoteInfo = MappilgueKit;
+		};
+		92CBB0832B18A16C00587BED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 92CBB07B2B18A16C00587BED /* MappilgueKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 92CBB0512B18994600587BED;
+			remoteInfo = MappilgueKitTests;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		92CBB0742B189CF800587BED /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				92CBB0862B18A20800587BED /* MappilgueKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		021CF7D6B8E435D26802F66A /* Pods_Mappilogue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mappilogue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -305,7 +335,6 @@
 		920031C22A8B5D2F00E3170D /* MainLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLocationViewController.swift; sourceTree = "<group>"; };
 		920031C42A8B5D7D00E3170D /* MapMainLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMainLocationViewController.swift; sourceTree = "<group>"; };
 		920031C62A8B5DB700E3170D /* MapSettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSettingsHeaderView.swift; sourceTree = "<group>"; };
-		920031CE2A8B654F00E3170D /* SecureAPIKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = SecureAPIKeys.plist; sourceTree = "<group>"; };
 		920031D02A8B65F000E3170D /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		920031D22A8C832300E3170D /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		920031D42A8D021000E3170D /* KakaoSerachDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSerachDTO.swift; sourceTree = "<group>"; };
@@ -533,6 +562,8 @@
 		92A7B6652A4E5B3A009C9293 /* UpcomingSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingSchedule.swift; sourceTree = "<group>"; };
 		92A7B6672A4E6154009C9293 /* UpcomingScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingScheduleCell.swift; sourceTree = "<group>"; };
 		92C2EC602A6924B5002DB0E3 /* LineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineCell.swift; sourceTree = "<group>"; };
+		92CBB03B2B18905200587BED /* SecureAPIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SecureAPIKeys.plist; path = Resources/SecureAPIKeys.plist; sourceTree = "<group>"; };
+		92CBB07B2B18A16C00587BED /* MappilgueKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MappilgueKit.xcodeproj; path = MappilgueKit/MappilgueKit.xcodeproj; sourceTree = "<group>"; };
 		92CD36F92A7B505900768B61 /* MyCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCategoryViewController.swift; sourceTree = "<group>"; };
 		92E20F452B137B3600380FA5 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		92E20F482B13B8AB00380FA5 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
@@ -565,6 +596,7 @@
 				928B7BDE2A99B50400E4F789 /* KakaoSDKUser in Frameworks */,
 				920031CD2A8B626B00E3170D /* Moya in Frameworks */,
 				920031DE2A8DF62A00E3170D /* Lottie in Frameworks */,
+				92CBB0852B18A20800587BED /* MappilgueKit.framework in Frameworks */,
 				928B7BDC2A99B50400E4F789 /* KakaoSDKAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1359,6 +1391,7 @@
 		926998EA2A14EC07003DDAD2 = {
 			isa = PBXGroup;
 			children = (
+				92CBB07B2B18A16C00587BED /* MappilgueKit.xcodeproj */,
 				924BE0C92A51AE25002C70FF /* .swiftlint.yml */,
 				926998F52A14EC07003DDAD2 /* Mappilogue */,
 				9269990C2A14EC09003DDAD2 /* MappilogueTests */,
@@ -1386,8 +1419,8 @@
 				926999272A14F0FA003DDAD2 /* Resources */,
 				926999262A14F0ED003DDAD2 /* Sources */,
 				926999042A14EC09003DDAD2 /* Info.plist */,
-				920031CE2A8B654F00E3170D /* SecureAPIKeys.plist */,
 				929E23182AB81E40003180B3 /* GoogleService-Info.plist */,
+				92CBB03B2B18905200587BED /* SecureAPIKeys.plist */,
 			);
 			path = Mappilogue;
 			sourceTree = "<group>";
@@ -1631,6 +1664,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		92CBB07C2B18A16C00587BED /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				92CBB0822B18A16C00587BED /* MappilgueKit.framework */,
+				92CBB0842B18A16C00587BED /* MappilgueKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		92E20F442B137B1400380FA5 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1688,6 +1730,7 @@
 				926998F02A14EC07003DDAD2 /* Frameworks */,
 				926998F12A14EC07003DDAD2 /* Resources */,
 				95A751AE3E60A06AD2553209 /* [CP] Embed Pods Frameworks */,
+				92CBB0742B189CF800587BED /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1786,6 +1829,12 @@
 			);
 			productRefGroup = 926998F42A14EC07003DDAD2 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 92CBB07C2B18A16C00587BED /* Products */;
+					ProjectRef = 92CBB07B2B18A16C00587BED /* MappilgueKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				926998F22A14EC07003DDAD2 /* Mappilogue */,
@@ -1795,14 +1844,31 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		92CBB0822B18A16C00587BED /* MappilgueKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MappilgueKit.framework;
+			remoteRef = 92CBB0812B18A16C00587BED /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		92CBB0842B18A16C00587BED /* MappilgueKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MappilgueKitTests.xctest;
+			remoteRef = 92CBB0832B18A16C00587BED /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		926998F12A14EC07003DDAD2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92CBB03C2B18905300587BED /* SecureAPIKeys.plist in Resources */,
 				929158272A2529660022BEF9 /* Pretendard-SemiBold.ttf in Resources */,
 				929158222A2529660022BEF9 /* Pretendard-Regular.ttf in Resources */,
-				920031CF2A8B654F00E3170D /* SecureAPIKeys.plist in Resources */,
 				926999032A14EC09003DDAD2 /* LaunchScreen.storyboard in Resources */,
 				924BE0CA2A51AE25002C70FF /* .swiftlint.yml in Resources */,
 				920031E02A8DF6F800E3170D /* saving.json in Resources */,
