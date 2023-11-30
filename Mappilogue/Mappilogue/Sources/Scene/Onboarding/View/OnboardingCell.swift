@@ -20,7 +20,7 @@ class OnboardingCell: BaseCollectionViewCell {
     override func setupProperty() {
         super.setupProperty()
         
-        onboardingImage.contentMode = .scaleToFill
+        onboardingImage.contentMode = .scaleAspectFit
         onboardingImage.layer.cornerRadius = 20
         onboardingImage.clipsToBounds = true
     }
@@ -35,9 +35,7 @@ class OnboardingCell: BaseCollectionViewCell {
         super.setupLayout()
         
         onboardingImage.snp.makeConstraints {
-            $0.top.bottom.equalTo(contentView)
-            $0.leading.equalTo(contentView).offset(68)
-            $0.trailing.equalTo(contentView).offset(-68)
+            $0.edges.equalTo(contentView)
         }
     }
     
