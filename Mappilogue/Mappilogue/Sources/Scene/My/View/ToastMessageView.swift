@@ -16,15 +16,15 @@ class ToastMessageView: BaseView {
         super.setupProperty()
         
         layer.cornerRadius = 12
-        backgroundColor = .color404040
+        backgroundColor = .gray404040
         
         toastMessageImage.image = UIImage(named: "common_toastMessage")
         
-        toastMessageLabel.textColor = .colorFFFFFF
+        toastMessageLabel.textColor = .whiteFFFFFF
         toastMessageLabel.font = .body02
         
         undoButton.setTitle("되돌리기", for: .normal)
-        undoButton.setTitleColor(.color43B54E, for: .normal)
+        undoButton.setTitleColor(.green43B54E, for: .normal)
         undoButton.titleLabel?.font = .body03
     }
     

@@ -19,7 +19,7 @@ class BottomSheetViewController: BaseViewController {
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0)
-        collectionView.backgroundColor = .colorF9F8F7
+        collectionView.backgroundColor = .grayF9F8F7
         collectionView.register(EmptyRecordCell.self, forCellWithReuseIdentifier: EmptyRecordCell.registerId)
         collectionView.register(RecordCell.self, forCellWithReuseIdentifier: RecordCell.registerId)
         collectionView.register(SortHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SortHeaderView.registerId)
@@ -38,7 +38,7 @@ class BottomSheetViewController: BaseViewController {
         
         view.layer.cornerRadius = 24
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        view.backgroundColor = .colorF9F8F7
+        view.backgroundColor = .grayF9F8F7
         
         barImage.image = UIImage(named: "bottomSheetBar")
     }

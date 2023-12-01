@@ -52,17 +52,17 @@ class ScheduleDetailViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        view.backgroundColor = .color404040.withAlphaComponent(0.1)
+        view.backgroundColor = .gray404040.withAlphaComponent(0.1)
         
         scheduleView.layer.cornerRadius = 24
-        scheduleView.backgroundColor = .colorF9F8F7
+        scheduleView.backgroundColor = .grayF9F8F7
         
         dateLabel.font = .title01
-        dateLabel.textColor = .color1C1C1C
+        dateLabel.textColor = .black1C1C1C
         
         lunarDateLabel.text = "음력 3월 27일"
         lunarDateLabel.font = .body02
-        lunarDateLabel.textColor = .color707070
+        lunarDateLabel.textColor = .gray707070
         
         addScheduleButton.addTarget(self, action: #selector(addScheduleButtonTapped), for: .touchUpInside)
     }
@@ -177,7 +177,7 @@ class ScheduleDetailViewController: BaseViewController {
                                                           messageText: nil,
                                                           cancelText: "취소",
                                                           doneText: "삭제",
-                                                          buttonColor: .colorF14C4C,
+                                                          buttonColor: .redF14C4C,
                                                           alertHeight: 140))
         editViewController.onModify = { self.presentWriteRecordViewController() }
         editViewController.onDelete = { self.deleteSchedule() }

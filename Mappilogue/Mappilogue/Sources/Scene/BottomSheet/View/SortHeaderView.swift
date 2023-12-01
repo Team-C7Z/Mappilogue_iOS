@@ -25,7 +25,7 @@ class SortHeaderView: BaseCollectionReusableView {
         sortImage.image = UIImage(named: "record_sort")
         
         updateSortButton()
-        sortLabel.textColor = .color707070
+        sortLabel.textColor = .gray707070
         sortLabel.font = .body02
         
         sortButton.addTarget(self, action: #selector(sortButtonTapped), for: .touchUpInside)

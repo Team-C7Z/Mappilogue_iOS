@@ -23,11 +23,11 @@ class EmptyRecordCell: BaseCollectionViewCell {
         stackView.spacing = 4
         
         emptyRecordLabel.text = "표시할 기록이 없어요"
-        emptyRecordLabel.textColor = .color707070
+        emptyRecordLabel.textColor = .gray707070
         emptyRecordLabel.font = .title02
         
         emptyRecordSubLabel.text = "캘린더에 등록했던 일정에서 기록을 만들어 보세요"
-        emptyRecordSubLabel.textColor = .color707070
+        emptyRecordSubLabel.textColor = .gray707070
         emptyRecordSubLabel.font = .caption01
     }
     

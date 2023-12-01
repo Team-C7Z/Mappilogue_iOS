@@ -17,15 +17,15 @@ class MainLocationButton: BaseButton {
     override func setupProperty() {
         super.setupProperty()
         
-        backgroundColor = .colorF9F8F7
+        backgroundColor = .grayF9F8F7
         
-        locationTitleLabel.textColor = .color707070
+        locationTitleLabel.textColor = .gray707070
         locationTitleLabel.font = .body02
         
         moveImage.image = UIImage(named: "moveWrite")
         
-        lineViewTop.backgroundColor = .colorEAE6E1
-        lineViewBottom.backgroundColor = .colorEAE6E1
+        lineViewTop.backgroundColor = .grayEAE6E1
+        lineViewBottom.backgroundColor = .grayEAE6E1
     }
     
     override func setupHierarchy() {

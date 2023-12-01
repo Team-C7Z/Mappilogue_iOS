@@ -17,10 +17,10 @@ class GatheringToastMessageView: BaseView {
         super.setupProperty()
         
         toastMessageView.layer.cornerRadius = 12
-        toastMessageView.backgroundColor = .color404040
+        toastMessageView.backgroundColor = .gray404040
         toastMessageImage.image = UIImage(named: "toastMessage")
         toastMessageLabel.text = "모임 기능은 나중에 만나요!"
-        toastMessageLabel.textColor = .colorFFFFFF
+        toastMessageLabel.textColor = .whiteFFFFFF
         toastMessageLabel.font = .body02
         toastMessageArrow.image = UIImage(named: "toastMessageArrow")
     }

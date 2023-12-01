@@ -119,7 +119,7 @@ extension MapMainLocationViewController: CLLocationManagerDelegate {
                           messageText: "위치 권한을 허용하지 않을 경우\n일부 기능을 사용할 수 없어요",
                           cancelText: "닫기",
                           doneText: "설정으로 이동",
-                          buttonColor: .color2EBD3D,
+                          buttonColor: .green2EBD3D,
                           alertHeight: 182)
         alertViewController.configureAlert(with: alert)
         alertViewController.onDoneTapped = {

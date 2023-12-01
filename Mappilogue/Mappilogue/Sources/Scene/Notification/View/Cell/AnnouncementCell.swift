@@ -28,7 +28,7 @@ class AnnouncementCell: BaseTableViewCell {
         titleLabel.textColor = .color000000
         titleLabel.font = .body03
         
-        dateLabel.textColor = .color707070
+        dateLabel.textColor = .gray707070
         dateLabel.font = .caption02
         
         expandButton.addTarget(self, action: #selector(expandButtonTapped), for: .touchUpInside)

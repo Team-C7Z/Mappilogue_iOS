@@ -34,7 +34,7 @@ class DatePickerViewController: BaseViewController {
     
         view.backgroundColor = .clear
         
-        datePickerOuterView.backgroundColor = .colorF5F3F0
+        datePickerOuterView.backgroundColor = .grayF5F3F0
         datePickerView.delegate = self
         datePickerView.dataSource = self
     }

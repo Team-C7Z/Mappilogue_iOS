@@ -38,23 +38,23 @@ class OnboardingViewController: BaseViewController {
         super.setupProperty()
     
         onboardingLabel.text = "일정에 여러 장소를 추가해 보세요"
-        onboardingLabel.textColor = .color1C1C1C
+        onboardingLabel.textColor = .black1C1C1C
         onboardingLabel.font = .title01
         
         pageControl.numberOfPages = onboardingPages.count
         pageControl.currentPage = currentPage
         pageControl.setCurrentPageIndicatorImage(UIImage(named: "currentPageIndicator"), forPage: currentPage)
         pageControl.preferredIndicatorImage = UIImage(named: "pageIndicator")
-        pageControl.pageIndicatorTintColor = .colorC9C6C2
-        pageControl.currentPageIndicatorTintColor = .color2EBD3D
+        pageControl.pageIndicatorTintColor = .grayC9C6C2
+        pageControl.currentPageIndicatorTintColor = .green2EBD3D
         pageControl.isUserInteractionEnabled = false
     
-        startButton.backgroundColor = .color9B9791
+        startButton.backgroundColor = .gray9B9791
         startButton.layer.cornerRadius = 12
         startButton.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
         startButtonLabel.text = "시작하기"
-        startButtonLabel.textColor = .colorFFFFFF
+        startButtonLabel.textColor = .whiteFFFFFF
         startButtonLabel.font = .subtitle01
         startButton.isEnabled = false
         startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
@@ -136,10 +136,10 @@ extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDa
         onboardingLabel.text = onboardingPages[currentPage].title
         
         if currentPage < (onboardingPages.count - 1) {
-            startButton.backgroundColor = .color9B9791
+            startButton.backgroundColor = .gray9B9791
             startButton.isEnabled = false
         } else {
-            startButton.backgroundColor = .color1C1C1C
+            startButton.backgroundColor = .black1C1C1C
             startButton.isEnabled = true
         }
     }

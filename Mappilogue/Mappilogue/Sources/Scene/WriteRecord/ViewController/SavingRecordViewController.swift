@@ -27,10 +27,10 @@ class SavingRecordViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        view.backgroundColor = .color404040.withAlphaComponent(0.1)
+        view.backgroundColor = .gray404040.withAlphaComponent(0.1)
         
         modalView.layer.cornerRadius = 12
-        modalView.backgroundColor = .colorF9F8F7
+        modalView.backgroundColor = .grayF9F8F7
         
         titleLabel.text = "기록 저장 중이에요"
         titleLabel.textColor = .color000000
@@ -40,9 +40,9 @@ class SavingRecordViewController: BaseViewController {
         lottieAnimationView.loopMode = .loop
         lottieAnimationView.play()
         
-        cancelButton.backgroundColor = .colorF5F3F0
+        cancelButton.backgroundColor = .grayF5F3F0
         cancelButton.setTitle("취소", for: .normal)
-        cancelButton.setTitleColor(.color1C1C1C, for: .normal)
+        cancelButton.setTitleColor(.black1C1C1C, for: .normal)
         cancelButton.titleLabel?.font = .body02
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
     }

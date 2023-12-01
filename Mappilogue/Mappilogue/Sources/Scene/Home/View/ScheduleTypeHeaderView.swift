@@ -44,11 +44,11 @@ class ScheduleTypeHeaderView: BaseTableViewHeaderFooterView {
         
         todayScheduleButton.setTitle("오늘의 일정", for: .normal)
         todayScheduleButton.titleLabel?.font = .title01
-        todayScheduleButton.setTitleColor(.color1C1C1C, for: .normal)
+        todayScheduleButton.setTitleColor(.black1C1C1C, for: .normal)
         
         upcomingScheduleButton.setTitle("다가오는 일정", for: .normal)
         upcomingScheduleButton.titleLabel?.font = .title01
-        upcomingScheduleButton.setTitleColor(.color9B9791, for: .normal)
+        upcomingScheduleButton.setTitleColor(.gray9B9791, for: .normal)
     }
     
     override func setupHierarchy() {
@@ -82,7 +82,7 @@ class ScheduleTypeHeaderView: BaseTableViewHeaderFooterView {
     }
     
     private func updateButtonTitleColor() {
-        todayScheduleButton.setTitleColor(scheduleType == .today ? .color1C1C1C : .color9B9791, for: .normal)
-        upcomingScheduleButton.setTitleColor(scheduleType == .upcoming ? .color1C1C1C : .color9B9791, for: .normal)
+        todayScheduleButton.setTitleColor(scheduleType == .today ? .black1C1C1C : .gray9B9791, for: .normal)
+        upcomingScheduleButton.setTitleColor(scheduleType == .upcoming ? .black1C1C1C : .gray9B9791, for: .normal)
     }
 }

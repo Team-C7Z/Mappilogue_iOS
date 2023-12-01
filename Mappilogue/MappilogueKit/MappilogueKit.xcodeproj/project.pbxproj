@@ -13,6 +13,8 @@
 		92CBB29B2B19C07100587BED /* MappilogueKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 92CBB28D2B19C07100587BED /* MappilogueKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		92CBB2C32B19C4B600587BED /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CBB2C22B19C4B600587BED /* UIColor+Extension.swift */; };
 		92CBB2D62B19E84900587BED /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CBB2D52B19E84900587BED /* UIFont+Extension.swift */; };
+		92CBB2D82B19EA8800587BED /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CBB2D72B19EA8800587BED /* Color+Extension.swift */; };
+		92CBB2DA2B19EB4D00587BED /* CalendarColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CBB2D92B19EB4D00587BED /* CalendarColor+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +35,8 @@
 		92CBB2992B19C07100587BED /* MappilogueKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappilogueKitTests.swift; sourceTree = "<group>"; };
 		92CBB2C22B19C4B600587BED /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		92CBB2D52B19E84900587BED /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		92CBB2D72B19EA8800587BED /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		92CBB2D92B19EB4D00587BED /* CalendarColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarColor+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +123,8 @@
 			isa = PBXGroup;
 			children = (
 				92CBB2C22B19C4B600587BED /* UIColor+Extension.swift */,
+				92CBB2D72B19EA8800587BED /* Color+Extension.swift */,
+				92CBB2D92B19EB4D00587BED /* CalendarColor+Extension.swift */,
 			);
 			path = Colors;
 			sourceTree = "<group>";
@@ -241,6 +247,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				92CBB2D62B19E84900587BED /* UIFont+Extension.swift in Sources */,
+				92CBB2D82B19EA8800587BED /* Color+Extension.swift in Sources */,
+				92CBB2DA2B19EB4D00587BED /* CalendarColor+Extension.swift in Sources */,
 				92CBB28F2B19C07100587BED /* MappilogueKit.docc in Sources */,
 				92CBB2C32B19C4B600587BED /* UIColor+Extension.swift in Sources */,
 			);

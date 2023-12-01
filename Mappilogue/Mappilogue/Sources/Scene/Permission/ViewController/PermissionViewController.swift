@@ -34,12 +34,12 @@ class PermissionViewController: BaseViewController {
         cameraView.configure(imageName: "permission_camera", size: CGSize(width: 28, height: 24), title: "카메라", subTitle: "촬영 후 사진 업로드")
         locationView.configure(imageName: "permission_location", size: CGSize(width: 24, height: 30), title: "위치", subTitle: "현재 위치에서 기록 검색")
         
-        startButton.backgroundColor = .color1C1C1C
+        startButton.backgroundColor = .black1C1C1C
         startButton.layer.cornerRadius = 12
         startButton.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
         startButtonLabel.text = "허용하고 시작하기"
-        startButtonLabel.textColor = .colorFFFFFF
+        startButtonLabel.textColor = .whiteFFFFFF
         startButtonLabel.font = .subtitle01
         startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
     }

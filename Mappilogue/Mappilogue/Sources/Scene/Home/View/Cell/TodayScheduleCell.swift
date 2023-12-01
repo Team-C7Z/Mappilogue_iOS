@@ -33,7 +33,7 @@ class TodayScheduleCell: BaseTableViewCell {
         
         outerView.layer.cornerRadius = 12
         
-        todayScheduleLabel.textColor = .color1C1C1C
+        todayScheduleLabel.textColor = .black1C1C1C
         todayScheduleLabel.textAlignment = .center
         todayScheduleLabel.font = .title02
  

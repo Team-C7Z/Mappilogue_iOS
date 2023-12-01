@@ -39,15 +39,15 @@ class RecordCell: BaseCollectionViewCell {
         recordTitleLabel.textColor = .color000000
         recordTitleLabel.font = .title02
         
-        recordDateLabel.textColor = .color707070
+        recordDateLabel.textColor = .gray707070
         recordDateLabel.font = .caption01
 
         separatorImage.image = UIImage(named: "common_separator")
 
-        recordLocationLabel.textColor = .color707070
+        recordLocationLabel.textColor = .gray707070
         recordLocationLabel.font = .caption01
 
-        cateogryLabel.textColor = .color707070
+        cateogryLabel.textColor = .gray707070
         cateogryLabel.font = .caption02
     }
     

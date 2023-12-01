@@ -18,20 +18,20 @@ class MyRecordContentHeaderView: BaseView {
     override func setupProperty() {
         super.setupProperty()
    
-        categoryNameLabel.textColor = .color707070
+        categoryNameLabel.textColor = .gray707070
         categoryNameLabel.font = .caption02
         
-        titleLabel.textColor = .color1C1C1C
+        titleLabel.textColor = .black1C1C1C
         titleLabel.font = .title01
         
         locationImage.image = UIImage(named: "record_location_fill")
-        locationLabel.textColor = .color707070
+        locationLabel.textColor = .gray707070
         locationLabel.font = .body02
         
-        dateLabel.textColor = .color707070
+        dateLabel.textColor = .gray707070
         dateLabel.font = .body02
         
-        lineView.backgroundColor = .colorEAE6E1
+        lineView.backgroundColor = .grayEAE6E1
     }
     
     override func setupHierarchy() {

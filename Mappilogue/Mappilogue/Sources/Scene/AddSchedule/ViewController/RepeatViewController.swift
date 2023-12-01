@@ -76,8 +76,8 @@ class RepeatViewController: BaseViewController {
     }
     
     private func setRepeatButtonDesign() {
-        weekdayButton.setTitleColor(selectedRepeatType == .weekday ? .color1C1C1C : .color9B9791, for: .normal)
-        cycleButton.setTitleColor(selectedRepeatType == .cycle ? .color1C1C1C : .color9B9791, for: .normal)
+        weekdayButton.setTitleColor(selectedRepeatType == .weekday ? .black1C1C1C : .gray9B9791, for: .normal)
+        cycleButton.setTitleColor(selectedRepeatType == .cycle ? .black1C1C1C : .gray9B9791, for: .normal)
     }
     
     @objc private func repeatButtonTapped(_ sender: UIButton) {

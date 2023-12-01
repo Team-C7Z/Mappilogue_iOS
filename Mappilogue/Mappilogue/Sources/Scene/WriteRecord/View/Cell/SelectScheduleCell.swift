@@ -22,16 +22,16 @@ class SelectScheduleCell: BaseCollectionViewCell {
         
         scheduleColorView.layer.cornerRadius = 4
         
-        scheduleTitleLabel.textColor = .color1C1C1C
+        scheduleTitleLabel.textColor = .black1C1C1C
         scheduleTitleLabel.font = .body02
         
-        scheduleTimeLabel.textColor = .color707070
+        scheduleTimeLabel.textColor = .gray707070
         scheduleTimeLabel.font = .caption03
         
-        separatorLabel.textColor = .color707070
+        separatorLabel.textColor = .gray707070
         separatorLabel.font = .caption03
         
-        scheduleLocationLabel.textColor = .color707070
+        scheduleLocationLabel.textColor = .gray707070
         scheduleLocationLabel.font = .caption03
         
         writeButton.setImage(UIImage(named: "moveRecord"), for: .normal)

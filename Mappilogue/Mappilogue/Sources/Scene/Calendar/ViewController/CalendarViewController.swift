@@ -25,7 +25,7 @@ class CalendarViewController: NavigationBarViewController {
         layout.minimumLineSpacing = 0
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .colorF9F8F7
+        collectionView.backgroundColor = .grayF9F8F7
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isPagingEnabled = true
         collectionView.register(CalendarCell.self, forCellWithReuseIdentifier: CalendarCell.registerId)
@@ -141,7 +141,7 @@ class CalendarViewController: NavigationBarViewController {
     }
     
     func chageDatePickerMode() {
-        view.backgroundColor = .colorF5F3F0
+        view.backgroundColor = .grayF5F3F0
     }
     
     @objc func presentScheduleViewContoller(_ notification: Notification) {
@@ -242,7 +242,7 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
 
 extension CalendarViewController: ChangedDateDelegate {
     func chagedDate(_ selectedDate: SelectedDate) {
-        view.backgroundColor = .colorF9F8F7
+        view.backgroundColor = .grayF9F8F7
         self.selectedDate = selectedDate
         updateCurrentDateLabel()
 

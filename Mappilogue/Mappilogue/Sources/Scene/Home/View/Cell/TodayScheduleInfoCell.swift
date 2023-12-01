@@ -25,16 +25,16 @@ class TodayScheduleInfoCell: BaseTableViewCell {
         super.setupProperty()
         
         outerView.layer.cornerRadius = 12
-        outerView.backgroundColor = .colorF5F3F0
+        outerView.backgroundColor = .grayF5F3F0
         
-        locationLabel.textColor = .color1C1C1C
+        locationLabel.textColor = .black1C1C1C
         locationLabel.font = .title02
         locationLabel.numberOfLines = 1
         locationLabel.lineBreakMode = .byTruncatingTail
         
-        separatorImage.tintColor = .color9B9791
+        separatorImage.tintColor = .gray9B9791
         
-        timeLabel.textColor = .color9B9791
+        timeLabel.textColor = .gray9B9791
         timeLabel.font = .body02
     }
     

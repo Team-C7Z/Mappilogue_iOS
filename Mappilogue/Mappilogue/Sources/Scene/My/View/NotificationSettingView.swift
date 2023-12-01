@@ -16,8 +16,8 @@ class NotificationSettingView: BaseView {
     override func setupProperty() {
         super.setupProperty()
         
-        backgroundColor = .colorF9F8F7
-        notificationLabel.textColor = .color1C1C1C
+        backgroundColor = .grayF9F8F7
+        notificationLabel.textColor = .black1C1C1C
         notificationLabel.font = .body02
         
         notificationSwitch.onSwitchTapped = {

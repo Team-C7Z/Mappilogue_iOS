@@ -38,7 +38,7 @@ class NotificationViewController: BaseViewController {
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
-        collectionView.backgroundColor = .colorF9F8F7
+        collectionView.backgroundColor = .grayF9F8F7
         collectionView.register(SelectedNotificationCell.self, forCellWithReuseIdentifier: SelectedNotificationCell.registerId)
         collectionView.register(NotificationHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: NotificationHeaderView.registerId)
         collectionView.delegate = self
@@ -62,7 +62,7 @@ class NotificationViewController: BaseViewController {
         
         setNavigationTitleAndBackButton("알림", backButtonAction: #selector(popToAddScheduleViewController))
         
-        pickerOuterView.backgroundColor = .colorF5F3F0
+        pickerOuterView.backgroundColor = .grayF5F3F0
         pickerView.delegate = self
         pickerView.dataSource = self
         pickerOuterView.isHidden = true

@@ -17,18 +17,18 @@ class ImageSaveRecordView: BaseView {
     override func setupProperty() {
         super.setupProperty()
         
-        backgroundColor = .colorF9F8F7
+        backgroundColor = .grayF9F8F7
         
-        lineView.backgroundColor = .colorEAE6E1
+        lineView.backgroundColor = .grayEAE6E1
         
         addImageImage.image = UIImage(named: "record_addImage")
         addImageImage.contentMode = .scaleAspectFit
         
         saveRecordButton.setTitle("기록 저장", for: .normal)
-        saveRecordButton.setTitleColor(.colorFFFFFF, for: .normal)
+        saveRecordButton.setTitleColor(.whiteFFFFFF, for: .normal)
         saveRecordButton.titleLabel?.font = .body03
         saveRecordButton.layer.cornerRadius = 35 / 2
-        saveRecordButton.backgroundColor = .color2EBD3D
+        saveRecordButton.backgroundColor = .green2EBD3D
         
         hideKeyboardButton.setImage(UIImage(named: "hideKeyboard"), for: .normal)
         hideKeyboardButton.isHidden = true

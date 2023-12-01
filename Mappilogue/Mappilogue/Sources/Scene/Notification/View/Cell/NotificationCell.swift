@@ -30,10 +30,10 @@ class NotificationCell: BaseTableViewCell {
         
         colorView.layer.cornerRadius = 2
 
-        dateLabel.textColor = .color1C1C1C
+        dateLabel.textColor = .black1C1C1C
         dateLabel.font = .caption02
         
-        timeLabel.textColor = .color1C1C1C
+        timeLabel.textColor = .black1C1C1C
         timeLabel.font = .caption02
         
         titleLabel.textColor = .color000000

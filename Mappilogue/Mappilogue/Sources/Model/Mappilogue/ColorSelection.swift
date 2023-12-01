@@ -10,20 +10,20 @@ import UIKit
 
 func dummyColorSelectionData() -> [UIColor] {
     return [
-        .colorFFA1A1,
-        .colorFFAF82,
-        .colorF5DC82,
-        .colorF0F1B0,
-        .colorCAEDA8,
-        .colorB1E9BE,
-        .colorB2EAD6,
-        .colorB2EBE7,
-        .colorABD9F3,
-        .colorBAD7FA,
-        .colorE6C3F2,
-        .colorF0B4D5,
-        .colorC9C6C2,
-        .color9B9791,
-        .color404040
+        .redFFA1A1,
+        .orangeFFAF82,
+        .yellowF5DC82,
+        .limeF0F1B0,
+        .grassCAEDA8,
+        .greenB1E9BE,
+        .mintB2EAD6,
+        .skyblueB2EBE7,
+        .blueABD9F3,
+        .marineBAD7FA,
+        .purpleE6C3F2,
+        .pinkF0B4D5,
+        .grayC9C6C2,
+        .gray9B9791,
+        .gray404040
     ]
 }

@@ -20,7 +20,7 @@ class PermissionView: BaseView {
         permissionTitleLabel.textColor = .color000000
         permissionTitleLabel.font = .title02
         
-        permissionSubTitleLabel.textColor = .color9B9791
+        permissionSubTitleLabel.textColor = .gray9B9791
         permissionSubTitleLabel.font = .body02
     }
     

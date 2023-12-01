@@ -24,23 +24,23 @@ class EditViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        view.backgroundColor = .color404040.withAlphaComponent(0.1)
+        view.backgroundColor = .gray404040.withAlphaComponent(0.1)
         
         modalView.layer.cornerRadius = 24
         modalView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         modalView.layer.masksToBounds = true
-        modalView.backgroundColor = .colorF9F8F7
+        modalView.backgroundColor = .grayF9F8F7
         
-        barView.backgroundColor = .colorC9C6C2
+        barView.backgroundColor = .grayC9C6C2
         
         modifyImage.image = UIImage(named: "common_modify")
-        modifyLabel.textColor = .color1C1C1C
+        modifyLabel.textColor = .black1C1C1C
         modifyLabel.font = .title02
         modifyButton.addTarget(self, action: #selector(modifyButtonTapped), for: .touchUpInside)
         
         deleteImage.image = UIImage(named: "common_delete")
-        deleteImage.tintColor = .colorF14C4C
-        deleteLabel.textColor = .color1C1C1C
+        deleteImage.tintColor = .redF14C4C
+        deleteLabel.textColor = .black1C1C1C
         deleteLabel.font = .title02
         deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
     }

@@ -17,13 +17,13 @@ class ContentTextView: BaseView {
     override func setupProperty() {
         super.setupProperty()
         
-        backgroundColor = .colorF9F8F7
+        backgroundColor = .grayF9F8F7
        
         textView.text = textViewPlaceHolder
-        textView.textColor = .color9B9791
+        textView.textColor = .gray9B9791
         textView.backgroundColor = .clear
         textView.font = .body02
-        textView.tintColor = .color2EBD3D
+        textView.tintColor = .green2EBD3D
         textView.isScrollEnabled = false
         textView.delegate = self
     }
@@ -53,21 +53,21 @@ extension ContentTextView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == textViewPlaceHolder {
             textView.text = nil
-            textView.textColor = .color1C1C1C
+            textView.textColor = .black1C1C1C
         }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = textViewPlaceHolder
-            textView.textColor = .color9B9791
+            textView.textColor = .gray9B9791
         }
     }
     
     func textViewDidChange(_ textView: UITextView) {
         textView.setLineAndLetterSpacing(textView.text)
         textView.font = .body02
-        textView.textColor = .color1C1C1C
+        textView.textColor = .black1C1C1C
         updateTextViewHeight()
     }
     

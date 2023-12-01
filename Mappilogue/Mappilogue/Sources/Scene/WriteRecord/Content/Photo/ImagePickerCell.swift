@@ -19,7 +19,7 @@ class ImagePickerCell: BaseCollectionViewCell {
     override func setupProperty() {
         super.setupProperty()
 
-        contentView.layer.borderColor = UIColor.color2EBD3D.cgColor
+        contentView.layer.borderColor = UIColor.green2EBD3D.cgColor
         
         pickerImage.contentMode = .scaleAspectFill
         pickerImage.clipsToBounds = true
