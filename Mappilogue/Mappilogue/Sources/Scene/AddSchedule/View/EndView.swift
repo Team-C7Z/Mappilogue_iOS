@@ -28,10 +28,10 @@ class EndView: UIView {
      }
     
     private func setupProperty() {
-        backgroundColor = .colorF9F8F7
+        backgroundColor = .grayF9F8F7
         
         endLabel.text = "종료"
-        endLabel.textColor = .color707070
+        endLabel.textColor = .gray707070
         endLabel.font = .body02
         
         stackView.axis = .horizontal
@@ -39,7 +39,7 @@ class EndView: UIView {
         stackView.spacing = 0
 
         endDateButton.setTitle("없음", for: .normal)
-        endDateButton.setTitleColor(.color1C1C1C, for: .normal)
+        endDateButton.setTitleColor(.black1C1C1C, for: .normal)
         endDateButton.titleLabel?.font = .title02
         
         deleteEndDateButton.setImage(UIImage(named: "deleteEndDate"), for: .normal)

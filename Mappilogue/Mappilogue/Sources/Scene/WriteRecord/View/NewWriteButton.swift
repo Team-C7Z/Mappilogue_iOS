@@ -14,11 +14,11 @@ class NewWriteButton: BaseButton {
     override func setupProperty() {
         super.setupProperty()
         
-        backgroundColor = .colorF5F3F0
+        backgroundColor = .grayF5F3F0
         layer.cornerRadius = 12
         
         newWriteLabel.text = "새로 쓰기"
-        newWriteLabel.textColor = .color1C1C1C
+        newWriteLabel.textColor = .black1C1C1C
         newWriteLabel.font = .body02
         
         moveImage.image = UIImage(named: "newWrite")

@@ -18,15 +18,15 @@ class LimitedPhotoSelectionView: BaseView {
         super.setupProperty()
         
         addImagesLabel.text = "더 많은 사진 선택하기"
-        addImagesLabel.textColor = .color1C1C1C
+        addImagesLabel.textColor = .black1C1C1C
         addImagesLabel.font = .body02
         
         setPermissionLabel.text = "접근 권한 설정으로 이동하기"
-        setPermissionLabel.textColor = .color1C1C1C
+        setPermissionLabel.textColor = .black1C1C1C
         setPermissionLabel.font = .body02
         
         setPermissionSubLabel.text = "모든 사진에 접근할 수 있게 변경해 보세요"
-        setPermissionSubLabel.textColor = .colorC9C6C2
+        setPermissionSubLabel.textColor = .grayC9C6C2
         setPermissionSubLabel.font = .caption01
     }
     

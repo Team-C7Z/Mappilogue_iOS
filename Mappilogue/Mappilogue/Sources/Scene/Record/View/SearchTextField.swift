@@ -27,8 +27,8 @@ class SearchTextField: UITextField {
         addLeftPadding()
         layer.cornerRadius = 12
         layer.applyShadow()
-        backgroundColor = .colorF9F8F7
-        tintColor = .color2EBD3D
+        backgroundColor = .grayF9F8F7
+        tintColor = .green2EBD3D
         font = .body01
         returnKeyType = .search
         

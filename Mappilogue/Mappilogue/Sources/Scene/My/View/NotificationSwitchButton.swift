@@ -16,11 +16,11 @@ class NotificationSwitchButton: BaseButton {
         super.setupProperty()
         
         layer.cornerRadius = 16
-        backgroundColor = .colorEAE6E1
+        backgroundColor = .grayEAE6E1
   
         thumbView.layer.cornerRadius = 12
         thumbView.layer.applyShadow()
-        thumbView.backgroundColor = .color9B9791
+        thumbView.backgroundColor = .gray9B9791
         thumbView.isUserInteractionEnabled = false
         
         addTarget(self, action: #selector(updateSwitchDesign), for: .touchUpInside)
@@ -54,8 +54,8 @@ class NotificationSwitchButton: BaseButton {
     }
     
     func configure(_ isSelected: Bool) {
-        backgroundColor = isSelected ? .color2EBD3D : .colorEAE6E1
-        thumbView.backgroundColor = isSelected ? .colorFFFFFF : .color9B9791
+        backgroundColor = isSelected ? .green2EBD3D : .grayEAE6E1
+        thumbView.backgroundColor = isSelected ? .whiteFFFFFF : .gray9B9791
         
         thumbView.snp.updateConstraints {
             $0.leading.equalTo(self).offset(isSelected ? 36 : 4)

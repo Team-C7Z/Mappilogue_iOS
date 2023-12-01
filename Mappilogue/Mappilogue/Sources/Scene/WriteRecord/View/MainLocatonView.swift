@@ -15,12 +15,12 @@ class MainLocatonView: BaseView {
         super.setupProperty()
         
         layer.cornerRadius = 14
-        backgroundColor = .color2EBD3D
+        backgroundColor = .green2EBD3D
         
         mainLocationImage.image = UIImage(named: "mainLocation")
         
         mainLocationLabel.text = "대표 위치"
-        mainLocationLabel.textColor = .colorFFFFFF
+        mainLocationLabel.textColor = .whiteFFFFFF
         mainLocationLabel.font = .caption02
     }
     

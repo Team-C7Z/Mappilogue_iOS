@@ -22,16 +22,16 @@ class HomeEmptyScheduleCell: BaseTableViewCell {
     override func setupProperty() {
         super.setupProperty()
         
-        contentView.backgroundColor = .colorF5F3F0
+        contentView.backgroundColor = .grayF5F3F0
         contentView.layer.cornerRadius = 12
         
         emptyScheduleLabel.font = .title02
-        emptyScheduleLabel.textColor = .color707070
+        emptyScheduleLabel.textColor = .gray707070
         emptyScheduleLabel.textAlignment = .center
         
         emptyScheduleSubLabel.text = "아래 버튼을 눌러 일정을 추가해 보세요!"
         emptyScheduleSubLabel.font = .caption02
-        emptyScheduleSubLabel.textColor = .color404040
+        emptyScheduleSubLabel.textColor = .gray404040
         emptyScheduleSubLabel.textAlignment = .center
     }
     

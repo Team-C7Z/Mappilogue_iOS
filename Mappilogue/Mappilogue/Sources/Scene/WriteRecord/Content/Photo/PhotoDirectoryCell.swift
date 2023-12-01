@@ -21,14 +21,14 @@ class PhotoDirectoryCell: BaseCollectionViewCell {
     override func setupProperty() {
         super.setupProperty()
         
-        photoDirectoryImage.backgroundColor = .colorEAE6E1
+        photoDirectoryImage.backgroundColor = .grayEAE6E1
         photoDirectoryImage.contentMode = .scaleAspectFill
         photoDirectoryImage.clipsToBounds = true
     
-        photoDirectoryTitle.textColor = .color1C1C1C
+        photoDirectoryTitle.textColor = .black1C1C1C
         photoDirectoryTitle.font = .body01
         
-        photoDirectoryCountLabel.textColor = .colorC9C6C2
+        photoDirectoryCountLabel.textColor = .grayC9C6C2
         photoDirectoryCountLabel.font = .caption01
     }
     

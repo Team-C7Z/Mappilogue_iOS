@@ -42,11 +42,11 @@ class WithdrawalViewController: BaseViewController {
         setSkipButtonItem()
         
         withdrawalTitleLabel.text = "탈퇴하는 이유가 있나요?"
-        withdrawalTitleLabel.textColor = .color1C1C1C
+        withdrawalTitleLabel.textColor = .black1C1C1C
         withdrawalTitleLabel.font = .title01
         
         withdrawalSubTitleLabel.text = "더 좋은 서비스를 만드는 데에 참고할게요"
-        withdrawalSubTitleLabel.textColor = .color707070
+        withdrawalSubTitleLabel.textColor = .gray707070
         withdrawalSubTitleLabel.font = .body02
         
         stackView.axis = .vertical
@@ -54,9 +54,9 @@ class WithdrawalViewController: BaseViewController {
         stackView.spacing = 0
         
         submitButton.layer.cornerRadius = 12
-        submitButton.backgroundColor = .colorC9C6C2
+        submitButton.backgroundColor = .grayC9C6C2
         submitButton.setTitle("제출하기", for: .normal)
-        submitButton.setTitleColor(.colorFFFFFF, for: .normal)
+        submitButton.setTitleColor(.whiteFFFFFF, for: .normal)
         submitButton.titleLabel?.font = .body03
         submitButton.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
     }
@@ -98,7 +98,7 @@ class WithdrawalViewController: BaseViewController {
     
     func setSkipButtonItem() {
         let skipButtonItem = UIBarButtonItem(title: "건너뛰기", style: .plain, target: self, action: #selector(performWithdrawal))
-        skipButtonItem.tintColor = .color9B9791
+        skipButtonItem.tintColor = .gray9B9791
         navigationItem.rightBarButtonItem = skipButtonItem
     }
     
@@ -120,7 +120,7 @@ class WithdrawalViewController: BaseViewController {
     }
     
     private func updateSubmitButtonDesign() {
-        submitButton.backgroundColor = isSelectedReason ? .color2EBD3D : .colorC9C6C2
+        submitButton.backgroundColor = isSelectedReason ? .green2EBD3D : .grayC9C6C2
     }
     
     @objc func submitButtonTapped() {

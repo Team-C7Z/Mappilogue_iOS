@@ -15,7 +15,7 @@ class FindMarkersButton: BaseButton {
         super.setupProperty()
         
         layer.cornerRadius = 20
-        backgroundColor = .colorF9F8F7
+        backgroundColor = .grayF9F8F7
         
         findImage.image = UIImage(named: "record_find")
         

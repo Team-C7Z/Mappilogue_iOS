@@ -31,7 +31,7 @@ class ContentImageView: BaseView {
     override func setupProperty() {
         super.setupProperty()
         
-        lineView.backgroundColor = .colorEAE6E1
+        lineView.backgroundColor = .grayEAE6E1
     }
     
     override func setupHierarchy() {

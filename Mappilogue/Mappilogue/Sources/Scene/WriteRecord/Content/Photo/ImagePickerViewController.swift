@@ -29,7 +29,7 @@ class ImagePickerViewController: BaseViewController {
         layout.scrollDirection = .vertical
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .colorF9F8F7
+        collectionView.backgroundColor = .grayF9F8F7
         collectionView.register(ImagePickerCell.self, forCellWithReuseIdentifier: ImagePickerCell.registerId)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -70,7 +70,7 @@ class ImagePickerViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        limitedPhotoSelectionView.backgroundColor = .colorF9F8F7
+        limitedPhotoSelectionView.backgroundColor = .grayF9F8F7
         
         limitedPhotoSelectionView.addImagesButton.addTarget(self, action: #selector(addImagesButtonTapped), for: .touchUpInside)
         limitedPhotoSelectionView.setPermissionButton.addTarget(self, action: #selector(setPermissionButtonTapped), for: .touchUpInside)

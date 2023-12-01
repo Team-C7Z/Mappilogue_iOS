@@ -91,7 +91,7 @@ class MyRecordContentViewController: BaseViewController {
                                                           messageText: nil,
                                                           cancelText: "취소",
                                                           doneText: "삭제",
-                                                          buttonColor: .colorF14C4C,
+                                                          buttonColor: .redF14C4C,
                                                           alertHeight: 140)
         )
         editViewController.onModify = { self.modifyRecord() }

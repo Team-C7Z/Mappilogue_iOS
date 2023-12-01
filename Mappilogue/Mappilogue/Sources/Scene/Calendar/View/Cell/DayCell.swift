@@ -52,18 +52,18 @@ class DayCell: BaseCollectionViewCell {
         dayLabel.text = day
         
         if isCurrentMonth {
-            dayLabel.textColor = .color1C1C1C
+            dayLabel.textColor = .black1C1C1C
             
             if isToday {
-                todayView.backgroundColor = .color2EBD3D
-                dayLabel.textColor = .colorFFFFFF
+                todayView.backgroundColor = .green2EBD3D
+                dayLabel.textColor = .whiteFFFFFF
             } else if isSaturday {
                 dayLabel.textColor = .color3C58EE
             } else if isSunday {
-                dayLabel.textColor = .colorF14C4C
+                dayLabel.textColor = .redF14C4C
             }
         } else {
-            dayLabel.textColor = .color9B9791
+            dayLabel.textColor = .gray9B9791
         }
     }
 }

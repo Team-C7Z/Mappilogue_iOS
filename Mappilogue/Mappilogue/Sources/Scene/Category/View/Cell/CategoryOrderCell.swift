@@ -18,12 +18,12 @@ class CategoryOrderCell: BaseCollectionViewCell {
     override func setupProperty() {
         super.setupProperty()
         
-        lineView.backgroundColor = .colorEAE6E1
+        lineView.backgroundColor = .grayEAE6E1
         
-        categoryLabel.textColor = .color1C1C1C
+        categoryLabel.textColor = .black1C1C1C
         categoryLabel.font = .body02
 
-        categoryCountLabel.textColor = .color9B9791
+        categoryCountLabel.textColor = .gray9B9791
         categoryCountLabel.font = .body02
     }
     

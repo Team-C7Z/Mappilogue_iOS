@@ -20,7 +20,7 @@ class MyCategoryViewController: BaseViewController {
         layout.scrollDirection = .vertical
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .colorF9F8F7
+        collectionView.backgroundColor = .grayF9F8F7
         collectionView.register(EmptyRecordCell.self, forCellWithReuseIdentifier: EmptyRecordCell.registerId)
         collectionView.register(RecordCell.self, forCellWithReuseIdentifier: RecordCell.registerId)
         collectionView.delegate = self
@@ -58,7 +58,7 @@ class MyCategoryViewController: BaseViewController {
     func setMenuButtonItem() {
         if categoryName != "전체" {
             let menuButtonItem = UIBarButtonItem(image: UIImage(named: "menu"), style: .plain, target: self, action: #selector(menuButtonItemTapped))
-            menuButtonItem.tintColor = .color1C1C1C
+            menuButtonItem.tintColor = .black1C1C1C
             navigationItem.rightBarButtonItem = menuButtonItem
         }
     }

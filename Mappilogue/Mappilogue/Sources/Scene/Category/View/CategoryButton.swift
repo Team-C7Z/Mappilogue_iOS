@@ -15,15 +15,15 @@ class CategoryButton: BaseButton {
     override func setupProperty() {
         super.setupProperty()
         
-        backgroundColor = .colorF9F8F7
+        backgroundColor = .grayF9F8F7
         
         cateogoryLabel.text = "카테고리"
-        cateogoryLabel.textColor = .color1C1C1C
+        cateogoryLabel.textColor = .black1C1C1C
         cateogoryLabel.font = .body02
  
         moveImage.image = UIImage(named: "moveWrite")
         
-        lineView.backgroundColor = .colorEAE6E1
+        lineView.backgroundColor = .grayEAE6E1
     }
     
     override func setupHierarchy() {

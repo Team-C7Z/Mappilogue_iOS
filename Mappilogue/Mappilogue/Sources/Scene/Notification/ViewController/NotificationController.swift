@@ -17,7 +17,7 @@ class NotificationController: BaseViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.separatorStyle = .none
-        tableView.backgroundColor = .colorF9F8F7
+        tableView.backgroundColor = .grayF9F8F7
         tableView.sectionHeaderHeight = 0
         tableView.sectionFooterHeight = 0
         tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)

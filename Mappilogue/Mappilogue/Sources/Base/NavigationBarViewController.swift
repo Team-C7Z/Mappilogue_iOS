@@ -21,7 +21,7 @@ class NavigationBarViewController: BaseViewController {
     func setUpRightBarButtonItem() {
         let notificationImage = UIImage(named: "notification")
         let notificationButtonItem = UIBarButtonItem(image: notificationImage, style: .plain, target: self, action: #selector(rightBarButtonItemTapped))
-        notificationButtonItem.tintColor = .color1C1C1C
+        notificationButtonItem.tintColor = .black1C1C1C
         navigationItem.rightBarButtonItem = notificationButtonItem
     }
     

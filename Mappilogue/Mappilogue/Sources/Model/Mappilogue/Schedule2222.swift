@@ -27,24 +27,24 @@ struct Schedule2222 {
 
 func dummyScheduleData() -> [CalendarSchedule] {
     let calendarSchedule1 = CalendarSchedule(year: 2023, month: 7, day: 24, schedules: [
-        Schedule2222(title: "미술관 가기", color: .colorE6C3F2, time: "1:00 PM", location: "국립현대미술관"),
-        Schedule2222(title: "홈트레이닝", color: .colorF0B4D5, time: "4:00 PM", location: ""),
-        Schedule2222(title: "저녁 회의", color: .colorB2EAD6, time: "8:00 PM", location: "스타벅스 논현점")
+        Schedule2222(title: "미술관 가기", color: .purpleE6C3F2, time: "1:00 PM", location: "국립현대미술관"),
+        Schedule2222(title: "홈트레이닝", color: .pinkF0B4D5, time: "4:00 PM", location: ""),
+        Schedule2222(title: "저녁 회의", color: .mintB2EAD6, time: "8:00 PM", location: "스타벅스 논현점")
     ])
     let calendarSchedule2 = CalendarSchedule(year: 2023, month: 7, day: 16, schedules: [
-        Schedule2222(title: "놀이공원", color: .colorBAD7FA, time: "3:00 PM", location: "잠실역", category: "데이트")
+        Schedule2222(title: "놀이공원", color: .marineBAD7FA, time: "3:00 PM", location: "잠실역", category: "데이트")
     ])
     let calendarSchedule3 = CalendarSchedule(year: 2023, month: 8, day: 25, schedules: [
-        Schedule2222(title: "부산여행", color: .colorF0F1B0, time: "3:00 PM", location: "부산역", image: ["recordTest1", "recordTest2", "recordTest3"], content: "제주 여행 마지막 날이다!\n아침부터 보이는 풍경이 너무 멋지다.", category: "여행")
+        Schedule2222(title: "부산여행", color: .limeF0F1B0, time: "3:00 PM", location: "부산역", image: ["recordTest1", "recordTest2", "recordTest3"], content: "제주 여행 마지막 날이다!\n아침부터 보이는 풍경이 너무 멋지다.", category: "여행")
     ])
     let calendarSchedule4 = CalendarSchedule(year: 2023, month: 8, day: 26, schedules: [
-        Schedule2222(title: "부산여행", color: .colorF0F1B0, time: nil, location: "광안리", image: ["recordTest1"], content: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.", category: "여행")
+        Schedule2222(title: "부산여행", color: .limeF0F1B0, time: nil, location: "광안리", image: ["recordTest1"], content: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.", category: "여행")
     ])
     let calendarSchedule5 = CalendarSchedule(year: 2023, month: 8, day: 27, schedules: [
-        Schedule2222(title: "부산여행", color: .colorF0F1B0, time: nil, location: "해운대", content: "냠냠")
+        Schedule2222(title: "부산여행", color: .limeF0F1B0, time: nil, location: "해운대", content: "냠냠")
     ])
     let calendarSchedule6 = CalendarSchedule(year: 2023, month: 8, day: 28, schedules: [
-        Schedule2222(title: "부산여행", color: .colorF0F1B0, time: nil, location: "잠실역")
+        Schedule2222(title: "부산여행", color: .limeF0F1B0, time: nil, location: "잠실역")
     ])
 
     return [calendarSchedule1, calendarSchedule2, calendarSchedule3, calendarSchedule4, calendarSchedule5, calendarSchedule6]

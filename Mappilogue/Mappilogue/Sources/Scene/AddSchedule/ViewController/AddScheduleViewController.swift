@@ -21,7 +21,7 @@ class AddScheduleViewController: BaseViewController {
     
     var colorList: [ColorListDTO] = []
     var isColorSelection: Bool = false
-    var selectedColor: UIColor = .color1C1C1C
+    var selectedColor: UIColor = .black1C1C1C
 
     var scheduleDateType: AddScheduleDateType = .unKnown
     let years: [Int] = Array(1970...2050)
@@ -41,7 +41,7 @@ class AddScheduleViewController: BaseViewController {
         layout.scrollDirection = .vertical
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .colorF9F8F7
+        collectionView.backgroundColor = .grayF9F8F7
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         collectionView.register(LocationTimeCell.self, forCellWithReuseIdentifier: LocationTimeCell.registerId)
         collectionView.register(AddScheduleHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: AddScheduleHeaderView.registerId)
@@ -76,9 +76,9 @@ class AddScheduleViewController: BaseViewController {
         
         setNavigationBar()
         
-        datePickerOuterView.backgroundColor = .colorF5F3F0
+        datePickerOuterView.backgroundColor = .grayF5F3F0
         datePickerOuterView.isHidden = true
-        datePickerView.backgroundColor = .colorF5F3F0
+        datePickerView.backgroundColor = .grayF5F3F0
         datePickerView.delegate = self
         datePickerView.dataSource = self
         datePickerTap = UITapGestureRecognizer(target: self, action: #selector(dismissDatePicker))
@@ -136,7 +136,7 @@ class AddScheduleViewController: BaseViewController {
                           messageText: "저장하지 않은 일정은 사라져요",
                           cancelText: "취소",
                           doneText: "나가기",
-                          buttonColor: .colorF14C4C,
+                          buttonColor: .redF14C4C,
                           alertHeight: 160)
         alertViewController.configureAlert(with: alert)
         alertViewController.onDoneTapped = {
@@ -364,7 +364,7 @@ class AddScheduleViewController: BaseViewController {
         let alert = Alert(titleText: "선택한 장소를 삭제할까요?",
                           cancelText: "취소",
                           doneText: "삭제",
-                          buttonColor: .colorF14C4C,
+                          buttonColor: .redF14C4C,
                           alertHeight: 140)
         alertViewController.configureAlert(with: alert)
         alertViewController.modalPresentationStyle = .overCurrentContext
