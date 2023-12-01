@@ -1,13 +1,13 @@
 //
-//  UIColor.swift
-//  Mappilogue
+//  UIColor+Extension.swift
+//  MappilogueKit
 //
-//  Created by hyemi on 2023/05/30.
+//  Created by hyemi on 2023/12/01.
 //
 
 import UIKit
 
-extension UIColor {
+public extension UIColor {
     convenience init(hex: UInt, alpha: CGFloat = 1.0) {
         self.init(
             red: CGFloat((hex & 0xFF0000) >> 16) / 255.0,

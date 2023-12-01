@@ -7,160 +7,199 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		92CBB04C2B18994600587BED /* MappilgueKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = 92CBB04B2B18994600587BED /* MappilgueKit.docc */; };
-		92CBB0522B18994600587BED /* MappilgueKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CBB0472B18994600587BED /* MappilgueKit.framework */; };
-		92CBB0582B18994600587BED /* MappilgueKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 92CBB04A2B18994600587BED /* MappilgueKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		92CBB0622B18998600587BED /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CBB0612B18998600587BED /* Test.swift */; };
+		92CBB28F2B19C07100587BED /* MappilogueKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = 92CBB28E2B19C07100587BED /* MappilogueKit.docc */; };
+		92CBB2952B19C07100587BED /* MappilogueKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CBB28A2B19C07100587BED /* MappilogueKit.framework */; };
+		92CBB29A2B19C07100587BED /* MappilogueKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CBB2992B19C07100587BED /* MappilogueKitTests.swift */; };
+		92CBB29B2B19C07100587BED /* MappilogueKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 92CBB28D2B19C07100587BED /* MappilogueKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		92CBB2C32B19C4B600587BED /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CBB2C22B19C4B600587BED /* UIColor+Extension.swift */; };
+		92CBB2D62B19E84900587BED /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CBB2D52B19E84900587BED /* UIFont+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		92CBB0532B18994600587BED /* PBXContainerItemProxy */ = {
+		92CBB2962B19C07100587BED /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 92CBB03E2B18994600587BED /* Project object */;
+			containerPortal = 92CBB2812B19C07100587BED /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 92CBB0462B18994600587BED;
-			remoteInfo = MappilgueKit;
+			remoteGlobalIDString = 92CBB2892B19C07100587BED;
+			remoteInfo = MappilogueKit;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		92CBB0472B18994600587BED /* MappilgueKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MappilgueKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		92CBB04A2B18994600587BED /* MappilgueKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MappilgueKit.h; sourceTree = "<group>"; };
-		92CBB04B2B18994600587BED /* MappilgueKit.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = MappilgueKit.docc; sourceTree = "<group>"; };
-		92CBB0512B18994600587BED /* MappilgueKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MappilgueKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		92CBB0612B18998600587BED /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
-		92CBB0782B18A10B00587BED /* MappilgueKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = MappilgueKit.xcodeproj; sourceTree = "<group>"; };
+		92CBB28A2B19C07100587BED /* MappilogueKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MappilogueKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		92CBB28D2B19C07100587BED /* MappilogueKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MappilogueKit.h; sourceTree = "<group>"; };
+		92CBB28E2B19C07100587BED /* MappilogueKit.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = MappilogueKit.docc; sourceTree = "<group>"; };
+		92CBB2942B19C07100587BED /* MappilogueKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MappilogueKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92CBB2992B19C07100587BED /* MappilogueKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappilogueKitTests.swift; sourceTree = "<group>"; };
+		92CBB2C22B19C4B600587BED /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		92CBB2D52B19E84900587BED /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		92CBB0442B18994600587BED /* Frameworks */ = {
+		92CBB2872B19C07100587BED /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		92CBB04E2B18994600587BED /* Frameworks */ = {
+		92CBB2912B19C07100587BED /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92CBB0522B18994600587BED /* MappilgueKit.framework in Frameworks */,
+				92CBB2952B19C07100587BED /* MappilogueKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		92CBB03D2B18994600587BED = {
+		92CBB2802B19C07100587BED = {
 			isa = PBXGroup;
 			children = (
-				92CBB0612B18998600587BED /* Test.swift */,
-				92CBB0492B18994600587BED /* MappilgueKit */,
-				92CBB0482B18994600587BED /* Products */,
-				92CBB0772B18A10B00587BED /* Frameworks */,
+				92CBB28C2B19C07100587BED /* MappilogueKit */,
+				92CBB2982B19C07100587BED /* MappilogueKitTests */,
+				92CBB28B2B19C07100587BED /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		92CBB0482B18994600587BED /* Products */ = {
+		92CBB28B2B19C07100587BED /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				92CBB0472B18994600587BED /* MappilgueKit.framework */,
-				92CBB0512B18994600587BED /* MappilgueKitTests.xctest */,
+				92CBB28A2B19C07100587BED /* MappilogueKit.framework */,
+				92CBB2942B19C07100587BED /* MappilogueKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		92CBB0492B18994600587BED /* MappilgueKit */ = {
+		92CBB28C2B19C07100587BED /* MappilogueKit */ = {
 			isa = PBXGroup;
 			children = (
-				92CBB04A2B18994600587BED /* MappilgueKit.h */,
-				92CBB04B2B18994600587BED /* MappilgueKit.docc */,
+				92CBB2BF2B19C46600587BED /* DesignSystem */,
+				92CBB28D2B19C07100587BED /* MappilogueKit.h */,
+				92CBB28E2B19C07100587BED /* MappilogueKit.docc */,
 			);
-			path = MappilgueKit;
+			path = MappilogueKit;
 			sourceTree = "<group>";
 		};
-		92CBB0772B18A10B00587BED /* Frameworks */ = {
+		92CBB2982B19C07100587BED /* MappilogueKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				92CBB0782B18A10B00587BED /* MappilgueKit.xcodeproj */,
+				92CBB2992B19C07100587BED /* MappilogueKitTests.swift */,
 			);
-			name = Frameworks;
+			path = MappilogueKitTests;
 			sourceTree = "<group>";
 		};
-		92CBB0792B18A10B00587BED /* Products */ = {
+		92CBB2BF2B19C46600587BED /* DesignSystem */ = {
 			isa = PBXGroup;
-			name = Products;
+			children = (
+				92CBB2C02B19C47F00587BED /* Resources */,
+				92CBB2C12B19C48600587BED /* Sources */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		92CBB2C02B19C47F00587BED /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		92CBB2C12B19C48600587BED /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				92CBB2D32B19E80E00587BED /* Colors */,
+				92CBB2D42B19E81A00587BED /* Fonts */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		92CBB2D32B19E80E00587BED /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				92CBB2C22B19C4B600587BED /* UIColor+Extension.swift */,
+			);
+			path = Colors;
+			sourceTree = "<group>";
+		};
+		92CBB2D42B19E81A00587BED /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				92CBB2D52B19E84900587BED /* UIFont+Extension.swift */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		92CBB0422B18994600587BED /* Headers */ = {
+		92CBB2852B19C07100587BED /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92CBB0582B18994600587BED /* MappilgueKit.h in Headers */,
+				92CBB29B2B19C07100587BED /* MappilogueKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		92CBB0462B18994600587BED /* MappilgueKit */ = {
+		92CBB2892B19C07100587BED /* MappilogueKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92CBB05B2B18994600587BED /* Build configuration list for PBXNativeTarget "MappilgueKit" */;
+			buildConfigurationList = 92CBB29E2B19C07100587BED /* Build configuration list for PBXNativeTarget "MappilogueKit" */;
 			buildPhases = (
-				92CBB0422B18994600587BED /* Headers */,
-				92CBB0432B18994600587BED /* Sources */,
-				92CBB0442B18994600587BED /* Frameworks */,
-				92CBB0452B18994600587BED /* Resources */,
+				92CBB2852B19C07100587BED /* Headers */,
+				92CBB2862B19C07100587BED /* Sources */,
+				92CBB2872B19C07100587BED /* Frameworks */,
+				92CBB2882B19C07100587BED /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = MappilgueKit;
-			productName = MappilgueKit;
-			productReference = 92CBB0472B18994600587BED /* MappilgueKit.framework */;
+			name = MappilogueKit;
+			productName = MappilogueKit;
+			productReference = 92CBB28A2B19C07100587BED /* MappilogueKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		92CBB0502B18994600587BED /* MappilgueKitTests */ = {
+		92CBB2932B19C07100587BED /* MappilogueKitTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92CBB05E2B18994600587BED /* Build configuration list for PBXNativeTarget "MappilgueKitTests" */;
+			buildConfigurationList = 92CBB2A12B19C07100587BED /* Build configuration list for PBXNativeTarget "MappilogueKitTests" */;
 			buildPhases = (
-				92CBB04D2B18994600587BED /* Sources */,
-				92CBB04E2B18994600587BED /* Frameworks */,
-				92CBB04F2B18994600587BED /* Resources */,
+				92CBB2902B19C07100587BED /* Sources */,
+				92CBB2912B19C07100587BED /* Frameworks */,
+				92CBB2922B19C07100587BED /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				92CBB0542B18994600587BED /* PBXTargetDependency */,
+				92CBB2972B19C07100587BED /* PBXTargetDependency */,
 			);
-			name = MappilgueKitTests;
-			productName = MappilgueKitTests;
-			productReference = 92CBB0512B18994600587BED /* MappilgueKitTests.xctest */;
+			name = MappilogueKitTests;
+			productName = MappilogueKitTests;
+			productReference = 92CBB2942B19C07100587BED /* MappilogueKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		92CBB03E2B18994600587BED /* Project object */ = {
+		92CBB2812B19C07100587BED /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
-					92CBB0462B18994600587BED = {
+					92CBB2892B19C07100587BED = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
-					92CBB0502B18994600587BED = {
+					92CBB2932B19C07100587BED = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
 				};
 			};
-			buildConfigurationList = 92CBB0412B18994600587BED /* Build configuration list for PBXProject "MappilgueKit" */;
+			buildConfigurationList = 92CBB2842B19C07100587BED /* Build configuration list for PBXProject "MappilogueKit" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -168,32 +207,26 @@
 				en,
 				Base,
 			);
-			mainGroup = 92CBB03D2B18994600587BED;
-			productRefGroup = 92CBB0482B18994600587BED /* Products */;
+			mainGroup = 92CBB2802B19C07100587BED;
+			productRefGroup = 92CBB28B2B19C07100587BED /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 92CBB0792B18A10B00587BED /* Products */;
-					ProjectRef = 92CBB0782B18A10B00587BED /* MappilgueKit.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
-				92CBB0462B18994600587BED /* MappilgueKit */,
-				92CBB0502B18994600587BED /* MappilgueKitTests */,
+				92CBB2892B19C07100587BED /* MappilogueKit */,
+				92CBB2932B19C07100587BED /* MappilogueKitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		92CBB0452B18994600587BED /* Resources */ = {
+		92CBB2882B19C07100587BED /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		92CBB04F2B18994600587BED /* Resources */ = {
+		92CBB2922B19C07100587BED /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -203,34 +236,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		92CBB0432B18994600587BED /* Sources */ = {
+		92CBB2862B19C07100587BED /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92CBB04C2B18994600587BED /* MappilgueKit.docc in Sources */,
-				92CBB0622B18998600587BED /* Test.swift in Sources */,
+				92CBB2D62B19E84900587BED /* UIFont+Extension.swift in Sources */,
+				92CBB28F2B19C07100587BED /* MappilogueKit.docc in Sources */,
+				92CBB2C32B19C4B600587BED /* UIColor+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		92CBB04D2B18994600587BED /* Sources */ = {
+		92CBB2902B19C07100587BED /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92CBB29A2B19C07100587BED /* MappilogueKitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		92CBB0542B18994600587BED /* PBXTargetDependency */ = {
+		92CBB2972B19C07100587BED /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 92CBB0462B18994600587BED /* MappilgueKit */;
-			targetProxy = 92CBB0532B18994600587BED /* PBXContainerItemProxy */;
+			target = 92CBB2892B19C07100587BED /* MappilogueKit */;
+			targetProxy = 92CBB2962B19C07100587BED /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		92CBB0592B18994600587BED /* Debug */ = {
+		92CBB29C2B19C07100587BED /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -293,7 +328,7 @@
 			};
 			name = Debug;
 		};
-		92CBB05A2B18994600587BED /* Release */ = {
+		92CBB29D2B19C07100587BED /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -350,7 +385,7 @@
 			};
 			name = Release;
 		};
-		92CBB05C2B18994600587BED /* Debug */ = {
+		92CBB29F2B19C07100587BED /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -372,7 +407,7 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = hyem.MappilgueKit;
+				PRODUCT_BUNDLE_IDENTIFIER = C7Z.MappilogueKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -381,7 +416,7 @@
 			};
 			name = Debug;
 		};
-		92CBB05D2B18994600587BED /* Release */ = {
+		92CBB2A02B19C07100587BED /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -403,7 +438,7 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = hyem.MappilgueKit;
+				PRODUCT_BUNDLE_IDENTIFIER = C7Z.MappilogueKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -412,7 +447,7 @@
 			};
 			name = Release;
 		};
-		92CBB05F2B18994600587BED /* Debug */ = {
+		92CBB2A22B19C07100587BED /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -420,7 +455,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = hyem.MappilgueKitTests;
+				PRODUCT_BUNDLE_IDENTIFIER = C7Z.MappilogueKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -428,7 +463,7 @@
 			};
 			name = Debug;
 		};
-		92CBB0602B18994600587BED /* Release */ = {
+		92CBB2A32B19C07100587BED /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -436,7 +471,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = hyem.MappilgueKitTests;
+				PRODUCT_BUNDLE_IDENTIFIER = C7Z.MappilogueKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -447,34 +482,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		92CBB0412B18994600587BED /* Build configuration list for PBXProject "MappilgueKit" */ = {
+		92CBB2842B19C07100587BED /* Build configuration list for PBXProject "MappilogueKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				92CBB0592B18994600587BED /* Debug */,
-				92CBB05A2B18994600587BED /* Release */,
+				92CBB29C2B19C07100587BED /* Debug */,
+				92CBB29D2B19C07100587BED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92CBB05B2B18994600587BED /* Build configuration list for PBXNativeTarget "MappilgueKit" */ = {
+		92CBB29E2B19C07100587BED /* Build configuration list for PBXNativeTarget "MappilogueKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				92CBB05C2B18994600587BED /* Debug */,
-				92CBB05D2B18994600587BED /* Release */,
+				92CBB29F2B19C07100587BED /* Debug */,
+				92CBB2A02B19C07100587BED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92CBB05E2B18994600587BED /* Build configuration list for PBXNativeTarget "MappilgueKitTests" */ = {
+		92CBB2A12B19C07100587BED /* Build configuration list for PBXNativeTarget "MappilogueKitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				92CBB05F2B18994600587BED /* Debug */,
-				92CBB0602B18994600587BED /* Release */,
+				92CBB2A22B19C07100587BED /* Debug */,
+				92CBB2A32B19C07100587BED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 92CBB03E2B18994600587BED /* Project object */;
+	rootObject = 92CBB2812B19C07100587BED /* Project object */;
 }
