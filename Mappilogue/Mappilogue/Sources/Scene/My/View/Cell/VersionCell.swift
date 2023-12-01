@@ -25,7 +25,7 @@ class VersionCell: BaseCollectionViewCell {
         super.setupProperty()
         
         contentView.layer.cornerRadius = 12
-        contentView.backgroundColor = .colorF5F3F0
+        contentView.backgroundColor = .grayF5F3F0
         
         versionInfoLabel.text = "버전정보"
         versionInfoLabel.textColor = .color000000
@@ -36,25 +36,25 @@ class VersionCell: BaseCollectionViewCell {
         stackView.spacing = 4
         
         currentVersionLabel.text = Utils.getAppVersion()
-        currentVersionLabel.textColor = .color707070
+        currentVersionLabel.textColor = .gray707070
         currentVersionLabel.font = .body02
         
         versionSeparatorLabel.text = "/"
-        versionSeparatorLabel.textColor = .color707070
+        versionSeparatorLabel.textColor = .gray707070
         versionSeparatorLabel.font = .body02
         
         latestVersionLabel.text = "1.0"  // Utils.loadAppStoreVersion()
-        latestVersionLabel.textColor = .color707070
+        latestVersionLabel.textColor = .gray707070
         latestVersionLabel.font = .body02
         
         updateButton.addTarget(self, action: #selector(updateButtonTapped), for: .touchUpInside)
         
         updateLabel.text = "업데이트"
-        updateLabel.textColor = .colorC9C6C2
+        updateLabel.textColor = .grayC9C6C2
         updateLabel.font = .body02
         
         moveImage.image = UIImage(named: "my_move")
-        moveImage.tintColor = .colorC9C6C2
+        moveImage.tintColor = .grayC9C6C2
     }
     
     override func setupHierarchy() {

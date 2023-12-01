@@ -24,7 +24,7 @@ class CategorySettingCell: BaseTableViewCell {
         categoryImage.image = UIImage(named: "setting")
         
         categoryLabel.text = "카테고리 설정"
-        categoryLabel.textColor = .color707070
+        categoryLabel.textColor = .gray707070
         categoryLabel.font = .body02
     }
     

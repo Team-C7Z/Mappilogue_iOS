@@ -25,36 +25,36 @@ class InputAlertViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        view.backgroundColor = .color404040.withAlphaComponent(0.1)
+        view.backgroundColor = .gray404040.withAlphaComponent(0.1)
         
         alertView.layer.cornerRadius = 12
-        alertView.backgroundColor = .colorF9F8F7
+        alertView.backgroundColor = .grayF9F8F7
         
         titleLabel.text = "카테고리 이름을 설정해 주세요"
         titleLabel.textColor = .color000000
         titleLabel.font = .title02
         
-        inputTextField.textColor = .color1C1C1C
+        inputTextField.textColor = .black1C1C1C
         inputTextField.font = .body02
-        inputTextField.backgroundColor = .colorF5F3F0
+        inputTextField.backgroundColor = .grayF5F3F0
         inputTextField.placeholder = "새로운 카테고리"
         inputTextField.layer.cornerRadius = 12
-        inputTextField.tintColor = .color2EBD3D
+        inputTextField.tintColor = .green2EBD3D
         inputTextField.addLeftPadding()
         inputTextField.delegate = self
         inputTextField.becomeFirstResponder()
     
         cancelButton.setTitle("취소", for: .normal)
         cancelButton.layer.cornerRadius = 12
-        cancelButton.backgroundColor = .colorF5F3F0
-        cancelButton.setTitleColor(.color1C1C1C, for: .normal)
+        cancelButton.backgroundColor = .grayF5F3F0
+        cancelButton.setTitleColor(.black1C1C1C, for: .normal)
         cancelButton.titleLabel?.font = .body02
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         
         completionButton.setTitle("확인", for: .normal)
         completionButton.layer.cornerRadius = 12
-        completionButton.backgroundColor = .color2EBD3D
-        completionButton.setTitleColor(.colorFFFFFF, for: .normal)
+        completionButton.backgroundColor = .green2EBD3D
+        completionButton.setTitleColor(.whiteFFFFFF, for: .normal)
         completionButton.titleLabel?.font = .body03
         completionButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
     }

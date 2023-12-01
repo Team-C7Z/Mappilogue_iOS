@@ -35,7 +35,7 @@ class LocationTimeCell: BaseCollectionViewCell {
         super.setupProperty()
         
         contentView.layer.cornerRadius = 12
-        contentView.backgroundColor = .colorF5F3F0
+        contentView.backgroundColor = .grayF5F3F0
         
         locationLabel.textColor = .color000000
         locationLabel.font = .subtitle01
@@ -43,12 +43,12 @@ class LocationTimeCell: BaseCollectionViewCell {
         
         timeButton.addTarget(self, action: #selector(timeButtonTapped), for: .touchUpInside)
         timeImage.image = UIImage(named: "time")
-        timeLabel.textColor = .color707070
+        timeLabel.textColor = .gray707070
         timeLabel.font = .body02
-        timeLineView.backgroundColor = .color707070
+        timeLineView.backgroundColor = .gray707070
         
         editImage.image = UIImage(named: "edit")
-        editImage.tintColor = .colorC9C6C2
+        editImage.tintColor = .grayC9C6C2
 
         checkButton.setImage(UIImage(named: "common_unCheck"), for: .normal)
         checkButton.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)

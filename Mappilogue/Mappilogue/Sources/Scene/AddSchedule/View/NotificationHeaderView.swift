@@ -28,31 +28,31 @@ class NotificationHeaderView: BaseCollectionReusableView {
         super.setupProperty()
         
         startLabel.text = "시작일 기준"
-        startLabel.textColor = .color707070
+        startLabel.textColor = .gray707070
         startLabel.font = .body02
         
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.spacing = 1
-        stackView.backgroundColor = .colorEAE6E1
+        stackView.backgroundColor = .grayEAE6E1
         
-        startDateButton.backgroundColor = .colorF9F8F7
-        startDateLabel.textColor = .color1C1C1C
+        startDateButton.backgroundColor = .grayF9F8F7
+        startDateLabel.textColor = .black1C1C1C
         startDateLabel.font = .title02
         startDateButton.addTarget(self, action: #selector(startDateButtonTapped), for: .touchUpInside)
         
-        startTimeButton.backgroundColor = .colorF9F8F7
-        startTimeLabel.textColor = .color1C1C1C
+        startTimeButton.backgroundColor = .grayF9F8F7
+        startTimeLabel.textColor = .black1C1C1C
         startTimeLabel.font = .title02
         startTimeButton.addTarget(self, action: #selector(startTimeButtonTapped), for: .touchUpInside)
         
         addNotificationButton.layer.cornerRadius = 12
-        addNotificationButton.backgroundColor = .colorEAE6E1
+        addNotificationButton.backgroundColor = .grayEAE6E1
         addNotificationImage.image = UIImage(named: "addNotification")
         addNotificationButton.addTarget(self, action: #selector(addNotificationButtonTapped), for: .touchUpInside)
         
         notificationListLabel.text = "알림 리스트"
-        notificationListLabel.textColor = .color707070
+        notificationListLabel.textColor = .gray707070
         notificationListLabel.font = .body02
     }
     

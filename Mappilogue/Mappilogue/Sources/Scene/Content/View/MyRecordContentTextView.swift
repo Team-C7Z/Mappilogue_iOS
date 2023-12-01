@@ -37,7 +37,7 @@ class MyRecordContentTextView: BaseView {
     
     func configure(_ content: String, width: CGFloat) {
         textView.setLineAndLetterSpacing(content)
-        textView.textColor = .color1C1C1C
+        textView.textColor = .black1C1C1C
         textView.font = .body01
       
         let newSize = textView.sizeThatFits(CGSize(width: width, height: CGFloat.greatestFiniteMagnitude))

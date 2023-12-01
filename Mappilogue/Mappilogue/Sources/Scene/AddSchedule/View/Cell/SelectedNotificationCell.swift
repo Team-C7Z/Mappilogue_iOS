@@ -19,7 +19,7 @@ class SelectedNotificationCell: BaseCollectionViewCell {
     override func setupProperty() {
         super.setupProperty()
     
-        contentView.backgroundColor = .colorF5F3F0
+        contentView.backgroundColor = .grayF5F3F0
         contentView.layer.cornerRadius = 12
         deletButton.setImage(UIImage(named: "deleteNotification"), for: .normal)
         deletButton.addTarget(self, action: #selector(deletButtonTapped), for: .touchUpInside)

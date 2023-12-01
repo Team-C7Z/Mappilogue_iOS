@@ -32,11 +32,11 @@ class NotificationSettingViewController: BaseViewController {
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
         stackView.spacing = 1
-        stackView.backgroundColor = .colorEAE6E1
+        stackView.backgroundColor = .grayEAE6E1
 
         setSwitchToggleActions()
         
-        notificationControlOffView.backgroundColor = .colorF9F8F7.withAlphaComponent(0.4)
+        notificationControlOffView.backgroundColor = .grayF9F8F7.withAlphaComponent(0.4)
     }
     
     override func setupHierarchy() {

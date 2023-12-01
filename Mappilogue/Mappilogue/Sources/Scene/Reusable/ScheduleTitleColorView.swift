@@ -12,16 +12,16 @@ class ScheduleTitleColorView: BaseView {
     var onColorSelectionButtonTapped: ((Bool) -> Void)?
     
     private let scheduleTitleTextField = UITextField()
-    private var colorSelectionButton = ColorSelectionButton(textColor: .colorFFFFFF, color: .color1C1C1C)
+    private var colorSelectionButton = ColorSelectionButton(textColor: .whiteFFFFFF, color: .black1C1C1C)
     
     override func setupProperty() {
         super.setupProperty()
 
-        backgroundColor = .colorF9F8F7
+        backgroundColor = .grayF9F8F7
         
         scheduleTitleTextField.font = .title02
         scheduleTitleTextField.placeholder = "일정 제목을 적어 주세요"
-        scheduleTitleTextField.tintColor = .color2EBD3D
+        scheduleTitleTextField.tintColor = .green2EBD3D
         scheduleTitleTextField.returnKeyType = .done
         scheduleTitleTextField.delegate = self
         
@@ -57,12 +57,12 @@ class ScheduleTitleColorView: BaseView {
     
     func configure(_ isAdd: Bool, title: String, colorId: Int, color: UIColor, isColorSelection: Bool) {
         scheduleTitleTextField.text = title
-        scheduleTitleTextField.textColor = isAdd ? .color1C1C1C : .colorC9C6C2
+        scheduleTitleTextField.textColor = isAdd ? .black1C1C1C : .grayC9C6C2
         
-        if color == .color1C1C1C || color == .color9B9791 || color == .color404040 {
-            colorSelectionButton.configure(textColor: .colorFFFFFF, color: color, isColorSelection: isColorSelection)
+        if color == .black1C1C1C || color == .gray9B9791 || color == .gray404040 {
+            colorSelectionButton.configure(textColor: .whiteFFFFFF, color: color, isColorSelection: isColorSelection)
         } else {
-            colorSelectionButton.configure(textColor: .color1C1C1C, color: color, isColorSelection: isColorSelection)
+            colorSelectionButton.configure(textColor: .black1C1C1C, color: color, isColorSelection: isColorSelection)
         }
     }
     

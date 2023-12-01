@@ -12,7 +12,7 @@ class AddLocationFooterView: BaseCollectionReusableView {
     
     var onAddLocationButtonTapped: (() -> Void)?
     
-    private let addLocationButton = AddButton(text: "장소 추가하기", backgroundColor: .color1C1C1C)
+    private let addLocationButton = AddButton(text: "장소 추가하기", backgroundColor: .black1C1C1C)
     
     override func setupProperty() {
         super.setupProperty()

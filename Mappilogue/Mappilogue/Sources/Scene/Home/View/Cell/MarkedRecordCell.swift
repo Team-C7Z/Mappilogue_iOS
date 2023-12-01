@@ -19,7 +19,7 @@ class MarkedRecordCell: BaseCollectionViewCell {
     override func setupProperty() {
         super.setupProperty()
         
-        contentView.backgroundColor = .colorEAE6E1
+        contentView.backgroundColor = .grayEAE6E1
         contentView.layer.cornerRadius = 12
         
         markedRecordImage.layer.cornerRadius = 12
@@ -28,10 +28,10 @@ class MarkedRecordCell: BaseCollectionViewCell {
         
         markView.configure(heartWidth: 16, heartHeight: 15)
     
-        markedRecordDateLabel.textColor = .color707070
+        markedRecordDateLabel.textColor = .gray707070
         markedRecordDateLabel.font = .body02
         
-        markedRecordLocationLabel.textColor = .color1C1C1C
+        markedRecordLocationLabel.textColor = .black1C1C1C
         markedRecordLocationLabel.font = .title02
     }
     

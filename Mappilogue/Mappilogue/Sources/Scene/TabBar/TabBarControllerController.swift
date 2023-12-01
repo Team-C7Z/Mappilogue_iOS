@@ -14,9 +14,9 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        tabBar.backgroundColor = .colorF9F8F7
-        tabBar.tintColor = .color1C1C1C // 선택 아이템
-        tabBar.unselectedItemTintColor = .color707070
+        tabBar.backgroundColor = .grayF9F8F7
+        tabBar.tintColor = .black1C1C1C // 선택 아이템
+        tabBar.unselectedItemTintColor = .gray707070
         
         setTabBar()
         

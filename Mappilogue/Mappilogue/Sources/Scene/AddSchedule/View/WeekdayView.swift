@@ -48,9 +48,9 @@ class WeekdayView: BaseView {
         let button = UIButton()
         button.setTitle(title, for: .normal)
         button.titleLabel?.font = .body01
-        button.setTitleColor(.color1C1C1C, for: .normal)
+        button.setTitleColor(.black1C1C1C, for: .normal)
         button.layer.cornerRadius = 18
-        button.backgroundColor = .colorEAE6E1
+        button.backgroundColor = .grayEAE6E1
         button.addTarget(self, action: #selector(weekdayButtonTapped), for: .touchUpInside)
     
         button.snp.makeConstraints {
@@ -77,6 +77,6 @@ class WeekdayView: BaseView {
     }
     
     func updateCycleButtonDesign(_ button: UIButton) {
-        button.backgroundColor = button.isSelected ? .colorC9C6C2 : .colorEAE6E1
+        button.backgroundColor = button.isSelected ? .grayC9C6C2 : .grayEAE6E1
     }
 }

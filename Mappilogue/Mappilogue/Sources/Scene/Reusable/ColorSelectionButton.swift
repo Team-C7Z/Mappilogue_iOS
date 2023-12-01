@@ -17,7 +17,7 @@ class ColorSelectionButton: UIButton {
         colorSelectionLabel.textColor = textColor
         backgroundColor = color
         colorSelectionArrowImage.image = UIImage(named: "closedColorSelection")
-        colorSelectionArrowImage.tintColor = .colorFFFFFF
+        colorSelectionArrowImage.tintColor = .whiteFFFFFF
         colorSelectionArrowImage.tintColor = textColor
       
         setupProperty()
@@ -63,7 +63,7 @@ class ColorSelectionButton: UIButton {
         colorSelectionLabel.textColor = textColor
         backgroundColor = color
         colorSelectionArrowImage.image = UIImage(named: !isColorSelection ? "opendColorSelection" : "closedColorSelection")
-        colorSelectionArrowImage.tintColor = .colorFFFFFF
+        colorSelectionArrowImage.tintColor = .whiteFFFFFF
         colorSelectionArrowImage.tintColor = textColor
         
 //        if isColorSelection {

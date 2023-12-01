@@ -23,7 +23,7 @@ class AddLocationViewController: BaseViewController {
         layout.scrollDirection = .vertical
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .colorF9F8F7
+        collectionView.backgroundColor = .grayF9F8F7
         collectionView.register(LocationCell.self, forCellWithReuseIdentifier: LocationCell.registerId)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -39,10 +39,10 @@ class AddLocationViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        view.backgroundColor = .color404040.withAlphaComponent(0.1)
+        view.backgroundColor = .gray404040.withAlphaComponent(0.1)
         
         addLocationView.layer.cornerRadius = 24
-        addLocationView.backgroundColor = .colorF9F8F7
+        addLocationView.backgroundColor = .grayF9F8F7
         
         searchBar.configure("장소 검색")
         searchBar.delegate = self

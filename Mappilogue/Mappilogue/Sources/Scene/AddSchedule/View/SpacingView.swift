@@ -16,20 +16,20 @@ class SpacingView: BaseView {
     override func setupProperty() {
         super.setupProperty()
         
-        backgroundColor = .colorF9F8F7
+        backgroundColor = .grayF9F8F7
         
         spacingStackView.axis = .horizontal
         spacingStackView.distribution = .fillEqually
         spacingStackView.spacing = 0
         
         spacingLabel.text = "간격"
-        spacingLabel.textColor = .color707070
+        spacingLabel.textColor = .gray707070
         spacingLabel.font = .body02
         
         setupSpacingTextField()
         
         spacingDateLabel.text = "주"
-        spacingTextField.textColor = .color1C1C1C
+        spacingTextField.textColor = .black1C1C1C
         spacingTextField.font = .title02
     }
     
@@ -60,11 +60,11 @@ class SpacingView: BaseView {
     
     private func setupSpacingTextField() {
         spacingTextField.text = "1"
-        spacingTextField.textColor = .color1C1C1C
+        spacingTextField.textColor = .black1C1C1C
         spacingTextField.font = .title02
         spacingTextField.keyboardType = .numberPad
         spacingTextField.textAlignment = .center
-        spacingTextField.tintColor = .color2EBD3D
+        spacingTextField.tintColor = .green2EBD3D
         spacingTextField.delegate = self
         spacingTextField.addTarget(self, action: #selector(textFieldDidBeginEditing), for: .editingDidBegin)
         spacingTextField.addTarget(self, action: #selector(textFieldEditingChanged), for: .editingChanged)

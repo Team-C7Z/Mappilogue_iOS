@@ -23,21 +23,21 @@ class ScheduleDurationView: BaseView {
         stackView.distribution = .fillEqually
         stackView.spacing = 1
         
-        startDateButton.backgroundColor = .colorF9F8F7
-        endDateButton.backgroundColor = .colorF9F8F7
+        startDateButton.backgroundColor = .grayF9F8F7
+        endDateButton.backgroundColor = .grayF9F8F7
 
         startLabel.text = "시작"
-        startLabel.textColor = .color707070
+        startLabel.textColor = .gray707070
         startLabel.font = .body02
 
-        startDateLabel.textColor = .color1C1C1C
+        startDateLabel.textColor = .black1C1C1C
         startDateLabel.font = .title02
         
         endLabel.text = "종료"
-        endLabel.textColor = .color707070
+        endLabel.textColor = .gray707070
         endLabel.font = .body02
         
-        endDateLabel.textColor = .color1C1C1C
+        endDateLabel.textColor = .black1C1C1C
         endDateLabel.font = .title02
     }
     
@@ -91,14 +91,14 @@ class ScheduleDurationView: BaseView {
         endDateLabel.text = "\(endDate.year)년 \(endDate.month)월 \(endDate.day ?? 1)일"
         
         if dateType == .startDate {
-            startDateButton.backgroundColor = .colorF5F3F0
-            endDateButton.backgroundColor = .colorF9F8F7
+            startDateButton.backgroundColor = .grayF5F3F0
+            endDateButton.backgroundColor = .grayF9F8F7
         } else if dateType == .endDate {
-            startDateButton.backgroundColor = .colorF9F8F7
-            endDateButton.backgroundColor = .colorF5F3F0
+            startDateButton.backgroundColor = .grayF9F8F7
+            endDateButton.backgroundColor = .grayF5F3F0
         } else {
-            startDateButton.backgroundColor = .colorF9F8F7
-            endDateButton.backgroundColor = .colorF9F8F7
+            startDateButton.backgroundColor = .grayF9F8F7
+            endDateButton.backgroundColor = .grayF9F8F7
         }
     }
 }

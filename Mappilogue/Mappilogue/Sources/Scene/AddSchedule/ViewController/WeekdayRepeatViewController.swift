@@ -35,7 +35,7 @@ class WeekdayRepeatViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        separatorView.backgroundColor = .colorEAE6E1
+        separatorView.backgroundColor = .grayEAE6E1
         
         spacingEndStackView.axis = .horizontal
         spacingEndStackView.distribution = .fillEqually
@@ -43,9 +43,9 @@ class WeekdayRepeatViewController: BaseViewController {
         
         endView.endDateButton.addTarget(self, action: #selector(endDateButtonTapped), for: .touchUpInside)
         
-        datePickerOuterView.backgroundColor = .colorF5F3F0
+        datePickerOuterView.backgroundColor = .grayF5F3F0
 
-        datePickerView.backgroundColor = .colorF5F3F0
+        datePickerView.backgroundColor = .grayF5F3F0
         datePickerView.delegate = self
         datePickerView.dataSource = self
         datePickerOuterView.isHidden = true

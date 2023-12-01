@@ -29,20 +29,20 @@ class InquiryViewController: BaseViewController {
         setNavigationTitleAndBackButton("문의하기", backButtonAction: #selector(backButtonTapped))
         
         inquiryTitleLabel.text = "여러분의 이야기를 기다려요"
-        inquiryTitleLabel.textColor = .color1C1C1C
+        inquiryTitleLabel.textColor = .black1C1C1C
         inquiryTitleLabel.font = .title01
         inquiryContentLabel.setTextWithLineHeight(text: "맵필로그 팀은 여러분의 질문을 언제든지 기다리고 있어요.\n궁금한 점이나 건의할 점, 사소한 의견이라도 맵필로그 팀에게 전해 주세요.", lineHeight: 21)
-        inquiryContentLabel.textColor = .color707070
+        inquiryContentLabel.textColor = .gray707070
         inquiryContentLabel.font = .body02
         inquiryContentLabel.numberOfLines = 0
         inquiryContentLabel.lineBreakMode = .byWordWrapping
         
         emailView.layer.cornerRadius = 12
-        emailView.backgroundColor = .colorF5F3F0
+        emailView.backgroundColor = .grayF5F3F0
         emailImage.image = UIImage(named: "my_email")
         emailLabel.text = email
         emailCopyButton.setTitle("복사하기", for: .normal)
-        emailCopyButton.setTitleColor(.color2EBD3D, for: .normal)
+        emailCopyButton.setTitleColor(.green2EBD3D, for: .normal)
         emailCopyButton.titleLabel?.font = .body03
         emailCopyButton.addTarget(self, action: #selector(emailCopyButtonTapped), for: .touchUpInside)
     }

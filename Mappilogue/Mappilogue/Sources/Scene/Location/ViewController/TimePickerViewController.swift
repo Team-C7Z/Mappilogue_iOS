@@ -22,18 +22,18 @@ class TimePickerViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        view.backgroundColor = .color404040.withAlphaComponent(0.1)
+        view.backgroundColor = .gray404040.withAlphaComponent(0.1)
         
         timePickerOuterView.layer.cornerRadius = 12
-        timePickerOuterView.backgroundColor = .colorF9F8F7
+        timePickerOuterView.backgroundColor = .grayF9F8F7
         
         deleteTimeButton.addTarget(self, action: #selector(deleteTimeButtonTapped), for: .touchUpInside)
         
         deleteTimeImage.image = UIImage(named: "common_delete")
-        deleteTimeImage.tintColor = .colorF14C4C
+        deleteTimeImage.tintColor = .redF14C4C
         
         deleteTimeLabel.text = "시간삭제"
-        deleteTimeLabel.textColor = .color707070
+        deleteTimeLabel.textColor = .gray707070
         deleteTimeLabel.font = .caption02
         
         cancelButton.setImage(UIImage(named: "cancel"), for: .normal)

@@ -22,7 +22,7 @@ class PhotoDirectoryView: BaseView {
         layout.scrollDirection = .vertical
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .colorF9F8F7
+        collectionView.backgroundColor = .grayF9F8F7
         collectionView.register(PhotoDirectoryCell.self, forCellWithReuseIdentifier: PhotoDirectoryCell.registerId)
         collectionView.delegate = self
         collectionView.dataSource = self

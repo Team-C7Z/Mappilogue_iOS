@@ -17,7 +17,7 @@ class AddButton: UIButton {
         setupButton()
         
         addLabel.text = text
-        setTitleColor(.colorFFFFFF, for: .normal)
+        setTitleColor(.whiteFFFFFF, for: .normal)
         self.backgroundColor = backgroundColor
         
         layer.cornerRadius = 12

@@ -19,10 +19,10 @@ class SearchLocationCell: BaseCollectionViewCell {
         
         locationImage.image = UIImage(named: "searchLocation")
         
-        locationTitleLabel.textColor = .color1C1C1C
+        locationTitleLabel.textColor = .black1C1C1C
         locationTitleLabel.font = .title02
         
-        addressLabel.textColor = .color707070
+        addressLabel.textColor = .gray707070
         addressLabel.font = .caption01
     }
     
