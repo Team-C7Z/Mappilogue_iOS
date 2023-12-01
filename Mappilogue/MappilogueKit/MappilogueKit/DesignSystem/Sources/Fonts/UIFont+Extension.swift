@@ -1,14 +1,14 @@
 //
-//  UIFont.swift
-//  Mappilogue
+//  UIFont+Extension.swift
+//  MappilogueKit
 //
-//  Created by hyemi on 2023/06/28.
+//  Created by hyemi on 2023/12/01.
 //
 
 import UIKit
 
-extension UIFont {
-    public enum PretendardType: String {
+public extension UIFont {
+    enum PretendardType: String {
         case bold = "Bold"
         case medium = "Medium"
         case regular = "Regular"

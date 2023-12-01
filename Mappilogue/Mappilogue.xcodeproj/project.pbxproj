@@ -234,7 +234,6 @@
 		929158242A2529660022BEF9 /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581B2A2529660022BEF9 /* Pretendard-Medium.ttf */; };
 		929158252A2529660022BEF9 /* Pretendard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */; };
 		929158272A2529660022BEF9 /* Pretendard-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581E2A2529660022BEF9 /* Pretendard-SemiBold.ttf */; };
-		9291582A2A252CC20022BEF9 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929158292A252CC20022BEF9 /* UIColor.swift */; };
 		929158302A2537E40022BEF9 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9291582F2A2537E40022BEF9 /* SnapKit */; };
 		929E23152AB737DC003180B3 /* ProfileImageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23142AB737DC003180B3 /* ProfileImageDTO.swift */; };
 		929E23172AB7F6C4003180B3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23162AB7F6C4003180B3 /* Utils.swift */; };
@@ -250,8 +249,8 @@
 		92A7B6682A4E6154009C9293 /* UpcomingScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6672A4E6154009C9293 /* UpcomingScheduleCell.swift */; };
 		92C2EC612A6924B5002DB0E3 /* LineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2EC602A6924B5002DB0E3 /* LineCell.swift */; };
 		92CBB03C2B18905300587BED /* SecureAPIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92CBB03B2B18905200587BED /* SecureAPIKeys.plist */; };
-		92CBB0852B18A20800587BED /* MappilgueKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CBB0822B18A16C00587BED /* MappilgueKit.framework */; };
-		92CBB0862B18A20800587BED /* MappilgueKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 92CBB0822B18A16C00587BED /* MappilgueKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		92CBB2B62B19C13000587BED /* MappilogueKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CBB2B32B19C11D00587BED /* MappilogueKit.framework */; };
+		92CBB2B72B19C13000587BED /* MappilogueKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 92CBB2B32B19C11D00587BED /* MappilogueKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		92CD36FA2A7B505900768B61 /* MyCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CD36F92A7B505900768B61 /* MyCategoryViewController.swift */; };
 		92E20F462B137B3600380FA5 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E20F452B137B3600380FA5 /* UserViewModel.swift */; };
 		92E20F492B13B8AB00380FA5 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E20F482B13B8AB00380FA5 /* AuthViewModel.swift */; };
@@ -267,7 +266,6 @@
 		92FE26112A4A6E1600BCDB82 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FE26102A4A6E1600BCDB82 /* BaseCollectionViewCell.swift */; };
 		92FE26132A4B74D800BCDB82 /* ScheduleTypeHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FE26122A4B74D800BCDB82 /* ScheduleTypeHeaderView.swift */; };
 		92FE26152A4B751000BCDB82 /* BaseCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FE26142A4B751000BCDB82 /* BaseCollectionReusableView.swift */; };
-		92FE26172A4B76B800BCDB82 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FE26162A4B76B800BCDB82 /* UIFont.swift */; };
 		F37D62EC0B1A011ED13134F8 /* Pods_MappilogueTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81A821757BF382206BE4FD7A /* Pods_MappilogueTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -286,19 +284,19 @@
 			remoteGlobalIDString = 926998F22A14EC07003DDAD2;
 			remoteInfo = Mappilogue;
 		};
-		92CBB0812B18A16C00587BED /* PBXContainerItemProxy */ = {
+		92CBB2B22B19C11D00587BED /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 92CBB07B2B18A16C00587BED /* MappilgueKit.xcodeproj */;
+			containerPortal = 92CBB2AD2B19C11D00587BED /* MappilogueKit.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 92CBB0472B18994600587BED;
-			remoteInfo = MappilgueKit;
+			remoteGlobalIDString = 92CBB28A2B19C07100587BED;
+			remoteInfo = MappilogueKit;
 		};
-		92CBB0832B18A16C00587BED /* PBXContainerItemProxy */ = {
+		92CBB2B42B19C11D00587BED /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 92CBB07B2B18A16C00587BED /* MappilgueKit.xcodeproj */;
+			containerPortal = 92CBB2AD2B19C11D00587BED /* MappilogueKit.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 92CBB0512B18994600587BED;
-			remoteInfo = MappilgueKitTests;
+			remoteGlobalIDString = 92CBB2942B19C07100587BED;
+			remoteInfo = MappilogueKitTests;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -309,7 +307,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				92CBB0862B18A20800587BED /* MappilgueKit.framework in Embed Frameworks */,
+				92CBB2B72B19C13000587BED /* MappilogueKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -547,7 +545,6 @@
 		9291581B2A2529660022BEF9 /* Pretendard-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.ttf"; sourceTree = "<group>"; };
 		9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.ttf"; sourceTree = "<group>"; };
 		9291581E2A2529660022BEF9 /* Pretendard-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.ttf"; sourceTree = "<group>"; };
-		929158292A252CC20022BEF9 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		929E23142AB737DC003180B3 /* ProfileImageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageDTO.swift; sourceTree = "<group>"; };
 		929E23162AB7F6C4003180B3 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		929E23182AB81E40003180B3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -563,7 +560,7 @@
 		92A7B6672A4E6154009C9293 /* UpcomingScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingScheduleCell.swift; sourceTree = "<group>"; };
 		92C2EC602A6924B5002DB0E3 /* LineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineCell.swift; sourceTree = "<group>"; };
 		92CBB03B2B18905200587BED /* SecureAPIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SecureAPIKeys.plist; path = Resources/SecureAPIKeys.plist; sourceTree = "<group>"; };
-		92CBB07B2B18A16C00587BED /* MappilgueKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MappilgueKit.xcodeproj; path = MappilgueKit/MappilgueKit.xcodeproj; sourceTree = "<group>"; };
+		92CBB2AD2B19C11D00587BED /* MappilogueKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MappilogueKit.xcodeproj; path = MappilogueKit/MappilogueKit.xcodeproj; sourceTree = "<group>"; };
 		92CD36F92A7B505900768B61 /* MyCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCategoryViewController.swift; sourceTree = "<group>"; };
 		92E20F452B137B3600380FA5 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		92E20F482B13B8AB00380FA5 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
@@ -579,7 +576,6 @@
 		92FE26102A4A6E1600BCDB82 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		92FE26122A4B74D800BCDB82 /* ScheduleTypeHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTypeHeaderView.swift; sourceTree = "<group>"; };
 		92FE26142A4B751000BCDB82 /* BaseCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionReusableView.swift; sourceTree = "<group>"; };
-		92FE26162A4B76B800BCDB82 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		C335EE5D808E808B36CCF9CC /* Pods-Mappilogue.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mappilogue.debug.xcconfig"; path = "Target Support Files/Pods-Mappilogue/Pods-Mappilogue.debug.xcconfig"; sourceTree = "<group>"; };
 		C5CC701B6A8E2F772AEB8E9E /* Pods-MappilogueTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MappilogueTests.debug.xcconfig"; path = "Target Support Files/Pods-MappilogueTests/Pods-MappilogueTests.debug.xcconfig"; sourceTree = "<group>"; };
 		DCCDD669BAF4514B461B20ED /* Pods-MappilogueTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MappilogueTests.release.xcconfig"; path = "Target Support Files/Pods-MappilogueTests/Pods-MappilogueTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -596,7 +592,7 @@
 				928B7BDE2A99B50400E4F789 /* KakaoSDKUser in Frameworks */,
 				920031CD2A8B626B00E3170D /* Moya in Frameworks */,
 				920031DE2A8DF62A00E3170D /* Lottie in Frameworks */,
-				92CBB0852B18A20800587BED /* MappilgueKit.framework in Frameworks */,
+				92CBB2B62B19C13000587BED /* MappilogueKit.framework in Frameworks */,
 				928B7BDC2A99B50400E4F789 /* KakaoSDKAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1391,7 +1387,7 @@
 		926998EA2A14EC07003DDAD2 = {
 			isa = PBXGroup;
 			children = (
-				92CBB07B2B18A16C00587BED /* MappilgueKit.xcodeproj */,
+				92CBB2AD2B19C11D00587BED /* MappilogueKit.xcodeproj */,
 				924BE0C92A51AE25002C70FF /* .swiftlint.yml */,
 				926998F52A14EC07003DDAD2 /* Mappilogue */,
 				9269990C2A14EC09003DDAD2 /* MappilogueTests */,
@@ -1486,8 +1482,6 @@
 		926999292A14F11B003DDAD2 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				929158292A252CC20022BEF9 /* UIColor.swift */,
-				92FE26162A4B76B800BCDB82 /* UIFont.swift */,
 				9224FD322A641B64000A56A6 /* UIViewController.swift */,
 				92011C652A78980E009B047F /* UIView.swift */,
 				925840C82A7F805800997434 /* UILabel.swift */,
@@ -1664,11 +1658,11 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		92CBB07C2B18A16C00587BED /* Products */ = {
+		92CBB2AE2B19C11D00587BED /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				92CBB0822B18A16C00587BED /* MappilgueKit.framework */,
-				92CBB0842B18A16C00587BED /* MappilgueKitTests.xctest */,
+				92CBB2B32B19C11D00587BED /* MappilogueKit.framework */,
+				92CBB2B52B19C11D00587BED /* MappilogueKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1831,8 +1825,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 92CBB07C2B18A16C00587BED /* Products */;
-					ProjectRef = 92CBB07B2B18A16C00587BED /* MappilgueKit.xcodeproj */;
+					ProductGroup = 92CBB2AE2B19C11D00587BED /* Products */;
+					ProjectRef = 92CBB2AD2B19C11D00587BED /* MappilogueKit.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1845,18 +1839,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		92CBB0822B18A16C00587BED /* MappilgueKit.framework */ = {
+		92CBB2B32B19C11D00587BED /* MappilogueKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = MappilgueKit.framework;
-			remoteRef = 92CBB0812B18A16C00587BED /* PBXContainerItemProxy */;
+			path = MappilogueKit.framework;
+			remoteRef = 92CBB2B22B19C11D00587BED /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		92CBB0842B18A16C00587BED /* MappilgueKitTests.xctest */ = {
+		92CBB2B52B19C11D00587BED /* MappilogueKitTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = MappilgueKitTests.xctest;
-			remoteRef = 92CBB0832B18A16C00587BED /* PBXContainerItemProxy */;
+			path = MappilogueKitTests.xctest;
+			remoteRef = 92CBB2B42B19C11D00587BED /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -2064,7 +2058,6 @@
 				920031AF2A8B5AF600E3170D /* LocationAPI.swift in Sources */,
 				928B7BFF2A9F2D6600E4F789 /* AuthType.swift in Sources */,
 				920031B22A8B5B4C00E3170D /* LocationManager.swift in Sources */,
-				92FE26172A4B76B800BCDB82 /* UIFont.swift in Sources */,
 				926999422A14F74B003DDAD2 /* CalendarViewController.swift in Sources */,
 				92FE26112A4A6E1600BCDB82 /* BaseCollectionViewCell.swift in Sources */,
 				92A7B6662A4E5B3A009C9293 /* UpcomingSchedule.swift in Sources */,
@@ -2084,7 +2077,6 @@
 				92011C1E2A75EE79009B047F /* MarkView.swift in Sources */,
 				9224FD372A653024000A56A6 /* SpacingView.swift in Sources */,
 				925840AA2A7CC92E00997434 /* CategorySettingCell.swift in Sources */,
-				9291582A2A252CC20022BEF9 /* UIColor.swift in Sources */,
 				9245BC282B0A4D3400383F4D /* CalendarDTO.swift in Sources */,
 				925840CD2A7F8E1C00997434 /* WithdrawalReasonView.swift in Sources */,
 				928B7C162AA1C62400E4F789 /* UserManager.swift in Sources */,
