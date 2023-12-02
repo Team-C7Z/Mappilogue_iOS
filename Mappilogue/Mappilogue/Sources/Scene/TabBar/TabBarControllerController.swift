@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
-    var gatheringToastMessage = GatheringToastMessageView()
+    var gatheringToastMessage = GatheringToastView()
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -7,6 +7,7 @@
 
 import UIKit
 import Photos
+import MappilogueKit
 
 class WriteRecordViewController: BaseViewController {
     private var colorViewModel = ColorViewModel()

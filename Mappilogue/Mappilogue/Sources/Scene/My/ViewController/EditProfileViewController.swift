@@ -7,6 +7,7 @@
 
 import UIKit
 import Photos
+import MappilogueKit
 
 class EditProfileViewController: BaseViewController {
     var userViewModel = UserViewModel()

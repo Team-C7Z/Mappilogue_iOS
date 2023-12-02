@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		923AA0752B1AEC33006028AF /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 923AA0742B1AEC33006028AF /* SnapKit */; };
+		923AA07D2B1B1984006028AF /* GatheringToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923AA07C2B1B1984006028AF /* GatheringToastView.swift */; };
 		92CBB28F2B19C07100587BED /* MappilogueKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = 92CBB28E2B19C07100587BED /* MappilogueKit.docc */; };
 		92CBB2952B19C07100587BED /* MappilogueKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CBB28A2B19C07100587BED /* MappilogueKit.framework */; };
 		92CBB29A2B19C07100587BED /* MappilogueKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CBB2992B19C07100587BED /* MappilogueKitTests.swift */; };
@@ -15,6 +17,9 @@
 		92CBB2D62B19E84900587BED /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CBB2D52B19E84900587BED /* UIFont+Extension.swift */; };
 		92CBB2D82B19EA8800587BED /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CBB2D72B19EA8800587BED /* Color+Extension.swift */; };
 		92CBB2DA2B19EB4D00587BED /* CalendarColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CBB2D92B19EB4D00587BED /* CalendarColor+Extension.swift */; };
+		92D019B42B1A1A9E009C7C3D /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92D019B32B1A1A9E009C7C3D /* Icons.xcassets */; };
+		92D019B82B1AE37A009C7C3D /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D019B72B1AE37A009C7C3D /* AlertViewController.swift */; };
+		92D019BA2B1AE3A0009C7C3D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D019B92B1AE3A0009C7C3D /* Alert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		923AA07C2B1B1984006028AF /* GatheringToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GatheringToastView.swift; path = MappilogueKit/DesignSystem/Sources/Components/Toast/GatheringToastView.swift; sourceTree = SOURCE_ROOT; };
 		92CBB28A2B19C07100587BED /* MappilogueKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MappilogueKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CBB28D2B19C07100587BED /* MappilogueKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MappilogueKit.h; sourceTree = "<group>"; };
 		92CBB28E2B19C07100587BED /* MappilogueKit.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = MappilogueKit.docc; sourceTree = "<group>"; };
@@ -37,6 +43,9 @@
 		92CBB2D52B19E84900587BED /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		92CBB2D72B19EA8800587BED /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		92CBB2D92B19EB4D00587BED /* CalendarColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarColor+Extension.swift"; sourceTree = "<group>"; };
+		92D019B32B1A1A9E009C7C3D /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
+		92D019B72B1AE37A009C7C3D /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		92D019B92B1AE3A0009C7C3D /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				923AA0752B1AEC33006028AF /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +68,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		923AA0792B1AF060006028AF /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				923AA07C2B1B1984006028AF /* GatheringToastView.swift */,
+			);
+			name = Toast;
+			path = "쌤ㄴㅅ";
+			sourceTree = "<group>";
+		};
 		92CBB2802B19C07100587BED = {
 			isa = PBXGroup;
 			children = (
@@ -106,6 +125,7 @@
 		92CBB2C02B19C47F00587BED /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				92D019B22B1A1A4A009C7C3D /* Icons */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -115,6 +135,7 @@
 			children = (
 				92CBB2D32B19E80E00587BED /* Colors */,
 				92CBB2D42B19E81A00587BED /* Fonts */,
+				92D019B52B1A2013009C7C3D /* Components */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -135,6 +156,32 @@
 				92CBB2D52B19E84900587BED /* UIFont+Extension.swift */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		92D019B22B1A1A4A009C7C3D /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				92D019B32B1A1A9E009C7C3D /* Icons.xcassets */,
+			);
+			path = Icons;
+			sourceTree = "<group>";
+		};
+		92D019B52B1A2013009C7C3D /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				92D019B62B1A2B3B009C7C3D /* Alert */,
+				923AA0792B1AF060006028AF /* Toast */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		92D019B62B1A2B3B009C7C3D /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				92D019B92B1AE3A0009C7C3D /* Alert.swift */,
+				92D019B72B1AE37A009C7C3D /* AlertViewController.swift */,
+			);
+			path = Alert;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,6 +212,9 @@
 			dependencies = (
 			);
 			name = MappilogueKit;
+			packageProductDependencies = (
+				923AA0742B1AEC33006028AF /* SnapKit */,
+			);
 			productName = MappilogueKit;
 			productReference = 92CBB28A2B19C07100587BED /* MappilogueKit.framework */;
 			productType = "com.apple.product-type.framework";
@@ -214,6 +264,9 @@
 				Base,
 			);
 			mainGroup = 92CBB2802B19C07100587BED;
+			packageReferences = (
+				923AA0732B1AEC33006028AF /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 92CBB28B2B19C07100587BED /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -229,6 +282,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92D019B42B1A1A9E009C7C3D /* Icons.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,10 +301,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				92CBB2D62B19E84900587BED /* UIFont+Extension.swift in Sources */,
+				92D019B82B1AE37A009C7C3D /* AlertViewController.swift in Sources */,
+				923AA07D2B1B1984006028AF /* GatheringToastView.swift in Sources */,
 				92CBB2D82B19EA8800587BED /* Color+Extension.swift in Sources */,
 				92CBB2DA2B19EB4D00587BED /* CalendarColor+Extension.swift in Sources */,
 				92CBB28F2B19C07100587BED /* MappilogueKit.docc in Sources */,
 				92CBB2C32B19C4B600587BED /* UIColor+Extension.swift in Sources */,
+				92D019BA2B1AE3A0009C7C3D /* Alert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,6 +575,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		923AA0732B1AEC33006028AF /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		923AA0742B1AEC33006028AF /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 923AA0732B1AEC33006028AF /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 92CBB2812B19C07100587BED /* Project object */;
 }

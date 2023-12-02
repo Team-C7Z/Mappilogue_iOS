@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class AddScheduleViewController: BaseViewController {
     private var colorViewModel = ColorViewModel()

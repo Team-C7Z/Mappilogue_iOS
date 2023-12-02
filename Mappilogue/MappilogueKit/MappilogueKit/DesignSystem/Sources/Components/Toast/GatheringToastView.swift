@@ -1,21 +1,31 @@
 //
-//  GatheringToastMessageView.swift
-//  Mappilogue
+//  GatheringToastView.swift
+//  MappilogueKit
 //
-//  Created by hyemi on 2023/07/23.
+//  Created by hyemi on 2023/12/02.
 //
 
 import UIKit
 
-class GatheringToastMessageView: BaseView {
+public class GatheringToastView: UIView {
     private let toastMessageView = UIView()
     private let toastMessageImage = UIImageView()
     private let toastMessageLabel = UILabel()
     private let toastMessageArrow = UIImageView()
 
-    override func setupProperty() {
-        super.setupProperty()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
+        setupProperty()
+        setupHierarchy()
+        setupLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupProperty() {
         toastMessageView.layer.cornerRadius = 12
         toastMessageView.backgroundColor = .gray404040
         toastMessageImage.image = UIImage(named: "toastMessage")
@@ -25,18 +35,14 @@ class GatheringToastMessageView: BaseView {
         toastMessageArrow.image = UIImage(named: "toastMessageArrow")
     }
     
-    override func setupHierarchy() {
-        super.setupHierarchy()
-        
+    func setupHierarchy() {
         addSubview(toastMessageView)
         toastMessageView.addSubview(toastMessageImage)
         toastMessageView.addSubview(toastMessageLabel)
         addSubview(toastMessageArrow)
     }
     
-    override func setupLayout() {
-        super.setupLayout()
-        
+    func setupLayout() {
         toastMessageView.snp.makeConstraints {
             $0.bottom.equalTo(toastMessageArrow.snp.top).offset(4)
             $0.centerX.equalToSuperview()
