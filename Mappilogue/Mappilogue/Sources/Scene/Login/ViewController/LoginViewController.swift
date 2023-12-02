@@ -10,13 +10,14 @@ import KakaoSDKAuth
 import KakaoSDKUser
 import KakaoSDKCommon
 import AuthenticationServices
+import MappilogueKit
 
 class LoginViewController: BaseViewController {
     private var isAlarmAccept: ActiveStatus = .inactive
     
     private let logoImage = UIImageView()
-    private let kakaoLoginButton = UIButton()
-    private let appleLoginButton = UIButton()
+    private let kakaoLoginButton = KakaoLoginButton()
+    private let appleLoginButton = AppleLoginButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +30,8 @@ class LoginViewController: BaseViewController {
     
         logoImage.image = UIImage(named: "common_logo")
         
-        kakaoLoginButton.setImage(UIImage(named: "login_kakao"), for: .normal)
         kakaoLoginButton.addTarget(self, action: #selector(kakaoLoginButtonTapped), for: .touchUpInside)
-        appleLoginButton.setImage(UIImage(named: "login_apple"), for: .normal)
+     
         appleLoginButton.addTarget(self, action: #selector(appleLoginButtonTapped), for: .touchUpInside)
     }
     
@@ -57,14 +57,12 @@ class LoginViewController: BaseViewController {
             $0.bottom.equalTo(appleLoginButton.snp.top).offset(-8)
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().offset(-16)
-            $0.height.equalTo(54)
         }
         
         appleLoginButton.snp.makeConstraints {
             $0.bottom.equalToSuperview().offset(-110)
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().offset(-16)
-            $0.height.equalTo(54)
         }
     }
     
@@ -159,7 +157,6 @@ extension LoginViewController {
         }
     }
 }
-
 
 extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding{
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {

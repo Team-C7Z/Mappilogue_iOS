@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class OnboardingViewController: BaseViewController {
     private let onboardingPages = [
@@ -43,8 +44,8 @@ class OnboardingViewController: BaseViewController {
         
         pageControl.numberOfPages = onboardingPages.count
         pageControl.currentPage = currentPage
-        pageControl.setCurrentPageIndicatorImage(UIImage(named: "currentPageIndicator"), forPage: currentPage)
-        pageControl.preferredIndicatorImage = UIImage(named: "pageIndicator")
+        pageControl.setCurrentPageIndicatorImage(Images.image(named: .onboardingCurrentPage), forPage: currentPage)
+        pageControl.preferredIndicatorImage = Images.image(named: .onboardingPage)
         pageControl.pageIndicatorTintColor = .grayC9C6C2
         pageControl.currentPageIndicatorTintColor = .green2EBD3D
         pageControl.isUserInteractionEnabled = false

@@ -28,11 +28,11 @@ public class GatheringToastView: UIView {
     func setupProperty() {
         toastMessageView.layer.cornerRadius = 12
         toastMessageView.backgroundColor = .gray404040
-        toastMessageImage.image = Images.images.toastGathering
+        toastMessageImage.image = Images.image(named: .toastGathering)
         toastMessageLabel.text = "모임 기능은 나중에 만나요!"
         toastMessageLabel.textColor = .whiteFFFFFF
         toastMessageLabel.font = .body02
-        toastMessageArrow.image = Images.images.toastGatheringArrow
+        toastMessageArrow.image = Images.image(named: .toastGatheringArrow)
     }
     
     func setupHierarchy() {

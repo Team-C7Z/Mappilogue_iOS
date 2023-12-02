@@ -28,7 +28,7 @@ public class DeleteToastView: UIView {
     func setupProperty() {
         toastMessageView.layer.cornerRadius = 12
         toastMessageView.backgroundColor = .gray404040
-        toastMessageImage.image = Images.images.toastDelete
+        toastMessageImage.image = Images.image(named: .toastDelete)
         toastMessageLabel.text = "일정이 삭제되었어요"
         toastMessageLabel.textColor = .whiteFFFFFF
         toastMessageLabel.font = .body02
