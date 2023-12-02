@@ -7,6 +7,7 @@
 
 import UIKit
 import KakaoSDKUser
+import MappilogueKit
 
 struct MyInfo {
     var image: String

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class ScheduleDetailViewController: BaseViewController {
     let calendarViewModel = CalendarViewModel()

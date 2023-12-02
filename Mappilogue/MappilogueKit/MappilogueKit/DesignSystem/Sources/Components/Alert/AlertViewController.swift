@@ -1,24 +1,16 @@
 //
 //  AlertViewController.swift
-//  Mappilogue
+//  MappilogueKit
 //
-//  Created by hyemi on 2023/07/26.
+//  Created by hyemi on 2023/12/02.
 //
 
 import UIKit
+import SnapKit
 
-struct Alert {
-    var titleText: String
-    var messageText: String?
-    var cancelText: String
-    var doneText: String
-    var buttonColor: UIColor
-    var alertHeight: CGFloat
-}
-
-class AlertViewController: BaseViewController {
-    var onCancelTapped: (() -> Void)?
-    var onDoneTapped: (() -> Void)?
+public class AlertViewController: UIViewController {
+    public var onCancelTapped: (() -> Void)?
+    public var onDoneTapped: (() -> Void)?
     
     private let alertView = UIView()
     private let titleLabel = UILabel()
@@ -26,14 +18,15 @@ class AlertViewController: BaseViewController {
     private let cancelButton = UIButton()
     private let doneButton = UIButton()
     
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
 
+        setupProperty()
+        setupHierarchy()
+        setupLayout()
     }
     
-    override func setupProperty() {
-        super.setupProperty()
-        
+    func setupProperty() {
         view.backgroundColor = .gray404040.withAlphaComponent(0.1)
         
         alertView.layer.cornerRadius = 12
@@ -59,9 +52,7 @@ class AlertViewController: BaseViewController {
         doneButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
     }
     
-    override func setupHierarchy() {
-        super.setupHierarchy()
-        
+    func setupHierarchy() {
         view.addSubview(alertView)
         alertView.addSubview(titleLabel)
         alertView.addSubview(messageLabel)
@@ -69,9 +60,7 @@ class AlertViewController: BaseViewController {
         alertView.addSubview(doneButton)
     }
     
-    override func setupLayout() {
-        super.setupLayout()
-        
+    func setupLayout() {
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(alertView).offset(32)
             $0.centerX.equalTo(alertView)
@@ -109,7 +98,7 @@ class AlertViewController: BaseViewController {
         }
     }
     
-    func configureAlert(with alert: Alert) {
+    public func configureAlert(with alert: Alert) {
         titleLabel.text = alert.titleText
         messageLabel.text = alert.messageText
         cancelButton.setTitle(alert.cancelText, for: .normal)
