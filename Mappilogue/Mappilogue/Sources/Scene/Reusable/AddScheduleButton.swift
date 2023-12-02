@@ -2,23 +2,19 @@
 //  AddScheduleButton.swift
 //  Mappilogue
 //
-//  Created by hyemi on 2023/07/13.
+//  Created by hyemi on 2023/12/02.
 //
 
 import UIKit
 
 class AddScheduleButton: UIButton {
-    init() {
-        super.init(frame: .zero)
-        
-        setImage(UIImage(named: "addSchedule"), for: .normal)
-    
-        self.snp.makeConstraints {
-            $0.width.height.equalTo(56)
-        }
+
+    /*
+    // Only override draw() if you perform custom drawing.
+    // An empty implementation adversely affects performance during animation.
+    override func draw(_ rect: CGRect) {
+        // Drawing code
     }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
+    */
+
 }
