@@ -100,7 +100,6 @@
 		9224FCF52A5D6C65000A56A6 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */; };
 		9224FCF72A5FC4CA000A56A6 /* ScheduleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF62A5FC4CA000A56A6 /* ScheduleDetailViewController.swift */; };
 		9224FCF92A5FCF72000A56A6 /* ScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCF82A5FCF72000A56A6 /* ScheduleCell.swift */; };
-		9224FCFB2A5FDD90000A56A6 /* AddScheduleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCFA2A5FDD90000A56A6 /* AddScheduleButton.swift */; };
 		9224FCFD2A5FF185000A56A6 /* AddScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCFC2A5FF185000A56A6 /* AddScheduleViewController.swift */; };
 		9224FD032A600ACF000A56A6 /* ScheduleDurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD022A600ACF000A56A6 /* ScheduleDurationView.swift */; };
 		9224FD052A600F42000A56A6 /* NotificationRepeatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD042A600F42000A56A6 /* NotificationRepeatButton.swift */; };
@@ -128,6 +127,7 @@
 		9230BE492A58D23B0053E535 /* NavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BE482A58D23B0053E535 /* NavigationBarViewController.swift */; };
 		9230BE512A59B45D0053E535 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230BE502A59B45D0053E535 /* CalendarViewModel.swift */; };
 		923AA0982B1B3C27006028AF /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 923AA0972B1B3C27006028AF /* SnapKit */; };
+		923AA0A52B1B6E88006028AF /* AddScheduleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923AA0A42B1B6E88006028AF /* AddScheduleButton.swift */; };
 		92459ED82A52494200493941 /* AddMarkedRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92459ED72A52494200493941 /* AddMarkedRecordCell.swift */; };
 		92459EDA2A530D1100493941 /* MarkedRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92459ED92A530D1100493941 /* MarkedRecordCell.swift */; };
 		9245BBC82AFB926900383F4D /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BBC72AFB926900383F4D /* CategoryViewModel.swift */; };
@@ -238,7 +238,6 @@
 		929E23192AB81E40003180B3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 929E23182AB81E40003180B3 /* GoogleService-Info.plist */; };
 		929E231C2AB81EB1003180B3 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 929E231B2AB81EB1003180B3 /* FirebaseMessaging */; };
 		929E23212AB83920003180B3 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23202AB83920003180B3 /* Auth.swift */; };
-		92A7B64F2A4CCE29009C9293 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B64E2A4CCE29009C9293 /* AddButton.swift */; };
 		92A7B6592A4D01B3009C9293 /* TodayScheduleInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6582A4D01B3009C9293 /* TodayScheduleInfoCell.swift */; };
 		92A7B65F2A4E07DB009C9293 /* TodayScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B65E2A4E07DB009C9293 /* TodayScheduleCell.swift */; };
 		92A7B6612A4E2039009C9293 /* BaseTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6602A4E2039009C9293 /* BaseTableViewHeaderFooterView.swift */; };
@@ -409,7 +408,6 @@
 		9224FCF42A5D6C65000A56A6 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		9224FCF62A5FC4CA000A56A6 /* ScheduleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailViewController.swift; sourceTree = "<group>"; };
 		9224FCF82A5FCF72000A56A6 /* ScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCell.swift; sourceTree = "<group>"; };
-		9224FCFA2A5FDD90000A56A6 /* AddScheduleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleButton.swift; sourceTree = "<group>"; };
 		9224FCFC2A5FF185000A56A6 /* AddScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleViewController.swift; sourceTree = "<group>"; };
 		9224FD022A600ACF000A56A6 /* ScheduleDurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDurationView.swift; sourceTree = "<group>"; };
 		9224FD042A600F42000A56A6 /* NotificationRepeatButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRepeatButton.swift; sourceTree = "<group>"; };
@@ -436,6 +434,7 @@
 		9230BE462A57FEB80053E535 /* DayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayCell.swift; sourceTree = "<group>"; };
 		9230BE482A58D23B0053E535 /* NavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarViewController.swift; sourceTree = "<group>"; };
 		9230BE502A59B45D0053E535 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
+		923AA0A42B1B6E88006028AF /* AddScheduleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleButton.swift; sourceTree = "<group>"; };
 		92459ED72A52494200493941 /* AddMarkedRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMarkedRecordCell.swift; sourceTree = "<group>"; };
 		92459ED92A530D1100493941 /* MarkedRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkedRecordCell.swift; sourceTree = "<group>"; };
 		92459EDB2A53158A00493941 /* MarkedRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkedRecord.swift; sourceTree = "<group>"; };
@@ -547,7 +546,6 @@
 		929E231D2AB81EEE003180B3 /* Mappilogue.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Mappilogue.entitlements; sourceTree = "<group>"; };
 		929E23202AB83920003180B3 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		92A7B64B2A4CC0E6009C9293 /* HomeEmptyScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEmptyScheduleCell.swift; sourceTree = "<group>"; };
-		92A7B64E2A4CCE29009C9293 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		92A7B6582A4D01B3009C9293 /* TodayScheduleInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayScheduleInfoCell.swift; sourceTree = "<group>"; };
 		92A7B65E2A4E07DB009C9293 /* TodayScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayScheduleCell.swift; sourceTree = "<group>"; };
 		92A7B6602A4E2039009C9293 /* BaseTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
@@ -1618,8 +1616,6 @@
 		92A7B64D2A4CCDB7009C9293 /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
-				92A7B64E2A4CCE29009C9293 /* AddButton.swift */,
-				9224FCFA2A5FDD90000A56A6 /* AddScheduleButton.swift */,
 				9224FD082A601B00000A56A6 /* ColorSelectionButton.swift */,
 				92011C192A755D02009B047F /* MyRecordButton.swift */,
 				92011B272A6E75F1009B047F /* WriteRecordButton.swift */,
@@ -1629,6 +1625,7 @@
 				92011C672A78CB24009B047F /* InputAlertViewController.swift */,
 				925840CE2A7FCB5400997434 /* ScheduleTitleColorView.swift */,
 				920031F02A918B4700E3170D /* CustomNavigationBar.swift */,
+				923AA0A42B1B6E88006028AF /* AddScheduleButton.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -2113,6 +2110,7 @@
 				92A7B6612A4E2039009C9293 /* BaseTableViewHeaderFooterView.swift in Sources */,
 				92011B812A7271D0009B047F /* CategoryButton.swift in Sources */,
 				92011C122A74F8E6009B047F /* SearchRecordCell.swift in Sources */,
+				923AA0A52B1B6E88006028AF /* AddScheduleButton.swift in Sources */,
 				92139D932AB2C842005344AE /* AnnouncementContentCell.swift in Sources */,
 				92F00AB32AF4B996001FE43F /* AddCategoryDTO.swift in Sources */,
 				928B7BF52A9CA51500E4F789 /* ErrorDTO.swift in Sources */,
@@ -2183,7 +2181,6 @@
 				928B7C072A9FA90500E4F789 /* BaseManager.swift in Sources */,
 				920031C12A8B5D0800E3170D /* MainLocationSettingView.swift in Sources */,
 				92011B922A7367E6009B047F /* MainLocationButton.swift in Sources */,
-				9224FCFB2A5FDD90000A56A6 /* AddScheduleButton.swift in Sources */,
 				92E7814E2A850316000DAACD /* Date.swift in Sources */,
 				92011CB92A7A1718009B047F /* MyRecordViewController.swift in Sources */,
 				925840A42A7C890100997434 /* CategorySelectionCell.swift in Sources */,
@@ -2232,7 +2229,6 @@
 				920031D52A8D021000E3170D /* KakaoSerachDTO.swift in Sources */,
 				92011B282A6E75F1009B047F /* WriteRecordButton.swift in Sources */,
 				92F00AB12AF4B897001FE43F /* CategoryManager.swift in Sources */,
-				92A7B64F2A4CCE29009C9293 /* AddButton.swift in Sources */,
 				92011C182A753AEB009B047F /* CALayer.swift in Sources */,
 				92011B702A70E7D8009B047F /* BottomSheetViewController.swift in Sources */,
 				92011B7F2A726031009B047F /* WriteRecordViewController.swift in Sources */,

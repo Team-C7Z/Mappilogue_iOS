@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class MaredRecordsFooterView: BaseTableViewHeaderFooterView {
     static let registerId = "\(MaredRecordsFooterView.self)"
@@ -14,7 +15,7 @@ class MaredRecordsFooterView: BaseTableViewHeaderFooterView {
     var onMarkedRecord: (() -> Void)?
     var onAddRecord: (() -> Void)?
     
-    private let addScheduleButton = AddButton(text: "일정 추가하기", backgroundColor: .black1C1C1C)
+    private let addScheduleButton = AddButton(title: "일정 추가하기")
     
     let dummyMarkedData = dummyMarkedRecordData(markedRecordCount: 1         )
     let limitedMarkedRecordsCount = 3
@@ -63,7 +64,6 @@ class MaredRecordsFooterView: BaseTableViewHeaderFooterView {
         
         addScheduleButton.snp.makeConstraints {
             $0.leading.top.trailing.equalTo(contentView)
-            $0.height.equalTo(53)
         }
         
         markedRecordsLabel.snp.makeConstraints {
