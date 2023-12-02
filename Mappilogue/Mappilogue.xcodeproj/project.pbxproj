@@ -44,7 +44,6 @@
 		9200320F2A99A3A800E3170D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9200320E2A99A3A800E3170D /* LoginViewController.swift */; };
 		92011B282A6E75F1009B047F /* WriteRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B272A6E75F1009B047F /* WriteRecordButton.swift */; };
 		92011B702A70E7D8009B047F /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */; };
-		92011B722A7127FC009B047F /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B712A7127FC009B047F /* AlertViewController.swift */; };
 		92011B752A7138B0009B047F /* EmptyRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B742A7138B0009B047F /* EmptyRecordCell.swift */; };
 		92011B782A71683E009B047F /* SelectWriteRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B772A71683E009B047F /* SelectWriteRecordViewController.swift */; };
 		92011B7B2A716C9D009B047F /* SelectScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B7A2A716C9D009B047F /* SelectScheduleCell.swift */; };
@@ -177,7 +176,6 @@
 		9263786B2A546BDE004E5B6E /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9263786A2A546BDE004E5B6E /* OnboardingViewController.swift */; };
 		9263786E2A5475AF004E5B6E /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9263786D2A5475AF004E5B6E /* OnboardingCell.swift */; };
 		926378712A54E0E6004E5B6E /* RootUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926378702A54E0E6004E5B6E /* RootUserDefaults.swift */; };
-		926382B42A6CC9760064C1A8 /* GatheringToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926382B32A6CC9760064C1A8 /* GatheringToastMessageView.swift */; };
 		926382B62A6D03850064C1A8 /* CalendarEmptyScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926382B52A6D03850064C1A8 /* CalendarEmptyScheduleCell.swift */; };
 		926998F72A14EC07003DDAD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926998F62A14EC07003DDAD2 /* AppDelegate.swift */; };
 		926998F92A14EC07003DDAD2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926998F82A14EC07003DDAD2 /* SceneDelegate.swift */; };
@@ -234,7 +232,6 @@
 		929158242A2529660022BEF9 /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581B2A2529660022BEF9 /* Pretendard-Medium.ttf */; };
 		929158252A2529660022BEF9 /* Pretendard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */; };
 		929158272A2529660022BEF9 /* Pretendard-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581E2A2529660022BEF9 /* Pretendard-SemiBold.ttf */; };
-		929158302A2537E40022BEF9 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9291582F2A2537E40022BEF9 /* SnapKit */; };
 		929E23152AB737DC003180B3 /* ProfileImageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23142AB737DC003180B3 /* ProfileImageDTO.swift */; };
 		929E23172AB7F6C4003180B3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23162AB7F6C4003180B3 /* Utils.swift */; };
 		929E23192AB81E40003180B3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 929E23182AB81E40003180B3 /* GoogleService-Info.plist */; };
@@ -355,7 +352,6 @@
 		9200320E2A99A3A800E3170D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		92011B272A6E75F1009B047F /* WriteRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordButton.swift; sourceTree = "<group>"; };
 		92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
-		92011B712A7127FC009B047F /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		92011B742A7138B0009B047F /* EmptyRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyRecordCell.swift; sourceTree = "<group>"; };
 		92011B772A71683E009B047F /* SelectWriteRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWriteRecordViewController.swift; sourceTree = "<group>"; };
 		92011B7A2A716C9D009B047F /* SelectScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectScheduleCell.swift; sourceTree = "<group>"; };
@@ -487,7 +483,6 @@
 		9263786A2A546BDE004E5B6E /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		9263786D2A5475AF004E5B6E /* OnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
 		926378702A54E0E6004E5B6E /* RootUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootUserDefaults.swift; sourceTree = "<group>"; };
-		926382B32A6CC9760064C1A8 /* GatheringToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatheringToastMessageView.swift; sourceTree = "<group>"; };
 		926382B52A6D03850064C1A8 /* CalendarEmptyScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEmptyScheduleCell.swift; sourceTree = "<group>"; };
 		926998F32A14EC07003DDAD2 /* Mappilogue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mappilogue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		926998F62A14EC07003DDAD2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -586,7 +581,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				929158302A2537E40022BEF9 /* SnapKit in Frameworks */,
 				520E9D02714F72A41E207B62 /* Pods_Mappilogue.framework in Frameworks */,
 				929E231C2AB81EB1003180B3 /* FirebaseMessaging in Frameworks */,
 				928B7BDE2A99B50400E4F789 /* KakaoSDKUser in Frameworks */,
@@ -1170,14 +1164,6 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		9245BC052B08C41F00383F4D /* View */ = {
-			isa = PBXGroup;
-			children = (
-				926382B32A6CC9760064C1A8 /* GatheringToastMessageView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		9245BC062B08C42B00383F4D /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1566,7 +1552,6 @@
 			isa = PBXGroup;
 			children = (
 				9245BC042B08C41700383F4D /* ViewController */,
-				9245BC052B08C41F00383F4D /* View */,
 			);
 			path = Gathering;
 			sourceTree = "<group>";
@@ -1639,7 +1624,6 @@
 				925840DA2A82144A00997434 /* EditViewController.swift */,
 				92011C1D2A75EE79009B047F /* MarkView.swift */,
 				920031D22A8C832300E3170D /* SearchBar.swift */,
-				92011B712A7127FC009B047F /* AlertViewController.swift */,
 				92011C672A78CB24009B047F /* InputAlertViewController.swift */,
 				925840CE2A7FCB5400997434 /* ScheduleTitleColorView.swift */,
 				920031F02A918B4700E3170D /* CustomNavigationBar.swift */,
@@ -1732,7 +1716,6 @@
 			);
 			name = Mappilogue;
 			packageProductDependencies = (
-				9291582F2A2537E40022BEF9 /* SnapKit */,
 				920031CC2A8B626B00E3170D /* Moya */,
 				920031DD2A8DF62A00E3170D /* Lottie */,
 				928B7BDB2A99B50400E4F789 /* KakaoSDKAuth */,
@@ -2035,7 +2018,6 @@
 				920031BF2A8B5CD600E3170D /* MainLocationAlertViewController.swift in Sources */,
 				9245BC2C2B0BBBFF00383F4D /* ScheduleDetailDTO.swift in Sources */,
 				9224FCF52A5D6C65000A56A6 /* DatePickerViewController.swift in Sources */,
-				926382B42A6CC9760064C1A8 /* GatheringToastMessageView.swift in Sources */,
 				925840D12A7FCE6800997434 /* AddScheduleHeaderView.swift in Sources */,
 				925840A82A7CBF3B00997434 /* CategorySelectionLabelCell.swift in Sources */,
 				928B7BFB2A9DC55600E4F789 /* AuthUserDefaults.swift in Sources */,
@@ -2152,7 +2134,6 @@
 				926378712A54E0E6004E5B6E /* RootUserDefaults.swift in Sources */,
 				925840CF2A7FCB5400997434 /* ScheduleTitleColorView.swift in Sources */,
 				92139D872AB1BB2D005344AE /* Notification.swift in Sources */,
-				92011B722A7127FC009B047F /* AlertViewController.swift in Sources */,
 				9224FCFD2A5FF185000A56A6 /* AddScheduleViewController.swift in Sources */,
 				9224FD252A638F01000A56A6 /* RepeatType.swift in Sources */,
 				92E781522A85381D000DAACD /* String.swift in Sources */,
@@ -2655,11 +2636,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 928B7BDA2A99B50400E4F789 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
 			productName = KakaoSDKUser;
-		};
-		9291582F2A2537E40022BEF9 /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9291582E2A2537E40022BEF9 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
 		};
 		929E231B2AB81EB1003180B3 /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;

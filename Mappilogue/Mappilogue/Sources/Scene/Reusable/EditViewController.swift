@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class EditViewController: BaseViewController {
     var alert: Alert?

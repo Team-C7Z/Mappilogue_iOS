@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class MyRecordContentViewController: BaseViewController {
     var schedule = Schedule2222()

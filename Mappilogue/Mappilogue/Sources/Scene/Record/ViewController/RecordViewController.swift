@@ -7,6 +7,7 @@
 
 import UIKit
 import NMapsMap
+import MappilogueKit
 
 class RecordViewController: NavigationBarViewController {
     let dummyCategory: [Category] = []

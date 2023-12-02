@@ -7,6 +7,7 @@
 
 import UIKit
 import NMapsMap
+import MappilogueKit
 
 class MapMainLocationViewController: BaseViewController {
     var onSelectedMapLocation: ((String) -> Void)?
