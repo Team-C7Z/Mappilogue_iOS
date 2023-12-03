@@ -1,5 +1,5 @@
 //
-//  MyRecordContentTextView.swift
+//  ContentTextView.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/09/10.

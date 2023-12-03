@@ -1,5 +1,5 @@
 //
-//  ContentImageView.swift
+//  WrtieContentImageView.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/09/09.

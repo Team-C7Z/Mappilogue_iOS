@@ -52,6 +52,10 @@ class NavigationBarViewController: BaseViewController {
             self.popNavigationController()
         }
         
+        setDefaultPopBar(title: title)
+    }
+    
+    func setDefaultPopBar(title: String) {
         popBar.configure(title: title)
         
         view.addSubview(popBar)
@@ -86,6 +90,10 @@ class NavigationBarViewController: BaseViewController {
     
     func setPopMenuBar(title: String) {
         popMenuBar.configure(title: title)
+        
+        popMenuBar.onPopButtonTapped = {
+            self.popNavigationController()
+        }
         
         view.addSubview(popMenuBar)
         

@@ -1,5 +1,5 @@
 //
-//  MyRecordContentViewController.swift
+//  ContentViewController.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/08/17.
@@ -8,7 +8,7 @@
 import UIKit
 import MappilogueKit
 
-class ContentViewController: BaseViewController {
+class ContentViewController: NavigationBarViewController {
     var schedule = Schedule2222()
     var isNewWrite: Bool = false
     
@@ -17,7 +17,7 @@ class ContentViewController: BaseViewController {
     private let stackView = UIStackView()
     private let recordContentHeaderView = MyRecordContentHeaderView()
     private let myRecordContentImageView = MyRecordContentImageView()
-    private let myRecordContentTextView = MyRecordContentTextView()
+    private let contentTextView = ContentTextView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,8 +27,10 @@ class ContentViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationTitleAndItems(imageName: "menu", action: #selector(menuButtonTapped), isLeft: false)
-        setNavigationTitleAndBackButton("나의 기록", backButtonAction: isNewWrite ? #selector(navigateToMyCategoryViewController) : #selector(backButtonTapped))
+        setPopMenuBar(title: "나의 기록")
+        popMenuBar.onMenuButtonTapped = {
+            self.menuButtonTapped()
+        }
         
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
@@ -38,8 +40,8 @@ class ContentViewController: BaseViewController {
         if let images = schedule.image {
             myRecordContentImageView.configure(images, size: view.frame.width - 32)
         }
-        myRecordContentTextView.configure(schedule.content ?? "", width: view.frame.width - 32)
-        myRecordContentTextView.stackViewHeightUpdated = {
+        contentTextView.configure(schedule.content ?? "", width: view.frame.width - 32)
+        contentTextView.stackViewHeightUpdated = {
             self.stackView.layoutIfNeeded()
         }
     }
@@ -52,14 +54,15 @@ class ContentViewController: BaseViewController {
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(recordContentHeaderView)
         stackView.addArrangedSubview(myRecordContentImageView)
-        stackView.addArrangedSubview(myRecordContentTextView)
+        stackView.addArrangedSubview(contentTextView)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
         scrollView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(88)
+            $0.leading.bottom.trailing.equalToSuperview()
         }
         
         contentView.snp.makeConstraints {
@@ -107,7 +110,7 @@ class ContentViewController: BaseViewController {
     
     private func deleteRecord() {
         if isNewWrite {
-            if let viewControllerToPopTo = navigationController?.viewControllers.first(where: { $0 is SelectWriteRecordViewController }) {
+            if let viewControllerToPopTo = navigationController?.viewControllers.first(where: { $0 is WriteListRecordViewController }) {
                 
                 navigationController?.popToViewController(viewControllerToPopTo, animated: true)
             }

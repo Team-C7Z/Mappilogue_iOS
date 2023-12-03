@@ -29,6 +29,8 @@ public class LogoNotificationBar: UIView {
         backgroundColor = .grayF9F8F7
         
         logoImage.image = Icons.icon(named: .logo)
+        logoImage.contentMode = .scaleAspectFit
+        
         notificationButton.setImage(Icons.icon(named: .notificationDefault), for: .normal)
         notificationButton.addTarget(self, action: #selector(notificationButtonTapped), for: .touchUpInside)
     }

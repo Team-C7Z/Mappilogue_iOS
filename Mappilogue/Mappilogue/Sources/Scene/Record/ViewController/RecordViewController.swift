@@ -66,6 +66,7 @@ class RecordViewController: NavigationBarViewController {
     override func setupProperty() {
         super.setupProperty()
         
+        setNotificationBar(title: "기록")
         setMapView()
         setBottomSheetHeight()
      
@@ -99,8 +100,8 @@ class RecordViewController: NavigationBarViewController {
         super.setupLayout()
         
         mapView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(88)
+            $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-40)
         }
         
@@ -283,7 +284,7 @@ class RecordViewController: NavigationBarViewController {
     }
     
     @objc private func writeRecordButtonTapped() {
-        let selectWriteRecordViewController = SelectWriteRecordViewController()
+        let selectWriteRecordViewController = WriteListRecordViewController()
         selectWriteRecordViewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(selectWriteRecordViewController, animated: true)
     }

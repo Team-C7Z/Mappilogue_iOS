@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InquiryViewController: BaseViewController {
+class InquiryViewController: NavigationBarViewController {
     private let email = "mappilogue@naver.com"
     
     private let inquiryTitleLabel = UILabel()
@@ -26,7 +26,7 @@ class InquiryViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationTitleAndBackButton("문의하기", backButtonAction: #selector(backButtonTapped))
+        setPopBar(title: "문의하기")
         
         inquiryTitleLabel.text = "여러분의 이야기를 기다려요"
         inquiryTitleLabel.textColor = .black1C1C1C
@@ -62,7 +62,7 @@ class InquiryViewController: BaseViewController {
         super.setupLayout()
         
         inquiryTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            $0.top.equalToSuperview().offset(98)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
         }
         

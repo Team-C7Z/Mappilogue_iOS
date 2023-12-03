@@ -9,7 +9,7 @@ import UIKit
 import Photos
 import MappilogueKit
 
-class EditProfileViewController: BaseViewController {
+class EditProfileViewController: NavigationBarViewController {
     var userViewModel = UserViewModel()
     
     private let profileImageButton = UIButton()
@@ -33,7 +33,7 @@ class EditProfileViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationTitleAndBackButton("프로필 편집", backButtonAction: #selector(backButtonTapped))
+        setPopBar(title: "프로필 편집")
         
         profileImageButton.addTarget(self, action: #selector(profileImageButtonTapped), for: .touchUpInside)
         
