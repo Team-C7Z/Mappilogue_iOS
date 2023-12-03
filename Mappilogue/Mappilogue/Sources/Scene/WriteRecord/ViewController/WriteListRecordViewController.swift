@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SelectWriteRecordViewController: BaseViewController {
+class WriteListRecordViewController: NavigationBarViewController {
     var dummyData = dummyScheduleData()
     
     private lazy var collectionView: UICollectionView = {
@@ -35,7 +35,7 @@ class SelectWriteRecordViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationTitleAndBackButton("기록 쓰기", backButtonAction: #selector(backButtonTapped))
+        setPopBar(title: "기록 쓰기")
         
         newWriteButton.addTarget(self, action: #selector(newWriteButtonTapped), for: .touchUpInside)
     }
@@ -51,7 +51,8 @@ class SelectWriteRecordViewController: BaseViewController {
         super.setupLayout()
         
         collectionView.snp.makeConstraints {
-            $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(88)
+            $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(newWriteButton.snp.top).offset(-12)
         }
         
@@ -76,7 +77,7 @@ class SelectWriteRecordViewController: BaseViewController {
     }
 }
 
-extension SelectWriteRecordViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension WriteListRecordViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return dummyData.count
     }
