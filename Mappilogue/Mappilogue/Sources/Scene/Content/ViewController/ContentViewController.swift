@@ -8,7 +8,7 @@
 import UIKit
 import MappilogueKit
 
-class MyRecordContentViewController: BaseViewController {
+class ContentViewController: BaseViewController {
     var schedule = Schedule2222()
     var isNewWrite: Bool = false
     

@@ -8,7 +8,7 @@
 import UIKit
 import Photos
 
-class ContentImageView: BaseView {
+class WrtieContentImageView: BaseView {
     private var assets: [PHAsset] = []
     private var selectedImageIndex: Int = 0
     private var selectedMainImageIndex: Int = 0
@@ -87,7 +87,7 @@ class ContentImageView: BaseView {
     }
 }
 
-extension ContentImageView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension WrtieContentImageView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return assets.count
     }
