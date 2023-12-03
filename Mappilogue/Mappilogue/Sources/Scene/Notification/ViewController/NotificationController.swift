@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NotificationController: BaseViewController {
+class NotificationController: NavigationBarViewController {
     var notificationData: [NotificationData] = []
     var announcementData: [AnnouncementData] = []
     var isAnnouncementExpanded = [Bool]()
@@ -41,7 +41,7 @@ class NotificationController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationTitleAndBackButton("알림", backButtonAction: #selector(backButtonTapped))
+        setPopBarBar(title: "알림")
     }
     
     override func setupHierarchy() {
@@ -54,7 +54,8 @@ class NotificationController: BaseViewController {
         super.setupLayout()
      
         tableView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(88)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
     

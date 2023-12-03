@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class HomeViewController: NavigationBarViewController {
     let dummyTodayData = dummyTodayScheduleData(scheduleCount: 2)
@@ -42,7 +43,7 @@ class HomeViewController: NavigationBarViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setupNavigationBar()
+        setLogoNotificationBar()
     }
     
     override func setupHierarchy() {
@@ -53,18 +54,11 @@ class HomeViewController: NavigationBarViewController {
     
     override func setupLayout() {
         super.setupLayout()
-        
-        tableView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
-        }
-    }
     
-    func setupNavigationBar() {
-        self.navigationItem.title = ""
-        
-        let logoImage = UIImage(named: "home_logo")?.withRenderingMode(.alwaysOriginal)
-        let buttonItem = UIBarButtonItem(image: logoImage, style: .plain, target: self, action: nil)
-        navigationItem.leftBarButtonItem = buttonItem
+        tableView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(88)
+            $0.leading.bottom.trailing.equalToSuperview()
+        }
     }
 }
 

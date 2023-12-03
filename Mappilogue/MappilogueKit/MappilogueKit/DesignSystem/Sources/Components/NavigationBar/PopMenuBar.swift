@@ -7,12 +7,14 @@
 
 import UIKit
 
-class PopMenuBar: UIView {
+public class PopMenuBar: UIView {
+    public var onPopButtonTapped: (() -> Void)?
+    
     private let popButton = UIButton()
     private let titleLabel = UILabel()
     private let menuButton = UIButton()
     
-    init(title: String) {
+    public init(title: String) {
         super.init(frame: CGRect.zero)
         
         setupProperty(title)
@@ -27,6 +29,7 @@ class PopMenuBar: UIView {
     func setupProperty(_ title: String) {
         popButton.setImage(Icons.icon(named: .pop), for: .normal)
         titleLabel.text = title
+        titleLabel.font = .title02
         menuButton.setImage(Icons.icon(named: .notificationDefault), for: .normal)
     }
     
@@ -37,9 +40,13 @@ class PopMenuBar: UIView {
     }
     
     func setupLayout() {
+        self.snp.makeConstraints {
+            $0.height.equalTo(88)
+        }
+        
         popButton.snp.makeConstraints {
             $0.leading.equalTo(self).offset(16)
-            $0.bottom.equalTo(self).offset(10)
+            $0.bottom.equalTo(self).offset(-10)
             $0.width.height.equalTo(24)
         }
         

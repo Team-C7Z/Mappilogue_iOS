@@ -7,12 +7,15 @@
 
 import UIKit
 
-class DismissSaveBar: UIView {
+public class DismissSaveBar: UIView {
+    public var onDismissButtonTapped: (() -> Void)?
+    public var onSaveButtonTapped: (() -> Void)?
+    
     private let dismissButton = UIButton()
     private let titleLabel = UILabel()
     private let saveButton = UIButton()
     
-    init(title: String) {
+    public init(title: String) {
         super.init(frame: CGRect.zero)
         
         setupProperty(title)
@@ -27,6 +30,7 @@ class DismissSaveBar: UIView {
     func setupProperty(_ title: String) {
         dismissButton.setImage(Icons.icon(named: .dismiss), for: .normal)
         titleLabel.text = title
+        titleLabel.font = .title02
         saveButton.setImage(Icons.icon(named: .save), for: .normal)
     }
     
@@ -37,9 +41,13 @@ class DismissSaveBar: UIView {
     }
     
     func setupLayout() {
+        self.snp.makeConstraints {
+            $0.height.equalTo(88)
+        }
+        
         dismissButton.snp.makeConstraints {
             $0.leading.equalTo(self).offset(16)
-            $0.bottom.equalTo(self).offset(10)
+            $0.bottom.equalTo(self).offset(-10)
             $0.width.height.equalTo(24)
         }
         
