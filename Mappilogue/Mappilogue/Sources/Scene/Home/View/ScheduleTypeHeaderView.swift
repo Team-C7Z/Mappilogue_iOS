@@ -55,16 +55,15 @@ class ScheduleTypeHeaderView: BaseTableViewHeaderFooterView {
         super.setupHierarchy()
         
         contentView.addSubview(stackView)
-        [todayScheduleButton, upcomingScheduleButton].forEach {
-            stackView.addArrangedSubview($0)
-        }
+        stackView.addArrangedSubview(todayScheduleButton)
+        stackView.addArrangedSubview(upcomingScheduleButton)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
         stackView.snp.makeConstraints {
-            $0.top.leading.equalTo(contentView)
+            $0.top.bottom.leading.equalTo(contentView)
         }
     }
     

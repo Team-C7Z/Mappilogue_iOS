@@ -7,11 +7,13 @@
 
 import UIKit
 
-class NotificationBar: UIView {
+public class NotificationBar: UIView {
+    public var onNotificationButtonTapped: (() -> Void)?
+    
     private let titleLabel = UILabel()
     private let notificationButton = UIButton()
     
-    init(title: String) {
+    public init(title: String) {
         super.init(frame: CGRect.zero)
         
         setupProperty(title)
@@ -25,6 +27,7 @@ class NotificationBar: UIView {
     
     func setupProperty(_ title: String) {
         titleLabel.text = title
+        titleLabel.font = .title02
         notificationButton.setImage(Icons.icon(named: .notificationDefault), for: .normal)
     }
     
@@ -34,6 +37,10 @@ class NotificationBar: UIView {
     }
     
     func setupLayout() {
+        self.snp.makeConstraints {
+            $0.height.equalTo(88)
+        }
+        
         titleLabel.snp.makeConstraints {
             $0.centerX.equalTo(self)
             $0.bottom.equalTo(self).offset(-10)

@@ -38,6 +38,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     func createViewController(_ viewController: UIViewController, title: String, imageName: String) -> UIViewController {
         let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.isNavigationBarHidden = true
         viewController.title = title
         viewController.tabBarItem.image = UIImage(named: imageName)
         return navigationController

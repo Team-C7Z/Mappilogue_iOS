@@ -7,11 +7,13 @@
 
 import UIKit
 
-class LogoNotificationBar: UIView {
+public class LogoNotificationBar: UIView {
+    public var onNotificationButtonTapped: (() -> Void)?
+    
     private let logoImage = UIImageView()
     private let notificationButton = UIButton()
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         
         setupProperty()
@@ -24,8 +26,11 @@ class LogoNotificationBar: UIView {
     }
     
     func setupProperty() {
+        backgroundColor = .grayF9F8F7
+        
         logoImage.image = Icons.icon(named: .logo)
         notificationButton.setImage(Icons.icon(named: .notificationDefault), for: .normal)
+        notificationButton.addTarget(self, action: #selector(notificationButtonTapped), for: .touchUpInside)
     }
     
     func setupHierarchy() {
@@ -34,6 +39,10 @@ class LogoNotificationBar: UIView {
     }
     
     func setupLayout() {
+        self.snp.makeConstraints {
+            $0.height.equalTo(88)
+        }
+        
         logoImage.snp.makeConstraints {
             $0.leading.equalTo(self).offset(16)
             $0.bottom.equalTo(self).offset(-9)
@@ -42,10 +51,14 @@ class LogoNotificationBar: UIView {
         }
         
         notificationButton.snp.makeConstraints {
-            $0.trailing.equalTo(self).offset(16)
+            $0.trailing.equalTo(self).offset(-16)
             $0.bottom.equalTo(self).offset(-7)
             $0.width.equalTo(26)
             $0.height.equalTo(29)
         }
+    }
+    
+    @objc func notificationButtonTapped() {
+        onNotificationButtonTapped?()
     }
 }
