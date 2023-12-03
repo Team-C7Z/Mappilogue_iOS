@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MyRecordContentTextView: BaseView {
+class ContentTextView: BaseView {
     var stackViewHeightUpdated: (() -> Void)?
     
     private let textView = UITextView()
