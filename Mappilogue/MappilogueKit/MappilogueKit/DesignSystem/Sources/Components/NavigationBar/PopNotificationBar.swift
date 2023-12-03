@@ -15,10 +15,10 @@ public class PopNotificationBar: UIView {
     private let titleLabel = UILabel()
     private let notificationButton = UIButton()
     
-    public init(title: String) {
+    public init() {
         super.init(frame: CGRect.zero)
         
-        setupProperty(title)
+        setupProperty()
         setupHierarchy()
         setupLayout()
     }
@@ -27,9 +27,8 @@ public class PopNotificationBar: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupProperty(_ title: String) {
+    func setupProperty() {
         popButton.setImage(Icons.icon(named: .pop), for: .normal)
-        titleLabel.text = title
         titleLabel.font = .title02
         notificationButton.setImage(Icons.icon(named: .notificationDefault), for: .normal)
     }
@@ -62,5 +61,9 @@ public class PopNotificationBar: UIView {
             $0.width.equalTo(26)
             $0.height.equalTo(29)
         }
+    }
+    
+    public func configure(title: String) {
+        titleLabel.text = title
     }
 }

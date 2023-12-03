@@ -8,7 +8,7 @@
 import UIKit
 import MappilogueKit
 
-class AddScheduleViewController: BaseViewController {
+class AddScheduleViewController: NavigationBarViewController {
     private var colorViewModel = ColorViewModel()
     private var scheduleViewModel = ScheduleViewModel()
     private var calendarViewModel = CalendarViewModel()
@@ -74,7 +74,7 @@ class AddScheduleViewController: BaseViewController {
 
     override func setupProperty() {
         super.setupProperty()
-        
+
         setNavigationBar()
         
         datePickerOuterView.backgroundColor = .grayF5F3F0
@@ -98,7 +98,8 @@ class AddScheduleViewController: BaseViewController {
         super.setupLayout()
         
         collectionView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(88)
+            $0.leading.bottom.trailing.equalToSuperview()
         }
     
         datePickerOuterView.snp.makeConstraints {
@@ -121,13 +122,13 @@ class AddScheduleViewController: BaseViewController {
     }
     
     func setNavigationBar() {
-        title = "일정"
-        setNavigationTitleAndItems(imageName: "common_dismiss", action: #selector(dismissButtonTapped), isLeft: true)
-        setNavigationTitleAndItems(imageName: "common_completion", action: #selector(completionButtonTapped), isLeft: false)
-    }
-    
-    @objc func dismissButtonTapped() {
-        presentAlert()
+        setDismissSaveBar(title: "일정")
+        dismissSaveBar.onDismissButtonTapped = {
+            self.presentAlert()
+        }
+        dismissSaveBar.onSaveButtonTapped = {
+            self.saveSchedule()
+        }
     }
     
     private func presentAlert() {
@@ -148,7 +149,7 @@ class AddScheduleViewController: BaseViewController {
         present(alertViewController, animated: false)
     }
     
-    @objc func completionButtonTapped(_ sender: UIButton) {
+    func saveSchedule() {
         schedule.startDate = startDate.stringFromSelectedDate()
         schedule.endDate = endDate.stringFromSelectedDate()
         if schedule.colorId == -1 {
@@ -287,11 +288,11 @@ class AddScheduleViewController: BaseViewController {
     }
 
     func navigateToNotificationViewController() {
-        let notificationViewController = NotificationViewController()
-        notificationViewController.onNotificationSelected = { alarmOptions in
+        let addNotificationViewController = AddNotificationViewController()
+        addNotificationViewController.onNotificationSelected = { alarmOptions in
             self.schedule.alarmOptions = alarmOptions
         }
-        navigationController?.pushViewController(notificationViewController, animated: true)
+        navigationController?.pushViewController(addNotificationViewController, animated: true)
     }
     
     func presentRepeatViewController() {

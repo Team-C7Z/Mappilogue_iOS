@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class CalendarViewController: NavigationBarViewController {
     private var calendarViewModel = CalendarViewModel()
@@ -55,6 +56,7 @@ class CalendarViewController: NavigationBarViewController {
     override func setupProperty() {
         super.setupProperty()
         
+        setNotificationBar(title: "캘린더")
         setCalendarDate()
         
         currentDateButton.addTarget(self, action: #selector(changeDateButtonTapped), for: .touchUpInside)
@@ -81,7 +83,7 @@ class CalendarViewController: NavigationBarViewController {
     
         currentDateButton.snp.makeConstraints {
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            $0.top.equalToSuperview().offset(88)
             $0.leading.equalTo(currentDateLabel.snp.leading)
             $0.trailing.equalTo(changeDateImage.snp.trailing)
             $0.height.equalTo(28)
