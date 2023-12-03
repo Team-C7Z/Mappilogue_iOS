@@ -33,7 +33,7 @@
 		920031EB2A9103E900E3170D /* ImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031EA2A9103E900E3170D /* ImagePickerViewController.swift */; };
 		920031ED2A91085300E3170D /* ImagePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031EC2A91085300E3170D /* ImagePickerCell.swift */; };
 		920031EF2A910F7800E3170D /* PhotoDirectoryPickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031EE2A910F7800E3170D /* PhotoDirectoryPickerButton.swift */; };
-		920031F12A918B4700E3170D /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031F02A918B4700E3170D /* CustomNavigationBar.swift */; };
+		920031F12A918B4700E3170D /* ImagePickerNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031F02A918B4700E3170D /* ImagePickerNavigationViewController.swift */; };
 		920031F32A92274100E3170D /* LimitedPhotoSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031F22A92274000E3170D /* LimitedPhotoSelectionView.swift */; };
 		920031F52A92444E00E3170D /* PhotoDirectoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031F42A92444E00E3170D /* PhotoDirectoryView.swift */; };
 		920031F82A92467A00E3170D /* PhotoDirectoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031F72A92467A00E3170D /* PhotoDirectoryCell.swift */; };
@@ -42,20 +42,19 @@
 		920032052A97166700E3170D /* PermissionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920032042A97166700E3170D /* PermissionView.swift */; };
 		920032092A975EA400E3170D /* SelectPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920032082A975EA400E3170D /* SelectPermissionViewController.swift */; };
 		9200320F2A99A3A800E3170D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9200320E2A99A3A800E3170D /* LoginViewController.swift */; };
-		92011B282A6E75F1009B047F /* WriteRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B272A6E75F1009B047F /* WriteRecordButton.swift */; };
 		92011B702A70E7D8009B047F /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */; };
 		92011B752A7138B0009B047F /* EmptyRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B742A7138B0009B047F /* EmptyRecordCell.swift */; };
 		92011B782A71683E009B047F /* WriteListRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B772A71683E009B047F /* WriteListRecordViewController.swift */; };
 		92011B7B2A716C9D009B047F /* SelectScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B7A2A716C9D009B047F /* SelectScheduleCell.swift */; };
 		92011B7D2A7174B6009B047F /* DateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B7C2A7174B6009B047F /* DateHeaderView.swift */; };
 		92011B7F2A726031009B047F /* WriteRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B7E2A726031009B047F /* WriteRecordViewController.swift */; };
-		92011B812A7271D0009B047F /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B802A7271D0009B047F /* CategoryButton.swift */; };
+		92011B812A7271D0009B047F /* SelectCategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B802A7271D0009B047F /* SelectCategoryButton.swift */; };
 		92011B872A72B0A7009B047F /* MainLocatonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B862A72B0A7009B047F /* MainLocatonView.swift */; };
 		92011B892A72B4BB009B047F /* WriteContentTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B882A72B4BB009B047F /* WriteContentTextView.swift */; };
 		92011B8B2A72B7DA009B047F /* NewWriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B8A2A72B7DA009B047F /* NewWriteButton.swift */; };
 		92011B8D2A72BBE8009B047F /* ImageSaveRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B8C2A72BBE8009B047F /* ImageSaveRecordView.swift */; };
 		92011B902A7364D0009B047F /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B8F2A7364D0009B047F /* BaseButton.swift */; };
-		92011B922A7367E6009B047F /* MainLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B912A7367E5009B047F /* MainLocationButton.swift */; };
+		92011B922A7367E6009B047F /* SelectMainLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B912A7367E5009B047F /* SelectMainLocationButton.swift */; };
 		92011BF92A73D404009B047F /* ColorSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011BF82A73D404009B047F /* ColorSelectionView.swift */; };
 		92011BFF2A7407D3009B047F /* SelectCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011BFE2A7407D3009B047F /* SelectCategoryViewController.swift */; };
 		92011C012A740A08009B047F /* AddNewCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C002A740A08009B047F /* AddNewCategoryCell.swift */; };
@@ -68,9 +67,8 @@
 		92011C142A74F9DE009B047F /* SearchLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C132A74F9DE009B047F /* SearchLocationCell.swift */; };
 		92011C162A7505F7009B047F /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C152A7505F7009B047F /* Record.swift */; };
 		92011C182A753AEB009B047F /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C172A753AEB009B047F /* CALayer.swift */; };
-		92011C1A2A755D02009B047F /* MyRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C192A755D02009B047F /* MyRecordButton.swift */; };
 		92011C1C2A75E484009B047F /* RecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C1B2A75E484009B047F /* RecordCell.swift */; };
-		92011C1E2A75EE79009B047F /* MarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C1D2A75EE79009B047F /* MarkView.swift */; };
+		92011C1E2A75EE79009B047F /* MarkView11.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C1D2A75EE79009B047F /* MarkView11.swift */; };
 		92011C202A769C12009B047F /* SortHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C1F2A769C12009B047F /* SortHeaderView.swift */; };
 		92011C222A77907F009B047F /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C212A77907F009B047F /* CategoryCell.swift */; };
 		92011C242A77A329009B047F /* AddCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C232A77A329009B047F /* AddCategoryCell.swift */; };
@@ -103,7 +101,6 @@
 		9224FCFD2A5FF185000A56A6 /* AddScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FCFC2A5FF185000A56A6 /* AddScheduleViewController.swift */; };
 		9224FD032A600ACF000A56A6 /* ScheduleDurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD022A600ACF000A56A6 /* ScheduleDurationView.swift */; };
 		9224FD052A600F42000A56A6 /* NotificationRepeatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD042A600F42000A56A6 /* NotificationRepeatButton.swift */; };
-		9224FD092A601B00000A56A6 /* ColorSelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD082A601B00000A56A6 /* ColorSelectionButton.swift */; };
 		9224FD192A616EB1000A56A6 /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD182A616EB1000A56A6 /* ColorCell.swift */; };
 		9224FD1B2A61705D000A56A6 /* ColorSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD1A2A61705D000A56A6 /* ColorSelection.swift */; };
 		9224FD1F2A62B4E9000A56A6 /* AddNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD1E2A62B4E9000A56A6 /* AddNotificationViewController.swift */; };
@@ -341,7 +338,7 @@
 		920031EA2A9103E900E3170D /* ImagePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerViewController.swift; sourceTree = "<group>"; };
 		920031EC2A91085300E3170D /* ImagePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerCell.swift; sourceTree = "<group>"; };
 		920031EE2A910F7800E3170D /* PhotoDirectoryPickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDirectoryPickerButton.swift; sourceTree = "<group>"; };
-		920031F02A918B4700E3170D /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
+		920031F02A918B4700E3170D /* ImagePickerNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerNavigationViewController.swift; sourceTree = "<group>"; };
 		920031F22A92274000E3170D /* LimitedPhotoSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitedPhotoSelectionView.swift; sourceTree = "<group>"; };
 		920031F42A92444E00E3170D /* PhotoDirectoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDirectoryView.swift; sourceTree = "<group>"; };
 		920031F72A92467A00E3170D /* PhotoDirectoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDirectoryCell.swift; sourceTree = "<group>"; };
@@ -350,20 +347,19 @@
 		920032042A97166700E3170D /* PermissionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionView.swift; sourceTree = "<group>"; };
 		920032082A975EA400E3170D /* SelectPermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPermissionViewController.swift; sourceTree = "<group>"; };
 		9200320E2A99A3A800E3170D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		92011B272A6E75F1009B047F /* WriteRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordButton.swift; sourceTree = "<group>"; };
 		92011B6F2A70E7D8009B047F /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		92011B742A7138B0009B047F /* EmptyRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyRecordCell.swift; sourceTree = "<group>"; };
 		92011B772A71683E009B047F /* WriteListRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteListRecordViewController.swift; sourceTree = "<group>"; };
 		92011B7A2A716C9D009B047F /* SelectScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectScheduleCell.swift; sourceTree = "<group>"; };
 		92011B7C2A7174B6009B047F /* DateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHeaderView.swift; sourceTree = "<group>"; };
 		92011B7E2A726031009B047F /* WriteRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordViewController.swift; sourceTree = "<group>"; };
-		92011B802A7271D0009B047F /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
+		92011B802A7271D0009B047F /* SelectCategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryButton.swift; sourceTree = "<group>"; };
 		92011B862A72B0A7009B047F /* MainLocatonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLocatonView.swift; sourceTree = "<group>"; };
 		92011B882A72B4BB009B047F /* WriteContentTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteContentTextView.swift; sourceTree = "<group>"; };
 		92011B8A2A72B7DA009B047F /* NewWriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWriteButton.swift; sourceTree = "<group>"; };
 		92011B8C2A72BBE8009B047F /* ImageSaveRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaveRecordView.swift; sourceTree = "<group>"; };
 		92011B8F2A7364D0009B047F /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
-		92011B912A7367E5009B047F /* MainLocationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainLocationButton.swift; sourceTree = "<group>"; };
+		92011B912A7367E5009B047F /* SelectMainLocationButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectMainLocationButton.swift; sourceTree = "<group>"; };
 		92011BF82A73D404009B047F /* ColorSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectionView.swift; sourceTree = "<group>"; };
 		92011BFE2A7407D3009B047F /* SelectCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryViewController.swift; sourceTree = "<group>"; };
 		92011C002A740A08009B047F /* AddNewCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCategoryCell.swift; sourceTree = "<group>"; };
@@ -376,9 +372,8 @@
 		92011C132A74F9DE009B047F /* SearchLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationCell.swift; sourceTree = "<group>"; };
 		92011C152A7505F7009B047F /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		92011C172A753AEB009B047F /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
-		92011C192A755D02009B047F /* MyRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordButton.swift; sourceTree = "<group>"; };
 		92011C1B2A75E484009B047F /* RecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCell.swift; sourceTree = "<group>"; };
-		92011C1D2A75EE79009B047F /* MarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkView.swift; sourceTree = "<group>"; };
+		92011C1D2A75EE79009B047F /* MarkView11.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkView11.swift; sourceTree = "<group>"; };
 		92011C1F2A769C12009B047F /* SortHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortHeaderView.swift; sourceTree = "<group>"; };
 		92011C212A77907F009B047F /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		92011C232A77A329009B047F /* AddCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryCell.swift; sourceTree = "<group>"; };
@@ -411,7 +406,6 @@
 		9224FCFC2A5FF185000A56A6 /* AddScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleViewController.swift; sourceTree = "<group>"; };
 		9224FD022A600ACF000A56A6 /* ScheduleDurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDurationView.swift; sourceTree = "<group>"; };
 		9224FD042A600F42000A56A6 /* NotificationRepeatButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRepeatButton.swift; sourceTree = "<group>"; };
-		9224FD082A601B00000A56A6 /* ColorSelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectionButton.swift; sourceTree = "<group>"; };
 		9224FD182A616EB1000A56A6 /* ColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
 		9224FD1A2A61705D000A56A6 /* ColorSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelection.swift; sourceTree = "<group>"; };
 		9224FD1E2A62B4E9000A56A6 /* AddNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotificationViewController.swift; sourceTree = "<group>"; };
@@ -716,12 +710,8 @@
 		920031F62A92445200E3170D /* Photo */ = {
 			isa = PBXGroup;
 			children = (
-				920031EA2A9103E900E3170D /* ImagePickerViewController.swift */,
-				920031EE2A910F7800E3170D /* PhotoDirectoryPickerButton.swift */,
-				920031EC2A91085300E3170D /* ImagePickerCell.swift */,
-				920031F22A92274000E3170D /* LimitedPhotoSelectionView.swift */,
-				920031F42A92444E00E3170D /* PhotoDirectoryView.swift */,
-				920031F72A92467A00E3170D /* PhotoDirectoryCell.swift */,
+				92E3F4292B1CDDAE00E03C15 /* ViewController */,
+				92E3F42A2B1CDDB900E03C15 /* View */,
 			);
 			path = Photo;
 			sourceTree = "<group>";
@@ -776,10 +766,10 @@
 		92011BFD2A74031B009B047F /* Content */ = {
 			isa = PBXGroup;
 			children = (
+				92011B802A7271D0009B047F /* SelectCategoryButton.swift */,
 				92139D6C2AAC454B005344AE /* WrtieContentImageView.swift */,
 				92011B882A72B4BB009B047F /* WriteContentTextView.swift */,
 				92139D6E2AAC4737005344AE /* ContentImageCell.swift */,
-				920031F62A92445200E3170D /* Photo */,
 			);
 			path = Content;
 			sourceTree = "<group>";
@@ -919,7 +909,6 @@
 		9245BBE62B088E6600383F4D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				92011B802A7271D0009B047F /* CategoryButton.swift */,
 				92011CBA2A7A199F009B047F /* Cell */,
 			);
 			path = View;
@@ -1243,7 +1232,7 @@
 				92011B7C2A7174B6009B047F /* DateHeaderView.swift */,
 				92011B8A2A72B7DA009B047F /* NewWriteButton.swift */,
 				92011B8C2A72BBE8009B047F /* ImageSaveRecordView.swift */,
-				92011B912A7367E5009B047F /* MainLocationButton.swift */,
+				92011B912A7367E5009B047F /* SelectMainLocationButton.swift */,
 				92011B862A72B0A7009B047F /* MainLocatonView.swift */,
 				920031C62A8B5DB700E3170D /* MapSettingsHeaderView.swift */,
 				920031B92A8B5C3000E3170D /* AddedLocationsHeaderView.swift */,
@@ -1512,6 +1501,7 @@
 				920031E32A8E1E8100E3170D /* BottomSheet */,
 				92011C052A74A0FE009B047F /* Search */,
 				92011B762A716801009B047F /* WriteRecord */,
+				920031F62A92445200E3170D /* Photo */,
 				9245BBE32B08827E00383F4D /* Category */,
 				920031E52A8E1EBC00E3170D /* Content */,
 				9269993D2A14F6F9003DDAD2 /* My */,
@@ -1617,15 +1607,11 @@
 		92A7B64D2A4CCDB7009C9293 /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
-				9224FD082A601B00000A56A6 /* ColorSelectionButton.swift */,
-				92011C192A755D02009B047F /* MyRecordButton.swift */,
-				92011B272A6E75F1009B047F /* WriteRecordButton.swift */,
 				925840DA2A82144A00997434 /* EditViewController.swift */,
-				92011C1D2A75EE79009B047F /* MarkView.swift */,
+				92011C1D2A75EE79009B047F /* MarkView11.swift */,
 				920031D22A8C832300E3170D /* SearchBar.swift */,
 				92011C672A78CB24009B047F /* InputAlertViewController.swift */,
 				925840CE2A7FCB5400997434 /* ScheduleTitleColorView.swift */,
-				920031F02A918B4700E3170D /* CustomNavigationBar.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -1672,6 +1658,35 @@
 				92E20F4B2B1429F400380FA5 /* Onboarding.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		92E3F4292B1CDDAE00E03C15 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				920031F02A918B4700E3170D /* ImagePickerNavigationViewController.swift */,
+				920031EA2A9103E900E3170D /* ImagePickerViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		92E3F42A2B1CDDB900E03C15 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				920031EE2A910F7800E3170D /* PhotoDirectoryPickerButton.swift */,
+				920031F22A92274000E3170D /* LimitedPhotoSelectionView.swift */,
+				920031F42A92444E00E3170D /* PhotoDirectoryView.swift */,
+				92E3F42B2B1CDDC000E03C15 /* Cell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		92E3F42B2B1CDDC000E03C15 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				920031EC2A91085300E3170D /* ImagePickerCell.swift */,
+				920031F72A92467A00E3170D /* PhotoDirectoryCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		92E7814A2A849AB9000DAACD /* Cell */ = {
@@ -2051,12 +2066,11 @@
 				925840C72A7F76A500997434 /* WithdrawalAlertViewController.swift in Sources */,
 				920031B82A8B5BC700E3170D /* KakaoAddressDTO.swift in Sources */,
 				92011B782A71683E009B047F /* WriteListRecordViewController.swift in Sources */,
-				92011C1A2A755D02009B047F /* MyRecordButton.swift in Sources */,
 				92139D6F2AAC4737005344AE /* ContentImageCell.swift in Sources */,
 				9224FD3D2A6559A0000A56A6 /* AddLocationViewController.swift in Sources */,
 				9245BC262B0A4C5400383F4D /* Calendar.swift in Sources */,
 				9224FD1F2A62B4E9000A56A6 /* AddNotificationViewController.swift in Sources */,
-				92011C1E2A75EE79009B047F /* MarkView.swift in Sources */,
+				92011C1E2A75EE79009B047F /* MarkView11.swift in Sources */,
 				923AA0B92B1B7F50006028AF /* NavigationBarViewController.swift in Sources */,
 				9224FD372A653024000A56A6 /* SpacingView.swift in Sources */,
 				925840AA2A7CC92E00997434 /* CategorySettingCell.swift in Sources */,
@@ -2110,7 +2124,7 @@
 				9224FD032A600ACF000A56A6 /* ScheduleDurationView.swift in Sources */,
 				92E20F492B13B8AB00380FA5 /* AuthViewModel.swift in Sources */,
 				92A7B6612A4E2039009C9293 /* BaseTableViewHeaderFooterView.swift in Sources */,
-				92011B812A7271D0009B047F /* CategoryButton.swift in Sources */,
+				92011B812A7271D0009B047F /* SelectCategoryButton.swift in Sources */,
 				92011C122A74F8E6009B047F /* SearchRecordCell.swift in Sources */,
 				92139D932AB2C842005344AE /* AnnouncementContentCell.swift in Sources */,
 				92F00AB32AF4B996001FE43F /* AddCategoryDTO.swift in Sources */,
@@ -2141,7 +2155,7 @@
 				9245BC1C2B09CA3400383F4D /* AddScheduleDTO.swift in Sources */,
 				9245BC2A2B0A501900383F4D /* CalendarManager.swift in Sources */,
 				9273C9522ABF040E00224DE1 /* ScheduleAPI.swift in Sources */,
-				920031F12A918B4700E3170D /* CustomNavigationBar.swift in Sources */,
+				920031F12A918B4700E3170D /* ImagePickerNavigationViewController.swift in Sources */,
 				9224FD192A616EB1000A56A6 /* ColorCell.swift in Sources */,
 				92A7B6682A4E6154009C9293 /* UpcomingScheduleCell.swift in Sources */,
 				927E7F272A683DCD00E6A29F /* CalendarCell.swift in Sources */,
@@ -2167,7 +2181,6 @@
 				9245BC172B08D1EE00383F4D /* ColorViewModel.swift in Sources */,
 				925840A02A7BD4D700997434 /* CategoryOrderCell.swift in Sources */,
 				9224FCF32A5C5E7A000A56A6 /* WeekCell.swift in Sources */,
-				9224FD092A601B00000A56A6 /* ColorSelectionButton.swift in Sources */,
 				9224FD4A2A667F7E000A56A6 /* TimePickerViewController.swift in Sources */,
 				9224FD272A6394A9000A56A6 /* WeekdayRepeatViewController.swift in Sources */,
 				920031D12A8B65F000E3170D /* Bundle.swift in Sources */,
@@ -2180,7 +2193,7 @@
 				92011B7B2A716C9D009B047F /* SelectScheduleCell.swift in Sources */,
 				928B7C072A9FA90500E4F789 /* BaseManager.swift in Sources */,
 				920031C12A8B5D0800E3170D /* MainLocationSettingView.swift in Sources */,
-				92011B922A7367E6009B047F /* MainLocationButton.swift in Sources */,
+				92011B922A7367E6009B047F /* SelectMainLocationButton.swift in Sources */,
 				92E7814E2A850316000DAACD /* Date.swift in Sources */,
 				92011CB92A7A1718009B047F /* MyRecordViewController.swift in Sources */,
 				925840A42A7C890100997434 /* CategorySelectionCell.swift in Sources */,
@@ -2227,7 +2240,6 @@
 				9224FD232A62EC0B000A56A6 /* RepeatViewController.swift in Sources */,
 				9245BBC82AFB926900383F4D /* CategoryViewModel.swift in Sources */,
 				920031D52A8D021000E3170D /* KakaoSerachDTO.swift in Sources */,
-				92011B282A6E75F1009B047F /* WriteRecordButton.swift in Sources */,
 				92F00AB12AF4B897001FE43F /* CategoryManager.swift in Sources */,
 				92011C182A753AEB009B047F /* CALayer.swift in Sources */,
 				92011B702A70E7D8009B047F /* BottomSheetViewController.swift in Sources */,

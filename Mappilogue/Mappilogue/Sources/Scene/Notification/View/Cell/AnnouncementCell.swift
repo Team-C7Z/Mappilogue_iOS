@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class AnnouncementCell: BaseTableViewCell {
     static let registerId = "\(AnnouncementCell.self)"
@@ -65,7 +66,7 @@ class AnnouncementCell: BaseTableViewCell {
     func configure(_ announcement: AnnouncementData, isExpanded: Bool) {
         titleLabel.text = announcement.title
         dateLabel.text = announcement.date
-        expandButton.setImage(UIImage(named: isExpanded ? "notification_close" : "notification_expand"), for: .normal)
+        expandButton.setImage(Images.image(named: isExpanded ? .buttonClose : .buttonExpand), for: .normal)
     }
     
     @objc private func expandButtonTapped() {

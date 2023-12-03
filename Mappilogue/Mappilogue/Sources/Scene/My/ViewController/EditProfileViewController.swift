@@ -64,7 +64,7 @@ class EditProfileViewController: NavigationBarViewController {
         loginAccountTitleLabel.textColor = .gray707070
         loginAccountTitleLabel.font = .body02
         
-        loginAccountImage.image = UIImage(named: "my_kakaoAccount")
+        loginAccountImage.image = Images.image(named: .imageKakaoLoginAccount)
         
         loginAccountLabel.textColor = .gray707070
         loginAccountLabel.font = .caption01
@@ -90,8 +90,8 @@ class EditProfileViewController: NavigationBarViewController {
         super.setupLayout()
     
         profileImageButton.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
+            $0.top.equalToSuperview().offset(98)
+            $0.leading.equalToSuperview().offset(16)
             $0.width.height.equalTo(88)
         }
         
@@ -110,13 +110,13 @@ class EditProfileViewController: NavigationBarViewController {
         }
         
         nicknameTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(25)
+            $0.top.equalToSuperview().offset(113)
             $0.leading.equalTo(profileImage.snp.trailing).offset(20)
         }
         
         editNicknameTextField.snp.makeConstraints {
             $0.leading.equalTo(nicknameTitleLabel)
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(46)
+            $0.top.equalToSuperview().offset(144)
         }
         
         editNicknameImage.snp.makeConstraints {

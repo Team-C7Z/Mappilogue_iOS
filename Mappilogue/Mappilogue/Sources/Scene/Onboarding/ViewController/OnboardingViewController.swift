@@ -44,8 +44,8 @@ class OnboardingViewController: BaseViewController {
         
         pageControl.numberOfPages = onboardingPages.count
         pageControl.currentPage = currentPage
-        pageControl.setCurrentPageIndicatorImage(Images.image(named: .onboardingCurrentPage), forPage: currentPage)
-        pageControl.preferredIndicatorImage = Images.image(named: .onboardingPage)
+        pageControl.setCurrentPageIndicatorImage(Images.image(named: .imageOnboardingCurrentPage), forPage: currentPage)
+        pageControl.preferredIndicatorImage = Images.image(named: .imageOnboardingPage)
         pageControl.pageIndicatorTintColor = .grayC9C6C2
         pageControl.currentPageIndicatorTintColor = .green2EBD3D
         pageControl.isUserInteractionEnabled = false
