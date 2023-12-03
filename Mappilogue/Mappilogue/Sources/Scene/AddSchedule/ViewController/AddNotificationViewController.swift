@@ -1,5 +1,5 @@
 //
-//  NotificationViewController.swift
+//  AddNotificationViewController.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/07/15.
@@ -15,7 +15,7 @@ struct SelectedNotification {
     var timePeriod: String?
 }
 
-class NotificationViewController: BaseViewController {
+class AddNotificationViewController: NavigationBarViewController {
     private var monthlyCalendar = CalendarViewModel()
     var onNotificationSelected: (([String]) -> Void)?
     
@@ -59,8 +59,8 @@ class NotificationViewController: BaseViewController {
     
     override func setupProperty() {
         super.setupProperty()
-        
-        setNavigationTitleAndBackButton("알림", backButtonAction: #selector(popToAddScheduleViewController))
+    
+        setNavigationBar()
         
         pickerOuterView.backgroundColor = .grayF5F3F0
         pickerView.delegate = self
@@ -82,7 +82,8 @@ class NotificationViewController: BaseViewController {
         super.setupLayout()
         
         collectionView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(88)
+            $0.leading.bottom.trailing.equalToSuperview()
         }
         
         pickerOuterView.snp.makeConstraints {
@@ -95,6 +96,13 @@ class NotificationViewController: BaseViewController {
             $0.bottom.equalTo(pickerOuterView).offset(-8)
             $0.centerX.equalTo(pickerOuterView)
             $0.width.equalTo(240)
+        }
+    }
+    
+    private func setNavigationBar() {
+        setPopBar(title: "알림")
+        popBar.onPopButtonTapped = {
+            self.popToAddScheduleViewController()
         }
     }
     
@@ -172,7 +180,7 @@ class NotificationViewController: BaseViewController {
     }
 }
 
-extension NotificationViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension AddNotificationViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return notificationList.count
     }
@@ -224,7 +232,7 @@ extension NotificationViewController: UICollectionViewDelegate, UICollectionView
     }
 }
 
-extension NotificationViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension AddNotificationViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return isDate ? 1 : 3
     }

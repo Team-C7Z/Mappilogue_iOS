@@ -15,10 +15,10 @@ public class DismissSaveBar: UIView {
     private let titleLabel = UILabel()
     private let saveButton = UIButton()
     
-    public init(title: String) {
+    public init() {
         super.init(frame: CGRect.zero)
         
-        setupProperty(title)
+        setupProperty()
         setupHierarchy()
         setupLayout()
     }
@@ -27,11 +27,12 @@ public class DismissSaveBar: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupProperty(_ title: String) {
+    func setupProperty() {
         dismissButton.setImage(Icons.icon(named: .dismiss), for: .normal)
-        titleLabel.text = title
+        dismissButton.addTarget(self, action: #selector(dismissButtonTapped), for: .touchUpInside)
         titleLabel.font = .title02
         saveButton.setImage(Icons.icon(named: .save), for: .normal)
+        saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
     }
     
     func setupHierarchy() {
@@ -61,5 +62,17 @@ public class DismissSaveBar: UIView {
             $0.bottom.equalTo(self).offset(-10)
             $0.width.height.equalTo(24)
         }
+    }
+    
+    public func configure(title: String) {
+        titleLabel.text = title
+    }
+    
+    @objc func dismissButtonTapped() {
+        onDismissButtonTapped?()
+    }
+    
+    @objc func saveButtonTapped() {
+        onSaveButtonTapped?()
     }
 }

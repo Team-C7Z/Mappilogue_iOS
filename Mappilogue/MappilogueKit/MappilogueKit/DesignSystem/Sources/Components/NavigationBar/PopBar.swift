@@ -13,10 +13,10 @@ public class PopBar: UIView {
     private let popButton = UIButton()
     private let titleLabel = UILabel()
     
-    public init(title: String) {
+    public init() {
         super.init(frame: CGRect.zero)
         
-        setupProperty(title)
+        setupProperty()
         setupHierarchy()
         setupLayout()
     }
@@ -25,10 +25,9 @@ public class PopBar: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupProperty(_ title: String) {
+    func setupProperty() {
         popButton.setImage(Icons.icon(named: .pop), for: .normal)
         popButton.addTarget(self, action: #selector(popButtonTapped), for: .touchUpInside)
-        titleLabel.text = title
         titleLabel.font = .title02
     }
     
@@ -52,6 +51,10 @@ public class PopBar: UIView {
             $0.centerX.equalTo(self)
             $0.bottom.equalTo(self).offset(-10)
         }
+    }
+    
+    public func configure(title: String) {
+        titleLabel.text = title
     }
     
     @objc func popButtonTapped() {
