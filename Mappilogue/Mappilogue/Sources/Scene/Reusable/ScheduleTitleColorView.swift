@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class ScheduleTitleColorView: BaseView {
     var onNameEntered: ((String) -> Void)?
     var onColorSelectionButtonTapped: ((Bool) -> Void)?
     
-    private let scheduleTitleTextField = UITextField()
+    private let scheduleTitleTextField = ScheduleTitleTextField()
     private var colorSelectionButton = ColorSelectionButton(textColor: .whiteFFFFFF, color: .black1C1C1C)
     
     override func setupProperty() {
@@ -19,10 +20,6 @@ class ScheduleTitleColorView: BaseView {
 
         backgroundColor = .grayF9F8F7
         
-        scheduleTitleTextField.font = .title02
-        scheduleTitleTextField.placeholder = "일정 제목을 적어 주세요"
-        scheduleTitleTextField.tintColor = .green2EBD3D
-        scheduleTitleTextField.returnKeyType = .done
         scheduleTitleTextField.delegate = self
         
         colorSelectionButton.addTarget(self, action: #selector(colorSelectionButtonTapped), for: .touchUpInside)

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class MarkedRecordCell: BaseCollectionViewCell {
     static let registerId = "\(MarkedRecordCell.self)"

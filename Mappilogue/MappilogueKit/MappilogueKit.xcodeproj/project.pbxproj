@@ -35,6 +35,13 @@
 		92D019B82B1AE37A009C7C3D /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D019B72B1AE37A009C7C3D /* AlertViewController.swift */; };
 		92D019BA2B1AE3A0009C7C3D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D019B92B1AE3A0009C7C3D /* Alert.swift */; };
 		92E3F40E2B1C804500E03C15 /* AddScheduleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F40D2B1C804500E03C15 /* AddScheduleButton.swift */; };
+		92E3F4122B1CC3B100E03C15 /* WriteRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F4112B1CC3B100E03C15 /* WriteRecordButton.swift */; };
+		92E3F4152B1CC48D00E03C15 /* CALayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F4142B1CC48D00E03C15 /* CALayer+Extension.swift */; };
+		92E3F4182B1CC64A00E03C15 /* MainLocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F4172B1CC64A00E03C15 /* MainLocationButton.swift */; };
+		92E3F41B2B1CCB9500E03C15 /* MarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F41A2B1CCB9500E03C15 /* MarkView.swift */; };
+		92E3F4242B1CD84D00E03C15 /* ScheduleTitleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F4232B1CD84D00E03C15 /* ScheduleTitleTextField.swift */; };
+		92E3F4262B1CD9D200E03C15 /* ColorSelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F4252B1CD9D200E03C15 /* ColorSelectionButton.swift */; };
+		92E3F4282B1CDC6C00E03C15 /* MyRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F4272B1CDC6C00E03C15 /* MyRecordButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +83,13 @@
 		92D019B72B1AE37A009C7C3D /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		92D019B92B1AE3A0009C7C3D /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		92E3F40D2B1C804500E03C15 /* AddScheduleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleButton.swift; sourceTree = "<group>"; };
+		92E3F4112B1CC3B100E03C15 /* WriteRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordButton.swift; sourceTree = "<group>"; };
+		92E3F4142B1CC48D00E03C15 /* CALayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extension.swift"; sourceTree = "<group>"; };
+		92E3F4172B1CC64A00E03C15 /* MainLocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLocationButton.swift; sourceTree = "<group>"; };
+		92E3F41A2B1CCB9500E03C15 /* MarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkView.swift; sourceTree = "<group>"; };
+		92E3F4232B1CD84D00E03C15 /* ScheduleTitleTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTitleTextField.swift; sourceTree = "<group>"; };
+		92E3F4252B1CD9D200E03C15 /* ColorSelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectionButton.swift; sourceTree = "<group>"; };
+		92E3F4272B1CDC6C00E03C15 /* MyRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +146,10 @@
 				923AA09C2B1B4283006028AF /* AppleLoginButton.swift */,
 				923AA09E2B1B4B68006028AF /* AddButton.swift */,
 				92E3F40D2B1C804500E03C15 /* AddScheduleButton.swift */,
+				92E3F4112B1CC3B100E03C15 /* WriteRecordButton.swift */,
+				92E3F4272B1CDC6C00E03C15 /* MyRecordButton.swift */,
+				92E3F4172B1CC64A00E03C15 /* MainLocationButton.swift */,
+				92E3F4252B1CD9D200E03C15 /* ColorSelectionButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -252,10 +270,14 @@
 		92D019B52B1A2013009C7C3D /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				92E3F4132B1CC42200E03C15 /* Background */,
 				923AA0AB2B1B7379006028AF /* NavigationBar */,
 				923AA0992B1B3D31006028AF /* Button */,
+				92E3F41F2B1CD77300E03C15 /* TextField */,
+				92E3F41C2B1CD32700E03C15 /* Modal */,
 				92D019B62B1A2B3B009C7C3D /* Alert */,
 				923AA0932B1B3476006028AF /* Toast */,
+				92E3F4192B1CCB7A00E03C15 /* Mark */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -267,6 +289,37 @@
 				92D019B72B1AE37A009C7C3D /* AlertViewController.swift */,
 			);
 			path = Alert;
+			sourceTree = "<group>";
+		};
+		92E3F4132B1CC42200E03C15 /* Background */ = {
+			isa = PBXGroup;
+			children = (
+				92E3F4142B1CC48D00E03C15 /* CALayer+Extension.swift */,
+			);
+			path = Background;
+			sourceTree = "<group>";
+		};
+		92E3F4192B1CCB7A00E03C15 /* Mark */ = {
+			isa = PBXGroup;
+			children = (
+				92E3F41A2B1CCB9500E03C15 /* MarkView.swift */,
+			);
+			path = Mark;
+			sourceTree = "<group>";
+		};
+		92E3F41C2B1CD32700E03C15 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
+		92E3F41F2B1CD77300E03C15 /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+				92E3F4232B1CD84D00E03C15 /* ScheduleTitleTextField.swift */,
+			);
+			path = TextField;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -386,23 +439,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92E3F4122B1CC3B100E03C15 /* WriteRecordButton.swift in Sources */,
 				923AA0A72B1B6F1E006028AF /* Icons.swift in Sources */,
 				923AA09D2B1B4283006028AF /* AppleLoginButton.swift in Sources */,
 				923AA09F2B1B4B68006028AF /* AddButton.swift in Sources */,
 				923AA0C52B1C574E006028AF /* PopBar.swift in Sources */,
 				92E3F40E2B1C804500E03C15 /* AddScheduleButton.swift in Sources */,
 				923AA0AD2B1B7406006028AF /* LogoNotificationBar.swift in Sources */,
+				92E3F4182B1CC64A00E03C15 /* MainLocationButton.swift in Sources */,
 				92CBB2D62B19E84900587BED /* UIFont+Extension.swift in Sources */,
 				923AA0C12B1C574E006028AF /* PopMenuBar.swift in Sources */,
 				923AA0C32B1C574E006028AF /* DismissSaveBar.swift in Sources */,
+				92E3F41B2B1CCB9500E03C15 /* MarkView.swift in Sources */,
 				92D019B82B1AE37A009C7C3D /* AlertViewController.swift in Sources */,
+				92E3F4152B1CC48D00E03C15 /* CALayer+Extension.swift in Sources */,
+				92E3F4262B1CD9D200E03C15 /* ColorSelectionButton.swift in Sources */,
 				923AA07D2B1B1984006028AF /* GatheringToastView.swift in Sources */,
 				923AA07F2B1B1B1A006028AF /* DeleteToastView.swift in Sources */,
 				923AA0C22B1C574E006028AF /* PopNotificationBar.swift in Sources */,
+				92E3F4242B1CD84D00E03C15 /* ScheduleTitleTextField.swift in Sources */,
 				92CBB2D82B19EA8800587BED /* Color+Extension.swift in Sources */,
 				92CBB2DA2B19EB4D00587BED /* CalendarColor+Extension.swift in Sources */,
 				92CBB28F2B19C07100587BED /* MappilogueKit.docc in Sources */,
 				923AA0962B1B3532006028AF /* Images.swift in Sources */,
+				92E3F4282B1CDC6C00E03C15 /* MyRecordButton.swift in Sources */,
 				923AA0C42B1C574E006028AF /* NotificationBar.swift in Sources */,
 				923AA09B2B1B3D59006028AF /* KakaoLoginButton.swift in Sources */,
 				923AA0AA2B1B71DA006028AF /* UIImage+Extension.swift in Sources */,
