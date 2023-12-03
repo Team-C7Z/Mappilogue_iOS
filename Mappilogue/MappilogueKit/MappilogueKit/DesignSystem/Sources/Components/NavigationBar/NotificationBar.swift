@@ -28,7 +28,7 @@ public class NotificationBar: UIView {
     func setupProperty() {
         titleLabel.font = .title02
         notificationButton.setImage(Icons.icon(named: .notificationDefault), for: .normal)
-        notificationButton.addTarget(self, action: #selector(popNotificationTapped), for: .touchUpInside)
+        notificationButton.addTarget(self, action: #selector(notificationButtonTapped), for: .touchUpInside)
     }
     
     func setupHierarchy() {
@@ -58,7 +58,7 @@ public class NotificationBar: UIView {
         titleLabel.text = title
     }
     
-    @objc func popNotificationTapped() {
+    @objc func notificationButtonTapped() {
         onNotificationButtonTapped?()
     }
 }

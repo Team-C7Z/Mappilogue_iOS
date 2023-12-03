@@ -245,12 +245,12 @@ extension HomeViewController: ScheduleTypeDelegate, ExpandCellDelegate {
     }
     
     func navigateToRecordContentViewController() {
-        let recordContentViewController = MyRecordContentViewController()
+        let recordContentViewController = ContentViewController()
         navigationController?.pushViewController(recordContentViewController, animated: true)
     }
     
     func navigateToSelectWriteRecordViewController() {
-        let selectWriteRecordViewController = SelectWriteRecordViewController()
+        let selectWriteRecordViewController = WriteListRecordViewController()
         navigationController?.pushViewController(selectWriteRecordViewController, animated: true)
     }
 }

@@ -60,6 +60,7 @@ class MyViewController: NavigationBarViewController {
     override func setupProperty() {
         super.setupProperty()
         
+        setNotificationBar(title: "MY")
     }
     
     override func setupHierarchy() {
@@ -72,7 +73,8 @@ class MyViewController: NavigationBarViewController {
         super.setupLayout()
     
         collectionView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(98)
+            $0.leading.bottom.trailing.equalToSuperview()
         }
     }
     

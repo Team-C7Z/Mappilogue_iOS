@@ -8,7 +8,7 @@
 import UIKit
 import KakaoSDKUser
 
-class WithdrawalViewController: BaseViewController {
+class WithdrawalViewController: WithdrawalNavigationViewController {
     var authViewModel = AuthViewModel()
     
     let withdrawalReasons = [
@@ -38,8 +38,7 @@ class WithdrawalViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationTitleAndBackButton("탈퇴하기", backButtonAction: #selector(backButtonTapped))
-        setSkipButtonItem()
+        skipButton.addTarget(self, action: #selector(performWithdrawal), for: .touchUpInside)
         
         withdrawalTitleLabel.text = "탈퇴하는 이유가 있나요?"
         withdrawalTitleLabel.textColor = .black1C1C1C
@@ -63,7 +62,7 @@ class WithdrawalViewController: BaseViewController {
     
     override func setupHierarchy() {
         super.setupHierarchy()
-        
+
         view.addSubview(withdrawalTitleLabel)
         view.addSubview(withdrawalSubTitleLabel)
         view.addSubview(stackView)
@@ -74,12 +73,12 @@ class WithdrawalViewController: BaseViewController {
         super.setupLayout()
         
         withdrawalTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            $0.top.equalToSuperview().offset(98)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
         }
         
         withdrawalSubTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(44)
+            $0.top.equalToSuperview().offset(142)
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
         }
         
@@ -94,12 +93,6 @@ class WithdrawalViewController: BaseViewController {
             $0.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
             $0.height.equalTo(53)
         }
-    }
-    
-    func setSkipButtonItem() {
-        let skipButtonItem = UIBarButtonItem(title: "건너뛰기", style: .plain, target: self, action: #selector(performWithdrawal))
-        skipButtonItem.tintColor = .gray9B9791
-        navigationItem.rightBarButtonItem = skipButtonItem
     }
     
     private func createWithdrawalReasonView() {

@@ -1,5 +1,5 @@
 //
-//  WriteTextView.swift
+//  WriteContentTextView.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/07/27.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WriteTextView: BaseView {
+class WriteContentTextView: BaseView {
     let textViewPlaceHolder = "기록을 입력하세요"
     var textViewHeight: CGFloat = 300
     var stackViewHeightUpdated: (() -> Void)?
@@ -49,7 +49,7 @@ class WriteTextView: BaseView {
     }
 }
 
-extension WriteTextView: UITextViewDelegate {
+extension WriteContentTextView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == textViewPlaceHolder {
             textView.text = nil

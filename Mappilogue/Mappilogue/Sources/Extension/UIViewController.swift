@@ -8,32 +8,7 @@
 import Foundation
 import UIKit
 
-extension UIViewController {
-    func setNavigationTitleAndBackButton(_ title: String, backButtonAction: Selector) {
-        self.title = title
-        let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: "back"), for: .normal)
-        button.addTarget(self, action: backButtonAction, for: .touchUpInside)
-        let barButtonItem = UIBarButtonItem(customView: button)
-        navigationItem.leftBarButtonItem = barButtonItem
-    }
-    
-    func setNavigationTitleAndItems(imageName: String, action: Selector, isLeft: Bool) {
-        let button = UIButton(type: .custom)
-        button.setImage(UIImage(named: imageName), for: .normal)
-        button.addTarget(self, action: action, for: .touchUpInside)
-        let barButtonItem = UIBarButtonItem(customView: button)
-        if isLeft {
-            navigationItem.leftBarButtonItem = barButtonItem
-        } else {
-            navigationItem.rightBarButtonItem = barButtonItem
-        }
-    }
-    
-    @objc func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
-    }
-    
+extension UIViewController {    
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tap.cancelsTouchesInView = false

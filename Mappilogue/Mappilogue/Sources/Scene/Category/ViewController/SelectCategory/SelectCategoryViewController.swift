@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SelectCategoryViewController: BaseViewController {
+class SelectCategoryViewController: NavigationBarViewController {
     private var categoryViewModel = CategoryViewModel()
     var categories: [Category] = []
     
@@ -35,7 +35,7 @@ class SelectCategoryViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationTitleAndBackButton("카테고리 선택", backButtonAction: #selector(backButtonTapped))
+        setPopBar(title: "카테고리 선택")
     }
     
     override func setupHierarchy() {
@@ -48,7 +48,8 @@ class SelectCategoryViewController: BaseViewController {
         super.setupLayout()
         
         collectionView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(88)
+            $0.leading.bottom.trailing.equalToSuperview()
         }
     }
 }

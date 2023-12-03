@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainLocationViewController: BaseViewController {
+class MainLocationViewController: NavigationBarViewController {
     private var selectedMapLocation: Location?
     private let dummyLocation = dummyMainLocationData()
     private var selectedLocationIndex: Int?
@@ -37,7 +37,7 @@ class MainLocationViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
 
-        setNavigationTitleAndBackButton("대표 위치 설정", backButtonAction: #selector(backButtonTapped))
+        setPopBar(title: "대표 위치 설정")
     }
 
     override func setupHierarchy() {
@@ -50,7 +50,8 @@ class MainLocationViewController: BaseViewController {
         super.setupLayout()
 
         collectionView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(88)
+            $0.leading.bottom.trailing.equalToSuperview()
         }
     }
 

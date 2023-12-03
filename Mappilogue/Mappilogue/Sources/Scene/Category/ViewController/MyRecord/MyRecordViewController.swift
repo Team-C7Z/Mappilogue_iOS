@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MyRecordViewController: BaseViewController {
+class MyRecordViewController: NavigationBarViewController {
     private var categoryViewModel = CategoryViewModel()
     var categories: [Category] = []
     var totalCategoryCount: Int = 0
@@ -41,7 +41,7 @@ class MyRecordViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationTitleAndBackButton("나의 기록", backButtonAction: #selector(popToRootViewController))
+        setPopBar(title: "나의 기록")
     }
     
     override func setupHierarchy() {
@@ -54,7 +54,8 @@ class MyRecordViewController: BaseViewController {
         super.setupLayout()
         
         tableView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(88)
+            $0.leading.bottom.trailing.equalToSuperview()
         }
     }
     
