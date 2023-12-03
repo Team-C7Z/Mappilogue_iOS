@@ -18,11 +18,11 @@
 		923AA0A72B1B6F1E006028AF /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923AA0A62B1B6F1E006028AF /* Icons.swift */; };
 		923AA0AA2B1B71DA006028AF /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923AA0A92B1B71DA006028AF /* UIImage+Extension.swift */; };
 		923AA0AD2B1B7406006028AF /* LogoNotificationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923AA0AC2B1B7406006028AF /* LogoNotificationBar.swift */; };
-		923AA0AF2B1B741A006028AF /* PopNotificationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923AA0AE2B1B741A006028AF /* PopNotificationBar.swift */; };
-		923AA0B12B1B742C006028AF /* PopNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923AA0B02B1B742C006028AF /* PopNavigationBar.swift */; };
-		923AA0B32B1B74B1006028AF /* DismissSaveBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923AA0B22B1B74B1006028AF /* DismissSaveBar.swift */; };
-		923AA0B52B1B74EB006028AF /* NotificationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923AA0B42B1B74EB006028AF /* NotificationBar.swift */; };
-		923AA0B72B1B7514006028AF /* PopMenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923AA0B62B1B7514006028AF /* PopMenuBar.swift */; };
+		923AA0C12B1C574E006028AF /* PopMenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923AA0BC2B1C574D006028AF /* PopMenuBar.swift */; };
+		923AA0C22B1C574E006028AF /* PopNotificationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923AA0BD2B1C574D006028AF /* PopNotificationBar.swift */; };
+		923AA0C32B1C574E006028AF /* DismissSaveBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923AA0BE2B1C574E006028AF /* DismissSaveBar.swift */; };
+		923AA0C42B1C574E006028AF /* NotificationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923AA0BF2B1C574E006028AF /* NotificationBar.swift */; };
+		923AA0C52B1C574E006028AF /* PopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923AA0C02B1C574E006028AF /* PopBar.swift */; };
 		92CBB28F2B19C07100587BED /* MappilogueKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = 92CBB28E2B19C07100587BED /* MappilogueKit.docc */; };
 		92CBB2952B19C07100587BED /* MappilogueKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CBB28A2B19C07100587BED /* MappilogueKit.framework */; };
 		92CBB29A2B19C07100587BED /* MappilogueKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CBB2992B19C07100587BED /* MappilogueKitTests.swift */; };
@@ -57,11 +57,11 @@
 		923AA0A62B1B6F1E006028AF /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		923AA0A92B1B71DA006028AF /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		923AA0AC2B1B7406006028AF /* LogoNotificationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoNotificationBar.swift; sourceTree = "<group>"; };
-		923AA0AE2B1B741A006028AF /* PopNotificationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopNotificationBar.swift; sourceTree = "<group>"; };
-		923AA0B02B1B742C006028AF /* PopNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopNavigationBar.swift; sourceTree = "<group>"; };
-		923AA0B22B1B74B1006028AF /* DismissSaveBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissSaveBar.swift; sourceTree = "<group>"; };
-		923AA0B42B1B74EB006028AF /* NotificationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationBar.swift; sourceTree = "<group>"; };
-		923AA0B62B1B7514006028AF /* PopMenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopMenuBar.swift; sourceTree = "<group>"; };
+		923AA0BC2B1C574D006028AF /* PopMenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopMenuBar.swift; sourceTree = "<group>"; };
+		923AA0BD2B1C574D006028AF /* PopNotificationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopNotificationBar.swift; sourceTree = "<group>"; };
+		923AA0BE2B1C574E006028AF /* DismissSaveBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissSaveBar.swift; sourceTree = "<group>"; };
+		923AA0BF2B1C574E006028AF /* NotificationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationBar.swift; sourceTree = "<group>"; };
+		923AA0C02B1C574E006028AF /* PopBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopBar.swift; sourceTree = "<group>"; };
 		92CBB28A2B19C07100587BED /* MappilogueKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MappilogueKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CBB28D2B19C07100587BED /* MappilogueKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MappilogueKit.h; sourceTree = "<group>"; };
 		92CBB28E2B19C07100587BED /* MappilogueKit.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = MappilogueKit.docc; sourceTree = "<group>"; };
@@ -145,11 +145,11 @@
 			isa = PBXGroup;
 			children = (
 				923AA0AC2B1B7406006028AF /* LogoNotificationBar.swift */,
-				923AA0AE2B1B741A006028AF /* PopNotificationBar.swift */,
-				923AA0B02B1B742C006028AF /* PopNavigationBar.swift */,
-				923AA0B22B1B74B1006028AF /* DismissSaveBar.swift */,
-				923AA0B42B1B74EB006028AF /* NotificationBar.swift */,
-				923AA0B62B1B7514006028AF /* PopMenuBar.swift */,
+				923AA0C02B1C574E006028AF /* PopBar.swift */,
+				923AA0BD2B1C574D006028AF /* PopNotificationBar.swift */,
+				923AA0BE2B1C574E006028AF /* DismissSaveBar.swift */,
+				923AA0BF2B1C574E006028AF /* NotificationBar.swift */,
+				923AA0BC2B1C574D006028AF /* PopMenuBar.swift */,
 			);
 			path = NavigationBar;
 			sourceTree = "<group>";
@@ -383,25 +383,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				923AA0B12B1B742C006028AF /* PopNavigationBar.swift in Sources */,
 				923AA0A72B1B6F1E006028AF /* Icons.swift in Sources */,
 				923AA09D2B1B4283006028AF /* AppleLoginButton.swift in Sources */,
 				923AA09F2B1B4B68006028AF /* AddButton.swift in Sources */,
-				923AA0B52B1B74EB006028AF /* NotificationBar.swift in Sources */,
+				923AA0C52B1C574E006028AF /* PopBar.swift in Sources */,
 				923AA0AD2B1B7406006028AF /* LogoNotificationBar.swift in Sources */,
 				92CBB2D62B19E84900587BED /* UIFont+Extension.swift in Sources */,
+				923AA0C12B1C574E006028AF /* PopMenuBar.swift in Sources */,
+				923AA0C32B1C574E006028AF /* DismissSaveBar.swift in Sources */,
 				92D019B82B1AE37A009C7C3D /* AlertViewController.swift in Sources */,
 				923AA07D2B1B1984006028AF /* GatheringToastView.swift in Sources */,
 				923AA07F2B1B1B1A006028AF /* DeleteToastView.swift in Sources */,
+				923AA0C22B1C574E006028AF /* PopNotificationBar.swift in Sources */,
 				92CBB2D82B19EA8800587BED /* Color+Extension.swift in Sources */,
 				92CBB2DA2B19EB4D00587BED /* CalendarColor+Extension.swift in Sources */,
-				923AA0B32B1B74B1006028AF /* DismissSaveBar.swift in Sources */,
 				92CBB28F2B19C07100587BED /* MappilogueKit.docc in Sources */,
-				923AA0AF2B1B741A006028AF /* PopNotificationBar.swift in Sources */,
 				923AA0962B1B3532006028AF /* Images.swift in Sources */,
+				923AA0C42B1C574E006028AF /* NotificationBar.swift in Sources */,
 				923AA09B2B1B3D59006028AF /* KakaoLoginButton.swift in Sources */,
 				923AA0AA2B1B71DA006028AF /* UIImage+Extension.swift in Sources */,
-				923AA0B72B1B7514006028AF /* PopMenuBar.swift in Sources */,
 				92CBB2C32B19C4B600587BED /* UIColor+Extension.swift in Sources */,
 				92D019BA2B1AE3A0009C7C3D /* Alert.swift in Sources */,
 			);
