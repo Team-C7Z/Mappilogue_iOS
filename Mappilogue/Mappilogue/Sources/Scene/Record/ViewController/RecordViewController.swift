@@ -218,8 +218,8 @@ class RecordViewController: NavigationBarViewController {
         return markerView
     }
     
-    private func createZoomOutMarkerView(record: Record) -> MarkView {
-        let markView = MarkView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
+    private func createZoomOutMarkerView(record: Record) -> MarkView11 {
+        let markView = MarkView11(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
         markView.configure(heartWidth: 14, heartHeight: 13)
         markView.layer.applyShadow()
         markView.backgroundColor = record.color
@@ -234,7 +234,7 @@ class RecordViewController: NavigationBarViewController {
         return marker
     }
     
-    private func createZoomOutMarker(markerView: MarkView, lat: Double, lng: Double) -> NMFMarker {
+    private func createZoomOutMarker(markerView: MarkView11, lat: Double, lng: Double) -> NMFMarker {
         let marker = NMFMarker()
         marker.iconImage = NMFOverlayImage(image: markerView.asImage())
         marker.position = NMGLatLng(lat: lat, lng: lng)

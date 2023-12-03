@@ -8,8 +8,8 @@
 import UIKit
 
 class NotificationViewController: NavigationBarViewController {
-    var notificationData: [NotificationData] = []
-    var announcementData: [AnnouncementData] = []
+    var notificationData: [NotificationData] = dummyNotificaitonData()
+    var announcementData: [AnnouncementData] = dummyAnnouncementData()
     var isAnnouncementExpanded = [Bool]()
     
     var notificationType: NotificationType = .notification

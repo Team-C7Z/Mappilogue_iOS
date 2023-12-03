@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class NotificationCell: BaseTableViewCell {
     static let registerId = "\(NotificationCell.self)"
@@ -39,7 +40,7 @@ class NotificationCell: BaseTableViewCell {
         titleLabel.textColor = .color000000
         titleLabel.font = .body02
         
-        removeButton.setImage(UIImage(named: "notification_remove"), for: .normal)
+        removeButton.setImage(Images.image(named: .buttonRemove), for: .normal)
         removeButton.addTarget(self, action: #selector(removeButtonTapped), for: .touchUpInside)
     }
     

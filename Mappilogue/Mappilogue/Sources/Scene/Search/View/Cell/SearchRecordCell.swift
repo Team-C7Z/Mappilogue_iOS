@@ -10,7 +10,7 @@ import UIKit
 class SearchRecordCell: BaseCollectionViewCell {
     static let registerId = "\(SearchRecordCell.self)"
     
-    private let markView = MarkView(frame: CGRect(x: 0, y: 0, width: 19, height: 19))
+    private let markView = MarkView11(frame: CGRect(x: 0, y: 0, width: 19, height: 19))
     private let recordTitleLabel = UILabel()
     private let recordDateLabel = UILabel()
     private let separatorImage = UIImageView()

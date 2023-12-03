@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class EmptyNotificationCell: BaseTableViewCell {
     static let registerId = "\(EmptyNotificationCell.self)"
@@ -22,7 +23,7 @@ class EmptyNotificationCell: BaseTableViewCell {
         stackView.distribution = .equalSpacing
         stackView.spacing = 16
   
-        notificationImage.image = UIImage(named: "notification_empty")
+        notificationImage.image = Images.image(named: .imageNotificationEmpty)
         
         notificationLabel.textColor = .color000000
         notificationLabel.font = .title02
