@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchViewController: BaseViewController {
+class SearchViewController: NavigationBarViewController {
     let dummyLocation = dummyLocationData()
     let dummyRecord = dummyRecordData()
     var keyboardHeight: CGFloat = 0
@@ -48,7 +48,7 @@ class SearchViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationTitleAndBackButton("검색", backButtonAction: #selector(backButtonTapped))
+        setPopBar(title: "검색")
         
         searchBar.configure("장소 또는 기록 검색")
         searchBar.becomeFirstResponder()
@@ -77,8 +77,8 @@ class SearchViewController: BaseViewController {
         super.setupLayout()
         
         searchBar.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(88)
+            $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(40)
         }
         

@@ -9,6 +9,7 @@ import UIKit
 
 public class PopMenuBar: UIView {
     public var onPopButtonTapped: (() -> Void)?
+    public var onMenuButtonTapped: (() -> Void)?
     
     private let popButton = UIButton()
     private let titleLabel = UILabel()
@@ -28,8 +29,10 @@ public class PopMenuBar: UIView {
     
     func setupProperty() {
         popButton.setImage(Icons.icon(named: .pop), for: .normal)
+        popButton.addTarget(self, action: #selector(popButtonTapped), for: .touchUpInside)
         titleLabel.font = .title02
-        menuButton.setImage(Icons.icon(named: .notificationDefault), for: .normal)
+        menuButton.setImage(Icons.icon(named: .menu), for: .normal)
+        menuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
     }
     
     func setupHierarchy() {
@@ -63,5 +66,13 @@ public class PopMenuBar: UIView {
     
     public func configure(title: String) {
         titleLabel.text = title
+    }
+    
+    @objc func popButtonTapped() {
+        onPopButtonTapped?()
+    }
+    
+    @objc func menuButtonTapped() {
+        onMenuButtonTapped?()
     }
 }

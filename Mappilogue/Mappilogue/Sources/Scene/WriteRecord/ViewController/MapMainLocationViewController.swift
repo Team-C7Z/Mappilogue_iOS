@@ -9,7 +9,7 @@ import UIKit
 import NMapsMap
 import MappilogueKit
 
-class MapMainLocationViewController: BaseViewController {
+class MapMainLocationViewController: NavigationBarViewController {
     var onSelectedMapLocation: ((String) -> Void)?
 
     let locationManager = CLLocationManager()
@@ -28,9 +28,9 @@ class MapMainLocationViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
 
+        setPopBar(title: "대표 위치 설정")
         setMapView()
-
-        setNavigationTitleAndBackButton("대표 위치 설정", backButtonAction: #selector(backButtonTapped))
+        
         mainLocationSettingView.onSelectedMapLocation = { address in
             self.selectMapLocation(address)
         }
@@ -47,7 +47,8 @@ class MapMainLocationViewController: BaseViewController {
         super.setupLayout()
 
         mapView.snp.makeConstraints {
-            $0.leading.top.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(88)
+            $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(mainLocationSettingView.snp.top).offset(15)
         }
 

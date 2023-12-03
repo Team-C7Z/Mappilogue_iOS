@@ -1,5 +1,5 @@
 //
-//  SelectWriteRecordViewController.swift
+//  WriteListRecordViewController.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/07/26.
