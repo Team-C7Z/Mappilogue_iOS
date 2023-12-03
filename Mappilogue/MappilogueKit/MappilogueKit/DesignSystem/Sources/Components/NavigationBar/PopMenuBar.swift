@@ -14,10 +14,10 @@ public class PopMenuBar: UIView {
     private let titleLabel = UILabel()
     private let menuButton = UIButton()
     
-    public init(title: String) {
+    public init() {
         super.init(frame: CGRect.zero)
         
-        setupProperty(title)
+        setupProperty()
         setupHierarchy()
         setupLayout()
     }
@@ -26,9 +26,8 @@ public class PopMenuBar: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupProperty(_ title: String) {
+    func setupProperty() {
         popButton.setImage(Icons.icon(named: .pop), for: .normal)
-        titleLabel.text = title
         titleLabel.font = .title02
         menuButton.setImage(Icons.icon(named: .notificationDefault), for: .normal)
     }
@@ -60,5 +59,9 @@ public class PopMenuBar: UIView {
             $0.bottom.equalTo(self).offset(-6)
             $0.width.height.equalTo(32)
         }
+    }
+    
+    public func configure(title: String) {
+        titleLabel.text = title
     }
 }

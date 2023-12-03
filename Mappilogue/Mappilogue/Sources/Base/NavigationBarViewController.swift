@@ -9,6 +9,13 @@ import UIKit
 import MappilogueKit
 
 class NavigationBarViewController: BaseViewController {
+    let logoNotoficationBar = LogoNotificationBar()
+    let popBar = PopBar()
+    let popNotificationBar = PopNotificationBar()
+    let dismissSaveBar = DismissSaveBar()
+    let notificationBar = NotificationBar()
+    let popMenuBar = PopMenuBar()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -19,10 +26,8 @@ class NavigationBarViewController: BaseViewController {
     }
     
     func setLogoNotificationBar() {
-        let logoNotoficationBar = LogoNotificationBar()
-        
         logoNotoficationBar.onNotificationButtonTapped = {
-            self.notificationButtonTapped()
+            self.pushNotificationController()
         }
 
         view.addSubview(logoNotoficationBar)
@@ -33,7 +38,7 @@ class NavigationBarViewController: BaseViewController {
     }
     
     func setPopNotificationBar(title: String) {
-        let popNotificationBar = PopNotificationBar(title: title)
+        popNotificationBar.configure(title: title)
         
         view.addSubview(popNotificationBar)
         
@@ -42,12 +47,12 @@ class NavigationBarViewController: BaseViewController {
         }
     }
     
-    func setPopBarBar(title: String) {
-        let popBar = PopBar(title: title)
-
+    func setPopBar(title: String) {
         popBar.onPopButtonTapped = {
-            self.popButtonTapped()
+            self.popNavigationController()
         }
+        
+        popBar.configure(title: title)
         
         view.addSubview(popBar)
         
@@ -56,9 +61,8 @@ class NavigationBarViewController: BaseViewController {
         }
     }
     
-    func setDismissSaveBarBar(title: String) {
-        let dismissSaveBar = DismissSaveBar(title: title)
-        
+    func setDismissSaveBar(title: String) {
+        dismissSaveBar.configure(title: title)
         view.addSubview(dismissSaveBar)
         
         dismissSaveBar.snp.makeConstraints {
@@ -67,8 +71,12 @@ class NavigationBarViewController: BaseViewController {
     }
     
     func setNotificationBar(title: String) {
-        let notificationBar = NotificationBar(title: title)
-
+        notificationBar.configure(title: title)
+        
+        notificationBar.onNotificationButtonTapped = {
+            self.pushNotificationController()
+        }
+        
         view.addSubview(notificationBar)
         
         notificationBar.snp.makeConstraints {
@@ -77,7 +85,8 @@ class NavigationBarViewController: BaseViewController {
     }
     
     func setPopMenuBar(title: String) {
-        let popMenuBar = PopMenuBar(title: title)
+        popMenuBar.configure(title: title)
+        
         view.addSubview(popMenuBar)
         
         popMenuBar.snp.makeConstraints {
@@ -85,13 +94,13 @@ class NavigationBarViewController: BaseViewController {
         }
     }
     
-    func notificationButtonTapped() {
-        let notificationController = NotificationController()
+    func pushNotificationController() {
+        let notificationController = NotificationViewController()
         notificationController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(notificationController, animated: true)
     }
     
-    func popButtonTapped() {
+    func popNavigationController() {
         navigationController?.popViewController(animated: true)
     }
 }

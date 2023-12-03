@@ -34,6 +34,7 @@
 		92D019B42B1A1A9E009C7C3D /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92D019B32B1A1A9E009C7C3D /* Icons.xcassets */; };
 		92D019B82B1AE37A009C7C3D /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D019B72B1AE37A009C7C3D /* AlertViewController.swift */; };
 		92D019BA2B1AE3A0009C7C3D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D019B92B1AE3A0009C7C3D /* Alert.swift */; };
+		92E3F40E2B1C804500E03C15 /* AddScheduleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F40D2B1C804500E03C15 /* AddScheduleButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		92D019B32B1A1A9E009C7C3D /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		92D019B72B1AE37A009C7C3D /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		92D019B92B1AE3A0009C7C3D /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		92E3F40D2B1C804500E03C15 /* AddScheduleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 				923AA09A2B1B3D59006028AF /* KakaoLoginButton.swift */,
 				923AA09C2B1B4283006028AF /* AppleLoginButton.swift */,
 				923AA09E2B1B4B68006028AF /* AddButton.swift */,
+				92E3F40D2B1C804500E03C15 /* AddScheduleButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				923AA09D2B1B4283006028AF /* AppleLoginButton.swift in Sources */,
 				923AA09F2B1B4B68006028AF /* AddButton.swift in Sources */,
 				923AA0C52B1C574E006028AF /* PopBar.swift in Sources */,
+				92E3F40E2B1C804500E03C15 /* AddScheduleButton.swift in Sources */,
 				923AA0AD2B1B7406006028AF /* LogoNotificationBar.swift in Sources */,
 				92CBB2D62B19E84900587BED /* UIFont+Extension.swift in Sources */,
 				923AA0C12B1C574E006028AF /* PopMenuBar.swift in Sources */,

@@ -13,10 +13,10 @@ public class NotificationBar: UIView {
     private let titleLabel = UILabel()
     private let notificationButton = UIButton()
     
-    public init(title: String) {
+    public init() {
         super.init(frame: CGRect.zero)
         
-        setupProperty(title)
+        setupProperty()
         setupHierarchy()
         setupLayout()
     }
@@ -25,10 +25,10 @@ public class NotificationBar: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupProperty(_ title: String) {
-        titleLabel.text = title
+    func setupProperty() {
         titleLabel.font = .title02
         notificationButton.setImage(Icons.icon(named: .notificationDefault), for: .normal)
+        notificationButton.addTarget(self, action: #selector(popNotificationTapped), for: .touchUpInside)
     }
     
     func setupHierarchy() {
@@ -52,5 +52,13 @@ public class NotificationBar: UIView {
             $0.width.equalTo(26)
             $0.height.equalTo(29)
         }
+    }
+    
+    public func configure(title: String) {
+        titleLabel.text = title
+    }
+    
+    @objc func popNotificationTapped() {
+        onNotificationButtonTapped?()
     }
 }

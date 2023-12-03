@@ -1,5 +1,5 @@
 //
-//  NotificationController.swift
+//  NotificationViewController.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/09/12.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NotificationController: NavigationBarViewController {
+class NotificationViewController: NavigationBarViewController {
     var notificationData: [NotificationData] = []
     var announcementData: [AnnouncementData] = []
     var isAnnouncementExpanded = [Bool]()
@@ -41,7 +41,7 @@ class NotificationController: NavigationBarViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setPopBarBar(title: "알림")
+        setPopBar(title: "알림")
     }
     
     override func setupHierarchy() {
@@ -66,7 +66,7 @@ class NotificationController: NavigationBarViewController {
     }
 }
 
-extension NotificationController: UITableViewDelegate, UITableViewDataSource {
+extension NotificationViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         switch notificationType {
         case .notification:
@@ -186,7 +186,7 @@ extension NotificationController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension NotificationController: NotificationTypeDelegate {
+extension NotificationViewController: NotificationTypeDelegate {
     func categoryButtonTapped(_ notificationType: NotificationType) {
         self.notificationType = notificationType
 
@@ -194,7 +194,7 @@ extension NotificationController: NotificationTypeDelegate {
     }
 }
 
-extension NotificationController: ExpandCellDelegate {
+extension NotificationViewController: ExpandCellDelegate {
     func expandButtonTapped(in cell: UITableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         isAnnouncementExpanded[indexPath.section].toggle()
