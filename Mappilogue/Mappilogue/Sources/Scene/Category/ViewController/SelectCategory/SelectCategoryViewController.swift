@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class SelectCategoryViewController: NavigationBarViewController {
     private var categoryViewModel = CategoryViewModel()
@@ -104,7 +105,7 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
             self.categories.append(Category(id: 0, title: "새로운 카테고리", isMarkedInMap: .inactive, markCount: 0))
             collectionView.reloadData()
             
-            let inputAlertViewController = InputAlertViewController()
+            let inputAlertViewController = InputModalViewController()
             inputAlertViewController.modalPresentationStyle = .overCurrentContext
             inputAlertViewController.onCancelTapped = {
                 self.categories.removeLast()

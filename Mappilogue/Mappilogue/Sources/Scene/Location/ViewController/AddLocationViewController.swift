@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class AddLocationViewController: BaseViewController {
     var searchKeyword: String = ""

@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class SelectMainLocationButton: BaseButton {
-    private let mainLocationView = MainLocatonView()
+    private let mainLocationView = MainLocationView()
     private let locationTitleLabel = UILabel()
     private let moveImage = UIImageView()
     private let lineViewTop = UIView()

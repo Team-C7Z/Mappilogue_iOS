@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class NotificationSettingView: BaseView {
     var onSwitchTapped: (() -> Void)?

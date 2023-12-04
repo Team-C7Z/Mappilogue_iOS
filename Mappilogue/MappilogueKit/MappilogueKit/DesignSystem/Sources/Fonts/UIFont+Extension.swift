@@ -8,7 +8,7 @@
 import UIKit
 
 public extension UIFont {
-    enum PretendardType: String {
+    enum PretendardType: String, CaseIterable {
         case bold = "Bold"
         case medium = "Medium"
         case regular = "Regular"

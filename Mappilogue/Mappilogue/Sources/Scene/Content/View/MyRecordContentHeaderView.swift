@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class MyRecordContentHeaderView: BaseView {
     private let categoryNameLabel = UILabel()
@@ -24,7 +25,7 @@ class MyRecordContentHeaderView: BaseView {
         titleLabel.textColor = .black1C1C1C
         titleLabel.font = .title01
         
-        locationImage.image = UIImage(named: "record_location_fill")
+        locationImage.image = Images.image(named: .imagePinFill)
         locationLabel.textColor = .gray707070
         locationLabel.font = .body02
         

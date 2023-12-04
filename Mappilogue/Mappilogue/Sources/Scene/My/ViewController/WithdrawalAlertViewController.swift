@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class WithdrawalAlertViewController: BaseViewController {
     var isChecked: Bool = false
@@ -40,7 +41,7 @@ class WithdrawalAlertViewController: BaseViewController {
         messageLabel.lineBreakMode = .byWordWrapping
         
         checkButton.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
-        checkImage.image = UIImage(named: "common_unCheck")
+        checkImage.image = Images.image(named: .buttonUncheck)
         checkLabel.text = "주의사항을 확인했어요"
         checkLabel.textColor = .gray707070
         checkLabel.font = .body02
@@ -128,7 +129,7 @@ class WithdrawalAlertViewController: BaseViewController {
     @objc private func checkButtonTapped() {
         isChecked = !isChecked
         
-        checkImage.image = UIImage(named: isChecked ? "common_check" : "common_unCheck")
+        checkImage.image = Images.image(named: isChecked ? .buttonCheck : .buttonUncheck)
         doneButton.backgroundColor = isChecked ? .redF14C4C : .grayC9C6C2
     }
     

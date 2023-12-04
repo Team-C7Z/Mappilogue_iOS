@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class NewCategoryCell: BaseCollectionViewCell {
     static let registerId = "\(NewCategoryCell.self)"
@@ -27,7 +28,7 @@ class NewCategoryCell: BaseCollectionViewCell {
         categoryCountLabel.textColor = .gray9B9791
         categoryCountLabel.font = .body02
         
-        checkCategoryButton.setImage(UIImage(named: "common_unCheck"), for: .normal)
+        checkCategoryButton.setImage(Images.image(named: .buttonUncheck), for: .normal)
         checkCategoryButton.addTarget(self, action: #selector(checkCategoryButtonTapped), for: .touchUpInside)
     }
     
@@ -64,6 +65,6 @@ class NewCategoryCell: BaseCollectionViewCell {
     
     @objc func checkCategoryButtonTapped(_ button: UIButton) {
         button.isSelected = !button.isSelected
-        button.setImage(UIImage(named: button.isSelected ? "common_check" : "common_unCheck"), for: .normal)
+        button.setImage(Images.image(named: button.isSelected ? .buttonCheck : .buttonUncheck), for: .normal)
     }
 }
