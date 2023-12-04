@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class TodayScheduleInfoCell: BaseTableViewCell {
     static let registerId = "\(TodayScheduleInfoCell.self)"
@@ -78,7 +79,7 @@ class TodayScheduleInfoCell: BaseTableViewCell {
     func configure(location: String, time: String?) {
         locationLabel.text = location
         if let time = time {
-            separatorImage.image = UIImage(named: "common_separator")
+            separatorImage.image = Images.image(named: .imageSeparator)
             timeLabel.text = time
         } else {
             timeLabel.text = ""

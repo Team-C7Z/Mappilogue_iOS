@@ -138,7 +138,7 @@ extension MapMainLocationViewController: NMFMapViewCameraDelegate {
         let projection = mapView.projection
         let coord = projection.latlng(from: CGPoint(x: mapView.frame.width / 2, y: mapView.frame.height / 2 + 18))
         marker.position = NMGLatLng(lat: coord.lat, lng: coord.lng)
-        marker.iconImage = NMFOverlayImage(name: "record_mainLocation")
+        marker.iconImage = NMFOverlayImage(name: Images.Image.imageMainLocation.rawValue)
         marker.width = 65
         marker.height = 36
         marker.mapView = mapView

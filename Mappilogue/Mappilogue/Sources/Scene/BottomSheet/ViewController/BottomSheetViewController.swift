@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class BottomSheetViewController: BaseViewController {
     var dummyRecord: [Record] = []
@@ -40,7 +41,7 @@ class BottomSheetViewController: BaseViewController {
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         view.backgroundColor = .grayF9F8F7
         
-        barImage.image = UIImage(named: "bottomSheetBar")
+        barImage.image = Images.image(named: .imageBottomSheetBar)
     }
     
     override func setupHierarchy() {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class SearchViewController: NavigationBarViewController {
     let dummyLocation = dummyLocationData()

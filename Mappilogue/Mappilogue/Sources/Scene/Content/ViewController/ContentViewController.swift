@@ -87,7 +87,7 @@ class ContentViewController: NavigationBarViewController {
     }
     
     @objc func menuButtonTapped() {
-        let editViewController = EditViewController()
+        let editViewController = EditBottomSheetViewController()
         editViewController.modalPresentationStyle = .overFullScreen
         editViewController.configure(modifyTitle: "수정하기",
                                              deleteTitle: "삭제하기",
