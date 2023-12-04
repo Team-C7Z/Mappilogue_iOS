@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class SearchLocationCell: BaseCollectionViewCell {
     static let registerId = "\(SearchLocationCell.self)"
@@ -17,7 +18,7 @@ class SearchLocationCell: BaseCollectionViewCell {
     override func setupProperty() {
         super.setupProperty()
         
-        locationImage.image = UIImage(named: "searchLocation")
+        locationImage.image = Images.image(named: .imagePin)
         
         locationTitleLabel.textColor = .black1C1C1C
         locationTitleLabel.font = .title02

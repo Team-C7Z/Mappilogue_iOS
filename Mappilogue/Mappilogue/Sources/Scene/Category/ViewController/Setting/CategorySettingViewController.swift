@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class CategorySettingViewController: NavigationBarViewController {
     private var categoryViewModel = CategoryViewModel()
@@ -182,7 +183,7 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
     }
     
     private func presentInputAlertViewController() {
-        let inputAlertViewController = InputAlertViewController()
+        let inputAlertViewController = InputModalViewController()
         inputAlertViewController.modalPresentationStyle = .overCurrentContext
         inputAlertViewController.onCompletionTapped = { inputText in
             self.categoryViewModel.addCategory(title: inputText)

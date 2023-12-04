@@ -22,14 +22,12 @@
 		920031C72A8B5DB700E3170D /* MapSettingsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031C62A8B5DB700E3170D /* MapSettingsHeaderView.swift */; };
 		920031CD2A8B626B00E3170D /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 920031CC2A8B626B00E3170D /* Moya */; };
 		920031D12A8B65F000E3170D /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D02A8B65F000E3170D /* Bundle.swift */; };
-		920031D32A8C832300E3170D /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D22A8C832300E3170D /* SearchBar.swift */; };
 		920031D52A8D021000E3170D /* KakaoSerachDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D42A8D021000E3170D /* KakaoSerachDTO.swift */; };
 		920031D72A8DAFD800E3170D /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D62A8DAFD800E3170D /* ContentViewController.swift */; };
 		920031D92A8DB50600E3170D /* MyRecordContentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031D82A8DB50600E3170D /* MyRecordContentHeaderView.swift */; };
 		920031DB2A8DD29700E3170D /* SavingRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031DA2A8DD29700E3170D /* SavingRecordViewController.swift */; };
 		920031DE2A8DF62A00E3170D /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 920031DD2A8DF62A00E3170D /* Lottie */; };
 		920031E02A8DF6F800E3170D /* saving.json in Resources */ = {isa = PBXBuildFile; fileRef = 920031DF2A8DF6F800E3170D /* saving.json */; };
-		920031E22A8E1E7700E3170D /* FindMarkersButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031E12A8E1E7700E3170D /* FindMarkersButton.swift */; };
 		920031EB2A9103E900E3170D /* ImagePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031EA2A9103E900E3170D /* ImagePickerViewController.swift */; };
 		920031ED2A91085300E3170D /* ImagePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031EC2A91085300E3170D /* ImagePickerCell.swift */; };
 		920031EF2A910F7800E3170D /* PhotoDirectoryPickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031EE2A910F7800E3170D /* PhotoDirectoryPickerButton.swift */; };
@@ -49,7 +47,6 @@
 		92011B7D2A7174B6009B047F /* DateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B7C2A7174B6009B047F /* DateHeaderView.swift */; };
 		92011B7F2A726031009B047F /* WriteRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B7E2A726031009B047F /* WriteRecordViewController.swift */; };
 		92011B812A7271D0009B047F /* SelectCategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B802A7271D0009B047F /* SelectCategoryButton.swift */; };
-		92011B872A72B0A7009B047F /* MainLocatonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B862A72B0A7009B047F /* MainLocatonView.swift */; };
 		92011B892A72B4BB009B047F /* WriteContentTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B882A72B4BB009B047F /* WriteContentTextView.swift */; };
 		92011B8B2A72B7DA009B047F /* NewWriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B8A2A72B7DA009B047F /* NewWriteButton.swift */; };
 		92011B8D2A72BBE8009B047F /* ImageSaveRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011B8C2A72BBE8009B047F /* ImageSaveRecordView.swift */; };
@@ -60,7 +57,6 @@
 		92011C012A740A08009B047F /* AddNewCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C002A740A08009B047F /* AddNewCategoryCell.swift */; };
 		92011C042A740C16009B047F /* NewCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C032A740C16009B047F /* NewCategoryCell.swift */; };
 		92011C072A74AD97009B047F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C062A74AD97009B047F /* SearchViewController.swift */; };
-		92011C092A74AFCA009B047F /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C082A74AFCA009B047F /* SearchTextField.swift */; };
 		92011C0E2A74C1FC009B047F /* EmptySearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C0D2A74C1FC009B047F /* EmptySearchCell.swift */; };
 		92011C102A74F222009B047F /* SearchType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C0F2A74F222009B047F /* SearchType.swift */; };
 		92011C122A74F8E6009B047F /* SearchRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C112A74F8E6009B047F /* SearchRecordCell.swift */; };
@@ -68,13 +64,10 @@
 		92011C162A7505F7009B047F /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C152A7505F7009B047F /* Record.swift */; };
 		92011C182A753AEB009B047F /* CALayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C172A753AEB009B047F /* CALayer.swift */; };
 		92011C1C2A75E484009B047F /* RecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C1B2A75E484009B047F /* RecordCell.swift */; };
-		92011C1E2A75EE79009B047F /* MarkView11.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C1D2A75EE79009B047F /* MarkView11.swift */; };
 		92011C202A769C12009B047F /* SortHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C1F2A769C12009B047F /* SortHeaderView.swift */; };
 		92011C222A77907F009B047F /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C212A77907F009B047F /* CategoryCell.swift */; };
 		92011C242A77A329009B047F /* AddCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C232A77A329009B047F /* AddCategoryCell.swift */; };
-		92011C642A788FBF009B047F /* MarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C632A788FBF009B047F /* MarkerView.swift */; };
 		92011C662A78980E009B047F /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C652A78980E009B047F /* UIView.swift */; };
-		92011C682A78CB24009B047F /* InputAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C672A78CB24009B047F /* InputAlertViewController.swift */; };
 		92011CB92A7A1718009B047F /* MyRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011CB82A7A1718009B047F /* MyRecordViewController.swift */; };
 		92011CBC2A7A19CA009B047F /* MyRecordCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011CBB2A7A19CA009B047F /* MyRecordCategoryCell.swift */; };
 		92139D6D2AAC454B005344AE /* WrtieContentImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D6C2AAC454B005344AE /* WrtieContentImageView.swift */; };
@@ -104,16 +97,10 @@
 		9224FD192A616EB1000A56A6 /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD182A616EB1000A56A6 /* ColorCell.swift */; };
 		9224FD1B2A61705D000A56A6 /* ColorSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD1A2A61705D000A56A6 /* ColorSelection.swift */; };
 		9224FD1F2A62B4E9000A56A6 /* AddNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD1E2A62B4E9000A56A6 /* AddNotificationViewController.swift */; };
-		9224FD232A62EC0B000A56A6 /* RepeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD222A62EC0B000A56A6 /* RepeatViewController.swift */; };
 		9224FD252A638F01000A56A6 /* RepeatType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD242A638F01000A56A6 /* RepeatType.swift */; };
-		9224FD272A6394A9000A56A6 /* WeekdayRepeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD262A6394A9000A56A6 /* WeekdayRepeatViewController.swift */; };
 		9224FD312A6397BD000A56A6 /* CycleRepeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD302A6397BD000A56A6 /* CycleRepeatViewController.swift */; };
 		9224FD332A641B64000A56A6 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD322A641B64000A56A6 /* UIViewController.swift */; };
-		9224FD352A652A96000A56A6 /* WeekdayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD342A652A96000A56A6 /* WeekdayView.swift */; };
-		9224FD372A653024000A56A6 /* SpacingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD362A653024000A56A6 /* SpacingView.swift */; };
-		9224FD3B2A6532E3000A56A6 /* EndView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD3A2A6532E3000A56A6 /* EndView.swift */; };
 		9224FD3D2A6559A0000A56A6 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD3C2A6559A0000A56A6 /* AddLocationViewController.swift */; };
-		9224FD3F2A6561CD000A56A6 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD3E2A6561CD000A56A6 /* UITextField.swift */; };
 		9224FD422A656407000A56A6 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD412A656407000A56A6 /* LocationCell.swift */; };
 		9224FD442A657150000A56A6 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD432A657150000A56A6 /* Location.swift */; };
 		9224FD462A6579A7000A56A6 /* DeleteLocationFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9224FD452A6579A7000A56A6 /* DeleteLocationFooterView.swift */; };
@@ -155,9 +142,7 @@
 		925840B92A7F2DA300997434 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840B82A7F2DA300997434 /* ProfileCell.swift */; };
 		925840BB2A7F455D00997434 /* NotificationSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840BA2A7F455D00997434 /* NotificationSettingViewController.swift */; };
 		925840BD2A7F459600997434 /* NotificationSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840BC2A7F459600997434 /* NotificationSettingView.swift */; };
-		925840C12A7F5B2200997434 /* NotificationSwitchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C02A7F5B2200997434 /* NotificationSwitchButton.swift */; };
 		925840C32A7F61E800997434 /* InquiryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C22A7F61E800997434 /* InquiryViewController.swift */; };
-		925840C52A7F71E600997434 /* ToastMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C42A7F71E600997434 /* ToastMessageView.swift */; };
 		925840C72A7F76A500997434 /* WithdrawalAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C62A7F76A500997434 /* WithdrawalAlertViewController.swift */; };
 		925840C92A7F805800997434 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840C82A7F805800997434 /* UILabel.swift */; };
 		925840CB2A7F86F900997434 /* WithdrawalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840CA2A7F86F900997434 /* WithdrawalViewController.swift */; };
@@ -169,7 +154,6 @@
 		925840D52A80957900997434 /* AddLocationFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840D42A80957900997434 /* AddLocationFooterView.swift */; };
 		925840D72A80D4BD00997434 /* NotificationHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840D62A80D4BD00997434 /* NotificationHeaderView.swift */; };
 		925840D92A80D84300997434 /* SelectedNotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840D82A80D84300997434 /* SelectedNotificationCell.swift */; };
-		925840DB2A82144A00997434 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840DA2A82144A00997434 /* EditViewController.swift */; };
 		9263786B2A546BDE004E5B6E /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9263786A2A546BDE004E5B6E /* OnboardingViewController.swift */; };
 		9263786E2A5475AF004E5B6E /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9263786D2A5475AF004E5B6E /* OnboardingCell.swift */; };
 		926378712A54E0E6004E5B6E /* RootUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926378702A54E0E6004E5B6E /* RootUserDefaults.swift */; };
@@ -225,10 +209,6 @@
 		928B7C1D2AA489F600E4F789 /* NotificationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C1C2AA489F600E4F789 /* NotificationDTO.swift */; };
 		928B7C1F2AA6DADA00E4F789 /* ProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C1E2AA6DADA00E4F789 /* ProfileDTO.swift */; };
 		928B7C222AA83D2000E4F789 /* EditNicknameModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C212AA83D2000E4F789 /* EditNicknameModalViewController.swift */; };
-		929158222A2529660022BEF9 /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 929158192A2529660022BEF9 /* Pretendard-Regular.ttf */; };
-		929158242A2529660022BEF9 /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581B2A2529660022BEF9 /* Pretendard-Medium.ttf */; };
-		929158252A2529660022BEF9 /* Pretendard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */; };
-		929158272A2529660022BEF9 /* Pretendard-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9291581E2A2529660022BEF9 /* Pretendard-SemiBold.ttf */; };
 		929E23152AB737DC003180B3 /* ProfileImageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23142AB737DC003180B3 /* ProfileImageDTO.swift */; };
 		929E23172AB7F6C4003180B3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23162AB7F6C4003180B3 /* Utils.swift */; };
 		929E23192AB81E40003180B3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 929E23182AB81E40003180B3 /* GoogleService-Info.plist */; };
@@ -249,6 +229,10 @@
 		92E20F492B13B8AB00380FA5 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E20F482B13B8AB00380FA5 /* AuthViewModel.swift */; };
 		92E20F4C2B1429F400380FA5 /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E20F4B2B1429F400380FA5 /* Onboarding.swift */; };
 		92E3F4102B1CBC7400E03C15 /* WithdrawalNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F40F2B1CBC7400E03C15 /* WithdrawalNavigationViewController.swift */; };
+		92E3F4462B1DE0D000E03C15 /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92E3F4422B1DE0D000E03C15 /* Pretendard-Regular.ttf */; };
+		92E3F4472B1DE0D000E03C15 /* Pretendard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92E3F4432B1DE0D000E03C15 /* Pretendard-Bold.ttf */; };
+		92E3F4482B1DE0D000E03C15 /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92E3F4442B1DE0D000E03C15 /* Pretendard-Medium.ttf */; };
+		92E3F4492B1DE0D000E03C15 /* Pretendard-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92E3F4452B1DE0D000E03C15 /* Pretendard-SemiBold.ttf */; };
 		92E7814C2A84B9B3000DAACD /* ScheduleDateFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7814B2A84B9B3000DAACD /* ScheduleDateFooterView.swift */; };
 		92E7814E2A850316000DAACD /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7814D2A850316000DAACD /* Date.swift */; };
 		92E781522A85381D000DAACD /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E781512A85381D000DAACD /* String.swift */; };
@@ -328,13 +312,11 @@
 		920031C42A8B5D7D00E3170D /* MapMainLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMainLocationViewController.swift; sourceTree = "<group>"; };
 		920031C62A8B5DB700E3170D /* MapSettingsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSettingsHeaderView.swift; sourceTree = "<group>"; };
 		920031D02A8B65F000E3170D /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
-		920031D22A8C832300E3170D /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		920031D42A8D021000E3170D /* KakaoSerachDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoSerachDTO.swift; sourceTree = "<group>"; };
 		920031D62A8DAFD800E3170D /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		920031D82A8DB50600E3170D /* MyRecordContentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordContentHeaderView.swift; sourceTree = "<group>"; };
 		920031DA2A8DD29700E3170D /* SavingRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingRecordViewController.swift; sourceTree = "<group>"; };
 		920031DF2A8DF6F800E3170D /* saving.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = saving.json; sourceTree = "<group>"; };
-		920031E12A8E1E7700E3170D /* FindMarkersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindMarkersButton.swift; sourceTree = "<group>"; };
 		920031EA2A9103E900E3170D /* ImagePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerViewController.swift; sourceTree = "<group>"; };
 		920031EC2A91085300E3170D /* ImagePickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerCell.swift; sourceTree = "<group>"; };
 		920031EE2A910F7800E3170D /* PhotoDirectoryPickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDirectoryPickerButton.swift; sourceTree = "<group>"; };
@@ -354,7 +336,6 @@
 		92011B7C2A7174B6009B047F /* DateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHeaderView.swift; sourceTree = "<group>"; };
 		92011B7E2A726031009B047F /* WriteRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordViewController.swift; sourceTree = "<group>"; };
 		92011B802A7271D0009B047F /* SelectCategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryButton.swift; sourceTree = "<group>"; };
-		92011B862A72B0A7009B047F /* MainLocatonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLocatonView.swift; sourceTree = "<group>"; };
 		92011B882A72B4BB009B047F /* WriteContentTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteContentTextView.swift; sourceTree = "<group>"; };
 		92011B8A2A72B7DA009B047F /* NewWriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWriteButton.swift; sourceTree = "<group>"; };
 		92011B8C2A72BBE8009B047F /* ImageSaveRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaveRecordView.swift; sourceTree = "<group>"; };
@@ -365,7 +346,6 @@
 		92011C002A740A08009B047F /* AddNewCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCategoryCell.swift; sourceTree = "<group>"; };
 		92011C032A740C16009B047F /* NewCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCategoryCell.swift; sourceTree = "<group>"; };
 		92011C062A74AD97009B047F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		92011C082A74AFCA009B047F /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
 		92011C0D2A74C1FC009B047F /* EmptySearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySearchCell.swift; sourceTree = "<group>"; };
 		92011C0F2A74F222009B047F /* SearchType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchType.swift; sourceTree = "<group>"; };
 		92011C112A74F8E6009B047F /* SearchRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecordCell.swift; sourceTree = "<group>"; };
@@ -373,13 +353,10 @@
 		92011C152A7505F7009B047F /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		92011C172A753AEB009B047F /* CALayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALayer.swift; sourceTree = "<group>"; };
 		92011C1B2A75E484009B047F /* RecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCell.swift; sourceTree = "<group>"; };
-		92011C1D2A75EE79009B047F /* MarkView11.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkView11.swift; sourceTree = "<group>"; };
 		92011C1F2A769C12009B047F /* SortHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortHeaderView.swift; sourceTree = "<group>"; };
 		92011C212A77907F009B047F /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		92011C232A77A329009B047F /* AddCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryCell.swift; sourceTree = "<group>"; };
-		92011C632A788FBF009B047F /* MarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerView.swift; sourceTree = "<group>"; };
 		92011C652A78980E009B047F /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
-		92011C672A78CB24009B047F /* InputAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAlertViewController.swift; sourceTree = "<group>"; };
 		92011CB82A7A1718009B047F /* MyRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordViewController.swift; sourceTree = "<group>"; };
 		92011CBB2A7A19CA009B047F /* MyRecordCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordCategoryCell.swift; sourceTree = "<group>"; };
 		92139D6C2AAC454B005344AE /* WrtieContentImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrtieContentImageView.swift; sourceTree = "<group>"; };
@@ -409,16 +386,10 @@
 		9224FD182A616EB1000A56A6 /* ColorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
 		9224FD1A2A61705D000A56A6 /* ColorSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelection.swift; sourceTree = "<group>"; };
 		9224FD1E2A62B4E9000A56A6 /* AddNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotificationViewController.swift; sourceTree = "<group>"; };
-		9224FD222A62EC0B000A56A6 /* RepeatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatViewController.swift; sourceTree = "<group>"; };
 		9224FD242A638F01000A56A6 /* RepeatType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatType.swift; sourceTree = "<group>"; };
-		9224FD262A6394A9000A56A6 /* WeekdayRepeatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayRepeatViewController.swift; sourceTree = "<group>"; };
 		9224FD302A6397BD000A56A6 /* CycleRepeatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleRepeatViewController.swift; sourceTree = "<group>"; };
 		9224FD322A641B64000A56A6 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		9224FD342A652A96000A56A6 /* WeekdayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayView.swift; sourceTree = "<group>"; };
-		9224FD362A653024000A56A6 /* SpacingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacingView.swift; sourceTree = "<group>"; };
-		9224FD3A2A6532E3000A56A6 /* EndView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndView.swift; sourceTree = "<group>"; };
 		9224FD3C2A6559A0000A56A6 /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
-		9224FD3E2A6561CD000A56A6 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		9224FD412A656407000A56A6 /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		9224FD432A657150000A56A6 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		9224FD452A6579A7000A56A6 /* DeleteLocationFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteLocationFooterView.swift; sourceTree = "<group>"; };
@@ -460,9 +431,7 @@
 		925840B82A7F2DA300997434 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		925840BA2A7F455D00997434 /* NotificationSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingViewController.swift; sourceTree = "<group>"; };
 		925840BC2A7F459600997434 /* NotificationSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingView.swift; sourceTree = "<group>"; };
-		925840C02A7F5B2200997434 /* NotificationSwitchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSwitchButton.swift; sourceTree = "<group>"; };
 		925840C22A7F61E800997434 /* InquiryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryViewController.swift; sourceTree = "<group>"; };
-		925840C42A7F71E600997434 /* ToastMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessageView.swift; sourceTree = "<group>"; };
 		925840C62A7F76A500997434 /* WithdrawalAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalAlertViewController.swift; sourceTree = "<group>"; };
 		925840C82A7F805800997434 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		925840CA2A7F86F900997434 /* WithdrawalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalViewController.swift; sourceTree = "<group>"; };
@@ -472,7 +441,6 @@
 		925840D42A80957900997434 /* AddLocationFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationFooterView.swift; sourceTree = "<group>"; };
 		925840D62A80D4BD00997434 /* NotificationHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHeaderView.swift; sourceTree = "<group>"; };
 		925840D82A80D84300997434 /* SelectedNotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedNotificationCell.swift; sourceTree = "<group>"; };
-		925840DA2A82144A00997434 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		9263786A2A546BDE004E5B6E /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		9263786D2A5475AF004E5B6E /* OnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
 		926378702A54E0E6004E5B6E /* RootUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootUserDefaults.swift; sourceTree = "<group>"; };
@@ -529,10 +497,6 @@
 		928B7C1C2AA489F600E4F789 /* NotificationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDTO.swift; sourceTree = "<group>"; };
 		928B7C1E2AA6DADA00E4F789 /* ProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDTO.swift; sourceTree = "<group>"; };
 		928B7C212AA83D2000E4F789 /* EditNicknameModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNicknameModalViewController.swift; sourceTree = "<group>"; };
-		929158192A2529660022BEF9 /* Pretendard-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.ttf"; sourceTree = "<group>"; };
-		9291581B2A2529660022BEF9 /* Pretendard-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.ttf"; sourceTree = "<group>"; };
-		9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.ttf"; sourceTree = "<group>"; };
-		9291581E2A2529660022BEF9 /* Pretendard-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.ttf"; sourceTree = "<group>"; };
 		929E23142AB737DC003180B3 /* ProfileImageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageDTO.swift; sourceTree = "<group>"; };
 		929E23162AB7F6C4003180B3 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		929E23182AB81E40003180B3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -553,6 +517,10 @@
 		92E20F482B13B8AB00380FA5 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		92E20F4B2B1429F400380FA5 /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		92E3F40F2B1CBC7400E03C15 /* WithdrawalNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalNavigationViewController.swift; sourceTree = "<group>"; };
+		92E3F4422B1DE0D000E03C15 /* Pretendard-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.ttf"; sourceTree = "<group>"; };
+		92E3F4432B1DE0D000E03C15 /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.ttf"; sourceTree = "<group>"; };
+		92E3F4442B1DE0D000E03C15 /* Pretendard-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.ttf"; sourceTree = "<group>"; };
+		92E3F4452B1DE0D000E03C15 /* Pretendard-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.ttf"; sourceTree = "<group>"; };
 		92E7814B2A84B9B3000DAACD /* ScheduleDateFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDateFooterView.swift; sourceTree = "<group>"; };
 		92E7814D2A850316000DAACD /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		92E781512A85381D000DAACD /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -843,7 +811,6 @@
 		9224FD2B2A639593000A56A6 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				9224FD182A616EB1000A56A6 /* ColorCell.swift */,
 				925840D82A80D84300997434 /* SelectedNotificationCell.swift */,
 			);
 			path = Cell;
@@ -1093,8 +1060,6 @@
 			children = (
 				9224FCFC2A5FF185000A56A6 /* AddScheduleViewController.swift */,
 				9224FD1E2A62B4E9000A56A6 /* AddNotificationViewController.swift */,
-				9224FD222A62EC0B000A56A6 /* RepeatViewController.swift */,
-				9224FD262A6394A9000A56A6 /* WeekdayRepeatViewController.swift */,
 				9224FD302A6397BD000A56A6 /* CycleRepeatViewController.swift */,
 			);
 			path = ViewController;
@@ -1114,12 +1079,10 @@
 			isa = PBXGroup;
 			children = (
 				925840D02A7FCE6800997434 /* AddScheduleHeaderView.swift */,
+				925840CE2A7FCB5400997434 /* ScheduleTitleColorView.swift */,
 				9224FD022A600ACF000A56A6 /* ScheduleDurationView.swift */,
 				9224FD042A600F42000A56A6 /* NotificationRepeatButton.swift */,
 				925840D62A80D4BD00997434 /* NotificationHeaderView.swift */,
-				9224FD342A652A96000A56A6 /* WeekdayView.swift */,
-				9224FD362A653024000A56A6 /* SpacingView.swift */,
-				9224FD3A2A6532E3000A56A6 /* EndView.swift */,
 				9224FD2B2A639593000A56A6 /* Cell */,
 			);
 			path = View;
@@ -1137,10 +1100,10 @@
 		9245BC032B08C3F200383F4D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				92E7814A2A849AB9000DAACD /* Cell */,
 				92E7814B2A84B9B3000DAACD /* ScheduleDateFooterView.swift */,
 				925840D42A80957900997434 /* AddLocationFooterView.swift */,
 				9224FD452A6579A7000A56A6 /* DeleteLocationFooterView.swift */,
+				92E7814A2A849AB9000DAACD /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1165,9 +1128,6 @@
 			isa = PBXGroup;
 			children = (
 				92011B732A71386F009B047F /* Cell */,
-				92011C082A74AFCA009B047F /* SearchTextField.swift */,
-				92011C632A788FBF009B047F /* MarkerView.swift */,
-				920031E12A8E1E7700E3170D /* FindMarkersButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1233,7 +1193,6 @@
 				92011B8A2A72B7DA009B047F /* NewWriteButton.swift */,
 				92011B8C2A72BBE8009B047F /* ImageSaveRecordView.swift */,
 				92011B912A7367E5009B047F /* SelectMainLocationButton.swift */,
-				92011B862A72B0A7009B047F /* MainLocatonView.swift */,
 				920031C62A8B5DB700E3170D /* MapSettingsHeaderView.swift */,
 				920031B92A8B5C3000E3170D /* AddedLocationsHeaderView.swift */,
 				920031C02A8B5D0800E3170D /* MainLocationSettingView.swift */,
@@ -1282,8 +1241,6 @@
 			isa = PBXGroup;
 			children = (
 				925840BC2A7F459600997434 /* NotificationSettingView.swift */,
-				925840C02A7F5B2200997434 /* NotificationSwitchButton.swift */,
-				925840C42A7F71E600997434 /* ToastMessageView.swift */,
 				925840CC2A7F8E1C00997434 /* WithdrawalReasonView.swift */,
 				925840B32A7F281A00997434 /* Cell */,
 			);
@@ -1311,6 +1268,7 @@
 			isa = PBXGroup;
 			children = (
 				92011BF82A73D404009B047F /* ColorSelectionView.swift */,
+				92E3F4382B1DA6D700E03C15 /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1462,7 +1420,6 @@
 				92011C652A78980E009B047F /* UIView.swift */,
 				925840C82A7F805800997434 /* UILabel.swift */,
 				92139D762AAD6DCF005344AE /* UITextView.swift */,
-				9224FD3E2A6561CD000A56A6 /* UITextField.swift */,
 				92011C172A753AEB009B047F /* CALayer.swift */,
 				92E7814D2A850316000DAACD /* Date.swift */,
 				92E781512A85381D000DAACD /* String.swift */,
@@ -1505,7 +1462,6 @@
 				9245BBE32B08827E00383F4D /* Category */,
 				920031E52A8E1EBC00E3170D /* Content */,
 				9269993D2A14F6F9003DDAD2 /* My */,
-				92A7B64D2A4CCDB7009C9293 /* Reusable */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -1596,24 +1552,12 @@
 		929158162A25292A0022BEF9 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				9291581C2A2529660022BEF9 /* Pretendard-Bold.ttf */,
-				9291581B2A2529660022BEF9 /* Pretendard-Medium.ttf */,
-				929158192A2529660022BEF9 /* Pretendard-Regular.ttf */,
-				9291581E2A2529660022BEF9 /* Pretendard-SemiBold.ttf */,
+				92E3F4432B1DE0D000E03C15 /* Pretendard-Bold.ttf */,
+				92E3F4442B1DE0D000E03C15 /* Pretendard-Medium.ttf */,
+				92E3F4422B1DE0D000E03C15 /* Pretendard-Regular.ttf */,
+				92E3F4452B1DE0D000E03C15 /* Pretendard-SemiBold.ttf */,
 			);
 			path = Fonts;
-			sourceTree = "<group>";
-		};
-		92A7B64D2A4CCDB7009C9293 /* Reusable */ = {
-			isa = PBXGroup;
-			children = (
-				925840DA2A82144A00997434 /* EditViewController.swift */,
-				92011C1D2A75EE79009B047F /* MarkView11.swift */,
-				920031D22A8C832300E3170D /* SearchBar.swift */,
-				92011C672A78CB24009B047F /* InputAlertViewController.swift */,
-				925840CE2A7FCB5400997434 /* ScheduleTitleColorView.swift */,
-			);
-			path = Reusable;
 			sourceTree = "<group>";
 		};
 		92A7B6642A4E52A6009C9293 /* Model */ = {
@@ -1685,6 +1629,14 @@
 			children = (
 				920031EC2A91085300E3170D /* ImagePickerCell.swift */,
 				920031F72A92467A00E3170D /* PhotoDirectoryCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		92E3F4382B1DA6D700E03C15 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				9224FD182A616EB1000A56A6 /* ColorCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1859,15 +1811,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				92CBB03C2B18905300587BED /* SecureAPIKeys.plist in Resources */,
-				929158272A2529660022BEF9 /* Pretendard-SemiBold.ttf in Resources */,
-				929158222A2529660022BEF9 /* Pretendard-Regular.ttf in Resources */,
+				92E3F4462B1DE0D000E03C15 /* Pretendard-Regular.ttf in Resources */,
+				92E3F4492B1DE0D000E03C15 /* Pretendard-SemiBold.ttf in Resources */,
 				926999032A14EC09003DDAD2 /* LaunchScreen.storyboard in Resources */,
 				924BE0CA2A51AE25002C70FF /* .swiftlint.yml in Resources */,
 				920031E02A8DF6F800E3170D /* saving.json in Resources */,
-				929158242A2529660022BEF9 /* Pretendard-Medium.ttf in Resources */,
 				929E23192AB81E40003180B3 /* GoogleService-Info.plist in Resources */,
-				929158252A2529660022BEF9 /* Pretendard-Bold.ttf in Resources */,
+				92E3F4472B1DE0D000E03C15 /* Pretendard-Bold.ttf in Resources */,
 				926999002A14EC09003DDAD2 /* Assets.xcassets in Resources */,
+				92E3F4482B1DE0D000E03C15 /* Pretendard-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2023,7 +1975,6 @@
 				92011C242A77A329009B047F /* AddCategoryCell.swift in Sources */,
 				92139D892AB1BEBD005344AE /* Announcement.swift in Sources */,
 				92011C662A78980E009B047F /* UIView.swift in Sources */,
-				92011C092A74AFCA009B047F /* SearchTextField.swift in Sources */,
 				92011C162A7505F7009B047F /* Record.swift in Sources */,
 				92FE26152A4B751000BCDB82 /* BaseCollectionReusableView.swift in Sources */,
 				928B7BE92A9B1C5B00E4F789 /* BaseDTO.swift in Sources */,
@@ -2045,7 +1996,6 @@
 				92011BFF2A7407D3009B047F /* SelectCategoryViewController.swift in Sources */,
 				925840AE2A7CD17E00997434 /* EditCategoryViewController.swift in Sources */,
 				9200318F2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift in Sources */,
-				9224FD3B2A6532E3000A56A6 /* EndView.swift in Sources */,
 				9230BE472A57FEB80053E535 /* DayCell.swift in Sources */,
 				9245BC192B08DA7A00383F4D /* ScheduleType.swift in Sources */,
 				92F00AAF2AF4B53D001FE43F /* CategoryAPI.swift in Sources */,
@@ -2061,7 +2011,6 @@
 				9224FD312A6397BD000A56A6 /* CycleRepeatViewController.swift in Sources */,
 				9245BBD62B04E40A00383F4D /* DeletedCategory.swift in Sources */,
 				920031F52A92444E00E3170D /* PhotoDirectoryView.swift in Sources */,
-				925840DB2A82144A00997434 /* EditViewController.swift in Sources */,
 				9224FCEE2A5BEF80000A56A6 /* ScheduleTitleCell.swift in Sources */,
 				925840C72A7F76A500997434 /* WithdrawalAlertViewController.swift in Sources */,
 				920031B82A8B5BC700E3170D /* KakaoAddressDTO.swift in Sources */,
@@ -2070,15 +2019,12 @@
 				9224FD3D2A6559A0000A56A6 /* AddLocationViewController.swift in Sources */,
 				9245BC262B0A4C5400383F4D /* Calendar.swift in Sources */,
 				9224FD1F2A62B4E9000A56A6 /* AddNotificationViewController.swift in Sources */,
-				92011C1E2A75EE79009B047F /* MarkView11.swift in Sources */,
 				923AA0B92B1B7F50006028AF /* NavigationBarViewController.swift in Sources */,
-				9224FD372A653024000A56A6 /* SpacingView.swift in Sources */,
 				925840AA2A7CC92E00997434 /* CategorySettingCell.swift in Sources */,
 				9245BC282B0A4D3400383F4D /* CalendarDTO.swift in Sources */,
 				925840CD2A7F8E1C00997434 /* WithdrawalReasonView.swift in Sources */,
 				928B7C162AA1C62400E4F789 /* UserManager.swift in Sources */,
 				928B7BEB2A9B27E800E4F789 /* AuthDTO.swift in Sources */,
-				92011B872A72B0A7009B047F /* MainLocatonView.swift in Sources */,
 				92F00AAD2AEE161C001FE43F /* ScheduleDateCell.swift in Sources */,
 				928B7C0C2AA06F7400E4F789 /* EditProfileViewController.swift in Sources */,
 				928B7BE22A9AF09E00E4F789 /* AuthAPI.swift in Sources */,
@@ -2111,12 +2057,10 @@
 				9224FCF92A5FCF72000A56A6 /* ScheduleCell.swift in Sources */,
 				9263786E2A5475AF004E5B6E /* OnboardingCell.swift in Sources */,
 				92139D752AAD67E8005344AE /* MyRecordContentImageView.swift in Sources */,
-				9224FD352A652A96000A56A6 /* WeekdayView.swift in Sources */,
 				926999362A14F443003DDAD2 /* BaseView.swift in Sources */,
 				92E3F4102B1CBC7400E03C15 /* WithdrawalNavigationViewController.swift in Sources */,
 				920031F32A92274100E3170D /* LimitedPhotoSelectionView.swift in Sources */,
 				92011C0E2A74C1FC009B047F /* EmptySearchCell.swift in Sources */,
-				925840C52A7F71E600997434 /* ToastMessageView.swift in Sources */,
 				925840D92A80D84300997434 /* SelectedNotificationCell.swift in Sources */,
 				9245BBD42B049EAC00383F4D /* DeleteCategoryAlertViewController.swift in Sources */,
 				92FE26132A4B74D800BCDB82 /* ScheduleTypeHeaderView.swift in Sources */,
@@ -2142,7 +2086,6 @@
 				920031D72A8DAFD800E3170D /* ContentViewController.swift in Sources */,
 				920031F82A92467A00E3170D /* PhotoDirectoryCell.swift in Sources */,
 				920032052A97166700E3170D /* PermissionView.swift in Sources */,
-				920031E22A8E1E7700E3170D /* FindMarkersButton.swift in Sources */,
 				926999442A14F756003DDAD2 /* GatheringViewController.swift in Sources */,
 				9200320F2A99A3A800E3170D /* LoginViewController.swift in Sources */,
 				92E7814C2A84B9B3000DAACD /* ScheduleDateFooterView.swift in Sources */,
@@ -2159,7 +2102,6 @@
 				9224FD192A616EB1000A56A6 /* ColorCell.swift in Sources */,
 				92A7B6682A4E6154009C9293 /* UpcomingScheduleCell.swift in Sources */,
 				927E7F272A683DCD00E6A29F /* CalendarCell.swift in Sources */,
-				925840C12A7F5B2200997434 /* NotificationSwitchButton.swift in Sources */,
 				92139D6D2AAC454B005344AE /* WrtieContentImageView.swift in Sources */,
 				9273C9542ABF05F300224DE1 /* ColorListDTO.swift in Sources */,
 				928B7BF92A9D944D00E4F789 /* Interceptor.swift in Sources */,
@@ -2171,8 +2113,6 @@
 				92139D912AB1EF51005344AE /* AnnouncementCell.swift in Sources */,
 				9230BE512A59B45D0053E535 /* CalendarViewModel.swift in Sources */,
 				92011B902A7364D0009B047F /* BaseButton.swift in Sources */,
-				92011C682A78CB24009B047F /* InputAlertViewController.swift in Sources */,
-				9224FD3F2A6561CD000A56A6 /* UITextField.swift in Sources */,
 				9230BE452A57F01E0053E535 /* WeekdayCell.swift in Sources */,
 				928B7C1F2AA6DADA00E4F789 /* ProfileDTO.swift in Sources */,
 				92011C102A74F222009B047F /* SearchType.swift in Sources */,
@@ -2182,7 +2122,6 @@
 				925840A02A7BD4D700997434 /* CategoryOrderCell.swift in Sources */,
 				9224FCF32A5C5E7A000A56A6 /* WeekCell.swift in Sources */,
 				9224FD4A2A667F7E000A56A6 /* TimePickerViewController.swift in Sources */,
-				9224FD272A6394A9000A56A6 /* WeekdayRepeatViewController.swift in Sources */,
 				920031D12A8B65F000E3170D /* Bundle.swift in Sources */,
 				9224FD442A657150000A56A6 /* Location.swift in Sources */,
 				926999462A14F75F003DDAD2 /* RecordViewController.swift in Sources */,
@@ -2230,14 +2169,11 @@
 				92CD36FA2A7B505900768B61 /* MyCategoryViewController.swift in Sources */,
 				928B7C1B2AA4784500E4F789 /* TermsOfUserDTO.swift in Sources */,
 				9224FD1B2A61705D000A56A6 /* ColorSelection.swift in Sources */,
-				920031D32A8C832300E3170D /* SearchBar.swift in Sources */,
 				9273C94E2ABEEFC300224DE1 /* AddScheduleDateType.swift in Sources */,
 				928B7BF72A9CA92F00E4F789 /* ActiveStatus.swift in Sources */,
 				9273C9502ABF040400224DE1 /* ScheduleManager.swift in Sources */,
-				92011C642A788FBF009B047F /* MarkerView.swift in Sources */,
 				92011CBC2A7A19CA009B047F /* MyRecordCategoryCell.swift in Sources */,
 				920031B52A8B5B9100E3170D /* Environment.swift in Sources */,
-				9224FD232A62EC0B000A56A6 /* RepeatViewController.swift in Sources */,
 				9245BBC82AFB926900383F4D /* CategoryViewModel.swift in Sources */,
 				920031D52A8D021000E3170D /* KakaoSerachDTO.swift in Sources */,
 				92F00AB12AF4B897001FE43F /* CategoryManager.swift in Sources */,

@@ -55,8 +55,8 @@ class PermissionView: BaseView {
         }
     }
     
-    func configure(imageName: String, size: CGSize, title: String, subTitle: String) {
-        permissionImage.image = UIImage(named: imageName)
+    func configure(image: UIImage, size: CGSize, title: String, subTitle: String) {
+        permissionImage.image = image
         permissionImage.snp.makeConstraints {
             $0.width.equalTo(size.width)
             $0.height.equalTo(size.height)

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class InquiryViewController: NavigationBarViewController {
     private let email = "mappilogue@naver.com"
@@ -102,7 +103,7 @@ class InquiryViewController: NavigationBarViewController {
     }
     
     func setGatheringToastMessage() {
-        emailCopyToastMessage.configure("이메일이 복사되었어요", showUndo: false)
+        emailCopyToastMessage.configure(message: "이메일이 복사되었어요", showUndo: false)
         view.addSubview(emailCopyToastMessage)
         
         emailCopyToastMessage.snp.makeConstraints {

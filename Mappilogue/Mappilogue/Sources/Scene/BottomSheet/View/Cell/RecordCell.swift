@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class RecordCell: BaseCollectionViewCell {
     static let registerId = "\(RecordCell.self)"
     
     private let recordImage = UIImageView()
-    private let markView = MarkView11(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
+    private let markView = MarkView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
     
     private let textView = UIView()
     private let recordTitleLabel = UILabel()
@@ -42,7 +43,7 @@ class RecordCell: BaseCollectionViewCell {
         recordDateLabel.textColor = .gray707070
         recordDateLabel.font = .caption01
 
-        separatorImage.image = UIImage(named: "common_separator")
+        separatorImage.image = Images.image(named: .imageSeparator)
 
         recordLocationLabel.textColor = .gray707070
         recordLocationLabel.font = .caption01

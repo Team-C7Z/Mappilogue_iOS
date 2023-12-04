@@ -73,7 +73,7 @@ class RecordViewController: NavigationBarViewController {
         searchTextField.delegate = self
         setSearchTextFieldTapGestue()
         
-        currentLocationButton.setImage(UIImage(named: "moveCurrentLocation"), for: .normal)
+        currentLocationButton.setImage(Images.image(named: .buttonMoveCurrentLocation), for: .normal)
         currentLocationButton.layer.applyShadow()
         currentLocationButton.addTarget(self, action: #selector(currentLocationButtonTapped), for: .touchUpInside)
         
@@ -170,7 +170,7 @@ class RecordViewController: NavigationBarViewController {
         guard let locationOverlay = locationOverlay else { return }
         locationOverlay.hidden = false
         locationOverlay.location = NMGLatLng(lat: latitude, lng: longitude)
-        locationOverlay.icon = NMFOverlayImage(name: "currentLocation")
+        locationOverlay.icon = NMFOverlayImage(name: Images.Image.imageCurrentLocation.rawValue)
         locationOverlay.iconWidth = 20
         locationOverlay.iconHeight = 20
     }
@@ -218,8 +218,8 @@ class RecordViewController: NavigationBarViewController {
         return markerView
     }
     
-    private func createZoomOutMarkerView(record: Record) -> MarkView11 {
-        let markView = MarkView11(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
+    private func createZoomOutMarkerView(record: Record) -> MarkView {
+        let markView = MarkView(frame: CGRect(x: 0, y: 0, width: 24, height: 24))
         markView.configure(heartWidth: 14, heartHeight: 13)
         markView.layer.applyShadow()
         markView.backgroundColor = record.color
@@ -234,7 +234,7 @@ class RecordViewController: NavigationBarViewController {
         return marker
     }
     
-    private func createZoomOutMarker(markerView: MarkView11, lat: Double, lng: Double) -> NMFMarker {
+    private func createZoomOutMarker(markerView: MarkView, lat: Double, lng: Double) -> NMFMarker {
         let marker = NMFMarker()
         marker.iconImage = NMFOverlayImage(image: markerView.asImage())
         marker.position = NMGLatLng(lat: lat, lng: lng)

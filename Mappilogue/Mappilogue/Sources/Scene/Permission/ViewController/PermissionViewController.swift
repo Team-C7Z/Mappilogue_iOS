@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class PermissionViewController: BaseViewController {
     private let permissionLabel = UILabel()
@@ -29,10 +30,10 @@ class PermissionViewController: BaseViewController {
         stackView.distribution = .equalSpacing
         stackView.spacing = 29
         
-        notificationView.configure(imageName: "permission_notification", size: CGSize(width: 24, height: 24), title: "알림", subTitle: "미리 알림 및 공지사항의 푸시 알림")
-        imageView.configure(imageName: "permission_image", size: CGSize(width: 24, height: 24), title: "사진", subTitle: "기록 작성 시 업로드할 사진 접근")
-        cameraView.configure(imageName: "permission_camera", size: CGSize(width: 28, height: 24), title: "카메라", subTitle: "촬영 후 사진 업로드")
-        locationView.configure(imageName: "permission_location", size: CGSize(width: 24, height: 30), title: "위치", subTitle: "현재 위치에서 기록 검색")
+        notificationView.configure(image: Images.image(named: .imagePermissionNotification), size: CGSize(width: 24, height: 24), title: "알림", subTitle: "미리 알림 및 공지사항의 푸시 알림")
+        imageView.configure(image: Images.image(named: .imagePermissionImage), size: CGSize(width: 24, height: 24), title: "사진", subTitle: "기록 작성 시 업로드할 사진 접근")
+        cameraView.configure(image: Images.image(named: .imagePermissionCamera), size: CGSize(width: 28, height: 24), title: "카메라", subTitle: "촬영 후 사진 업로드")
+        locationView.configure(image: Images.image(named: .imagePermissionLocation), size: CGSize(width: 24, height: 30), title: "위치", subTitle: "현재 위치에서 기록 검색")
         
         startButton.backgroundColor = .black1C1C1C
         startButton.layer.cornerRadius = 12

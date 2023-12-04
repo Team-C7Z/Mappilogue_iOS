@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class UpcomingScheduleCell: BaseTableViewCell {
     static let registerId = "\(UpcomingScheduleCell.self)"
@@ -85,7 +86,7 @@ class UpcomingScheduleCell: BaseTableViewCell {
         upcomingScheduleDateLabel.text = schedule.date
         if let time = schedule.time {
             upcomingScheduleTimeLabel.text = "\(time) 시작"
-            separatorImage.image = UIImage(named: "common_separator")
+            separatorImage.image = Images.image(named: .imageSeparator)
         } else {
             upcomingScheduleTimeLabel.text = ""
         }

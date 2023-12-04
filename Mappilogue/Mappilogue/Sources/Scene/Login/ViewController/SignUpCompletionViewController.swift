@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class SignUpCompletionViewController: BaseViewController {
     var onTapped: (() -> Void)?
@@ -30,7 +31,7 @@ class SignUpCompletionViewController: BaseViewController {
         stackView.alignment = .center
         stackView.spacing = 40
         
-        completionImage.image = UIImage(named: "login_completion")
+        completionImage.image = Images.image(named: .imageSignupCompletion)
         completionImage.contentMode = .scaleAspectFit
         
         labelStackView.axis = .vertical

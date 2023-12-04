@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class DeleteCategoryAlertViewController: BaseViewController {
     var onCancelTapped: (() -> Void)?
@@ -38,7 +39,7 @@ class DeleteCategoryAlertViewController: BaseViewController {
         
         checkButton.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
         
-        checkImage.image = UIImage(named: "common_unCheck")
+        checkImage.image = Images.image(named: .buttonUncheck)
         
         messageLabel.text = "카테고리 안 기록까지 모두 삭제"
         messageLabel.textColor = .gray707070
@@ -120,8 +121,8 @@ class DeleteCategoryAlertViewController: BaseViewController {
     }
     
     @objc func checkButtonTapped(_ button: UIButton) {
-        checkImage.image = UIImage(named: button.isSelected ? "common_unCheck" : "common_check")
-        
+        checkImage.image = Images.image(named: button.isSelected ? .buttonUncheck : .buttonCheck)
+      
         button.isSelected.toggle()
     }
     

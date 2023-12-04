@@ -296,8 +296,8 @@ class AddScheduleViewController: NavigationBarViewController {
     }
     
     func presentRepeatViewController() {
-        let repeatViewController = RepeatViewController()
-        navigationController?.pushViewController(repeatViewController, animated: true)
+//        let repeatViewController = RepeatViewController()
+//        navigationController?.pushViewController(repeatViewController, animated: true)
     }
     
     func presentAddLocationController() {

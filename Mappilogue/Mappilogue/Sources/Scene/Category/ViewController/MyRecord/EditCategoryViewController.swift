@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class EditCategoryViewController: BaseViewController {
     private var categoryViewModel = CategoryViewModel()
@@ -36,13 +37,13 @@ class EditCategoryViewController: BaseViewController {
         
         barView.backgroundColor = .grayC9C6C2
         
-        modifyCategoryImage.image = UIImage(named: "common_modify")
+        modifyCategoryImage.image = Images.image(named: .imageModify)
         modifyCategoryLabel.text = "카테고리 이름 바꾸기"
         modifyCategoryLabel.textColor = .black1C1C1C
         modifyCategoryLabel.font = .title02
         modifyCategoryButton.addTarget(self, action: #selector(modifyCategoryButtonTapped), for: .touchUpInside)
         
-        deleteCategoryImage.image = UIImage(named: "common_delete")
+        deleteCategoryImage.image = Images.image(named: .imageDelete)
         deleteCategoryImage.tintColor = .redF14C4C
         deleteCategoryLabel.text = "카테고리 삭제하기"
         deleteCategoryLabel.textColor = .black1C1C1C
@@ -127,7 +128,7 @@ class EditCategoryViewController: BaseViewController {
     @objc func modifyCategoryButtonTapped(_ button: UIButton) {
         editMode = false
         
-        let inputAlertViewController = InputAlertViewController()
+        let inputAlertViewController = InputModalViewController()
         inputAlertViewController.modalPresentationStyle = .overCurrentContext
         inputAlertViewController.configure(categoryName)
         inputAlertViewController.onCancelTapped = {
