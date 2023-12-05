@@ -24,10 +24,10 @@ class MyRecordCategoryCell: BaseTableViewCell {
     override func setupProperty() {
         super.setupProperty()
         
-        categoryLabel.textColor = .color1C1C1C
+        categoryLabel.textColor = .black1C1C1C
         categoryLabel.font = .body02
 
-        categoryCountLabel.textColor = .color9B9791
+        categoryCountLabel.textColor = .gray9B9791
         categoryCountLabel.font = .body02
         
         moveImage.image = UIImage(named: "moveWrite")
@@ -69,6 +69,6 @@ class MyRecordCategoryCell: BaseTableViewCell {
     func configure(with category: Category, isLast: Bool) {
         categoryLabel.text = category.title
         categoryCountLabel.text = "(\(category.markCount))"
-        lineView.backgroundColor = isLast ? .clear : .colorEAE6E1
+        lineView.backgroundColor = isLast ? .clear : .grayEAE6E1
     }
 }

@@ -18,7 +18,7 @@ extension CALayer {
     }
     
     func applyMainColorShadow() {
-        shadowColor = UIColor.color379240.cgColor
+        shadowColor = UIColor.green379240.cgColor
         shadowOpacity = 0.14
         shadowRadius = 4.0
         shadowOffset = CGSize(width: 0, height: 4)

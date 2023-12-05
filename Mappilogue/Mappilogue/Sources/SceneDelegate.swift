@@ -7,6 +7,7 @@
 
 import UIKit
 import KakaoSDKAuth
+import MappilogueKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -34,7 +35,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 }
             }
         }
-        
         window.makeKeyAndVisible()
         self.window = window
         

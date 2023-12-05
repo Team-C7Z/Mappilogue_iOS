@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class WithdrawalAlertViewController: BaseViewController {
     var isChecked: Bool = false
@@ -23,39 +24,39 @@ class WithdrawalAlertViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        view.backgroundColor = .color404040.withAlphaComponent(0.1)
+        view.backgroundColor = .gray404040.withAlphaComponent(0.1)
         
         alertView.layer.cornerRadius = 12
-        alertView.backgroundColor = .colorF9F8F7
+        alertView.backgroundColor = .grayF9F8F7
         
         titleLabel.text = "정말 탈퇴하시겠어요?"
         titleLabel.textColor = .color000000
         titleLabel.font = .title02
         
         messageLabel.setTextWithLineHeight(text: "이때까지 저장된 기록과 정보가 모두 지워지고 이는 복구할 수 없어요", lineHeight: 21)
-        messageLabel.textColor = .color707070
+        messageLabel.textColor = .gray707070
         messageLabel.font = .body02
         messageLabel.numberOfLines = 0
         messageLabel.textAlignment = .center
         messageLabel.lineBreakMode = .byWordWrapping
         
         checkButton.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
-        checkImage.image = UIImage(named: "common_unCheck")
+        checkImage.image = Images.image(named: .buttonUncheck)
         checkLabel.text = "주의사항을 확인했어요"
-        checkLabel.textColor = .color707070
+        checkLabel.textColor = .gray707070
         checkLabel.font = .body02
         
         cancelButton.layer.cornerRadius = 12
-        cancelButton.backgroundColor = .colorF5F3F0
+        cancelButton.backgroundColor = .grayF5F3F0
         cancelButton.setTitle("취소", for: .normal)
-        cancelButton.setTitleColor(.color1C1C1C, for: .normal)
+        cancelButton.setTitleColor(.black1C1C1C, for: .normal)
         cancelButton.titleLabel?.font = .body02
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         
         doneButton.layer.cornerRadius = 12
-        doneButton.backgroundColor = .colorC9C6C2
+        doneButton.backgroundColor = .grayC9C6C2
         doneButton.setTitle("탈퇴하기", for: .normal)
-        doneButton.setTitleColor(.colorFFFFFF, for: .normal)
+        doneButton.setTitleColor(.whiteFFFFFF, for: .normal)
         doneButton.titleLabel?.font = .body03
         doneButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
     }
@@ -128,8 +129,8 @@ class WithdrawalAlertViewController: BaseViewController {
     @objc private func checkButtonTapped() {
         isChecked = !isChecked
         
-        checkImage.image = UIImage(named: isChecked ? "common_check" : "common_unCheck")
-        doneButton.backgroundColor = isChecked ? .colorF14C4C : .colorC9C6C2
+        checkImage.image = Images.image(named: isChecked ? .buttonCheck : .buttonUncheck)
+        doneButton.backgroundColor = isChecked ? .redF14C4C : .grayC9C6C2
     }
     
     @objc private func cancelButtonTapped(_ sender: UIButton) {

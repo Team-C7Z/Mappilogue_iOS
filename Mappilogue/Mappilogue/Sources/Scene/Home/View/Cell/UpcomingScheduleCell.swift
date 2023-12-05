@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class UpcomingScheduleCell: BaseTableViewCell {
     static let registerId = "\(UpcomingScheduleCell.self)"
@@ -26,17 +27,17 @@ class UpcomingScheduleCell: BaseTableViewCell {
         super.setupProperty()
         
         outerView.layer.cornerRadius = 12
-        outerView.backgroundColor = .colorF5F3F0
+        outerView.backgroundColor = .grayF5F3F0
         
-        upcomingScheduleTimeLabel.textColor = .color1C1C1C
+        upcomingScheduleTimeLabel.textColor = .black1C1C1C
         upcomingScheduleDateLabel.font = .caption02
         
-        separatorImage.tintColor = .color1C1C1C
+        separatorImage.tintColor = .black1C1C1C
         
-        upcomingScheduleTimeLabel.textColor = .color1C1C1C
+        upcomingScheduleTimeLabel.textColor = .black1C1C1C
         upcomingScheduleTimeLabel.font = .caption01
         
-        upcomingScheduleLabel.textColor = .color1C1C1C
+        upcomingScheduleLabel.textColor = .black1C1C1C
         upcomingScheduleLabel.font = .title02
     }
     
@@ -85,7 +86,7 @@ class UpcomingScheduleCell: BaseTableViewCell {
         upcomingScheduleDateLabel.text = schedule.date
         if let time = schedule.time {
             upcomingScheduleTimeLabel.text = "\(time) 시작"
-            separatorImage.image = UIImage(named: "common_separator")
+            separatorImage.image = Images.image(named: .imageSeparator)
         } else {
             upcomingScheduleTimeLabel.text = ""
         }

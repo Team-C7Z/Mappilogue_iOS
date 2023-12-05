@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class ScheduleCell: BaseCollectionViewCell {
     static let registerId = "\(ScheduleCell.self)"
@@ -24,16 +25,16 @@ class ScheduleCell: BaseCollectionViewCell {
         
         scheduleColorView.layer.cornerRadius = 4
         
-        scheduleLabel.textColor = .color1C1C1C
+        scheduleLabel.textColor = .black1C1C1C
         scheduleLabel.font = .body02
         
-        scheduleTimeLabel.textColor = .color707070
+        scheduleTimeLabel.textColor = .gray707070
         scheduleTimeLabel.font = .caption03
         
-        scheduleLocationLabel.textColor = .color707070
+        scheduleLocationLabel.textColor = .gray707070
         scheduleLocationLabel.font = .caption03
         
-        editButton.setImage(UIImage(named: "common_edit"), for: .normal)
+        editButton.setImage(Images.image(named: .buttonEdit), for: .normal)
         editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
     }
     

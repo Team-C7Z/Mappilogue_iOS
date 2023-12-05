@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class DeleteCategoryAlertViewController: BaseViewController {
     var onCancelTapped: (() -> Void)?
@@ -27,10 +28,10 @@ class DeleteCategoryAlertViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        view.backgroundColor = .color404040.withAlphaComponent(0.1)
+        view.backgroundColor = .gray404040.withAlphaComponent(0.1)
         
         alertView.layer.cornerRadius = 12
-        alertView.backgroundColor = .colorF9F8F7
+        alertView.backgroundColor = .grayF9F8F7
         
         titleLabel.text = "이 카테고리를 삭제할까요?"
         titleLabel.textColor = .color000000
@@ -38,26 +39,26 @@ class DeleteCategoryAlertViewController: BaseViewController {
         
         checkButton.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
         
-        checkImage.image = UIImage(named: "common_unCheck")
+        checkImage.image = Images.image(named: .buttonUncheck)
         
         messageLabel.text = "카테고리 안 기록까지 모두 삭제"
-        messageLabel.textColor = .color707070
+        messageLabel.textColor = .gray707070
         messageLabel.font = .body02
         messageLabel.numberOfLines = 0
         messageLabel.textAlignment = .center
         
         cancelButton.setTitle("취소", for: .normal)
         cancelButton.layer.cornerRadius = 12
-        cancelButton.backgroundColor = .colorF5F3F0
-        cancelButton.setTitleColor(.color1C1C1C, for: .normal)
+        cancelButton.backgroundColor = .grayF5F3F0
+        cancelButton.setTitleColor(.black1C1C1C, for: .normal)
         cancelButton.titleLabel?.font = .body02
         cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         
         doneButton.setTitle("삭제", for: .normal)
         doneButton.layer.cornerRadius = 12
-        doneButton.setTitleColor(.colorFFFFFF, for: .normal)
+        doneButton.setTitleColor(.whiteFFFFFF, for: .normal)
         doneButton.titleLabel?.font = .body03
-        doneButton.backgroundColor = .colorF14C4C
+        doneButton.backgroundColor = .redF14C4C
         doneButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
     }
     
@@ -120,8 +121,8 @@ class DeleteCategoryAlertViewController: BaseViewController {
     }
     
     @objc func checkButtonTapped(_ button: UIButton) {
-        checkImage.image = UIImage(named: button.isSelected ? "common_unCheck" : "common_check")
-        
+        checkImage.image = Images.image(named: button.isSelected ? .buttonUncheck : .buttonCheck)
+      
         button.isSelected.toggle()
     }
     

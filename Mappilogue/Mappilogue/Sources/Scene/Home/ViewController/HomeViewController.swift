@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class HomeViewController: NavigationBarViewController {
     let dummyTodayData = dummyTodayScheduleData(scheduleCount: 2)
@@ -18,7 +19,7 @@ class HomeViewController: NavigationBarViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.separatorStyle = .none
-        tableView.backgroundColor = .colorF9F8F7
+        tableView.backgroundColor = .grayF9F8F7
         tableView.sectionHeaderHeight = 0
         tableView.sectionFooterHeight = 0
         tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
@@ -42,7 +43,7 @@ class HomeViewController: NavigationBarViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setupNavigationBar()
+        setLogoNotificationBar()
     }
     
     override func setupHierarchy() {
@@ -53,18 +54,11 @@ class HomeViewController: NavigationBarViewController {
     
     override func setupLayout() {
         super.setupLayout()
-        
-        tableView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
-        }
-    }
     
-    func setupNavigationBar() {
-        self.navigationItem.title = ""
-        
-        let logoImage = UIImage(named: "home_logo")?.withRenderingMode(.alwaysOriginal)
-        let buttonItem = UIBarButtonItem(image: logoImage, style: .plain, target: self, action: nil)
-        navigationItem.leftBarButtonItem = buttonItem
+        tableView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(88)
+            $0.leading.bottom.trailing.equalToSuperview()
+        }
     }
 }
 
@@ -251,12 +245,12 @@ extension HomeViewController: ScheduleTypeDelegate, ExpandCellDelegate {
     }
     
     func navigateToRecordContentViewController() {
-        let recordContentViewController = MyRecordContentViewController()
+        let recordContentViewController = ContentViewController()
         navigationController?.pushViewController(recordContentViewController, animated: true)
     }
     
     func navigateToSelectWriteRecordViewController() {
-        let selectWriteRecordViewController = SelectWriteRecordViewController()
+        let selectWriteRecordViewController = WriteListRecordViewController()
         navigationController?.pushViewController(selectWriteRecordViewController, animated: true)
     }
 }

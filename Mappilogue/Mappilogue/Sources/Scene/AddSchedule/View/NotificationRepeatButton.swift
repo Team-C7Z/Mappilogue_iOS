@@ -15,9 +15,9 @@ class NotificationRepeatButton: BaseButton {
     override func setupProperty() {
         super.setupProperty()
 
-        backgroundColor = .colorF9F8F7
+        backgroundColor = .grayF9F8F7
         
-        label.textColor = .color707070
+        label.textColor = .gray707070
         label.font = .body02
         
         moveImage.image = UIImage(named: "move")

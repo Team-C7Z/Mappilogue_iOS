@@ -23,11 +23,11 @@ class CalendarEmptyScheduleCell: BaseCollectionViewCell {
         stackView.spacing = 4
         
         emptyScheduleLabel.text = "일정이 없어요"
-        emptyScheduleLabel.textColor = .color707070
+        emptyScheduleLabel.textColor = .gray707070
         emptyScheduleLabel.font = .title02
         
         emptyScheduleSubLabel.text = "일정 추가 버튼을 눌러 일정을 만들어 보세요"
-        emptyScheduleSubLabel.textColor = .color707070
+        emptyScheduleSubLabel.textColor = .gray707070
         emptyScheduleSubLabel.font = .caption01
     }
     

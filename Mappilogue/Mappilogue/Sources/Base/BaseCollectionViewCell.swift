@@ -16,7 +16,7 @@ class BaseCollectionViewCell: UICollectionViewCell, BaseViewProtocol {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .colorF9F8F7
+        backgroundColor = .grayF9F8F7
         
         setupProperty()
         setupHierarchy()

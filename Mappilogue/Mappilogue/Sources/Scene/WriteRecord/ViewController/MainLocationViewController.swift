@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainLocationViewController: BaseViewController {
+class MainLocationViewController: NavigationBarViewController {
     private var selectedMapLocation: Location?
     private let dummyLocation = dummyMainLocationData()
     private var selectedLocationIndex: Int?
@@ -17,7 +17,7 @@ class MainLocationViewController: BaseViewController {
         layout.scrollDirection = .vertical
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .colorF9F8F7
+        collectionView.backgroundColor = .grayF9F8F7
 
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         collectionView.register(MainLocationCell.self, forCellWithReuseIdentifier: MainLocationCell.registerId)
@@ -37,7 +37,7 @@ class MainLocationViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
 
-        setNavigationTitleAndBackButton("대표 위치 설정", backButtonAction: #selector(backButtonTapped))
+        setPopBar(title: "대표 위치 설정")
     }
 
     override func setupHierarchy() {
@@ -50,7 +50,8 @@ class MainLocationViewController: BaseViewController {
         super.setupLayout()
 
         collectionView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(88)
+            $0.leading.bottom.trailing.equalToSuperview()
         }
     }
 

@@ -6,13 +6,14 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class AddLocationFooterView: BaseCollectionReusableView {
     static let registerId = "\(AddLocationFooterView.self)"
     
     var onAddLocationButtonTapped: (() -> Void)?
     
-    private let addLocationButton = AddButton(text: "장소 추가하기", backgroundColor: .color1C1C1C)
+    private let addLocationButton = AddButton(title: "일정 추가하기")
     
     override func setupProperty() {
         super.setupProperty()

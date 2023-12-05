@@ -7,8 +7,9 @@
 
 import UIKit
 import Photos
+import MappilogueKit
 
-class WriteRecordViewController: BaseViewController {
+class WriteRecordViewController: NavigationBarViewController {
     private var colorViewModel = ColorViewModel()
     private var colorList: [ColorListDTO] = []
     var schedule = Schedule2222()
@@ -18,12 +19,12 @@ class WriteRecordViewController: BaseViewController {
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     private let stackView = UIStackView()
-    private let categoryButton = CategoryButton()
+    private let categoryButton = SelectCategoryButton()
     private let scheduleTitleColorView = ScheduleTitleColorView()
     private let colorSelectionView = ColorSelectionView()
-    private let mainLocationButton = MainLocationButton()
-    private let contentImageView = ContentImageView()
-    private let contentTextView = ContentTextView()
+    private let mainLocationButton = SelectMainLocationButton()
+    private let contentImageView = WrtieContentImageView()
+    private let contentTextView = WriteContentTextView()
     private let saveRecordView = ImageSaveRecordView()
     
     override func viewDidLoad() {
@@ -40,7 +41,11 @@ class WriteRecordViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationTitleAndBackButton("기록 쓰기", backButtonAction: #selector(presentAlert))
+        setDefaultPopBar(title: "기록 쓰기")
+        
+        popBar.onPopButtonTapped = {
+            self.presentAlert()
+        }
 
         titleColorStackView.axis = .vertical
         titleColorStackView.distribution = .equalSpacing
@@ -84,7 +89,8 @@ class WriteRecordViewController: BaseViewController {
         super.setupLayout()
         
         scrollView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(88)
+            $0.leading.bottom.trailing.equalToSuperview()
         }
         
         contentView.snp.makeConstraints {
@@ -105,14 +111,14 @@ class WriteRecordViewController: BaseViewController {
         }
     }
     
-    @objc func presentAlert(_ sender: UIButton) {
+    func presentAlert() {
         let alertViewController = AlertViewController()
         alertViewController.modalPresentationStyle = .overCurrentContext
         let alert = Alert(titleText: "이 기록을 임시저장할까요?",
                           messageText: "쓰기 버튼을 다시 누르면 불러올 수 있어요",
                           cancelText: "삭제",
                           doneText: "임시저장",
-                          buttonColor: .color2EBD3D,
+                          buttonColor: .green2EBD3D,
                           alertHeight: 161)
         alertViewController.configureAlert(with: alert)
         alertViewController.onCancelTapped = {
@@ -244,7 +250,7 @@ class WriteRecordViewController: BaseViewController {
                               messageText: "사진 접근 권한을 허용하지 않을 경우\n일부 기능을 사용할 수 없어요",
                               cancelText: "닫기",
                               doneText: "설정으로 이동",
-                              buttonColor: .color2EBD3D,
+                              buttonColor: .green2EBD3D,
                               alertHeight: 182)
             alertViewController.configureAlert(with: alert)
             alertViewController.onDoneTapped = {
@@ -270,7 +276,7 @@ class WriteRecordViewController: BaseViewController {
     }
     
     private func navigateToRecordContentViewController() {
-        let myRecordContentViewController = MyRecordContentViewController()
+        let myRecordContentViewController = ContentViewController()
         myRecordContentViewController.isNewWrite = true
         myRecordContentViewController.schedule = schedule
         navigationController?.pushViewController(myRecordContentViewController, animated: true)

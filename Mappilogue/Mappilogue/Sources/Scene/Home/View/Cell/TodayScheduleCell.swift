@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 protocol ExpandCellDelegate: AnyObject {
     func expandButtonTapped(in cell: UITableViewCell)
@@ -20,7 +21,7 @@ class TodayScheduleCell: BaseTableViewCell {
     
     private let outerView = UIView()
     private let todayScheduleLabel = UILabel()
-    private let expandButton = UIButton()
+    private let expandCloseButton = UIButton()
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -33,11 +34,11 @@ class TodayScheduleCell: BaseTableViewCell {
         
         outerView.layer.cornerRadius = 12
         
-        todayScheduleLabel.textColor = .color1C1C1C
+        todayScheduleLabel.textColor = .black1C1C1C
         todayScheduleLabel.textAlignment = .center
         todayScheduleLabel.font = .title02
  
-        expandButton.addTarget(self, action: #selector(expandButtonTapped), for: .touchUpInside)
+        expandCloseButton.addTarget(self, action: #selector(expandButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -45,7 +46,7 @@ class TodayScheduleCell: BaseTableViewCell {
         
         contentView.addSubview(outerView)
         contentView.addSubview(todayScheduleLabel)
-        contentView.addSubview(expandButton)
+        contentView.addSubview(expandCloseButton)
     }
     
     override func setupLayout() {
@@ -61,17 +62,18 @@ class TodayScheduleCell: BaseTableViewCell {
             $0.centerY.equalTo(outerView)
         }
         
-        expandButton.snp.makeConstraints {
-            $0.trailing.equalTo(outerView).offset(-14)
+        expandCloseButton.snp.makeConstraints {
+            $0.trailing.equalTo(outerView).offset(-9)
             $0.centerY.equalTo(outerView)
-            $0.width.height.equalTo(24)
+            $0.width.equalTo(33)
+            $0.height.equalTo(32)
         }
     }
     
     func configure(_ schedule: TodaySchedule, isExpanded: Bool) {
         todayScheduleLabel.text = schedule.title
         outerView.backgroundColor = schedule.color
-        expandButton.setImage(UIImage(named: isExpanded ? "home_hideSchedule" : "home_showSchedule"), for: .normal)
+        expandCloseButton.setImage(Images.image(named: isExpanded ? .buttonExpand : .buttonClose), for: .normal)
     }
     
     @objc private func expandButtonTapped(_ sender: UIButton) {

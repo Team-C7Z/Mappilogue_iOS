@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class CalendarViewController: NavigationBarViewController {
     private var calendarViewModel = CalendarViewModel()
@@ -25,7 +26,7 @@ class CalendarViewController: NavigationBarViewController {
         layout.minimumLineSpacing = 0
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .colorF9F8F7
+        collectionView.backgroundColor = .grayF9F8F7
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isPagingEnabled = true
         collectionView.register(CalendarCell.self, forCellWithReuseIdentifier: CalendarCell.registerId)
@@ -55,6 +56,7 @@ class CalendarViewController: NavigationBarViewController {
     override func setupProperty() {
         super.setupProperty()
         
+        setNotificationBar(title: "캘린더")
         setCalendarDate()
         
         currentDateButton.addTarget(self, action: #selector(changeDateButtonTapped), for: .touchUpInside)
@@ -81,7 +83,7 @@ class CalendarViewController: NavigationBarViewController {
     
         currentDateButton.snp.makeConstraints {
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            $0.top.equalToSuperview().offset(88)
             $0.leading.equalTo(currentDateLabel.snp.leading)
             $0.trailing.equalTo(changeDateImage.snp.trailing)
             $0.height.equalTo(28)
@@ -141,7 +143,7 @@ class CalendarViewController: NavigationBarViewController {
     }
     
     func chageDatePickerMode() {
-        view.backgroundColor = .colorF5F3F0
+        view.backgroundColor = .grayF5F3F0
     }
     
     @objc func presentScheduleViewContoller(_ notification: Notification) {
@@ -242,7 +244,7 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
 
 extension CalendarViewController: ChangedDateDelegate {
     func chagedDate(_ selectedDate: SelectedDate) {
-        view.backgroundColor = .colorF9F8F7
+        view.backgroundColor = .grayF9F8F7
         self.selectedDate = selectedDate
         updateCurrentDateLabel()
 

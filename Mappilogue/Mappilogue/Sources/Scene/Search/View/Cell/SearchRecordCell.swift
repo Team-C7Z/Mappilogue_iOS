@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class SearchRecordCell: BaseCollectionViewCell {
     static let registerId = "\(SearchRecordCell.self)"
@@ -21,15 +22,15 @@ class SearchRecordCell: BaseCollectionViewCell {
 
         markView.configure(heartWidth: 11.08, heartHeight: 10.29)
         
-        recordTitleLabel.textColor = .color1C1C1C
+        recordTitleLabel.textColor = .black1C1C1C
         recordTitleLabel.font = .title02
         
-        recordDateLabel.textColor = .color707070
+        recordDateLabel.textColor = .gray707070
         recordDateLabel.font = .caption01
         
-        separatorImage.image = UIImage(named: "common_separator")
+        separatorImage.image = Images.image(named: .imageSeparator)
     
-        recordLocationLabel.textColor = .color707070
+        recordLocationLabel.textColor = .gray707070
         recordLocationLabel.font = .caption01
     }
     

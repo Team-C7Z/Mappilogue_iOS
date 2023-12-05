@@ -7,6 +7,7 @@
 
 import UIKit
 import NMapsMap
+import MappilogueKit
 
 class RecordViewController: NavigationBarViewController {
     let dummyCategory: [Category] = []
@@ -65,13 +66,14 @@ class RecordViewController: NavigationBarViewController {
     override func setupProperty() {
         super.setupProperty()
         
+        setNotificationBar(title: "기록")
         setMapView()
         setBottomSheetHeight()
      
         searchTextField.delegate = self
         setSearchTextFieldTapGestue()
         
-        currentLocationButton.setImage(UIImage(named: "moveCurrentLocation"), for: .normal)
+        currentLocationButton.setImage(Images.image(named: .buttonMoveCurrentLocation), for: .normal)
         currentLocationButton.layer.applyShadow()
         currentLocationButton.addTarget(self, action: #selector(currentLocationButtonTapped), for: .touchUpInside)
         
@@ -98,8 +100,8 @@ class RecordViewController: NavigationBarViewController {
         super.setupLayout()
         
         mapView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(88)
+            $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-40)
         }
         
@@ -168,7 +170,7 @@ class RecordViewController: NavigationBarViewController {
         guard let locationOverlay = locationOverlay else { return }
         locationOverlay.hidden = false
         locationOverlay.location = NMGLatLng(lat: latitude, lng: longitude)
-        locationOverlay.icon = NMFOverlayImage(name: "currentLocation")
+        locationOverlay.icon = NMFOverlayImage(name: Images.Image.imageCurrentLocation.rawValue)
         locationOverlay.iconWidth = 20
         locationOverlay.iconHeight = 20
     }
@@ -282,7 +284,7 @@ class RecordViewController: NavigationBarViewController {
     }
     
     @objc private func writeRecordButtonTapped() {
-        let selectWriteRecordViewController = SelectWriteRecordViewController()
+        let selectWriteRecordViewController = WriteListRecordViewController()
         selectWriteRecordViewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(selectWriteRecordViewController, animated: true)
     }
@@ -406,7 +408,7 @@ extension RecordViewController: CLLocationManagerDelegate {
                           messageText: "위치 권한을 허용하지 않을 경우\n일부 기능을 사용할 수 없어요",
                           cancelText: "닫기",
                           doneText: "설정으로 이동",
-                          buttonColor: .color2EBD3D,
+                          buttonColor: .green2EBD3D,
                           alertHeight: 182)
         alertViewController.configureAlert(with: alert)
         alertViewController.onDoneTapped = {
