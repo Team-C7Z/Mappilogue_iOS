@@ -108,7 +108,7 @@ class NavigationBarViewController: BaseViewController {
         navigationController?.pushViewController(notificationController, animated: true)
     }
     
-    func popNavigationController() {
+    @objc func popNavigationController() {
         navigationController?.popViewController(animated: true)
     }
 }
