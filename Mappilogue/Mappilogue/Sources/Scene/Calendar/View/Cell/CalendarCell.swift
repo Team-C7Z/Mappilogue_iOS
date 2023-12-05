@@ -18,7 +18,7 @@ class CalendarCell: BaseCollectionViewCell {
         let layout = UICollectionViewFlowLayout()
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .colorF9F8F7
+        collectionView.backgroundColor = .grayF9F8F7
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(WeekdayCell.self, forCellWithReuseIdentifier: WeekdayCell.registerId)
         collectionView.register(WeekCell.self, forCellWithReuseIdentifier: WeekCell.registerId)

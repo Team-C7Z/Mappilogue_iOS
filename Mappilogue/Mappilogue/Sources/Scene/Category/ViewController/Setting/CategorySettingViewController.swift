@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import MappilogueKit
 
-class CategorySettingViewController: BaseViewController {
+class CategorySettingViewController: NavigationBarViewController {
     private var categoryViewModel = CategoryViewModel()
     var categories: [Category] = []
     
@@ -15,7 +16,7 @@ class CategorySettingViewController: BaseViewController {
         let layout = LeftAlignedCollectionViewFlowLayout()
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .colorF9F8F7
+        collectionView.backgroundColor = .grayF9F8F7
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
         collectionView.register(CategoryOrderCell.self, forCellWithReuseIdentifier: CategoryOrderCell.registerId)
@@ -39,7 +40,7 @@ class CategorySettingViewController: BaseViewController {
      override func setupProperty() {
          super.setupProperty()
          
-         setNavigationTitleAndBackButton("카테고리 설정", backButtonAction: #selector(backButtonTapped))
+         setPopBar(title: "카테고리 설정")
      }
      
      override func setupHierarchy() {
@@ -52,7 +53,8 @@ class CategorySettingViewController: BaseViewController {
          super.setupLayout()
       
          collectionView.snp.makeConstraints {
-             $0.edges.equalTo(view.safeAreaLayoutGuide)
+             $0.top.equalToSuperview().offset(88)
+             $0.leading.bottom.trailing.equalToSuperview()
          }
      }
  }
@@ -181,7 +183,7 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
     }
     
     private func presentInputAlertViewController() {
-        let inputAlertViewController = InputAlertViewController()
+        let inputAlertViewController = InputModalViewController()
         inputAlertViewController.modalPresentationStyle = .overCurrentContext
         inputAlertViewController.onCompletionTapped = { inputText in
             self.categoryViewModel.addCategory(title: inputText)

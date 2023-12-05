@@ -16,7 +16,7 @@ class ColorSelectionView: BaseView {
         let layout = UICollectionViewFlowLayout()
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .colorF9F8F7
+        collectionView.backgroundColor = .grayF9F8F7
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(ColorCell.self, forCellWithReuseIdentifier: ColorCell.registerId)
         collectionView.delegate = self
@@ -38,7 +38,7 @@ class ColorSelectionView: BaseView {
     override func setupProperty() {
         super.setupProperty()
         
-        backgroundColor = .colorF9F8F7
+        backgroundColor = .grayF9F8F7
     }
     
     override func setupHierarchy() {

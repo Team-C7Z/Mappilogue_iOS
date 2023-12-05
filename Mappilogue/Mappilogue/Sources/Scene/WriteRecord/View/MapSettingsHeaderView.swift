@@ -28,7 +28,7 @@ class MapSettingsHeaderView: BaseCollectionReusableView {
         mapSettingsButton.addTarget(self, action: #selector(setLocationButtonTapped), for: .touchUpInside)
 
         mapSettingsLabel.text = "지도에서 설정"
-        mapSettingsLabel.textColor = .color1C1C1C
+        mapSettingsLabel.textColor = .black1C1C1C
         mapSettingsLabel.font = .body02
 
         moveImage.image = UIImage(named: "moveWrite")

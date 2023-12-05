@@ -18,9 +18,9 @@ class CategorySelectionCell: BaseCollectionViewCell {
         
         contentView.layer.cornerRadius = 16
         contentView.layer.applyShadow()
-        contentView.backgroundColor = .colorEAE6E1
+        contentView.backgroundColor = .grayEAE6E1
         
-        categoryLabel.textColor = .color1C1C1C
+        categoryLabel.textColor = .black1C1C1C
         categoryLabel.font = .caption02
         
         categoryImage.image = UIImage(named: "addCategory")
@@ -51,7 +51,7 @@ class CategorySelectionCell: BaseCollectionViewCell {
     func configure(_ title: String, isSelection: Bool) {
         categoryLabel.text = title
         categoryImage.image = UIImage(named: isSelection ? "deleteCategory" : "addCategory")
-        contentView.backgroundColor = isSelection ? .colorF9F8F7 : .colorEAE6E1
+        contentView.backgroundColor = isSelection ? .grayF9F8F7 : .grayEAE6E1
         
         categoryImage.snp.updateConstraints {
             $0.width.height.equalTo(isSelection ? 8 : 10)

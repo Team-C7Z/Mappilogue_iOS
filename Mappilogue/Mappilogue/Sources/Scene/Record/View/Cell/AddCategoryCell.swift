@@ -18,11 +18,11 @@ class AddCategoryCell: BaseCollectionViewCell {
         
         layer.cornerRadius = 17
         layer.applyShadow()
-        backgroundColor = .colorF9F8F7
+        backgroundColor = .grayF9F8F7
         
         addCategoryImage.image = UIImage(named: "addCategory")
         addCategoryLabel.text = "카테고리 추가"
-        addCategoryLabel.textColor = .color1C1C1C
+        addCategoryLabel.textColor = .black1C1C1C
         addCategoryLabel.font = .caption02
     }
     

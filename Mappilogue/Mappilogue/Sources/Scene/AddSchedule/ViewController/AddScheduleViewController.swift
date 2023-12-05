@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import MappilogueKit
 
-class AddScheduleViewController: BaseViewController {
+class AddScheduleViewController: NavigationBarViewController {
     private var colorViewModel = ColorViewModel()
     private var scheduleViewModel = ScheduleViewModel()
     private var calendarViewModel = CalendarViewModel()
@@ -21,7 +22,7 @@ class AddScheduleViewController: BaseViewController {
     
     var colorList: [ColorListDTO] = []
     var isColorSelection: Bool = false
-    var selectedColor: UIColor = .color1C1C1C
+    var selectedColor: UIColor = .black1C1C1C
 
     var scheduleDateType: AddScheduleDateType = .unKnown
     let years: [Int] = Array(1970...2050)
@@ -41,7 +42,7 @@ class AddScheduleViewController: BaseViewController {
         layout.scrollDirection = .vertical
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .colorF9F8F7
+        collectionView.backgroundColor = .grayF9F8F7
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         collectionView.register(LocationTimeCell.self, forCellWithReuseIdentifier: LocationTimeCell.registerId)
         collectionView.register(AddScheduleHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: AddScheduleHeaderView.registerId)
@@ -73,12 +74,12 @@ class AddScheduleViewController: BaseViewController {
 
     override func setupProperty() {
         super.setupProperty()
-        
+
         setNavigationBar()
         
-        datePickerOuterView.backgroundColor = .colorF5F3F0
+        datePickerOuterView.backgroundColor = .grayF5F3F0
         datePickerOuterView.isHidden = true
-        datePickerView.backgroundColor = .colorF5F3F0
+        datePickerView.backgroundColor = .grayF5F3F0
         datePickerView.delegate = self
         datePickerView.dataSource = self
         datePickerTap = UITapGestureRecognizer(target: self, action: #selector(dismissDatePicker))
@@ -97,7 +98,8 @@ class AddScheduleViewController: BaseViewController {
         super.setupLayout()
         
         collectionView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(88)
+            $0.leading.bottom.trailing.equalToSuperview()
         }
     
         datePickerOuterView.snp.makeConstraints {
@@ -120,13 +122,13 @@ class AddScheduleViewController: BaseViewController {
     }
     
     func setNavigationBar() {
-        title = "일정"
-        setNavigationTitleAndItems(imageName: "common_dismiss", action: #selector(dismissButtonTapped), isLeft: true)
-        setNavigationTitleAndItems(imageName: "common_completion", action: #selector(completionButtonTapped), isLeft: false)
-    }
-    
-    @objc func dismissButtonTapped() {
-        presentAlert()
+        setDismissSaveBar(title: "일정")
+        dismissSaveBar.onDismissButtonTapped = {
+            self.presentAlert()
+        }
+        dismissSaveBar.onSaveButtonTapped = {
+            self.saveSchedule()
+        }
     }
     
     private func presentAlert() {
@@ -136,7 +138,7 @@ class AddScheduleViewController: BaseViewController {
                           messageText: "저장하지 않은 일정은 사라져요",
                           cancelText: "취소",
                           doneText: "나가기",
-                          buttonColor: .colorF14C4C,
+                          buttonColor: .redF14C4C,
                           alertHeight: 160)
         alertViewController.configureAlert(with: alert)
         alertViewController.onDoneTapped = {
@@ -147,7 +149,7 @@ class AddScheduleViewController: BaseViewController {
         present(alertViewController, animated: false)
     }
     
-    @objc func completionButtonTapped(_ sender: UIButton) {
+    func saveSchedule() {
         schedule.startDate = startDate.stringFromSelectedDate()
         schedule.endDate = endDate.stringFromSelectedDate()
         if schedule.colorId == -1 {
@@ -286,16 +288,16 @@ class AddScheduleViewController: BaseViewController {
     }
 
     func navigateToNotificationViewController() {
-        let notificationViewController = NotificationViewController()
-        notificationViewController.onNotificationSelected = { alarmOptions in
+        let addNotificationViewController = AddNotificationViewController()
+        addNotificationViewController.onNotificationSelected = { alarmOptions in
             self.schedule.alarmOptions = alarmOptions
         }
-        navigationController?.pushViewController(notificationViewController, animated: true)
+        navigationController?.pushViewController(addNotificationViewController, animated: true)
     }
     
     func presentRepeatViewController() {
-        let repeatViewController = RepeatViewController()
-        navigationController?.pushViewController(repeatViewController, animated: true)
+//        let repeatViewController = RepeatViewController()
+//        navigationController?.pushViewController(repeatViewController, animated: true)
     }
     
     func presentAddLocationController() {
@@ -364,7 +366,7 @@ class AddScheduleViewController: BaseViewController {
         let alert = Alert(titleText: "선택한 장소를 삭제할까요?",
                           cancelText: "취소",
                           doneText: "삭제",
-                          buttonColor: .colorF14C4C,
+                          buttonColor: .redF14C4C,
                           alertHeight: 140)
         alertViewController.configureAlert(with: alert)
         alertViewController.modalPresentationStyle = .overCurrentContext

@@ -55,7 +55,7 @@ class AddScheduleHeaderView: BaseCollectionReusableView {
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
         stackView.spacing = 1
-        stackView.backgroundColor = .colorEAE6E1
+        stackView.backgroundColor = .grayEAE6E1
     
         notificationButton.configure(imageName: "notification", title: "알림")
         repeatButton.configure(imageName: "repeat", title: "반복")

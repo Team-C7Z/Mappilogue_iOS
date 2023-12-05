@@ -20,15 +20,15 @@ class MainLocationSettingView: BaseView {
         layer.cornerRadius = 24
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         layer.masksToBounds = true
-        backgroundColor = .colorF9F8F7
+        backgroundColor = .grayF9F8F7
 
         addressLabel.textColor = .color000000
         addressLabel.font = .title02
 
         setLocationButton.layer.cornerRadius = 12
-        setLocationButton.backgroundColor = .color43B54E
+        setLocationButton.backgroundColor = .green43B54E
         setLocationButton.setTitle("이 위치로 설정하기", for: .normal)
-        setLocationButton.setTitleColor(.colorFFFFFF, for: .normal)
+        setLocationButton.setTitleColor(.whiteFFFFFF, for: .normal)
         setLocationButton.titleLabel?.font = .body03
         setLocationButton.addTarget(self, action: #selector(setLocationButtonTapped), for: .touchUpInside)
     }

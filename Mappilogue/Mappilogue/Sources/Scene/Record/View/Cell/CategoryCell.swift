@@ -20,7 +20,7 @@ class CategoryCell: BaseCollectionViewCell {
         layer.applyShadow()
         
         categoryLabel.text = "유진이랑 논 날"
-        categoryLabel.textColor = .color1C1C1C
+        categoryLabel.textColor = .black1C1C1C
         categoryLabel.font = .caption02
         
         xCategoryButton.setImage(UIImage(named: "record_deleteCategoryMark"), for: .normal)
@@ -52,7 +52,7 @@ class CategoryCell: BaseCollectionViewCell {
     func configure(_ title: String, isSelected: Bool) {
         categoryLabel.text = title
         
-        backgroundColor = isSelected ? .colorEAE6E1 : .colorF9F8F7
+        backgroundColor = isSelected ? .grayEAE6E1 : .grayF9F8F7
         xCategoryButton.isHidden = !isSelected
         
 //        let categoryLabelSize = categoryLabel.sizeThatFits(CGSize(width: categoryLabel.bounds.width, height: CGFloat.greatestFiniteMagnitude))

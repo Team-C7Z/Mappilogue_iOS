@@ -31,7 +31,7 @@ class ContentImageCell: BaseCollectionViewCell {
         super.setupProperty()
     
         layer.cornerRadius = 12
-        layer.borderColor = UIColor.color2EBD3D.cgColor
+        layer.borderColor = UIColor.green2EBD3D.cgColor
         
         contentImage.layer.cornerRadius = 12
         contentImage.contentMode = .scaleAspectFill
@@ -42,7 +42,7 @@ class ContentImageCell: BaseCollectionViewCell {
         
         mainImageButton.layer.cornerRadius = 23 / 2
         mainImageButton.setTitle("대표", for: .normal)
-        mainImageButton.setTitleColor(.colorFFFFFF, for: .normal)
+        mainImageButton.setTitleColor(.whiteFFFFFF, for: .normal)
         mainImageButton.titleLabel?.font = .caption03
         mainImageButton.addTarget(self, action: #selector(mainImageButtonTapped), for: .touchUpInside)
     }
@@ -86,7 +86,7 @@ class ContentImageCell: BaseCollectionViewCell {
         }
         
         self.index = index
-        mainImageButton.backgroundColor = isMain ? .color2EBD3D : .colorEAE6E1
+        mainImageButton.backgroundColor = isMain ? .green2EBD3D : .grayEAE6E1
         layer.borderWidth = isSelected ? 2 : 0
         removeImageButton.isHidden = !isSelected
     }

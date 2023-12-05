@@ -17,7 +17,7 @@ class AddNewCategoryCell: BaseCollectionViewCell {
         super.setupProperty()
         
         addCategoryLabel.text = "카테고리 추가"
-        addCategoryLabel.textColor = .color1C1C1C
+        addCategoryLabel.textColor = .black1C1C1C
         addCategoryLabel.font = .body02
         
         addCategoryImage.image = UIImage(named: "addCategory2")

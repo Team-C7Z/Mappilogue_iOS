@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class DeleteLocationHeaderView: BaseCollectionReusableView {
     static let registerId = "\(DeleteLocationHeaderView.self)"
@@ -30,15 +31,15 @@ class DeleteLocationHeaderView: BaseCollectionReusableView {
         stackView.distribution = .equalSpacing
         stackView.spacing = 12
         
-        deleteSelectedImage.image = UIImage(named: "deleteLocation")
-        deleteSelectedLabel.textColor = .color707070
+        deleteSelectedImage.image = Images.image(named: .imageDeleteLocation)
+        deleteSelectedLabel.textColor = .gray707070
         deleteSelectedLabel.font = .body02
         deleteSelectedButton.addTarget(self, action: #selector(deleteSelectedButtonTapped), for: .touchUpInside)
         
-        deleteImage.image = UIImage(named: "common_delete")
-        deleteImage.tintColor = .colorF14C4C
+        deleteImage.image = Images.image(named: .imageDelete)
+        deleteImage.tintColor = .redF14C4C
         deleteLabel.text = "삭제하기"
-        deleteLabel.textColor = .color707070
+        deleteLabel.textColor = .gray707070
         deleteLabel.font = .body02
         deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         

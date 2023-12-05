@@ -27,18 +27,18 @@ class EditNicknameModalViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        view.backgroundColor = .color404040.withAlphaComponent(0.1)
+        view.backgroundColor = .gray404040.withAlphaComponent(0.1)
         
         alertView.layer.cornerRadius = 12
-        alertView.backgroundColor = .colorF9F8F7
+        alertView.backgroundColor = .grayF9F8F7
         
-        inputTextField.textColor = .color1C1C1C
+        inputTextField.textColor = .black1C1C1C
         inputTextField.font = .body02
-        inputTextField.backgroundColor = .colorF5F3F0
+        inputTextField.backgroundColor = .red
         inputTextField.placeholder = "1~8자의 한글 또는 영문"
         inputTextField.layer.cornerRadius = 12
         inputTextField.addLeftPadding()
-        inputTextField.tintColor = .color2EBD3D
+        inputTextField.tintColor = .green2EBD3D
         inputTextField.returnKeyType = .done
         inputTextField.delegate = self
         inputTextField.becomeFirstResponder()
@@ -51,20 +51,20 @@ class EditNicknameModalViewController: BaseViewController {
         messageImage.image = UIImage(named: "my_validNicname")
         
         messageLabel.text = "초성이나 특수문자는 넣을 수 없어요"
-        messageLabel.textColor = .color707070
+        messageLabel.textColor = .gray707070
         messageLabel.font = .caption01
     
         closeButton.setTitle("닫기", for: .normal)
         closeButton.layer.cornerRadius = 12
-        closeButton.backgroundColor = .colorF5F3F0
-        closeButton.setTitleColor(.color1C1C1C, for: .normal)
+        closeButton.backgroundColor = .grayF5F3F0
+        closeButton.setTitleColor(.black1C1C1C, for: .normal)
         closeButton.titleLabel?.font = .body02
         closeButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         
         changeButton.setTitle("바꾸기", for: .normal)
         changeButton.layer.cornerRadius = 12
-        changeButton.backgroundColor = .color2EBD3D
-        changeButton.setTitleColor(.colorFFFFFF, for: .normal)
+        changeButton.backgroundColor = .green2EBD3D
+        changeButton.setTitleColor(.whiteFFFFFF, for: .normal)
         changeButton.titleLabel?.font = .body03
         changeButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
     }

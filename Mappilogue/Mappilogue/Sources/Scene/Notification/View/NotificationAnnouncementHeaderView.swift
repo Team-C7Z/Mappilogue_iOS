@@ -38,15 +38,15 @@ class NotificationAnnouncementHeaderView: BaseTableViewHeaderFooterView {
         
         notificationButton.setTitle("알림", for: .normal)
         notificationButton.titleLabel?.font = .title02
-        notificationButton.setTitleColor(.color1C1C1C, for: .normal)
+        notificationButton.setTitleColor(.grayEAE6E1, for: .normal)
         
-        notificationLineView.backgroundColor = .color1C1C1C
+        notificationLineView.backgroundColor = .grayC9C6C2
         
         announcementButton.setTitle("공지사항", for: .normal)
         announcementButton.titleLabel?.font = .title02
-        announcementButton.setTitleColor(.colorC9C6C2, for: .normal)
+        announcementButton.setTitleColor(.grayC9C6C2, for: .normal)
         
-        announcementLineView.backgroundColor = .colorC9C6C2
+        announcementLineView.backgroundColor = .grayC9C6C2
     }
     
     override func setupHierarchy() {
@@ -101,10 +101,10 @@ class NotificationAnnouncementHeaderView: BaseTableViewHeaderFooterView {
     }
     
     private func updateButtonTitleColor() {
-        notificationButton.setTitleColor(notificationType == .notification ? .color1C1C1C : .colorC9C6C2, for: .normal)
-        notificationLineView.backgroundColor = notificationType == .notification ? .color1C1C1C : .colorC9C6C2
-        announcementButton.setTitleColor(notificationType == .announcement ? .color1C1C1C : .colorC9C6C2, for: .normal)
-        announcementLineView.backgroundColor = notificationType == .announcement ? .color1C1C1C : .colorC9C6C2
+        notificationButton.setTitleColor(notificationType == .notification ? .black1C1C1C : .grayC9C6C2, for: .normal)
+        notificationLineView.backgroundColor = notificationType == .notification ? .black1C1C1C : .grayC9C6C2
+        announcementButton.setTitleColor(notificationType == .announcement ? .black1C1C1C : .grayC9C6C2, for: .normal)
+        announcementLineView.backgroundColor = notificationType == .announcement ? .black1C1C1C : .grayC9C6C2
     }
 }
 

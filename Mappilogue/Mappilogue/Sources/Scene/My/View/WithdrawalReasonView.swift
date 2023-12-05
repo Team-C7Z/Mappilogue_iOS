@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class WithdrawalReasonView: BaseView {
     var onReasonSelected: ((Int) -> Void)?
@@ -18,7 +19,7 @@ class WithdrawalReasonView: BaseView {
         
         withdrawalReasonLabel.textColor = .color000000
         withdrawalReasonLabel.font = .body02
-        withdrawalReasonCheckButton.setImage(UIImage(named: "common_unCheck"), for: .normal)
+        withdrawalReasonCheckButton.setImage(Images.image(named: .buttonUncheck), for: .normal)
         withdrawalReasonCheckButton.addTarget(self, action: #selector(withdrawalReasonCheckButtonTapped), for: .touchUpInside)
     }
     
@@ -58,6 +59,6 @@ class WithdrawalReasonView: BaseView {
     }
     
     private func updateCheckButtonDesign(_ button: UIButton) {
-        button.setImage(UIImage(named: button.isSelected ? "common_check" : "common_unCheck"), for: .normal)
+        button.setImage(Images.image(named: button.isSelected ? .buttonCheck : .buttonUncheck), for: .normal)
     }
 }

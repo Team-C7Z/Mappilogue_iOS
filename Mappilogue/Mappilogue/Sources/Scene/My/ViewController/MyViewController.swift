@@ -7,6 +7,7 @@
 
 import UIKit
 import KakaoSDKUser
+import MappilogueKit
 
 struct MyInfo {
     var image: String
@@ -36,7 +37,7 @@ class MyViewController: NavigationBarViewController {
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
-        collectionView.backgroundColor = .colorF9F8F7
+        collectionView.backgroundColor = .grayF9F8F7
         collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: ProfileCell.registerId)
         collectionView.register(VersionCell.self, forCellWithReuseIdentifier: VersionCell.registerId)
         collectionView.register(MyCell.self, forCellWithReuseIdentifier: MyCell.registerId)
@@ -59,6 +60,7 @@ class MyViewController: NavigationBarViewController {
     override func setupProperty() {
         super.setupProperty()
         
+        setNotificationBar(title: "MY")
     }
     
     override func setupHierarchy() {
@@ -71,7 +73,8 @@ class MyViewController: NavigationBarViewController {
         super.setupLayout()
     
         collectionView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(98)
+            $0.leading.bottom.trailing.equalToSuperview()
         }
     }
     
@@ -226,7 +229,7 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
                           messageText: nil,
                           cancelText: "취소",
                           doneText: "확인",
-                          buttonColor: .color2EBD3D,
+                          buttonColor: .green2EBD3D,
                           alertHeight: 140)
         alertViewController.configureAlert(with: alert)
         alertViewController.onDoneTapped = {

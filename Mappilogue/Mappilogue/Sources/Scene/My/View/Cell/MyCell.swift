@@ -17,7 +17,7 @@ class MyCell: BaseCollectionViewCell {
     override func setupProperty() {
         super.setupProperty()
         
-        myLabel.textColor = .color1C1C1C
+        myLabel.textColor = .black1C1C1C
         myLabel.font = .body02
     }
     
@@ -51,6 +51,6 @@ class MyCell: BaseCollectionViewCell {
     func configure(myInfo: MyInfo, isLast: Bool) {
         myImage.image = UIImage(named: myInfo.image)
         myLabel.text = myInfo.title
-        lineView.backgroundColor = isLast ? .clear : .colorEAE6E1
+        lineView.backgroundColor = isLast ? .clear : .grayEAE6E1
     }
 }

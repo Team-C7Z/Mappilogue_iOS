@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class NotificationCell: BaseTableViewCell {
     static let registerId = "\(NotificationCell.self)"
@@ -30,16 +31,16 @@ class NotificationCell: BaseTableViewCell {
         
         colorView.layer.cornerRadius = 2
 
-        dateLabel.textColor = .color1C1C1C
+        dateLabel.textColor = .black1C1C1C
         dateLabel.font = .caption02
         
-        timeLabel.textColor = .color1C1C1C
+        timeLabel.textColor = .black1C1C1C
         timeLabel.font = .caption02
         
         titleLabel.textColor = .color000000
         titleLabel.font = .body02
         
-        removeButton.setImage(UIImage(named: "notification_remove"), for: .normal)
+        removeButton.setImage(Images.image(named: .buttonDelete), for: .normal)
         removeButton.addTarget(self, action: #selector(removeButtonTapped), for: .touchUpInside)
     }
     

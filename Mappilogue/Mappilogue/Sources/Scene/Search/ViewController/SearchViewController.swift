@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import MappilogueKit
 
-class SearchViewController: BaseViewController {
+class SearchViewController: NavigationBarViewController {
     let dummyLocation = dummyLocationData()
     let dummyRecord = dummyRecordData()
     var keyboardHeight: CGFloat = 0
@@ -28,7 +29,7 @@ class SearchViewController: BaseViewController {
         layout.scrollDirection = .vertical
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .colorF9F8F7
+        collectionView.backgroundColor = .grayF9F8F7
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         collectionView.register(EmptySearchCell.self, forCellWithReuseIdentifier: EmptySearchCell.registerId)
         collectionView.register(SearchLocationCell.self, forCellWithReuseIdentifier: SearchLocationCell.registerId)
@@ -48,7 +49,7 @@ class SearchViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationTitleAndBackButton("검색", backButtonAction: #selector(backButtonTapped))
+        setPopBar(title: "검색")
         
         searchBar.configure("장소 또는 기록 검색")
         searchBar.becomeFirstResponder()
@@ -77,8 +78,8 @@ class SearchViewController: BaseViewController {
         super.setupLayout()
         
         searchBar.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(88)
+            $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(40)
         }
         
@@ -142,13 +143,13 @@ class SearchViewController: BaseViewController {
     }
     
     private func setLocationButtonDesign() {
-        locationButton.setTitleColor(searchType == .location ? .colorFFFFFF : .color707070, for: .normal)
-        locationButton.backgroundColor = searchType == .location ? .color2EBD3D : .colorF5F3F0
+        locationButton.setTitleColor(searchType == .location ? .whiteFFFFFF : .gray707070, for: .normal)
+        locationButton.backgroundColor = searchType == .location ? .green2EBD3D : .grayF5F3F0
     }
     
     private func setRecordButtonDesign() {
-        recordButton.setTitleColor(searchType == .record ? .colorFFFFFF : .color707070, for: .normal)
-        recordButton.backgroundColor = searchType == .record ? .color2EBD3D : .colorF5F3F0
+        recordButton.setTitleColor(searchType == .record ? .whiteFFFFFF : .gray707070, for: .normal)
+        recordButton.backgroundColor = searchType == .record ? .green2EBD3D : .grayF5F3F0
     }
 }
 

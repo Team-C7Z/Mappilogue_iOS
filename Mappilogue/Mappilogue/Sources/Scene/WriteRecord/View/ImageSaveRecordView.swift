@@ -6,31 +6,26 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class ImageSaveRecordView: BaseView {
     private let lineView = UIView()
     let addImageButton = UIButton()
     let addImageImage = UIImageView()
-    let saveRecordButton = UIButton()
+    let saveRecordButton = SaveRecordButton()
     let hideKeyboardButton = UIButton()
     
     override func setupProperty() {
         super.setupProperty()
         
-        backgroundColor = .colorF9F8F7
+        backgroundColor = .grayF9F8F7
         
-        lineView.backgroundColor = .colorEAE6E1
+        lineView.backgroundColor = .grayEAE6E1
         
-        addImageImage.image = UIImage(named: "record_addImage")
+        addImageImage.image = Images.image(named: .buttonAddPhoto)
         addImageImage.contentMode = .scaleAspectFit
         
-        saveRecordButton.setTitle("기록 저장", for: .normal)
-        saveRecordButton.setTitleColor(.colorFFFFFF, for: .normal)
-        saveRecordButton.titleLabel?.font = .body03
-        saveRecordButton.layer.cornerRadius = 35 / 2
-        saveRecordButton.backgroundColor = .color2EBD3D
-        
-        hideKeyboardButton.setImage(UIImage(named: "hideKeyboard"), for: .normal)
+        hideKeyboardButton.setImage(Images.image(named: .buttonHideKey), for: .normal)
         hideKeyboardButton.isHidden = true
     }
     

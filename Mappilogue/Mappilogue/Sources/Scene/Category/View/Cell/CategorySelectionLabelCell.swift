@@ -16,7 +16,7 @@ class CategorySelectionLabelCell: BaseCollectionViewCell {
         super.setupProperty()
         
         mapCategoryLabel.text = "지도에서 표시할 카테고리"
-        mapCategoryLabel.textColor = .color707070
+        mapCategoryLabel.textColor = .gray707070
         mapCategoryLabel.font = .caption01
     }
     
