@@ -8,7 +8,7 @@
 import Foundation
 
 struct Environment {
-    static let baseURL = "https://api-dev.mappilogue.shop"
-    static let kakaoAPI = "https://dapi.kakao.com"
+    static let baseURL = Bundle.main.apiKey
+    static let kakaoAPI = Bundle.main.kakaoApiKey
     static let kakaoRestKey = Bundle.main.kakaoRestKey
 }
