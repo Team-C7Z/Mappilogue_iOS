@@ -22,19 +22,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        if RootUserDefaults.isPermissionNeeded() {
-            window.rootViewController = PermissionViewController()
-        } else if RootUserDefaults.isOnboardingNeeded() {
-            window.rootViewController = OnboardingViewController()
-        } else {
-            AuthUserDefaults.autoLogin { success in
-                if success {
+//        if RootUserDefaults.isPermissionNeeded() {
+//            window.rootViewController = PermissionViewController()
+//        } else if RootUserDefaults.isOnboardingNeeded() {
+//            window.rootViewController = OnboardingViewController()
+//        } else {
+//            AuthUserDefaults.autoLogin { success in
+//                if success {
                     window.rootViewController = TabBarController()
-                } else {
-                    window.rootViewController = LoginViewController()
-                }
-            }
-        }
+//                } else {
+//                    window.rootViewController = LoginViewController()
+//                }
+//            }
+//        }
         window.makeKeyAndVisible()
         self.window = window
         
