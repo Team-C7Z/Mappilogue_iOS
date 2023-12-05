@@ -22,19 +22,19 @@ class WithdrawalCompletedAlertViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        view.backgroundColor = .color404040.withAlphaComponent(0.1)
+        view.backgroundColor = .gray404040.withAlphaComponent(0.1)
         
         alertView.layer.cornerRadius = 12
-        alertView.backgroundColor = .colorF9F8F7
+        alertView.backgroundColor = .grayF9F8F7
         
         titleLabel.text = "탈퇴가 완료되었어요"
         titleLabel.textColor = .color000000
         titleLabel.font = .title02
     
         doneButton.layer.cornerRadius = 12
-        doneButton.backgroundColor = .color2EBD3D
+        doneButton.backgroundColor = .green2EBD3D
         doneButton.setTitle("로그인 페이지로 돌아가기", for: .normal)
-        doneButton.setTitleColor(.colorFFFFFF, for: .normal)
+        doneButton.setTitleColor(.whiteFFFFFF, for: .normal)
         doneButton.titleLabel?.font = .body03
         doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
     }

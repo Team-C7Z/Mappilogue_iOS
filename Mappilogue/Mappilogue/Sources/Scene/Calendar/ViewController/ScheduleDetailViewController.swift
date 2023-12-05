@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import MappilogueKit
 
-class ScheduleDetailViewController: BaseViewController {
+class ScheduleDetailViewController: ModalViewController {
     let calendarViewModel = CalendarViewModel()
     var date: String = ""
     var schedules = ScheduleDetailDTO(solarDate: "", lunarDate: "", schedulesOnSpecificDate: [])
@@ -17,7 +18,6 @@ class ScheduleDetailViewController: BaseViewController {
     
     var addButtonLocation: CGRect?
     
-    private let scheduleView = UIView()
     private let dateLabel = UILabel()
     private let lunarDateLabel = UILabel()
     
@@ -39,8 +39,12 @@ class ScheduleDetailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+
         loadCalendarData()
+        
+        setupProperty()
+        setupHierarchy()
+        setupLayout()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -49,47 +53,28 @@ class ScheduleDetailViewController: BaseViewController {
         animateAddScheduleButton()
     }
     
-    override func setupProperty() {
-        super.setupProperty()
-        
-        view.backgroundColor = .color404040.withAlphaComponent(0.1)
-        
-        scheduleView.layer.cornerRadius = 24
-        scheduleView.backgroundColor = .colorF9F8F7
-        
+    func setupProperty() {
         dateLabel.font = .title01
-        dateLabel.textColor = .color1C1C1C
+        dateLabel.textColor = .black1C1C1C
         
         lunarDateLabel.text = "음력 3월 27일"
         lunarDateLabel.font = .body02
-        lunarDateLabel.textColor = .color707070
+        lunarDateLabel.textColor = .gray707070
         
         addScheduleButton.addTarget(self, action: #selector(addScheduleButtonTapped), for: .touchUpInside)
     }
     
-    override func setupHierarchy() {
-        super.setupHierarchy()
-        
-        view.addSubview(scheduleView)
-        scheduleView.addSubview(dateLabel)
-        scheduleView.addSubview(lunarDateLabel)
-        scheduleView.addSubview(collectionView)
+    func setupHierarchy() {
+        modalView.addSubview(dateLabel)
+        modalView.addSubview(lunarDateLabel)
+        modalView.addSubview(collectionView)
         view.addSubview(addScheduleButton)
     }
     
-    override func setupLayout() {
-        super.setupLayout()
-        
-        scheduleView.snp.makeConstraints {
-            $0.centerX.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().offset(16)
-            $0.trailing.equalToSuperview().offset(-16)
-            $0.height.equalTo(429)
-        }
-        
+    func setupLayout() {
         dateLabel.snp.makeConstraints {
-            $0.top.equalTo(scheduleView).offset(30)
-            $0.leading.equalTo(scheduleView).offset(20)
+            $0.top.equalTo(modalView).offset(30)
+            $0.leading.equalTo(modalView).offset(20)
         }
         
         lunarDateLabel.snp.makeConstraints {
@@ -98,9 +83,9 @@ class ScheduleDetailViewController: BaseViewController {
         }
         
         collectionView.snp.makeConstraints {
-            $0.top.equalTo(scheduleView).offset(78)
+            $0.top.equalTo(modalView).offset(78)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(scheduleView).offset(-18)
+            $0.bottom.equalTo(modalView).offset(-18)
         }
         
         addScheduleButton.snp.makeConstraints {
@@ -110,10 +95,10 @@ class ScheduleDetailViewController: BaseViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first, !scheduleView.frame.contains(touch.location(in: view)) else { return }
+        guard let touch = touches.first, !modalView.frame.contains(touch.location(in: view)) else { return }
         
         view.backgroundColor = .clear
-        scheduleView.isHidden = true
+        modalView.isHidden = true
         
         UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseInOut, animations: {
             self.addScheduleButton.frame.origin.x = self.addButtonLocation?.minX ?? 0
@@ -154,8 +139,8 @@ class ScheduleDetailViewController: BaseViewController {
     
     func animateAddScheduleButton() {
         UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
-            let maxX = self.scheduleView.frame.maxX
-            let maxY = self.scheduleView.frame.maxY
+            let maxX = self.modalView.frame.maxX
+            let maxY = self.modalView.frame.maxY
             self.addScheduleButton.frame.origin.x = maxX - 56 - 20
             self.addScheduleButton.frame.origin.y = maxY - 56 - 20
             self.view.layoutIfNeeded()
@@ -169,7 +154,7 @@ class ScheduleDetailViewController: BaseViewController {
     }
     
     private func presentEditScheduleViewController() {
-        let editViewController = EditViewController()
+        let editViewController = EditBottomSheetViewController()
         editViewController.modalPresentationStyle = .overFullScreen
         editViewController.configure(modifyTitle: "기록 작성하기",
                                              deleteTitle: "일정 삭제하기",
@@ -177,7 +162,7 @@ class ScheduleDetailViewController: BaseViewController {
                                                           messageText: nil,
                                                           cancelText: "취소",
                                                           doneText: "삭제",
-                                                          buttonColor: .colorF14C4C,
+                                                          buttonColor: .redF14C4C,
                                                           alertHeight: 140))
         editViewController.onModify = { self.presentWriteRecordViewController() }
         editViewController.onDelete = { self.deleteSchedule() }

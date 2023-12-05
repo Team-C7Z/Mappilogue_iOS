@@ -20,17 +20,17 @@ class ProfileCell: BaseCollectionViewCell {
         
         profileImage.layer.cornerRadius = 56 / 2
         profileImage.layer.masksToBounds = true
-        profileImage.backgroundColor = .colorF5F3F0
+        profileImage.backgroundColor = .grayF5F3F0
         profileImage.contentMode = .scaleAspectFill
         
         profileNameLabel.textColor = .color000000
         profileNameLabel.font = .title02
         
-        profileEmailLabel.textColor = .color707070
+        profileEmailLabel.textColor = .gray707070
         profileEmailLabel.font = .caption01
         
         moveImage.image = UIImage(named: "my_move")
-        moveImage.tintColor = .color707070
+        moveImage.tintColor = .gray707070
     }
     
     override func setupHierarchy() {

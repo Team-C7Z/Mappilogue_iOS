@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import MappilogueKit
 
-class SelectCategoryViewController: BaseViewController {
+class SelectCategoryViewController: NavigationBarViewController {
     private var categoryViewModel = CategoryViewModel()
     var categories: [Category] = []
     
@@ -16,7 +17,7 @@ class SelectCategoryViewController: BaseViewController {
         layout.scrollDirection = .vertical
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .colorF9F8F7
+        collectionView.backgroundColor = .grayF9F8F7
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         collectionView.register(AddNewCategoryCell.self, forCellWithReuseIdentifier: AddNewCategoryCell.registerId)
         collectionView.register(NewCategoryCell.self, forCellWithReuseIdentifier: NewCategoryCell.registerId)
@@ -35,7 +36,7 @@ class SelectCategoryViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationTitleAndBackButton("카테고리 선택", backButtonAction: #selector(backButtonTapped))
+        setPopBar(title: "카테고리 선택")
     }
     
     override func setupHierarchy() {
@@ -48,7 +49,8 @@ class SelectCategoryViewController: BaseViewController {
         super.setupLayout()
         
         collectionView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(88)
+            $0.leading.bottom.trailing.equalToSuperview()
         }
     }
 }
@@ -103,7 +105,7 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
             self.categories.append(Category(id: 0, title: "새로운 카테고리", isMarkedInMap: .inactive, markCount: 0))
             collectionView.reloadData()
             
-            let inputAlertViewController = InputAlertViewController()
+            let inputAlertViewController = InputModalViewController()
             inputAlertViewController.modalPresentationStyle = .overCurrentContext
             inputAlertViewController.onCancelTapped = {
                 self.categories.removeLast()

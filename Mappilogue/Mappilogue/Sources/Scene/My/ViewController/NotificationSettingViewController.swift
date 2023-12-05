@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NotificationSettingViewController: BaseViewController {
+class NotificationSettingViewController: NavigationBarViewController {
     var userViewModel = UserViewModel()
     private var notificationDTO: NotificationDTO?
     
@@ -27,16 +27,20 @@ class NotificationSettingViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationTitleAndBackButton("알림 설정", backButtonAction: #selector(updateNotification))
+        setDefaultPopBar(title: "알림 설정")
+        
+        popBar.onPopButtonTapped = {
+            self.updateNotification()
+        }
         
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
         stackView.spacing = 1
-        stackView.backgroundColor = .colorEAE6E1
+        stackView.backgroundColor = .grayEAE6E1
 
         setSwitchToggleActions()
         
-        notificationControlOffView.backgroundColor = .colorF9F8F7.withAlphaComponent(0.4)
+        notificationControlOffView.backgroundColor = .grayF9F8F7.withAlphaComponent(0.4)
     }
     
     override func setupHierarchy() {
@@ -54,9 +58,9 @@ class NotificationSettingViewController: BaseViewController {
         super.setupLayout()
     
         totalNotiviationView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
-            $0.trailing.equalTo(view.safeAreaLayoutGuide).offset(-16)
+            $0.top.equalToSuperview().offset(98)
+            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().offset(-16)
         }
         
         stackView.snp.makeConstraints {
@@ -75,7 +79,7 @@ class NotificationSettingViewController: BaseViewController {
             userViewModel.updateNotificationSetting(notification: notification)
         }
         
-        backButtonTapped()
+        // backButtonTapped()
     }
     
     func getNotificationSetting() {

@@ -7,8 +7,9 @@
 
 import UIKit
 import Photos
+import MappilogueKit
 
-class EditProfileViewController: BaseViewController {
+class EditProfileViewController: NavigationBarViewController {
     var userViewModel = UserViewModel()
     
     private let profileImageButton = UIButton()
@@ -32,7 +33,7 @@ class EditProfileViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationTitleAndBackButton("프로필 편집", backButtonAction: #selector(backButtonTapped))
+        setPopBar(title: "프로필 편집")
         
         profileImageButton.addTarget(self, action: #selector(profileImageButtonTapped), for: .touchUpInside)
         
@@ -43,29 +44,29 @@ class EditProfileViewController: BaseViewController {
         editProfileImageImage.image = UIImage(named: "my_editProfileImage")
         
         editProfileImageLabel.text = "사진 편집"
-        editProfileImageLabel.textColor = .colorFFFFFF
+        editProfileImageLabel.textColor = .whiteFFFFFF
         editProfileImageLabel.font = .caption03
         
         nicknameTitleLabel.text = "닉네임"
-        nicknameTitleLabel.textColor = .color707070
+        nicknameTitleLabel.textColor = .gray707070
         nicknameTitleLabel.font = .body02
         
-        editNicknameTextField.textColor = .color1C1C1C
+        editNicknameTextField.textColor = .black1C1C1C
         editNicknameTextField.font = .title02
-        editNicknameTextField.tintColor = .color2EBD3D
+        editNicknameTextField.tintColor = .green2EBD3D
         editNicknameTextField.delegate = self
         
         editNicknameImage.image = UIImage(named: "my_editNickname")
         
-        nicknameLineView.backgroundColor = .color1C1C1C
+        nicknameLineView.backgroundColor = .black1C1C1C
         
         loginAccountTitleLabel.text = "로그인 계정"
-        loginAccountTitleLabel.textColor = .color707070
+        loginAccountTitleLabel.textColor = .gray707070
         loginAccountTitleLabel.font = .body02
         
-        loginAccountImage.image = UIImage(named: "my_kakaoAccount")
+        loginAccountImage.image = Images.image(named: .imageKakaoLoginAccount)
         
-        loginAccountLabel.textColor = .color707070
+        loginAccountLabel.textColor = .gray707070
         loginAccountLabel.font = .caption01
     }
     
@@ -89,8 +90,8 @@ class EditProfileViewController: BaseViewController {
         super.setupLayout()
     
         profileImageButton.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            $0.leading.equalTo(view.safeAreaLayoutGuide).offset(16)
+            $0.top.equalToSuperview().offset(98)
+            $0.leading.equalToSuperview().offset(16)
             $0.width.height.equalTo(88)
         }
         
@@ -109,13 +110,13 @@ class EditProfileViewController: BaseViewController {
         }
         
         nicknameTitleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(25)
+            $0.top.equalToSuperview().offset(113)
             $0.leading.equalTo(profileImage.snp.trailing).offset(20)
         }
         
         editNicknameTextField.snp.makeConstraints {
             $0.leading.equalTo(nicknameTitleLabel)
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(46)
+            $0.top.equalToSuperview().offset(144)
         }
         
         editNicknameImage.snp.makeConstraints {
@@ -201,7 +202,7 @@ class EditProfileViewController: BaseViewController {
                               messageText: "사진 접근 권한을 허용하지 않을 경우\n일부 기능을 사용할 수 없어요",
                               cancelText: "닫기",
                               doneText: "설정으로 이동",
-                              buttonColor: .color2EBD3D,
+                              buttonColor: .green2EBD3D,
                               alertHeight: 182)
             alertViewController.configureAlert(with: alert)
             alertViewController.onDoneTapped = {

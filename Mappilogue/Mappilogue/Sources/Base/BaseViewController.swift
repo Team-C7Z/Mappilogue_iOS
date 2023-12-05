@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import MappilogueKit
 
 protocol BaseViewControllerProtocol {
     func setupProperty()
@@ -19,7 +20,7 @@ class BaseViewController: UIViewController, BaseViewControllerProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .colorF9F8F7
+        view.backgroundColor = .grayF9F8F7
         
         setupProperty()
         setupHierarchy()

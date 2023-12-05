@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class AddMarkedRecordCell: BaseCollectionViewCell {
     static let registerId = "\(AddMarkedRecordCell.self)"
@@ -15,10 +16,10 @@ class AddMarkedRecordCell: BaseCollectionViewCell {
     override func setupProperty() {
         super.setupProperty()
         
-        contentView.backgroundColor = .colorF5F3F0
+        contentView.backgroundColor = .grayF5F3F0
         contentView.layer.cornerRadius = 12
         
-        addMarkedRecordButton.setImage(UIImage(named: "home_addMarkedRecord"), for: .normal)
+        addMarkedRecordButton.setImage(Images.image(named: .imageAddMarkedRecord), for: .normal)
         addMarkedRecordButton.isUserInteractionEnabled = false
     }
     

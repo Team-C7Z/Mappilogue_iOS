@@ -53,11 +53,11 @@ class CycleRepeatViewController: BaseViewController {
     private func createButton(_ text: String) -> UIButton {
         let button = UIButton()
         button.setTitle(text, for: .normal)
-        button.setTitleColor(.colorC9C6C2, for: .normal)
+        button.setTitleColor(.grayC9C6C2, for: .normal)
         button.titleLabel?.font = .title02
         button.layer.cornerRadius = 16
         button.layer.borderWidth = 2
-        button.layer.borderColor = UIColor.colorC9C6C2.cgColor
+        button.layer.borderColor = UIColor.grayC9C6C2.cgColor
         button.addTarget(self, action: #selector(cycleButtonTapped), for: .touchUpInside)
         
         button.snp.makeConstraints {
@@ -87,7 +87,7 @@ class CycleRepeatViewController: BaseViewController {
 
     func updateCyclebuttonDesign(_ sender: UIButton) {
         sender.layer.borderWidth = sender.isSelected ? 0 : 2
-        sender.backgroundColor = sender.isSelected ? .color1C1C1C : .colorFFFFFF
-        sender.setTitleColor(sender.isSelected ? .colorFFFFFF : .colorC9C6C2, for: .normal)
+        sender.backgroundColor = sender.isSelected ? .black1C1C1C : .whiteFFFFFF
+        sender.setTitleColor(sender.isSelected ? .whiteFFFFFF : .grayC9C6C2, for: .normal)
     }
 }

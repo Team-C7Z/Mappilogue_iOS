@@ -8,7 +8,7 @@
 import UIKit
 import WebKit
 
-class TermsOfUseViewController: BaseViewController {
+class TermsOfUseViewController: NavigationBarViewController {
     var userViewModel = UserViewModel()
     
     private let webView = WKWebView()
@@ -22,7 +22,7 @@ class TermsOfUseViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationTitleAndBackButton("이용약관", backButtonAction: #selector(backButtonTapped))
+        setPopBar(title: "이용약관")
     }
     
     override func setupHierarchy() {
@@ -35,7 +35,8 @@ class TermsOfUseViewController: BaseViewController {
         super.setupLayout()
 
         webView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(98)
+            $0.leading.bottom.trailing.equalTo(view.safeAreaLayoutGuide)
         }
     }
     

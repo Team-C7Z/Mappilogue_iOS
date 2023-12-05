@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MyCategoryViewController: BaseViewController {
+class MyCategoryViewController: NavigationBarViewController {
     let dummyRecord = dummyRecordData()
     var categoryId: Int = 0
     var categoryName: String = ""
@@ -20,7 +20,7 @@ class MyCategoryViewController: BaseViewController {
         layout.scrollDirection = .vertical
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .colorF9F8F7
+        collectionView.backgroundColor = .grayF9F8F7
         collectionView.register(EmptyRecordCell.self, forCellWithReuseIdentifier: EmptyRecordCell.registerId)
         collectionView.register(RecordCell.self, forCellWithReuseIdentifier: RecordCell.registerId)
         collectionView.delegate = self
@@ -36,7 +36,7 @@ class MyCategoryViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setNavigationTitleAndBackButton(categoryName, backButtonAction: isNewWrite ? #selector(navigateToMyRecordViewController) : #selector(backButtonTapped))
+//        setNavigationTitleAndBackButton(categoryName, backButtonAction: isNewWrite ? #selector(navigateToMyRecordViewController) : #selector(backButtonTapped))
         setMenuButtonItem()
     }
     
@@ -50,16 +50,20 @@ class MyCategoryViewController: BaseViewController {
         super.setupLayout()
         
         collectionView.snp.makeConstraints {
-            $0.leading.top.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(88)
+            $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(view)
         }
     }
     
     func setMenuButtonItem() {
         if categoryName != "전체" {
-            let menuButtonItem = UIBarButtonItem(image: UIImage(named: "menu"), style: .plain, target: self, action: #selector(menuButtonItemTapped))
-            menuButtonItem.tintColor = .color1C1C1C
-            navigationItem.rightBarButtonItem = menuButtonItem
+            setPopMenuBar(title: categoryName)
+            popMenuBar.onMenuButtonTapped = {
+                self.menuButtonItemTapped()
+            }
+        } else {
+            setPopBar(title: categoryName)
         }
     }
     
@@ -80,7 +84,7 @@ class MyCategoryViewController: BaseViewController {
     }
     
     private func navigateToRecordContentViewController() {
-        let myRecordContentViewController = MyRecordContentViewController()
+        let myRecordContentViewController = ContentViewController()
         navigationController?.pushViewController(myRecordContentViewController, animated: true)
     }
     

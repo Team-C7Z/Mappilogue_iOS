@@ -13,7 +13,7 @@ class LineCell: BaseCollectionViewCell {
     override func setupProperty() {
         super.setupProperty()
     
-        contentView.backgroundColor = .colorEAE6E1
+        contentView.backgroundColor = .grayEAE6E1
     }
     
     override func setupHierarchy() {

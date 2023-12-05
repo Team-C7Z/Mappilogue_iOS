@@ -22,7 +22,7 @@ class AddedLocationsHeaderView: BaseCollectionReusableView {
         super.setupProperty()
 
         locationHeaderLabel.text = "일정에서 추가한 장소"
-        locationHeaderLabel.textColor = .color707070
+        locationHeaderLabel.textColor = .gray707070
         locationHeaderLabel.font = .caption01
     }
 

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class MaredRecordsFooterView: BaseTableViewHeaderFooterView {
     static let registerId = "\(MaredRecordsFooterView.self)"
@@ -14,7 +15,7 @@ class MaredRecordsFooterView: BaseTableViewHeaderFooterView {
     var onMarkedRecord: (() -> Void)?
     var onAddRecord: (() -> Void)?
     
-    private let addScheduleButton = AddButton(text: "일정 추가하기", backgroundColor: .color1C1C1C)
+    private let addScheduleButton = AddButton(title: "일정 추가하기")
     
     let dummyMarkedData = dummyMarkedRecordData(markedRecordCount: 1         )
     let limitedMarkedRecordsCount = 3
@@ -25,7 +26,7 @@ class MaredRecordsFooterView: BaseTableViewHeaderFooterView {
         layout.scrollDirection = .horizontal
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .colorF9F8F7
+        collectionView.backgroundColor = .grayF9F8F7
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.register(MarkedRecordCell.self, forCellWithReuseIdentifier: MarkedRecordCell.registerId)
         collectionView.register(AddMarkedRecordCell.self, forCellWithReuseIdentifier: AddMarkedRecordCell.registerId)
@@ -47,7 +48,7 @@ class MaredRecordsFooterView: BaseTableViewHeaderFooterView {
         
         markedRecordsLabel.text = "마크한 기록"
         markedRecordsLabel.font = .title01
-        markedRecordsLabel.textColor = .color1C1C1C
+        markedRecordsLabel.textColor = .black1C1C1C
     }
     
     override func setupHierarchy() {
@@ -63,7 +64,6 @@ class MaredRecordsFooterView: BaseTableViewHeaderFooterView {
         
         addScheduleButton.snp.makeConstraints {
             $0.leading.top.trailing.equalTo(contentView)
-            $0.height.equalTo(53)
         }
         
         markedRecordsLabel.snp.makeConstraints {

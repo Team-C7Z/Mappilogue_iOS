@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class SignUpCompletionViewController: BaseViewController {
     var onTapped: (() -> Void)?
@@ -30,7 +31,7 @@ class SignUpCompletionViewController: BaseViewController {
         stackView.alignment = .center
         stackView.spacing = 40
         
-        completionImage.image = UIImage(named: "login_completion")
+        completionImage.image = Images.image(named: .imageSignupCompletion)
         completionImage.contentMode = .scaleAspectFit
         
         labelStackView.axis = .vertical
@@ -39,11 +40,11 @@ class SignUpCompletionViewController: BaseViewController {
         labelStackView.spacing = 3
         
         completionLabel.text = "맵필로그에 오신 걸 환영해요!"
-        completionLabel.textColor = .color1C1C1C
+        completionLabel.textColor = .black1C1C1C
         completionLabel.font = .title01
         
         goToHomeLabel.text = "3초 뒤에 홈으로 이동할게요"
-        goToHomeLabel.textColor = .color9B9791
+        goToHomeLabel.textColor = .gray9B9791
         goToHomeLabel.font = .body02
     }
 

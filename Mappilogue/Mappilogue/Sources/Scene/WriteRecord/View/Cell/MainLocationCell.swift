@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class MainLocationCell: BaseCollectionViewCell {
     static let registerId = "\(SearchLocationCell.self)"
@@ -17,28 +18,20 @@ class MainLocationCell: BaseCollectionViewCell {
     private let locationImage = UIImageView()
     private let locationTitleLabel = UILabel()
     private let addressLabel = UILabel()
-    private let mainLocationButton = UIButton()
+    private let mainLocationButton = MainLocationButton()
 
     override func setupProperty() {
         super.setupProperty()
 
-        locationImage.image = UIImage(named: "searchLocation")
+        locationImage.image = Images.image(named: .imagePin)
 
         locationTitleLabel.text = "카멜리아힐"
-        locationTitleLabel.textColor = .color1C1C1C
+        locationTitleLabel.textColor = .black1C1C1C
         locationTitleLabel.font = .title02
 
         addressLabel.text = "제주 서귀포시 안덕면 병악로 166"
-        addressLabel.textColor = .color707070
+        addressLabel.textColor = .gray707070
         addressLabel.font = .caption01
-
-        mainLocationButton.setTitle("대표 위치", for: .normal)
-        mainLocationButton.setTitleColor(.colorC9C6C2, for: .normal)
-        mainLocationButton.titleLabel?.font = .caption02
-        mainLocationButton.backgroundColor = .clear
-        mainLocationButton.layer.borderWidth = 2
-        mainLocationButton.layer.borderColor = UIColor.colorC9C6C2.cgColor
-        mainLocationButton.layer.cornerRadius = 14
 
         mainLocationButton.addTarget(self, action: #selector(mainLocationButtonTapped), for: .touchUpInside)
     }
@@ -96,8 +89,8 @@ class MainLocationCell: BaseCollectionViewCell {
     }
 
     private func updateMainLocationDesign(_ isSelect: Bool) {
-        mainLocationButton.setTitleColor(isSelect ? .colorFFFFFF : .colorC9C6C2, for: .normal)
-        mainLocationButton.backgroundColor = isSelect ? .color2EBD3D : .clear
+        mainLocationButton.setTitleColor(isSelect ? .whiteFFFFFF : .grayC9C6C2, for: .normal)
+        mainLocationButton.backgroundColor = isSelect ? .green2EBD3D : .clear
         mainLocationButton.layer.borderWidth = isSelect ? 0 : 2
     }
 }

@@ -7,8 +7,9 @@
 
 import UIKit
 import NMapsMap
+import MappilogueKit
 
-class MapMainLocationViewController: BaseViewController {
+class MapMainLocationViewController: NavigationBarViewController {
     var onSelectedMapLocation: ((String) -> Void)?
 
     let locationManager = CLLocationManager()
@@ -27,9 +28,9 @@ class MapMainLocationViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
 
+        setPopBar(title: "대표 위치 설정")
         setMapView()
-
-        setNavigationTitleAndBackButton("대표 위치 설정", backButtonAction: #selector(backButtonTapped))
+        
         mainLocationSettingView.onSelectedMapLocation = { address in
             self.selectMapLocation(address)
         }
@@ -46,7 +47,8 @@ class MapMainLocationViewController: BaseViewController {
         super.setupLayout()
 
         mapView.snp.makeConstraints {
-            $0.leading.top.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview().offset(88)
+            $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(mainLocationSettingView.snp.top).offset(15)
         }
 
@@ -119,7 +121,7 @@ extension MapMainLocationViewController: CLLocationManagerDelegate {
                           messageText: "위치 권한을 허용하지 않을 경우\n일부 기능을 사용할 수 없어요",
                           cancelText: "닫기",
                           doneText: "설정으로 이동",
-                          buttonColor: .color2EBD3D,
+                          buttonColor: .green2EBD3D,
                           alertHeight: 182)
         alertViewController.configureAlert(with: alert)
         alertViewController.onDoneTapped = {
@@ -136,7 +138,7 @@ extension MapMainLocationViewController: NMFMapViewCameraDelegate {
         let projection = mapView.projection
         let coord = projection.latlng(from: CGPoint(x: mapView.frame.width / 2, y: mapView.frame.height / 2 + 18))
         marker.position = NMGLatLng(lat: coord.lat, lng: coord.lng)
-        marker.iconImage = NMFOverlayImage(name: "record_mainLocation")
+        marker.iconImage = NMFOverlayImage(name: Images.Image.imageMainLocation.rawValue)
         marker.width = 65
         marker.height = 36
         marker.mapView = mapView

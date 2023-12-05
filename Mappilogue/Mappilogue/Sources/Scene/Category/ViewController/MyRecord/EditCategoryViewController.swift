@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class EditCategoryViewController: BaseViewController {
     private var categoryViewModel = CategoryViewModel()
@@ -27,25 +28,25 @@ class EditCategoryViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        view.backgroundColor = .color404040.withAlphaComponent(0.1)
+        view.backgroundColor = .gray404040.withAlphaComponent(0.1)
         
         modalView.layer.cornerRadius = 24
         modalView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         modalView.layer.masksToBounds = true
-        modalView.backgroundColor = .colorF9F8F7
+        modalView.backgroundColor = .grayF9F8F7
         
-        barView.backgroundColor = .colorC9C6C2
+        barView.backgroundColor = .grayC9C6C2
         
-        modifyCategoryImage.image = UIImage(named: "common_modify")
+        modifyCategoryImage.image = Images.image(named: .imageModify)
         modifyCategoryLabel.text = "카테고리 이름 바꾸기"
-        modifyCategoryLabel.textColor = .color1C1C1C
+        modifyCategoryLabel.textColor = .black1C1C1C
         modifyCategoryLabel.font = .title02
         modifyCategoryButton.addTarget(self, action: #selector(modifyCategoryButtonTapped), for: .touchUpInside)
         
-        deleteCategoryImage.image = UIImage(named: "common_delete")
-        deleteCategoryImage.tintColor = .colorF14C4C
+        deleteCategoryImage.image = Images.image(named: .imageDelete)
+        deleteCategoryImage.tintColor = .redF14C4C
         deleteCategoryLabel.text = "카테고리 삭제하기"
-        deleteCategoryLabel.textColor = .color1C1C1C
+        deleteCategoryLabel.textColor = .black1C1C1C
         deleteCategoryLabel.font = .title02
         deleteCategoryButton.addTarget(self, action: #selector(deleteCategoryButtonTapped), for: .touchUpInside)
     }
@@ -127,7 +128,7 @@ class EditCategoryViewController: BaseViewController {
     @objc func modifyCategoryButtonTapped(_ button: UIButton) {
         editMode = false
         
-        let inputAlertViewController = InputAlertViewController()
+        let inputAlertViewController = InputModalViewController()
         inputAlertViewController.modalPresentationStyle = .overCurrentContext
         inputAlertViewController.configure(categoryName)
         inputAlertViewController.onCancelTapped = {

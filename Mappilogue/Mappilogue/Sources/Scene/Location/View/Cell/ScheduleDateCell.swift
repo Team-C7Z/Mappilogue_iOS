@@ -15,7 +15,7 @@ class ScheduleDateCell: BaseCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        contentView.backgroundColor = .colorEAE6E1
+        contentView.backgroundColor = .grayEAE6E1
     }
     
     override func setupProperty() {
@@ -25,7 +25,7 @@ class ScheduleDateCell: BaseCollectionViewCell {
         
         dateLabel.text = "5월 10일"
         dateLabel.font = .title02
-        dateLabel.textColor = .colorFFFFFF
+        dateLabel.textColor = .whiteFFFFFF
     }
     
     override func setupHierarchy() {
@@ -44,6 +44,6 @@ class ScheduleDateCell: BaseCollectionViewCell {
     
     func configure(_ date: String, isSelected: Bool) {
         dateLabel.text = date
-        contentView.backgroundColor = isSelected ? .color1C1C1C : .colorEAE6E1
+        contentView.backgroundColor = isSelected ? .black1C1C1C : .grayEAE6E1
     }
 }

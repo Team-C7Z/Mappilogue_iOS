@@ -42,7 +42,7 @@ class ScheduleDotCell: BaseCollectionViewCell {
     
     func configure(scheduleStatus: Bool) {
         if scheduleStatus {
-            dotView.backgroundColor = .color2EBD3D
+            dotView.backgroundColor = .green2EBD3D
         }
     }
 }

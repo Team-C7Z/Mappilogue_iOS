@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
     var gatheringToastMessage = GatheringToastMessageView()
@@ -14,9 +15,9 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        tabBar.backgroundColor = .colorF9F8F7
-        tabBar.tintColor = .color1C1C1C // 선택 아이템
-        tabBar.unselectedItemTintColor = .color707070
+        tabBar.backgroundColor = .grayF9F8F7
+        tabBar.tintColor = .black1C1C1C // 선택 아이템
+        tabBar.unselectedItemTintColor = .gray707070
         
         setTabBar()
         
@@ -25,20 +26,21 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     func setTabBar() {
         let viewControllers = [
-            createViewController(HomeViewController(), title: "홈", imageName: "home"),
-            createViewController(CalendarViewController(), title: "캘린더", imageName: "calendar"),
-            createViewController(GatheringViewController(), title: "모임", imageName: "gathering"),
-            createViewController(RecordViewController(), title: "기록", imageName: "record"),
-            createViewController(MyViewController(), title: "MY", imageName: "my")
+            createViewController(HomeViewController(), title: "홈", image: Images.image(named: .tabbarHome)),
+            createViewController(CalendarViewController(), title: "캘린더", image: Images.image(named: .tabbarCalendar)),
+            createViewController(GatheringViewController(), title: "모임", image: Images.image(named: .tabbarGathering)),
+            createViewController(RecordViewController(), title: "기록", image: Images.image(named: .tabbarRecord)),
+            createViewController(MyViewController(), title: "MY", image: Images.image(named: .tabbarMy))
         ]
 
         setViewControllers(viewControllers, animated: false)
     }
     
-    func createViewController(_ viewController: UIViewController, title: String, imageName: String) -> UIViewController {
+    func createViewController(_ viewController: UIViewController, title: String, image: UIImage) -> UIViewController {
         let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.isNavigationBarHidden = true
         viewController.title = title
-        viewController.tabBarItem.image = UIImage(named: imageName)
+        viewController.tabBarItem.image = image
         return navigationController
     }
     
