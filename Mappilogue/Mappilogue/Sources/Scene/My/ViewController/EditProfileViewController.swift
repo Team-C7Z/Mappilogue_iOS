@@ -221,15 +221,15 @@ class EditProfileViewController: NavigationBarViewController {
             imagePickerViewController.isProfile = true
             imagePickerViewController.onCompletion = { assets in
                 if let asset = assets.first {
-                    self.updateProfileImage(asset)
+                    self.updateProfileAssetImage(asset)
                 }
             }
             imagePickerViewController.modalPresentationStyle = .fullScreen
-            self.present(imagePickerViewController, animated: true)
+            self.navigationController?.pushViewController(imagePickerViewController, animated: false)
         }
     }
     
-    private func updateProfileImage(_ asset: PHAsset) {
+    private func updateProfileAssetImage(_ asset: PHAsset) {
         let imageManager = PHCachingImageManager()
         let options = PHImageRequestOptions()
        
@@ -251,12 +251,15 @@ class EditProfileViewController: NavigationBarViewController {
     
     @objc func presentEditNicknameModalViewController() {
         let editNicknameModalViewController = EditNicknameModalViewController()
-        editNicknameModalViewController.modalPresentationStyle = .overFullScreen
         editNicknameModalViewController.configure(editNicknameTextField.text ?? "")
         editNicknameModalViewController.onChangeTapped = { nickname in
             self.changeNickname(nickname)
         }
-        present(editNicknameModalViewController, animated: false)
+        navigationController?.pushViewController(editNicknameModalViewController, animated: false)
+    }
+    
+    func updateProfilePhotoImage(_ photo: UIImage) {
+        profileImage.image = photo
     }
     
     private func changeNickname(_ nickname: String) {

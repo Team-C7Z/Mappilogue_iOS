@@ -8,6 +8,7 @@
 import UIKit
 import Photos
 import PhotosUI
+import MappilogueKit
 
 class ImagePickerViewController: ImagePickerNavigationViewController {
     var allPhotos = PHFetchResult<PHAsset>()
@@ -68,7 +69,7 @@ class ImagePickerViewController: ImagePickerNavigationViewController {
         
         dismissSaveBar.onSaveButtonTapped = {
             self.onCompletion?(self.selectedAssets)
-            self.dismiss(animated: true)
+            self.navigationController?.popViewController(animated: false)
         }
         
         photoDirectoryPickerButton.addTarget(self, action: #selector(photoDirectoryPickerButtonTapped), for: .touchUpInside)
@@ -156,19 +157,62 @@ class ImagePickerViewController: ImagePickerNavigationViewController {
     private func removePhotoDirectoryView() {
         photoDirectoryView.removeFromSuperview()
     }
+    
+    private func checkCameraPermission() {
+        AVCaptureDevice.requestAccess(for: .video) { permission in
+            if permission {
+                print("Camera: 권한 허용")
+                DispatchQueue.main.async {
+                    self.presentCameraViewController()
+                }
+            } else {
+                print("Camera: 권한 거부")
+                DispatchQueue.main.async {
+                    self.presentCameraPermissionAlert()
+                }
+            }
+        }
+    }
+
+    func presentCameraPermissionAlert() {
+        let alertViewController = AlertViewController()
+        alertViewController.modalPresentationStyle = .overCurrentContext
+        let alert = Alert(titleText: "카메라 접근 권한을 허용해 주세요",
+                          messageText: "카메라 접근 권한을 허용하지 않을 경우\n일부 기능을 사용할 수 없어요",
+                          cancelText: "닫기",
+                          doneText: "설정으로 이동",
+                          buttonColor: .green2EBD3D,
+                          alertHeight: 182)
+        alertViewController.configureAlert(with: alert)
+        alertViewController.onDoneTapped = {
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+        self.present(alertViewController, animated: false)
+    }
+
+    private func presentCameraViewController() {
+        let cameraViewController = CameraViewController()
+        navigationController?.pushViewController(cameraViewController, animated: false)
+    }
 }
 
 extension ImagePickerViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return currentAlbum.count
+        return currentAlbum.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImagePickerCell.registerId, for: indexPath) as? ImagePickerCell else { return UICollectionViewCell() }
-        
-        let asset = currentAlbum[indexPath.row]
-        let isSelected = selectedAssets.contains(asset)
-        cell.configure(asset, isSelected: isSelected)
+
+        if indexPath.row == 0 {
+            cell.configure(nil, isSelected: false)
+        } else {
+            let asset = currentAlbum[indexPath.row - 1]
+            let isSelected = selectedAssets.contains(asset)
+            cell.configure(asset, isSelected: isSelected)
+        }
         
         return cell
     }
@@ -189,15 +233,20 @@ extension ImagePickerViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let asset = currentAlbum[indexPath.row]
-        
-        if isProfile {
-            selectedAssets = [asset]
+        if indexPath.row == 0 {
+            checkCameraPermission()
         } else {
-            if let index = selectedAssets.firstIndex(where: { $0 == asset}) {
-                selectedAssets.remove(at: index)
+            let asset = currentAlbum[indexPath.row - 1]
+            
+            if isProfile {
+                selectedAssets = [asset]
+                
             } else {
-                selectedAssets.append(asset)
+                if let index = selectedAssets.firstIndex(where: { $0 == asset}) {
+                    selectedAssets.remove(at: index)
+                } else {
+                    selectedAssets.append(asset)
+                }
             }
         }
         
