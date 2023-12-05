@@ -1345,6 +1345,7 @@
 		926998F52A14EC07003DDAD2 /* Mappilogue */ = {
 			isa = PBXGroup;
 			children = (
+				92E3F4662B1ED0CC00E03C15 /* App */,
 				929E231D2AB81EEE003180B3 /* Mappilogue.entitlements */,
 				926999272A14F0FA003DDAD2 /* Resources */,
 				926999262A14F0ED003DDAD2 /* Sources */,
@@ -1375,8 +1376,6 @@
 		926999262A14F0ED003DDAD2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				926998F62A14EC07003DDAD2 /* AppDelegate.swift */,
-				926998F82A14EC07003DDAD2 /* SceneDelegate.swift */,
 				926999282A14F113003DDAD2 /* Base */,
 				926999292A14F11B003DDAD2 /* Extension */,
 				92A7B6642A4E52A6009C9293 /* Model */,
@@ -1639,6 +1638,15 @@
 				9224FD182A616EB1000A56A6 /* ColorCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		92E3F4662B1ED0CC00E03C15 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				926998F62A14EC07003DDAD2 /* AppDelegate.swift */,
+				926998F82A14EC07003DDAD2 /* SceneDelegate.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 		92E7814A2A849AB9000DAACD /* Cell */ = {

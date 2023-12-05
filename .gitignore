@@ -93,3 +93,4 @@ iOSInjectionProject/
 **/.DS_Store
 
 **/SecureAPIKeys.plist
+**/GoogleService-Info.plist
