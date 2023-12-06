@@ -22,6 +22,9 @@ class ContentViewController: NavigationBarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        myRecordContentImageView.onImageTapped = { imageName in
+            self.presentImageDetailViewController(imageName)
+        }
     }
     
     override func setupProperty() {
@@ -117,5 +120,12 @@ class ContentViewController: NavigationBarViewController {
         } else {
             navigationController?.popViewController(animated: true)
         }
+    }
+    
+    private func presentImageDetailViewController(_ imageName: String) {
+        let imageDetailViewController = ImageDetailViewController()
+        imageDetailViewController.modalPresentationStyle = .overCurrentContext
+        imageDetailViewController.configure(imageName)
+        present(imageDetailViewController, animated: false)
     }
 }
