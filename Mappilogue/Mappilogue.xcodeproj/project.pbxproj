@@ -11,7 +11,6 @@
 		9200318F2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9200318E2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift */; };
 		920031AF2A8B5AF600E3170D /* LocationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031AE2A8B5AF600E3170D /* LocationAPI.swift */; };
 		920031B22A8B5B4C00E3170D /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031B12A8B5B4C00E3170D /* LocationManager.swift */; };
-		920031B52A8B5B9100E3170D /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031B42A8B5B9100E3170D /* Environment.swift */; };
 		920031B82A8B5BC700E3170D /* KakaoAddressDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031B72A8B5BC700E3170D /* KakaoAddressDTO.swift */; };
 		920031BA2A8B5C3000E3170D /* AddedLocationsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031B92A8B5C3000E3170D /* AddedLocationsHeaderView.swift */; };
 		920031BD2A8B5C8E00E3170D /* MainLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920031BC2A8B5C8E00E3170D /* MainLocationCell.swift */; };
@@ -226,6 +225,7 @@
 		92CBB2B62B19C13000587BED /* MappilogueKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CBB2B32B19C11D00587BED /* MappilogueKit.framework */; };
 		92CBB2B72B19C13000587BED /* MappilogueKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 92CBB2B32B19C11D00587BED /* MappilogueKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		92CD36FA2A7B505900768B61 /* MyRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CD36F92A7B505900768B61 /* MyRecordViewController.swift */; };
+		92E1F6072B20D39900F0C1EE /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E1F6062B20D39900F0C1EE /* Environment.swift */; };
 		92E20F462B137B3600380FA5 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E20F452B137B3600380FA5 /* UserViewModel.swift */; };
 		92E20F492B13B8AB00380FA5 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E20F482B13B8AB00380FA5 /* AuthViewModel.swift */; };
 		92E20F4C2B1429F400380FA5 /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E20F4B2B1429F400380FA5 /* Onboarding.swift */; };
@@ -307,7 +307,6 @@
 		9200318E2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalCompletedAlertViewController.swift; sourceTree = "<group>"; };
 		920031AE2A8B5AF600E3170D /* LocationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAPI.swift; sourceTree = "<group>"; };
 		920031B12A8B5B4C00E3170D /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		920031B42A8B5B9100E3170D /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		920031B72A8B5BC700E3170D /* KakaoAddressDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoAddressDTO.swift; sourceTree = "<group>"; };
 		920031B92A8B5C3000E3170D /* AddedLocationsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddedLocationsHeaderView.swift; sourceTree = "<group>"; };
 		920031BC2A8B5C8E00E3170D /* MainLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLocationCell.swift; sourceTree = "<group>"; };
@@ -519,6 +518,7 @@
 		92CBB03B2B18905200587BED /* SecureAPIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SecureAPIKeys.plist; path = Resources/SecureAPIKeys.plist; sourceTree = "<group>"; };
 		92CBB2AD2B19C11D00587BED /* MappilogueKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MappilogueKit.xcodeproj; path = MappilogueKit/MappilogueKit.xcodeproj; sourceTree = "<group>"; };
 		92CD36F92A7B505900768B61 /* MyRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordViewController.swift; sourceTree = "<group>"; };
+		92E1F6062B20D39900F0C1EE /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		92E20F452B137B3600380FA5 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		92E20F482B13B8AB00380FA5 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		92E20F4B2B1429F400380FA5 /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
@@ -628,8 +628,8 @@
 		920031B32A8B5B7D00E3170D /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				920031B42A8B5B9100E3170D /* Environment.swift */,
 				920031D02A8B65F000E3170D /* Bundle.swift */,
+				92E1F6062B20D39900F0C1EE /* Environment.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -2161,6 +2161,7 @@
 				92011B922A7367E6009B047F /* SelectMainLocationButton.swift in Sources */,
 				92E7814E2A850316000DAACD /* Date.swift in Sources */,
 				92011CB92A7A1718009B047F /* MyRecordListViewController.swift in Sources */,
+				92E1F6072B20D39900F0C1EE /* Environment.swift in Sources */,
 				925840A42A7C890100997434 /* CategorySelectionCell.swift in Sources */,
 				92011C1C2A75E484009B047F /* RecordCell.swift in Sources */,
 				926999402A14F73C003DDAD2 /* HomeViewController.swift in Sources */,
@@ -2201,7 +2202,6 @@
 				928B7BF72A9CA92F00E4F789 /* ActiveStatus.swift in Sources */,
 				9273C9502ABF040400224DE1 /* ScheduleManager.swift in Sources */,
 				92011CBC2A7A19CA009B047F /* MyRecordCategoryCell.swift in Sources */,
-				920031B52A8B5B9100E3170D /* Environment.swift in Sources */,
 				9245BBC82AFB926900383F4D /* CategoryViewModel.swift in Sources */,
 				920031D52A8D021000E3170D /* KakaoSerachDTO.swift in Sources */,
 				92F00AB12AF4B897001FE43F /* CategoryManager.swift in Sources */,
