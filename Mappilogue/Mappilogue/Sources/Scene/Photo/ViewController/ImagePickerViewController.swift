@@ -22,6 +22,7 @@ class ImagePickerViewController: ImagePickerNavigationViewController {
     var isProfile: Bool = false
     var isPhotoDirectory: Bool = false
     var onCompletion: (([PHAsset]) -> Void)?
+    var maxPhotoSelectionCount = 0
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -37,6 +38,7 @@ class ImagePickerViewController: ImagePickerNavigationViewController {
     
     private let limitedPhotoSelectionView = LimitedPhotoSelectionView()
     private let photoDirectoryView = PhotoDirectoryView()
+    private let toastMessage = ToastMessageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -196,6 +198,32 @@ class ImagePickerViewController: ImagePickerNavigationViewController {
         let cameraViewController = CameraViewController()
         navigationController?.pushViewController(cameraViewController, animated: false)
     }
+    
+    func setToastMessage() {
+        toastMessage.configure(message: "사진은 10개까지 업로드할 수 있어요", showUndo: false)
+        view.addSubview(toastMessage)
+        
+        toastMessage.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-16)
+            $0.centerX.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+    
+    func showToastMessage() {
+        self.setToastMessage()
+        
+        UIView.animate(withDuration: 2, delay: 0, options: .curveLinear, animations: {
+            
+        }, completion: { (_) in
+            UIView.animate(withDuration: 0.3, delay: 1, options: .curveEaseIn, animations: {
+                self.toastMessage.alpha = 0.0
+            }, completion: { (_) in
+                self.toastMessage.alpha = 1.0
+                self.toastMessage.removeFromSuperview()
+            })
+        })
+    }
+    
 }
 
 extension ImagePickerViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {    
@@ -207,13 +235,16 @@ extension ImagePickerViewController: UICollectionViewDelegate, UICollectionViewD
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImagePickerCell.registerId, for: indexPath) as? ImagePickerCell else { return UICollectionViewCell() }
 
         if indexPath.row == 0 {
-            cell.configure(nil, isSelected: false)
+            cell.configure(nil, isSelected: false, count: 0)
         } else {
             let asset = currentAlbum[indexPath.row - 1]
             let isSelected = selectedAssets.contains(asset)
-            cell.configure(asset, isSelected: isSelected)
+            if let count = selectedAssets.firstIndex(of: asset) {
+                cell.configure(asset, isSelected: isSelected, count: isProfile ? nil : count + 1)
+            } else {
+                cell.configure(asset, isSelected: isSelected, count: nil)
+            }
         }
-        
         return cell
     }
 
@@ -240,16 +271,18 @@ extension ImagePickerViewController: UICollectionViewDelegate, UICollectionViewD
             
             if isProfile {
                 selectedAssets = [asset]
-                
             } else {
-                if let index = selectedAssets.firstIndex(where: { $0 == asset}) {
-                    selectedAssets.remove(at: index)
+                if selectedAssets.count < 10 {
+                    if let index = selectedAssets.firstIndex(where: { $0 == asset}) {
+                        selectedAssets.remove(at: index)
+                    } else {
+                        selectedAssets.append(asset)
+                    }
                 } else {
-                    selectedAssets.append(asset)
+                    showToastMessage()
                 }
             }
         }
-        
         collectionView.reloadData()
     }
 }

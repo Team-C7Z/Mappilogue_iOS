@@ -17,6 +17,8 @@ class ImagePickerCell: BaseCollectionViewCell {
     
     private let cameraImage = UIImageView()
     private let pickerImage = UIImageView()
+    private let countView = UIView()
+    private let countLabel = UILabel()
     
     override func setupProperty() {
         super.setupProperty()
@@ -30,7 +32,13 @@ class ImagePickerCell: BaseCollectionViewCell {
         pickerImage.contentMode = .scaleAspectFill
         pickerImage.clipsToBounds = true
         options.deliveryMode = .highQualityFormat
-
+        
+        countLabel.textColor = .whiteFFFFFF
+        countLabel.font = .title02
+        
+        countView.backgroundColor = .green2EBD3D
+        countView.layer.cornerRadius = 12
+        countView.isHidden = true
     }
     
     override func setupHierarchy() {
@@ -38,6 +46,8 @@ class ImagePickerCell: BaseCollectionViewCell {
         
         contentView.addSubview(cameraImage)
         contentView.addSubview(pickerImage)
+        contentView.addSubview(countView)
+        countView.addSubview(countLabel)
     }
     
     override func setupLayout() {
@@ -53,9 +63,18 @@ class ImagePickerCell: BaseCollectionViewCell {
         pickerImage.snp.makeConstraints {
             $0.width.height.equalTo(contentView)
         }
+        
+        countView.snp.makeConstraints {
+            $0.top.leading.equalTo(pickerImage).offset(12)
+            $0.width.height.equalTo(24)
+        }
+        
+        countLabel.snp.makeConstraints {
+            $0.center.equalTo(countView)
+        }
     }
     
-    func configure(_ asset: PHAsset?, isSelected: Bool) {
+    func configure(_ asset: PHAsset?, isSelected: Bool, count: Int?) {
         let size = CGSize(width: self.frame.width * UIScreen.main.scale, height: self.frame.height * UIScreen.main.scale)
         
         if let asset {
@@ -68,7 +87,12 @@ class ImagePickerCell: BaseCollectionViewCell {
             pickerImage.image = Images.image(named: .buttonCamera)
         }
         
+        countView.isHidden = !isSelected
+        if let count {
+            countLabel.text = "\(count)"
+        } else {
+            countView.isHidden = true
+        }
         contentView.layer.borderWidth = isSelected ? 4 : 0
-
     }
 }

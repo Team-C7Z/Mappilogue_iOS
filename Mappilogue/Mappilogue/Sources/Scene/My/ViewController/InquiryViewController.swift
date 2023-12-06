@@ -99,10 +99,10 @@ class InquiryViewController: NavigationBarViewController {
     }
     
     @objc func emailCopyButtonTapped() {
-        showGatheringToastMessage()
+        showToastMessage()
     }
     
-    func setGatheringToastMessage() {
+    func setToastMessage() {
         emailCopyToastMessage.configure(message: "이메일이 복사되었어요", showUndo: false)
         view.addSubview(emailCopyToastMessage)
         
@@ -112,8 +112,8 @@ class InquiryViewController: NavigationBarViewController {
         }
     }
     
-    func showGatheringToastMessage() {
-        self.setGatheringToastMessage()
+    func showToastMessage() {
+        self.setToastMessage()
         
         UIView.animate(withDuration: 2, delay: 0, options: .curveLinear, animations: {
             
