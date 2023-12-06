@@ -68,7 +68,7 @@
 		92011C222A77907F009B047F /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C212A77907F009B047F /* CategoryCell.swift */; };
 		92011C242A77A329009B047F /* AddCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C232A77A329009B047F /* AddCategoryCell.swift */; };
 		92011C662A78980E009B047F /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C652A78980E009B047F /* UIView.swift */; };
-		92011CB92A7A1718009B047F /* MyRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011CB82A7A1718009B047F /* MyRecordViewController.swift */; };
+		92011CB92A7A1718009B047F /* MyRecordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011CB82A7A1718009B047F /* MyRecordListViewController.swift */; };
 		92011CBC2A7A19CA009B047F /* MyRecordCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011CBB2A7A19CA009B047F /* MyRecordCategoryCell.swift */; };
 		92139D6D2AAC454B005344AE /* WrtieContentImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D6C2AAC454B005344AE /* WrtieContentImageView.swift */; };
 		92139D6F2AAC4737005344AE /* ContentImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D6E2AAC4737005344AE /* ContentImageCell.swift */; };
@@ -220,11 +220,12 @@
 		92A7B6632A4E20BF009C9293 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6622A4E20BF009C9293 /* BaseTableViewCell.swift */; };
 		92A7B6662A4E5B3A009C9293 /* UpcomingSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6652A4E5B3A009C9293 /* UpcomingSchedule.swift */; };
 		92A7B6682A4E6154009C9293 /* UpcomingScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6672A4E6154009C9293 /* UpcomingScheduleCell.swift */; };
+		92BE02722B20376F00632ABA /* ImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BE02712B20376F00632ABA /* ImageDetailViewController.swift */; };
 		92C2EC612A6924B5002DB0E3 /* LineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2EC602A6924B5002DB0E3 /* LineCell.swift */; };
 		92CBB03C2B18905300587BED /* SecureAPIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92CBB03B2B18905200587BED /* SecureAPIKeys.plist */; };
 		92CBB2B62B19C13000587BED /* MappilogueKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CBB2B32B19C11D00587BED /* MappilogueKit.framework */; };
 		92CBB2B72B19C13000587BED /* MappilogueKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 92CBB2B32B19C11D00587BED /* MappilogueKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		92CD36FA2A7B505900768B61 /* MyCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CD36F92A7B505900768B61 /* MyCategoryViewController.swift */; };
+		92CD36FA2A7B505900768B61 /* MyRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CD36F92A7B505900768B61 /* MyRecordViewController.swift */; };
 		92E20F462B137B3600380FA5 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E20F452B137B3600380FA5 /* UserViewModel.swift */; };
 		92E20F492B13B8AB00380FA5 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E20F482B13B8AB00380FA5 /* AuthViewModel.swift */; };
 		92E20F4C2B1429F400380FA5 /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E20F4B2B1429F400380FA5 /* Onboarding.swift */; };
@@ -233,6 +234,10 @@
 		92E3F4472B1DE0D000E03C15 /* Pretendard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92E3F4432B1DE0D000E03C15 /* Pretendard-Bold.ttf */; };
 		92E3F4482B1DE0D000E03C15 /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92E3F4442B1DE0D000E03C15 /* Pretendard-Medium.ttf */; };
 		92E3F4492B1DE0D000E03C15 /* Pretendard-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 92E3F4452B1DE0D000E03C15 /* Pretendard-SemiBold.ttf */; };
+		92E3F46F2B1ED63600E03C15 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F46E2B1ED63600E03C15 /* CameraViewController.swift */; };
+		92E3F4712B1ED64C00E03C15 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F4702B1ED64C00E03C15 /* PreviewView.swift */; };
+		92E3F4732B1ED66400E03C15 /* CapturePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F4722B1ED66400E03C15 /* CapturePhotoViewController.swift */; };
+		92E3F4752B1EFB1E00E03C15 /* CameraNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F4742B1EFB1E00E03C15 /* CameraNavigationBarViewController.swift */; };
 		92E7814C2A84B9B3000DAACD /* ScheduleDateFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7814B2A84B9B3000DAACD /* ScheduleDateFooterView.swift */; };
 		92E7814E2A850316000DAACD /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7814D2A850316000DAACD /* Date.swift */; };
 		92E781522A85381D000DAACD /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E781512A85381D000DAACD /* String.swift */; };
@@ -357,7 +362,7 @@
 		92011C212A77907F009B047F /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		92011C232A77A329009B047F /* AddCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryCell.swift; sourceTree = "<group>"; };
 		92011C652A78980E009B047F /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
-		92011CB82A7A1718009B047F /* MyRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordViewController.swift; sourceTree = "<group>"; };
+		92011CB82A7A1718009B047F /* MyRecordListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordListViewController.swift; sourceTree = "<group>"; };
 		92011CBB2A7A19CA009B047F /* MyRecordCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordCategoryCell.swift; sourceTree = "<group>"; };
 		92139D6C2AAC454B005344AE /* WrtieContentImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrtieContentImageView.swift; sourceTree = "<group>"; };
 		92139D6E2AAC4737005344AE /* ContentImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentImageCell.swift; sourceTree = "<group>"; };
@@ -509,10 +514,11 @@
 		92A7B6622A4E20BF009C9293 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		92A7B6652A4E5B3A009C9293 /* UpcomingSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingSchedule.swift; sourceTree = "<group>"; };
 		92A7B6672A4E6154009C9293 /* UpcomingScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingScheduleCell.swift; sourceTree = "<group>"; };
+		92BE02712B20376F00632ABA /* ImageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailViewController.swift; sourceTree = "<group>"; };
 		92C2EC602A6924B5002DB0E3 /* LineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineCell.swift; sourceTree = "<group>"; };
 		92CBB03B2B18905200587BED /* SecureAPIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SecureAPIKeys.plist; path = Resources/SecureAPIKeys.plist; sourceTree = "<group>"; };
 		92CBB2AD2B19C11D00587BED /* MappilogueKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MappilogueKit.xcodeproj; path = MappilogueKit/MappilogueKit.xcodeproj; sourceTree = "<group>"; };
-		92CD36F92A7B505900768B61 /* MyCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCategoryViewController.swift; sourceTree = "<group>"; };
+		92CD36F92A7B505900768B61 /* MyRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordViewController.swift; sourceTree = "<group>"; };
 		92E20F452B137B3600380FA5 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		92E20F482B13B8AB00380FA5 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		92E20F4B2B1429F400380FA5 /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
@@ -521,6 +527,10 @@
 		92E3F4432B1DE0D000E03C15 /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.ttf"; sourceTree = "<group>"; };
 		92E3F4442B1DE0D000E03C15 /* Pretendard-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.ttf"; sourceTree = "<group>"; };
 		92E3F4452B1DE0D000E03C15 /* Pretendard-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.ttf"; sourceTree = "<group>"; };
+		92E3F46E2B1ED63600E03C15 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		92E3F4702B1ED64C00E03C15 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		92E3F4722B1ED66400E03C15 /* CapturePhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturePhotoViewController.swift; sourceTree = "<group>"; };
+		92E3F4742B1EFB1E00E03C15 /* CameraNavigationBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraNavigationBarViewController.swift; sourceTree = "<group>"; };
 		92E7814B2A84B9B3000DAACD /* ScheduleDateFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDateFooterView.swift; sourceTree = "<group>"; };
 		92E7814D2A850316000DAACD /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		92E781512A85381D000DAACD /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -902,8 +912,8 @@
 		9245BBEB2B08907B00383F4D /* MyRecord */ = {
 			isa = PBXGroup;
 			children = (
-				92011CB82A7A1718009B047F /* MyRecordViewController.swift */,
-				92CD36F92A7B505900768B61 /* MyCategoryViewController.swift */,
+				92011CB82A7A1718009B047F /* MyRecordListViewController.swift */,
+				92CD36F92A7B505900768B61 /* MyRecordViewController.swift */,
 				925840AD2A7CD17E00997434 /* EditCategoryViewController.swift */,
 				9245BBD32B049EAC00383F4D /* DeleteCategoryAlertViewController.swift */,
 			);
@@ -1205,6 +1215,7 @@
 			isa = PBXGroup;
 			children = (
 				920031D62A8DAFD800E3170D /* ContentViewController.swift */,
+				92BE02712B20376F00632ABA /* ImageDetailViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1212,10 +1223,10 @@
 		9245BC112B08C4FE00383F4D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				92139D722AAD673A005344AE /* ContentTextView.swift */,
-				92139D742AAD67E8005344AE /* MyRecordContentImageView.swift */,
 				920031D82A8DB50600E3170D /* MyRecordContentHeaderView.swift */,
+				92139D742AAD67E8005344AE /* MyRecordContentImageView.swift */,
 				92139D782AAD709E005344AE /* MyRecordContentImageCell.swift */,
+				92139D722AAD673A005344AE /* ContentTextView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1345,7 +1356,6 @@
 		926998F52A14EC07003DDAD2 /* Mappilogue */ = {
 			isa = PBXGroup;
 			children = (
-				92E3F4662B1ED0CC00E03C15 /* App */,
 				929E231D2AB81EEE003180B3 /* Mappilogue.entitlements */,
 				926999272A14F0FA003DDAD2 /* Resources */,
 				926999262A14F0ED003DDAD2 /* Sources */,
@@ -1376,6 +1386,7 @@
 		926999262A14F0ED003DDAD2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				92E3F4662B1ED0CC00E03C15 /* App */,
 				926999282A14F113003DDAD2 /* Base */,
 				926999292A14F11B003DDAD2 /* Extension */,
 				92A7B6642A4E52A6009C9293 /* Model */,
@@ -1608,6 +1619,9 @@
 			children = (
 				920031F02A918B4700E3170D /* ImagePickerNavigationViewController.swift */,
 				920031EA2A9103E900E3170D /* ImagePickerViewController.swift */,
+				92E3F4742B1EFB1E00E03C15 /* CameraNavigationBarViewController.swift */,
+				92E3F46E2B1ED63600E03C15 /* CameraViewController.swift */,
+				92E3F4722B1ED66400E03C15 /* CapturePhotoViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1618,6 +1632,7 @@
 				920031EE2A910F7800E3170D /* PhotoDirectoryPickerButton.swift */,
 				920031F22A92274000E3170D /* LimitedPhotoSelectionView.swift */,
 				920031F42A92444E00E3170D /* PhotoDirectoryView.swift */,
+				92E3F4702B1ED64C00E03C15 /* PreviewView.swift */,
 				92E3F42B2B1CDDC000E03C15 /* Cell */,
 			);
 			path = View;
@@ -1980,6 +1995,7 @@
 				926382B62A6D03850064C1A8 /* CalendarEmptyScheduleCell.swift in Sources */,
 				92011B892A72B4BB009B047F /* WriteContentTextView.swift in Sources */,
 				92011C222A77907F009B047F /* CategoryCell.swift in Sources */,
+				92E3F46F2B1ED63600E03C15 /* CameraViewController.swift in Sources */,
 				92011C242A77A329009B047F /* AddCategoryCell.swift in Sources */,
 				92139D892AB1BEBD005344AE /* Announcement.swift in Sources */,
 				92011C662A78980E009B047F /* UIView.swift in Sources */,
@@ -1992,6 +2008,7 @@
 				920031BF2A8B5CD600E3170D /* MainLocationAlertViewController.swift in Sources */,
 				9245BC2C2B0BBBFF00383F4D /* ScheduleDetailDTO.swift in Sources */,
 				9224FCF52A5D6C65000A56A6 /* DatePickerViewController.swift in Sources */,
+				92BE02722B20376F00632ABA /* ImageDetailViewController.swift in Sources */,
 				925840D12A7FCE6800997434 /* AddScheduleHeaderView.swift in Sources */,
 				925840A82A7CBF3B00997434 /* CategorySelectionLabelCell.swift in Sources */,
 				928B7BFB2A9DC55600E4F789 /* AuthUserDefaults.swift in Sources */,
@@ -2134,6 +2151,7 @@
 				9224FD442A657150000A56A6 /* Location.swift in Sources */,
 				926999462A14F75F003DDAD2 /* RecordViewController.swift in Sources */,
 				92011C202A769C12009B047F /* SortHeaderView.swift in Sources */,
+				92E3F4752B1EFB1E00E03C15 /* CameraNavigationBarViewController.swift in Sources */,
 				928B7BF32A9C7B4400E4F789 /* NetworkLoggerPlugin.swift in Sources */,
 				9245BBDA2B05088700383F4D /* UpdatedCategory.swift in Sources */,
 				928B7C1D2AA489F600E4F789 /* NotificationDTO.swift in Sources */,
@@ -2142,7 +2160,7 @@
 				920031C12A8B5D0800E3170D /* MainLocationSettingView.swift in Sources */,
 				92011B922A7367E6009B047F /* SelectMainLocationButton.swift in Sources */,
 				92E7814E2A850316000DAACD /* Date.swift in Sources */,
-				92011CB92A7A1718009B047F /* MyRecordViewController.swift in Sources */,
+				92011CB92A7A1718009B047F /* MyRecordListViewController.swift in Sources */,
 				925840A42A7C890100997434 /* CategorySelectionCell.swift in Sources */,
 				92011C1C2A75E484009B047F /* RecordCell.swift in Sources */,
 				926999402A14F73C003DDAD2 /* HomeViewController.swift in Sources */,
@@ -2151,7 +2169,9 @@
 				927E7F212A66F64400E6A29F /* Schedule2222.swift in Sources */,
 				925840BD2A7F459600997434 /* NotificationSettingView.swift in Sources */,
 				928B7BE72A9B1B3E00E4F789 /* AuthManager.swift in Sources */,
+				92E3F4712B1ED64C00E03C15 /* PreviewView.swift in Sources */,
 				928B7BEE2A9C603C00E4F789 /* TodaySchedule.swift in Sources */,
+				92E3F4732B1ED66400E03C15 /* CapturePhotoViewController.swift in Sources */,
 				92011C142A74F9DE009B047F /* SearchLocationCell.swift in Sources */,
 				9245BBE22B087FF400383F4D /* ColorManager.swift in Sources */,
 				92459EDA2A530D1100493941 /* MarkedRecordCell.swift in Sources */,
@@ -2174,7 +2194,7 @@
 				9263786B2A546BDE004E5B6E /* OnboardingViewController.swift in Sources */,
 				9245BC2E2B0DCA2300383F4D /* GetScheduleDTO.swift in Sources */,
 				92A7B6632A4E20BF009C9293 /* BaseTableViewCell.swift in Sources */,
-				92CD36FA2A7B505900768B61 /* MyCategoryViewController.swift in Sources */,
+				92CD36FA2A7B505900768B61 /* MyRecordViewController.swift in Sources */,
 				928B7C1B2AA4784500E4F789 /* TermsOfUserDTO.swift in Sources */,
 				9224FD1B2A61705D000A56A6 /* ColorSelection.swift in Sources */,
 				9273C94E2ABEEFC300224DE1 /* AddScheduleDateType.swift in Sources */,

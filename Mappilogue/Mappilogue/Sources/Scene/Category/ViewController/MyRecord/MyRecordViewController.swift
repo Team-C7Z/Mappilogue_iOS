@@ -1,164 +1,147 @@
 //
-//  MyRecordViewController.swift
+//  MyCategoryViewController.swift
 //  Mappilogue
 //
-//  Created by hyemi on 2023/08/02.
+//  Created by hyemi on 2023/08/03.
 //
 
 import UIKit
 
 class MyRecordViewController: NavigationBarViewController {
-    private var categoryViewModel = CategoryViewModel()
-    var categories: [Category] = []
-    var totalCategoryCount: Int = 0
+    let dummyRecord = dummyRecordData()
+    var categoryId: Int = 0
+    var categoryName: String = ""
+    var onModifyCategory: ((String) -> Void)?
+    var onDeleteCategory: (() -> Void)?
     var isNewWrite: Bool = false
     
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.separatorStyle = .none
-        tableView.backgroundColor = .grayF9F8F7
-        tableView.sectionHeaderHeight = 0
-        tableView.sectionFooterHeight = 0
-        tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
-        tableView.register(MyRecordCategoryCell.self, forCellReuseIdentifier: MyRecordCategoryCell.registerId)
-        tableView.register(CategorySettingCell.self, forCellReuseIdentifier: CategorySettingCell.registerId)
-        tableView.delegate = self
-        tableView.dataSource = self
-        return tableView
-    }()
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        loadCategoryData()
-    }
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .grayF9F8F7
+        collectionView.register(EmptyRecordCell.self, forCellWithReuseIdentifier: EmptyRecordCell.registerId)
+        collectionView.register(RecordCell.self, forCellWithReuseIdentifier: RecordCell.registerId)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        return collectionView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+  
     }
     
     override func setupProperty() {
         super.setupProperty()
         
-        setPopBar(title: "나의 기록")
+//        setNavigationTitleAndBackButton(categoryName, backButtonAction: isNewWrite ? #selector(navigateToMyRecordViewController) : #selector(backButtonTapped))
+        setMenuButtonItem()
     }
     
     override func setupHierarchy() {
         super.setupHierarchy()
         
-        view.addSubview(tableView)
+        view.addSubview(collectionView)
     }
     
     override func setupLayout() {
         super.setupLayout()
         
-        tableView.snp.makeConstraints {
+        collectionView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(88)
-            $0.leading.bottom.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(view)
         }
     }
     
-    @objc func popToRootViewController() {
-        navigationController?.popToRootViewController(animated: true)
+    func setMenuButtonItem() {
+        if categoryName != "전체" {
+            setPopMenuBar(title: categoryName)
+            popMenuBar.onMenuButtonTapped = {
+                self.menuButtonItemTapped()
+            }
+        } else {
+            setPopBar(title: categoryName)
+        }
+    }
+    
+    @objc func menuButtonItemTapped() {
+        let editCategoryViewController = EditCategoryViewController()
+        editCategoryViewController.modalPresentationStyle = .overFullScreen
+        editCategoryViewController.categoryId = categoryId
+        editCategoryViewController.categoryName = categoryName
+//        editCategoryViewController.onModifyCategory = { categoryName in
+//            self.title = categoryName
+//            self.onModifyCategory?(categoryName)
+//        }
+        editCategoryViewController.onDeleteCategory = {
+            self.onDeleteCategory?()
+            self.navigationController?.popViewController(animated: false)
+        }
+        present(editCategoryViewController, animated: false)
+    }
+    
+    private func navigateToRecordContentViewController() {
+        let myRecordContentViewController = ContentViewController()
+        navigationController?.pushViewController(myRecordContentViewController, animated: true)
+    }
+    
+    @objc private func navigateToMyRecordViewController() {
+        let myRecordViewController = MyRecordListViewController()
+        navigationController?.pushViewController(myRecordViewController, animated: false)
     }
 }
 
-extension MyRecordViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+extension MyRecordViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dummyRecord.isEmpty ? 1 : dummyRecord.count
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? categories.count + 1 : 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
-            let cell = configureMyRecordCategoryCell(for: indexPath, in: tableView)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if dummyRecord.isEmpty {
+            let cell = configureEmptyRecordCell(for: indexPath, in: collectionView)
             return cell
-        case 1:
-            let cell = configureCategorySettingCell(for: indexPath, in: tableView)
+        } else {
+            let cell = configureRecordCell(for: indexPath, in: collectionView)
             return cell
-        default:
-            return UITableViewCell()
         }
     }
     
-    private func configureMyRecordCategoryCell(for indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MyRecordCategoryCell.registerId, for: indexPath) as? MyRecordCategoryCell else {
-            return UITableViewCell()
-        }
-        cell.selectionStyle = .none
+    private func configureEmptyRecordCell(for indexPath: IndexPath, in collectionView: UICollectionView) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyRecordCell.registerId, for: indexPath) as? EmptyRecordCell else { return UICollectionViewCell() }
+        return cell
+    }
+    
+    private func configureRecordCell(for indexPath: IndexPath, in collectionView: UICollectionView) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecordCell.registerId, for: indexPath) as? RecordCell else { return UICollectionViewCell() }
         
-        let totalCategory = Category(id: 0, title: "전체", isMarkedInMap: .inactive, markCount: totalCategoryCount)
-        let category = indexPath.row == 0 ? totalCategory : categories[indexPath.row - 1]
-        let isLast = indexPath.row == categories.count
-        cell.configure(with: category, isLast: isLast)
+        let record = dummyRecord[indexPath.row]
+        cell.configure(with: record)
         
         return cell
     }
     
-    private func configureCategorySettingCell(for indexPath: IndexPath, in tableView: UITableView) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CategorySettingCell.registerId, for: indexPath) as? CategorySettingCell else {
-            return UITableViewCell()
-        }
-        cell.selectionStyle = .none
-        
-        return cell
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 16)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.section == 0 ? 41 : 40
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case 0:
-            didSelectMyRecordCategoryCell(indexPath)
-        case 1:
-            didSelectCategorySettingCell()
-        default:
-            break
-        }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width - 32, height: dummyRecord.isEmpty ? collectionView.frame.height - 110 : 64)
     }
     
-    func didSelectMyRecordCategoryCell(_ indexPath: IndexPath) {
-        let myCategoryViewController = MyCategoryViewController()
-        myCategoryViewController.categoryId = indexPath.row == 0 ? 0 : categories[indexPath.row-1].id
-        myCategoryViewController.categoryName = indexPath.row == 0 ? "전체" : categories[indexPath.row-1].title
-        myCategoryViewController.onModifyCategory = { categoryName in
-            self.categories[indexPath.row-1].title = categoryName
-            self.tableView.reloadData()
-        }
-        myCategoryViewController.onDeleteCategory = {
-            self.categories.remove(at: indexPath.row-1)
-            self.tableView.reloadData()
-        }
-        navigationController?.pushViewController(myCategoryViewController, animated: true)
+    // 수평 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
     
-    func didSelectCategorySettingCell() {
-        let categorySettingViewController = CategorySettingViewController()
-        navigationController?.pushViewController(categorySettingViewController, animated: true)
+    // 수직 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 12
     }
-}
-
-extension MyRecordViewController {
-    private func loadCategoryData() {
-        categoryViewModel.getCategory()
-     
-        categoryViewModel.$categoryResult
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { result in
-                guard let result else { return }
-                
-                self.categories = result.markCategories
-                self.totalCategoryCount = result.totalCategoryMarkCount
-                self.tableView.reloadData()
-            })
-            .store(in: &categoryViewModel.cancellables)
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        navigateToRecordContentViewController()
     }
 }

@@ -8,6 +8,8 @@
 import UIKit
 
 class MyRecordContentImageView: BaseView {
+    var onImageTapped: ((String) -> Void)?
+    
     private var recordImages: [String] = []
     
     private lazy var collectionView: UICollectionView = {
@@ -51,6 +53,11 @@ class MyRecordContentImageView: BaseView {
             $0.height.equalTo((recordImages.count == 1 ? size : 288))
         }
     }
+    
+    private func presentImageDetailViewController() {
+        let imageDetailViewController = ImageDetailViewController()
+        imageDetailViewController.modalPresentationStyle = .overFullScreen
+    }
 }
 
 extension MyRecordContentImageView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -87,6 +94,7 @@ extension MyRecordContentImageView: UICollectionViewDelegate, UICollectionViewDa
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let image = recordImages[indexPath.row]
+        onImageTapped?(image)
     }
 }

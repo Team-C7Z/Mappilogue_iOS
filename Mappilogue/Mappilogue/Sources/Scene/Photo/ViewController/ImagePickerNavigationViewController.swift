@@ -20,7 +20,7 @@ class ImagePickerNavigationViewController: NavigationBarViewController {
         setDismissSaveBar(title: "")
         
         dismissSaveBar.onDismissButtonTapped = {
-            self.dismiss(animated: true)
+            self.navigationController?.popViewController(animated: false)
         }
     }
 

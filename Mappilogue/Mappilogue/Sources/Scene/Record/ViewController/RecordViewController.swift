@@ -278,9 +278,9 @@ class RecordViewController: NavigationBarViewController {
     }
     
     @objc private func myRecordButtonTapped() {
-        let myRecordViewController = MyRecordViewController()
-        myRecordViewController.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(myRecordViewController, animated: true)
+        let myRecordListViewController = MyRecordListViewController()
+        myRecordListViewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(myRecordListViewController, animated: true)
     }
     
     @objc private func writeRecordButtonTapped() {
