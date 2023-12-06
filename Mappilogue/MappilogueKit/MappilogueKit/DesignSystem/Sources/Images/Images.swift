@@ -55,6 +55,7 @@ public class Images {
         case buttonCamera = "button_camera"
         case buttonCameraCapture = "button_camera_capture"
         case buttonChangeCameraMode = "button_change_camera_mode"
+        case buttonDismissImage = "button_dismiss_image"
         case buttonHideKey = "button_hide_keyboard"
         case toastGathering = "toast_gathering"
         case toastGatheringArrow = "toast_gathering_arrow"
