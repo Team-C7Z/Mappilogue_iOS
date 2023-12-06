@@ -209,17 +209,17 @@ class WriteRecordViewController: NavigationBarViewController {
     private func checkAlbumPermission() {
         switch PHPhotoLibrary.authorizationStatus(for: .readWrite) {
         case .limited:
-            presentImagePickerViewController(.limited)
+            pushImagePickerViewController(.limited)
         case .authorized:
-            presentImagePickerViewController(.authorized)
+            pushImagePickerViewController(.authorized)
         case .denied, .restricted:
             presentGalleyPermissionAlert()
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
                 if status == .limited {
-                    self.presentImagePickerViewController(.limited)
+                    self.pushImagePickerViewController(.limited)
                 } else if status == .authorized {
-                    self.presentImagePickerViewController(.authorized)
+                    self.pushImagePickerViewController(.authorized)
                 } else {
                     self.presentGalleyPermissionAlert()
                 }
@@ -230,15 +230,14 @@ class WriteRecordViewController: NavigationBarViewController {
         }
     }
 
-    func presentImagePickerViewController(_ status: PHAuthorizationStatus) {
+    func pushImagePickerViewController(_ status: PHAuthorizationStatus) {
         DispatchQueue.main.async {
             let imagePickerViewController = ImagePickerViewController()
             imagePickerViewController.authStatus = status
             imagePickerViewController.onCompletion = { assets in
                 self.displayRecordImages(assets)
             }
-            imagePickerViewController.modalPresentationStyle = .fullScreen
-            self.present(imagePickerViewController, animated: true)
+            self.navigationController?.pushViewController(imagePickerViewController, animated: false)
         }
     }
     

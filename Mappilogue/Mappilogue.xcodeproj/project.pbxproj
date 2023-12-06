@@ -68,7 +68,7 @@
 		92011C222A77907F009B047F /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C212A77907F009B047F /* CategoryCell.swift */; };
 		92011C242A77A329009B047F /* AddCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C232A77A329009B047F /* AddCategoryCell.swift */; };
 		92011C662A78980E009B047F /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011C652A78980E009B047F /* UIView.swift */; };
-		92011CB92A7A1718009B047F /* MyRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011CB82A7A1718009B047F /* MyRecordViewController.swift */; };
+		92011CB92A7A1718009B047F /* MyRecordListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011CB82A7A1718009B047F /* MyRecordListViewController.swift */; };
 		92011CBC2A7A19CA009B047F /* MyRecordCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92011CBB2A7A19CA009B047F /* MyRecordCategoryCell.swift */; };
 		92139D6D2AAC454B005344AE /* WrtieContentImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D6C2AAC454B005344AE /* WrtieContentImageView.swift */; };
 		92139D6F2AAC4737005344AE /* ContentImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92139D6E2AAC4737005344AE /* ContentImageCell.swift */; };
@@ -224,7 +224,7 @@
 		92CBB03C2B18905300587BED /* SecureAPIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92CBB03B2B18905200587BED /* SecureAPIKeys.plist */; };
 		92CBB2B62B19C13000587BED /* MappilogueKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CBB2B32B19C11D00587BED /* MappilogueKit.framework */; };
 		92CBB2B72B19C13000587BED /* MappilogueKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 92CBB2B32B19C11D00587BED /* MappilogueKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		92CD36FA2A7B505900768B61 /* MyCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CD36F92A7B505900768B61 /* MyCategoryViewController.swift */; };
+		92CD36FA2A7B505900768B61 /* MyRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CD36F92A7B505900768B61 /* MyRecordViewController.swift */; };
 		92E20F462B137B3600380FA5 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E20F452B137B3600380FA5 /* UserViewModel.swift */; };
 		92E20F492B13B8AB00380FA5 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E20F482B13B8AB00380FA5 /* AuthViewModel.swift */; };
 		92E20F4C2B1429F400380FA5 /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E20F4B2B1429F400380FA5 /* Onboarding.swift */; };
@@ -361,7 +361,7 @@
 		92011C212A77907F009B047F /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		92011C232A77A329009B047F /* AddCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryCell.swift; sourceTree = "<group>"; };
 		92011C652A78980E009B047F /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
-		92011CB82A7A1718009B047F /* MyRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordViewController.swift; sourceTree = "<group>"; };
+		92011CB82A7A1718009B047F /* MyRecordListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordListViewController.swift; sourceTree = "<group>"; };
 		92011CBB2A7A19CA009B047F /* MyRecordCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordCategoryCell.swift; sourceTree = "<group>"; };
 		92139D6C2AAC454B005344AE /* WrtieContentImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrtieContentImageView.swift; sourceTree = "<group>"; };
 		92139D6E2AAC4737005344AE /* ContentImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentImageCell.swift; sourceTree = "<group>"; };
@@ -516,7 +516,7 @@
 		92C2EC602A6924B5002DB0E3 /* LineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineCell.swift; sourceTree = "<group>"; };
 		92CBB03B2B18905200587BED /* SecureAPIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SecureAPIKeys.plist; path = Resources/SecureAPIKeys.plist; sourceTree = "<group>"; };
 		92CBB2AD2B19C11D00587BED /* MappilogueKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MappilogueKit.xcodeproj; path = MappilogueKit/MappilogueKit.xcodeproj; sourceTree = "<group>"; };
-		92CD36F92A7B505900768B61 /* MyCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCategoryViewController.swift; sourceTree = "<group>"; };
+		92CD36F92A7B505900768B61 /* MyRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordViewController.swift; sourceTree = "<group>"; };
 		92E20F452B137B3600380FA5 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		92E20F482B13B8AB00380FA5 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		92E20F4B2B1429F400380FA5 /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
@@ -910,8 +910,8 @@
 		9245BBEB2B08907B00383F4D /* MyRecord */ = {
 			isa = PBXGroup;
 			children = (
-				92011CB82A7A1718009B047F /* MyRecordViewController.swift */,
-				92CD36F92A7B505900768B61 /* MyCategoryViewController.swift */,
+				92011CB82A7A1718009B047F /* MyRecordListViewController.swift */,
+				92CD36F92A7B505900768B61 /* MyRecordViewController.swift */,
 				925840AD2A7CD17E00997434 /* EditCategoryViewController.swift */,
 				9245BBD32B049EAC00383F4D /* DeleteCategoryAlertViewController.swift */,
 			);
@@ -2156,7 +2156,7 @@
 				920031C12A8B5D0800E3170D /* MainLocationSettingView.swift in Sources */,
 				92011B922A7367E6009B047F /* SelectMainLocationButton.swift in Sources */,
 				92E7814E2A850316000DAACD /* Date.swift in Sources */,
-				92011CB92A7A1718009B047F /* MyRecordViewController.swift in Sources */,
+				92011CB92A7A1718009B047F /* MyRecordListViewController.swift in Sources */,
 				925840A42A7C890100997434 /* CategorySelectionCell.swift in Sources */,
 				92011C1C2A75E484009B047F /* RecordCell.swift in Sources */,
 				926999402A14F73C003DDAD2 /* HomeViewController.swift in Sources */,
@@ -2190,7 +2190,7 @@
 				9263786B2A546BDE004E5B6E /* OnboardingViewController.swift in Sources */,
 				9245BC2E2B0DCA2300383F4D /* GetScheduleDTO.swift in Sources */,
 				92A7B6632A4E20BF009C9293 /* BaseTableViewCell.swift in Sources */,
-				92CD36FA2A7B505900768B61 /* MyCategoryViewController.swift in Sources */,
+				92CD36FA2A7B505900768B61 /* MyRecordViewController.swift in Sources */,
 				928B7C1B2AA4784500E4F789 /* TermsOfUserDTO.swift in Sources */,
 				9224FD1B2A61705D000A56A6 /* ColorSelection.swift in Sources */,
 				9273C94E2ABEEFC300224DE1 /* AddScheduleDateType.swift in Sources */,

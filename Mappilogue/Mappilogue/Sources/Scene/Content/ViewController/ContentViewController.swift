@@ -80,7 +80,7 @@ class ContentViewController: NavigationBarViewController {
     }
     
     @objc func navigateToMyCategoryViewController() {
-        let myCategoryViewController = MyCategoryViewController()
+        let myCategoryViewController = MyRecordViewController()
         myCategoryViewController.isNewWrite = true
         myCategoryViewController.categoryName = "전체" 
         navigationController?.pushViewController(myCategoryViewController, animated: false)
