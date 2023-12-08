@@ -6,48 +6,48 @@
 //
 
 import Foundation
-import Moya
+import Combine
 
-class LocationManager {
-    static let shared = LocationManager()
+class LocationManager: LocationAPI {
+    private let baseURL = Environment.kakaoAPI
     
-    private let provider = MoyaProvider<LocationAPI>()
+    func getAddress(long: Double, lat: Double) -> AnyPublisher<KakaoAddressDTO, Error> {
+        let url = URL(string: "\(baseURL)/v2/local/geo/coord2address?x=\(long)&y=\(lat)")!
+        let request = setupRequest(for: url, method: "GET")
 
-    func getAddress(long: Double, lat: Double, completion: @escaping (AddressDocuments?) -> Void) {
-        provider.request(.getAddress(long: long, lat: lat)) { result in
-            switch result {
-            case .success(let response):
-                do {
-                    let kakaoAddress = try response.map(KakaoAddressDTO.self)
-                    if let address = kakaoAddress.documents.first {
-                        completion(address)
-                    }
-                } catch {
-                    print("Mapping error: \(error)")
-                    completion(nil)
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .tryMap { data, response in
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                    throw URLError(.badServerResponse)
                 }
-            case .failure(let err):
-                print(err.localizedDescription)
-                completion(nil)
+                return data
             }
-        }
+            .decode(type: KakaoAddressDTO.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
     }
     
-    func getSearchResults(keyword: String, page: Int, completion: @escaping ([KakaoSearchPlaces]?) -> Void) {
-        provider.request(.search(keyword: keyword, page: page)) { result in
-            switch result {
-            case .success(let response):
-                do {
-                    let searchPlace = try response.map(KakaoSerachDTO.self)
-                    completion(searchPlace.kakaoSearchPlaces)
-                } catch {
-                    print("Mapping error: \(error)")
-                    completion(nil)
+    func getSearchResults(keyword: String, page: Int) -> AnyPublisher<KakaoSerachDTO, Error> {
+        let url = URL(string: "\(baseURL)/v2/local/search/keyword?query=\(keyword)&page=\(page)")!
+        let request = setupRequest(for: url, method: "GET")
+
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .tryMap { data, response in
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                    throw URLError(.badServerResponse)
                 }
-            case .failure(let err):
-                print(err.localizedDescription)
-                completion(nil)
+                return data
             }
-        }
+            .decode(type: KakaoSerachDTO.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+    }
+    
+    private func setupRequest(for url: URL, method: String) -> URLRequest {
+        var request = URLRequest(url: url)
+        request.httpMethod = method
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("KakaoAK \(Environment.kakaoRestKey)", forHTTPHeaderField: "Authorization")
+        
+        return request
     }
 }

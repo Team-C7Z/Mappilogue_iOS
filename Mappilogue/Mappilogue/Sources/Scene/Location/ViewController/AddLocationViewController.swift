@@ -9,6 +9,8 @@ import UIKit
 import MappilogueKit
 
 class AddLocationViewController: BaseViewController {
+    private var locationViewModel = LocationViewModel()
+    
     var searchKeyword: String = ""
     var searchPlaces: [KakaoSearchPlaces] = []
     var currentPage = 1
@@ -100,14 +102,19 @@ class AddLocationViewController: BaseViewController {
         
         isLoading = true
         
-        LocationManager.shared.getSearchResults(keyword: search, page: currentPage) { places in
-            guard let places = places else { return }
-            
-            self.isLoading = false
-            self.searchPlaces += places
-            self.currentPage += 1
-            self.collectionView.reloadData()
-        }
+        locationViewModel.getSearchResults(keyword: search, page: currentPage)
+        
+        locationViewModel.$locationResult
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { result in
+                guard let places = result else { return }
+                
+                self.isLoading = false
+                self.searchPlaces += places
+                self.currentPage += 1
+                self.collectionView.reloadData()
+            })
+            .store(in: &locationViewModel.cancellables)
         
         searchBar.resignFirstResponder()
     }

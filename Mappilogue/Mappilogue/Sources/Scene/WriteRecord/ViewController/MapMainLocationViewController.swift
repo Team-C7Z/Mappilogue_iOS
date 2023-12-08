@@ -10,6 +10,7 @@ import NMapsMap
 import MappilogueKit
 
 class MapMainLocationViewController: NavigationBarViewController {
+    private var locationViewModel = LocationViewModel()
     var onSelectedMapLocation: ((String) -> Void)?
 
     let locationManager = CLLocationManager()
@@ -145,13 +146,19 @@ extension MapMainLocationViewController: NMFMapViewCameraDelegate {
     }
 
     func mapViewCameraIdle(_ mapView: NMFMapView) {
-        LocationManager.shared.getAddress(long: mapView.longitude, lat: mapView.latitude) { address in
-           guard let address = address else { return }
-           if let roadAddress = address.roadAddress {
-               self.mainLocationSettingView.configure(roadAddress.addressName)
-           } else {
-               self.mainLocationSettingView.configure(address.address.addressName ?? "")
-           }
-       }
+        locationViewModel.getAddress(long: mapView.longitude, lat: mapView.latitude)
+        
+        locationViewModel.$addressResult
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { result in
+                guard let address = result else { return }
+                
+                if let roadAddress = address.roadAddress {
+                    self.mainLocationSettingView.configure(roadAddress.addressName)
+                } else {
+                    self.mainLocationSettingView.configure(address.address.addressName ?? "")
+                }
+            })
+            .store(in: &locationViewModel.cancellables)
     }
 }

@@ -129,7 +129,6 @@
 		9245BC2A2B0A501900383F4D /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BC292B0A501900383F4D /* CalendarManager.swift */; };
 		9245BC2C2B0BBBFF00383F4D /* ScheduleDetailDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BC2B2B0BBBFF00383F4D /* ScheduleDetailDTO.swift */; };
 		9245BC2E2B0DCA2300383F4D /* GetScheduleDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9245BC2D2B0DCA2300383F4D /* GetScheduleDTO.swift */; };
-		924BE0CA2A51AE25002C70FF /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 924BE0C92A51AE25002C70FF /* .swiftlint.yml */; };
 		9258409E2A7BD30700997434 /* CategorySettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258409D2A7BD30700997434 /* CategorySettingViewController.swift */; };
 		925840A02A7BD4D700997434 /* CategoryOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258409F2A7BD4D700997434 /* CategoryOrderCell.swift */; };
 		925840A42A7C890100997434 /* CategorySelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925840A32A7C890100997434 /* CategorySelectionCell.swift */; };
@@ -219,6 +218,8 @@
 		92A7B6632A4E20BF009C9293 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6622A4E20BF009C9293 /* BaseTableViewCell.swift */; };
 		92A7B6662A4E5B3A009C9293 /* UpcomingSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6652A4E5B3A009C9293 /* UpcomingSchedule.swift */; };
 		92A7B6682A4E6154009C9293 /* UpcomingScheduleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6672A4E6154009C9293 /* UpcomingScheduleCell.swift */; };
+		92B365A52B22C33200502446 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B365A42B22C33200502446 /* LocationViewModel.swift */; };
+		92B365B02B22C8DE00502446 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 92B365AF2B22C8DD00502446 /* .swiftlint.yml */; };
 		92BE02722B20376F00632ABA /* ImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BE02712B20376F00632ABA /* ImageDetailViewController.swift */; };
 		92C2EC612A6924B5002DB0E3 /* LineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2EC602A6924B5002DB0E3 /* LineCell.swift */; };
 		92CBB03C2B18905300587BED /* SecureAPIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92CBB03B2B18905200587BED /* SecureAPIKeys.plist */; };
@@ -423,7 +424,6 @@
 		9245BC292B0A501900383F4D /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		9245BC2B2B0BBBFF00383F4D /* ScheduleDetailDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDetailDTO.swift; sourceTree = "<group>"; };
 		9245BC2D2B0DCA2300383F4D /* GetScheduleDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetScheduleDTO.swift; sourceTree = "<group>"; };
-		924BE0C92A51AE25002C70FF /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		9258409D2A7BD30700997434 /* CategorySettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingViewController.swift; sourceTree = "<group>"; };
 		9258409F2A7BD4D700997434 /* CategoryOrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryOrderCell.swift; sourceTree = "<group>"; };
 		925840A32A7C890100997434 /* CategorySelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionCell.swift; sourceTree = "<group>"; };
@@ -513,6 +513,8 @@
 		92A7B6622A4E20BF009C9293 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		92A7B6652A4E5B3A009C9293 /* UpcomingSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingSchedule.swift; sourceTree = "<group>"; };
 		92A7B6672A4E6154009C9293 /* UpcomingScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingScheduleCell.swift; sourceTree = "<group>"; };
+		92B365A42B22C33200502446 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
+		92B365AF2B22C8DD00502446 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		92BE02712B20376F00632ABA /* ImageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailViewController.swift; sourceTree = "<group>"; };
 		92C2EC602A6924B5002DB0E3 /* LineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineCell.swift; sourceTree = "<group>"; };
 		92CBB03B2B18905200587BED /* SecureAPIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SecureAPIKeys.plist; path = Resources/SecureAPIKeys.plist; sourceTree = "<group>"; };
@@ -842,6 +844,7 @@
 		9224FD402A6563CF000A56A6 /* Location */ = {
 			isa = PBXGroup;
 			children = (
+				92B365A32B22C32700502446 /* ViewModel */,
 				9245BC022B08C3E800383F4D /* ViewController */,
 				9245BC032B08C3F200383F4D /* View */,
 			);
@@ -1332,8 +1335,8 @@
 		926998EA2A14EC07003DDAD2 = {
 			isa = PBXGroup;
 			children = (
+				92B365AF2B22C8DD00502446 /* .swiftlint.yml */,
 				92CBB2AD2B19C11D00587BED /* MappilogueKit.xcodeproj */,
-				924BE0C92A51AE25002C70FF /* .swiftlint.yml */,
 				926998F52A14EC07003DDAD2 /* Mappilogue */,
 				9269990C2A14EC09003DDAD2 /* MappilogueTests */,
 				926999162A14EC09003DDAD2 /* MappilogueUITests */,
@@ -1581,6 +1584,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		92B365A32B22C32700502446 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				92B365A42B22C33200502446 /* LocationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		92CBB2AE2B19C11D00587BED /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1763,7 +1774,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					926998F22A14EC07003DDAD2 = {
 						CreatedOnToolsVersion = 14.2;
@@ -1833,11 +1844,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92B365B02B22C8DE00502446 /* .swiftlint.yml in Resources */,
 				92CBB03C2B18905300587BED /* SecureAPIKeys.plist in Resources */,
 				92E3F4462B1DE0D000E03C15 /* Pretendard-Regular.ttf in Resources */,
 				92E3F4492B1DE0D000E03C15 /* Pretendard-SemiBold.ttf in Resources */,
 				926999032A14EC09003DDAD2 /* LaunchScreen.storyboard in Resources */,
-				924BE0CA2A51AE25002C70FF /* .swiftlint.yml in Resources */,
 				920031E02A8DF6F800E3170D /* saving.json in Resources */,
 				929E23192AB81E40003180B3 /* GoogleService-Info.plist in Resources */,
 				92E3F4472B1DE0D000E03C15 /* Pretendard-Bold.ttf in Resources */,
@@ -2192,6 +2203,7 @@
 				920031EB2A9103E900E3170D /* ImagePickerViewController.swift in Sources */,
 				9224FD332A641B64000A56A6 /* UIViewController.swift in Sources */,
 				925840C92A7F805800997434 /* UILabel.swift in Sources */,
+				92B365A52B22C33200502446 /* LocationViewModel.swift in Sources */,
 				9263786B2A546BDE004E5B6E /* OnboardingViewController.swift in Sources */,
 				9245BC2E2B0DCA2300383F4D /* GetScheduleDTO.swift in Sources */,
 				92A7B6632A4E20BF009C9293 /* BaseTableViewCell.swift in Sources */,
@@ -2291,6 +2303,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2351,6 +2364,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
