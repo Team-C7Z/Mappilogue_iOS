@@ -8,7 +8,7 @@
 import UIKit
 
 class EditNicknameModalViewController: BaseViewController {
-    var userViewModel = UserViewModel()
+    var viewModel = ProfileViewModel()
     var onChangeTapped: ((String) -> Void)?
     
     private let alertView = UIView()
@@ -34,7 +34,7 @@ class EditNicknameModalViewController: BaseViewController {
         
         inputTextField.textColor = .black1C1C1C
         inputTextField.font = .body02
-        inputTextField.backgroundColor = .red
+        inputTextField.backgroundColor = .grayF5F3F0
         inputTextField.placeholder = "1~8자의 한글 또는 영문"
         inputTextField.layer.cornerRadius = 12
         inputTextField.addLeftPadding()
@@ -160,7 +160,7 @@ class EditNicknameModalViewController: BaseViewController {
     }
     
     private func updateNickname(_ nickname: String) {
-        userViewModel.updateNickname(nickname: nickname)
+        viewModel.updateNickname(nickname: nickname)
     }
 }
 

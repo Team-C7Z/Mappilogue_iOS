@@ -9,7 +9,7 @@ import UIKit
 import MappilogueKit
 
 class InquiryViewController: NavigationBarViewController {
-    private let email = "mappilogue@naver.com"
+    var viewModel = InquiryViewModel()
     
     private let inquiryTitleLabel = UILabel()
     private let inquiryContentLabel = UILabel()
@@ -41,7 +41,7 @@ class InquiryViewController: NavigationBarViewController {
         emailView.layer.cornerRadius = 12
         emailView.backgroundColor = .grayF5F3F0
         emailImage.image = UIImage(named: "my_email")
-        emailLabel.text = email
+        emailLabel.text = viewModel.email
         emailCopyButton.setTitle("복사하기", for: .normal)
         emailCopyButton.setTitleColor(.green2EBD3D, for: .normal)
         emailCopyButton.titleLabel?.font = .body03
@@ -130,6 +130,6 @@ class InquiryViewController: NavigationBarViewController {
     }
     
     private func copyEmail() {
-        UIPasteboard.general.string = email
+        UIPasteboard.general.string = viewModel.email
     }
 }

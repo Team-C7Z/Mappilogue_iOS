@@ -10,7 +10,7 @@ import Photos
 import MappilogueKit
 
 class EditProfileViewController: NavigationBarViewController {
-    var userViewModel = UserViewModel()
+    var viewModel = ProfileViewModel()
     
     private let profileImageButton = UIButton()
     private let profileImage = UIImageView()
@@ -238,7 +238,7 @@ class EditProfileViewController: NavigationBarViewController {
                 self.profileImage.image = image
                 
                 if let image = image, let imageData = image.jpegData(compressionQuality: 1.0) {
-                    self.userViewModel.updateProfileImage(image: imageData)
+                    self.viewModel.updateProfileImage(image: imageData)
                 }
             }
         }
@@ -251,11 +251,12 @@ class EditProfileViewController: NavigationBarViewController {
     
     @objc func presentEditNicknameModalViewController() {
         let editNicknameModalViewController = EditNicknameModalViewController()
+        editNicknameModalViewController.modalPresentationStyle = .overCurrentContext
         editNicknameModalViewController.configure(editNicknameTextField.text ?? "")
         editNicknameModalViewController.onChangeTapped = { nickname in
             self.changeNickname(nickname)
         }
-        navigationController?.pushViewController(editNicknameModalViewController, animated: false)
+        present(editNicknameModalViewController, animated: false)
     }
     
     func updateProfilePhotoImage(_ photo: UIImage) {
@@ -264,6 +265,7 @@ class EditProfileViewController: NavigationBarViewController {
     
     private func changeNickname(_ nickname: String) {
         editNicknameTextField.text = nickname
+        viewModel.updateNickname(nickname: nickname)
     }
 }
 

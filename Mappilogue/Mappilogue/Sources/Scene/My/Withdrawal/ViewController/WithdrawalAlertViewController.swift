@@ -9,8 +9,7 @@ import UIKit
 import MappilogueKit
 
 class WithdrawalAlertViewController: BaseViewController {
-    var isChecked: Bool = false
-    var onDoneTapped: (() -> Void)?
+    var viewModel = WithdrawalAlertViewModel()
     
     private let alertView = UIView()
     private let titleLabel = UILabel()
@@ -127,10 +126,13 @@ class WithdrawalAlertViewController: BaseViewController {
     }
     
     @objc private func checkButtonTapped() {
-        isChecked = !isChecked
-        
-        checkImage.image = Images.image(named: isChecked ? .buttonCheck : .buttonUncheck)
-        doneButton.backgroundColor = isChecked ? .redF14C4C : .grayC9C6C2
+        viewModel.toggleCheck()
+        updateUI()
+    }
+    
+    private func updateUI() {
+        checkImage.image = Images.image(named: viewModel.isChecked ? .buttonCheck : .buttonUncheck)
+        doneButton.backgroundColor = viewModel.isChecked ? .redF14C4C : .grayC9C6C2
     }
     
     @objc private func cancelButtonTapped(_ sender: UIButton) {
@@ -138,9 +140,9 @@ class WithdrawalAlertViewController: BaseViewController {
     }
     
     @objc private func deleteButtonTapped(_ sender: UIButton) {
-        if isChecked {
+        if viewModel.isChecked {
             dismiss(animated: false) {
-                self.onDoneTapped?()
+                self.viewModel.performDelete()
             }
         }
     }

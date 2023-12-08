@@ -9,18 +9,8 @@ import UIKit
 import KakaoSDKUser
 
 class WithdrawalViewController: WithdrawalNavigationViewController {
-    var authViewModel = AuthViewModel()
+    var viewModel = WithdrawalViewModel()
     
-    let withdrawalReasons = [
-        "이제 이 서비스가 필요하지 않아요",
-        "어플이 사용하기 어려워요",
-        "어플에 오류가 있어요",
-        "재가입을 하고 싶어요",
-        "기능들이 마음에 들지 않거나 부족해요",
-        "기타"
-    ]
-    var selectedReasons: [Bool] = []
-    var isSelectedReason: Bool = false
     var onWithdrawal: (() -> Void)?
     
     private let withdrawalTitleLabel = UILabel()
@@ -31,7 +21,7 @@ class WithdrawalViewController: WithdrawalNavigationViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        selectedReasons = Array(repeating: false, count: withdrawalReasons.count)
+        viewModel.selectedReasons = Array(repeating: false, count: viewModel.withdrawalReasons.count)
         createWithdrawalReasonView()
     }
     
@@ -96,33 +86,29 @@ class WithdrawalViewController: WithdrawalNavigationViewController {
     }
     
     private func createWithdrawalReasonView() {
-        for (index, title) in withdrawalReasons.enumerated() {
+        for (index, title) in viewModel.withdrawalReasons.enumerated() {
             let withdrawalReasonView = WithdrawalReasonView()
             withdrawalReasonView.configure(title, index)
             withdrawalReasonView.onReasonSelected = { index in
-                self.updateSelectedReasons(index)
+                self.viewModel.updateSelectedReasons(index)
+                self.updateSubmitButtonDesign()
             }
             stackView.addArrangedSubview(withdrawalReasonView)
         }
     }
     
-    private func updateSelectedReasons(_ index: Int) {
-        selectedReasons[index] = !selectedReasons[index]
-        isSelectedReason = selectedReasons.contains(true)
-        updateSubmitButtonDesign()
-    }
-    
     private func updateSubmitButtonDesign() {
-        submitButton.backgroundColor = isSelectedReason ? .green2EBD3D : .grayC9C6C2
+        submitButton.backgroundColor = viewModel.isSelectedReason ? .green2EBD3D : .grayC9C6C2
     }
     
     @objc func submitButtonTapped() {
-        if isSelectedReason {
+        if viewModel.isSelectedReason {
             performWithdrawal()
         }
     }
     
     @objc private func performWithdrawal() {
+        completeWithdrawal()
         UserApi.shared.unlink { error in
             if let error = error {
                 print(error)
@@ -133,7 +119,7 @@ class WithdrawalViewController: WithdrawalNavigationViewController {
     }
     
     private func handleUserManagerWithdrawal() {
-        authViewModel.withdrawal(reason: self.withdrawalReason())
+        viewModel.withdrawal(reason: self.viewModel.withdrawalReasonText)
             .sink { completion in
                 switch completion {
                 case .finished:
@@ -145,24 +131,12 @@ class WithdrawalViewController: WithdrawalNavigationViewController {
                 self.clearAuthUserDefaults()
                 self.completeWithdrawal()
             }
-            .store(in: &authViewModel.cancellables)
+            .store(in: &viewModel.cancellables)
     }
     
     private func clearAuthUserDefaults() {
         AuthUserDefaults.accessToken = nil
         AuthUserDefaults.refreshToken = nil
-    }
-    
-    private func withdrawalReason() -> String? {
-        return isSelectedReason ? setWithdrawlReason() : nil
-    }
-    
-    private func setWithdrawlReason() -> String {
-        var reasons: [String] = []
-        for (index, selectedReason) in selectedReasons.enumerated() where selectedReason {
-            reasons.append(withdrawalReasons[index])
-        }
-        return reasons.joined(separator: " / ")
     }
     
     func completeWithdrawal() {

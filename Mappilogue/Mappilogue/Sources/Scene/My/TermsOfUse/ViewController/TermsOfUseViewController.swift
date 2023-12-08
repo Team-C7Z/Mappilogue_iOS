@@ -9,7 +9,7 @@ import UIKit
 import WebKit
 
 class TermsOfUseViewController: NavigationBarViewController {
-    var userViewModel = UserViewModel()
+    var viewModel = TermsOfUseViewModel()
     
     private let webView = WKWebView()
     
@@ -48,15 +48,15 @@ class TermsOfUseViewController: NavigationBarViewController {
     }
     
     func getTermsOfUserURL() {
-        userViewModel.getTermsOfUse()
+        viewModel.getTermsOfUse()
         
-        userViewModel.$termsOfUserResult
+        viewModel.$termsOfUserResult
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { result in
                 guard let result else { return }
                 self.handleTermsOfUserResponse(result)
             })
-            .store(in: &userViewModel.cancellables)
+            .store(in: &viewModel.cancellables)
     }
     
     func handleTermsOfUserResponse(_ response: Any) {

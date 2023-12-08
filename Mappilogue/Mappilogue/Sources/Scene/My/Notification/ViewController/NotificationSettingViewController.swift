@@ -8,7 +8,7 @@
 import UIKit
 
 class NotificationSettingViewController: NavigationBarViewController {
-    var userViewModel = UserViewModel()
+    var viewModel = NotificationSettingViewModel()
     private var notificationDTO: NotificationDTO?
     
     private let totalNotiviationView = NotificationSettingView()
@@ -27,7 +27,7 @@ class NotificationSettingViewController: NavigationBarViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        setDefaultPopBar(title: "알림 설정")
+        setPopBar(title: "알림 설정")
         
         popBar.onPopButtonTapped = {
             self.updateNotification()
@@ -76,23 +76,23 @@ class NotificationSettingViewController: NavigationBarViewController {
     
     @objc private func updateNotification() {
         if let notification = notificationDTO {
-            userViewModel.updateNotificationSetting(notification: notification)
+            viewModel.updateNotificationSetting(notification: notification)
         }
         
-        // backButtonTapped()
+        navigationController?.popViewController(animated: true)
     }
     
     func getNotificationSetting() {
-        userViewModel.getNotificationSetting()
+        viewModel.getNotificationSetting()
         
-        userViewModel.$notificationResult
+        viewModel.$notificationResult
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { result in
                 guard let result else { return }
                 
                 self.handleNotificationSettingResponse(result)
             })
-            .store(in: &userViewModel.cancellables)
+            .store(in: &viewModel.cancellables)
     }
     
     private func handleNotificationSettingResponse(_ result: NotificationDTO) {
@@ -114,7 +114,7 @@ class NotificationSettingViewController: NavigationBarViewController {
         totalNotiviationView.onSwitchTapped = {
             guard let notification = self.notificationDTO else { return }
             
-            self.notificationDTO?.isTotalNotification = self.switchToggle(notification.isTotalNotification)
+            self.notificationDTO?.isTotalNotification = self.viewModel.switchToggle(notification.isTotalNotification)
             self.configureNotification()
             self.setTotalNotificationControl()
         }
@@ -122,32 +122,23 @@ class NotificationSettingViewController: NavigationBarViewController {
         noticeNotification.onSwitchTapped = {
             guard let notification = self.notificationDTO else { return }
             
-            self.notificationDTO?.isNoticeNotification = self.switchToggle(notification.isNoticeNotification)
+            self.notificationDTO?.isNoticeNotification = self.viewModel.switchToggle(notification.isNoticeNotification)
             self.configureNotification()
         }
         
         scheduleReminderNotification.onSwitchTapped = {
             guard let notification = self.notificationDTO else { return }
             
-            self.notificationDTO?.isScheduleReminderNotification = self.switchToggle(notification.isScheduleReminderNotification)
+            self.notificationDTO?.isScheduleReminderNotification = self.viewModel.switchToggle(notification.isScheduleReminderNotification)
             self.configureNotification()
         }
         
         marketingAlertView.onSwitchTapped = {
             guard let notification = self.notificationDTO else { return }
             
-            self.notificationDTO?.isMarketingNotification = self.switchToggle(notification.isMarketingNotification)
+            self.notificationDTO?.isMarketingNotification = self.viewModel.switchToggle(notification.isMarketingNotification)
             self.configureNotification()
         }
-    }
-    
-    func switchToggle(_ notification: String?) -> String {
-        guard let notification = notification else { return "" }
-        
-        let currentType = ActiveStatus(rawValue: notification)
-        let newType: ActiveStatus = currentType == .active ? .inactive : .active
-        
-        return newType.rawValue
     }
     
     func setTotalNotificationControl() {

@@ -9,15 +9,9 @@ import UIKit
 import KakaoSDKUser
 import MappilogueKit
 
-struct MyInfo {
-    var image: String
-    var title: String
-}
-
 class MyViewController: NavigationBarViewController {
-    var userViewModel = UserViewModel()
-    var authViewModel = AuthViewModel()
-    
+    var viewModel = MyViewModel()
+
     var myInfoData: [[MyInfo]] = [
         [
             MyInfo(image: "my_notification", title: "알림 설정"),
@@ -50,10 +44,8 @@ class MyViewController: NavigationBarViewController {
         super.viewDidLoad()
         
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
+
+    override func viewWillAppear(_ animated: Bool) {
         getProfile()
     }
 
@@ -79,15 +71,15 @@ class MyViewController: NavigationBarViewController {
     }
     
     private func getProfile() {
-        userViewModel.getProfile()
+        viewModel.getProfile()
         
-        userViewModel.$profileResult
+        viewModel.$profileResult
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { result in
                 self.profile = result
                 self.collectionView.reloadData()
             })
-            .store(in: &userViewModel.cancellables)
+            .store(in: &viewModel.cancellables)
         
     }
     
@@ -98,9 +90,6 @@ class MyViewController: NavigationBarViewController {
     @objc func presentWithdrawalConfirmationAlert() {
         let withdrawalCompletedAlertViewController = WithdrawalCompletedAlertViewController()
         withdrawalCompletedAlertViewController.modalPresentationStyle = .overCurrentContext
-        withdrawalCompletedAlertViewController.onDoneTapped = {
-            print("로그인 페이지로 이동")
-        }
         present(withdrawalCompletedAlertViewController, animated: false)
     }
 }
@@ -241,7 +230,7 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     private func presentWithdrawalAlert() {
         let withdrawalAlertViewController = WithdrawalAlertViewController()
         withdrawalAlertViewController.modalPresentationStyle = .overFullScreen
-        withdrawalAlertViewController.onDoneTapped = {
+        withdrawalAlertViewController.viewModel.onDeleteButtonTapped = {
             self.navigateToWithdrawalViewController()
         }
         present(withdrawalAlertViewController, animated: false)
@@ -259,7 +248,7 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func logout() {
-        authViewModel.logout()
+        viewModel.logout()
             .sink { completion in
                 switch completion {
                 case .finished:
@@ -271,7 +260,7 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
                 self.clearAuthUserDefaults()
                 self.presentLoginViewController()
             }
-            .store(in: &authViewModel.cancellables)
+            .store(in: &viewModel.cancellables)
     }
     
     private func clearAuthUserDefaults() {
@@ -282,9 +271,6 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     func presentWithdrawalCompletedAlert() {
         let withdrawalCompletedAlertViewController = WithdrawalCompletedAlertViewController()
         withdrawalCompletedAlertViewController.modalPresentationStyle = .overFullScreen
-        withdrawalCompletedAlertViewController.onDoneTapped = {
-            self.presentLoginViewController()
-        }
         present(withdrawalCompletedAlertViewController, animated: false)
     }
     
