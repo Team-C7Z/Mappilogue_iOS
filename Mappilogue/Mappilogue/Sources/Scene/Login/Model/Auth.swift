@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct Auth {
+struct Auth: Codable {
     var socialAccessToken: String
-    var socialVendor: AuthVendor
+    var socialVendor: String
     var fcmToken: String?
-    var isAlarmAccept: ActiveStatus?
+    var isAlarmAccept: String?
 }

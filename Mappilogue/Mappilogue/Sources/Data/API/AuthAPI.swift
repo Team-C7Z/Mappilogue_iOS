@@ -10,7 +10,6 @@ import Moya
 import Combine
 
 enum AuthAPI {
-    case socialLogin(token: String, socialVendor: String, fcmToken: String?, isAlarm: String?)
     case refreshToken(token: String)
 }
 
@@ -21,8 +20,6 @@ extension AuthAPI: TargetType {
     
     var path: String {
         switch self {
-        case .socialLogin:
-            return "/api/v1/users/social-login"
         case .refreshToken:
             return "/api/v1/users/token-refresh"
         }
@@ -34,22 +31,6 @@ extension AuthAPI: TargetType {
     
     var task: Moya.Task {
         switch self {
-        case let .socialLogin(token, socialVendor, fcmToken, isAlarm):
-            var requestParameters: [String: Any] = [
-                "socialAccessToken": token,
-                "socialVendor": socialVendor
-            ]
-            
-            if let fcmToken = fcmToken {
-                requestParameters["fcmToken"] = fcmToken
-            }
-            
-            if let isAlarmValue = isAlarm {
-                requestParameters["isAlarmAccept"] = isAlarmValue
-            }
-            
-            return .requestParameters(parameters: requestParameters, encoding: JSONEncoding.default)
-            
         case let .refreshToken(token):
             let requestParameters: [String: String] = [
                 "refreshToken": token
@@ -65,6 +46,7 @@ extension AuthAPI: TargetType {
 }
 
 protocol AuthAPI2 {
+    func socialLogin(auth: Auth) -> AnyPublisher<BaseDTO<AuthDTO>, Error>
     func logout() -> AnyPublisher<Void, Error>
     func withdrawal(reason: String?) -> AnyPublisher<Void, Error>
 }

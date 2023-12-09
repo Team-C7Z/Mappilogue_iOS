@@ -13,6 +13,7 @@ import AuthenticationServices
 import MappilogueKit
 
 class LoginViewController: BaseViewController {
+    var viewModel = LoginViewModel()
     private var isAlarmAccept: ActiveStatus = .inactive
     
     private let logoImage = UIImageView()
@@ -28,7 +29,7 @@ class LoginViewController: BaseViewController {
     override func setupProperty() {
         super.setupProperty()
     
-        logoImage.image = UIImage(named: "common_logo")
+        logoImage.image = Icons.icon(named: .logo)
         
         kakaoLoginButton.addTarget(self, action: #selector(kakaoLoginButtonTapped), for: .touchUpInside)
      
@@ -85,16 +86,21 @@ class LoginViewController: BaseViewController {
         } else {
             guard let oauthToken = oauthToken else { return }
             let accessToken = oauthToken.accessToken
+        
+            let socialVendor = AuthVendor.kakao.rawValue
+            let isAlarmAccept = ActiveStatus.inactive.rawValue
+            let auth = Auth(socialAccessToken: accessToken, socialVendor: socialVendor, fcmToken: AuthUserDefaults.fcmToken, isAlarmAccept: isAlarmAccept)
 
-            let auth = Auth(socialAccessToken: accessToken, socialVendor: .kakao, fcmToken: AuthUserDefaults.fcmToken, isAlarmAccept: isAlarmAccept)
-            AuthManager.shared.logIn(auth: auth) { result in
-                switch result {
-                case .success(let response):
-                    self.handleLoginResponse(response)
-                default:
-                    break
-                }
-            }
+            viewModel.socialLogin(auth: auth)
+
+            viewModel.$loginResult
+                .receive(on: DispatchQueue.main)
+                .sink(receiveValue: { result in
+                    guard let result else { return }
+                    
+                    self.handleLoginResponse(result)
+                })
+                .store(in: &viewModel.cancellables)
         }
     }
     
@@ -109,9 +115,7 @@ class LoginViewController: BaseViewController {
         authorizationController.performRequests()
     }
     
-    private func handleLoginResponse(_ response: Any) {
-        guard let baseResponse = response as? BaseDTO<AuthDTO>, let result = baseResponse.result else { return }
-        
+    private func handleLoginResponse(_ result: AuthDTO) {
         AuthUserDefaults.accessToken = result.accessToken
         AuthUserDefaults.refreshToken = result.refreshToken
         

@@ -12,20 +12,6 @@ import Combine
 class AuthManager {
     static let shared = AuthManager()
     private let provider = MoyaProvider<AuthAPI>(plugins: [NetworkLoggerPlugin()])
-  
-    func logIn(auth: Auth, completion: @escaping (NetworkResult<Any>) -> Void) {
-        provider.request(.socialLogin(token: auth.socialAccessToken, socialVendor: auth.socialVendor.rawValue, fcmToken: auth.fcmToken, isAlarm: auth.isAlarmAccept?.rawValue)) { result in
-            switch result {
-            case .success(let response):
-                let statusCode = response.statusCode
-                let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<AuthDTO>.self)
-                completion(networkResult)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
     
     func updateAccessToken(token: String, completion: @escaping (NetworkResult<Any>) -> Void) {
         provider.request(.refreshToken(token: token)) { result in
@@ -60,6 +46,42 @@ class AuthManager {
 
 class AuthManager2: AuthAPI2 {
     private let baseURL = "\(Environment.baseURL)/api/v1/users"
+    
+    func socialLogin(auth: Auth) -> AnyPublisher<BaseDTO<AuthDTO>, Error> {
+        let url = URL(string: "\(baseURL)/social-login")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        var requestParameters: [String: Any] = [
+            "socialAccessToken": auth.socialAccessToken,
+            "socialVendor": auth.socialVendor
+        ]
+        
+        if let fcmToken = auth.fcmToken {
+            requestParameters["fcmToken"] = fcmToken
+        }
+        
+        if let isAlarmValue = auth.isAlarmAccept {
+            requestParameters["isAlarmAccept"] = "ACTIVE"
+        }
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: requestParameters)
+        } catch {
+            return Fail(error: CategoryAPIError.serializationError(error)).eraseToAnyPublisher()
+        }
+     
+        return URLSession.shared.dataTaskPublisher(for: request)
+            .tryMap { data, response in
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 201 else {
+                    throw URLError(.badServerResponse)
+                }
+                return data
+            }
+            .decode(type: BaseDTO<AuthDTO>.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+    }
     
     func logout() -> AnyPublisher<Void, Error> {
         let url = URL(string: "\(baseURL)/logout")!

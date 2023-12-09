@@ -9,11 +9,7 @@ import UIKit
 import MappilogueKit
 
 class OnboardingViewController: BaseViewController {
-    private let onboardingPages = [
-        Onboarding(title: "일정에 여러 장소를 추가해 보세요", image: "onboarding1"),
-        Onboarding(title: "내 일정을 기반으로 하루를 기록해 보세요", image: "onboarding2"),
-        Onboarding(title: "지도로 내 기록을 한 눈에 볼 수 있어요", image: "onboarding3")
-    ]
+    var viewModel = OnboardingViewModel()
     
     private let onboardingLabel = UILabel()
     private lazy var collectionView: UICollectionView = {
@@ -33,8 +29,6 @@ class OnboardingViewController: BaseViewController {
     private let startButton = UIButton()
     private let startButtonLabel = UILabel()
     
-    private var currentPage: Int = 0
-    
     override func setupProperty() {
         super.setupProperty()
     
@@ -42,9 +36,9 @@ class OnboardingViewController: BaseViewController {
         onboardingLabel.textColor = .black1C1C1C
         onboardingLabel.font = .title01
         
-        pageControl.numberOfPages = onboardingPages.count
-        pageControl.currentPage = currentPage
-        pageControl.setCurrentPageIndicatorImage(Images.image(named: .imageOnboardingCurrentPage), forPage: currentPage)
+        pageControl.numberOfPages = viewModel.onboardingPages.count
+        pageControl.currentPage = viewModel.currentPage
+        pageControl.setCurrentPageIndicatorImage(Images.image(named: .imageOnboardingCurrentPage), forPage: viewModel.currentPage)
         pageControl.preferredIndicatorImage = Images.image(named: .imageOnboardingPage)
         pageControl.pageIndicatorTintColor = .grayC9C6C2
         pageControl.currentPageIndicatorTintColor = .green2EBD3D
@@ -112,13 +106,13 @@ class OnboardingViewController: BaseViewController {
 
 extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return onboardingPages.count
+        return viewModel.onboardingPages.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OnboardingCell.registerId, for: indexPath) as? OnboardingCell else { return UICollectionViewCell() }
         
-        let image = onboardingPages[indexPath.row].image
+        let image = viewModel.onboardingPages[indexPath.row].image
         
         cell.configure(with: image)
         
@@ -132,16 +126,20 @@ extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        currentPage = Int(scrollView.contentOffset.x / scrollView.frame.width)
-        pageControl.currentPage = currentPage
-        onboardingLabel.text = onboardingPages[currentPage].title
+        updatePageDesign(Int(scrollView.contentOffset.x / scrollView.frame.width))
+    }
+    
+    private func updatePageDesign(_ page: Int) {
+        viewModel.currentPage = page
+        pageControl.currentPage = page
+        onboardingLabel.text = viewModel.onboardingPages[ page].title
         
-        if currentPage < (onboardingPages.count - 1) {
-            startButton.backgroundColor = .gray9B9791
-            startButton.isEnabled = false
-        } else {
+        if viewModel.setStartButton() {
             startButton.backgroundColor = .black1C1C1C
             startButton.isEnabled = true
+        } else {
+            startButton.backgroundColor = .gray9B9791
+            startButton.isEnabled = false
         }
     }
 }
