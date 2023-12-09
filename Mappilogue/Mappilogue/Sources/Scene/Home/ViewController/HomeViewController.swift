@@ -9,12 +9,7 @@ import UIKit
 import MappilogueKit
 
 class HomeViewController: NavigationBarViewController {
-    let dummyTodayData = dummyTodayScheduleData(scheduleCount: 2)
-    let dummyUpcomingData = dummyUpcomingScheduleData(scheduleCount: 0)
-    var isScheduleExpanded = [Bool]()
-    
-    var selectedScheduleType: ScheduleType = .today
-    var limitedUpcomingScheduleCount = 4
+    var viewModel = HomeViewModel()
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -37,7 +32,6 @@ class HomeViewController: NavigationBarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        isScheduleExpanded = Array(repeating: true, count: dummyTodayData.count)
     }
     
     override func setupProperty() {
@@ -64,31 +58,31 @@ class HomeViewController: NavigationBarViewController {
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        switch selectedScheduleType {
+        switch viewModel.selectedScheduleType {
         case .today:
-            return dummyTodayData.isEmpty ? 1 : dummyTodayData.count
+            return viewModel.dummyTodayData.isEmpty ? 1 : viewModel.dummyTodayData.count
         case .upcoming:
             return 1
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch selectedScheduleType {
+        switch viewModel.selectedScheduleType {
         case .today:
-            if dummyTodayData.isEmpty {
+            if viewModel.dummyTodayData.isEmpty {
                 return 1
             } else {
-                return isScheduleExpanded[section] ? dummyTodayData[section].location.count + 1 : 1
+                return viewModel.isScheduleExpanded[section] ? viewModel.dummyTodayData[section].location.count + 1 : 1
             }
         case .upcoming:
-            return dummyUpcomingData.isEmpty ? 1 : dummyUpcomingData.count
+            return viewModel.dummyUpcomingData.isEmpty ? 1 : viewModel.dummyUpcomingData.count
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch selectedScheduleType {
+        switch viewModel.selectedScheduleType {
         case .today:
-            if dummyTodayData.isEmpty {
+            if viewModel.dummyTodayData.isEmpty {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeEmptyScheduleCell.registerId, for: indexPath) as? HomeEmptyScheduleCell else { return UITableViewCell() }
                 cell.selectionStyle = .none
                 
@@ -102,8 +96,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.selectionStyle = .none
                     cell.delegate = self
               
-                    let schedule = dummyTodayData[indexPath.section]
-                    let isExpanded = isScheduleExpanded[indexPath.section]
+                    let schedule = viewModel.dummyTodayData[indexPath.section]
+                    let isExpanded = viewModel.isScheduleExpanded[indexPath.section]
                     cell.configure(schedule, isExpanded: isExpanded)
                
                     return cell
@@ -112,7 +106,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: TodayScheduleInfoCell.registerId, for: indexPath) as? TodayScheduleInfoCell else { return UITableViewCell() }
                     cell.selectionStyle = .none
              
-                    let schedule = dummyTodayData[indexPath.section]
+                    let schedule = viewModel.dummyTodayData[indexPath.section]
                     let location = schedule.location[indexPath.row - 1]
                     let time = schedule.time[indexPath.row - 1]
                     cell.configure(location: location, time: time)
@@ -122,7 +116,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             }
             
         case .upcoming:
-            if dummyUpcomingData.isEmpty {
+            if viewModel.dummyUpcomingData.isEmpty {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeEmptyScheduleCell.registerId, for: indexPath) as? HomeEmptyScheduleCell else { return UITableViewCell() }
                 cell.selectionStyle = .none
                 
@@ -134,7 +128,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: UpcomingScheduleCell.registerId, for: indexPath) as? UpcomingScheduleCell else { return UITableViewCell() }
                 cell.selectionStyle = .none
                 
-                let schedule = dummyUpcomingData[indexPath.row]
+                let schedule = viewModel.dummyUpcomingData[indexPath.row]
                 cell.configure(schedule)
                 
                 return cell
@@ -143,9 +137,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch selectedScheduleType {
+        switch viewModel.selectedScheduleType {
         case .today:
-            if dummyTodayData.isEmpty {
+            if viewModel.dummyTodayData.isEmpty {
                 return 130 + 16
                 
             } else {
@@ -158,7 +152,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         case .upcoming:
-            if dummyUpcomingData.isEmpty {
+            if viewModel.dummyUpcomingData.isEmpty {
                 return 130 + 16
                 
             } else {
@@ -200,12 +194,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        switch selectedScheduleType {
+        switch viewModel.selectedScheduleType {
         case .today:
-            if dummyTodayData.isEmpty {
+            if viewModel.dummyTodayData.isEmpty {
                 return 352
             } else {
-                return section == dummyTodayData.count - 1 ? 336 + 16 : 0
+                return section == viewModel.dummyTodayData.count - 1 ? 336 + 16 : 0
             }
         case .upcoming:
             return 352
@@ -213,13 +207,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch selectedScheduleType {
+        switch viewModel.selectedScheduleType {
         case .today:
-            if !dummyTodayData.isEmpty {
+            if !viewModel.dummyTodayData.isEmpty {
                 navigateToAddScheduleViewController()
             }
         case .upcoming:
-            if !dummyUpcomingData.isEmpty {
+            if !viewModel.dummyUpcomingData.isEmpty {
                 navigateToAddScheduleViewController()
             }
         }
@@ -228,14 +222,14 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension HomeViewController: ScheduleTypeDelegate, ExpandCellDelegate {
     func scheduleButtonTapped(scheduleType: ScheduleType) {
-        self.selectedScheduleType = scheduleType
+        self.viewModel.selectedScheduleType = scheduleType
         
         tableView.reloadData()
     }
     
     func expandButtonTapped(in cell: UITableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
-        isScheduleExpanded[indexPath.section].toggle()
+        viewModel.isScheduleExpanded[indexPath.section].toggle()
         tableView.reloadSections([indexPath.section], with: .none)
     }
     

@@ -231,6 +231,8 @@
 		92B365DD2B2382D000502446 /* PermissionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B365DC2B2382D000502446 /* PermissionViewModel.swift */; };
 		92B365E02B23877000502446 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B365DF2B23877000502446 /* OnboardingViewModel.swift */; };
 		92B365E22B238D5300502446 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B365E12B238D5300502446 /* LoginViewModel.swift */; };
+		92B365E72B24846500502446 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B365E62B24846500502446 /* NotificationViewModel.swift */; };
+		92B365EA2B24878E00502446 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B365E92B24878E00502446 /* HomeViewModel.swift */; };
 		92BE02722B20376F00632ABA /* ImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BE02712B20376F00632ABA /* ImageDetailViewController.swift */; };
 		92C2EC612A6924B5002DB0E3 /* LineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C2EC602A6924B5002DB0E3 /* LineCell.swift */; };
 		92CBB03C2B18905300587BED /* SecureAPIKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92CBB03B2B18905200587BED /* SecureAPIKeys.plist */; };
@@ -535,6 +537,8 @@
 		92B365DC2B2382D000502446 /* PermissionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewModel.swift; sourceTree = "<group>"; };
 		92B365DF2B23877000502446 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		92B365E12B238D5300502446 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		92B365E62B24846500502446 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
+		92B365E92B24878E00502446 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		92BE02712B20376F00632ABA /* ImageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailViewController.swift; sourceTree = "<group>"; };
 		92C2EC602A6924B5002DB0E3 /* LineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineCell.swift; sourceTree = "<group>"; };
 		92CBB03B2B18905200587BED /* SecureAPIKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SecureAPIKeys.plist; path = Resources/SecureAPIKeys.plist; sourceTree = "<group>"; };
@@ -811,6 +815,7 @@
 			isa = PBXGroup;
 			children = (
 				9245BBF92B08C25300383F4D /* Model */,
+				92B365E52B24845300502446 /* ViewModel */,
 				9245BBF72B08C22E00383F4D /* ViewController */,
 				9245BBF82B08C24000383F4D /* View */,
 			);
@@ -1501,6 +1506,7 @@
 			isa = PBXGroup;
 			children = (
 				9245BBFD2B08C2AA00383F4D /* Model */,
+				92B365E82B24867D00502446 /* ViewModel */,
 				9245BBFC2B08C29600383F4D /* ViewController */,
 				9245BBFE2B08C2B300383F4D /* View */,
 			);
@@ -1801,6 +1807,22 @@
 				9245BC072B08C43100383F4D /* View */,
 			);
 			path = Map;
+			sourceTree = "<group>";
+		};
+		92B365E52B24845300502446 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				92B365E62B24846500502446 /* NotificationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		92B365E82B24867D00502446 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				92B365E92B24878E00502446 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		92CBB2AE2B19C11D00587BED /* Products */ = {
@@ -2214,6 +2236,7 @@
 				92139D892AB1BEBD005344AE /* Announcement.swift in Sources */,
 				92011C662A78980E009B047F /* UIView.swift in Sources */,
 				92011C162A7505F7009B047F /* Record.swift in Sources */,
+				92B365E72B24846500502446 /* NotificationViewModel.swift in Sources */,
 				92FE26152A4B751000BCDB82 /* BaseCollectionReusableView.swift in Sources */,
 				928B7BE92A9B1C5B00E4F789 /* BaseDTO.swift in Sources */,
 				925840B52A7F2D3B00997434 /* MyCell.swift in Sources */,
@@ -2302,6 +2325,7 @@
 				9263786E2A5475AF004E5B6E /* OnboardingCell.swift in Sources */,
 				92139D752AAD67E8005344AE /* MyRecordContentImageView.swift in Sources */,
 				926999362A14F443003DDAD2 /* BaseView.swift in Sources */,
+				92B365EA2B24878E00502446 /* HomeViewModel.swift in Sources */,
 				92E3F4102B1CBC7400E03C15 /* WithdrawalNavigationViewController.swift in Sources */,
 				920031F32A92274100E3170D /* LimitedPhotoSelectionView.swift in Sources */,
 				92011C0E2A74C1FC009B047F /* EmptySearchCell.swift in Sources */,
