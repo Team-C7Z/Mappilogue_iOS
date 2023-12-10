@@ -14,7 +14,6 @@ import MappilogueKit
 
 class LoginViewController: BaseViewController {
     var viewModel = LoginViewModel()
-    private var isAlarmAccept: ActiveStatus = .inactive
     
     private let logoImage = UIImageView()
     private let kakaoLoginButton = KakaoLoginButton()
@@ -152,9 +151,9 @@ extension LoginViewController {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             switch settings.authorizationStatus {
             case .authorized:
-                self.isAlarmAccept = .active
+                self.viewModel.isAlarmAccept = .active
             case .denied:
-                self.isAlarmAccept = .inactive
+                self.viewModel.isAlarmAccept = .inactive
             default:
                 break
             }

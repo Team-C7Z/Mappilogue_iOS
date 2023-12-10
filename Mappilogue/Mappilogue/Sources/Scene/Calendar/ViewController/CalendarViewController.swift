@@ -9,13 +9,8 @@ import UIKit
 import MappilogueKit
 
 class CalendarViewController: NavigationBarViewController {
-    private var calendarViewModel = CalendarViewModel()
-    private var calendarSchedules: [CalendarSchedules] = []
-    private var scheduleId: Int?
-    private var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0)
-    
-    private var currentPage = 1
-    
+    private var viewModel = CalendarViewModel()
+
     private let currentDateButton = UIButton()
     private let currentDateLabel = UILabel()
     private let changeDateImage = UIImageView()
@@ -60,7 +55,7 @@ class CalendarViewController: NavigationBarViewController {
         setCalendarDate()
         
         currentDateButton.addTarget(self, action: #selector(changeDateButtonTapped), for: .touchUpInside)
-        currentDateLabel.text = "\(selectedDate.year)년 \(selectedDate.month)월"
+        currentDateLabel.text = "\(viewModel.selectedDate.year)년 \(viewModel.selectedDate.month)월"
         currentDateLabel.font = .subtitle01
         changeDateImage.image = UIImage(named: "changeDate")
         
@@ -111,30 +106,30 @@ class CalendarViewController: NavigationBarViewController {
     }
     
     func setCalendarDate() {
-        selectedDate = SelectedDate(year: calendarViewModel.currentYear, month: calendarViewModel.currentMonth)
+        viewModel.selectedDate = SelectedDate(year: viewModel.currentYear, month: viewModel.currentMonth)
     }
     
     func loadCalendarData() {
-        let currentMonthCalendar = Calendar1(year: calendarViewModel.currentYear, month: calendarViewModel.currentMonth)
+        let currentMonthCalendar = Calendar1(year: viewModel.currentYear, month: viewModel.currentMonth)
 
-        calendarViewModel.getCalendar(calendar: currentMonthCalendar)
+        viewModel.getCalendar(calendar: currentMonthCalendar)
      
-        calendarViewModel.$calendarResult
+        viewModel.$calendarResult
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { result in
-                self.calendarSchedules = result?.calenderSchedules ?? []
+                self.viewModel.calendarSchedules = result?.calenderSchedules ?? []
             })
-            .store(in: &calendarViewModel.cancellables)
+            .store(in: &viewModel.cancellables)
     }
 
     func setCurrentPage() {
-        let indexPath = IndexPath(item: currentPage, section: 0)
+        let indexPath = IndexPath(item: viewModel.currentPage, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
     }
     
     @objc func changeDateButtonTapped(_ sender: UIButton) {
         let datePickerViewController = DatePickerViewController()
-        datePickerViewController.selectedDate = selectedDate
+        datePickerViewController.viewModel.selectedDate = viewModel.selectedDate
         datePickerViewController.delegate = self
         datePickerViewController.modalPresentationStyle = .overCurrentContext
         present(datePickerViewController, animated: false)
@@ -149,18 +144,18 @@ class CalendarViewController: NavigationBarViewController {
     @objc func presentScheduleViewContoller(_ notification: Notification) {
         addScheduleButton.isHidden = true
         if let date = notification.object as? String {
-            let scheduleDetailViewController = ScheduleDetailViewController()
-            scheduleDetailViewController.date = date
-            scheduleDetailViewController.addButtonLocation = addScheduleButton.frame
+            let calendarDetailViewController = CalendarDetailViewController()
+            calendarDetailViewController.viewModel.date = date
+            calendarDetailViewController.addButtonLocation = addScheduleButton.frame
 //            scheduleDetailViewController.onWriteRecordButtonTapped = { schedule in
 //                self.navigationToWriteRecordViewController(schedule)
 //            }
-            scheduleDetailViewController.onAddScheduleButtonTapped = { id in
-                self.scheduleId = id
+            calendarDetailViewController.onAddScheduleButtonTapped = { id in
+                self.viewModel.scheduleId = id
                 self.navigationToAddScheduleViewController()
             }
-            scheduleDetailViewController.modalPresentationStyle = .overFullScreen
-            present(scheduleDetailViewController, animated: false)
+            calendarDetailViewController.modalPresentationStyle = .overFullScreen
+            present(calendarDetailViewController, animated: false)
         }
     }
     
@@ -179,7 +174,7 @@ class CalendarViewController: NavigationBarViewController {
         addScheduleButton.isHidden = false
         let addScheduleViewController = AddScheduleViewController()
         addScheduleViewController.hidesBottomBarWhenPushed = true
-        addScheduleViewController.scheduleId = scheduleId
+        addScheduleViewController.viewModel.scheduleId = viewModel.scheduleId
         navigationController?.pushViewController(addScheduleViewController, animated: true)
     }
 }
@@ -191,7 +186,7 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCell.registerId, for: indexPath) as? CalendarCell else { return UICollectionViewCell() }
-        cell.configure(with: selectedDate)
+        cell.configure(with: viewModel.selectedDate)
         
         return cell
     }
@@ -203,57 +198,35 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        currentPage = Int(scrollView.contentOffset.x / scrollView.frame.width)
+        viewModel.currentPage = Int(scrollView.contentOffset.x / scrollView.frame.width)
         
-        if currentPage == 0 {
-            selectedDate = changePreviousMonth(selectedDate)
-        } else if currentPage == 2 {
-            selectedDate = changeNextMonth(selectedDate)
+        if viewModel.currentPage == 0 {
+            viewModel.selectedDate = viewModel.changePreviousMonth(viewModel.selectedDate)
+        } else if viewModel.currentPage == 2 {
+            viewModel.selectedDate = viewModel.changeNextMonth(viewModel.selectedDate)
         }
         
-        currentPage = 1
-        let indexPath = IndexPath(item: currentPage, section: 0)
+        viewModel.currentPage = 1
+        let indexPath = IndexPath(item: viewModel.currentPage, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
-        currentDateLabel.text = "\(selectedDate.year)년 \(selectedDate.month)월"
+        currentDateLabel.text = "\(viewModel.selectedDate.year)년 \(viewModel.selectedDate.month)월"
         
         collectionView.reloadData()
-    }
-    
-    private func changePreviousMonth(_ date: SelectedDate) -> SelectedDate {
-        var newDate = date
-        if date.month == 1 {
-            newDate.year -= 1
-            newDate.month = 12
-        } else {
-            newDate.month -= 1
-        }
-        return newDate
-    }
-    
-    private func changeNextMonth(_ date: SelectedDate) -> SelectedDate {
-        var newDate = date
-        if date.month == 12 {
-            newDate.year += 1
-            newDate.month = 1
-        } else {
-            newDate.month += 1
-        }
-        return newDate
     }
 }
 
 extension CalendarViewController: ChangedDateDelegate {
     func chagedDate(_ selectedDate: SelectedDate) {
         view.backgroundColor = .grayF9F8F7
-        self.selectedDate = selectedDate
+        viewModel.selectedDate = selectedDate
         updateCurrentDateLabel()
 
         collectionView.reloadData()
     }
     
     private func updateCurrentDateLabel() {
-        let year = selectedDate.year
-        let month = selectedDate.month
+        let year = viewModel.selectedDate.year
+        let month = viewModel.selectedDate.month
         currentDateLabel.text = "\(year)년 \(month)월"
     }
 }

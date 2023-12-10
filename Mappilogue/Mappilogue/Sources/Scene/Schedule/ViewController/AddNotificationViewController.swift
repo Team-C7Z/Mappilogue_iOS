@@ -7,30 +7,8 @@
 
 import UIKit
 
-struct SelectedNotification {
-    var notification: String?
-    var date: String?
-    var hour: Int?
-    var minute: Int?
-    var timePeriod: String?
-}
-
 class AddNotificationViewController: NavigationBarViewController {
-    private var monthlyCalendar = CalendarViewModel()
-    var onNotificationSelected: (([String]) -> Void)?
-    
-    var dates = ["7일 전", "3일 전", "이틀 전", "전날", "당일"]
-    var beforDay = [7, 3, 2, 1, 0]
-    var convertedDate: [String] = []
-    var selectedBeforeDayIndex: Int = 0
-    let hours = Array(1...12)
-    var minutes = Array(0...59).map {String(format: "%02d", $0)}
-    var timePeriod = ["AM", "PM"]
-    var selectedTimePeriodIndex: Int = 0
-    var isDate: Bool = false
-    var selectedNotification = SelectedNotification()
-    var notificationList: [SelectedNotification] = []
-    var alarmOptions: [String] = []
+    var viewModel = AddNotificationViewModel()
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -52,8 +30,8 @@ class AddNotificationViewController: NavigationBarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        selectedNotification = setCurrentDate()
-        setDateList()
+        viewModel.selectedNotification = viewModel.setCurrentDate()
+        viewModel.setDateList()
         setSelectedDate()
     }
     
@@ -107,51 +85,21 @@ class AddNotificationViewController: NavigationBarViewController {
     }
     
     @objc func popToAddScheduleViewController() {
-        notificationList.forEach {
-            if let time = monthlyCalendar.convertTimeIntToDate(
-                hour: $0.hour ?? 0,
-                minute: $0.minute ?? 0,
-                timePeriod: $0.timePeriod ?? "AM"
-            ) {
-                let alarm = "\($0.notification ?? "")T\(time)"
-                alarmOptions.append(alarm)
-            }
-        }
-        
-        onNotificationSelected?(alarmOptions)
+        viewModel.updateAlarmOptionsFromNotificationList()
         navigationController?.popViewController(animated: true)
     }
-    
-    func setCurrentDate() -> SelectedNotification {
-        let todayDate = "당일 (\(monthlyCalendar.currentMonth)월 \(monthlyCalendar.currentDay)일)"
-        let notification = monthlyCalendar.convertIntToDate(
-            year: monthlyCalendar.currentYear,
-            month: monthlyCalendar.currentMonth,
-            day: monthlyCalendar.currentDay
-        )?.formatToyyyyMMddDateString()
-        return SelectedNotification(notification: notification, date: todayDate, hour: 9, minute: 0, timePeriod: "AM")
-    }
-    
-    func setDateList() {
-        selectedBeforeDayIndex = dates.count-1
-        for index in dates.indices {
-            let date = monthlyCalendar.getDateBefore(beforeDay: beforDay[index])
-            convertedDate.append(date)
-            dates[index] += " (\(date.formatToMMddDateString()))"
-        }
-    }
-    
+
     func setSelectedDate() {
         pickerView.reloadAllComponents()
-        if isDate {
-            pickerView.selectRow(selectedBeforeDayIndex, inComponent: 0, animated: false)
+        if viewModel.isDate {
+            pickerView.selectRow(viewModel.selectedBeforeDayIndex, inComponent: 0, animated: false)
         } else {
-            guard let hour = selectedNotification.hour else { return }
-            guard let minute = selectedNotification.minute else { return }
+            guard let hour = viewModel.selectedNotification.hour else { return }
+            guard let minute = viewModel.selectedNotification.minute else { return }
             
             pickerView.selectRow(hour-1, inComponent: 0, animated: false)
             pickerView.selectRow(minute, inComponent: 1, animated: false)
-            pickerView.selectRow(selectedTimePeriodIndex, inComponent: 2, animated: false)
+            pickerView.selectRow(viewModel.selectedTimePeriodIndex, inComponent: 2, animated: false)
         }
     }
     
@@ -161,7 +109,7 @@ class AddNotificationViewController: NavigationBarViewController {
     }
     
     func showPickerView(_ isDate: Bool) {
-        self.isDate = isDate
+        viewModel.isDate = isDate
         pickerOuterView.isHidden = false
         setSelectedDate()
     }
@@ -174,25 +122,21 @@ class AddNotificationViewController: NavigationBarViewController {
         }
     }
     
-    func addNotification() {
-        notificationList.append(selectedNotification)
-        collectionView.reloadData()
-    }
 }
 
 extension AddNotificationViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return notificationList.count
+        return viewModel.notificationList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectedNotificationCell.registerId, for: indexPath) as? SelectedNotificationCell else { return UICollectionViewCell() }
         
-        let date = notificationList[indexPath.row]
+        let date = viewModel.notificationList[indexPath.row]
         cell.configure(indexPath.row, date: date)
         
         cell.onDeleteButtonTapped = { index in
-            self.notificationList.remove(at: index)
+            self.viewModel.notificationList.remove(at: index)
             collectionView.reloadData()
         }
         
@@ -210,10 +154,12 @@ extension AddNotificationViewController: UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: NotificationHeaderView.registerId, for: indexPath) as? NotificationHeaderView else { return UICollectionReusableView() }
     
-        headerView.configure(selectedNotification)
+        headerView.configure(viewModel.selectedNotification)
         headerView.onStartDateButtonTapped = { self.showPickerView(true) }
         headerView.onStartTimeButtonTapped = { self.showPickerView(false) }
-        headerView.onAddNotificationButtonTapped = { self.addNotification() }
+        headerView.onAddNotificationButtonTapped = { self.viewModel.addNotification() }
+        collectionView.reloadData()
+        
         return headerView
     }
 
@@ -234,46 +180,39 @@ extension AddNotificationViewController: UICollectionViewDelegate, UICollectionV
 
 extension AddNotificationViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return isDate ? 1 : 3
+        return viewModel.isDate ? 1 : 3
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch component {
         case 0:
-            return isDate ? dates.count : hours.count
+            return viewModel.isDate ? viewModel.dates.count : viewModel.hours.count
         case 1:
-            return minutes.count
+            return viewModel.minutes.count
         default:
-            return timePeriod.count
+            return viewModel.timePeriod.count
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch component {
         case 0:
-            return isDate ? "\(dates[row])" : "\(hours[row])"
+            return viewModel.isDate ? "\(viewModel.dates[row])" : "\(viewModel.hours[row])"
         case 1:
-            return "\(minutes[row])"
+            return "\(viewModel.minutes[row])"
         default:
-            return "\(timePeriod[row])"
+            return "\(viewModel.timePeriod[row])"
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         switch component {
         case 0:
-            if isDate {
-                selectedNotification.notification = convertedDate[row]
-                selectedNotification.date = dates[row]
-                selectedBeforeDayIndex = row
-            } else {
-                selectedNotification.hour = hours[row]
-            }
+            viewModel.updateSelectedNotification(row: row)
         case 1:
-            selectedNotification.minute = Int(minutes[row]) ?? 0
+            viewModel.updateSelectedNotificationMinute(row: row)
         default:
-            selectedNotification.timePeriod = timePeriod[row]
-            selectedTimePeriodIndex = row
+            viewModel.updateSelectedNotificationTimePeriod(row: row)
         }
     }
 }

@@ -9,13 +9,8 @@ import UIKit
 import MappilogueKit
 
 class AddLocationViewController: BaseViewController {
-    private var locationViewModel = LocationViewModel()
+    private var viewModel = LocationViewModel()
     
-    var searchKeyword: String = ""
-    var searchPlaces: [KakaoSearchPlaces] = []
-    var currentPage = 1
-    var totalPage = 10
-    var isLoading = false
     var onLocationSelected: ((KakaoSearchPlaces) -> Void)?
 
     private let addLocationView = UIView()
@@ -91,30 +86,24 @@ class AddLocationViewController: BaseViewController {
         dismiss(animated: false)
     }
     
-    func addUserDefinedPlace(_ search: String) {
-        let userDefinedPlace = KakaoSearchPlaces(placeName: search, addressName: "사용자 지정 위치", long: "", lat: "")
-        searchPlaces.insert(userDefinedPlace, at: 0)
-        searchKeyword = search
-    }
-    
     func loadSearchPlace(_ search: String) {
-        guard !isLoading && currentPage <= totalPage else { return }
+        guard !viewModel.isLoading && viewModel.currentPage <= viewModel.totalPage else { return }
         
-        isLoading = true
+        viewModel.isLoading = true
         
-        locationViewModel.getSearchResults(keyword: search, page: currentPage)
+        viewModel.getSearchResults(keyword: search, page: viewModel.currentPage)
         
-        locationViewModel.$locationResult
+        viewModel.$locationResult
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { result in
                 guard let places = result else { return }
                 
-                self.isLoading = false
-                self.searchPlaces += places
-                self.currentPage += 1
+                self.viewModel.isLoading = false
+                self.viewModel.searchPlaces += places
+                self.viewModel.currentPage += 1
                 self.collectionView.reloadData()
             })
-            .store(in: &locationViewModel.cancellables)
+            .store(in: &viewModel.cancellables)
         
         searchBar.resignFirstResponder()
     }
@@ -122,13 +111,13 @@ class AddLocationViewController: BaseViewController {
 
 extension AddLocationViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return searchPlaces.count
+        return viewModel.searchPlaces.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LocationCell.registerId, for: indexPath) as? LocationCell else { return UICollectionViewCell() }
         
-        let place = searchPlaces[indexPath.row]
+        let place = viewModel.searchPlaces[indexPath.row]
         let title = place.placeName
         let address = place.addressName
         
@@ -156,13 +145,13 @@ extension AddLocationViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == searchPlaces.count - 1 {
-            loadSearchPlace(searchKeyword)
+        if indexPath.row == viewModel.searchPlaces.count - 1 {
+            loadSearchPlace(viewModel.searchKeyword)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let location = searchPlaces[indexPath.row]
+        let location = viewModel.searchPlaces[indexPath.row]
         
         dismiss(animated: false) {
             self.onLocationSelected?(location)
@@ -173,7 +162,7 @@ extension AddLocationViewController: UICollectionViewDelegate, UICollectionViewD
 extension AddLocationViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let search = searchBar.text else { return }
-        addUserDefinedPlace(search)
+        viewModel.addUserDefinedPlace(search)
         loadSearchPlace(search)
     }
 }

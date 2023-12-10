@@ -8,11 +8,9 @@
 import UIKit
 
 class DatePickerViewController: BaseViewController {
-    var selectedDate: SelectedDate?
+    var viewModel = DatePickerViewModel()
+ 
     weak var delegate: ChangedDateDelegate?
-    
-    let years = Array(1970...2050)
-    let months = Array(1...12)
     
     let datePickerOuterView = UIView()
     let datePickerView = UIPickerView()
@@ -71,19 +69,19 @@ class DatePickerViewController: BaseViewController {
             self.datePickerOuterView.frame.origin.y = 0
         }, completion: { _ in
             self.dismiss(animated: false) {
-                guard let date = self.selectedDate else { return }
+                guard let date = self.viewModel.selectedDate else { return }
                 self.delegate?.chagedDate(date)
             }
         })
     }
 
     func setDate() {
-        if let year = selectedDate?.year, let currentYearIndex =
-            years.firstIndex(of: year) {
+        if let year = viewModel.selectedDate?.year, let currentYearIndex =
+            viewModel.years.firstIndex(of: year) {
             datePickerView.selectRow(currentYearIndex, inComponent: 0, animated: false)
         }
         
-        if let month = selectedDate?.month, let currentMonthIndex = months.firstIndex(of: month) {
+        if let month = viewModel.selectedDate?.month, let currentMonthIndex = viewModel.months.firstIndex(of: month) {
             datePickerView.selectRow(currentMonthIndex, inComponent: 1, animated: false)
         }
     }
@@ -104,9 +102,9 @@ extension DatePickerViewController: UIPickerViewDelegate, UIPickerViewDataSource
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch component {
         case 0:
-            return years.count
+            return viewModel.years.count
         case 1:
-            return months.count
+            return viewModel.months.count
         default:
             return 0
         }
@@ -115,15 +113,15 @@ extension DatePickerViewController: UIPickerViewDelegate, UIPickerViewDataSource
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch component {
         case 0:
-            if let selectedYear = selectedDate?.year, selectedYear == years[row] {
-                return "\(years[row]) 년"
+            if let selectedYear = viewModel.selectedDate?.year, selectedYear == viewModel.years[row] {
+                return "\(viewModel.years[row]) 년"
             }
-            return "\(years[row])"
+            return "\(viewModel.years[row])"
         case 1:
-            if let selectedMonth = selectedDate?.month, selectedMonth == months[row] {
-                return "\(months[row]) 월"
+            if let selectedMonth = viewModel.selectedDate?.month, selectedMonth == viewModel.months[row] {
+                return "\(viewModel.months[row]) 월"
             }
-            return "\(months[row])"
+            return "\(viewModel.months[row])"
         default:
             return ""
         }
@@ -132,9 +130,9 @@ extension DatePickerViewController: UIPickerViewDelegate, UIPickerViewDataSource
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         switch component {
         case 0:
-            selectedDate?.year = years[row]
+            viewModel.selectedDate?.year = viewModel.years[row]
         case 1:
-            selectedDate?.month = months[row]
+            viewModel.selectedDate?.month = viewModel.months[row]
         default:
             break
         }

@@ -1,5 +1,5 @@
 //
-//  ScheduleDetailViewController.swift
+//  CalendarDetailViewController.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/07/13.
@@ -8,11 +8,9 @@
 import UIKit
 import MappilogueKit
 
-class ScheduleDetailViewController: ModalViewController {
-    let calendarViewModel = CalendarViewModel()
-    var date: String = ""
-    var schedules = ScheduleDetailDTO(solarDate: "", lunarDate: "", schedulesOnSpecificDate: [])
-    var selectedScheduleIndex: Int?
+class CalendarDetailViewController: ModalViewController {
+    let viewModel = CalendarDetailViewModel()
+ 
     var onWriteRecordButtonTapped: ((Schedule) -> Void)?
     var onAddScheduleButtonTapped: ((Int?) -> Void)?
     
@@ -57,7 +55,6 @@ class ScheduleDetailViewController: ModalViewController {
         dateLabel.font = .title01
         dateLabel.textColor = .black1C1C1C
         
-        lunarDateLabel.text = "음력 3월 27일"
         lunarDateLabel.font = .body02
         lunarDateLabel.textColor = .gray707070
         
@@ -112,29 +109,22 @@ class ScheduleDetailViewController: ModalViewController {
     }
     
     func loadCalendarData() {
-        calendarViewModel.getScheduleDetail(date: date)
+        viewModel.getScheduleDetail(date: viewModel.date)
         
-        calendarViewModel.$scheduleDetailResult
+        viewModel.$scheduleDetailResult
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { result in
                 guard let result else { return }
-                self.schedules = result
+                self.viewModel.schedules = result
                 self.collectionView.reloadData()
-                self.setDateLabel(date: self.schedules.solarDate, lunarDate: self.schedules.lunarDate)
+                self.setDateLabel(date: self.viewModel.schedules.solarDate, lunarDate: self.viewModel.schedules.lunarDate)
             })
-            .store(in: &calendarViewModel.cancellables)
+            .store(in: &viewModel.cancellables)
     }
 
     func setDateLabel(date: String, lunarDate: String) {
-        dateLabel.text = setDate(date: date)
-        lunarDateLabel.text = setDate(date: lunarDate)
-    }
-    
-    func setDate(date: String) -> String {
-        let dateArr = date.split(separator: " ").map {String($0)}
-        let (dateMonth, dateDay) = (dateArr[1], dateArr[2])
-        
-        return dateMonth + dateDay
+        dateLabel.text = viewModel.setDate(date: date)
+        lunarDateLabel.text = viewModel.setDate(date: lunarDate)
     }
     
     func animateAddScheduleButton() {
@@ -171,34 +161,34 @@ class ScheduleDetailViewController: ModalViewController {
     
     private func presentWriteRecordViewController() {
         dismiss(animated: false) {
-            guard let index = self.selectedScheduleIndex else { return }
+            guard let index = self.viewModel.selectedScheduleIndex else { return }
           //  self.onWriteRecordButtonTapped?(self.schedules[index])
         }
     }
     
     private func deleteSchedule() {
-        calendarViewModel.deleteSchedule(id: self.selectedScheduleIndex ?? -1, date: date)
+        viewModel.deleteSchedule(id: self.viewModel.selectedScheduleIndex ?? -1, date: viewModel.date)
     }
 }
 
-extension ScheduleDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension CalendarDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return schedules.schedulesOnSpecificDate.isEmpty ? 1 : schedules.schedulesOnSpecificDate.count
+        return viewModel.schedules.schedulesOnSpecificDate.isEmpty ? 1 : viewModel.schedules.schedulesOnSpecificDate.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if schedules.schedulesOnSpecificDate.isEmpty {
+        if viewModel.schedules.schedulesOnSpecificDate.isEmpty {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarEmptyScheduleCell.registerId, for: indexPath) as? CalendarEmptyScheduleCell else { return UICollectionViewCell() }
             return cell
             
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ScheduleCell.registerId, for: indexPath) as? ScheduleCell else { return UICollectionViewCell() }
         
-            let schedule = schedules.schedulesOnSpecificDate[indexPath.row]
+            let schedule = viewModel.schedules.schedulesOnSpecificDate[indexPath.row]
             cell.configure(schedule.scheduleId, schedule: schedule)
             
             cell.onEditButtonTapped = { index in
-                self.selectedScheduleIndex = index
+                self.viewModel.selectedScheduleIndex = index
                 self.presentEditScheduleViewController()
             }
             return cell
@@ -210,7 +200,7 @@ extension ScheduleDetailViewController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width - 40, height: schedules.schedulesOnSpecificDate.isEmpty ? collectionView.frame.height : 52)
+        return CGSize(width: collectionView.frame.width - 40, height: viewModel.schedules.schedulesOnSpecificDate.isEmpty ? collectionView.frame.height : 52)
     }
   
     // 수평 간격
@@ -224,7 +214,7 @@ extension ScheduleDetailViewController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let id = schedules.schedulesOnSpecificDate[indexPath.row].scheduleId
+        let id = viewModel.schedules.schedulesOnSpecificDate[indexPath.row].scheduleId
         onAddScheduleButtonTapped?(id)
         dismiss(animated: false)
     }

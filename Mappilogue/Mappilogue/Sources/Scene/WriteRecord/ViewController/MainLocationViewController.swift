@@ -8,9 +8,7 @@
 import UIKit
 
 class MainLocationViewController: NavigationBarViewController {
-    private var selectedMapLocation: Location?
-    private let dummyLocation = dummyMainLocationData()
-    private var selectedLocationIndex: Int?
+    var viewModel = MainLocationViewModel()
 
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -31,7 +29,6 @@ class MainLocationViewController: NavigationBarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        selectedLocationIndex = dummyLocation[0].address.isEmpty ? 1 : 0
     }
 
     override func setupProperty() {
@@ -58,27 +55,18 @@ class MainLocationViewController: NavigationBarViewController {
     func setLocationButtonTapped() {
         let mapMainLocationViewController = MapMainLocationViewController()
         mapMainLocationViewController.onSelectedMapLocation = { address in
-            self.selectMapLocation(address)
+            self.viewModel.selectMapLocation(address)
+            self.collectionView.reloadData()
         }
         navigationController?.pushViewController(mapMainLocationViewController, animated: true)
-    }
-
-    func selectMapLocation(_ address: String) {
-        selectedMapLocation = Location(title: address, address: address)
-        selectedLocationIndex = -1
-        collectionView.reloadData()
-    }
-
-    func selectMainLocation(_ index: Int?) {
-        selectedLocationIndex = index
-        collectionView.reloadData()
     }
 
     private func presentMainLocationAlert() {
         let mainLocationAlertViewController = MainLocationAlertViewController()
         mainLocationAlertViewController.modalPresentationStyle = .overCurrentContext
         mainLocationAlertViewController.onCanelTapped = {
-            self.selectMainLocation(1)
+            self.viewModel.selectMainLocation(1)
+            self.collectionView.reloadData()
         }
         present(mainLocationAlertViewController, animated: false)
     }
@@ -90,31 +78,30 @@ extension MainLocationViewController: UICollectionViewDelegate, UICollectionView
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 ? (selectedMapLocation == nil ? 0 : 1) : dummyLocation.count
+        return section == 0 ? (viewModel.selectedMapLocation == nil ? 0 : 1) : viewModel.dummyLocation.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainLocationCell.registerId, for: indexPath) as? MainLocationCell else { return UICollectionViewCell() }
 
         if indexPath.section == 0 {
-            if let location = selectedMapLocation {
-                let isSelect = selectedLocationIndex == -1
+            if let location = viewModel.selectedMapLocation {
+                let isSelect = viewModel.selectedLocationIndex == -1
                 cell.configure(-1, location: location, isSelect: isSelect)
             }
         } else {
-            let location = dummyLocation[indexPath.row]
-            let isSelect = indexPath.row == selectedLocationIndex
+            let location = viewModel.dummyLocation[indexPath.row]
+            let isSelect = indexPath.row == viewModel.selectedLocationIndex
             cell.configure(indexPath.row, location: location, isSelect: isSelect)
 
             cell.onMainLocationSelection = { index in
-                self.selectMainLocation(index)
+                self.viewModel.selectMainLocation(index)
                 if let index = index {
-                    if index == 0 && self.dummyLocation[index].address.isEmpty {
+                    if index == 0 && self.viewModel.dummyLocation[index].address.isEmpty {
                         self.presentMainLocationAlert()
                     }
                 }
             }
-
         }
 
         return cell

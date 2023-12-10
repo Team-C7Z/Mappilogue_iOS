@@ -9,15 +9,9 @@ import UIKit
 import MappilogueKit
 
 class SearchViewController: NavigationBarViewController {
-    let dummyLocation = dummyLocationData()
-    let dummyRecord = dummyRecordData()
+    var viewModel = SearchViewModel()
+
     var keyboardHeight: CGFloat = 0
-    
-    var searchType: SearchType = .location {
-        didSet {
-            setSearchButtonDesign()
-        }
-    }
     
     private let searchBar = SearchBar()
     private let stackView = UIStackView()
@@ -44,6 +38,7 @@ class SearchViewController: NavigationBarViewController {
         
         setKeyboardObservers()
         hideKeyboardWhenTappedAround()
+        setSearchButtonDesign()
     }
     
     override func setupProperty() {
@@ -128,9 +123,9 @@ class SearchViewController: NavigationBarViewController {
     @objc func categoryButtonTapped(_ button: UIButton) {
         switch button {
         case locationButton:
-            searchType = .location
+            viewModel.searchType = .location
         case recordButton:
-            searchType = .record
+            viewModel.searchType = .record
         default:
             break
         }
@@ -143,13 +138,13 @@ class SearchViewController: NavigationBarViewController {
     }
     
     private func setLocationButtonDesign() {
-        locationButton.setTitleColor(searchType == .location ? .whiteFFFFFF : .gray707070, for: .normal)
-        locationButton.backgroundColor = searchType == .location ? .green2EBD3D : .grayF5F3F0
+        locationButton.setTitleColor(viewModel.searchType == .location ? .whiteFFFFFF : .gray707070, for: .normal)
+        locationButton.backgroundColor = viewModel.searchType == .location ? .green2EBD3D : .grayF5F3F0
     }
     
     private func setRecordButtonDesign() {
-        recordButton.setTitleColor(searchType == .record ? .whiteFFFFFF : .gray707070, for: .normal)
-        recordButton.backgroundColor = searchType == .record ? .green2EBD3D : .grayF5F3F0
+        recordButton.setTitleColor(viewModel.searchType == .record ? .whiteFFFFFF : .gray707070, for: .normal)
+        recordButton.backgroundColor = viewModel.searchType == .record ? .green2EBD3D : .grayF5F3F0
     }
 }
 
@@ -161,37 +156,37 @@ extension SearchViewController: UISearchBarDelegate {
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch searchType {
+        switch viewModel.searchType {
         case .location:
-            return dummyLocation.isEmpty ? 1 : dummyLocation.count
+            return viewModel.dummyLocation.isEmpty ? 1 : viewModel.dummyLocation.count
         case .record:
-            return dummyRecord.isEmpty ? 1 : dummyRecord.count
+            return viewModel.dummyRecord.isEmpty ? 1 : viewModel.dummyRecord.count
         }
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch searchType {
+        switch viewModel.searchType {
         case .location:
-            if dummyLocation.isEmpty {
+            if viewModel.dummyLocation.isEmpty {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptySearchCell.registerId, for: indexPath) as? EmptySearchCell else { return UICollectionViewCell() }
                 return cell
                 
             } else {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchLocationCell.registerId, for: indexPath) as? SearchLocationCell else { return UICollectionViewCell() }
          
-                let location = dummyLocation[indexPath.row]
+                let location = viewModel.dummyLocation[indexPath.row]
                 cell.configure(with: location)
                 
                 return cell
             }
         case .record:
-            if dummyRecord.isEmpty {
+            if viewModel.dummyRecord.isEmpty {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmptySearchCell.registerId, for: indexPath) as? EmptySearchCell else { return UICollectionViewCell() }
                 return cell
             } else {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchRecordCell.registerId, for: indexPath) as? SearchRecordCell else { return UICollectionViewCell() }
                 
-                let record = dummyRecord[indexPath.row]
+                let record = viewModel.dummyRecord[indexPath.row]
                 cell.configure(with: record)
                     
                 return cell
@@ -204,11 +199,11 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        switch searchType {
+        switch viewModel.searchType {
         case .location:
-            return CGSize(width: collectionView.frame.width - 32, height: dummyLocation.isEmpty ? collectionView.frame.height - keyboardHeight : 44)
+            return CGSize(width: collectionView.frame.width - 32, height: viewModel.dummyLocation.isEmpty ? collectionView.frame.height - keyboardHeight : 44)
         case .record:
-            return CGSize(width: collectionView.frame.width - 32, height: dummyRecord.isEmpty ? collectionView.frame.height - keyboardHeight : 43)
+            return CGSize(width: collectionView.frame.width - 32, height: viewModel.dummyRecord.isEmpty ? collectionView.frame.height - keyboardHeight : 43)
         }
     }
     

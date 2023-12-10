@@ -10,9 +10,14 @@ import Combine
 
 class CalendarViewModel {
     @Published var calendarResult: CalendarDTO?
-    @Published var scheduleDetailResult: ScheduleDetailDTO?
+   
     var cancellables: Set<AnyCancellable> = []
     private let calendarManager = CalendarManager()
+    
+    var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0)
+    var calendarSchedules: [CalendarSchedules] = []
+    var scheduleId: Int?
+    var currentPage = 1
     
     let weekday: [String] = ["일", "월", "화", "수", "목", "금", "토"]
     
@@ -166,6 +171,28 @@ class CalendarViewModel {
         }
         
         return (currentYear, currentMonth)
+    }
+    
+    func changePreviousMonth(_ date: SelectedDate) -> SelectedDate {
+        var newDate = date
+        if date.month == 1 {
+            newDate.year -= 1
+            newDate.month = 12
+        } else {
+            newDate.month -= 1
+        }
+        return newDate
+    }
+    
+    func changeNextMonth(_ date: SelectedDate) -> SelectedDate {
+        var newDate = date
+        if date.month == 12 {
+            newDate.year += 1
+            newDate.month = 1
+        } else {
+            newDate.month += 1
+        }
+        return newDate
     }
     
     func getDays(year: Int, month: Int) -> [Int] {
@@ -377,36 +404,6 @@ extension CalendarViewModel {
             }, receiveValue: { response in
                 self.calendarResult = response.result
             })
-            .store(in: &cancellables)
-    }
-    
-    func getScheduleDetail(date: String) {
-        calendarManager.getScheduleDetail(date: date)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure:
-                    print("error")
-                }
-            }, receiveValue: { response in
-                self.scheduleDetailResult = response.result
-            })
-            .store(in: &cancellables)
-    }
-    
-    func deleteSchedule(id: Int, date: String) {
-        calendarManager.deleteSchedule(id: id)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    self.getScheduleDetail(date: date)
-                case .failure:
-                    print("error")
-                }
-            }, receiveValue: { _ in })
             .store(in: &cancellables)
     }
 }

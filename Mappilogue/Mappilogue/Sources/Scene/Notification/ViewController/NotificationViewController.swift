@@ -31,7 +31,6 @@ class NotificationViewController: NavigationBarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-     
     }
 
     override func setupProperty() {

@@ -11,18 +11,7 @@ import MappilogueKit
 
 class MyViewController: NavigationBarViewController {
     var viewModel = MyViewModel()
-
-    var myInfoData: [[MyInfo]] = [
-        [
-            MyInfo(image: "my_notification", title: "알림 설정"),
-            MyInfo(image: "my_terms", title: "이용약관"),
-            MyInfo(image: "my_inquiry", title: "문의하기")
-        ],
-        [
-            MyInfo(image: "my_logout", title: "로그아웃"),
-            MyInfo(image: "my_withdrawal", title: "탈퇴하기")
-        ]
-    ]
+    
     var profile: ProfileDTO?
     
     private lazy var collectionView: UICollectionView = {
@@ -142,8 +131,8 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     
     private func configureMyCell(for indexPath: IndexPath, in collectionView: UICollectionView) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCell.registerId, for: indexPath) as? MyCell else { return UICollectionViewCell() }
-        let myInfo = myInfoData[indexPath.section-2][indexPath.row]
-        let isLast = indexPath.row == myInfoData[indexPath.section-2].count-1
+        let myInfo = viewModel.myInfoData[indexPath.section-2][indexPath.row]
+        let isLast = indexPath.row == viewModel.myInfoData[indexPath.section-2].count-1
         cell.configure(myInfo: myInfo, isLast: isLast)
         return cell
     }
