@@ -9,6 +9,8 @@ import UIKit
 import MappilogueKit
 
 class PermissionViewController: BaseViewController {
+    weak var coordinator: PermissionCoordinator?
+    
     private let permissionLabel = UILabel()
     private let stackView = UIStackView()
     private let notificationView = PermissionView()
@@ -85,9 +87,7 @@ class PermissionViewController: BaseViewController {
     
     @objc private func startButtonTapped(_ sender: UIButton) {
         RootUserDefaults.setPermissionComplete()
-
-        let selectPermissionViewController = SelectPermissionViewController()
-        selectPermissionViewController.modalPresentationStyle = .fullScreen
-        present(selectPermissionViewController, animated: false)
+    
+        coordinator?.showOnboardingViewController()
     }
 }

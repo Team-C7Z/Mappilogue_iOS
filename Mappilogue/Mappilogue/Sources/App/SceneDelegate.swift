@@ -12,32 +12,21 @@ import MappilogueKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    private var appCoordinator: AppCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        
-        let window = UIWindow(windowScene: windowScene)
-        
-        if RootUserDefaults.isPermissionNeeded() {
-            window.rootViewController = PermissionViewController()
-        } else if RootUserDefaults.isOnboardingNeeded() {
-            window.rootViewController = OnboardingViewController()
-        } else {
-            AuthUserDefaults.autoLogin { success in
-                if success {
-                    window.rootViewController = TabBarController()
-                } else {
-                    window.rootViewController = LoginViewController()
-                }
-            }
+        guard let windowScene = (scene as? UIWindowScene) else {
+            return
         }
-        window.makeKeyAndVisible()
-        self.window = window
         
+        let navigationController = UINavigationController()
+        
+        appCoordinator = AppCoordinator(navigationController: navigationController)
+        appCoordinator?.start()
+        
+        window = UIWindow(windowScene: windowScene)
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {

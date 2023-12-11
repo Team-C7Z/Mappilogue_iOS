@@ -13,6 +13,7 @@ import AuthenticationServices
 import MappilogueKit
 
 class LoginViewController: BaseViewController {
+    weak var coordinator: LoginCoordinator?
     var viewModel = LoginViewModel()
     
     private let logoImage = UIImageView()
@@ -140,9 +141,7 @@ class LoginViewController: BaseViewController {
     }
     
     func presentTabBarController() {
-        let tabBarController = TabBarController()
-        tabBarController.modalPresentationStyle = .fullScreen
-        present(tabBarController, animated: false)
+        coordinator?.showTabBarController()
     }
 }
 
