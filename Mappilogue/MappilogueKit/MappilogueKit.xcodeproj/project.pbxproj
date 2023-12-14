@@ -23,6 +23,7 @@
 		923AA0C32B1C574E006028AF /* DismissSaveBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923AA0BE2B1C574E006028AF /* DismissSaveBar.swift */; };
 		923AA0C42B1C574E006028AF /* NotificationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923AA0BF2B1C574E006028AF /* NotificationBar.swift */; };
 		923AA0C52B1C574E006028AF /* PopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923AA0C02B1C574E006028AF /* PopBar.swift */; };
+		929020252B2B750200AFBA66 /* mappilogue_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 929020242B2B750200AFBA66 /* mappilogue_logo.png */; };
 		92CBB28F2B19C07100587BED /* MappilogueKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = 92CBB28E2B19C07100587BED /* MappilogueKit.docc */; };
 		92CBB2952B19C07100587BED /* MappilogueKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CBB28A2B19C07100587BED /* MappilogueKit.framework */; };
 		92CBB29A2B19C07100587BED /* MappilogueKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CBB2992B19C07100587BED /* MappilogueKitTests.swift */; };
@@ -81,6 +82,7 @@
 		923AA0BE2B1C574E006028AF /* DismissSaveBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissSaveBar.swift; sourceTree = "<group>"; };
 		923AA0BF2B1C574E006028AF /* NotificationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationBar.swift; sourceTree = "<group>"; };
 		923AA0C02B1C574E006028AF /* PopBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopBar.swift; sourceTree = "<group>"; };
+		929020242B2B750200AFBA66 /* mappilogue_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mappilogue_logo.png; sourceTree = "<group>"; };
 		92CBB28A2B19C07100587BED /* MappilogueKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MappilogueKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CBB28D2B19C07100587BED /* MappilogueKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MappilogueKit.h; sourceTree = "<group>"; };
 		92CBB28E2B19C07100587BED /* MappilogueKit.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = MappilogueKit.docc; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				92D019B32B1A1A9E009C7C3D /* Icons.xcassets */,
+				929020242B2B750200AFBA66 /* mappilogue_logo.png */,
 			);
 			path = Icons;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				929020252B2B750200AFBA66 /* mappilogue_logo.png in Resources */,
 				92D019B42B1A1A9E009C7C3D /* Icons.xcassets in Resources */,
 				923AA0832B1B1D27006028AF /* Images.xcassets in Resources */,
 			);
