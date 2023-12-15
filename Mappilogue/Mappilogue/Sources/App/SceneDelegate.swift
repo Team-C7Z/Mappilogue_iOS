@@ -18,35 +18,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else {
             return
         }
-        
-        let window = UIWindow(windowScene: windowScene)
+
         let navigationController = UINavigationController()
         
-//        if RootUserDefaults.isPermissionNeeded() {
-            window.rootViewController = PermissionViewController()
-//        } else if RootUserDefaults.isOnboardingNeeded() {
-//            window.rootViewController = OnboardingViewController()
-//        } else {
-//            AuthUserDefaults.autoLogin { success in
-//                if success {
-//                    window.rootViewController = TabBarController()
-//                } else {
-//                    window.rootViewController = LoginViewController()
-//                }
-//            }
-//        }
-        window.makeKeyAndVisible()
-        self.window = window
-
-//
-//        let navigationController = UINavigationController()
-//        
-//        appCoordinator = AppCoordinator(navigationController: navigationController)
-//        appCoordinator?.start()
-//        
-//        window = UIWindow(windowScene: windowScene)
-//        window?.rootViewController = navigationController
-//        window?.makeKeyAndVisible()
+        appCoordinator = AppCoordinator(navigationController: navigationController)
+        appCoordinator?.start()
+        
+        window = UIWindow(windowScene: windowScene)
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {

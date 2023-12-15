@@ -12,13 +12,18 @@ protocol LoginDelegate: AnyObject {
 }
 
 class LoginCoordinator: BaseCoordinator {
+    let loginViewController = LoginViewController()
     var onSignUpCompletion: (() -> Void)?
     
     override func start() {
-        let loginViewController = LoginViewController()
         loginViewController.coordinator = self
-        navigationController.isNavigationBarHidden = true
         navigationController.pushViewController(loginViewController, animated: false)
+    }
+    
+    func presentLoginViewController() {
+        loginViewController.coordinator = self
+        loginViewController.modalPresentationStyle = .fullScreen
+        navigationController.present(loginViewController, animated: false)
     }
     
     func showTabBarController() {
