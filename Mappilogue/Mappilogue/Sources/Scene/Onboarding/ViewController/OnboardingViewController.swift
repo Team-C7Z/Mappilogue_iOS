@@ -99,7 +99,7 @@ class OnboardingViewController: BaseViewController {
     @objc private func startButtonTapped(_ sender: UIButton) {
         RootUserDefaults.setOnboardingComplete()
         
-        coordinator?.presentLoginViewController()
+        coordinator?.showLoginViewController()
     }
 }
 

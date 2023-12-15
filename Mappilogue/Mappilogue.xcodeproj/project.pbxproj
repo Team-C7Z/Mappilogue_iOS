@@ -216,6 +216,7 @@
 		92901FA02B2753D500AFBA66 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92901F9F2B2753D500AFBA66 /* OnboardingCoordinator.swift */; };
 		92901FA22B275B2900AFBA66 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92901FA12B275B2900AFBA66 /* LoginCoordinator.swift */; };
 		92901FA42B275BFF00AFBA66 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92901FA32B275BFF00AFBA66 /* TabBarCoordinator.swift */; };
+		929020362B2C257000AFBA66 /* SignUpCompletionCoordinatorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020352B2C257000AFBA66 /* SignUpCompletionCoordinatorCoordinator.swift */; };
 		929E23152AB737DC003180B3 /* ProfileImageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23142AB737DC003180B3 /* ProfileImageDTO.swift */; };
 		929E23172AB7F6C4003180B3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23162AB7F6C4003180B3 /* Utils.swift */; };
 		929E23192AB81E40003180B3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 929E23182AB81E40003180B3 /* GoogleService-Info.plist */; };
@@ -532,6 +533,7 @@
 		92901F9F2B2753D500AFBA66 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		92901FA12B275B2900AFBA66 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		92901FA32B275BFF00AFBA66 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
+		929020352B2C257000AFBA66 /* SignUpCompletionCoordinatorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCompletionCoordinatorCoordinator.swift; sourceTree = "<group>"; };
 		929E23142AB737DC003180B3 /* ProfileImageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageDTO.swift; sourceTree = "<group>"; };
 		929E23162AB7F6C4003180B3 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		929E23182AB81E40003180B3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -1648,6 +1650,7 @@
 				92901F9D2B2724B000AFBA66 /* PermissionCoordinator.swift */,
 				92901F9F2B2753D500AFBA66 /* OnboardingCoordinator.swift */,
 				92901FA12B275B2900AFBA66 /* LoginCoordinator.swift */,
+				929020352B2C257000AFBA66 /* SignUpCompletionCoordinatorCoordinator.swift */,
 				92901FA32B275BFF00AFBA66 /* TabBarCoordinator.swift */,
 			);
 			path = Coordinator;
@@ -2369,6 +2372,7 @@
 				9245BC1F2B09CDF300383F4D /* ScheduleViewModel.swift in Sources */,
 				9245BBE02B0873E500383F4D /* ColorAPI.swift in Sources */,
 				92901FA22B275B2900AFBA66 /* LoginCoordinator.swift in Sources */,
+				929020362B2C257000AFBA66 /* SignUpCompletionCoordinatorCoordinator.swift in Sources */,
 				92139D792AAD709E005344AE /* MyRecordContentImageCell.swift in Sources */,
 				9245BC232B0A4B5700383F4D /* CalendarAPI.swift in Sources */,
 				926999382A14F4AA003DDAD2 /* TabBarControllerController.swift in Sources */,

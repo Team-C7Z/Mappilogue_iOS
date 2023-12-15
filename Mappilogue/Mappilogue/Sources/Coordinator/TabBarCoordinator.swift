@@ -7,9 +7,22 @@
 
 import Foundation
 
-class TabBarCoordinator: BaseCoordinator {
+protocol TabBarDelegate: AnyObject {
+    func presentTabBarController()
+}
+
+class TabBarCoordinator: BaseCoordinator, TabBarDelegate {
+    let tabBarController = TabBarController()
+    
     override func start() {
-        let tabBarController = TabBarController()
-        navigationController.pushViewController(tabBarController, animated: false)
+        presentTabBarController()
+    }
+    
+    func presentTabBarController() {
+        tabBarController.coordinator = self
+        tabBarController.modalPresentationStyle = .fullScreen
+        navigationController.present(tabBarController, animated: false)
+//        navigationController.isNavigationBarHidden = true
+//        navigationController.pushViewController(tabBarController, animated: false)
     }
 }

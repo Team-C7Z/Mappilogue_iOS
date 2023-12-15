@@ -8,7 +8,7 @@
 import UIKit
 
 protocol PermissionDelegate: AnyObject {
-    func presentOnboardingViewController()
+    func showOnboardingViewController()
 }
 
 class PermissionCoordinator: BaseCoordinator, PermissionDelegate {
@@ -18,9 +18,9 @@ class PermissionCoordinator: BaseCoordinator, PermissionDelegate {
         navigationController.pushViewController(permissionViewController, animated: false)
     }
     
-    func presentOnboardingViewController() {
+    func showOnboardingViewController() {
         let coordinator = OnboardingCoordinator(navigationController: navigationController)
-        coordinator.presentOnboardingViewController()
+        coordinator.start()
         childCoordinators.append(coordinator)
     }
 }

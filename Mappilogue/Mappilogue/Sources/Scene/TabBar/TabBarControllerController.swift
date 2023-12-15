@@ -9,6 +9,7 @@ import UIKit
 import MappilogueKit
 
 class TabBarController: UITabBarController, UITabBarControllerDelegate {
+    weak var coordinator: TabBarCoordinator?
     var gatheringToastMessage = GatheringToastMessageView()
     
     override func viewDidLoad() {

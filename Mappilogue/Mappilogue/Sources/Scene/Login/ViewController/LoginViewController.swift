@@ -141,7 +141,8 @@ class LoginViewController: BaseViewController {
     }
     
     func presentTabBarController() {
-        coordinator?.showTabBarController()
+      //  coordinator?.presentTabBarController()
+        coordinator?.showSignUpCompletionViewController()
     }
 }
 

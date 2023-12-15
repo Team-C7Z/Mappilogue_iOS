@@ -8,27 +8,29 @@
 import UIKit
 
 protocol LoginDelegate: AnyObject {
-    func presentTabBarController()
+    func showSignUpCompletionViewController()
+    func showTabBarController()
 }
 
-class LoginCoordinator: BaseCoordinator {
+class LoginCoordinator: BaseCoordinator, LoginDelegate {
     let loginViewController = LoginViewController()
     var onSignUpCompletion: (() -> Void)?
     
     override func start() {
         loginViewController.coordinator = self
+        navigationController.isNavigationBarHidden = true
         navigationController.pushViewController(loginViewController, animated: false)
     }
     
-    func presentLoginViewController() {
-        loginViewController.coordinator = self
-        loginViewController.modalPresentationStyle = .fullScreen
-        navigationController.present(loginViewController, animated: false)
+    func showSignUpCompletionViewController() {
+        let coordinator = SignUpCompletionCoordinator(navigationController: self.navigationController)
+        coordinator.start()
+        self.childCoordinators.append(coordinator)
     }
     
     func showTabBarController() {
-        let coordinator = TabBarCoordinator(navigationController: navigationController)
+        let coordinator = TabBarCoordinator(navigationController: self.navigationController)
         coordinator.start()
-        childCoordinators.append(coordinator)
+        self.childCoordinators.append(coordinator)
     }
 }

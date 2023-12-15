@@ -9,7 +9,10 @@ import UIKit
 import MappilogueKit
 
 class SignUpCompletionViewController: BaseViewController {
+    weak var coordinator: SignUpCompletionCoordinator?
     var onTapped: (() -> Void)?
+    var dismissTimer: Timer?
+    var minterval = 3.0
     
     private let stackView = UIStackView()
     private let completionImage = UIImageView()
@@ -19,8 +22,14 @@ class SignUpCompletionViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        dimissAfterDelay()
+        
+        dismissTimer = Timer.scheduledTimer(timeInterval: 1,
+                             target: self,
+                             selector: #selector(remainingSeconds),
+                             userInfo: nil,
+                             repeats: true)
+    
+        dismissAfterDelay()
     }
     
     override func setupProperty() {
@@ -43,7 +52,7 @@ class SignUpCompletionViewController: BaseViewController {
         completionLabel.textColor = .black1C1C1C
         completionLabel.font = .title01
         
-        goToHomeLabel.text = "3초 뒤에 홈으로 이동할게요"
+        goToHomeLabel.text = "\(Int(minterval))초 뒤에 홈으로 이동할게요"
         goToHomeLabel.textColor = .gray9B9791
         goToHomeLabel.font = .body02
     }
@@ -73,18 +82,27 @@ class SignUpCompletionViewController: BaseViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.dimissViewController()
+        // self.dismissViewController()
     }
     
-    private func dimissAfterDelay() {
+    @objc func remainingSeconds() {
+        minterval -= 1
+        if minterval == 0 {
+            if let timer = dismissTimer {
+                timer.invalidate()
+            }
+        } else {
+            goToHomeLabel.text = "\(Int(minterval))초 뒤에 홈으로 이동할게요"
+        }
+    }
+    
+    private func dismissAfterDelay() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.dimissViewController()
+            self.dismissViewController()
         }
     }
     
-    private func dimissViewController() {
-        dismiss(animated: true) {
-            self.onTapped?()
-        }
+    private func dismissViewController() {
+        coordinator?.presentTabBarController()
     }
 }

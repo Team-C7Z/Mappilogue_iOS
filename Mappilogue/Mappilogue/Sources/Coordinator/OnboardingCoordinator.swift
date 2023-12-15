@@ -8,28 +8,21 @@
 import UIKit
 
 protocol OnboardingDelegate: AnyObject {
-    func presentLoginViewController()
+    func showLoginViewController()
 }
 
-class OnboardingCoordinator: BaseCoordinator {
+class OnboardingCoordinator: BaseCoordinator, OnboardingDelegate {
     let onboardingViewController = OnboardingViewController()
     
     override func start() {
         onboardingViewController.coordinator = self
+        navigationController.isNavigationBarHidden = true
         navigationController.pushViewController(onboardingViewController, animated: false)
     }
     
-    func presentOnboardingViewController() {
-        onboardingViewController.coordinator = self
-        onboardingViewController.modalPresentationStyle = .fullScreen
-        navigationController.present(onboardingViewController, animated: false)
-    }
-    
-    func presentLoginViewController() {
-        onboardingViewController.dismiss(animated: false) {
-            let coordinator = LoginCoordinator(navigationController: self.navigationController)
-            coordinator.presentLoginViewController()
-            self.childCoordinators.append(coordinator)
-        }
+    func showLoginViewController() {
+        let coordinator = LoginCoordinator(navigationController: self.navigationController)
+        coordinator.start()
+        self.childCoordinators.append(coordinator)
     }
 }

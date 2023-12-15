@@ -16,19 +16,19 @@ class AppCoordinator: Coordinator {
     }
     
     func start() {
-        if RootUserDefaults.isPermissionNeeded() {
+//        if RootUserDefaults.isPermissionNeeded() {
             showPermissionViewController()
-        } else if RootUserDefaults.isOnboardingNeeded() {
-            showOnboardingViewController()
-        } else {
-            AuthUserDefaults.autoLogin { success in
-                if success {
-                    self.showTabBarController()
-                } else {
-                    self.showLoginViewController()
-                }
-            }
-        }
+//        } else if RootUserDefaults.isOnboardingNeeded() {
+//            showOnboardingViewController()
+//        } else {
+//            AuthUserDefaults.autoLogin { success in
+//                if success {
+//                    self.showTabBarController()
+//                } else {
+//                    self.showLoginViewController()
+//                }
+//            }
+//        }
     }
         
     func showPermissionViewController() {
