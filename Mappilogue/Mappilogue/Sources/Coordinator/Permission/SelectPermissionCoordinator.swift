@@ -15,7 +15,6 @@ class SelectPermissionCoordinator: BaseCoordinator, SelectPermissionDelegate {
     override func start() {
         let selectPermissionViewController = SelectPermissionViewController()
         selectPermissionViewController.coordinator = self
-        navigationController.isNavigationBarHidden = true
         navigationController.pushViewController(selectPermissionViewController, animated: false)
     }
     

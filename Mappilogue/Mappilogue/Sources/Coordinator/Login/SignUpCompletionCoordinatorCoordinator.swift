@@ -23,7 +23,8 @@ class SignUpCompletionCoordinator: BaseCoordinator, SignUpCompletionDelegate {
     }
     
     func presentTabBarController() {
-        let coordinator = TabBarCoordinator(navigationController: self.navigationController)
+        let tabBarController = UITabBarController()
+        let coordinator = TabBarCoordinator(tabBarController: tabBarController, navigationController: navigationController)
         coordinator.start()
         self.childCoordinators.append(coordinator)
     }

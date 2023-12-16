@@ -50,8 +50,15 @@ class AppCoordinator: Coordinator {
     }
     
     func showTabBarController() {
-        let tabBarCoordinator = TabBarCoordinator(navigationController: navigationController)
+        let tabBarController = UITabBarController()
+        let tabBarCoordinator = TabBarCoordinator(tabBarController: tabBarController, navigationController: navigationController)
         childCoordinators.append(tabBarCoordinator)
         tabBarCoordinator.start()
+    }
+    
+    func showNotificationController() {
+        let notificationCoordinator = NotificationCoordinator(navigationController: navigationController)
+        childCoordinators.append(notificationCoordinator)
+        notificationCoordinator.start()
     }
 }

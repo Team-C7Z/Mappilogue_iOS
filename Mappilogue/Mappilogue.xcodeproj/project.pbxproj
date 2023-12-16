@@ -163,7 +163,7 @@
 		9269991A2A14EC09003DDAD2 /* MappilogueUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999192A14EC09003DDAD2 /* MappilogueUITestsLaunchTests.swift */; };
 		926999342A14F2A3003DDAD2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999332A14F2A3003DDAD2 /* BaseViewController.swift */; };
 		926999362A14F443003DDAD2 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999352A14F443003DDAD2 /* BaseView.swift */; };
-		926999382A14F4AA003DDAD2 /* TabBarControllerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999372A14F4AA003DDAD2 /* TabBarControllerController.swift */; };
+		926999382A14F4AA003DDAD2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999372A14F4AA003DDAD2 /* TabBarController.swift */; };
 		926999402A14F73C003DDAD2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9269993F2A14F73C003DDAD2 /* HomeViewController.swift */; };
 		926999422A14F74B003DDAD2 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999412A14F74B003DDAD2 /* CalendarViewController.swift */; };
 		926999442A14F756003DDAD2 /* GatheringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999432A14F756003DDAD2 /* GatheringViewController.swift */; };
@@ -219,6 +219,12 @@
 		929020362B2C257000AFBA66 /* SignUpCompletionCoordinatorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020352B2C257000AFBA66 /* SignUpCompletionCoordinatorCoordinator.swift */; };
 		929020392B2C8F4500AFBA66 /* mappilogue_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 929020382B2C8F4400AFBA66 /* mappilogue_logo.png */; };
 		9290203E2B2D9D3800AFBA66 /* SelectPermissionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290203D2B2D9D3800AFBA66 /* SelectPermissionCoordinator.swift */; };
+		929020452B2D9FD200AFBA66 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020442B2D9FD200AFBA66 /* HomeCoordinator.swift */; };
+		929020482B2DA07E00AFBA66 /* NotificationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020472B2DA07E00AFBA66 /* NotificationCoordinator.swift */; };
+		9290204D2B2DB36B00AFBA66 /* MyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290204C2B2DB36B00AFBA66 /* MyCoordinator.swift */; };
+		9290204F2B2DB37500AFBA66 /* RecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290204E2B2DB37500AFBA66 /* RecordCoordinator.swift */; };
+		929020512B2DB37D00AFBA66 /* CalendarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020502B2DB37D00AFBA66 /* CalendarCoordinator.swift */; };
+		929020542B2DE2A400AFBA66 /* GatheringCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020532B2DE2A400AFBA66 /* GatheringCoordinator.swift */; };
 		929E23152AB737DC003180B3 /* ProfileImageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23142AB737DC003180B3 /* ProfileImageDTO.swift */; };
 		929E23172AB7F6C4003180B3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23162AB7F6C4003180B3 /* Utils.swift */; };
 		929E23192AB81E40003180B3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 929E23182AB81E40003180B3 /* GoogleService-Info.plist */; };
@@ -485,7 +491,7 @@
 		926999192A14EC09003DDAD2 /* MappilogueUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappilogueUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		926999332A14F2A3003DDAD2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		926999352A14F443003DDAD2 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
-		926999372A14F4AA003DDAD2 /* TabBarControllerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarControllerController.swift; sourceTree = "<group>"; };
+		926999372A14F4AA003DDAD2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		9269993F2A14F73C003DDAD2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		926999412A14F74B003DDAD2 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		926999432A14F756003DDAD2 /* GatheringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatheringViewController.swift; sourceTree = "<group>"; };
@@ -538,6 +544,12 @@
 		929020352B2C257000AFBA66 /* SignUpCompletionCoordinatorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCompletionCoordinatorCoordinator.swift; sourceTree = "<group>"; };
 		929020382B2C8F4400AFBA66 /* mappilogue_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mappilogue_logo.png; sourceTree = "<group>"; };
 		9290203D2B2D9D3800AFBA66 /* SelectPermissionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPermissionCoordinator.swift; sourceTree = "<group>"; };
+		929020442B2D9FD200AFBA66 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		929020472B2DA07E00AFBA66 /* NotificationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCoordinator.swift; sourceTree = "<group>"; };
+		9290204C2B2DB36B00AFBA66 /* MyCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCoordinator.swift; sourceTree = "<group>"; };
+		9290204E2B2DB37500AFBA66 /* RecordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCoordinator.swift; sourceTree = "<group>"; };
+		929020502B2DB37D00AFBA66 /* CalendarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCoordinator.swift; sourceTree = "<group>"; };
+		929020532B2DE2A400AFBA66 /* GatheringCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatheringCoordinator.swift; sourceTree = "<group>"; };
 		929E23142AB737DC003180B3 /* ProfileImageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageDTO.swift; sourceTree = "<group>"; };
 		929E23162AB7F6C4003180B3 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		929E23182AB81E40003180B3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -1533,7 +1545,7 @@
 		926999392A14F673003DDAD2 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
-				926999372A14F4AA003DDAD2 /* TabBarControllerController.swift */,
+				926999372A14F4AA003DDAD2 /* TabBarController.swift */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -1656,6 +1668,12 @@
 				929020402B2D9F0D00AFBA66 /* Onboarding */,
 				929020412B2D9F1A00AFBA66 /* Login */,
 				929020422B2D9F2500AFBA66 /* TabBar */,
+				929020462B2DA06C00AFBA66 /* Notification */,
+				929020432B2D9FB600AFBA66 /* Home */,
+				929020492B2DB32E00AFBA66 /* Calendar */,
+				929020522B2DE28E00AFBA66 /* Gathering */,
+				9290204A2B2DB33A00AFBA66 /* Record */,
+				9290204B2B2DB35B00AFBA66 /* My */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1692,6 +1710,54 @@
 				92901FA32B275BFF00AFBA66 /* TabBarCoordinator.swift */,
 			);
 			path = TabBar;
+			sourceTree = "<group>";
+		};
+		929020432B2D9FB600AFBA66 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				929020442B2D9FD200AFBA66 /* HomeCoordinator.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		929020462B2DA06C00AFBA66 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				929020472B2DA07E00AFBA66 /* NotificationCoordinator.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		929020492B2DB32E00AFBA66 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				929020502B2DB37D00AFBA66 /* CalendarCoordinator.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		9290204A2B2DB33A00AFBA66 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				9290204E2B2DB37500AFBA66 /* RecordCoordinator.swift */,
+			);
+			path = Record;
+			sourceTree = "<group>";
+		};
+		9290204B2B2DB35B00AFBA66 /* My */ = {
+			isa = PBXGroup;
+			children = (
+				9290204C2B2DB36B00AFBA66 /* MyCoordinator.swift */,
+			);
+			path = My;
+			sourceTree = "<group>";
+		};
+		929020522B2DE28E00AFBA66 /* Gathering */ = {
+			isa = PBXGroup;
+			children = (
+				929020532B2DE2A400AFBA66 /* GatheringCoordinator.swift */,
+			);
+			path = Gathering;
 			sourceTree = "<group>";
 		};
 		929158162A25292A0022BEF9 /* Fonts */ = {
@@ -2352,6 +2418,7 @@
 				92011C662A78980E009B047F /* UIView.swift in Sources */,
 				92011C162A7505F7009B047F /* Record.swift in Sources */,
 				92B365E72B24846500502446 /* NotificationViewModel.swift in Sources */,
+				929020452B2D9FD200AFBA66 /* HomeCoordinator.swift in Sources */,
 				92FE26152A4B751000BCDB82 /* BaseCollectionReusableView.swift in Sources */,
 				928B7BE92A9B1C5B00E4F789 /* BaseDTO.swift in Sources */,
 				925840B52A7F2D3B00997434 /* MyCell.swift in Sources */,
@@ -2414,11 +2481,12 @@
 				929020362B2C257000AFBA66 /* SignUpCompletionCoordinatorCoordinator.swift in Sources */,
 				92139D792AAD709E005344AE /* MyRecordContentImageCell.swift in Sources */,
 				9245BC232B0A4B5700383F4D /* CalendarAPI.swift in Sources */,
-				926999382A14F4AA003DDAD2 /* TabBarControllerController.swift in Sources */,
+				926999382A14F4AA003DDAD2 /* TabBarController.swift in Sources */,
 				920032032A9715D600E3170D /* PermissionViewController.swift in Sources */,
 				9258409E2A7BD30700997434 /* CategorySettingViewController.swift in Sources */,
 				92C2EC612A6924B5002DB0E3 /* LineCell.swift in Sources */,
 				92A7B65F2A4E07DB009C9293 /* TodayScheduleCell.swift in Sources */,
+				929020512B2DB37D00AFBA66 /* CalendarCoordinator.swift in Sources */,
 				928B7C052A9F9CD900E4F789 /* RefreshTokenDTO.swift in Sources */,
 				926999342A14F2A3003DDAD2 /* BaseViewController.swift in Sources */,
 				928B7C192AA462CE00E4F789 /* TermsOfUseViewController.swift in Sources */,
@@ -2457,6 +2525,7 @@
 				9224FD032A600ACF000A56A6 /* ScheduleDurationView.swift in Sources */,
 				92A7B6612A4E2039009C9293 /* BaseTableViewHeaderFooterView.swift in Sources */,
 				92B365C32B2368F100502446 /* InquiryViewModel.swift in Sources */,
+				929020482B2DA07E00AFBA66 /* NotificationCoordinator.swift in Sources */,
 				92011B812A7271D0009B047F /* SelectCategoryButton.swift in Sources */,
 				92011C122A74F8E6009B047F /* SearchRecordCell.swift in Sources */,
 				92139D932AB2C842005344AE /* AnnouncementContentCell.swift in Sources */,
@@ -2477,6 +2546,7 @@
 				92901F9E2B2724B000AFBA66 /* PermissionCoordinator.swift in Sources */,
 				920031F82A92467A00E3170D /* PhotoDirectoryCell.swift in Sources */,
 				92B365DD2B2382D000502446 /* PermissionViewModel.swift in Sources */,
+				929020542B2DE2A400AFBA66 /* GatheringCoordinator.swift in Sources */,
 				920032052A97166700E3170D /* PermissionView.swift in Sources */,
 				926999442A14F756003DDAD2 /* GatheringViewController.swift in Sources */,
 				9200320F2A99A3A800E3170D /* LoginViewController.swift in Sources */,
@@ -2502,6 +2572,7 @@
 				92011B8B2A72B7DA009B047F /* NewWriteButton.swift in Sources */,
 				928B7C102AA19E7700E4F789 /* UserAPI.swift in Sources */,
 				925840B72A7F2D5A00997434 /* VersionCell.swift in Sources */,
+				9290204D2B2DB36B00AFBA66 /* MyCoordinator.swift in Sources */,
 				925840D72A80D4BD00997434 /* NotificationHeaderView.swift in Sources */,
 				929E23212AB83920003180B3 /* Auth.swift in Sources */,
 				92139D912AB1EF51005344AE /* AnnouncementCell.swift in Sources */,
@@ -2510,6 +2581,7 @@
 				9230BE452A57F01E0053E535 /* WeekdayCell.swift in Sources */,
 				928B7C1F2AA6DADA00E4F789 /* ProfileDTO.swift in Sources */,
 				92011C102A74F222009B047F /* SearchType.swift in Sources */,
+				9290204F2B2DB37500AFBA66 /* RecordCoordinator.swift in Sources */,
 				92139D8D2AB1C1BA005344AE /* EmptyNotificationCell.swift in Sources */,
 				92A7B6592A4D01B3009C9293 /* TodayScheduleInfoCell.swift in Sources */,
 				9245BC172B08D1EE00383F4D /* ColorViewModel.swift in Sources */,

@@ -13,24 +13,23 @@ protocol LoginDelegate: AnyObject {
 }
 
 class LoginCoordinator: BaseCoordinator, LoginDelegate {
-    var onSignUpCompletion: (() -> Void)?
-    
     override func start() {
         let loginViewController = LoginViewController()
         loginViewController.coordinator = self
-        navigationController.isNavigationBarHidden = true
         navigationController.pushViewController(loginViewController, animated: false)
     }
     
     func showSignUpCompletionViewController() {
-        let coordinator = SignUpCompletionCoordinator(navigationController: self.navigationController)
+        let coordinator = SignUpCompletionCoordinator(navigationController: navigationController)
         coordinator.start()
         self.childCoordinators.append(coordinator)
     }
     
     func showTabBarController() {
-        let coordinator = TabBarCoordinator(navigationController: self.navigationController)
+        let tabBarController = UITabBarController()
+        let coordinator = TabBarCoordinator(tabBarController: tabBarController, navigationController: navigationController)
+        childCoordinators.append(coordinator)
         coordinator.start()
-        self.childCoordinators.append(coordinator)
+   
     }
 }

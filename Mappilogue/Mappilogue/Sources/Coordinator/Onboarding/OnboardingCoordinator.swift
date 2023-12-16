@@ -15,7 +15,6 @@ class OnboardingCoordinator: BaseCoordinator, OnboardingDelegate {
     override func start() {
         let onboardingViewController = OnboardingViewController()
         onboardingViewController.coordinator = self
-        navigationController.isNavigationBarHidden = true
         navigationController.pushViewController(onboardingViewController, animated: false)
     }
     
