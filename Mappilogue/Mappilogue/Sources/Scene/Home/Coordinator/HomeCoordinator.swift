@@ -8,23 +8,46 @@
 import UIKit
 
 protocol HomeDelegate: AnyObject {
+    func showNotificationViewController()
+    func showCalendarDetailViewController()
+    func showAddScheduleViewController()
+    func showContentViewController()
+    func showWriteRecordListViewController()
 }
 
-class HomeCoordinator: Coordinator, HomeDelegate {
-    var childCoordinators: [Coordinator] = []
-    var navigationController: UINavigationController
-    
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
-    }
-    
-    func start() {
+class HomeCoordinator: AppCoordinator, HomeDelegate {
+    override func start() {
         let homeViewController = HomeViewController()
+        homeViewController.coordinator = self
         navigationController.pushViewController(homeViewController, animated: false)
     }
     
-    func showLoginViewController() {
-        let coordinator = LoginCoordinator(navigationController: self.navigationController)
+    func showNotificationViewController() {
+        let coordinator = NotificationCoordinator(navigationController: self.navigationController)
+        coordinator.start()
+        self.childCoordinators.append(coordinator)
+    }
+    
+    func showCalendarDetailViewController() {
+        let coordinator = CalendarDetailCoordinator(navigationController: self.navigationController)
+        coordinator.start()
+        self.childCoordinators.append(coordinator)
+    }
+    
+    func showAddScheduleViewController() {
+        let coordinator = ScheduleCoordinator(navigationController: self.navigationController)
+        coordinator.start()
+        self.childCoordinators.append(coordinator)
+    }
+    
+    func showContentViewController() {
+        let coordinator = ContentCoordinator(navigationController: self.navigationController)
+        coordinator.start()
+        self.childCoordinators.append(coordinator)
+    }
+    
+    func showWriteRecordListViewController() {
+        let coordinator = WriteRecordListCoordinator(navigationController: self.navigationController)
         coordinator.start()
         self.childCoordinators.append(coordinator)
     }

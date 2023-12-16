@@ -8,6 +8,7 @@
 import UIKit
 
 class NotificationViewController: NavigationBarViewController {
+    weak var coordinator: NotificationCoordinator?
     var viewModel = NotificationViewModel()
     
     private lazy var tableView: UITableView = {
@@ -37,6 +38,10 @@ class NotificationViewController: NavigationBarViewController {
         super.setupProperty()
         
         setPopBar(title: "알림")
+        
+        popBar.onPopButtonTapped = {
+            self.coordinator?.popViewController()
+        }
     }
     
     override func setupHierarchy() {

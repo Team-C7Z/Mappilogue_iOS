@@ -9,6 +9,7 @@ import UIKit
 import MappilogueKit
 
 class HomeViewController: NavigationBarViewController {
+    weak var coordinator: HomeCoordinator?
     var viewModel = HomeViewModel()
     
     private lazy var tableView: UITableView = {
@@ -38,6 +39,10 @@ class HomeViewController: NavigationBarViewController {
         super.setupProperty()
         
         setLogoNotificationBar()
+        
+        logoNotoficationBar.onNotificationButtonTapped = {
+            self.coordinator?.showNotificationViewController()
+        }
     }
     
     override func setupHierarchy() {
@@ -179,17 +184,16 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         guard let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: MaredRecordsFooterView.registerId) as? MaredRecordsFooterView else { return UIView() }
         
         footerView.onAddSchedule = {
-            self.navigateToAddScheduleViewController()
+            self.coordinator?.showAddScheduleViewController()
         }
         
         footerView.onMarkedRecord = {
-            self.navigateToRecordContentViewController()
+            self.coordinator?.showContentViewController()
         }
         
         footerView.onAddRecord = {
-            self.navigateToSelectWriteRecordViewController()
+            self.coordinator?.showWriteRecordListViewController()
         }
-        
         return footerView
     }
     
@@ -210,11 +214,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         switch viewModel.selectedScheduleType {
         case .today:
             if !viewModel.dummyTodayData.isEmpty {
-                navigateToAddScheduleViewController()
+              //  coordinator?.showCalendarDetailViewController()
             }
         case .upcoming:
             if !viewModel.dummyUpcomingData.isEmpty {
-                navigateToAddScheduleViewController()
+              //  coordinator?.showCalendarDetailViewController()
             }
         }
     }
@@ -231,20 +235,5 @@ extension HomeViewController: ScheduleTypeDelegate, ExpandCellDelegate {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         viewModel.isScheduleExpanded[indexPath.section].toggle()
         tableView.reloadSections([indexPath.section], with: .none)
-    }
-    
-    func navigateToAddScheduleViewController() {
-        let addScheduleViewController = AddScheduleViewController()
-        navigationController?.pushViewController(addScheduleViewController, animated: true)
-    }
-    
-    func navigateToRecordContentViewController() {
-        let recordContentViewController = ContentViewController()
-        navigationController?.pushViewController(recordContentViewController, animated: true)
-    }
-    
-    func navigateToSelectWriteRecordViewController() {
-        let selectWriteRecordViewController = WriteListRecordViewController()
-        navigationController?.pushViewController(selectWriteRecordViewController, animated: true)
     }
 }

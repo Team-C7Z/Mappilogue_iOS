@@ -1,5 +1,5 @@
 //
-//  WriteListRecordViewController.swift
+//  WriteRecordListRecordViewController.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/07/26.
@@ -7,7 +7,8 @@
 
 import UIKit
 
-class WriteListRecordViewController: NavigationBarViewController {
+class WriteRecordListRecordViewController: NavigationBarViewController {
+    weak var coordinator: WriteRecordListCoordinator?
     var dummyData = dummyScheduleData()
     
     private lazy var collectionView: UICollectionView = {
@@ -77,7 +78,7 @@ class WriteListRecordViewController: NavigationBarViewController {
     }
 }
 
-extension WriteListRecordViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension WriteRecordListRecordViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return dummyData.count
     }

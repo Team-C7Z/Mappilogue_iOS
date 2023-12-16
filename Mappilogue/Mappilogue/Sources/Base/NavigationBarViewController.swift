@@ -26,9 +26,9 @@ class NavigationBarViewController: BaseViewController {
     }
     
     func setLogoNotificationBar() {
-        logoNotoficationBar.onNotificationButtonTapped = {
-            self.pushNotificationController()
-        }
+//        logoNotoficationBar.onNotificationButtonTapped = {
+//            self.pushNotificationController()
+//        }
 
         view.addSubview(logoNotoficationBar)
         
@@ -48,10 +48,6 @@ class NavigationBarViewController: BaseViewController {
     }
     
     func setPopBar(title: String) {
-        popBar.onPopButtonTapped = {
-            self.popNavigationController()
-        }
-        
         setDefaultPopBar(title: title)
     }
     
@@ -103,9 +99,9 @@ class NavigationBarViewController: BaseViewController {
     }
     
     func pushNotificationController() {
-        let notificationController = NotificationViewController()
-        notificationController.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(notificationController, animated: true)
+//        let notificationController = NotificationViewController()
+//        notificationController.hidesBottomBarWhenPushed = true
+//        navigationController?.pushViewController(notificationController, animated: true)
     }
     
     @objc func popNavigationController() {

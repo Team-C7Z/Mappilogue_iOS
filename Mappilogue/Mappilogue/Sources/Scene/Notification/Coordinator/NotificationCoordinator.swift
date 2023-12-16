@@ -7,9 +7,19 @@
 
 import Foundation
 
-class NotificationCoordinator: BaseCoordinator {
+protocol NotificationDelegate: AnyObject {
+    func popViewController()
+}
+
+class NotificationCoordinator: BaseCoordinator, NotificationDelegate {
     override func start() {
         let notificationViewController = NotificationViewController()
+        notificationViewController.hidesBottomBarWhenPushed = true
+        notificationViewController.coordinator = self
         navigationController.pushViewController(notificationViewController, animated: false)
+    }
+    
+    func popViewController() {
+        navigationController.popViewController(animated: true)
     }
 }

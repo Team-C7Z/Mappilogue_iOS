@@ -9,6 +9,7 @@ import UIKit
 import MappilogueKit
 
 class ContentViewController: NavigationBarViewController {
+    weak var coordinator: ContentCoordinator?
     var schedule = Schedule2222()
     var isNewWrite: Bool = false
     
@@ -113,7 +114,7 @@ class ContentViewController: NavigationBarViewController {
     
     private func deleteRecord() {
         if isNewWrite {
-            if let viewControllerToPopTo = navigationController?.viewControllers.first(where: { $0 is WriteListRecordViewController }) {
+            if let viewControllerToPopTo = navigationController?.viewControllers.first(where: { $0 is WriteRecordListRecordViewController }) {
                 
                 navigationController?.popToViewController(viewControllerToPopTo, animated: true)
             }

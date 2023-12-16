@@ -9,6 +9,7 @@ import UIKit
 import MappilogueKit
 
 class AddScheduleViewController: NavigationBarViewController {
+    weak var coordinator: ScheduleCoordinator?
     private var colorViewModel = ColorViewModel()
     var viewModel = ScheduleViewModel()
     

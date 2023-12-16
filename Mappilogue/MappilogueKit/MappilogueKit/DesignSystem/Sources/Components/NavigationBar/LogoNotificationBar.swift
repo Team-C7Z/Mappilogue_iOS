@@ -61,7 +61,6 @@ public class LogoNotificationBar: UIView {
     }
     
     @objc func notificationButtonTapped() {
-        print("ASdfadfs")
         onNotificationButtonTapped?()
     }
 }

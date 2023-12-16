@@ -9,6 +9,7 @@ import UIKit
 import MappilogueKit
 
 class CalendarDetailViewController: ModalViewController {
+    weak var coordinator: CalendarDetailCoordinator?
     let viewModel = CalendarDetailViewModel()
  
     var onWriteRecordButtonTapped: ((Schedule) -> Void)?

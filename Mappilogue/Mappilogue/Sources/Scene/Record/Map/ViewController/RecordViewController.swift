@@ -284,7 +284,7 @@ class RecordViewController: NavigationBarViewController {
     }
     
     @objc private func writeRecordButtonTapped() {
-        let selectWriteRecordViewController = WriteListRecordViewController()
+        let selectWriteRecordViewController = WriteRecordListRecordViewController()
         selectWriteRecordViewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(selectWriteRecordViewController, animated: true)
     }
