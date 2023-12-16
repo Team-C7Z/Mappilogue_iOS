@@ -163,7 +163,6 @@
 		9269991A2A14EC09003DDAD2 /* MappilogueUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999192A14EC09003DDAD2 /* MappilogueUITestsLaunchTests.swift */; };
 		926999342A14F2A3003DDAD2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999332A14F2A3003DDAD2 /* BaseViewController.swift */; };
 		926999362A14F443003DDAD2 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999352A14F443003DDAD2 /* BaseView.swift */; };
-		926999382A14F4AA003DDAD2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999372A14F4AA003DDAD2 /* TabBarController.swift */; };
 		926999402A14F73C003DDAD2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9269993F2A14F73C003DDAD2 /* HomeViewController.swift */; };
 		926999422A14F74B003DDAD2 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999412A14F74B003DDAD2 /* CalendarViewController.swift */; };
 		926999442A14F756003DDAD2 /* GatheringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926999432A14F756003DDAD2 /* GatheringViewController.swift */; };
@@ -491,7 +490,6 @@
 		926999192A14EC09003DDAD2 /* MappilogueUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappilogueUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		926999332A14F2A3003DDAD2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		926999352A14F443003DDAD2 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
-		926999372A14F4AA003DDAD2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		9269993F2A14F73C003DDAD2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		926999412A14F74B003DDAD2 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		926999432A14F756003DDAD2 /* GatheringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatheringViewController.swift; sourceTree = "<group>"; };
@@ -762,6 +760,7 @@
 		920032012A9715B800E3170D /* Permission */ = {
 			isa = PBXGroup;
 			children = (
+				929020552B2DE7EA00AFBA66 /* Coordinator */,
 				92B365DB2B2382B500502446 /* ViewModel */,
 				9245BBF32B08C1E700383F4D /* ViewController */,
 				9245BBF42B08C20500383F4D /* View */,
@@ -772,6 +771,7 @@
 		9200320D2A99A39A00E3170D /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				9290205C2B2DE8D000AFBA66 /* Coordinator */,
 				9245BBFA2B08C26800383F4D /* Model */,
 				92E20F472B13B89800380FA5 /* ViewModel */,
 				9245BBFB2B08C26F00383F4D /* ViewController */,
@@ -857,6 +857,7 @@
 		92139D7D2AB0B08E005344AE /* Notification */ = {
 			isa = PBXGroup;
 			children = (
+				9290205E2B2DE91100AFBA66 /* Coordinator */,
 				9245BBF92B08C25300383F4D /* Model */,
 				92B365E52B24845300502446 /* ViewModel */,
 				9245BBF72B08C22E00383F4D /* ViewController */,
@@ -1376,6 +1377,7 @@
 		9263786C2A546BE3004E5B6E /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				9290205B2B2DE89F00AFBA66 /* Coordinator */,
 				92E20F4A2B1429EA00380FA5 /* Model */,
 				92B365DE2B23875D00502446 /* ViewModel */,
 				9245BBF52B08C21500383F4D /* ViewController */,
@@ -1456,7 +1458,6 @@
 				92A7B6642A4E52A6009C9293 /* Model */,
 				9269992B2A14F157003DDAD2 /* Data */,
 				920031B32A8B5B7D00E3170D /* Global */,
-				92901F932B271C1100AFBA66 /* Coordinator */,
 				9269992C2A14F164003DDAD2 /* Scene */,
 			);
 			path = Sources;
@@ -1520,6 +1521,7 @@
 		9269992C2A14F164003DDAD2 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				92901F9B2B27237B00AFBA66 /* AppCoordinator.swift */,
 				920032012A9715B800E3170D /* Permission */,
 				9263786C2A546BE3004E5B6E /* Onboarding */,
 				9200320D2A99A39A00E3170D /* Login */,
@@ -1545,7 +1547,7 @@
 		926999392A14F673003DDAD2 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
-				926999372A14F4AA003DDAD2 /* TabBarController.swift */,
+				9290205D2B2DE8F800AFBA66 /* Coordinator */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -1553,6 +1555,7 @@
 		9269993A2A14F689003DDAD2 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				9290205F2B2DE94E00AFBA66 /* Coordinator */,
 				9245BBFD2B08C2AA00383F4D /* Model */,
 				92B365E82B24867D00502446 /* ViewModel */,
 				9245BBFC2B08C29600383F4D /* ViewController */,
@@ -1564,6 +1567,7 @@
 		9269993B2A14F6A4003DDAD2 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				929020602B2DE95B00AFBA66 /* Coordinator */,
 				9245BC242B0A4C4200383F4D /* Model */,
 				9245BBF02B08C06000383F4D /* ViewModel */,
 				9245BBEF2B08BF9200383F4D /* ViewController */,
@@ -1575,6 +1579,7 @@
 		9269993C2A14F6BF003DDAD2 /* Gathering */ = {
 			isa = PBXGroup;
 			children = (
+				929020612B2DE97400AFBA66 /* Coordinator */,
 				9245BC042B08C41700383F4D /* ViewController */,
 			);
 			path = Gathering;
@@ -1583,6 +1588,7 @@
 		9269993D2A14F6F9003DDAD2 /* My */ = {
 			isa = PBXGroup;
 			children = (
+				929020632B2DE99700AFBA66 /* Coordinator */,
 				92B365BE2B23671C00502446 /* My */,
 				92B365C82B236BDA00502446 /* Profile */,
 				92B365C62B236BBE00502446 /* Notification */,
@@ -1596,6 +1602,7 @@
 		9269993E2A14F71D003DDAD2 /* Record */ = {
 			isa = PBXGroup;
 			children = (
+				929020622B2DE98500AFBA66 /* Coordinator */,
 				92B365E32B240B6700502446 /* Map */,
 				920031E32A8E1E8100E3170D /* BottomSheet */,
 			);
@@ -1660,104 +1667,86 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		92901F932B271C1100AFBA66 /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				92901F9B2B27237B00AFBA66 /* AppCoordinator.swift */,
-				9290203F2B2D9EFF00AFBA66 /* Permission */,
-				929020402B2D9F0D00AFBA66 /* Onboarding */,
-				929020412B2D9F1A00AFBA66 /* Login */,
-				929020422B2D9F2500AFBA66 /* TabBar */,
-				929020462B2DA06C00AFBA66 /* Notification */,
-				929020432B2D9FB600AFBA66 /* Home */,
-				929020492B2DB32E00AFBA66 /* Calendar */,
-				929020522B2DE28E00AFBA66 /* Gathering */,
-				9290204A2B2DB33A00AFBA66 /* Record */,
-				9290204B2B2DB35B00AFBA66 /* My */,
-			);
-			path = Coordinator;
-			sourceTree = "<group>";
-		};
-		9290203F2B2D9EFF00AFBA66 /* Permission */ = {
+		929020552B2DE7EA00AFBA66 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
 				92901F9D2B2724B000AFBA66 /* PermissionCoordinator.swift */,
 				9290203D2B2D9D3800AFBA66 /* SelectPermissionCoordinator.swift */,
 			);
-			path = Permission;
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		929020402B2D9F0D00AFBA66 /* Onboarding */ = {
+		9290205B2B2DE89F00AFBA66 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
 				92901F9F2B2753D500AFBA66 /* OnboardingCoordinator.swift */,
 			);
-			path = Onboarding;
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		929020412B2D9F1A00AFBA66 /* Login */ = {
+		9290205C2B2DE8D000AFBA66 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
 				92901FA12B275B2900AFBA66 /* LoginCoordinator.swift */,
 				929020352B2C257000AFBA66 /* SignUpCompletionCoordinatorCoordinator.swift */,
 			);
-			path = Login;
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		929020422B2D9F2500AFBA66 /* TabBar */ = {
+		9290205D2B2DE8F800AFBA66 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
 				92901FA32B275BFF00AFBA66 /* TabBarCoordinator.swift */,
 			);
-			path = TabBar;
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		929020432B2D9FB600AFBA66 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				929020442B2D9FD200AFBA66 /* HomeCoordinator.swift */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
-		929020462B2DA06C00AFBA66 /* Notification */ = {
+		9290205E2B2DE91100AFBA66 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
 				929020472B2DA07E00AFBA66 /* NotificationCoordinator.swift */,
 			);
-			path = Notification;
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		929020492B2DB32E00AFBA66 /* Calendar */ = {
+		9290205F2B2DE94E00AFBA66 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				929020442B2D9FD200AFBA66 /* HomeCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		929020602B2DE95B00AFBA66 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
 				929020502B2DB37D00AFBA66 /* CalendarCoordinator.swift */,
 			);
-			path = Calendar;
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		9290204A2B2DB33A00AFBA66 /* Record */ = {
-			isa = PBXGroup;
-			children = (
-				9290204E2B2DB37500AFBA66 /* RecordCoordinator.swift */,
-			);
-			path = Record;
-			sourceTree = "<group>";
-		};
-		9290204B2B2DB35B00AFBA66 /* My */ = {
-			isa = PBXGroup;
-			children = (
-				9290204C2B2DB36B00AFBA66 /* MyCoordinator.swift */,
-			);
-			path = My;
-			sourceTree = "<group>";
-		};
-		929020522B2DE28E00AFBA66 /* Gathering */ = {
+		929020612B2DE97400AFBA66 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
 				929020532B2DE2A400AFBA66 /* GatheringCoordinator.swift */,
 			);
-			path = Gathering;
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		929020622B2DE98500AFBA66 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				9290204E2B2DB37500AFBA66 /* RecordCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		929020632B2DE99700AFBA66 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				9290204C2B2DB36B00AFBA66 /* MyCoordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		929158162A25292A0022BEF9 /* Fonts */ = {
@@ -2481,7 +2470,6 @@
 				929020362B2C257000AFBA66 /* SignUpCompletionCoordinatorCoordinator.swift in Sources */,
 				92139D792AAD709E005344AE /* MyRecordContentImageCell.swift in Sources */,
 				9245BC232B0A4B5700383F4D /* CalendarAPI.swift in Sources */,
-				926999382A14F4AA003DDAD2 /* TabBarController.swift in Sources */,
 				920032032A9715D600E3170D /* PermissionViewController.swift in Sources */,
 				9258409E2A7BD30700997434 /* CategorySettingViewController.swift in Sources */,
 				92C2EC612A6924B5002DB0E3 /* LineCell.swift in Sources */,
