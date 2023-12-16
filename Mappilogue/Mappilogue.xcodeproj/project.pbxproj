@@ -217,6 +217,8 @@
 		92901FA22B275B2900AFBA66 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92901FA12B275B2900AFBA66 /* LoginCoordinator.swift */; };
 		92901FA42B275BFF00AFBA66 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92901FA32B275BFF00AFBA66 /* TabBarCoordinator.swift */; };
 		929020362B2C257000AFBA66 /* SignUpCompletionCoordinatorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020352B2C257000AFBA66 /* SignUpCompletionCoordinatorCoordinator.swift */; };
+		929020392B2C8F4500AFBA66 /* mappilogue_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 929020382B2C8F4400AFBA66 /* mappilogue_logo.png */; };
+		9290203E2B2D9D3800AFBA66 /* SelectPermissionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290203D2B2D9D3800AFBA66 /* SelectPermissionCoordinator.swift */; };
 		929E23152AB737DC003180B3 /* ProfileImageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23142AB737DC003180B3 /* ProfileImageDTO.swift */; };
 		929E23172AB7F6C4003180B3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23162AB7F6C4003180B3 /* Utils.swift */; };
 		929E23192AB81E40003180B3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 929E23182AB81E40003180B3 /* GoogleService-Info.plist */; };
@@ -534,6 +536,8 @@
 		92901FA12B275B2900AFBA66 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		92901FA32B275BFF00AFBA66 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 		929020352B2C257000AFBA66 /* SignUpCompletionCoordinatorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCompletionCoordinatorCoordinator.swift; sourceTree = "<group>"; };
+		929020382B2C8F4400AFBA66 /* mappilogue_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mappilogue_logo.png; sourceTree = "<group>"; };
+		9290203D2B2D9D3800AFBA66 /* SelectPermissionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPermissionCoordinator.swift; sourceTree = "<group>"; };
 		929E23142AB737DC003180B3 /* ProfileImageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageDTO.swift; sourceTree = "<group>"; };
 		929E23162AB7F6C4003180B3 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		929E23182AB81E40003180B3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -1451,6 +1455,7 @@
 			children = (
 				929158162A25292A0022BEF9 /* Fonts */,
 				926998FF2A14EC09003DDAD2 /* Assets.xcassets */,
+				929020382B2C8F4400AFBA66 /* mappilogue_logo.png */,
 				926999012A14EC09003DDAD2 /* LaunchScreen.storyboard */,
 				920031DF2A8DF6F800E3170D /* saving.json */,
 			);
@@ -1648,6 +1653,7 @@
 			children = (
 				92901F9B2B27237B00AFBA66 /* AppCoordinator.swift */,
 				92901F9D2B2724B000AFBA66 /* PermissionCoordinator.swift */,
+				9290203D2B2D9D3800AFBA66 /* SelectPermissionCoordinator.swift */,
 				92901F9F2B2753D500AFBA66 /* OnboardingCoordinator.swift */,
 				92901FA12B275B2900AFBA66 /* LoginCoordinator.swift */,
 				929020352B2C257000AFBA66 /* SignUpCompletionCoordinatorCoordinator.swift */,
@@ -2145,6 +2151,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				929020392B2C8F4500AFBA66 /* mappilogue_logo.png in Resources */,
 				92B365B02B22C8DE00502446 /* .swiftlint.yml in Resources */,
 				92CBB03C2B18905300587BED /* SecureAPIKeys.plist in Resources */,
 				92E3F4462B1DE0D000E03C15 /* Pretendard-Regular.ttf in Resources */,
@@ -2516,6 +2523,7 @@
 				928B7BFD2A9DD4DC00E4F789 /* BaseAPI.swift in Sources */,
 				92B365EC2B24A2C000502446 /* DatePickerViewModel.swift in Sources */,
 				926998F92A14EC07003DDAD2 /* SceneDelegate.swift in Sources */,
+				9290203E2B2D9D3800AFBA66 /* SelectPermissionCoordinator.swift in Sources */,
 				92139D852AB1B169005344AE /* NotificationType.swift in Sources */,
 				92139D732AAD673A005344AE /* ContentTextView.swift in Sources */,
 				920031BD2A8B5C8E00E3170D /* MainLocationCell.swift in Sources */,

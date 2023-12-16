@@ -132,17 +132,11 @@ class LoginViewController: BaseViewController {
     }
     
     func presentSignUpCompleteViewController() {
-        let signUpCompletionViewController = SignUpCompletionViewController()
-        signUpCompletionViewController.modalPresentationStyle = .fullScreen
-        signUpCompletionViewController.onTapped = {
-            self.presentTabBarController()
-        }
-        present(signUpCompletionViewController, animated: false)
+        coordinator?.showSignUpCompletionViewController()
     }
     
     func presentTabBarController() {
-      //  coordinator?.presentTabBarController()
-        coordinator?.showSignUpCompletionViewController()
+        coordinator?.showTabBarController()
     }
 }
 
@@ -161,7 +155,7 @@ extension LoginViewController {
     }
 }
 
-extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding{
+extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view.window!
     }

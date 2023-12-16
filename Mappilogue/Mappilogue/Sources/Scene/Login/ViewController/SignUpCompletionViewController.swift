@@ -10,7 +10,6 @@ import MappilogueKit
 
 class SignUpCompletionViewController: BaseViewController {
     weak var coordinator: SignUpCompletionCoordinator?
-    var onTapped: (() -> Void)?
     var dismissTimer: Timer?
     var minterval = 3.0
     

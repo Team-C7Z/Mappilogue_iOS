@@ -12,23 +12,19 @@ protocol SignUpCompletionDelegate: AnyObject {
 }
 
 class SignUpCompletionCoordinator: BaseCoordinator, SignUpCompletionDelegate {
-    let signUpCompletionController = SignUpCompletionViewController()
-    
     override func start() {
         presentSignUpController()
     }
     
     func presentSignUpController() {
+        let signUpCompletionController = SignUpCompletionViewController()
         signUpCompletionController.coordinator = self
-        signUpCompletionController.modalPresentationStyle = .fullScreen
-        navigationController.present(signUpCompletionController, animated: false)
+        navigationController.pushViewController(signUpCompletionController, animated: false)
     }
     
     func presentTabBarController() {
-        signUpCompletionController.dismiss(animated: false) {
-            let coordinator = TabBarCoordinator(navigationController: self.navigationController)
-            coordinator.start()
-            self.childCoordinators.append(coordinator)
-        }
+        let coordinator = TabBarCoordinator(navigationController: self.navigationController)
+        coordinator.start()
+        self.childCoordinators.append(coordinator)
     }
 }

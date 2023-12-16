@@ -118,9 +118,7 @@ class AddScheduleViewController: NavigationBarViewController {
                           alertHeight: 160)
         alertViewController.configureAlert(with: alert)
         alertViewController.onDoneTapped = {
-            self.dismiss(animated: false) {
-                self.navigationController?.popViewController(animated: true)
-           }
+            self.navigationController?.popViewController(animated: true)
         }
         present(alertViewController, animated: false)
     }

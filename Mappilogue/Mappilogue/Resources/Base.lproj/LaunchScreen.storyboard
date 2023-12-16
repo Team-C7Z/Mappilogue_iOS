@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mappilogue_logo" translatesAutoresizingMaskIntoConstraints="NO" id="daj-g8-jiT">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mappilogue_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="daj-g8-jiT">
                                 <rect key="frame" x="68.666666666666686" y="334" width="256" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="256" id="Frv-4M-tzZ"/>
@@ -39,7 +39,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="mappilogue_logo" width="768" height="168"/>
+        <image name="mappilogue_logo.png" width="256" height="56"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

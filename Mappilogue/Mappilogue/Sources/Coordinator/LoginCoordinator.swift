@@ -13,10 +13,10 @@ protocol LoginDelegate: AnyObject {
 }
 
 class LoginCoordinator: BaseCoordinator, LoginDelegate {
-    let loginViewController = LoginViewController()
     var onSignUpCompletion: (() -> Void)?
     
     override func start() {
+        let loginViewController = LoginViewController()
         loginViewController.coordinator = self
         navigationController.isNavigationBarHidden = true
         navigationController.pushViewController(loginViewController, animated: false)

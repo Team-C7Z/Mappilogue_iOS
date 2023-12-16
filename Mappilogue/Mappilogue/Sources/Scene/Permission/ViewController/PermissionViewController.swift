@@ -88,6 +88,6 @@ class PermissionViewController: BaseViewController {
     @objc private func startButtonTapped(_ sender: UIButton) {
         RootUserDefaults.setPermissionComplete()
     
-        coordinator?.showOnboardingViewController()
+        coordinator?.showSelectPermissionViewController()
     }
 }
