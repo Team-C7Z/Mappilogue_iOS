@@ -1652,14 +1652,46 @@
 			isa = PBXGroup;
 			children = (
 				92901F9B2B27237B00AFBA66 /* AppCoordinator.swift */,
-				92901F9D2B2724B000AFBA66 /* PermissionCoordinator.swift */,
-				9290203D2B2D9D3800AFBA66 /* SelectPermissionCoordinator.swift */,
-				92901F9F2B2753D500AFBA66 /* OnboardingCoordinator.swift */,
-				92901FA12B275B2900AFBA66 /* LoginCoordinator.swift */,
-				929020352B2C257000AFBA66 /* SignUpCompletionCoordinatorCoordinator.swift */,
-				92901FA32B275BFF00AFBA66 /* TabBarCoordinator.swift */,
+				9290203F2B2D9EFF00AFBA66 /* Permission */,
+				929020402B2D9F0D00AFBA66 /* Onboarding */,
+				929020412B2D9F1A00AFBA66 /* Login */,
+				929020422B2D9F2500AFBA66 /* TabBar */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		9290203F2B2D9EFF00AFBA66 /* Permission */ = {
+			isa = PBXGroup;
+			children = (
+				92901F9D2B2724B000AFBA66 /* PermissionCoordinator.swift */,
+				9290203D2B2D9D3800AFBA66 /* SelectPermissionCoordinator.swift */,
+			);
+			path = Permission;
+			sourceTree = "<group>";
+		};
+		929020402B2D9F0D00AFBA66 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				92901F9F2B2753D500AFBA66 /* OnboardingCoordinator.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		929020412B2D9F1A00AFBA66 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				92901FA12B275B2900AFBA66 /* LoginCoordinator.swift */,
+				929020352B2C257000AFBA66 /* SignUpCompletionCoordinatorCoordinator.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		929020422B2D9F2500AFBA66 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				92901FA32B275BFF00AFBA66 /* TabBarCoordinator.swift */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 		929158162A25292A0022BEF9 /* Fonts */ = {
