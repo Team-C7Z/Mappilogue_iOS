@@ -11,6 +11,8 @@ import PhotosUI
 import MappilogueKit
 
 class ImagePickerViewController: ImagePickerNavigationViewController {
+    weak var coordinator: ImagePickerCoordinator?
+    
     var allPhotos = PHFetchResult<PHAsset>()
     var authStatus: PHAuthorizationStatus?
     var favoritePhotosAlbum =  PHFetchResult<PHAsset>()
@@ -70,8 +72,7 @@ class ImagePickerViewController: ImagePickerNavigationViewController {
         super.setupProperty()
         
         dismissSaveBar.onSaveButtonTapped = {
-            self.onCompletion?(self.selectedAssets)
-            self.navigationController?.popViewController(animated: false)
+            self.coordinator?.popViewController(assets: self.selectedAssets)
         }
         
         photoDirectoryPickerButton.addTarget(self, action: #selector(photoDirectoryPickerButtonTapped), for: .touchUpInside)

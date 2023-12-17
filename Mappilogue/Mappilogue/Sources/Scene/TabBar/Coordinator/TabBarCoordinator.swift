@@ -77,7 +77,7 @@ class TabBarCoordinator: NSObject, Coordinator, UITabBarControllerDelegate {
             return
         }
         
-        var gatheringToastMessage = GatheringToastMessageView()
+        let gatheringToastMessage = GatheringToastMessageView()
         
         viewController.view.addSubview(gatheringToastMessage)
         

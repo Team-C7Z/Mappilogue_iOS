@@ -9,6 +9,7 @@ import UIKit
 import WebKit
 
 class TermsOfUseViewController: NavigationBarViewController {
+    weak var coordinator: TermsOfUseCoordinator?
     var viewModel = TermsOfUseViewModel()
     
     private let webView = WKWebView()
@@ -23,6 +24,10 @@ class TermsOfUseViewController: NavigationBarViewController {
         super.setupProperty()
         
         setPopBar(title: "이용약관")
+        
+        popBar.onPopButtonTapped = {
+            self.coordinator?.popViewController()
+        }
     }
     
     override func setupHierarchy() {

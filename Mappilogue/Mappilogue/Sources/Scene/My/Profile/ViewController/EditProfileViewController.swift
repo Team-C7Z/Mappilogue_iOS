@@ -10,7 +10,9 @@ import Photos
 import MappilogueKit
 
 class EditProfileViewController: NavigationBarViewController {
+    weak var coordiantor: EditProfileCoordinator?
     var viewModel = ProfileViewModel()
+    var onChangedNickname: ((String) -> Void)?
     
     private let profileImageButton = UIButton()
     private let profileImage = UIImageView()
@@ -34,6 +36,10 @@ class EditProfileViewController: NavigationBarViewController {
         super.setupProperty()
         
         setPopBar(title: "프로필 편집")
+        
+        popBar.onPopButtonTapped = {
+            self.coordiantor?.popViewController()
+        }
         
         profileImageButton.addTarget(self, action: #selector(profileImageButtonTapped), for: .touchUpInside)
         
@@ -216,20 +222,21 @@ class EditProfileViewController: NavigationBarViewController {
     
     func presentImagePickerViewController(_ status: PHAuthorizationStatus) {
         DispatchQueue.main.async {
-            let imagePickerViewController = ImagePickerViewController()
-            imagePickerViewController.authStatus = status
-            imagePickerViewController.isProfile = true
-            imagePickerViewController.onCompletion = { assets in
-                if let asset = assets.first {
-                    self.updateProfileAssetImage(asset)
-                }
-            }
-            imagePickerViewController.modalPresentationStyle = .fullScreen
-            self.navigationController?.pushViewController(imagePickerViewController, animated: false)
+//            let imagePickerViewController = ImagePickerViewController()
+//            imagePickerViewController.authStatus = status
+//            imagePickerViewController.isProfile = true
+//            imagePickerViewController.onCompletion = { assets in
+//                if let asset = assets.first {
+//                    self.updateProfileAssetImage(asset)
+//                }
+//            }
+//            imagePickerViewController.modalPresentationStyle = .fullScreen
+//            self.navigationController?.pushViewController(imagePickerViewController, animated: false)
+            self.coordiantor?.showImagePickerViewController(authStatus: status, isProfile: true)
         }
     }
     
-    private func updateProfileAssetImage(_ asset: PHAsset) {
+    func updateProfileAssetImage(_ asset: PHAsset) {
         let imageManager = PHCachingImageManager()
         let options = PHImageRequestOptions()
        
@@ -250,22 +257,16 @@ class EditProfileViewController: NavigationBarViewController {
     }
     
     @objc func presentEditNicknameModalViewController() {
-        let editNicknameModalViewController = EditNicknameModalViewController()
-        editNicknameModalViewController.modalPresentationStyle = .overCurrentContext
-        editNicknameModalViewController.configure(editNicknameTextField.text ?? "")
-        editNicknameModalViewController.onChangeTapped = { nickname in
-            self.changeNickname(nickname)
-        }
-        present(editNicknameModalViewController, animated: false)
+        coordiantor?.showEditNicknameModalViewController(editNicknameTextField.text ?? "")
     }
     
     func updateProfilePhotoImage(_ photo: UIImage) {
         profileImage.image = photo
     }
     
-    private func changeNickname(_ nickname: String) {
-        editNicknameTextField.text = nickname
+    func changeNickname(_ nickname: String) {
         viewModel.updateNickname(nickname: nickname)
+        editNicknameTextField.text = nickname
     }
 }
 

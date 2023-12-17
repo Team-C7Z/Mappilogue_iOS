@@ -9,6 +9,7 @@ import UIKit
 import MappilogueKit
 
 class InquiryViewController: NavigationBarViewController {
+    weak var coordinator: InquiryCoordinator?
     var viewModel = InquiryViewModel()
     
     private let inquiryTitleLabel = UILabel()
@@ -28,6 +29,10 @@ class InquiryViewController: NavigationBarViewController {
         super.setupProperty()
         
         setPopBar(title: "문의하기")
+        
+        popBar.onPopButtonTapped = {
+            self.coordinator?.popViewController()
+        }
         
         inquiryTitleLabel.text = "여러분의 이야기를 기다려요"
         inquiryTitleLabel.textColor = .black1C1C1C

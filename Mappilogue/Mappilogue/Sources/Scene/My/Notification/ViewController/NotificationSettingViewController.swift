@@ -8,6 +8,7 @@
 import UIKit
 
 class NotificationSettingViewController: NavigationBarViewController {
+    weak var coordinator: NotificationSettingCoordinator?
     var viewModel = NotificationSettingViewModel()
     private var notificationDTO: NotificationDTO?
     
@@ -79,7 +80,7 @@ class NotificationSettingViewController: NavigationBarViewController {
             viewModel.updateNotificationSetting(notification: notification)
         }
         
-        navigationController?.popViewController(animated: true)
+        coordinator?.popViewController()
     }
     
     func getNotificationSetting() {

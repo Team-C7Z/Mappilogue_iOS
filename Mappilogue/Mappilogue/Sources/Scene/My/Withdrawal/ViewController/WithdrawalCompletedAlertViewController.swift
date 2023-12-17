@@ -8,6 +8,7 @@
 import UIKit
 
 class WithdrawalCompletedAlertViewController: BaseViewController {
+    
     private let alertView = UIView()
     private let titleLabel = UILabel()
     private let goToLoginButton = UIButton()
