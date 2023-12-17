@@ -9,6 +9,7 @@ import UIKit
 import KakaoSDKUser
 
 class WithdrawalViewController: WithdrawalNavigationViewController {
+    weak var coordinator: WithdrawalCoordinator?
     var viewModel = WithdrawalViewModel()
     
     var onWithdrawal: (() -> Void)?
@@ -27,6 +28,10 @@ class WithdrawalViewController: WithdrawalNavigationViewController {
     
     override func setupProperty() {
         super.setupProperty()
+        
+        popBar.onPopButtonTapped = {
+            self.coordinator?.popViewController()
+        }
         
         skipButton.addTarget(self, action: #selector(performWithdrawal), for: .touchUpInside)
         
@@ -140,7 +145,7 @@ class WithdrawalViewController: WithdrawalNavigationViewController {
     }
     
     func completeWithdrawal() {
-        navigationController?.popViewController(animated: false)
+        coordinator?.popViewController()
         onWithdrawal?()
     }
 }

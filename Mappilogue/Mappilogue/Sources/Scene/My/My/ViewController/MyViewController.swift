@@ -10,6 +10,7 @@ import KakaoSDKUser
 import MappilogueKit
 
 class MyViewController: NavigationBarViewController {
+    weak var coordinator: MyCoordinator?
     var viewModel = MyViewModel()
     
     var profile: ProfileDTO?
@@ -35,6 +36,8 @@ class MyViewController: NavigationBarViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         getProfile()
     }
 
@@ -42,6 +45,10 @@ class MyViewController: NavigationBarViewController {
         super.setupProperty()
         
         setNotificationBar(title: "MY")
+        
+        notificationBar.onNotificationButtonTapped = {
+            self.coordinator?.showNotificationViewController()
+        }
     }
     
     override func setupHierarchy() {
@@ -158,20 +165,14 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            navigateToEditProfileViewController()
+            coordinator?.showEditProfileViewController(profile)
         case 2:
             if indexPath.row == 0 {
-                let notificationSettingViewController = NotificationSettingViewController()
-                notificationSettingViewController.hidesBottomBarWhenPushed = true
-                navigationController?.pushViewController(notificationSettingViewController, animated: true)
+                coordinator?.showNotificationSettingViewController()
             } else if indexPath.row == 1 {
-                let termsOfUseViewController = TermsOfUseViewController()
-                termsOfUseViewController.hidesBottomBarWhenPushed = true
-                navigationController?.pushViewController(termsOfUseViewController, animated: true)
+                coordinator?.showTermsOfUserViewController()
             } else if indexPath.row == 2 {
-                let inquiryViewController = InquiryViewController()
-                inquiryViewController.hidesBottomBarWhenPushed = true
-                navigationController?.pushViewController(inquiryViewController, animated: true)
+                coordinator?.showInquiryViewController()
             }
         case 3:
             if indexPath.row == 0 {
@@ -182,15 +183,6 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
         default:
             break
         }
-    }
-    
-    private func navigateToEditProfileViewController() {
-        let editProfileViewController = EditProfileViewController()
-        editProfileViewController.hidesBottomBarWhenPushed = true
-        if let profile = profile {
-            editProfileViewController.configure(profile)
-        }
-        navigationController?.pushViewController(editProfileViewController, animated: true)
     }
     
     private func openAppStore(_ appId: String) {
@@ -217,23 +209,7 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
      }
     
     private func presentWithdrawalAlert() {
-        let withdrawalAlertViewController = WithdrawalAlertViewController()
-        withdrawalAlertViewController.modalPresentationStyle = .overFullScreen
-        withdrawalAlertViewController.viewModel.onDeleteButtonTapped = {
-            self.navigateToWithdrawalViewController()
-        }
-        present(withdrawalAlertViewController, animated: false)
-    }
-    
-    private func navigateToWithdrawalViewController() {
-        let withdrawalViewController = WithdrawalViewController()
-        withdrawalViewController.hidesBottomBarWhenPushed = true
-        withdrawalViewController.onWithdrawal = {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                self.presentWithdrawalCompletedAlert()
-            }
-        }
-        self.navigationController?.pushViewController(withdrawalViewController, animated: true)
+        coordinator?.showWithdrawalAlertViewController()
     }
     
     func logout() {
@@ -255,12 +231,6 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     private func clearAuthUserDefaults() {
         AuthUserDefaults.accessToken = nil
         AuthUserDefaults.refreshToken = nil
-    }
-    
-    func presentWithdrawalCompletedAlert() {
-        let withdrawalCompletedAlertViewController = WithdrawalCompletedAlertViewController()
-        withdrawalCompletedAlertViewController.modalPresentationStyle = .overFullScreen
-        present(withdrawalCompletedAlertViewController, animated: false)
     }
     
     func presentLoginViewController() {

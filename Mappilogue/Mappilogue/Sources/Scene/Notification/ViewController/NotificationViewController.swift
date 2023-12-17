@@ -43,7 +43,7 @@ class NotificationViewController: NavigationBarViewController {
             self.coordinator?.popViewController()
         }
     }
-    
+     
     override func setupHierarchy() {
         super.setupHierarchy()
       

@@ -9,6 +9,7 @@ import UIKit
 import MappilogueKit
 
 class WithdrawalAlertViewController: BaseViewController {
+    weak var coordinator: WithdrawalAlertCoordinator?
     var viewModel = WithdrawalAlertViewModel()
     
     private let alertView = UIView()
@@ -136,14 +137,12 @@ class WithdrawalAlertViewController: BaseViewController {
     }
     
     @objc private func cancelButtonTapped(_ sender: UIButton) {
-        dismiss(animated: false)
+        coordinator?.dismissViewController()
     }
     
     @objc private func deleteButtonTapped(_ sender: UIButton) {
         if viewModel.isChecked {
-            dismiss(animated: false) {
-                self.viewModel.performDelete()
-            }
+            coordinator?.withdrawal()
         }
     }
 }

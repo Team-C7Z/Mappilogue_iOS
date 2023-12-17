@@ -8,6 +8,7 @@
 import UIKit
 
 class EditNicknameModalViewController: BaseViewController {
+    weak var coordinator: EditNicknameCoordinator?
     var viewModel = ProfileViewModel()
     var onChangeTapped: ((String) -> Void)?
     
@@ -127,17 +128,16 @@ class EditNicknameModalViewController: BaseViewController {
     }
     
     @objc private func cancelButtonTapped(_ sender: UIButton) {
-        dismiss(animated: false)
+        coordinator?.dismissViewController(inputTextField.text ?? "")
     }
     
     @objc private func deleteButtonTapped(_ sender: UIButton) {
         guard let text = inputTextField.text else { return }
             
         if isValidNickname(text) && !text.isEmpty {
-            dismiss(animated: false) {
-                self.updateNickname(text)
-                self.onChangeTapped?(text)
-            }
+            updateNickname(text)
+            onChangeTapped?(text)
+            coordinator?.dismissViewController(text)
         } else {
             alertView.snp.updateConstraints {
                 $0.height.equalTo(179)
