@@ -7,7 +7,7 @@ Mappilogue의 iOS 레포지토리 입니다.
 <br></br>
 ## Skill
 ### Architecture
-- MVVM
+- MVVM-C
 
 ### Tech Stack
 - UIKit
