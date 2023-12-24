@@ -8,7 +8,9 @@
 import UIKit
 
 class MyRecordListViewController: NavigationBarViewController {
+    weak var coordinator: MyRecordListCoordinator?
     private var categoryViewModel = CategoryViewModel()
+    
     var categories: [Category] = []
     var totalCategoryCount: Int = 0
     var isNewWrite: Bool = false
@@ -42,6 +44,10 @@ class MyRecordListViewController: NavigationBarViewController {
         super.setupProperty()
         
         setPopBar(title: "나의 기록")
+        
+        popBar.onPopButtonTapped = {
+            self.coordinator?.popViewController()
+        }
     }
     
     override func setupHierarchy() {
@@ -126,22 +132,23 @@ extension MyRecordListViewController: UITableViewDelegate, UITableViewDataSource
     
     func didSelectMyRecordCategoryCell(_ indexPath: IndexPath) {
         let myRecordViewController = MyRecordViewController()
-        myRecordViewController.categoryId = indexPath.row == 0 ? 0 : categories[indexPath.row-1].id
-        myRecordViewController.categoryName = indexPath.row == 0 ? "전체" : categories[indexPath.row-1].title
-        myRecordViewController.onModifyCategory = { categoryName in
-            self.categories[indexPath.row-1].title = categoryName
-            self.tableView.reloadData()
-        }
-        myRecordViewController.onDeleteCategory = {
-            self.categories.remove(at: indexPath.row-1)
-            self.tableView.reloadData()
-        }
-        navigationController?.pushViewController(myRecordViewController, animated: true)
+        let categoryId = indexPath.row == 0 ? 0 : categories[indexPath.row-1].id
+        let categoryName = indexPath.row == 0 ? "전체" : categories[indexPath.row-1].title
+        
+        coordinator?.showMyRecordViewController(cateogryId: categoryId, categoryName: categoryName)
+//        myRecordViewController.onModifyCategory = { categoryName in
+//            self.categories[indexPath.row-1].title = categoryName
+//            self.tableView.reloadData()
+//        }
+//        myRecordViewController.onDeleteCategory = {
+//            self.categories.remove(at: indexPath.row-1)
+//            self.tableView.reloadData()
+//        }
+//        navigationController?.pushViewController(myRecordViewController, animated: true)
     }
     
     func didSelectCategorySettingCell() {
-        let categorySettingViewController = CategorySettingViewController()
-        navigationController?.pushViewController(categorySettingViewController, animated: true)
+        coordinator?.showCategorySettingViewController()
     }
 }
 

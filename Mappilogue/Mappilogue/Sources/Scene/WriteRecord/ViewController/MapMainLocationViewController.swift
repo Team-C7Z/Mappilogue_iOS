@@ -10,6 +10,7 @@ import NMapsMap
 import MappilogueKit
 
 class MapMainLocationViewController: NavigationBarViewController {
+    weak var coordinator: MapMainLocationCoordinator?
     private var locationViewModel = LocationViewModel()
     var onSelectedMapLocation: ((String) -> Void)?
 
@@ -30,6 +31,11 @@ class MapMainLocationViewController: NavigationBarViewController {
         super.setupProperty()
 
         setPopBar(title: "대표 위치 설정")
+        
+        popBar.onPopButtonTapped = {
+            self.coordinator?.popViewController()
+        }
+        
         setMapView()
         
         mainLocationSettingView.onSelectedMapLocation = { address in

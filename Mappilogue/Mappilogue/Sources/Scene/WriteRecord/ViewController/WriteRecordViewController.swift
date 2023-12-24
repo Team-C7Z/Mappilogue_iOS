@@ -10,7 +10,9 @@ import Photos
 import MappilogueKit
 
 class WriteRecordViewController: NavigationBarViewController {
+    weak var coordinator: WriteRecordCoordinator?
     private var colorViewModel = ColorViewModel()
+   
     private var colorList: [ColorListDTO] = []
     var schedule = Schedule2222()
     var onColorSelectionButtonTapped: (() -> Void)?
@@ -131,8 +133,7 @@ class WriteRecordViewController: NavigationBarViewController {
     }
     
     @objc func categoryButtonTapped() {
-        let selectCategoryViewController = SelectCategoryViewController()
-        navigationController?.pushViewController(selectCategoryViewController, animated: true)
+        coordinator?.showSelectCategoryViewController()
     }
     
     private func configureScheduleTitleColorView() {
@@ -158,8 +159,7 @@ class WriteRecordViewController: NavigationBarViewController {
     }
     
     @objc func mainLocationButtonTapped() {
-        let mainLocationViewController = MainLocationViewController()
-        navigationController?.pushViewController(mainLocationViewController, animated: true)
+        coordinator?.showMainLocationViewController()
     }
     
     private func scrollToBottom() {
@@ -232,12 +232,11 @@ class WriteRecordViewController: NavigationBarViewController {
 
     func pushImagePickerViewController(_ status: PHAuthorizationStatus) {
         DispatchQueue.main.async {
-            let imagePickerViewController = ImagePickerViewController()
-            imagePickerViewController.authStatus = status
-            imagePickerViewController.onCompletion = { assets in
-                self.displayRecordImages(assets)
-            }
-            self.navigationController?.pushViewController(imagePickerViewController, animated: false)
+            self.coordinator?.showImagePickerViewController(authStatus: status, isProfile: false)
+//            imagePickerViewController.onCompletion = { assets in
+//                self.displayRecordImages(assets)
+//            }
+            
         }
     }
     
@@ -266,12 +265,10 @@ class WriteRecordViewController: NavigationBarViewController {
     }
     
     @objc func saveRecordButtonTapped() {
-        let savingRecordViewController = SavingRecordViewController()
-        savingRecordViewController.modalPresentationStyle = .overFullScreen
-        savingRecordViewController.onSaveComplete = {
-            self.navigateToRecordContentViewController()
-        }
-        present(savingRecordViewController, animated: false)
+        coordinator?.showSavingRecordViewController()
+//        savingRecordViewController.onSaveComplete = {
+//            self.navigateToRecordContentViewController()
+//        }
     }
     
     private func navigateToRecordContentViewController() {
@@ -330,7 +327,6 @@ extension WriteRecordViewController {
             } receiveValue: { response in
                 guard let result = response.result else { return }
 
-                
             }
             .store(in: &colorViewModel.cancellables)
     }

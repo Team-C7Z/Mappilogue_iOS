@@ -9,6 +9,8 @@ import UIKit
 import MappilogueKit
 
 class SelectCategoryViewController: NavigationBarViewController {
+    weak var coordinator: SelectCategoryCoordinator?
+    
     private var categoryViewModel = CategoryViewModel()
     var categories: [Category] = []
     
@@ -37,6 +39,10 @@ class SelectCategoryViewController: NavigationBarViewController {
         super.setupProperty()
         
         setPopBar(title: "카테고리 선택")
+        
+        popBar.onPopButtonTapped = {
+            self.coordinator?.popViewController()
+        }
     }
     
     override func setupHierarchy() {

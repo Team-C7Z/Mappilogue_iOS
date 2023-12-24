@@ -38,6 +38,10 @@ class WriteRecordListRecordViewController: NavigationBarViewController {
         
         setPopBar(title: "기록 쓰기")
         
+        popBar.onPopButtonTapped = {
+            self.coordinator?.popViewController()
+        }
+        
         newWriteButton.addTarget(self, action: #selector(newWriteButtonTapped), for: .touchUpInside)
     }
     
@@ -66,11 +70,12 @@ class WriteRecordListRecordViewController: NavigationBarViewController {
     }
     
     func presentToWriteRecordViewController(_ indexPath: IndexPath?) {
-        let writeRecordViewController = WriteRecordViewController()
+        var schedule = Schedule2222()
+        
         if let indexPath = indexPath {
-            writeRecordViewController.schedule = dummyData[indexPath.section].schedules[indexPath.row]
+            schedule =  dummyData[indexPath.section].schedules[indexPath.row]
         }
-        navigationController?.pushViewController(writeRecordViewController, animated: true)
+        coordinator?.showWriteRecordViewController(schedule: schedule)
     }
     
     @objc private func newWriteButtonTapped() {

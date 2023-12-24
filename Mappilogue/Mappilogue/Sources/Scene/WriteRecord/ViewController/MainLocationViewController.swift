@@ -8,6 +8,7 @@
 import UIKit
 
 class MainLocationViewController: NavigationBarViewController {
+    weak var coordinator: MainLocationCoordinator?
     var viewModel = MainLocationViewModel()
 
     private lazy var collectionView: UICollectionView = {
@@ -35,6 +36,10 @@ class MainLocationViewController: NavigationBarViewController {
         super.setupProperty()
 
         setPopBar(title: "대표 위치 설정")
+        
+        popBar.onPopButtonTapped = {
+            self.coordinator?.popViewController()
+        }
     }
 
     override func setupHierarchy() {
@@ -53,12 +58,11 @@ class MainLocationViewController: NavigationBarViewController {
     }
 
     func setLocationButtonTapped() {
-        let mapMainLocationViewController = MapMainLocationViewController()
-        mapMainLocationViewController.onSelectedMapLocation = { address in
-            self.viewModel.selectMapLocation(address)
-            self.collectionView.reloadData()
-        }
-        navigationController?.pushViewController(mapMainLocationViewController, animated: true)
+        coordinator?.showMapMainLocationController()
+//        mapMainLocationViewController.onSelectedMapLocation = { address in
+//            self.viewModel.selectMapLocation(address)
+//            self.collectionView.reloadData()
+//        }
     }
 
     private func presentMainLocationAlert() {

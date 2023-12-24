@@ -8,6 +8,8 @@
 import UIKit
 
 class MyRecordViewController: NavigationBarViewController {
+    weak var coordinator: MyRecordCoordinator?
+    
     let dummyRecord = dummyRecordData()
     var categoryId: Int = 0
     var categoryName: String = ""
@@ -35,6 +37,10 @@ class MyRecordViewController: NavigationBarViewController {
     
     override func setupProperty() {
         super.setupProperty()
+        
+        popBar.onPopButtonTapped = {
+            self.coordinator?.popViewController()
+        }
         
 //        setNavigationTitleAndBackButton(categoryName, backButtonAction: isNewWrite ? #selector(navigateToMyRecordViewController) : #selector(backButtonTapped))
         setMenuButtonItem()

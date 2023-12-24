@@ -9,6 +9,7 @@ import UIKit
 import Lottie
 
 class SavingRecordViewController: BaseViewController {
+    weak var coordinator: SavingRecordCoordinator?
     var onSaveComplete: (() -> Void)?
     
     private let modalView = UIView()
