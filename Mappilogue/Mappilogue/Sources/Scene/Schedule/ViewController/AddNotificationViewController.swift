@@ -8,6 +8,7 @@
 import UIKit
 
 class AddNotificationViewController: NavigationBarViewController {
+    weak var coordinator: AddNotificationCoordinator?
     var viewModel = AddNotificationViewModel()
     
     private lazy var collectionView: UICollectionView = {
@@ -86,7 +87,7 @@ class AddNotificationViewController: NavigationBarViewController {
     
     @objc func popToAddScheduleViewController() {
         viewModel.updateAlarmOptionsFromNotificationList()
-        navigationController?.popViewController(animated: true)
+        coordinator?.popViewController()
     }
 
     func setSelectedDate() {

@@ -7,7 +7,9 @@
 
 import UIKit
 
-public class InputModalViewController: UIViewController {
+class InputModalViewController: UIViewController {
+    weak var coordinator: InputModalCoordinator?
+    
     public var onCancelTapped: (() -> Void)?
     public var onCompletionTapped: ((String) -> Void)?
     
@@ -108,17 +110,14 @@ public class InputModalViewController: UIViewController {
     }
     
     @objc private func cancelButtonTapped(_ sender: UIButton) {
-        dismiss(animated: false) {
-            self.onCancelTapped?()
-        }
+        coordinator?.dismissViewController()
     }
     
     @objc private func deleteButtonTapped(_ sender: UIButton) {
         guard let text = inputTextField.text else { return }
         
-        dismiss(animated: false) {
-            self.onCompletionTapped?(text)
-        }
+        onCompletionTapped?(text)
+        coordinator?.dismissViewController()
     }
 }
 

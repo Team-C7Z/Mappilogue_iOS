@@ -8,6 +8,8 @@
 import UIKit
 
 class MainLocationAlertViewController: BaseViewController {
+    weak var coordinator: MainLocationAlertCoordinator?
+    
     var onCanelTapped: (() -> Void)?
     var onDoneTapped: (() -> Void)?
 
@@ -95,14 +97,12 @@ class MainLocationAlertViewController: BaseViewController {
     }
 
     @objc private func cancelButtonTapped(_ sender: UIButton) {
-        dismiss(animated: false) {
-            self.onCanelTapped?()
-        }
+        onCanelTapped?()
+        coordinator?.dismissViewController()
     }
 
     @objc private func deleteButtonTapped(_ sender: UIButton) {
-        dismiss(animated: false) {
-            self.onDoneTapped?()
-        }
+        onDoneTapped?()
+        coordinator?.dismissViewController()
     }
 }

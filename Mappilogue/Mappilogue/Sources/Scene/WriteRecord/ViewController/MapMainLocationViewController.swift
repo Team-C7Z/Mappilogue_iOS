@@ -10,6 +10,7 @@ import NMapsMap
 import MappilogueKit
 
 class MapMainLocationViewController: NavigationBarViewController {
+    weak var coordinator: MapMainLocationCoordinator?
     private var locationViewModel = LocationViewModel()
     var onSelectedMapLocation: ((String) -> Void)?
 
@@ -30,6 +31,11 @@ class MapMainLocationViewController: NavigationBarViewController {
         super.setupProperty()
 
         setPopBar(title: "대표 위치 설정")
+        
+        popBar.onPopButtonTapped = {
+            self.coordinator?.popViewController()
+        }
+        
         setMapView()
         
         mainLocationSettingView.onSelectedMapLocation = { address in
@@ -80,7 +86,7 @@ class MapMainLocationViewController: NavigationBarViewController {
 
     func selectMapLocation(_ address: String) {
         self.onSelectedMapLocation?(address)
-        self.navigationController?.popViewController(animated: true)
+        self.coordinator?.popViewController()
     }
 }
 
@@ -116,21 +122,18 @@ extension MapMainLocationViewController: CLLocationManagerDelegate {
     }
 
     func presentLocationPermissionAlert() {
-        let alertViewController = AlertViewController()
-        alertViewController.modalPresentationStyle = .overCurrentContext
         let alert = Alert(titleText: "위치 권한을 허용해 주세요",
                           messageText: "위치 권한을 허용하지 않을 경우\n일부 기능을 사용할 수 없어요",
                           cancelText: "닫기",
                           doneText: "설정으로 이동",
                           buttonColor: .green2EBD3D,
                           alertHeight: 182)
-        alertViewController.configureAlert(with: alert)
-        alertViewController.onDoneTapped = {
-            if let url = URL(string: UIApplication.openSettingsURLString) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            }
-        }
-        present(alertViewController, animated: false)
+//        alertViewController.onDoneTapped = {
+//            if let url = URL(string: UIApplication.openSettingsURLString) {
+//                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//            }
+//        }
+        coordinator?.showLocationPermissionAlert(alert: alert)
     }
 }
 

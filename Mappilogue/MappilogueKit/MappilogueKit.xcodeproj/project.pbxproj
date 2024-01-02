@@ -23,6 +23,7 @@
 		923AA0C32B1C574E006028AF /* DismissSaveBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923AA0BE2B1C574E006028AF /* DismissSaveBar.swift */; };
 		923AA0C42B1C574E006028AF /* NotificationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923AA0BF2B1C574E006028AF /* NotificationBar.swift */; };
 		923AA0C52B1C574E006028AF /* PopBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923AA0C02B1C574E006028AF /* PopBar.swift */; };
+		929020D02B3A911300AFBA66 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020CF2B3A911300AFBA66 /* Alert.swift */; };
 		92CBB28F2B19C07100587BED /* MappilogueKit.docc in Sources */ = {isa = PBXBuildFile; fileRef = 92CBB28E2B19C07100587BED /* MappilogueKit.docc */; };
 		92CBB2952B19C07100587BED /* MappilogueKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92CBB28A2B19C07100587BED /* MappilogueKit.framework */; };
 		92CBB29A2B19C07100587BED /* MappilogueKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CBB2992B19C07100587BED /* MappilogueKitTests.swift */; };
@@ -32,8 +33,7 @@
 		92CBB2D82B19EA8800587BED /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CBB2D72B19EA8800587BED /* Color+Extension.swift */; };
 		92CBB2DA2B19EB4D00587BED /* CalendarColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CBB2D92B19EB4D00587BED /* CalendarColor+Extension.swift */; };
 		92D019B42B1A1A9E009C7C3D /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92D019B32B1A1A9E009C7C3D /* Icons.xcassets */; };
-		92D019B82B1AE37A009C7C3D /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D019B72B1AE37A009C7C3D /* AlertViewController.swift */; };
-		92D019BA2B1AE3A0009C7C3D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D019B92B1AE3A0009C7C3D /* Alert.swift */; };
+		92D019B82B1AE37A009C7C3D /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D019B72B1AE37A009C7C3D /* AlertView.swift */; };
 		92E3F40E2B1C804500E03C15 /* AddScheduleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F40D2B1C804500E03C15 /* AddScheduleButton.swift */; };
 		92E3F4122B1CC3B100E03C15 /* WriteRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F4112B1CC3B100E03C15 /* WriteRecordButton.swift */; };
 		92E3F4152B1CC48D00E03C15 /* CALayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F4142B1CC48D00E03C15 /* CALayer+Extension.swift */; };
@@ -42,10 +42,9 @@
 		92E3F4242B1CD84D00E03C15 /* ScheduleTitleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F4232B1CD84D00E03C15 /* ScheduleTitleTextField.swift */; };
 		92E3F4262B1CD9D200E03C15 /* ColorSelectionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F4252B1CD9D200E03C15 /* ColorSelectionButton.swift */; };
 		92E3F4282B1CDC6C00E03C15 /* MyRecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F4272B1CDC6C00E03C15 /* MyRecordButton.swift */; };
-		92E3F42E2B1CE5E500E03C15 /* InputModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F42D2B1CE5E500E03C15 /* InputModalViewController.swift */; };
 		92E3F4312B1CE6A200E03C15 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F4302B1CE6A200E03C15 /* UITextField+Extension.swift */; };
 		92E3F4342B1CE80300E03C15 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F4332B1CE80300E03C15 /* SearchBar.swift */; };
-		92E3F4372B1CEA0B00E03C15 /* EditBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F4362B1CEA0B00E03C15 /* EditBottomSheetViewController.swift */; };
+		92E3F4372B1CEA0B00E03C15 /* EditBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F4362B1CEA0B00E03C15 /* EditBottomSheetView.swift */; };
 		92E3F44B2B1DE68F00E03C15 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F44A2B1DE68F00E03C15 /* ModalViewController.swift */; };
 		92E3F44D2B1DF97B00E03C15 /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F44C2B1DF97B00E03C15 /* SearchTextField.swift */; };
 		92E3F44F2B1DFAA400E03C15 /* FindMarkersButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E3F44E2B1DFAA400E03C15 /* FindMarkersButton.swift */; };
@@ -81,6 +80,7 @@
 		923AA0BE2B1C574E006028AF /* DismissSaveBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissSaveBar.swift; sourceTree = "<group>"; };
 		923AA0BF2B1C574E006028AF /* NotificationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationBar.swift; sourceTree = "<group>"; };
 		923AA0C02B1C574E006028AF /* PopBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopBar.swift; sourceTree = "<group>"; };
+		929020CF2B3A911300AFBA66 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		92CBB28A2B19C07100587BED /* MappilogueKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MappilogueKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		92CBB28D2B19C07100587BED /* MappilogueKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MappilogueKit.h; sourceTree = "<group>"; };
 		92CBB28E2B19C07100587BED /* MappilogueKit.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = MappilogueKit.docc; sourceTree = "<group>"; };
@@ -91,8 +91,7 @@
 		92CBB2D72B19EA8800587BED /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		92CBB2D92B19EB4D00587BED /* CalendarColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarColor+Extension.swift"; sourceTree = "<group>"; };
 		92D019B32B1A1A9E009C7C3D /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
-		92D019B72B1AE37A009C7C3D /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
-		92D019B92B1AE3A0009C7C3D /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		92D019B72B1AE37A009C7C3D /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		92E3F40D2B1C804500E03C15 /* AddScheduleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleButton.swift; sourceTree = "<group>"; };
 		92E3F4112B1CC3B100E03C15 /* WriteRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordButton.swift; sourceTree = "<group>"; };
 		92E3F4142B1CC48D00E03C15 /* CALayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extension.swift"; sourceTree = "<group>"; };
@@ -101,10 +100,9 @@
 		92E3F4232B1CD84D00E03C15 /* ScheduleTitleTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTitleTextField.swift; sourceTree = "<group>"; };
 		92E3F4252B1CD9D200E03C15 /* ColorSelectionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectionButton.swift; sourceTree = "<group>"; };
 		92E3F4272B1CDC6C00E03C15 /* MyRecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordButton.swift; sourceTree = "<group>"; };
-		92E3F42D2B1CE5E500E03C15 /* InputModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputModalViewController.swift; sourceTree = "<group>"; };
 		92E3F4302B1CE6A200E03C15 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		92E3F4332B1CE80300E03C15 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
-		92E3F4362B1CEA0B00E03C15 /* EditBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBottomSheetViewController.swift; sourceTree = "<group>"; };
+		92E3F4362B1CEA0B00E03C15 /* EditBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBottomSheetView.swift; sourceTree = "<group>"; };
 		92E3F44A2B1DE68F00E03C15 /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
 		92E3F44C2B1DF97B00E03C15 /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
 		92E3F44E2B1DFAA400E03C15 /* FindMarkersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindMarkersButton.swift; sourceTree = "<group>"; };
@@ -313,8 +311,8 @@
 		92D019B62B1A2B3B009C7C3D /* Alert */ = {
 			isa = PBXGroup;
 			children = (
-				92D019B92B1AE3A0009C7C3D /* Alert.swift */,
-				92D019B72B1AE37A009C7C3D /* AlertViewController.swift */,
+				929020CF2B3A911300AFBA66 /* Alert.swift */,
+				92D019B72B1AE37A009C7C3D /* AlertView.swift */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -340,7 +338,6 @@
 			isa = PBXGroup;
 			children = (
 				92E3F44A2B1DE68F00E03C15 /* ModalViewController.swift */,
-				92E3F42D2B1CE5E500E03C15 /* InputModalViewController.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -366,7 +363,7 @@
 		92E3F4352B1CE9F000E03C15 /* BottomSheet */ = {
 			isa = PBXGroup;
 			children = (
-				92E3F4362B1CEA0B00E03C15 /* EditBottomSheetViewController.swift */,
+				92E3F4362B1CEA0B00E03C15 /* EditBottomSheetView.swift */,
 			);
 			path = BottomSheet;
 			sourceTree = "<group>";
@@ -497,7 +494,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				92E3F4122B1CC3B100E03C15 /* WriteRecordButton.swift in Sources */,
-				92E3F42E2B1CE5E500E03C15 /* InputModalViewController.swift in Sources */,
 				92E3F4562B1E063E00E03C15 /* MainLocationButton.swift in Sources */,
 				92E3F4532B1DFC8E00E03C15 /* SaveRecordButton.swift in Sources */,
 				923AA0A72B1B6F1E006028AF /* Icons.swift in Sources */,
@@ -506,7 +502,7 @@
 				923AA09F2B1B4B68006028AF /* AddButton.swift in Sources */,
 				923AA0C52B1C574E006028AF /* PopBar.swift in Sources */,
 				92E3F44B2B1DE68F00E03C15 /* ModalViewController.swift in Sources */,
-				92E3F4372B1CEA0B00E03C15 /* EditBottomSheetViewController.swift in Sources */,
+				92E3F4372B1CEA0B00E03C15 /* EditBottomSheetView.swift in Sources */,
 				92E3F40E2B1C804500E03C15 /* AddScheduleButton.swift in Sources */,
 				923AA0AD2B1B7406006028AF /* LogoNotificationBar.swift in Sources */,
 				92E3F4182B1CC64A00E03C15 /* MainLocationView.swift in Sources */,
@@ -514,7 +510,7 @@
 				923AA0C12B1C574E006028AF /* PopMenuBar.swift in Sources */,
 				923AA0C32B1C574E006028AF /* DismissSaveBar.swift in Sources */,
 				92E3F41B2B1CCB9500E03C15 /* MarkView.swift in Sources */,
-				92D019B82B1AE37A009C7C3D /* AlertViewController.swift in Sources */,
+				92D019B82B1AE37A009C7C3D /* AlertView.swift in Sources */,
 				92E3F44F2B1DFAA400E03C15 /* FindMarkersButton.swift in Sources */,
 				92E3F4152B1CC48D00E03C15 /* CALayer+Extension.swift in Sources */,
 				92E3F4262B1CD9D200E03C15 /* ColorSelectionButton.swift in Sources */,
@@ -534,8 +530,8 @@
 				92E3F4512B1DFBCB00E03C15 /* MarkerView.swift in Sources */,
 				923AA09B2B1B3D59006028AF /* KakaoLoginButton.swift in Sources */,
 				923AA0AA2B1B71DA006028AF /* UIImage+Extension.swift in Sources */,
+				929020D02B3A911300AFBA66 /* Alert.swift in Sources */,
 				92CBB2C32B19C4B600587BED /* UIColor+Extension.swift in Sources */,
-				92D019BA2B1AE3A0009C7C3D /* Alert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

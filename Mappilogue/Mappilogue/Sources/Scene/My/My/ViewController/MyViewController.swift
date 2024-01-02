@@ -84,9 +84,7 @@ class MyViewController: NavigationBarViewController {
     }
     
     @objc func presentWithdrawalConfirmationAlert() {
-        let withdrawalCompletedAlertViewController = WithdrawalCompletedAlertViewController()
-        withdrawalCompletedAlertViewController.modalPresentationStyle = .overCurrentContext
-        present(withdrawalCompletedAlertViewController, animated: false)
+        coordinator?.showWithdrawalCompletedAlertViewController()
     }
 }
 
@@ -193,19 +191,16 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     private func presentLogoutAlert() {
-        let alertViewController = AlertViewController()
-        alertViewController.modalPresentationStyle = .overFullScreen
         let alert = Alert(titleText: "로그아웃 할까요?",
                           messageText: nil,
                           cancelText: "취소",
                           doneText: "확인",
                           buttonColor: .green2EBD3D,
                           alertHeight: 140)
-        alertViewController.configureAlert(with: alert)
-        alertViewController.onDoneTapped = {
-            self.logout()
-        }
-        present(alertViewController, animated: false)
+//        alertViewController.onDoneTapped = {
+//            self.logout()
+//        }
+        coordinator?.showLogoutAlert(alert: alert)
      }
     
     private func presentWithdrawalAlert() {
@@ -234,8 +229,6 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func presentLoginViewController() {
-        let loginViewController = LoginViewController()
-        loginViewController.modalPresentationStyle = .fullScreen
-        present(loginViewController, animated: false)
+        coordinator?.showLoginViewController()
     }
 }

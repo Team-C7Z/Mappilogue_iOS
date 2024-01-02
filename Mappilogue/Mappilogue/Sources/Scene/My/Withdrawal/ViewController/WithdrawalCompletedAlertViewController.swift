@@ -8,6 +8,7 @@
 import UIKit
 
 class WithdrawalCompletedAlertViewController: BaseViewController {
+    weak var coordinator: WithdrawalCompletedAlertDelegate?
     
     private let alertView = UIView()
     private let titleLabel = UILabel()
@@ -69,12 +70,6 @@ class WithdrawalCompletedAlertViewController: BaseViewController {
     }
     
     @objc func goToLogin() {
-        presentLoginViewController()
-    }
-    
-    private func presentLoginViewController() {
-        let loginViewController = LoginViewController()
-        loginViewController.modalPresentationStyle = .fullScreen
-        present(loginViewController, animated: false)
+        coordinator?.showLoginViewController()
     }
 }

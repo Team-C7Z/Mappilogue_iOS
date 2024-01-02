@@ -215,7 +215,7 @@
 		92901FA02B2753D500AFBA66 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92901F9F2B2753D500AFBA66 /* OnboardingCoordinator.swift */; };
 		92901FA22B275B2900AFBA66 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92901FA12B275B2900AFBA66 /* LoginCoordinator.swift */; };
 		92901FA42B275BFF00AFBA66 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92901FA32B275BFF00AFBA66 /* TabBarCoordinator.swift */; };
-		929020362B2C257000AFBA66 /* SignUpCompletionCoordinatorCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020352B2C257000AFBA66 /* SignUpCompletionCoordinatorCoordinator.swift */; };
+		929020362B2C257000AFBA66 /* SignUpCompletionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020352B2C257000AFBA66 /* SignUpCompletionCoordinator.swift */; };
 		929020392B2C8F4500AFBA66 /* mappilogue_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 929020382B2C8F4400AFBA66 /* mappilogue_logo.png */; };
 		9290203E2B2D9D3800AFBA66 /* SelectPermissionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290203D2B2D9D3800AFBA66 /* SelectPermissionCoordinator.swift */; };
 		929020452B2D9FD200AFBA66 /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020442B2D9FD200AFBA66 /* HomeCoordinator.swift */; };
@@ -224,7 +224,7 @@
 		9290204F2B2DB37500AFBA66 /* RecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290204E2B2DB37500AFBA66 /* RecordCoordinator.swift */; };
 		929020512B2DB37D00AFBA66 /* CalendarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020502B2DB37D00AFBA66 /* CalendarCoordinator.swift */; };
 		929020542B2DE2A400AFBA66 /* GatheringCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020532B2DE2A400AFBA66 /* GatheringCoordinator.swift */; };
-		929020662B2DEEE600AFBA66 /* ScheduleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020652B2DEEE600AFBA66 /* ScheduleCoordinator.swift */; };
+		929020662B2DEEE600AFBA66 /* AddScheduleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020652B2DEEE600AFBA66 /* AddScheduleCoordinator.swift */; };
 		929020682B2DF06D00AFBA66 /* CalendarDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020672B2DF06D00AFBA66 /* CalendarDetailCoordinator.swift */; };
 		9290206B2B2DF44500AFBA66 /* ContentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290206A2B2DF44500AFBA66 /* ContentCoordinator.swift */; };
 		9290206E2B2DF5F200AFBA66 /* WriteRecordListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290206D2B2DF5F200AFBA66 /* WriteRecordListCoordinator.swift */; };
@@ -237,6 +237,31 @@
 		929020992B2F530F00AFBA66 /* WithdrawalCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020982B2F530F00AFBA66 /* WithdrawalCoordinator.swift */; };
 		9290209B2B2F535F00AFBA66 /* WithdrawalAlertCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290209A2B2F535F00AFBA66 /* WithdrawalAlertCoordinator.swift */; };
 		9290209D2B2F750800AFBA66 /* WithdrawalCompletedAlertCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9290209C2B2F750800AFBA66 /* WithdrawalCompletedAlertCoordinator.swift */; };
+		929020A32B38203400AFBA66 /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020A22B38203400AFBA66 /* SearchCoordinator.swift */; };
+		929020A92B3838B500AFBA66 /* CategorySettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020A82B3838B500AFBA66 /* CategorySettingCoordinator.swift */; };
+		929020AB2B383AD600AFBA66 /* MyRecordListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020AA2B383AD600AFBA66 /* MyRecordListCoordinator.swift */; };
+		929020AD2B383F1600AFBA66 /* MyRecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020AC2B383F1600AFBA66 /* MyRecordCoordinator.swift */; };
+		929020AF2B38468F00AFBA66 /* WriteRecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020AE2B38468F00AFBA66 /* WriteRecordCoordinator.swift */; };
+		929020B12B384F0800AFBA66 /* SelectCategoryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020B02B384F0800AFBA66 /* SelectCategoryCoordinator.swift */; };
+		929020B62B3879AB00AFBA66 /* MainLocationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020B52B3879AB00AFBA66 /* MainLocationCoordinator.swift */; };
+		929020B82B387BF000AFBA66 /* MapMainLocationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020B72B387BF000AFBA66 /* MapMainLocationCoordinator.swift */; };
+		929020BA2B387E4500AFBA66 /* SavingRecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020B92B387E4500AFBA66 /* SavingRecordCoordinator.swift */; };
+		929020BE2B388A8600AFBA66 /* DatePickerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020BD2B388A8600AFBA66 /* DatePickerCoordinator.swift */; };
+		929020C02B3937B300AFBA66 /* AddNotificationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020BF2B3937B300AFBA66 /* AddNotificationCoordinator.swift */; };
+		929020C22B393B5400AFBA66 /* CameraCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020C12B393B5400AFBA66 /* CameraCoordinator.swift */; };
+		929020C72B397E2A00AFBA66 /* CapturePhotoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020C62B397E2A00AFBA66 /* CapturePhotoCoordinator.swift */; };
+		929020CA2B3A8ED500AFBA66 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020C92B3A8ED500AFBA66 /* AlertViewController.swift */; };
+		929020D22B3AB7B400AFBA66 /* EditBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020D12B3AB7B400AFBA66 /* EditBottomSheetViewController.swift */; };
+		929020DB2B3E774800AFBA66 /* AddLocationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020DA2B3E774800AFBA66 /* AddLocationCoordinator.swift */; };
+		929020DD2B3E7CA300AFBA66 /* AlertCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020DC2B3E7CA300AFBA66 /* AlertCoordinator.swift */; };
+		929020E02B3E8B9800AFBA66 /* TimePickerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020DF2B3E8B9800AFBA66 /* TimePickerCoordinator.swift */; };
+		929020EA2B3F22D100AFBA66 /* InputModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020E92B3F22D100AFBA66 /* InputModalViewController.swift */; };
+		929020EC2B3F234900AFBA66 /* InputModalCoorinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020EB2B3F234900AFBA66 /* InputModalCoorinator.swift */; };
+		929020EE2B405E1100AFBA66 /* MainLocationAlertCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020ED2B405E1100AFBA66 /* MainLocationAlertCoordinator.swift */; };
+		929020F02B406B9300AFBA66 /* EditCategoryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020EF2B406B9300AFBA66 /* EditCategoryCoordinator.swift */; };
+		929020F82B430FE600AFBA66 /* DeleteCategoryAlertCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020F72B430FE600AFBA66 /* DeleteCategoryAlertCoordinator.swift */; };
+		929020FA2B43113800AFBA66 /* EditBottomSheetCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020F92B43113800AFBA66 /* EditBottomSheetCoordinator.swift */; };
+		929020FC2B43136E00AFBA66 /* ImageDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020FB2B43136E00AFBA66 /* ImageDetailCoordinator.swift */; };
 		929E23152AB737DC003180B3 /* ProfileImageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23142AB737DC003180B3 /* ProfileImageDTO.swift */; };
 		929E23172AB7F6C4003180B3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23162AB7F6C4003180B3 /* Utils.swift */; };
 		929E23192AB81E40003180B3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 929E23182AB81E40003180B3 /* GoogleService-Info.plist */; };
@@ -552,7 +577,7 @@
 		92901F9F2B2753D500AFBA66 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		92901FA12B275B2900AFBA66 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		92901FA32B275BFF00AFBA66 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
-		929020352B2C257000AFBA66 /* SignUpCompletionCoordinatorCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCompletionCoordinatorCoordinator.swift; sourceTree = "<group>"; };
+		929020352B2C257000AFBA66 /* SignUpCompletionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCompletionCoordinator.swift; sourceTree = "<group>"; };
 		929020382B2C8F4400AFBA66 /* mappilogue_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mappilogue_logo.png; sourceTree = "<group>"; };
 		9290203D2B2D9D3800AFBA66 /* SelectPermissionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPermissionCoordinator.swift; sourceTree = "<group>"; };
 		929020442B2D9FD200AFBA66 /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
@@ -561,7 +586,7 @@
 		9290204E2B2DB37500AFBA66 /* RecordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCoordinator.swift; sourceTree = "<group>"; };
 		929020502B2DB37D00AFBA66 /* CalendarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCoordinator.swift; sourceTree = "<group>"; };
 		929020532B2DE2A400AFBA66 /* GatheringCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatheringCoordinator.swift; sourceTree = "<group>"; };
-		929020652B2DEEE600AFBA66 /* ScheduleCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCoordinator.swift; sourceTree = "<group>"; };
+		929020652B2DEEE600AFBA66 /* AddScheduleCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScheduleCoordinator.swift; sourceTree = "<group>"; };
 		929020672B2DF06D00AFBA66 /* CalendarDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDetailCoordinator.swift; sourceTree = "<group>"; };
 		9290206A2B2DF44500AFBA66 /* ContentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCoordinator.swift; sourceTree = "<group>"; };
 		9290206D2B2DF5F200AFBA66 /* WriteRecordListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordListCoordinator.swift; sourceTree = "<group>"; };
@@ -574,6 +599,31 @@
 		929020982B2F530F00AFBA66 /* WithdrawalCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalCoordinator.swift; sourceTree = "<group>"; };
 		9290209A2B2F535F00AFBA66 /* WithdrawalAlertCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalAlertCoordinator.swift; sourceTree = "<group>"; };
 		9290209C2B2F750800AFBA66 /* WithdrawalCompletedAlertCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawalCompletedAlertCoordinator.swift; sourceTree = "<group>"; };
+		929020A22B38203400AFBA66 /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
+		929020A82B3838B500AFBA66 /* CategorySettingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySettingCoordinator.swift; sourceTree = "<group>"; };
+		929020AA2B383AD600AFBA66 /* MyRecordListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordListCoordinator.swift; sourceTree = "<group>"; };
+		929020AC2B383F1600AFBA66 /* MyRecordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordCoordinator.swift; sourceTree = "<group>"; };
+		929020AE2B38468F00AFBA66 /* WriteRecordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRecordCoordinator.swift; sourceTree = "<group>"; };
+		929020B02B384F0800AFBA66 /* SelectCategoryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryCoordinator.swift; sourceTree = "<group>"; };
+		929020B52B3879AB00AFBA66 /* MainLocationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLocationCoordinator.swift; sourceTree = "<group>"; };
+		929020B72B387BF000AFBA66 /* MapMainLocationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMainLocationCoordinator.swift; sourceTree = "<group>"; };
+		929020B92B387E4500AFBA66 /* SavingRecordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingRecordCoordinator.swift; sourceTree = "<group>"; };
+		929020BD2B388A8600AFBA66 /* DatePickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerCoordinator.swift; sourceTree = "<group>"; };
+		929020BF2B3937B300AFBA66 /* AddNotificationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotificationCoordinator.swift; sourceTree = "<group>"; };
+		929020C12B393B5400AFBA66 /* CameraCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraCoordinator.swift; sourceTree = "<group>"; };
+		929020C62B397E2A00AFBA66 /* CapturePhotoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturePhotoCoordinator.swift; sourceTree = "<group>"; };
+		929020C92B3A8ED500AFBA66 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
+		929020D12B3AB7B400AFBA66 /* EditBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBottomSheetViewController.swift; sourceTree = "<group>"; };
+		929020DA2B3E774800AFBA66 /* AddLocationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationCoordinator.swift; sourceTree = "<group>"; };
+		929020DC2B3E7CA300AFBA66 /* AlertCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCoordinator.swift; sourceTree = "<group>"; };
+		929020DF2B3E8B9800AFBA66 /* TimePickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerCoordinator.swift; sourceTree = "<group>"; };
+		929020E92B3F22D100AFBA66 /* InputModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputModalViewController.swift; sourceTree = "<group>"; };
+		929020EB2B3F234900AFBA66 /* InputModalCoorinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputModalCoorinator.swift; sourceTree = "<group>"; };
+		929020ED2B405E1100AFBA66 /* MainLocationAlertCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLocationAlertCoordinator.swift; sourceTree = "<group>"; };
+		929020EF2B406B9300AFBA66 /* EditCategoryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryCoordinator.swift; sourceTree = "<group>"; };
+		929020F72B430FE600AFBA66 /* DeleteCategoryAlertCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCategoryAlertCoordinator.swift; sourceTree = "<group>"; };
+		929020F92B43113800AFBA66 /* EditBottomSheetCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBottomSheetCoordinator.swift; sourceTree = "<group>"; };
+		929020FB2B43136E00AFBA66 /* ImageDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailCoordinator.swift; sourceTree = "<group>"; };
 		929E23142AB737DC003180B3 /* ProfileImageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageDTO.swift; sourceTree = "<group>"; };
 		929E23162AB7F6C4003180B3 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		929E23182AB81E40003180B3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -851,7 +901,7 @@
 		92011C052A74A0FE009B047F /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				9245BC0B2B08C46500383F4D /* Model */,
+				929020A12B38202600AFBA66 /* Coordinator */,
 				92901F652B25974400AFBA66 /* ViewModel */,
 				9245BC0A2B08C45D00383F4D /* ViewController */,
 				9245BC0C2B08C46E00383F4D /* View */,
@@ -942,6 +992,7 @@
 		9224FD402A6563CF000A56A6 /* Location */ = {
 			isa = PBXGroup;
 			children = (
+				929020DE2B3E8B8900AFBA66 /* Coordinator */,
 				92B365A32B22C32700502446 /* ViewModel */,
 				9245BC022B08C3E800383F4D /* ViewController */,
 				9245BC032B08C3F200383F4D /* View */,
@@ -968,6 +1019,7 @@
 		9245BBE32B08827E00383F4D /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				929020A72B3838A600AFBA66 /* Coordinator */,
 				9245BC142B08C65800383F4D /* Model */,
 				9245BBE52B08835900383F4D /* ViewModel */,
 				9245BBE72B088E7F00383F4D /* ViewController */,
@@ -1570,6 +1622,8 @@
 				9245BBE32B08827E00383F4D /* Category */,
 				920031E52A8E1EBC00E3170D /* Content */,
 				9269993D2A14F6F9003DDAD2 /* My */,
+				929020C82B3A8EA800AFBA66 /* Alert */,
+				929020D32B3AB7C800AFBA66 /* Modal */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -1631,7 +1685,6 @@
 		9269993E2A14F71D003DDAD2 /* Record */ = {
 			isa = PBXGroup;
 			children = (
-				929020622B2DE98500AFBA66 /* Coordinator */,
 				92B365E32B240B6700502446 /* Map */,
 				920031E32A8E1E8100E3170D /* BottomSheet */,
 			);
@@ -1717,7 +1770,7 @@
 			isa = PBXGroup;
 			children = (
 				92901FA12B275B2900AFBA66 /* LoginCoordinator.swift */,
-				929020352B2C257000AFBA66 /* SignUpCompletionCoordinatorCoordinator.swift */,
+				929020352B2C257000AFBA66 /* SignUpCompletionCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1750,6 +1803,7 @@
 			isa = PBXGroup;
 			children = (
 				929020502B2DB37D00AFBA66 /* CalendarCoordinator.swift */,
+				929020BD2B388A8600AFBA66 /* DatePickerCoordinator.swift */,
 				929020672B2DF06D00AFBA66 /* CalendarDetailCoordinator.swift */,
 			);
 			path = Coordinator;
@@ -1782,7 +1836,8 @@
 		929020642B2DEEDB00AFBA66 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				929020652B2DEEE600AFBA66 /* ScheduleCoordinator.swift */,
+				929020652B2DEEE600AFBA66 /* AddScheduleCoordinator.swift */,
+				929020BF2B3937B300AFBA66 /* AddNotificationCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1791,6 +1846,7 @@
 			isa = PBXGroup;
 			children = (
 				9290206A2B2DF44500AFBA66 /* ContentCoordinator.swift */,
+				929020FB2B43136E00AFBA66 /* ImageDetailCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1799,6 +1855,11 @@
 			isa = PBXGroup;
 			children = (
 				9290206D2B2DF5F200AFBA66 /* WriteRecordListCoordinator.swift */,
+				929020AE2B38468F00AFBA66 /* WriteRecordCoordinator.swift */,
+				929020B52B3879AB00AFBA66 /* MainLocationCoordinator.swift */,
+				929020B72B387BF000AFBA66 /* MapMainLocationCoordinator.swift */,
+				929020ED2B405E1100AFBA66 /* MainLocationAlertCoordinator.swift */,
+				929020B92B387E4500AFBA66 /* SavingRecordCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1816,6 +1877,8 @@
 			isa = PBXGroup;
 			children = (
 				9290208A2B2F415C00AFBA66 /* ImagePickerCoordinator.swift */,
+				929020C12B393B5400AFBA66 /* CameraCoordinator.swift */,
+				929020C62B397E2A00AFBA66 /* CapturePhotoCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1850,6 +1913,81 @@
 				929020982B2F530F00AFBA66 /* WithdrawalCoordinator.swift */,
 				9290209A2B2F535F00AFBA66 /* WithdrawalAlertCoordinator.swift */,
 				9290209C2B2F750800AFBA66 /* WithdrawalCompletedAlertCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		929020A12B38202600AFBA66 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				929020A22B38203400AFBA66 /* SearchCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		929020A72B3838A600AFBA66 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				929020B22B384F4200AFBA66 /* SelectCategory */,
+				929020B32B384F5200AFBA66 /* MyRecord */,
+				929020B42B384F5E00AFBA66 /* Setting */,
+				9245BC0B2B08C46500383F4D /* Model */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		929020B22B384F4200AFBA66 /* SelectCategory */ = {
+			isa = PBXGroup;
+			children = (
+				929020B02B384F0800AFBA66 /* SelectCategoryCoordinator.swift */,
+			);
+			path = SelectCategory;
+			sourceTree = "<group>";
+		};
+		929020B32B384F5200AFBA66 /* MyRecord */ = {
+			isa = PBXGroup;
+			children = (
+				929020AA2B383AD600AFBA66 /* MyRecordListCoordinator.swift */,
+				929020AC2B383F1600AFBA66 /* MyRecordCoordinator.swift */,
+				929020EF2B406B9300AFBA66 /* EditCategoryCoordinator.swift */,
+				929020F72B430FE600AFBA66 /* DeleteCategoryAlertCoordinator.swift */,
+			);
+			path = MyRecord;
+			sourceTree = "<group>";
+		};
+		929020B42B384F5E00AFBA66 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				929020A82B3838B500AFBA66 /* CategorySettingCoordinator.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		929020C82B3A8EA800AFBA66 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				929020DC2B3E7CA300AFBA66 /* AlertCoordinator.swift */,
+				929020C92B3A8ED500AFBA66 /* AlertViewController.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		929020D32B3AB7C800AFBA66 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				929020EB2B3F234900AFBA66 /* InputModalCoorinator.swift */,
+				929020F92B43113800AFBA66 /* EditBottomSheetCoordinator.swift */,
+				929020D12B3AB7B400AFBA66 /* EditBottomSheetViewController.swift */,
+				929020E92B3F22D100AFBA66 /* InputModalViewController.swift */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
+		929020DE2B3E8B8900AFBA66 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				929020DA2B3E774800AFBA66 /* AddLocationCoordinator.swift */,
+				929020DF2B3E8B9800AFBA66 /* TimePickerCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -2082,6 +2220,7 @@
 		92B365E32B240B6700502446 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				929020622B2DE98500AFBA66 /* Coordinator */,
 				92901F622B258E6400AFBA66 /* ViewModel */,
 				9245BC062B08C42B00383F4D /* ViewController */,
 				9245BC072B08C43100383F4D /* View */,
@@ -2510,6 +2649,7 @@
 				925840D32A7FF39B00997434 /* HomeEmptyScheduleCell.swift in Sources */,
 				925840D22A7FF34000997434 /* MarkedRecord.swift in Sources */,
 				926382B62A6D03850064C1A8 /* CalendarEmptyScheduleCell.swift in Sources */,
+				929020FA2B43113800AFBA66 /* EditBottomSheetCoordinator.swift in Sources */,
 				92011B892A72B4BB009B047F /* WriteContentTextView.swift in Sources */,
 				92011C222A77907F009B047F /* CategoryCell.swift in Sources */,
 				92E3F46F2B1ED63600E03C15 /* CameraViewController.swift in Sources */,
@@ -2522,26 +2662,31 @@
 				92FE26152A4B751000BCDB82 /* BaseCollectionReusableView.swift in Sources */,
 				928B7BE92A9B1C5B00E4F789 /* BaseDTO.swift in Sources */,
 				925840B52A7F2D3B00997434 /* MyCell.swift in Sources */,
+				929020DD2B3E7CA300AFBA66 /* AlertCoordinator.swift in Sources */,
 				92139D7F2AB0B0F7005344AE /* NotificationViewController.swift in Sources */,
 				92011C042A740C16009B047F /* NewCategoryCell.swift in Sources */,
 				920031BF2A8B5CD600E3170D /* MainLocationAlertViewController.swift in Sources */,
 				9245BC2C2B0BBBFF00383F4D /* ScheduleDetailDTO.swift in Sources */,
 				9224FCF52A5D6C65000A56A6 /* DatePickerViewController.swift in Sources */,
 				92BE02722B20376F00632ABA /* ImageDetailViewController.swift in Sources */,
+				929020BE2B388A8600AFBA66 /* DatePickerCoordinator.swift in Sources */,
 				925840D12A7FCE6800997434 /* AddScheduleHeaderView.swift in Sources */,
 				925840A82A7CBF3B00997434 /* CategorySelectionLabelCell.swift in Sources */,
 				928B7BFB2A9DC55600E4F789 /* AuthUserDefaults.swift in Sources */,
 				925840BB2A7F455D00997434 /* NotificationSettingViewController.swift in Sources */,
 				92B365E22B238D5300502446 /* LoginViewModel.swift in Sources */,
 				92011C012A740A08009B047F /* AddNewCategoryCell.swift in Sources */,
+				929020AB2B383AD600AFBA66 /* MyRecordListCoordinator.swift in Sources */,
 				92011B752A7138B0009B047F /* EmptyRecordCell.swift in Sources */,
 				920031D92A8DB50600E3170D /* MyRecordContentHeaderView.swift in Sources */,
 				925840D52A80957900997434 /* AddLocationFooterView.swift in Sources */,
 				92901F612B257E9900AFBA66 /* SelectedNotification.swift in Sources */,
+				929020F82B430FE600AFBA66 /* DeleteCategoryAlertCoordinator.swift in Sources */,
 				92011BFF2A7407D3009B047F /* SelectCategoryViewController.swift in Sources */,
 				925840AE2A7CD17E00997434 /* EditCategoryViewController.swift in Sources */,
 				9200318F2A85FAEA00E3170D /* WithdrawalCompletedAlertViewController.swift in Sources */,
 				92B365E02B23877000502446 /* OnboardingViewModel.swift in Sources */,
+				929020E02B3E8B9800AFBA66 /* TimePickerCoordinator.swift in Sources */,
 				9230BE472A57FEB80053E535 /* DayCell.swift in Sources */,
 				9245BC192B08DA7A00383F4D /* ScheduleType.swift in Sources */,
 				92F00AAF2AF4B53D001FE43F /* CategoryAPI.swift in Sources */,
@@ -2551,6 +2696,7 @@
 				920031AF2A8B5AF600E3170D /* LocationAPI.swift in Sources */,
 				928B7BFF2A9F2D6600E4F789 /* AuthType.swift in Sources */,
 				920031B22A8B5B4C00E3170D /* LocationManager.swift in Sources */,
+				929020B82B387BF000AFBA66 /* MapMainLocationCoordinator.swift in Sources */,
 				926999422A14F74B003DDAD2 /* CalendarViewController.swift in Sources */,
 				9290206B2B2DF44500AFBA66 /* ContentCoordinator.swift in Sources */,
 				929020942B2F4F9600AFBA66 /* InquiryCoordinator.swift in Sources */,
@@ -2560,6 +2706,7 @@
 				9245BBD62B04E40A00383F4D /* DeletedCategory.swift in Sources */,
 				920031F52A92444E00E3170D /* PhotoDirectoryView.swift in Sources */,
 				9224FCEE2A5BEF80000A56A6 /* ScheduleTitleCell.swift in Sources */,
+				929020C72B397E2A00AFBA66 /* CapturePhotoCoordinator.swift in Sources */,
 				925840C72A7F76A500997434 /* WithdrawalAlertViewController.swift in Sources */,
 				920031B82A8B5BC700E3170D /* KakaoAddressDTO.swift in Sources */,
 				92011B782A71683E009B047F /* WriteRecordListRecordViewController.swift in Sources */,
@@ -2582,7 +2729,7 @@
 				9245BC1F2B09CDF300383F4D /* ScheduleViewModel.swift in Sources */,
 				9245BBE02B0873E500383F4D /* ColorAPI.swift in Sources */,
 				92901FA22B275B2900AFBA66 /* LoginCoordinator.swift in Sources */,
-				929020362B2C257000AFBA66 /* SignUpCompletionCoordinatorCoordinator.swift in Sources */,
+				929020362B2C257000AFBA66 /* SignUpCompletionCoordinator.swift in Sources */,
 				929020682B2DF06D00AFBA66 /* CalendarDetailCoordinator.swift in Sources */,
 				92139D792AAD709E005344AE /* MyRecordContentImageCell.swift in Sources */,
 				929020862B2EA9E500AFBA66 /* EditProfileCoordinator.swift in Sources */,
@@ -2597,6 +2744,7 @@
 				928B7C192AA462CE00E4F789 /* TermsOfUseViewController.swift in Sources */,
 				92139D8F2AB1E672005344AE /* LineHeaderView.swift in Sources */,
 				92B365CB2B236D6D00502446 /* TermsOfUseViewModel.swift in Sources */,
+				929020B12B384F0800AFBA66 /* SelectCategoryCoordinator.swift in Sources */,
 				9273C9582ABF2D7800224DE1 /* Schedule.swift in Sources */,
 				92459ED82A52494200493941 /* AddMarkedRecordCell.swift in Sources */,
 				920031ED2A91085300E3170D /* ImagePickerCell.swift in Sources */,
@@ -2604,6 +2752,7 @@
 				925840C32A7F61E800997434 /* InquiryViewController.swift in Sources */,
 				92B365B52B23289B00502446 /* WithdrawalViewModel.swift in Sources */,
 				920032002A9504EE00E3170D /* MaredRecordsFooterView.swift in Sources */,
+				929020CA2B3A8ED500AFBA66 /* AlertViewController.swift in Sources */,
 				9245BC212B0A445C00383F4D /* ScheduleDotCell.swift in Sources */,
 				928B7C222AA83D2000E4F789 /* EditNicknameModalViewController.swift in Sources */,
 				92139D832AB18D50005344AE /* NotificationAnnouncementHeaderView.swift in Sources */,
@@ -2623,19 +2772,23 @@
 				92E3F4102B1CBC7400E03C15 /* WithdrawalNavigationViewController.swift in Sources */,
 				920031F32A92274100E3170D /* LimitedPhotoSelectionView.swift in Sources */,
 				92011C0E2A74C1FC009B047F /* EmptySearchCell.swift in Sources */,
+				929020A32B38203400AFBA66 /* SearchCoordinator.swift in Sources */,
 				925840D92A80D84300997434 /* SelectedNotificationCell.swift in Sources */,
 				9245BBD42B049EAC00383F4D /* DeleteCategoryAlertViewController.swift in Sources */,
 				92FE26132A4B74D800BCDB82 /* ScheduleTypeHeaderView.swift in Sources */,
 				926998F72A14EC07003DDAD2 /* AppDelegate.swift in Sources */,
 				9224FD032A600ACF000A56A6 /* ScheduleDurationView.swift in Sources */,
+				929020FC2B43136E00AFBA66 /* ImageDetailCoordinator.swift in Sources */,
 				92A7B6612A4E2039009C9293 /* BaseTableViewHeaderFooterView.swift in Sources */,
 				92B365C32B2368F100502446 /* InquiryViewModel.swift in Sources */,
 				929020482B2DA07E00AFBA66 /* NotificationCoordinator.swift in Sources */,
 				92011B812A7271D0009B047F /* SelectCategoryButton.swift in Sources */,
 				92011C122A74F8E6009B047F /* SearchRecordCell.swift in Sources */,
 				92139D932AB2C842005344AE /* AnnouncementContentCell.swift in Sources */,
+				929020DB2B3E774800AFBA66 /* AddLocationCoordinator.swift in Sources */,
 				92F00AB32AF4B996001FE43F /* AddCategoryDTO.swift in Sources */,
 				928B7BF52A9CA51500E4F789 /* ErrorDTO.swift in Sources */,
+				929020F02B406B9300AFBA66 /* EditCategoryCoordinator.swift in Sources */,
 				929E23172AB7F6C4003180B3 /* Utils.swift in Sources */,
 				92011B7D2A7174B6009B047F /* DateHeaderView.swift in Sources */,
 				9224FD482A6579ED000A56A6 /* LocationTimeCell.swift in Sources */,
@@ -2645,6 +2798,7 @@
 				92B365CE2B23703200502446 /* NotificationSettingViewModel.swift in Sources */,
 				920031EF2A910F7800E3170D /* PhotoDirectoryPickerButton.swift in Sources */,
 				92011BF92A73D404009B047F /* ColorSelectionView.swift in Sources */,
+				929020AD2B383F1600AFBA66 /* MyRecordCoordinator.swift in Sources */,
 				920031C52A8B5D7D00E3170D /* MapMainLocationViewController.swift in Sources */,
 				92139D8B2AB1BFF8005344AE /* NotificationCell.swift in Sources */,
 				920031D72A8DAFD800E3170D /* ContentViewController.swift in Sources */,
@@ -2652,6 +2806,7 @@
 				920031F82A92467A00E3170D /* PhotoDirectoryCell.swift in Sources */,
 				92B365DD2B2382D000502446 /* PermissionViewModel.swift in Sources */,
 				929020542B2DE2A400AFBA66 /* GatheringCoordinator.swift in Sources */,
+				929020C02B3937B300AFBA66 /* AddNotificationCoordinator.swift in Sources */,
 				920032052A97166700E3170D /* PermissionView.swift in Sources */,
 				926999442A14F756003DDAD2 /* GatheringViewController.swift in Sources */,
 				9200320F2A99A3A800E3170D /* LoginViewController.swift in Sources */,
@@ -2666,6 +2821,7 @@
 				9245BC2A2B0A501900383F4D /* CalendarManager.swift in Sources */,
 				9273C9522ABF040E00224DE1 /* ScheduleAPI.swift in Sources */,
 				920031F12A918B4700E3170D /* ImagePickerNavigationViewController.swift in Sources */,
+				929020EA2B3F22D100AFBA66 /* InputModalViewController.swift in Sources */,
 				9224FD192A616EB1000A56A6 /* ColorCell.swift in Sources */,
 				92A7B6682A4E6154009C9293 /* UpcomingScheduleCell.swift in Sources */,
 				92901F6A2B259A4E00AFBA66 /* MainLocationViewModel.swift in Sources */,
@@ -2695,10 +2851,12 @@
 				9224FCF32A5C5E7A000A56A6 /* WeekCell.swift in Sources */,
 				9224FD4A2A667F7E000A56A6 /* TimePickerViewController.swift in Sources */,
 				920031D12A8B65F000E3170D /* Bundle.swift in Sources */,
+				929020A92B3838B500AFBA66 /* CategorySettingCoordinator.swift in Sources */,
 				9224FD442A657150000A56A6 /* Location.swift in Sources */,
 				926999462A14F75F003DDAD2 /* RecordViewController.swift in Sources */,
 				92011C202A769C12009B047F /* SortHeaderView.swift in Sources */,
-				929020662B2DEEE600AFBA66 /* ScheduleCoordinator.swift in Sources */,
+				929020662B2DEEE600AFBA66 /* AddScheduleCoordinator.swift in Sources */,
+				929020B62B3879AB00AFBA66 /* MainLocationCoordinator.swift in Sources */,
 				92B365DA2B23800700502446 /* MyInfo.swift in Sources */,
 				92E3F4752B1EFB1E00E03C15 /* CameraNavigationBarViewController.swift in Sources */,
 				928B7BF32A9C7B4400E4F789 /* NetworkLoggerPlugin.swift in Sources */,
@@ -2706,10 +2864,12 @@
 				9245BBDA2B05088700383F4D /* UpdatedCategory.swift in Sources */,
 				928B7C1D2AA489F600E4F789 /* NotificationDTO.swift in Sources */,
 				92011B7B2A716C9D009B047F /* SelectScheduleCell.swift in Sources */,
+				929020AF2B38468F00AFBA66 /* WriteRecordCoordinator.swift in Sources */,
 				928B7C072A9FA90500E4F789 /* BaseManager.swift in Sources */,
 				920031C12A8B5D0800E3170D /* MainLocationSettingView.swift in Sources */,
 				92011B922A7367E6009B047F /* SelectMainLocationButton.swift in Sources */,
 				92E7814E2A850316000DAACD /* Date.swift in Sources */,
+				929020EE2B405E1100AFBA66 /* MainLocationAlertCoordinator.swift in Sources */,
 				92011CB92A7A1718009B047F /* MyRecordListViewController.swift in Sources */,
 				92E1F6072B20D39900F0C1EE /* Environment.swift in Sources */,
 				925840A42A7C890100997434 /* CategorySelectionCell.swift in Sources */,
@@ -2758,16 +2918,20 @@
 				928B7C1B2AA4784500E4F789 /* TermsOfUserDTO.swift in Sources */,
 				9224FD1B2A61705D000A56A6 /* ColorSelection.swift in Sources */,
 				9273C94E2ABEEFC300224DE1 /* AddScheduleDateType.swift in Sources */,
+				929020EC2B3F234900AFBA66 /* InputModalCoorinator.swift in Sources */,
 				928B7BF72A9CA92F00E4F789 /* ActiveStatus.swift in Sources */,
 				9273C9502ABF040400224DE1 /* ScheduleManager.swift in Sources */,
 				92011CBC2A7A19CA009B047F /* MyRecordCategoryCell.swift in Sources */,
 				9245BBC82AFB926900383F4D /* CategoryViewModel.swift in Sources */,
 				920031D52A8D021000E3170D /* KakaoSerachDTO.swift in Sources */,
 				92F00AB12AF4B897001FE43F /* CategoryManager.swift in Sources */,
+				929020D22B3AB7B400AFBA66 /* EditBottomSheetViewController.swift in Sources */,
 				92901FA02B2753D500AFBA66 /* OnboardingCoordinator.swift in Sources */,
 				92011C182A753AEB009B047F /* CALayer.swift in Sources */,
 				92011B702A70E7D8009B047F /* BottomSheetViewController.swift in Sources */,
+				929020BA2B387E4500AFBA66 /* SavingRecordCoordinator.swift in Sources */,
 				92011B7F2A726031009B047F /* WriteRecordViewController.swift in Sources */,
+				929020C22B393B5400AFBA66 /* CameraCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

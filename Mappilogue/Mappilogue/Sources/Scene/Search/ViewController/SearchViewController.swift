@@ -9,6 +9,7 @@ import UIKit
 import MappilogueKit
 
 class SearchViewController: NavigationBarViewController {
+    weak var coordinator: SearchCoordinator?
     var viewModel = SearchViewModel()
 
     var keyboardHeight: CGFloat = 0
@@ -45,6 +46,9 @@ class SearchViewController: NavigationBarViewController {
         super.setupProperty()
         
         setPopBar(title: "검색")
+        popBar.onPopButtonTapped = {
+            self.coordinator?.popViewController()
+        }
         
         searchBar.configure("장소 또는 기록 검색")
         searchBar.becomeFirstResponder()
@@ -129,6 +133,7 @@ class SearchViewController: NavigationBarViewController {
         default:
             break
         }
+        setSearchButtonDesign()
         collectionView.reloadData()
     }
     

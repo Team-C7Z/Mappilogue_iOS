@@ -202,21 +202,18 @@ class EditProfileViewController: NavigationBarViewController {
     
     func presentGalleyPermissionAlert() {
         DispatchQueue.main.async {
-            let alertViewController = AlertViewController()
-            alertViewController.modalPresentationStyle = .overCurrentContext
             let alert = Alert(titleText: "사진 접근 권한을 허용해 주세요",
                               messageText: "사진 접근 권한을 허용하지 않을 경우\n일부 기능을 사용할 수 없어요",
                               cancelText: "닫기",
                               doneText: "설정으로 이동",
                               buttonColor: .green2EBD3D,
                               alertHeight: 182)
-            alertViewController.configureAlert(with: alert)
-            alertViewController.onDoneTapped = {
-                if let url = URL(string: UIApplication.openSettingsURLString) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                }
-            }
-            self.present(alertViewController, animated: false)
+            self.coordiantor?.showAlertViewController(alert: alert)
+//            alertViewController.onDoneTapped = {
+//                if let url = URL(string: UIApplication.openSettingsURLString) {
+//                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//                }
+//            }
         }
     }
     
@@ -231,7 +228,7 @@ class EditProfileViewController: NavigationBarViewController {
 //                }
 //            }
 //            imagePickerViewController.modalPresentationStyle = .fullScreen
-//            self.navigationController?.pushViewController(imagePickerViewController, animated: false)
+//
             self.coordiantor?.showImagePickerViewController(authStatus: status, isProfile: true)
         }
     }

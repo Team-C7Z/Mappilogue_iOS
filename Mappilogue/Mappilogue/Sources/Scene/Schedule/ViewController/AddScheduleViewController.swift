@@ -9,7 +9,7 @@ import UIKit
 import MappilogueKit
 
 class AddScheduleViewController: NavigationBarViewController {
-    weak var coordinator: ScheduleCoordinator?
+    weak var coordinator: AddScheduleCoordinator?
     private var colorViewModel = ColorViewModel()
     var viewModel = ScheduleViewModel()
     
@@ -103,25 +103,19 @@ class AddScheduleViewController: NavigationBarViewController {
         dismissSaveBar.onSaveButtonTapped = {
             self.viewModel.saveSchedule()
             self.viewModel.onPop = {
-                self.navigationController?.popViewController(animated: true)
+                self.coordinator?.popViewController()
             }
         }
     }
     
     private func presentAlert() {
-        let alertViewController = AlertViewController()
-        alertViewController.modalPresentationStyle = .overCurrentContext
         let alert = Alert(titleText: "일정 작성을 중단할까요?",
                           messageText: "저장하지 않은 일정은 사라져요",
                           cancelText: "취소",
                           doneText: "나가기",
                           buttonColor: .redF14C4C,
                           alertHeight: 160)
-        alertViewController.configureAlert(with: alert)
-        alertViewController.onDoneTapped = {
-            self.navigationController?.popViewController(animated: true)
-        }
-        present(alertViewController, animated: false)
+        coordinator?.showAlertViewController(alert: alert)
     }
 
     func setSelectedDate() {
@@ -206,51 +200,55 @@ class AddScheduleViewController: NavigationBarViewController {
     }
 
     func navigateToNotificationViewController() {
-        let addNotificationViewController = AddNotificationViewController()
-        addNotificationViewController.viewModel.onNotificationSelected = { alarmOptions in
-            self.viewModel.schedule.alarmOptions = alarmOptions
-        }
-        navigationController?.pushViewController(addNotificationViewController, animated: true)
+        coordinator?.showAddNotificationViewController()
+//        addNotificationViewController.viewModel.onNotificationSelected = { alarmOptions in
+//            self.viewModel.schedule.alarmOptions = alarmOptions
+//        }
+        
     }
     
     func presentAddLocationController() {
-        let addLocationViewController = AddLocationViewController()
-        addLocationViewController.modalPresentationStyle = .overFullScreen
-        addLocationViewController.onLocationSelected = { location in
-            self.viewModel.selectLocation(location)
-            self.collectionView.reloadData()
-        }
-        present(addLocationViewController, animated: false)
+//        addLocationViewController.onLocationSelected = { location in
+//            self.viewModel.selectLocation(location)
+//            self.collectionView.reloadData()
+//        }
+//        DispatchQueue.main.async {
+//            self.coordinator?.showAddLocationViewController()
+//        }
+//        
+//
+//        addLocationViewController.onLocationSelected = { location in
+//            self.viewModel.selectLocation(location)
+//            self.collectionView.reloadData()
+//        }
+        
+        coordinator?.showAddLocationViewController()
+
     }
     
     func presentTimePicker(indexPath: IndexPath) {
-        let timePickerViewController = TimePickerViewController()
         let selectedTime = viewModel.area[indexPath.section].value[indexPath.row].time
-        timePickerViewController.selectedTime = viewModel.setSelectedTime(selectedTime: selectedTime)
-        timePickerViewController.modalPresentationStyle = .overFullScreen
-        timePickerViewController.onSelectedTime = { selectedTime in
-            self.viewModel.area[indexPath.section].value[indexPath.row].time = self.viewModel.formatTime(selectedTime)
-            self.collectionView.reloadData()
-        }
-        present(timePickerViewController, animated: false)
+//        timePickerViewController.onSelectedTime = { selectedTime in
+//            self.viewModel.area[indexPath.section].value[indexPath.row].time = self.viewModel.formatTime(selectedTime)
+//            self.collectionView.reloadData()
+//        }
+        coordinator?.showTimePickerViewController(selectedTime: viewModel.setSelectedTime(selectedTime: selectedTime))
     }
     
     func presentDeleteLocationAlert() {
         guard !viewModel.selectedLocations.isEmpty else { return }
-        
-        let alertViewController = AlertViewController()
+
         let alert = Alert(titleText: "선택한 장소를 삭제할까요?",
                           cancelText: "취소",
                           doneText: "삭제",
                           buttonColor: .redF14C4C,
                           alertHeight: 140)
-        alertViewController.configureAlert(with: alert)
-        alertViewController.modalPresentationStyle = .overCurrentContext
-        alertViewController.onDoneTapped = {
-            self.viewModel.deleteSelectedLocations()
-            self.collectionView.reloadData()
-        }
-        self.present(alertViewController, animated: false)
+//        alertViewController.onDoneTapped = {
+//            self.viewModel.deleteSelectedLocations()
+//            self.collectionView.reloadData()
+//        }
+        
+        coordinator?.showAlertViewController(alert: alert)
     }
 }
 

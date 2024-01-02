@@ -103,9 +103,8 @@ class CalendarDetailViewController: ModalViewController {
             self.addScheduleButton.frame.origin.y = self.addButtonLocation?.minY ?? 0
             self.view.layoutIfNeeded()
         }, completion: { _ in
-            self.dismiss(animated: false) {
-                NotificationCenter.default.post(name: Notification.Name("DismissScheduleViewController"), object: nil)
-            }
+            NotificationCenter.default.post(name: Notification.Name("DismissScheduleViewController"), object: nil)
+            self.coordinator?.dismissViewController()
         })
     }
     
@@ -139,32 +138,30 @@ class CalendarDetailViewController: ModalViewController {
     }
     
     @objc func addScheduleButtonTapped(_ sender: UIButton) {
-        dismiss(animated: false) {
-            self.onAddScheduleButtonTapped?(nil)
-        }
+        onAddScheduleButtonTapped?(nil)
+        coordinator?.dismissViewController()
     }
     
     private func presentEditScheduleViewController() {
-        let editViewController = EditBottomSheetViewController()
-        editViewController.modalPresentationStyle = .overFullScreen
-        editViewController.configure(modifyTitle: "기록 작성하기",
-                                             deleteTitle: "일정 삭제하기",
-                                             alert: Alert(titleText: "이 일정을 삭제할까요?",
-                                                          messageText: nil,
-                                                          cancelText: "취소",
-                                                          doneText: "삭제",
-                                                          buttonColor: .redF14C4C,
-                                                          alertHeight: 140))
-        editViewController.onModify = { self.presentWriteRecordViewController() }
-        editViewController.onDelete = { self.deleteSchedule() }
-        present(editViewController, animated: false)
+//        let editViewController = EditBottomSheetViewController()
+//        editViewController.modalPresentationStyle = .overFullScreen
+//        editViewController.configure(modifyTitle: "기록 작성하기",
+//                                             deleteTitle: "일정 삭제하기",
+//                                             alert: Alert(titleText: "이 일정을 삭제할까요?",
+//                                                          messageText: nil,
+//                                                          cancelText: "취소",
+//                                                          doneText: "삭제",
+//                                                          buttonColor: .redF14C4C,
+//                                                          alertHeight: 140))
+//        editViewController.onModify = { self.showWriteRecordViewController() }
+//        editViewController.onDelete = { self.deleteSchedule() }
+        coordinator?.showEditScheduleViewController()
     }
     
-    private func presentWriteRecordViewController() {
-        dismiss(animated: false) {
-            guard let index = self.viewModel.selectedScheduleIndex else { return }
-          //  self.onWriteRecordButtonTapped?(self.schedules[index])
-        }
+    private func showWriteRecordViewController() {
+        guard let index = self.viewModel.selectedScheduleIndex else { return }
+        //  self.onWriteRecordButtonTapped?(self.schedules[index])
+        coordinator?.dismissViewController()
     }
     
     private func deleteSchedule() {
@@ -217,6 +214,6 @@ extension CalendarDetailViewController: UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let id = viewModel.schedules.schedulesOnSpecificDate[indexPath.row].scheduleId
         onAddScheduleButtonTapped?(id)
-        dismiss(animated: false)
+        coordinator?.dismissViewController()
     }
 }

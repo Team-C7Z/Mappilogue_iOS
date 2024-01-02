@@ -35,8 +35,8 @@ class HomeCoordinator: AppCoordinator, HomeDelegate {
     }
     
     func showAddScheduleViewController() {
-        let coordinator = ScheduleCoordinator(navigationController: self.navigationController)
-        coordinator.start()
+        let coordinator = AddScheduleCoordinator(navigationController: self.navigationController)
+        coordinator.showAddScheduleViewController(scheduleId: nil)
         self.childCoordinators.append(coordinator)
     }
     

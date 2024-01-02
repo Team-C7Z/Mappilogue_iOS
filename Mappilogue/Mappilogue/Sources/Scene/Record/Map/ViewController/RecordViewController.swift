@@ -10,6 +10,8 @@ import NMapsMap
 import MappilogueKit
 
 class RecordViewController: NavigationBarViewController {
+    weak var coordinator: RecordCoordinator?
+    
     let dummyCategory: [Category] = []
     let dummyRecord: [Record] = dummyRecordData()
     
@@ -67,6 +69,11 @@ class RecordViewController: NavigationBarViewController {
         super.setupProperty()
         
         setNotificationBar(title: "기록")
+        
+        notificationBar.onNotificationButtonTapped = {
+            self.coordinator?.showNotificationController()
+        }
+        
         setMapView()
         setBottomSheetHeight()
      
@@ -79,7 +86,7 @@ class RecordViewController: NavigationBarViewController {
         
         findMarkersButton.isHidden = true
         findMarkersButton.addTarget(self, action: #selector(findMarkersButtonTapped), for: .touchUpInside)
-        myRecordButton.addTarget(self, action: #selector(myRecordButtonTapped), for: .touchUpInside)
+        myRecordButton.addTarget(self, action: #selector(myRecordListButtonTapped), for: .touchUpInside)
         writeRecordButton.addTarget(self, action: #selector(writeRecordButtonTapped), for: .touchUpInside)
     }
     
@@ -250,20 +257,12 @@ class RecordViewController: NavigationBarViewController {
     }
     
     @objc private func searchTextFieldTapped() {
-        let searchViewController = SearchViewController()
-        searchViewController.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(searchViewController, animated: true)
+        coordinator?.showSearchViewController()
     }
     
     private func setSearchTextFieldTapGestue() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(searchTextFieldTapped))
         searchTextField.addGestureRecognizer(tap)
-    }
-    
-    private func navigateToCategorySettingViewController() {
-        let categorySettingViewController = CategorySettingViewController()
-        categorySettingViewController.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(categorySettingViewController, animated: true)
     }
     
     @objc private func currentLocationButtonTapped(_ sender: UIButton) {
@@ -277,16 +276,12 @@ class RecordViewController: NavigationBarViewController {
         getMapLatitudeLongitude()
     }
     
-    @objc private func myRecordButtonTapped() {
-        let myRecordListViewController = MyRecordListViewController()
-        myRecordListViewController.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(myRecordListViewController, animated: true)
+    @objc private func myRecordListButtonTapped() {
+        coordinator?.showMyRecordListViewController()
     }
     
     @objc private func writeRecordButtonTapped() {
-        let selectWriteRecordViewController = WriteRecordListRecordViewController()
-        selectWriteRecordViewController.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(selectWriteRecordViewController, animated: true)
+        coordinator?.showWriteRecordViewController()
     }
     
     private func setBottomSheetViewController() {
@@ -402,21 +397,19 @@ extension RecordViewController: CLLocationManagerDelegate {
     }
     
     func presentLocationPermissionAlert() {
-        let alertViewController = AlertViewController()
-        alertViewController.modalPresentationStyle = .overCurrentContext
         let alert = Alert(titleText: "위치 권한을 허용해 주세요",
                           messageText: "위치 권한을 허용하지 않을 경우\n일부 기능을 사용할 수 없어요",
                           cancelText: "닫기",
                           doneText: "설정으로 이동",
                           buttonColor: .green2EBD3D,
                           alertHeight: 182)
-        alertViewController.configureAlert(with: alert)
-        alertViewController.onDoneTapped = {
-            if let url = URL(string: UIApplication.openSettingsURLString) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            }
-        }
-        present(alertViewController, animated: false)
+//        alertViewController.onDoneTapped = {
+//            if let url = URL(string: UIApplication.openSettingsURLString) {
+//                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//            }
+//        }
+        
+        coordinator?.showAlertViewController(alert: alert)
     }
 }
 
@@ -511,7 +504,7 @@ extension RecordViewController: UICollectionViewDelegate, UICollectionViewDataSo
             
             collectionView.reloadData()
         default:
-            navigateToCategorySettingViewController()
+            coordinator?.showCategorySettingViewController()
         }
     }
 }

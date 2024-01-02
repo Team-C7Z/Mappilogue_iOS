@@ -5,7 +5,7 @@
 //  Created by hyemi on 12/16/23.
 //
 
-import Foundation
+import MappilogueKit
 
 protocol MyDelegate: AnyObject {
     func showEditProfileViewController(_ profile: ProfileDTO?)
@@ -63,8 +63,20 @@ class MyCoordinator: BaseCoordinator, MyDelegate {
         self.childCoordinators.append(coordinator)
     }
     
+    func showLogoutAlert(alert: Alert) {
+        let coordinator = AlertCoordinator(navigationController: self.navigationController)
+        coordinator.showAlert(alert)
+        self.childCoordinators.append(coordinator)
+    }
+    
     func showWithdrawalCompletedAlertViewController() {
         let coordinator = WithdrawalCompletedAlertCoordinator(navigationController: self.navigationController)
+        coordinator.start()
+        self.childCoordinators.append(coordinator)
+    }
+    
+    func showLoginViewController() {
+        let coordinator = LoginCoordinator(navigationController: self.navigationController)
         coordinator.start()
         self.childCoordinators.append(coordinator)
     }

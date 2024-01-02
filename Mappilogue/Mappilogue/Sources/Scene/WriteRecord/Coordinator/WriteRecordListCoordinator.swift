@@ -8,8 +8,8 @@
 import Foundation
 
 protocol WriteRecordListDelegate: AnyObject {
-    // func showNotificationViewController()
-    
+    func popViewController()
+    func showWriteRecordViewController(schedule: Schedule2222)
 }
 
 class WriteRecordListCoordinator: AppCoordinator, WriteRecordListDelegate {
@@ -18,5 +18,16 @@ class WriteRecordListCoordinator: AppCoordinator, WriteRecordListDelegate {
         writeRecordListViewController.hidesBottomBarWhenPushed = true
         writeRecordListViewController.coordinator = self
         navigationController.pushViewController(writeRecordListViewController, animated: false)
+    }
+    
+    func showWriteRecordViewController(schedule: Schedule2222) {
+        let coordinator =
+        WriteRecordCoordinator(navigationController: self.navigationController)
+        coordinator.showWriteRecordViewController(schedule: schedule)
+        self.childCoordinators.append(coordinator)
+    }
+    
+    func popViewController() {
+        navigationController.popViewController(animated: false)
     }
 }

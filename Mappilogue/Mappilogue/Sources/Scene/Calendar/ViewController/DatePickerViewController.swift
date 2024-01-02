@@ -8,6 +8,7 @@
 import UIKit
 
 class DatePickerViewController: BaseViewController {
+    weak var coordinator: DatePickerCoordinator?
     var viewModel = DatePickerViewModel()
  
     weak var delegate: ChangedDateDelegate?
@@ -68,10 +69,9 @@ class DatePickerViewController: BaseViewController {
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
             self.datePickerOuterView.frame.origin.y = 0
         }, completion: { _ in
-            self.dismiss(animated: false) {
-                guard let date = self.viewModel.selectedDate else { return }
-                self.delegate?.chagedDate(date)
-            }
+            guard let date = self.viewModel.selectedDate else { return }
+            self.delegate?.chagedDate(date)
+            self.coordinator?.dismissViewController()
         })
     }
 

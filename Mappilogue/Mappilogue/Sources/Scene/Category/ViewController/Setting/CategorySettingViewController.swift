@@ -9,7 +9,9 @@ import UIKit
 import MappilogueKit
 
 class CategorySettingViewController: NavigationBarViewController {
+    weak var coordinator: CategorySettingCoordinator?
     private var categoryViewModel = CategoryViewModel()
+    
     var categories: [Category] = []
     
     private lazy var collectionView: UICollectionView = {
@@ -41,6 +43,10 @@ class CategorySettingViewController: NavigationBarViewController {
          super.setupProperty()
          
          setPopBar(title: "카테고리 설정")
+         
+         popBar.onPopButtonTapped = {
+             self.coordinator?.popViewController()
+         }
      }
      
      override func setupHierarchy() {
@@ -183,12 +189,10 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
     }
     
     private func presentInputAlertViewController() {
-        let inputAlertViewController = InputModalViewController()
-        inputAlertViewController.modalPresentationStyle = .overCurrentContext
-        inputAlertViewController.onCompletionTapped = { inputText in
-            self.categoryViewModel.addCategory(title: inputText)
-        }
-        present(inputAlertViewController, animated: false)
+        coordinator?.showInputModalViewController()
+//        inputAlertViewController.onCompletionTapped = { inputText in
+//            self.categoryViewModel.addCategory(title: inputText)
+//        }
     }
     
     private func isIndexPathValid(_ indexPath: IndexPath) -> Bool {

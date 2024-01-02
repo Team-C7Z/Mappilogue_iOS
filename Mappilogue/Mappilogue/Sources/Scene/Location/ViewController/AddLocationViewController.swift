@@ -9,6 +9,7 @@ import UIKit
 import MappilogueKit
 
 class AddLocationViewController: BaseViewController {
+    weak var coordinator: AddLocationCoordinator?
     private var viewModel = LocationViewModel()
     
     var onLocationSelected: ((KakaoSearchPlaces) -> Void)?
@@ -83,7 +84,7 @@ class AddLocationViewController: BaseViewController {
             return
         }
 
-        dismiss(animated: false)
+        coordinator?.dismissViewController()
     }
     
     func loadSearchPlace(_ search: String) {
@@ -153,9 +154,8 @@ extension AddLocationViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let location = viewModel.searchPlaces[indexPath.row]
         
-        dismiss(animated: false) {
-            self.onLocationSelected?(location)
-        }
+        onLocationSelected?(location)
+        coordinator?.dismissViewController()
     }
 }
 

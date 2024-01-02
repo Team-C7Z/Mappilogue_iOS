@@ -9,6 +9,7 @@ import UIKit
 import MappilogueKit
 
 class CalendarViewController: NavigationBarViewController {
+    weak var coordinator: CalendarCoordinator?
     private var viewModel = CalendarViewModel()
 
     private let currentDateButton = UIButton()
@@ -52,6 +53,10 @@ class CalendarViewController: NavigationBarViewController {
         super.setupProperty()
         
         setNotificationBar(title: "캘린더")
+        notificationBar.onNotificationButtonTapped = {
+            self.coordinator?.showNotificationViewController()
+        }
+        
         setCalendarDate()
         
         currentDateButton.addTarget(self, action: #selector(changeDateButtonTapped), for: .touchUpInside)
@@ -128,11 +133,7 @@ class CalendarViewController: NavigationBarViewController {
     }
     
     @objc func changeDateButtonTapped(_ sender: UIButton) {
-        let datePickerViewController = DatePickerViewController()
-        datePickerViewController.viewModel.selectedDate = viewModel.selectedDate
-        datePickerViewController.delegate = self
-        datePickerViewController.modalPresentationStyle = .overCurrentContext
-        present(datePickerViewController, animated: false)
+        coordinator?.showDatePickerViewController(date: viewModel.selectedDate)
         
         chageDatePickerMode()
     }
@@ -144,26 +145,19 @@ class CalendarViewController: NavigationBarViewController {
     @objc func presentScheduleViewContoller(_ notification: Notification) {
         addScheduleButton.isHidden = true
         if let date = notification.object as? String {
-            let calendarDetailViewController = CalendarDetailViewController()
-            calendarDetailViewController.viewModel.date = date
-            calendarDetailViewController.addButtonLocation = addScheduleButton.frame
-//            scheduleDetailViewController.onWriteRecordButtonTapped = { schedule in
-//                self.navigationToWriteRecordViewController(schedule)
-//            }
-            calendarDetailViewController.onAddScheduleButtonTapped = { id in
-                self.viewModel.scheduleId = id
-                self.navigationToAddScheduleViewController()
-            }
-            calendarDetailViewController.modalPresentationStyle = .overFullScreen
-            present(calendarDetailViewController, animated: false)
+            coordinator?.showCalendarDetailViewController(date: date, frame: addScheduleButton.frame)
+            //            scheduleDetailViewController.onWriteRecordButtonTapped = { schedule in
+            //                self.navigationToWriteRecordViewController(schedule)
+            //            }
+            //            calendarDetailViewController.onAddScheduleButtonTapped = { id in
+            //                self.viewModel.scheduleId = id
+            //                self.navigationToAddScheduleViewController()
+            //            }
         }
     }
     
     func navigationToWriteRecordViewController(_ schedule: Schedule2222) {
-        let writeRecordViewController = WriteRecordViewController()
-        writeRecordViewController.hidesBottomBarWhenPushed = true
-        writeRecordViewController.schedule = schedule
-        navigationController?.pushViewController(writeRecordViewController, animated: true)
+        coordinator?.showWriteRecordViewController(schedule: schedule)
     }
     
     @objc func dismissScheduleViewController(_ notification: Notification) {
@@ -172,10 +166,8 @@ class CalendarViewController: NavigationBarViewController {
     
     @objc func navigationToAddScheduleViewController() {
         addScheduleButton.isHidden = false
-        let addScheduleViewController = AddScheduleViewController()
-        addScheduleViewController.hidesBottomBarWhenPushed = true
-        addScheduleViewController.viewModel.scheduleId = viewModel.scheduleId
-        navigationController?.pushViewController(addScheduleViewController, animated: true)
+
+        coordinator?.showAddScheduleViewController(scheduleId: viewModel.scheduleId)
     }
 }
 
