@@ -18,6 +18,12 @@ class SelectCategoryCoordinator: AppCoordinator, SelectCategoryDelegate {
         navigationController.pushViewController(selectCategoryViewController, animated: false)
     }
     
+    func showInputModalViewController() {
+        let coordinator = InputModalCoordinator(navigationController: self.navigationController)
+        coordinator.start()
+        self.childCoordinators.append(coordinator)
+    }
+    
     func popViewController() {
         navigationController.popViewController(animated: false)
     }

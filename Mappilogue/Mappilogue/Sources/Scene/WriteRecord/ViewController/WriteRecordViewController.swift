@@ -114,22 +114,20 @@ class WriteRecordViewController: NavigationBarViewController {
     }
     
     func presentAlert() {
-        let alertViewController = AlertViewController()
-        alertViewController.modalPresentationStyle = .overCurrentContext
         let alert = Alert(titleText: "이 기록을 임시저장할까요?",
                           messageText: "쓰기 버튼을 다시 누르면 불러올 수 있어요",
                           cancelText: "삭제",
                           doneText: "임시저장",
                           buttonColor: .green2EBD3D,
                           alertHeight: 161)
-        alertViewController.configureAlert(with: alert)
-        alertViewController.onCancelTapped = {
-            self.navigationController?.popViewController(animated: true)
-        }
-        alertViewController.onDoneTapped = {
-            self.navigationController?.popViewController(animated: true)
-        }
-        present(alertViewController, animated: false)
+        coordinator?.showAlertViewController(alert: alert)
+//        alertViewController.onCancelTapped = {
+//            self.coordinator?.popViewController()
+//        }
+//        alertViewController.onDoneTapped = {
+//            self.coordinator?.popViewController()
+//        }
+
     }
     
     @objc func categoryButtonTapped() {
@@ -209,17 +207,17 @@ class WriteRecordViewController: NavigationBarViewController {
     private func checkAlbumPermission() {
         switch PHPhotoLibrary.authorizationStatus(for: .readWrite) {
         case .limited:
-            pushImagePickerViewController(.limited)
+            showImagePickerViewController(.limited)
         case .authorized:
-            pushImagePickerViewController(.authorized)
+            showImagePickerViewController(.authorized)
         case .denied, .restricted:
             presentGalleyPermissionAlert()
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
                 if status == .limited {
-                    self.pushImagePickerViewController(.limited)
+                    self.showImagePickerViewController(.limited)
                 } else if status == .authorized {
-                    self.pushImagePickerViewController(.authorized)
+                    self.showImagePickerViewController(.authorized)
                 } else {
                     self.presentGalleyPermissionAlert()
                 }
@@ -230,7 +228,7 @@ class WriteRecordViewController: NavigationBarViewController {
         }
     }
 
-    func pushImagePickerViewController(_ status: PHAuthorizationStatus) {
+    func showImagePickerViewController(_ status: PHAuthorizationStatus) {
         DispatchQueue.main.async {
             self.coordinator?.showImagePickerViewController(authStatus: status, isProfile: false)
 //            imagePickerViewController.onCompletion = { assets in
@@ -242,21 +240,18 @@ class WriteRecordViewController: NavigationBarViewController {
     
     func presentGalleyPermissionAlert() {
         DispatchQueue.main.async {
-            let alertViewController = AlertViewController()
-            alertViewController.modalPresentationStyle = .overCurrentContext
             let alert = Alert(titleText: "사진 접근 권한을 허용해 주세요",
                               messageText: "사진 접근 권한을 허용하지 않을 경우\n일부 기능을 사용할 수 없어요",
                               cancelText: "닫기",
                               doneText: "설정으로 이동",
                               buttonColor: .green2EBD3D,
                               alertHeight: 182)
-            alertViewController.configureAlert(with: alert)
-            alertViewController.onDoneTapped = {
-                if let url = URL(string: UIApplication.openSettingsURLString) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                }
-            }
-            self.present(alertViewController, animated: false)
+            self.coordinator?.showGalleyPermissionAlertViewController(alert: alert)
+//            alertViewController.onDoneTapped = {
+//                if let url = URL(string: UIApplication.openSettingsURLString) {
+//                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//                }
+//            }
         }
     }
     
@@ -265,17 +260,7 @@ class WriteRecordViewController: NavigationBarViewController {
     }
     
     @objc func saveRecordButtonTapped() {
-        coordinator?.showSavingRecordViewController()
-//        savingRecordViewController.onSaveComplete = {
-//            self.navigateToRecordContentViewController()
-//        }
-    }
-    
-    private func navigateToRecordContentViewController() {
-        let myRecordContentViewController = ContentViewController()
-        myRecordContentViewController.isNewWrite = true
-        myRecordContentViewController.schedule = schedule
-        navigationController?.pushViewController(myRecordContentViewController, animated: true)
+        coordinator?.showSavingRecordViewController(isNewWrite: true, schedule: schedule)
     }
 }
 

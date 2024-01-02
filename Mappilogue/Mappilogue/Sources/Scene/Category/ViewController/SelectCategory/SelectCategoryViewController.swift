@@ -110,19 +110,17 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
             let status = ActiveStatus.active.rawValue
             self.categories.append(Category(id: 0, title: "새로운 카테고리", isMarkedInMap: .inactive, markCount: 0))
             collectionView.reloadData()
-            
-            let inputAlertViewController = InputModalViewController()
-            inputAlertViewController.modalPresentationStyle = .overCurrentContext
-            inputAlertViewController.onCancelTapped = {
-                self.categories.removeLast()
-                collectionView.reloadData()
-            }
-            inputAlertViewController.onCompletionTapped = { inputText in
-                self.categoryViewModel.addCategory(title: inputText)
-                self.categories[self.categories.count-1].title = inputText
-                self.collectionView.reloadData()
-            }
-            present(inputAlertViewController, animated: false)
+
+//            inputAlertViewController.onCancelTapped = {
+//                self.categories.removeLast()
+//                collectionView.reloadData()
+//            }
+//            inputAlertViewController.onCompletionTapped = { inputText in
+//                self.categoryViewModel.addCategory(title: inputText)
+//                self.categories[self.categories.count-1].title = inputText
+//                self.collectionView.reloadData()
+//            }
+            coordinator?.showInputModalViewController()
         }
     }
 }

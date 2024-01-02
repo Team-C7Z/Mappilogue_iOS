@@ -87,13 +87,12 @@ class SavingRecordViewController: BaseViewController {
     }
     
     @objc func cancelButtonTapped() {
-        dismiss(animated: false)
+        coordinator?.dismissViewController()
     }
     
     private func dismissViewController() {
         lottieAnimationView.stop()
-        dismiss(animated: false) {
-            self.onSaveComplete?()
-        }
+        onSaveComplete?()
+        dismissViewController()
     }
 }

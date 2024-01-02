@@ -9,6 +9,8 @@ import UIKit
 import MappilogueKit
 
 class DeleteCategoryAlertViewController: BaseViewController {
+    weak var coordinator: DeleteCategoryAlertCoordinator?
+    
     var onCancelTapped: (() -> Void)?
     var onDoneTapped: ((String) -> Void)?
     
@@ -127,15 +129,13 @@ class DeleteCategoryAlertViewController: BaseViewController {
     }
     
     @objc private func cancelButtonTapped(_ sender: UIButton) {
-        dismiss(animated: false) {
-            self.onCancelTapped?()
-        }
+        onCancelTapped?()
+        coordinator?.dismissViewController()
     }
     
     @objc private func deleteButtonTapped(_ sender: UIButton) {
         let option = self.checkButton.isSelected ? "all" : "only"
-        dismiss(animated: false) {
-            self.onDoneTapped?(option)
-        }
+        onDoneTapped?(option)
+        coordinator?.dismissViewController()
     }
 }

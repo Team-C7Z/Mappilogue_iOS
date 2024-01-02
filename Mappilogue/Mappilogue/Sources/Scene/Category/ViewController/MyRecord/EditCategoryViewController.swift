@@ -9,6 +9,7 @@ import UIKit
 import MappilogueKit
 
 class EditCategoryViewController: BaseViewController {
+    weak var coordinator: EditCategoryCoordinator?
     private var categoryViewModel = CategoryViewModel()
     
     var categoryId: Int = 0
@@ -121,49 +122,45 @@ class EditCategoryViewController: BaseViewController {
             guard let touch = touches.first, touch.location(in: view).y < modalView.frame.maxY else {
                 return
             }
-            dismiss(animated: false)
+            coordinator?.dismissViewController()
         }
     }
     
     @objc func modifyCategoryButtonTapped(_ button: UIButton) {
         editMode = false
         
-        let inputAlertViewController = InputModalViewController()
-        inputAlertViewController.modalPresentationStyle = .overCurrentContext
-        inputAlertViewController.configure(categoryName)
-        inputAlertViewController.onCancelTapped = {
-            self.dismiss(animated: false)
-        }
-        inputAlertViewController.onCompletionTapped = { inputText in
-            self.editMode = true
-            
-            let updateCategory = UpdatedCategory(markCategoryId: self.categoryId, title: inputText)
-            self.categoryViewModel.updateCategory(updateCategory: updateCategory)
-            
-            self.dismiss(animated: false)
-        }
-        present(inputAlertViewController, animated: false)
+
+//        inputAlertViewController.onCancelTapped = {
+//            self.dismiss(animated: false)
+//        }
+//        inputAlertViewController.onCompletionTapped = { inputText in
+//            self.editMode = true
+//            
+//            let updateCategory = UpdatedCategory(markCategoryId: self.categoryId, title: inputText)
+//            self.categoryViewModel.updateCategory(updateCategory: updateCategory)
+//            
+//            self.dismiss(animated: false)
+//        }
+        coordinator?.showInputModalViewController()
+    
     }
     
     @objc func deleteCategoryButtonTapped(_ button: UIButton) {
         editMode = false
-        
-        let alertViewController = DeleteCategoryAlertViewController()
-        alertViewController.modalPresentationStyle = .overCurrentContext
-     
-        alertViewController.onCancelTapped = {
-            self.editMode = true
-        }
-        
-        alertViewController.onDoneTapped = { option in
-            self.editMode = true
-            
-            let deleteCategory = DeletedCategory(markCategoryId: self.categoryId, option: option)
-            self.dismiss(animated: false) {
-                self.categoryViewModel.deleteCategory(deleteCategory: deleteCategory)
-                self.onDeleteCategory?()
-            }
-        }
-        present(alertViewController, animated: false)
+
+//        alertViewController.onCancelTapped = {
+//            self.editMode = true
+//        }
+//        
+//        alertViewController.onDoneTapped = { option in
+//            self.editMode = true
+//            
+//            let deleteCategory = DeletedCategory(markCategoryId: self.categoryId, option: option)
+//            self.dismiss(animated: false) {
+//                self.categoryViewModel.deleteCategory(deleteCategory: deleteCategory)
+//                self.onDeleteCategory?()
+//            }
+//        }
+        coordinator?.showDeleatCategoryAlert()
     }
 }

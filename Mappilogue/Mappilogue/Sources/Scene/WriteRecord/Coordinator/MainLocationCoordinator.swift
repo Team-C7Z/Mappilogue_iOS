@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MainLocationDelegate: AnyObject {
-    func showMapMainLocationController()
+    func showMapMainLocationViewController()
     func popViewController()
 }
 
@@ -19,11 +19,17 @@ class MainLocationCoordinator: AppCoordinator, MainLocationDelegate {
         navigationController.pushViewController(mainLocationViewController, animated: false)
     }
     
-    func showMapMainLocationController() {
+    func showMapMainLocationViewController() {
         let coordinator =
-        MapMainLocationCoordinator(navigationController: self.navigationController)
+        MapMainLocationCoordinator(navigationController: navigationController)
         coordinator.start()
-        self.childCoordinators.append(coordinator)
+        childCoordinators.append(coordinator)
+    }
+    
+    func showMainLocationAlertViewController() {
+        let coordinator = MainLocationAlertCoordinator(navigationController: navigationController)
+        coordinator.start()
+        childCoordinators.append(coordinator)
     }
 
     func popViewController() {

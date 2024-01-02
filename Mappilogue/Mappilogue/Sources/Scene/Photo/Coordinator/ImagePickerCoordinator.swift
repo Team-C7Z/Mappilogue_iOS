@@ -5,7 +5,7 @@
 //  Created by hyemi on 12/17/23.
 //
 
-import Foundation
+import MappilogueKit
 import Photos
 
 protocol ImagePickerDelegate: AnyObject {
@@ -31,6 +31,18 @@ class ImagePickerCoordinator: BaseCoordinator, ImagePickerDelegate {
         imagePickerViewController.isProfile = true
         imagePickerViewController.modalPresentationStyle = .fullScreen
         navigationController.pushViewController(imagePickerViewController, animated: false)
+    }
+    
+    func showCameraPermissionAlert(alert: Alert) {
+        let coordinator = AlertCoordinator(navigationController: self.navigationController)
+        coordinator.showAlert(alert)
+        self.childCoordinators.append(coordinator)
+    }
+    
+    func showCameraViewController() {
+        let coordinator = CameraCoordinator(navigationController: self.navigationController)
+        coordinator.start()
+        self.childCoordinators.append(coordinator)
     }
     
     func popViewController(assets: [PHAsset]) {

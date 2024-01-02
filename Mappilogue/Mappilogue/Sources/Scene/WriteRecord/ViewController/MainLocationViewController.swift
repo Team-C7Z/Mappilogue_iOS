@@ -58,7 +58,7 @@ class MainLocationViewController: NavigationBarViewController {
     }
 
     func setLocationButtonTapped() {
-        coordinator?.showMapMainLocationController()
+        coordinator?.showMapMainLocationViewController()
 //        mapMainLocationViewController.onSelectedMapLocation = { address in
 //            self.viewModel.selectMapLocation(address)
 //            self.collectionView.reloadData()
@@ -66,13 +66,12 @@ class MainLocationViewController: NavigationBarViewController {
     }
 
     private func presentMainLocationAlert() {
-        let mainLocationAlertViewController = MainLocationAlertViewController()
-        mainLocationAlertViewController.modalPresentationStyle = .overCurrentContext
-        mainLocationAlertViewController.onCanelTapped = {
-            self.viewModel.selectMainLocation(1)
-            self.collectionView.reloadData()
-        }
-        present(mainLocationAlertViewController, animated: false)
+        coordinator?.showMainLocationAlertViewController()
+//        mainLocationAlertViewController.onCanelTapped = {
+//            self.viewModel.selectMainLocation(1)
+//            self.collectionView.reloadData()
+//        }
+        
     }
 }
 

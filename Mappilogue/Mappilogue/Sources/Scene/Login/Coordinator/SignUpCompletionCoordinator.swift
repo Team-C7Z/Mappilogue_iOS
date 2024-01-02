@@ -1,5 +1,5 @@
 //
-//  SignUpCompletionCoordinator.swift
+//  SignUpCompletion.swift
 //  Mappilogue
 //
 //  Created by hyemi on 12/15/23.

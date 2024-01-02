@@ -8,6 +8,7 @@
 import Foundation
 
 protocol CategorySettingDelegate: AnyObject {
+    func showInputModalViewController()
     func popViewController()
 }
 
@@ -17,6 +18,12 @@ class CategorySettingCoordinator: AppCoordinator, CategorySettingDelegate {
         categorySettingController.hidesBottomBarWhenPushed = true
         categorySettingController.coordinator = self
         navigationController.pushViewController(categorySettingController, animated: false)
+    }
+    
+    func showInputModalViewController() {
+        let coordinator = InputModalCoordinator(navigationController: self.navigationController)
+        coordinator.start()
+        self.childCoordinators.append(coordinator)
     }
     
     func popViewController() {

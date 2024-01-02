@@ -189,12 +189,10 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
     }
     
     private func presentInputAlertViewController() {
-        let inputAlertViewController = InputModalViewController()
-        inputAlertViewController.modalPresentationStyle = .overCurrentContext
-        inputAlertViewController.onCompletionTapped = { inputText in
-            self.categoryViewModel.addCategory(title: inputText)
-        }
-        present(inputAlertViewController, animated: false)
+        coordinator?.showInputModalViewController()
+//        inputAlertViewController.onCompletionTapped = { inputText in
+//            self.categoryViewModel.addCategory(title: inputText)
+//        }
     }
     
     private func isIndexPathValid(_ indexPath: IndexPath) -> Bool {

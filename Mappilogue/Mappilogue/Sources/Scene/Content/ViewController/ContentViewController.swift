@@ -83,33 +83,20 @@ class ContentViewController: NavigationBarViewController {
         
     }
     
-    @objc func navigateToMyCategoryViewController() {
-        let myCategoryViewController = MyRecordViewController()
-        myCategoryViewController.isNewWrite = true
-        myCategoryViewController.categoryName = "전체" 
-        navigationController?.pushViewController(myCategoryViewController, animated: false)
-    }
-    
     @objc func menuButtonTapped() {
-        let editViewController = EditBottomSheetViewController()
-        editViewController.modalPresentationStyle = .overFullScreen
-        editViewController.configure(modifyTitle: "수정하기",
-                                             deleteTitle: "삭제하기",
-                                             alert: Alert(titleText: "이 기록을 삭제할까요?",
-                                                          messageText: nil,
-                                                          cancelText: "취소",
-                                                          doneText: "삭제",
-                                                          buttonColor: .redF14C4C,
-                                                          alertHeight: 140)
-        )
-        editViewController.onModify = { self.modifyRecord() }
-        editViewController.onDelete = { self.deleteRecord() }
-        present(editViewController, animated: false)
+//        editViewController.onModify = { self.modifyRecord() }
+//        editViewController.onDelete = { self.deleteRecord() }
+        let alert = Alert(titleText: "이 기록을 삭제할까요?",
+                          messageText: nil,
+                          cancelText: "취소",
+                          doneText: "삭제",
+                          buttonColor: .redF14C4C,
+                          alertHeight: 140)
+        coordinator?.showEditBottomSheetViewController(modifyTitle: "수정하기", deleteTitle: "삭제하기", alert: alert)
     }
     
     private func modifyRecord() {
-        let writeRecordViewController = WriteRecordViewController()
-        navigationController?.pushViewController(writeRecordViewController, animated: true)
+        coordinator?.showWriteRecordViewController()
     }
     
     private func deleteRecord() {
@@ -119,14 +106,11 @@ class ContentViewController: NavigationBarViewController {
                 navigationController?.popToViewController(viewControllerToPopTo, animated: true)
             }
         } else {
-            navigationController?.popViewController(animated: true)
+            coordinator?.popViewController()
         }
     }
     
     private func presentImageDetailViewController(_ imageName: String) {
-        let imageDetailViewController = ImageDetailViewController()
-        imageDetailViewController.modalPresentationStyle = .overCurrentContext
-        imageDetailViewController.configure(imageName)
-        present(imageDetailViewController, animated: false)
+        coordinator?.showImageDetailViewController(imageName: imageName)
     }
 }

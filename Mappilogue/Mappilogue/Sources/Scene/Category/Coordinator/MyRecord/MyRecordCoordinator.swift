@@ -22,6 +22,24 @@ class MyRecordCoordinator: AppCoordinator, MyRecordDelegate {
         navigationController.pushViewController(myRecordViewController, animated: false)
     }
     
+    func showContentViewController() {
+        let coordinator = ContentCoordinator(navigationController: self.navigationController)
+        coordinator.start()
+        self.childCoordinators.append(coordinator)
+    }
+    
+    func showMyRecordListViewController() {
+        let coordinator = MyRecordListCoordinator(navigationController: self.navigationController)
+        coordinator.start()
+        self.childCoordinators.append(coordinator)
+    }
+    
+    func showEditCategoryViewController(categoryId: Int, categoryName: String) {
+        let coordinator = EditCategoryCoordinator(navigationController: navigationController)
+        coordinator.showEditCategoryViewController(categoryId: categoryId, categoryName: categoryName)
+        self.childCoordinators.append(coordinator)
+    }
+    
     func popViewController() {
         navigationController.popViewController(animated: false)
     }

@@ -9,6 +9,8 @@ import UIKit
 import Photos
 
 class CapturePhotoViewController: BaseViewController {
+    weak var coordinator: CapturePhotoCoordinator?
+    
     var onDismiss: (() -> Void)?
     private var photo: UIImage?
 
@@ -65,7 +67,7 @@ class CapturePhotoViewController: BaseViewController {
     }
 
     @objc private func retakePhoto() {
-        navigationController?.popViewController(animated: false)
+        coordinator?.popViewController()
     }
 
     @objc private func usePhoto() {
@@ -77,7 +79,7 @@ class CapturePhotoViewController: BaseViewController {
             let viewControllers = navigationController.viewControllers
 
             let viewController = viewControllers[1]
-            navigationController.popToViewController(viewController, animated: false)
+            coordinator?.popViewController()
 
             if let editProfileViewController = viewController as? EditProfileViewController, let photo {
                 editProfileViewController.updateProfilePhotoImage(photo)

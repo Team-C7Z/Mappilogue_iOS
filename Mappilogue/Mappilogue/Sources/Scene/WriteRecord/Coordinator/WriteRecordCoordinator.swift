@@ -5,7 +5,7 @@
 //  Created by hyemi on 12/24/23.
 //
 
-import Foundation
+import MappilogueKit
 import Photos
 
 protocol WriteRecordDelegate: AnyObject {
@@ -27,6 +27,13 @@ class WriteRecordCoordinator: AppCoordinator, WriteRecordListDelegate {
         navigationController.pushViewController(writeRecordViewController, animated: false)
     }
     
+    func showAlertViewController(alert: Alert) {
+        let coordinator =
+        AlertCoordinator(navigationController: self.navigationController)
+        coordinator.showAlert(alert)
+        self.childCoordinators.append(coordinator)
+    }
+    
     func showSelectCategoryViewController() {
         let coordinator =
         SelectCategoryCoordinator(navigationController: self.navigationController)
@@ -41,6 +48,13 @@ class WriteRecordCoordinator: AppCoordinator, WriteRecordListDelegate {
         self.childCoordinators.append(coordinator)
     }
     
+    func showGalleyPermissionAlertViewController(alert: Alert) {
+        let coordinator =
+        AlertCoordinator(navigationController: self.navigationController)
+        coordinator.showAlert(alert)
+        self.childCoordinators.append(coordinator)
+    }
+    
     func showImagePickerViewController(authStatus: PHAuthorizationStatus, isProfile: Bool) {
         let coordinator =
         ImagePickerCoordinator(navigationController: self.navigationController)
@@ -48,10 +62,10 @@ class WriteRecordCoordinator: AppCoordinator, WriteRecordListDelegate {
         self.childCoordinators.append(coordinator)
     }
     
-    func showSavingRecordViewController() {
+    func showSavingRecordViewController(isNewWrite: Bool, schedule: Schedule2222) {
         let coordinator =
         SavingRecordCoordinator(navigationController: self.navigationController)
-        coordinator.start()
+        coordinator.showSavingRecordViewController(isNewWrite: isNewWrite, schedule: schedule)
         self.childCoordinators.append(coordinator)
     }
 

@@ -1,5 +1,5 @@
 //
-//  AlertViewController.swift
+//  AlertView.swift
 //  MappilogueKit
 //
 //  Created by hyemi on 2023/12/02.
@@ -8,29 +8,27 @@
 import UIKit
 import SnapKit
 
-public class AlertViewController: UIViewController {
-    public var onCancelTapped: (() -> Void)?
-    public var onDoneTapped: (() -> Void)?
-    
-    private let alertView = UIView()
+public class AlertView: UIView {
     private let titleLabel = UILabel()
     private let messageLabel = UILabel()
-    private let cancelButton = UIButton()
-    private let doneButton = UIButton()
+    public let cancelButton = UIButton()
+    public let doneButton = UIButton()
     
-    override public func viewDidLoad() {
-        super.viewDidLoad()
-
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
         setupProperty()
         setupHierarchy()
         setupLayout()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func setupProperty() {
-        view.backgroundColor = .gray404040.withAlphaComponent(0.1)
-        
-        alertView.layer.cornerRadius = 12
-        alertView.backgroundColor = .grayF9F8F7
+        layer.cornerRadius = 12
+        backgroundColor = .grayF9F8F7
         
         titleLabel.textColor = .color000000
         titleLabel.font = .title02
@@ -44,57 +42,42 @@ public class AlertViewController: UIViewController {
         cancelButton.backgroundColor = .grayF5F3F0
         cancelButton.setTitleColor(.black1C1C1C, for: .normal)
         cancelButton.titleLabel?.font = .body02
-        cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         
         doneButton.layer.cornerRadius = 12
         doneButton.setTitleColor(.whiteFFFFFF, for: .normal)
         doneButton.titleLabel?.font = .body03
-        doneButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
     }
     
     func setupHierarchy() {
-        view.addSubview(alertView)
-        alertView.addSubview(titleLabel)
-        alertView.addSubview(messageLabel)
-        alertView.addSubview(cancelButton)
-        alertView.addSubview(doneButton)
+        addSubview(titleLabel)
+        addSubview(messageLabel)
+        addSubview(cancelButton)
+        addSubview(doneButton)
     }
     
     func setupLayout() {
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(alertView).offset(32)
-            $0.centerX.equalTo(alertView)
+            $0.top.equalTo(self).offset(32)
+            $0.centerX.equalTo(self)
         }
         
         messageLabel.snp.makeConstraints {
-            $0.top.equalTo(alertView).offset(56)
-            $0.centerX.equalTo(alertView)
+            $0.top.equalTo(self).offset(56)
+            $0.centerX.equalTo(self)
         }
         
         cancelButton.snp.makeConstraints {
-            $0.bottom.equalTo(alertView).offset(-10)
-            $0.leading.equalTo(alertView).offset(10)
+            $0.bottom.equalTo(self).offset(-10)
+            $0.leading.equalTo(self).offset(10)
             $0.width.equalTo(120)
             $0.height.equalTo(42)
         }
         
         doneButton.snp.makeConstraints {
-            $0.bottom.equalTo(alertView).offset(-10)
-            $0.trailing.equalTo(alertView).offset(-10)
+            $0.bottom.equalTo(self).offset(-10)
+            $0.trailing.equalTo(self).offset(-10)
             $0.width.equalTo(120)
             $0.height.equalTo(42)
-        }
-    }
-    
-    @objc private func cancelButtonTapped(_ sender: UIButton) {
-        dismiss(animated: false) {
-            self.onCancelTapped?()
-        }
-    }
-    
-    @objc private func deleteButtonTapped(_ sender: UIButton) {
-        dismiss(animated: false) {
-            self.onDoneTapped?()
         }
     }
     
@@ -104,8 +87,7 @@ public class AlertViewController: UIViewController {
         cancelButton.setTitle(alert.cancelText, for: .normal)
         doneButton.setTitle(alert.doneText, for: .normal)
         doneButton.backgroundColor = alert.buttonColor
-        alertView.snp.makeConstraints {
-            $0.centerX.centerY.equalTo(view.safeAreaLayoutGuide)
+        self.snp.makeConstraints {
             $0.width.equalTo(270)
             $0.height.equalTo(alert.alertHeight)
         }

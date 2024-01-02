@@ -144,7 +144,6 @@ extension MyRecordListViewController: UITableViewDelegate, UITableViewDataSource
 //            self.categories.remove(at: indexPath.row-1)
 //            self.tableView.reloadData()
 //        }
-//        navigationController?.pushViewController(myRecordViewController, animated: true)
     }
     
     func didSelectCategorySettingCell() {

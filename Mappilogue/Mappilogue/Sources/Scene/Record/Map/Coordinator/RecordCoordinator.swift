@@ -5,7 +5,7 @@
 //  Created by hyemi on 12/16/23.
 //
 
-import Foundation
+import MappilogueKit
 
 protocol RecordDelegate: AnyObject {
     func showNotificationController()
@@ -51,4 +51,11 @@ class RecordCoordinator: BaseCoordinator, RecordDelegate {
         coordinator.start()
         self.childCoordinators.append(coordinator)
     }
+    
+    func showAlertViewController(alert: Alert) {
+        let coordinator = AlertCoordinator(navigationController: self.navigationController)
+        coordinator.showAlert(alert)
+        self.childCoordinators.append(coordinator)
+    }
+    
 }

@@ -8,23 +8,29 @@
 import Foundation
 
 protocol SavingRecordDelegate: AnyObject {
-    func showContentViewController()
+    func dismissViewController()
 }
 
 class SavingRecordCoordinator: AppCoordinator, SavingRecordDelegate {
-    override func start() {
+    override func start() { }
+    
+    func showSavingRecordViewController(isNewWrite: Bool, schedule: Schedule2222) {
         let savingRecordViewController = SavingRecordViewController()
         savingRecordViewController.modalPresentationStyle = .overFullScreen
         savingRecordViewController.onSaveComplete = {
-            self.showContentViewController()
+            self.showContentViewController(isNewWrite: isNewWrite, schedule: schedule)
         }
         navigationController.present(savingRecordViewController, animated: false)
     }
     
-    func showContentViewController() {
+    func showContentViewController(isNewWrite: Bool, schedule: Schedule2222) {
         let coordinator =
-        ContentCoordinator(navigationController: self.navigationController)
+        ContentCoordinator(navigationController: navigationController)
         coordinator.start()
-        self.childCoordinators.append(coordinator)
+        childCoordinators.append(coordinator)
+    }
+    
+    func dismissViewController() {
+        navigationController.dismiss(animated: false)
     }
 }
