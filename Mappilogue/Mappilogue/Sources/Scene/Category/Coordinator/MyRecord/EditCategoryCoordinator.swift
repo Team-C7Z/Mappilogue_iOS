@@ -37,6 +37,7 @@ class EditCategoryCoordinator: AppCoordinator, EditCategoryDelegate {
     }
     
     func dismissViewController() {
+        childDidFinish(self)
         navigationController.dismiss(animated: false)
     }
 }

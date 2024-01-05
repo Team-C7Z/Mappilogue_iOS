@@ -25,7 +25,7 @@ class HomeCoordinator: AppCoordinator, HomeDelegate {
     func showNotificationViewController() {
         let coordinator = NotificationCoordinator(navigationController: self.navigationController)
         coordinator.start()
-        self.childCoordinators.append(coordinator)
+        childCoordinators.append(coordinator)
     }
     
     func showCalendarDetailViewController() {

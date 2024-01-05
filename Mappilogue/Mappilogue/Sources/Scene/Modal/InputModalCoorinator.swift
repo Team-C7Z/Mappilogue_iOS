@@ -31,6 +31,7 @@ class InputModalCoordinator: AppCoordinator, InputModalDelegate {
     }
     
     func dismissViewController() {
+        childDidFinish(self)
         navigationController.dismiss(animated: false)
     }
 }

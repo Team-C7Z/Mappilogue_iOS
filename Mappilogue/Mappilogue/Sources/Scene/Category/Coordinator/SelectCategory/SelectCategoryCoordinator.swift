@@ -25,6 +25,7 @@ class SelectCategoryCoordinator: AppCoordinator, SelectCategoryDelegate {
     }
     
     func popViewController() {
+        childDidFinish(self)
         navigationController.popViewController(animated: false)
     }
 }

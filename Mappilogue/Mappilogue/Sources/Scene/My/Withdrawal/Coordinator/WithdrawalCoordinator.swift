@@ -27,6 +27,7 @@ class WithdrawalCoordinator: BaseCoordinator, WithdrawalDelegate {
     
     func popViewController() {
         delegate?.withdrawal()
+        childDidFinish(self)
         navigationController.popViewController(animated: false)
     }
 }

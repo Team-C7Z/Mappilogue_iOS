@@ -26,6 +26,7 @@ class SignUpCompletionCoordinator: BaseCoordinator, SignUpCompletionDelegate {
         let tabBarController = UITabBarController()
         let coordinator = TabBarCoordinator(tabBarController: tabBarController, navigationController: navigationController)
         coordinator.start()
+        childDidFinish(self)
         self.childCoordinators.append(coordinator)
     }
 }

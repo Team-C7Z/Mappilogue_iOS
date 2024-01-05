@@ -13,7 +13,8 @@ class EmptyNotificationCell: BaseTableViewCell {
 
     private let stackView = UIStackView()
     private let notificationImage = UIImageView()
-    private let notificationLabel = UILabel()
+    private let notificationTitleLabel = UILabel()
+    private let notificationSubTitleLabel = UILabel()
     
     override func setupProperty() {
         super.setupProperty()
@@ -25,8 +26,13 @@ class EmptyNotificationCell: BaseTableViewCell {
   
         notificationImage.image = Images.image(named: .imageNotificationEmpty)
         
-        notificationLabel.textColor = .color000000
-        notificationLabel.font = .title02
+        notificationTitleLabel.textColor = .color000000
+        notificationTitleLabel.font = .title02
+        
+        notificationSubTitleLabel.textColor = .gray9B9791
+        notificationSubTitleLabel.font = .body02
+        notificationSubTitleLabel.textAlignment = .center
+        notificationSubTitleLabel.numberOfLines = 0
     }
     
     override func setupHierarchy() {
@@ -34,7 +40,8 @@ class EmptyNotificationCell: BaseTableViewCell {
 
         contentView.addSubview(stackView)
         stackView.addArrangedSubview(notificationImage)
-        stackView.addArrangedSubview(notificationLabel)
+        stackView.addArrangedSubview(notificationTitleLabel)
+        stackView.addArrangedSubview(notificationSubTitleLabel)
     }
     
     override func setupLayout() {
@@ -42,7 +49,7 @@ class EmptyNotificationCell: BaseTableViewCell {
         
         stackView.snp.makeConstraints {
             $0.centerX.equalTo(contentView)
-            $0.top.equalTo(224)
+            $0.centerY.equalTo(contentView).offset(-88)
         }
         
         notificationImage.snp.makeConstraints {
@@ -53,9 +60,11 @@ class EmptyNotificationCell: BaseTableViewCell {
     func configure(notificationType: NotificationType) {
         switch notificationType {
         case .notification:
-            notificationLabel.text = "새로운 알림이 없어요"
+            notificationTitleLabel.text = "새로운 알림이 없어요"
+            notificationSubTitleLabel.setTextWithLineHeight(text: "모임 기능의 등장과 함께\n새로운 알림을 보내 드릴게요", lineHeight: 21)
         case .announcement:
-            notificationLabel.text = "아직 공지사항이 없어요"
+            notificationTitleLabel.text = "아직 공지사항이 없어요"
+            notificationSubTitleLabel.text = ""
         }
     }
 }

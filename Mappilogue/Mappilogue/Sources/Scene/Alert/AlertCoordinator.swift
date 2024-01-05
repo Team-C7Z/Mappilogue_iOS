@@ -35,6 +35,7 @@ class AlertCoordinator: AppCoordinator, AlertDelegate {
     }
     
     func dismissAlert() {
+        childDidFinish(self)
         navigationController.dismiss(animated: false)
     }
 }

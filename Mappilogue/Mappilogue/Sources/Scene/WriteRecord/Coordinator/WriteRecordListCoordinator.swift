@@ -28,6 +28,7 @@ class WriteRecordListCoordinator: AppCoordinator, WriteRecordListDelegate {
     }
     
     func popViewController() {
+        childDidFinish(self)
         navigationController.popViewController(animated: false)
     }
 }

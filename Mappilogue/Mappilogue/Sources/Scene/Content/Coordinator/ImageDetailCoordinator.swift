@@ -22,6 +22,7 @@ class ImageDetailCoordinator: BaseCoordinator, ImageDetailDelegate {
     }
     
     func dismissViewController() {
+        childDidFinish(self)
         navigationController.dismiss(animated: false)
     }
 }

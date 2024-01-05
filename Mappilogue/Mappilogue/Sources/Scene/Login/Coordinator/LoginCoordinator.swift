@@ -28,8 +28,8 @@ class LoginCoordinator: BaseCoordinator, LoginDelegate {
     func showTabBarController() {
         let tabBarController = UITabBarController()
         let coordinator = TabBarCoordinator(tabBarController: tabBarController, navigationController: navigationController)
-        childCoordinators.append(coordinator)
         coordinator.start()
-   
+        childDidFinish(self)
+        childCoordinators.append(coordinator)
     }
 }

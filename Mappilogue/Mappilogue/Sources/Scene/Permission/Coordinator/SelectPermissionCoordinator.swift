@@ -21,6 +21,7 @@ class SelectPermissionCoordinator: BaseCoordinator, SelectPermissionDelegate {
     func showOnboardingViewController() {
         let coordinator = OnboardingCoordinator(navigationController: navigationController)
         coordinator.start()
+        childDidFinish(self)
         childCoordinators.append(coordinator)
     }
 }

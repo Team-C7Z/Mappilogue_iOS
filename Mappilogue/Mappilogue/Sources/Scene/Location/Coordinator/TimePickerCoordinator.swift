@@ -22,6 +22,7 @@ class TimePickerCoordinator: AppCoordinator, TimePickerDelegate {
     }
     
     func dismissViewController() {
+        childDidFinish(self)
         navigationController.dismiss(animated: false)
     }
 }

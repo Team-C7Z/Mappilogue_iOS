@@ -20,6 +20,7 @@ class MainLocationAlertCoordinator: AppCoordinator, MainLocationAlertDelegate {
     }
     
     func dismissViewController() {
+        childDidFinish(self)
         navigationController.dismiss(animated: false)
     }
 }

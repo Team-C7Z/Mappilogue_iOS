@@ -21,6 +21,7 @@ class PermissionCoordinator: BaseCoordinator, PermissionDelegate {
     func showSelectPermissionViewController() {
         let coordinator = SelectPermissionCoordinator(navigationController: navigationController)
         coordinator.start()
+        childDidFinish(self)
         childCoordinators.append(coordinator)
     }
 }

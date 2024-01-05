@@ -20,6 +20,7 @@ class TermsOfUseCoordinator: BaseCoordinator, TermsOfUseDelegate {
     }
     
     func popViewController() {
+        childDidFinish(self)
         navigationController.popViewController(animated: false)
     }
 }

@@ -33,6 +33,7 @@ class MyRecordListCoordinator: AppCoordinator, MyRecordListDelegate {
     }
     
     func popViewController() {
+        childDidFinish(self)
         navigationController.popViewController(animated: false)
     }
 }

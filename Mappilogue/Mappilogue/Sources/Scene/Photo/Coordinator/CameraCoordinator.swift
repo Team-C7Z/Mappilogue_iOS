@@ -26,6 +26,7 @@ class CameraCoordinator: BaseCoordinator, CameraDelegate {
     }
     
     func popViewController() {
+        childDidFinish(self)
         navigationController.popViewController(animated: false)
     }
 }

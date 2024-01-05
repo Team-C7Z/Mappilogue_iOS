@@ -20,6 +20,7 @@ class DeleteCategoryAlertCoordinator: AppCoordinator, DeleteCategoryAlertDelegat
     }
     
     func dismissViewController() {
+        childDidFinish(self)
         navigationController.dismiss(animated: false)
     }
 }
