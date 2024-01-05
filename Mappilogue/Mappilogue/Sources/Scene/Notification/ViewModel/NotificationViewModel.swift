@@ -9,7 +9,7 @@ import Foundation
 
 class NotificationViewModel {
     var notificationData: [NotificationData] = []
-    var announcementData: [AnnouncementData] = dummyAnnouncementData()
+    var announcementData: [AnnouncementData] = []
     var isAnnouncementExpanded = [Bool]()
     
     var notificationType: NotificationType = .notification
