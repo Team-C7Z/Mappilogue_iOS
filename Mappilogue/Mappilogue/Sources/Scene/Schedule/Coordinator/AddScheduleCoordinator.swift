@@ -55,6 +55,7 @@ class AddScheduleCoordinator: AppCoordinator, AddScheduleDelegate {
     }
     
     func popViewController() {
+        childDidFinish(self)
         navigationController.popViewController(animated: false)
     }
 }

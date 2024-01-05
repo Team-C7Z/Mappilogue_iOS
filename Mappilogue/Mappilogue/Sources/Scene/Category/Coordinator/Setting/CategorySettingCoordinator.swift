@@ -27,6 +27,7 @@ class CategorySettingCoordinator: AppCoordinator, CategorySettingDelegate {
     }
     
     func popViewController() {
+        childDidFinish(self)
         navigationController.popViewController(animated: false)
     }
 }

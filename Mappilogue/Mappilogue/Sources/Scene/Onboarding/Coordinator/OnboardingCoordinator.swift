@@ -19,8 +19,9 @@ class OnboardingCoordinator: BaseCoordinator, OnboardingDelegate {
     }
     
     func showLoginViewController() {
-        let coordinator = LoginCoordinator(navigationController: self.navigationController)
+        let coordinator = LoginCoordinator(navigationController: navigationController)
         coordinator.start()
-        self.childCoordinators.append(coordinator)
+        childDidFinish(self)
+        childCoordinators.append(coordinator)
     }
 }

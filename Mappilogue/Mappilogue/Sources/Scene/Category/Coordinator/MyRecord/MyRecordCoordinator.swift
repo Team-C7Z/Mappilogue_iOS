@@ -41,6 +41,7 @@ class MyRecordCoordinator: AppCoordinator, MyRecordDelegate {
     }
     
     func popViewController() {
+        childDidFinish(self)
         navigationController.popViewController(animated: false)
     }
 }

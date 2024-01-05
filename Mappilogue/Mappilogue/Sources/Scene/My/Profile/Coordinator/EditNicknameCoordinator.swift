@@ -33,6 +33,7 @@ class EditNicknameCoordinator: BaseCoordinator, EditNicknameDelegate {
 
     func dismissViewController(_ nickname: String) {
         delegate?.changedNickname(nickname: nickname)
+        childDidFinish(self)
         navigationController.dismiss(animated: false)
     }
 }

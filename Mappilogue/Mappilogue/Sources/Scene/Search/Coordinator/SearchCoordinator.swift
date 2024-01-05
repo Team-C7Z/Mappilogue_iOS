@@ -20,6 +20,7 @@ class SearchCoordinator: AppCoordinator, SearchDelegate {
     }
     
     func popViewController() {
+        childDidFinish(self)
         navigationController.popViewController(animated: false)
     }
 }

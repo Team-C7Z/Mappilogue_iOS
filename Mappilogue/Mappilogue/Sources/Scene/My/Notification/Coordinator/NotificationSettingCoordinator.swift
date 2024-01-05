@@ -20,6 +20,7 @@ class NotificationSettingCoordinator: BaseCoordinator, NotificationSettingDelega
     }
     
     func popViewController() {
+        childDidFinish(self)
         navigationController.popViewController(animated: false)
     }
 }

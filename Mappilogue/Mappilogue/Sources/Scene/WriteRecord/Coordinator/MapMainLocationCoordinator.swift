@@ -26,6 +26,7 @@ class MapMainLocationCoordinator: AppCoordinator, MapMainLocationDelegate {
     }
 
     func popViewController() {
+        childDidFinish(self)
         navigationController.popViewController(animated: false)
     }
 }

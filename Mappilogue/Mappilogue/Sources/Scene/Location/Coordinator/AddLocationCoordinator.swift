@@ -20,6 +20,7 @@ class AddLocationCoordinator: AppCoordinator, AddLocationDelegate {
     }
     
     func dismissViewController() {
+        childDidFinish(self)
         navigationController.dismiss(animated: false)
     }
 }

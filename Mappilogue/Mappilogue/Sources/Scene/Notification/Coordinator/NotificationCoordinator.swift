@@ -21,5 +21,6 @@ class NotificationCoordinator: BaseCoordinator, NotificationDelegate {
     
     func popViewController() {
         navigationController.popViewController(animated: true)
+        childDidFinish(self)
     }
 }

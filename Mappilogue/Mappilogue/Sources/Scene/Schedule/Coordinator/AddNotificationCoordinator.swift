@@ -19,6 +19,7 @@ class AddNotificationCoordinator: AppCoordinator, AddNotificationDelegate {
     }
     
     func popViewController() {
+        childDidFinish(self)
         navigationController.popViewController(animated: false)
     }
 }

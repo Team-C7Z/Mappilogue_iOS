@@ -41,6 +41,7 @@ class CalendarDetailCoordinator: BaseCoordinator, CalendarDetailDelegate {
     }
     
     func dismissViewController() {
+        childDidFinish(self)
         navigationController.dismiss(animated: false)
     }
 }

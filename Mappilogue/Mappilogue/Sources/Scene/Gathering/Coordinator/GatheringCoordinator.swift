@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GatheringCoordinator: BaseCoordinator{
+class GatheringCoordinator: BaseCoordinator {
     override func start() {
 
     }

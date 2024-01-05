@@ -20,6 +20,7 @@ class InquiryCoordinator: BaseCoordinator, NotificationSettingDelegate {
     }
     
     func popViewController() {
+        childDidFinish(self)
         navigationController.popViewController(animated: false)
     }
 }

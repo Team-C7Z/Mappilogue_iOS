@@ -47,6 +47,7 @@ class ImagePickerCoordinator: BaseCoordinator, ImagePickerDelegate {
     
     func popViewController(assets: [PHAsset]) {
         delegate?.changedProfileImage(assets: assets)
+        childDidFinish(self)
         navigationController.popViewController(animated: false)
     }
 }

@@ -37,6 +37,7 @@ class EditBottomSheetCoordinator: AppCoordinator, EditBottomSheetDelegate {
     }
     
     func dismissViewController() {
-        navigationController.dismiss(animated: false) 
+        childDidFinish(self)
+        navigationController.dismiss(animated: false)
     }
 }

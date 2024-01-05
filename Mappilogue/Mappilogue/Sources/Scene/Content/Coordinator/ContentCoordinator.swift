@@ -38,6 +38,7 @@ class ContentCoordinator: BaseCoordinator, ContentDelegate {
     }
     
     func popViewController() {
+        childDidFinish(self)
         navigationController.popViewController(animated: false)
     }
 }

@@ -22,6 +22,7 @@ class DatePickerCoordinator: BaseCoordinator, DatePickerDelegate {
     }
     
     func dismissViewController() {
+        childDidFinish(self)
         navigationController.dismiss(animated: false)
     }
 }

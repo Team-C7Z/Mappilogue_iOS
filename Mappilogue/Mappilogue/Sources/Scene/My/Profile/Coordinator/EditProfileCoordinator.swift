@@ -53,10 +53,12 @@ class EditProfileCoordinator: BaseCoordinator, EditProfileDelegate {
     }
     
     func popViewController() {
+        childDidFinish(self)
         navigationController.popViewController(animated: true)
     }
     
     func dismissViewController() {
+        childDidFinish(self)
         navigationController.dismiss(animated: false)
     }
 }

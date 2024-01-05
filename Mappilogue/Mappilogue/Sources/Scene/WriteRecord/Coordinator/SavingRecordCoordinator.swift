@@ -31,6 +31,7 @@ class SavingRecordCoordinator: AppCoordinator, SavingRecordDelegate {
     }
     
     func dismissViewController() {
+        childDidFinish(self)
         navigationController.dismiss(animated: false)
     }
 }
