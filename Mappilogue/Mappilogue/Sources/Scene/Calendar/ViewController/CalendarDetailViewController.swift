@@ -8,7 +8,7 @@
 import UIKit
 import MappilogueKit
 
-class CalendarDetailViewController: ModalViewController {
+class CalendarDetailViewController: BaseViewController {
     weak var coordinator: CalendarDetailCoordinator?
     let viewModel = CalendarDetailViewModel()
  
@@ -17,6 +17,7 @@ class CalendarDetailViewController: ModalViewController {
     
     var addButtonLocation: CGRect?
     
+    public let modalView = UIView()
     private let dateLabel = UILabel()
     private let lunarDateLabel = UILabel()
     
@@ -36,10 +37,14 @@ class CalendarDetailViewController: ModalViewController {
     
     private let addScheduleButton = AddScheduleButton()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loadCalendarData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        loadCalendarData()
         
         setupProperty()
         setupHierarchy()
@@ -52,7 +57,12 @@ class CalendarDetailViewController: ModalViewController {
         animateAddScheduleButton()
     }
     
-    func setupProperty() {
+    override func setupProperty() {
+        view.backgroundColor = .gray404040.withAlphaComponent(0.1)
+        
+        modalView.layer.cornerRadius = 24
+        modalView.backgroundColor = .grayF9F8F7
+        
         dateLabel.font = .title01
         dateLabel.textColor = .black1C1C1C
         
@@ -62,14 +72,22 @@ class CalendarDetailViewController: ModalViewController {
         addScheduleButton.addTarget(self, action: #selector(addScheduleButtonTapped), for: .touchUpInside)
     }
     
-    func setupHierarchy() {
+    override func setupHierarchy() {
+        view.addSubview(modalView)
         modalView.addSubview(dateLabel)
         modalView.addSubview(lunarDateLabel)
         modalView.addSubview(collectionView)
         view.addSubview(addScheduleButton)
     }
     
-    func setupLayout() {
+    override func setupLayout() {
+        modalView.snp.makeConstraints {
+            $0.centerX.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().offset(-16)
+            $0.height.equalTo(429)
+        }
+        
         dateLabel.snp.makeConstraints {
             $0.top.equalTo(modalView).offset(30)
             $0.leading.equalTo(modalView).offset(20)
@@ -128,11 +146,14 @@ class CalendarDetailViewController: ModalViewController {
     }
     
     func animateAddScheduleButton() {
+        
         UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
+       
             let maxX = self.modalView.frame.maxX
             let maxY = self.modalView.frame.maxY
-            self.addScheduleButton.frame.origin.x = maxX - 56 - 20
-            self.addScheduleButton.frame.origin.y = maxY - 56 - 20
+            self.addScheduleButton.frame.origin.x = maxX - 20 - 56
+            self.addScheduleButton.frame.origin.y = maxY - 20 - 56
+ 
             self.view.layoutIfNeeded()
         })
     }

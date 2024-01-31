@@ -36,7 +36,7 @@ class CalendarViewController: NavigationBarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        loadCalendarData()
+        loadCalendarData111()
         
         NotificationCenter.default.addObserver(self, selector: #selector(presentScheduleViewContoller), name: Notification.Name("PresentScheduleViewController"), object: nil)
         
@@ -83,7 +83,7 @@ class CalendarViewController: NavigationBarViewController {
     
         currentDateButton.snp.makeConstraints {
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
-            $0.top.equalToSuperview().offset(88)
+            $0.top.equalToSuperview().offset(100)
             $0.leading.equalTo(currentDateLabel.snp.leading)
             $0.trailing.equalTo(changeDateImage.snp.trailing)
             $0.height.equalTo(28)
@@ -114,17 +114,19 @@ class CalendarViewController: NavigationBarViewController {
         viewModel.selectedDate = SelectedDate(year: viewModel.currentYear, month: viewModel.currentMonth)
     }
     
-    func loadCalendarData() {
-        let currentMonthCalendar = Calendar1(year: viewModel.currentYear, month: viewModel.currentMonth)
-
-        viewModel.getCalendar(calendar: currentMonthCalendar)
-     
-        viewModel.$calendarResult
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { result in
-                self.viewModel.calendarSchedules = result?.calenderSchedules ?? []
-            })
-            .store(in: &viewModel.cancellables)
+    func loadCalendarData111() {
+        CalendarManager111.shared.getCalendar(year: viewModel.currentYear, month: viewModel.currentMonth, completion: { result in
+            switch result {
+            case .success(let response):
+                guard let baseResponse = response as? BaseDTO<CalendarDTO>, let result = baseResponse.result else { return }
+                self.viewModel.calendarSchedules = result.calendarSchedules
+                self.viewModel.setCalendarDot()
+            
+                self.collectionView.reloadData()
+            default:
+                break
+            }
+        })
     }
 
     func setCurrentPage() {
@@ -144,6 +146,7 @@ class CalendarViewController: NavigationBarViewController {
     
     @objc func presentScheduleViewContoller(_ notification: Notification) {
         addScheduleButton.isHidden = true
+       
         if let date = notification.object as? String {
             coordinator?.showCalendarDetailViewController(date: date, frame: addScheduleButton.frame)
             //            scheduleDetailViewController.onWriteRecordButtonTapped = { schedule in
@@ -178,7 +181,7 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCell.registerId, for: indexPath) as? CalendarCell else { return UICollectionViewCell() }
-        cell.configure(with: viewModel.selectedDate)
+        cell.configure(date: viewModel.selectedDate, dotDats: viewModel.dotDates)
         
         return cell
     }

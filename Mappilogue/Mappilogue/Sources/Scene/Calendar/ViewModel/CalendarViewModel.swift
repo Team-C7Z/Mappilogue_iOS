@@ -16,6 +16,7 @@ class CalendarViewModel {
     
     var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0)
     var calendarSchedules: [CalendarSchedules] = []
+    var dotDates = Array(repeating: [Int](), count: 3)
     var scheduleId: Int?
     var currentPage = 1
     
@@ -262,20 +263,19 @@ class CalendarViewModel {
         }
     }
     
-    func datesBetween(startDate: String, endDate: String) -> [String]? {
+    func datesBetween(startDate: String, endDate: String) -> [Date]? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
         if let startDate = dateFormatter.date(from: startDate),
            let endDate = dateFormatter.date(from: endDate) {
-            var dates: [String] = []
+            var dates: [Date] = []
             
             let calendar = Calendar.current
             var currentDate = startDate
             
             while currentDate <= endDate {
-                let dateString = dateFormatter.string(from: currentDate)
-                dates.append(dateString)
+                dates.append(currentDate)
                 currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
             }
             
@@ -381,6 +381,59 @@ class CalendarViewModel {
         }
         return SelectedDate(year: 0, month: 0)
     }
+    
+    func compareDateToCurrentMonth(_ date: Date) -> MonthType {
+        let calendar = Calendar.current
+        let currentDate = Date()
+        
+        let currentYear = calendar.component(.year, from: currentDate)
+        let currentMonth = calendar.component(.month, from: currentDate)
+        
+        let targetYear = calendar.component(.year, from: date)
+        let targetMonth = calendar.component(.month, from: date)
+        
+        if currentYear == targetYear && currentMonth == targetMonth {
+            return .currentMonth
+        } else if currentYear == targetYear && currentMonth - targetMonth == 1 {
+            return .lastMonth
+        } else if currentYear == targetYear && targetMonth - currentMonth == 1 {
+            return .nextMonth
+        } else if currentYear - targetYear == 1 && currentMonth == 1 && targetMonth == 12 {
+            return .lastMonth
+        } else if targetYear - currentYear == 1 && currentMonth == 12 && targetMonth == 1 {
+            return .nextMonth
+        } else {
+            return .unknown
+        }
+    }
+    
+    func setCalendarDot() {
+        var dateArr = Array(repeating: [Int](), count: 3)
+        for schedule in calendarSchedules {
+            guard let dates = datesBetween(startDate: schedule.startDate, endDate: schedule.endDate) else { return }
+        
+            for date in dates {
+                switch compareDateToCurrentMonth(date) {
+                case .currentMonth:
+                    if let day = dayFromDate(date.formatToyyyyMMddDateString()) {
+                        dateArr[1].append(day)
+                    }
+                case .lastMonth:
+                    if let day = dayFromDate(date.formatToyyyyMMddDateString()) {
+                        dateArr[0].append(day)
+                    }
+                case .nextMonth:
+                    if let day = dayFromDate(date.formatToyyyyMMddDateString()) {
+                        dateArr[2].append(day)
+                    }
+                case .unknown:
+                    break
+                }
+            }
+        }
+      
+        dotDates = dateArr
+    }
 }
 
 enum MonthType: String, Codable {
@@ -397,6 +450,7 @@ extension CalendarViewModel {
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
+                    print(completion, 44)
                     break
                 case .failure:
                     print("error")

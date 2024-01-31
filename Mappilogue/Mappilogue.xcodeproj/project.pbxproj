@@ -262,9 +262,9 @@
 		929020F82B430FE600AFBA66 /* DeleteCategoryAlertCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020F72B430FE600AFBA66 /* DeleteCategoryAlertCoordinator.swift */; };
 		929020FA2B43113800AFBA66 /* EditBottomSheetCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020F92B43113800AFBA66 /* EditBottomSheetCoordinator.swift */; };
 		929020FC2B43136E00AFBA66 /* ImageDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020FB2B43136E00AFBA66 /* ImageDetailCoordinator.swift */; };
+		929021202B48452000AFBA66 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9290211F2B48452000AFBA66 /* GoogleService-Info.plist */; };
 		929E23152AB737DC003180B3 /* ProfileImageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23142AB737DC003180B3 /* ProfileImageDTO.swift */; };
 		929E23172AB7F6C4003180B3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23162AB7F6C4003180B3 /* Utils.swift */; };
-		929E23192AB81E40003180B3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 929E23182AB81E40003180B3 /* GoogleService-Info.plist */; };
 		929E231C2AB81EB1003180B3 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 929E231B2AB81EB1003180B3 /* FirebaseMessaging */; };
 		929E23212AB83920003180B3 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23202AB83920003180B3 /* Auth.swift */; };
 		92A7B6592A4D01B3009C9293 /* TodayScheduleInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7B6582A4D01B3009C9293 /* TodayScheduleInfoCell.swift */; };
@@ -624,9 +624,9 @@
 		929020F72B430FE600AFBA66 /* DeleteCategoryAlertCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCategoryAlertCoordinator.swift; sourceTree = "<group>"; };
 		929020F92B43113800AFBA66 /* EditBottomSheetCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBottomSheetCoordinator.swift; sourceTree = "<group>"; };
 		929020FB2B43136E00AFBA66 /* ImageDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailCoordinator.swift; sourceTree = "<group>"; };
+		9290211F2B48452000AFBA66 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		929E23142AB737DC003180B3 /* ProfileImageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageDTO.swift; sourceTree = "<group>"; };
 		929E23162AB7F6C4003180B3 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		929E23182AB81E40003180B3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		929E231D2AB81EEE003180B3 /* Mappilogue.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Mappilogue.entitlements; sourceTree = "<group>"; };
 		929E23202AB83920003180B3 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		92A7B64B2A4CC0E6009C9293 /* HomeEmptyScheduleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEmptyScheduleCell.swift; sourceTree = "<group>"; };
@@ -1508,8 +1508,8 @@
 				926999272A14F0FA003DDAD2 /* Resources */,
 				926999262A14F0ED003DDAD2 /* Sources */,
 				926999042A14EC09003DDAD2 /* Info.plist */,
-				929E23182AB81E40003180B3 /* GoogleService-Info.plist */,
 				92CBB03B2B18905200587BED /* SecureAPIKeys.plist */,
+				9290211F2B48452000AFBA66 /* GoogleService-Info.plist */,
 			);
 			path = Mappilogue;
 			sourceTree = "<group>";
@@ -2495,8 +2495,8 @@
 				92E3F4492B1DE0D000E03C15 /* Pretendard-SemiBold.ttf in Resources */,
 				926999032A14EC09003DDAD2 /* LaunchScreen.storyboard in Resources */,
 				920031E02A8DF6F800E3170D /* saving.json in Resources */,
-				929E23192AB81E40003180B3 /* GoogleService-Info.plist in Resources */,
 				92E3F4472B1DE0D000E03C15 /* Pretendard-Bold.ttf in Resources */,
+				929021202B48452000AFBA66 /* GoogleService-Info.plist in Resources */,
 				926999002A14EC09003DDAD2 /* Assets.xcassets in Resources */,
 				92E3F4482B1DE0D000E03C15 /* Pretendard-Medium.ttf in Resources */,
 			);

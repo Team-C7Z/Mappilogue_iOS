@@ -13,6 +13,7 @@ class CalendarCell: BaseCollectionViewCell {
     private var monthlyCalendar = CalendarViewModel()
     private var selectedDate: SelectedDate?
     private var weekCount: Int = 0
+    private var dotDates = Array(repeating: [Int](), count: 3)
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -47,8 +48,9 @@ class CalendarCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(with date: SelectedDate) {
+    func configure(date: SelectedDate, dotDats: [[Int]]) {
         selectedDate = date
+        self.dotDates = dotDats
         setCalendarDate()
     }
     
@@ -93,7 +95,7 @@ extension CalendarCell: UICollectionViewDelegate, UICollectionViewDataSource, UI
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeekCell.registerId, for: indexPath) as? WeekCell else { return UICollectionViewCell() }
                
                 if let year = selectedDate?.year, let month = selectedDate?.month {
-                    cell.configure(year: year, month: month, weekIndex: indexPath.section-1)
+                    cell.configure(year: year, month: month, weekIndex: indexPath.section-1, dotDates: dotDates)
                 }
                 
                 return cell

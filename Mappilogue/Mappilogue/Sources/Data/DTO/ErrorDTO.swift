@@ -9,11 +9,8 @@ import Foundation
 
 struct ErrorDTO: Codable {
     let isSuccess: Bool
-    let statusCode: Int
     let errorCode: String
-    let target: String
-    let message: String
-    let errorStack: String
+    let statusCode: Int
     let timestamp: String
     let path: String
 }

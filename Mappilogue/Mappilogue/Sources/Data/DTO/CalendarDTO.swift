@@ -8,7 +8,7 @@
 import Foundation
 
 struct CalendarDTO: Codable {
-    let calenderSchedules: [CalendarSchedules]
+    let calendarSchedules: [CalendarSchedules]
 }
 
 struct CalendarSchedules: Codable {

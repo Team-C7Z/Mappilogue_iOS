@@ -17,7 +17,7 @@ struct ScheduleTitle {
 class WeekCell: BaseCollectionViewCell {
     static let registerId = "\(WeekCell.self)"
     
-    var calendarViewModel = CalendarViewModel()
+    var viewModel = CalendarViewModel()
     
     var preMonthScheduleList: [[ScheduleTitle?]] = Array(repeating: Array(repeating: nil, count: 10), count: 32)
     var currentMonthScheduleList: [[ScheduleTitle?]] = Array(repeating: Array(repeating: nil, count: 10), count: 32)
@@ -33,6 +33,7 @@ class WeekCell: BaseCollectionViewCell {
     private var year: Int = 0
     private var month: Int = 0
     private var schedules: [Schedule2222] = []
+    private var dotDates = Array(repeating: [Int](), count: 3)
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -79,7 +80,7 @@ class WeekCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(year: Int, month: Int, weekIndex: Int) {
+    func configure(year: Int, month: Int, weekIndex: Int, dotDates: [[Int]]) {
         selectedDate = SelectedDate(year: year, month: month)
         self.year = year
         self.month = month
@@ -89,6 +90,8 @@ class WeekCell: BaseCollectionViewCell {
         nextMonthScheduleList = Array(repeating: Array(repeating: nil, count: 10), count: 32)
         days = monthlyCalendar.getMonthlyCalendar(year: year, month: month).reduce([], +)
         week = monthlyCalendar.getWeek(year: year, month: month, weekIndex: weekIndex)
+        self.dotDates = dotDates
+
         collectionView.reloadData()
     }
 
@@ -122,7 +125,7 @@ class WeekCell: BaseCollectionViewCell {
     }
     
     @objc private func dayButtonTapped(_ button: UIButton) {
-        let date = calendarViewModel.convertIntToDate(year: year, month: month, day: Int(week[button.tag]) ?? 0)
+        let date = viewModel.convertIntToDate(year: year, month: month, day: Int(week[button.tag]) ?? 0)
         let convertedDate = date?.formatToyyyyMMddDateString()
         NotificationCenter.default.post(name: Notification.Name("PresentScheduleViewController"), object: convertedDate)
     }
@@ -162,6 +165,35 @@ extension WeekCell: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ScheduleDotCell.registerId, for: indexPath) as? ScheduleDotCell else { return UICollectionViewCell() }
             
             let day = Int(week[indexPath.row]) ?? 0
+            var status = false
+            
+            if weekIndex == 0 {
+                if !monthlyCalendar.isLastMonth(indexPath.row) {
+                    if dotDates[0].contains(day) {
+                        status = true
+                    }
+                } else {
+                    if dotDates[1].contains(day) {
+                        status = true
+                    }
+                }
+            } else if weekIndex == monthlyCalendar.getWeekCount(year: selectedDate.year, month: selectedDate.month) - 1 {
+                if !monthlyCalendar.isNextMonth(indexPath.row) {
+                    if dotDates[2].contains(day) {
+                        status = true
+                    }
+                } else {
+                    if dotDates[1].contains(day) {
+                        status = true
+                    }
+                }
+            } else {
+                if dotDates[1].contains(day) {
+                    status = true
+                }
+            }
+            
+            cell.configure(scheduleStatus: status)
             
             return cell
         }
