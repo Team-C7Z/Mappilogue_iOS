@@ -323,9 +323,17 @@ class CalendarViewModel {
     }
     
     func setDateFormatter(date: SelectedDate) -> Date? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyyMMdd"
-        return dateFormatter.date(from: "\(date.year)\(String(format: "%02d", date.month))\(String(format: "%02d", date.day ?? 0))")
+        var calendar = Calendar.current
+        
+        var dateComponents = DateComponents()
+        dateComponents.year = date.year
+        dateComponents.month = date.month
+        
+        guard let date = calendar.date(from: dateComponents) else {
+            return nil
+        }
+        
+        return date
     }
     
     func daysBetweenDates(start: Date, end: Date) -> Int? {
@@ -386,8 +394,10 @@ class CalendarViewModel {
         let calendar = Calendar.current
         let currentDate = Date()
         
-        let currentYear = calendar.component(.year, from: currentDate)
-        let currentMonth = calendar.component(.month, from: currentDate)
+        guard let selectedDate = setDateFormatter(date: selectedDate) else { return .unknown }
+  
+        let currentYear = calendar.component(.year, from: selectedDate)
+        let currentMonth = calendar.component(.month, from: selectedDate)
         
         let targetYear = calendar.component(.year, from: date)
         let targetMonth = calendar.component(.month, from: date)

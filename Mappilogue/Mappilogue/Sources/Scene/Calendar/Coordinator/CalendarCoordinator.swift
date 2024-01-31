@@ -13,8 +13,9 @@ protocol CalendarDelegate: AnyObject {
 }
 
 class CalendarCoordinator: BaseCoordinator, CalendarDelegate {
+    let calendarViewController = CalendarViewController()
+    
     override func start() {
-        let calendarViewController = CalendarViewController()
         calendarViewController.coordinator = self
         navigationController.pushViewController(calendarViewController, animated: false)
     }
@@ -27,6 +28,7 @@ class CalendarCoordinator: BaseCoordinator, CalendarDelegate {
     
     func showDatePickerViewController(date: SelectedDate?) {
         let coordinator = DatePickerCoordinator(navigationController: self.navigationController)
+        coordinator.delegate = self
         coordinator.showDatePickerViewController(date: date)
         self.childCoordinators.append(coordinator)
     }
@@ -47,5 +49,11 @@ class CalendarCoordinator: BaseCoordinator, CalendarDelegate {
         let coordinator = WriteRecordCoordinator(navigationController: self.navigationController)
         coordinator.showWriteRecordViewController(schedule: schedule)
         self.childCoordinators.append(coordinator)
+    }
+}
+
+extension CalendarCoordinator: DismissDatePickerDelegate {
+    func changedDate(_ date: SelectedDate) {
+        calendarViewController.chagedDate(date)
     }
 }

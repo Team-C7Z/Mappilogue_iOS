@@ -8,20 +8,28 @@
 import Foundation
 
 protocol DatePickerDelegate: AnyObject {
-    func dismissViewController()
+    func dismissViewController(date: SelectedDate)
+}
+
+protocol DismissDatePickerDelegate: AnyObject {
+    func changedDate(_ date: SelectedDate)
 }
 
 class DatePickerCoordinator: BaseCoordinator, DatePickerDelegate {
+    weak var delegate: DismissDatePickerDelegate?
+    
     override func start() { }
     
     func showDatePickerViewController(date: SelectedDate?) {
         let datePickerViewController = DatePickerViewController()
+        datePickerViewController.coordinator = self
         datePickerViewController.viewModel.selectedDate = date
         datePickerViewController.modalPresentationStyle = .overCurrentContext
         navigationController.present(datePickerViewController, animated: false)
     }
     
-    func dismissViewController() {
+    func dismissViewController(date: SelectedDate) {
+        delegate?.changedDate(date)
         childDidFinish(self)
         navigationController.dismiss(animated: false)
     }

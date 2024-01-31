@@ -11,8 +11,6 @@ class DatePickerViewController: BaseViewController {
     weak var coordinator: DatePickerCoordinator?
     var viewModel = DatePickerViewModel()
  
-    weak var delegate: ChangedDateDelegate?
-    
     let datePickerOuterView = UIView()
     let datePickerView = UIPickerView()
     
@@ -70,8 +68,7 @@ class DatePickerViewController: BaseViewController {
             self.datePickerOuterView.frame.origin.y = 0
         }, completion: { _ in
             guard let date = self.viewModel.selectedDate else { return }
-            self.delegate?.chagedDate(date)
-            self.coordinator?.dismissViewController()
+            self.coordinator?.dismissViewController(date: date)
         })
     }
 
@@ -138,8 +135,4 @@ extension DatePickerViewController: UIPickerViewDelegate, UIPickerViewDataSource
         }
         pickerView.reloadComponent(component)
     }
-}
-
-protocol ChangedDateDelegate: AnyObject {
-    func chagedDate(_ selectedDate: SelectedDate)
 }

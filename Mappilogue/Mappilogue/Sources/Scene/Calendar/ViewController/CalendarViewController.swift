@@ -210,13 +210,14 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
     }
 }
 
-extension CalendarViewController: ChangedDateDelegate {
+extension CalendarViewController {
     func chagedDate(_ selectedDate: SelectedDate) {
         view.backgroundColor = .grayF9F8F7
         viewModel.selectedDate = selectedDate
         updateCurrentDateLabel()
-
-        collectionView.reloadData()
+        loadCalendarData111()
+        
+        print(viewModel.dotDates, 111)
     }
     
     private func updateCurrentDateLabel() {
