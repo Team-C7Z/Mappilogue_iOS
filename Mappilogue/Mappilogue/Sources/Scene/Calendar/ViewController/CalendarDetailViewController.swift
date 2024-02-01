@@ -36,25 +36,17 @@ class CalendarDetailViewController: BaseViewController {
     }()
     
     private let addScheduleButton = AddScheduleButton()
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        loadCalendarData()
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupProperty()
-        setupHierarchy()
-        setupLayout()
+
+        loadCalendarData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
        
-        animateAddScheduleButton()
+   //         animateAddScheduleButton()
     }
     
     override func setupProperty() {
@@ -85,17 +77,18 @@ class CalendarDetailViewController: BaseViewController {
             $0.centerX.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().offset(-16)
-            $0.height.equalTo(429)
         }
         
         dateLabel.snp.makeConstraints {
             $0.top.equalTo(modalView).offset(30)
             $0.leading.equalTo(modalView).offset(20)
+            $0.bottom.equalTo(modalView).offset(-369)
         }
         
         lunarDateLabel.snp.makeConstraints {
             $0.centerY.equalTo(dateLabel)
             $0.leading.equalTo(dateLabel.snp.trailing).offset(6)
+            $0.trailing.lessThanOrEqualTo(modalView).offset(-20)
         }
         
         collectionView.snp.makeConstraints {
@@ -121,34 +114,27 @@ class CalendarDetailViewController: BaseViewController {
             self.addScheduleButton.frame.origin.y = self.addButtonLocation?.minY ?? 0
             self.view.layoutIfNeeded()
         }, completion: { _ in
-            NotificationCenter.default.post(name: Notification.Name("DismissScheduleViewController"), object: nil)
+//            NotificationCenter.default.post(name: Notification.Name("DismissScheduleViewController"), object: nil)
             self.coordinator?.dismissViewController()
         })
     }
     
     func loadCalendarData() {
-        CalendarManager111.shared.getScheduleDetail(date: viewModel.date) { result in
-            switch result {
-            case .success(let response):
-                guard let baseResponse = response as? BaseDTO<ScheduleDetailDTO>, let result = baseResponse.result else { return }
-                self.viewModel.schedules = result
-                self.collectionView.reloadData()
-                self.setDateLabel(date: self.viewModel.schedules.solarDate, lunarDate: self.viewModel.schedules.lunarDate)
-            default:
-                break
+        DispatchQueue.global().async {
+            CalendarManager111.shared.getScheduleDetail(date: self.viewModel.date) { result in
+                switch result {
+                case .success(let response):
+                    guard let baseResponse = response as? BaseDTO<ScheduleDetailDTO>, let result = baseResponse.result else { return }
+                    self.viewModel.schedules = result
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                        self.setDateLabel(date: self.viewModel.schedules.solarDate, lunarDate: self.viewModel.schedules.lunarDate)
+                    }
+                default:
+                    break
+                }
             }
         }
-//        viewModel.getScheduleDetail(date: viewModel.date)
-//        
-//        viewModel.$scheduleDetailResult
-//            .receive(on: DispatchQueue.main)
-//            .sink(receiveValue: { result in
-//                guard let result else { return }
-//                self.viewModel.schedules = result
-//                self.collectionView.reloadData()
-//                self.setDateLabel(date: self.viewModel.schedules.solarDate, lunarDate: self.viewModel.schedules.lunarDate)
-//            })
-//            .store(in: &viewModel.cancellables)
     }
 
     func setDateLabel(date: String, lunarDate: String) {
@@ -157,20 +143,21 @@ class CalendarDetailViewController: BaseViewController {
     }
     
     func animateAddScheduleButton() {
+        let maxX = self.modalView.frame.maxX
+        let maxY = self.modalView.frame.maxY
+    
         UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
-       
-            let maxX = self.modalView.frame.maxX
-            let maxY = self.modalView.frame.maxY
             self.addScheduleButton.frame.origin.x = maxX - 20 - 56
             self.addScheduleButton.frame.origin.y = maxY - 20 - 56
- 
+            
             self.view.layoutIfNeeded()
         })
     }
     
     @objc func addScheduleButtonTapped(_ sender: UIButton) {
         onAddScheduleButtonTapped?(nil)
-        coordinator?.dismissViewController()
+      //  coordinator?.dismissViewController())
+        coordinator?.showAddScheduleViewController()
     }
     
     private func presentEditScheduleViewController() {

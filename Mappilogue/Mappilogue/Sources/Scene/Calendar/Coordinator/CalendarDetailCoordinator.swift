@@ -12,8 +12,14 @@ protocol CalendarDetailDelegate: AnyObject {
     func dismissViewController()
 }
 
+protocol ShowAddScheduleDelegate: AnyObject {
+    func showAddScheduleViewController()
+}
+
 class CalendarDetailCoordinator: BaseCoordinator, CalendarDetailDelegate {
     override func start() { }
+    
+    weak var delegate: ShowAddScheduleDelegate?
     
     func showCalendarDetailViewController(date: String, frame: CGRect) {
         let calendarDetailViewController = CalendarDetailViewController()
@@ -38,6 +44,11 @@ class CalendarDetailCoordinator: BaseCoordinator, CalendarDetailDelegate {
      //   editViewController.onModify = { self.showWriteRecordViewController() }
      //   editViewController.onDelete = { self.deleteSchedule() }
         navigationController.present(editViewController, animated: false)
+    }
+    
+    func showAddScheduleViewController() {
+        dismissViewController()
+        delegate?.showAddScheduleViewController()
     }
     
     func dismissViewController() {

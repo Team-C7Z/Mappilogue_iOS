@@ -35,6 +35,7 @@ class CalendarCoordinator: BaseCoordinator, CalendarDelegate {
     
     func showCalendarDetailViewController(date: String, frame: CGRect) {
         let coordinator = CalendarDetailCoordinator(navigationController: self.navigationController)
+        coordinator.delegate = self
         coordinator.showCalendarDetailViewController(date: date, frame: frame)
         self.childCoordinators.append(coordinator)
     }
@@ -55,5 +56,11 @@ class CalendarCoordinator: BaseCoordinator, CalendarDelegate {
 extension CalendarCoordinator: DismissDatePickerDelegate {
     func changedDate(_ date: SelectedDate) {
         calendarViewController.chagedDate(date)
+    }
+}
+
+extension CalendarCoordinator: ShowAddScheduleDelegate {
+    func showAddScheduleViewController() {
+        showAddScheduleViewController(scheduleId: nil)
     }
 }
