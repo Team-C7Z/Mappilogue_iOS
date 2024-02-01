@@ -236,33 +236,6 @@ class CalendarViewModel {
         return dateFormatter.string(from: date!)
     }
     
-    func compareDateToCurrentMonth(selectedDate: SelectedDate, date: String) -> MonthType {
-        let dateFormatter = DateFormatter()
-           dateFormatter.dateFormat = "yyyy-MM-dd"
-           
-        guard let inputDate = dateFormatter.date(from: date) else {
-            return .unknown
-        }
-        
-        let calendar = Calendar.current
-        guard let currentDate = convertIntToDate(year: selectedDate.year, month: selectedDate.month, day: nil) else { return .unknown }
-        
-        let inputYear = calendar.component(.year, from: inputDate)
-        let inputMonth = calendar.component(.month, from: inputDate)
-        let currentYear = calendar.component(.year, from: currentDate)
-        let currentMonth = calendar.component(.month, from: currentDate)
-
-        if inputYear == currentYear && inputMonth == currentMonth {
-            return .currentMonth
-        } else if inputYear == currentYear && inputMonth == currentMonth + 1 {
-            return .nextMonth
-        } else if inputYear == currentYear && inputMonth == currentMonth - 1 {
-            return .lastMonth
-        } else {
-            return .unknown
-        }
-    }
-    
     func datesBetween(startDate: String, endDate: String) -> [Date]? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -296,23 +269,6 @@ class CalendarViewModel {
         return nil
     }
     
-    func convertIntToDate(year: Int, month: Int, day: Int?) -> Date? {
-        var dateComponents = DateComponents()
-        dateComponents.year = year
-        dateComponents.month = month
-        
-        if let day {
-            dateComponents.day = day
-        }
-        
-        let calendar = Calendar.current
-        if let date = calendar.date(from: dateComponents) {
-            return date
-        } else {
-            return nil
-        }
-    }
-    
     func daysBetween(start: SelectedDate, end: SelectedDate) -> Int {
         let startDate = setDateFormatter(date: start)
         let endDate = setDateFormatter(date: end)
@@ -323,11 +279,12 @@ class CalendarViewModel {
     }
     
     func setDateFormatter(date: SelectedDate) -> Date? {
-        var calendar = Calendar.current
+        let calendar = Calendar.current
         
         var dateComponents = DateComponents()
         dateComponents.year = date.year
         dateComponents.month = date.month
+        dateComponents.day = date.day
         
         guard let date = calendar.date(from: dateComponents) else {
             return nil
@@ -451,23 +408,4 @@ enum MonthType: String, Codable {
     case currentMonth
     case nextMonth
     case unknown
-}
-
-extension CalendarViewModel {
-    func getCalendar(calendar: Calendar1) {
-        calendarManager.getCalendar(calendar: calendar)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    print(completion, 44)
-                    break
-                case .failure:
-                    print("error")
-                }
-            }, receiveValue: { response in
-                self.calendarResult = response.result
-            })
-            .store(in: &cancellables)
-    }
 }

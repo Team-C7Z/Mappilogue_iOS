@@ -12,22 +12,6 @@ import Moya
 struct CalendarManager: CalendarAPI {
     private let baseURL = "\(Environment.baseURL)/api/v1/schedules/"
     
-    func getCalendar(calendar: Calendar1) -> AnyPublisher<BaseDTO<CalendarDTO>, Error> {
-        let url = URL(string: "\(baseURL)calendars?year=\(calendar.year)&month=\(calendar.month)")!
-        let request = setupRequest(for: url, method: "Get")
-        
-        return URLSession.shared.dataTaskPublisher(for: request)
-            .tryMap { data, response in
-                print(data, response, 22)
-                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                    throw URLError(.badServerResponse)
-                }
-                return data
-            }
-            .decode(type: BaseDTO<CalendarDTO>.self, decoder: JSONDecoder())
-            .eraseToAnyPublisher()
-    }
-    
     func getScheduleDetail(date: String) -> AnyPublisher<BaseDTO<ScheduleDetailDTO>, Error> {
         let url = URL(string: "\(baseURL)detail-by-date?date=\(date)")!
         let request = setupRequest(for: url, method: "Get")
@@ -83,6 +67,20 @@ struct CalendarManager111 {
                 let statusCode = response.statusCode
                 let data = response.data
                 let networkResult = self.judgeStatus(statusCode, data, BaseDTO<CalendarDTO>.self)
+                completion(networkResult)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func getScheduleDetail(date: String, completion: @escaping (NetworkResult<Any>) -> Void) {
+        provider.request(.getScheduleDetail(date: date)) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<ScheduleDetailDTO>.self)
                 completion(networkResult)
             case .failure(let error):
                 print(error)

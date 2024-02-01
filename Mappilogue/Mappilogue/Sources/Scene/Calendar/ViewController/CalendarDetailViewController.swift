@@ -127,26 +127,36 @@ class CalendarDetailViewController: BaseViewController {
     }
     
     func loadCalendarData() {
-        viewModel.getScheduleDetail(date: viewModel.date)
-        
-        viewModel.$scheduleDetailResult
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { result in
-                guard let result else { return }
+        CalendarManager111.shared.getScheduleDetail(date: viewModel.date) { result in
+            switch result {
+            case .success(let response):
+                guard let baseResponse = response as? BaseDTO<ScheduleDetailDTO>, let result = baseResponse.result else { return }
                 self.viewModel.schedules = result
                 self.collectionView.reloadData()
                 self.setDateLabel(date: self.viewModel.schedules.solarDate, lunarDate: self.viewModel.schedules.lunarDate)
-            })
-            .store(in: &viewModel.cancellables)
+            default:
+                break
+            }
+        }
+//        viewModel.getScheduleDetail(date: viewModel.date)
+//        
+//        viewModel.$scheduleDetailResult
+//            .receive(on: DispatchQueue.main)
+//            .sink(receiveValue: { result in
+//                guard let result else { return }
+//                self.viewModel.schedules = result
+//                self.collectionView.reloadData()
+//                self.setDateLabel(date: self.viewModel.schedules.solarDate, lunarDate: self.viewModel.schedules.lunarDate)
+//            })
+//            .store(in: &viewModel.cancellables)
     }
 
     func setDateLabel(date: String, lunarDate: String) {
         dateLabel.text = viewModel.setDate(date: date)
-        lunarDateLabel.text = viewModel.setDate(date: lunarDate)
+        lunarDateLabel.text = "음력 \(viewModel.setDate(date: lunarDate))"
     }
     
     func animateAddScheduleButton() {
-        
         UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
        
             let maxX = self.modalView.frame.maxX

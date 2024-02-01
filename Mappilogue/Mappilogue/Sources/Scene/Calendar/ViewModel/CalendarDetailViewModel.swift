@@ -52,7 +52,7 @@ class CalendarDetailViewModel {
         let dateArr = date.split(separator: " ").map {String($0)}
         let (dateMonth, dateDay) = (dateArr[1], dateArr[2])
         
-        return dateMonth + dateDay
+        return dateMonth + " " + dateDay
     }
     
 }

@@ -216,8 +216,6 @@ extension CalendarViewController {
         viewModel.selectedDate = selectedDate
         updateCurrentDateLabel()
         loadCalendarData111()
-        
-        print(viewModel.dotDates, 111)
     }
     
     private func updateCurrentDateLabel() {

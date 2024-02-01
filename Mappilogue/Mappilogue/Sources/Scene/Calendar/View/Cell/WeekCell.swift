@@ -34,6 +34,8 @@ class WeekCell: BaseCollectionViewCell {
     private var month: Int = 0
     private var schedules: [Schedule2222] = []
     private var dotDates = Array(repeating: [Int](), count: 3)
+    private var lastMonthIndex: Int = 0
+    private var nextMonthIndex: Int = 0
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -125,8 +127,19 @@ class WeekCell: BaseCollectionViewCell {
     }
     
     @objc private func dayButtonTapped(_ button: UIButton) {
-        let date = viewModel.convertIntToDate(year: year, month: month, day: Int(week[button.tag]) ?? 0)
+        var date: Date?
+        if weekIndex == 0 && button.tag <= lastMonthIndex {
+            let previousMonth = viewModel.changePreviousMonth(SelectedDate(year: year, month: month, day: Int(week[button.tag]) ?? 0))
+            date = viewModel.setDateFormatter(date: previousMonth)
+        } else if weekIndex == monthlyCalendar.getWeekCount(year: selectedDate.year, month: selectedDate.month) - 1 && nextMonthIndex < button.tag {
+                let nextMonth = viewModel.changeNextMonth(SelectedDate(year: year, month: month, day: Int(week[button.tag]) ?? 0))
+                date = viewModel.setDateFormatter(date: nextMonth)
+        } else {
+            date = viewModel.setDateFormatter(date: SelectedDate(year: year, month: month, day: Int(week[button.tag]) ?? 0))
+        }
+
         let convertedDate = date?.formatToyyyyMMddDateString()
+    
         NotificationCenter.default.post(name: Notification.Name("PresentScheduleViewController"), object: convertedDate)
     }
 }
@@ -151,11 +164,21 @@ extension WeekCell: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
             let isToday = monthlyCalendar.isToday(year: selectedDate.year, month: selectedDate.month, day: day)
           
             if weekIndex == 0 {
-                isCurrentMonth = monthlyCalendar.isLastMonth(indexPath.row)
+                if monthlyCalendar.isLastMonth(indexPath.row) {
+                    isCurrentMonth = true
+                } else {
+                    isCurrentMonth = false
+                    lastMonthIndex = indexPath.row
+                }
             }
             
             if weekIndex == monthlyCalendar.getWeekCount(year: selectedDate.year, month: selectedDate.month) - 1 {
-                isCurrentMonth = monthlyCalendar.isNextMonth(indexPath.row)
+                if monthlyCalendar.isNextMonth(indexPath.row) {
+                    isCurrentMonth = true
+                    nextMonthIndex = indexPath.row
+                } else {
+                    isCurrentMonth = false
+                }
             }
             
             cell.configure(with: day, isCurrentMonth: isCurrentMonth, isSaturday: isSaturday, isSunday: isSunday, isToday: isToday)

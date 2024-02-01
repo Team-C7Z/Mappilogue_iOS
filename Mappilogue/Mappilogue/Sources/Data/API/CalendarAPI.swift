@@ -11,6 +11,7 @@ import Combine
 
 enum CalendarAPI111: BaseAPI {
     case getCalendar(year: Int, month: Int)
+    case getScheduleDetail(date: String)
 }
 
 extension CalendarAPI111: TargetType {
@@ -18,12 +19,16 @@ extension CalendarAPI111: TargetType {
         switch self {
         case .getCalendar:
             return "api/v1/schedules/calendars"
+        case .getScheduleDetail:
+            return "/api/v1/schedules/detail-by-date"
         }
     }
     
     var method: Moya.Method {
         switch self {
         case .getCalendar:
+            return .get
+        case .getScheduleDetail:
             return .get
         }
     }
@@ -36,12 +41,17 @@ extension CalendarAPI111: TargetType {
                 "month": month
             ]
             return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
+        case let .getScheduleDetail(date):
+            let requestParameters: [String: Any] = [
+                "date": date
+            ]
+            return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
+            
         }
     }
 }
 
 protocol CalendarAPI {
-    func getCalendar(calendar: Calendar1) -> AnyPublisher<BaseDTO<CalendarDTO>, Error>
     func getScheduleDetail(date: String) -> AnyPublisher<BaseDTO<ScheduleDetailDTO>, Error>
     func deleteSchedule(id: Int) -> AnyPublisher<Void, Error>
 }

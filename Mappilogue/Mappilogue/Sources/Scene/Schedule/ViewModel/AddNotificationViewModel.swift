@@ -41,10 +41,10 @@ class AddNotificationViewModel {
     
     func setCurrentDate() -> SelectedNotification {
         let todayDate = "당일 (\(calendarViewModel.currentMonth)월 \(calendarViewModel.currentDay)일)"
-        let notification = calendarViewModel.convertIntToDate(
+        let notification = calendarViewModel.setDateFormatter(date: SelectedDate(
             year: calendarViewModel.currentYear,
             month: calendarViewModel.currentMonth,
-            day: calendarViewModel.currentDay
+            day: calendarViewModel.currentDay)
         )?.formatToyyyyMMddDateString()
         return SelectedNotification(notification: notification, date: todayDate, hour: 9, minute: 0, timePeriod: "AM")
     }
