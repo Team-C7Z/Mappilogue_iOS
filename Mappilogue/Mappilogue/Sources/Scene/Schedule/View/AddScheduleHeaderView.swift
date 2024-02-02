@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MappilogueKit
 
 class AddScheduleHeaderView: BaseCollectionReusableView {
     static let registerId = "\(AddScheduleHeaderView.self)"
@@ -21,7 +22,6 @@ class AddScheduleHeaderView: BaseCollectionReusableView {
     var onStartDateButtonTapped: ((AddScheduleDateType) -> Void)?
     var onEndDateButtonTapped: ((AddScheduleDateType) -> Void)?
     var onNotificationButtonTapped: (() -> Void)?
-    var onRepeatButtonTapped: (() -> Void)?
     
     private let titleColorStackView = UIStackView()
     private let stackView = UIStackView()
@@ -29,7 +29,6 @@ class AddScheduleHeaderView: BaseCollectionReusableView {
     private let colorSelectionView = ColorSelectionView()
     private let scheduleDurationView = ScheduleDurationView()
     private let notificationButton = NotificationRepeatButton()
-    private let repeatButton = NotificationRepeatButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -57,8 +56,7 @@ class AddScheduleHeaderView: BaseCollectionReusableView {
         stackView.spacing = 1
         stackView.backgroundColor = .grayEAE6E1
     
-        notificationButton.configure(imageName: "notification", title: "알림")
-        repeatButton.configure(imageName: "repeat", title: "반복")
+        notificationButton.configure(imageName: Images.image(named: .imageScheduleNotification), title: "알림")
     }
     
     override func setupHierarchy() {
@@ -70,7 +68,6 @@ class AddScheduleHeaderView: BaseCollectionReusableView {
         titleColorStackView.addArrangedSubview(colorSelectionView)
         stackView.addArrangedSubview(scheduleDurationView)
         stackView.addArrangedSubview(notificationButton)
-        stackView.addArrangedSubview(repeatButton)
     }
     
     override func setupLayout() {
@@ -98,7 +95,7 @@ class AddScheduleHeaderView: BaseCollectionReusableView {
         if let index = colorList.firstIndex(where: {$0.id == colorId}) {
             let colorCode = colorList[index].code
             let color = UIColor.fromHex(colorCode)
-            scheduleTitleColorView.configure(true, title: title, colorId: colorId, color: color, isColorSelection: isColorSelection)
+            scheduleTitleColorView.configure(true, title: title, colorId: colorId, color: color)
         }
     }
     
@@ -121,15 +118,10 @@ class AddScheduleHeaderView: BaseCollectionReusableView {
     
     private func setNotificationRepeatButtonAction() {
         notificationButton.addTarget(self, action: #selector(notificationButtonTapped), for: .touchUpInside)
-        repeatButton.addTarget(self, action: #selector(repeatButtonTapped), for: .touchUpInside)
     }
 
     @objc private func notificationButtonTapped() {
         onNotificationButtonTapped?()
-    }
-    
-    @objc private func repeatButtonTapped() {
-        onRepeatButtonTapped?()
     }
 }
 
@@ -161,7 +153,7 @@ extension AddScheduleHeaderView {
             if let index = colorList.firstIndex(where: {$0.id == self.colorId}) {
                 let colorCode = colorList[index].code
                 let color = UIColor.fromHex(colorCode)
-                scheduleTitleColorView.configure(true, title: title, colorId: colorId, color: color, isColorSelection: isColorSelection)
+                scheduleTitleColorView.configure(true, title: title, colorId: colorId, color: color)
             }
             
             colorSelectionView.configure(colorId, colorList: colorList)

@@ -27,6 +27,7 @@ public class Images {
         case imageModify = "image_modify"
         case imageDelete = "image_delete"
         case imageOrder = "image_order"
+        case imageScheduleNotification = "image_schedule_notification"
         case imageMainLocation = "image_main_location"
         case imageMainLocationPin = "image_main_location_pin"
         case imagePinFill = "image_pin_fill"

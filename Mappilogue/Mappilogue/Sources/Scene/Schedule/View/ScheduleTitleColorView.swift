@@ -52,20 +52,21 @@ class ScheduleTitleColorView: BaseView {
         }
     }
     
-    func configure(_ isAdd: Bool, title: String, colorId: Int, color: UIColor, isColorSelection: Bool) {
+    func configure(_ isAdd: Bool, title: String, colorId: Int, color: UIColor) {
         scheduleTitleTextField.text = title
         scheduleTitleTextField.textColor = isAdd ? .black1C1C1C : .grayC9C6C2
         
         if color == .black1C1C1C || color == .gray9B9791 || color == .gray404040 {
-            colorSelectionButton.configure(textColor: .whiteFFFFFF, color: color, isColorSelection: isColorSelection)
+            colorSelectionButton.configure(textColor: .whiteFFFFFF, color: color)
         } else {
-            colorSelectionButton.configure(textColor: .black1C1C1C, color: color, isColorSelection: isColorSelection)
+            colorSelectionButton.configure(textColor: .black1C1C1C, color: color)
         }
     }
     
     @objc func colorSelectionButtonTapped(_ button: UIButton) {
         button.isSelected = !button.isSelected
         onColorSelectionButtonTapped?(button.isSelected)
+        colorSelectionButton.switchColorSelectionButton(button.isSelected)
     }
 }
 

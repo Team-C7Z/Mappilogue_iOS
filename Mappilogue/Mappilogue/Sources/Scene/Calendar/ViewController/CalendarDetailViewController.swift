@@ -46,7 +46,7 @@ class CalendarDetailViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
        
-   //         animateAddScheduleButton()
+    //    animateAddScheduleButton()
     }
     
     override func setupProperty() {
@@ -114,7 +114,7 @@ class CalendarDetailViewController: BaseViewController {
             self.addScheduleButton.frame.origin.y = self.addButtonLocation?.minY ?? 0
             self.view.layoutIfNeeded()
         }, completion: { _ in
-//            NotificationCenter.default.post(name: Notification.Name("DismissScheduleViewController"), object: nil)
+            NotificationCenter.default.post(name: Notification.Name("DismissScheduleViewController"), object: nil)
             self.coordinator?.dismissViewController()
         })
     }
@@ -230,8 +230,10 @@ extension CalendarDetailViewController: UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let id = viewModel.schedules.schedulesOnSpecificDate[indexPath.row].scheduleId
-        onAddScheduleButtonTapped?(id)
-        coordinator?.dismissViewController()
+        if !viewModel.schedules.schedulesOnSpecificDate.isEmpty {
+            let id = viewModel.schedules.schedulesOnSpecificDate[indexPath.row].scheduleId
+            onAddScheduleButtonTapped?(id)
+            coordinator?.dismissViewController()
+        }
     }
 }

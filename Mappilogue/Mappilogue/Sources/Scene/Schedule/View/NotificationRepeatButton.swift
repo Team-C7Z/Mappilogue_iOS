@@ -54,8 +54,8 @@ class NotificationRepeatButton: BaseButton {
         }
     }
     
-    func configure(imageName: String, title: String) {
-        image.image = UIImage(named: imageName)
+    func configure(imageName: UIImage, title: String) {
+        image.image = imageName
         label.text = title
     }
 }

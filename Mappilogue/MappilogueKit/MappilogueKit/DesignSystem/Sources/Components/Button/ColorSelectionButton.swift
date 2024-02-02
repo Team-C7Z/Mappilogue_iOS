@@ -16,7 +16,7 @@ public class ColorSelectionButton: UIButton {
 
         colorSelectionLabel.textColor = textColor
         backgroundColor = color
-        colorSelectionArrowImage.image = UIImage(named: "closedColorSelection")
+        colorSelectionArrowImage.image = UIImage(named: "opendColorSelection")
         colorSelectionArrowImage.tintColor = .whiteFFFFFF
         colorSelectionArrowImage.tintColor = textColor
       
@@ -59,12 +59,15 @@ public class ColorSelectionButton: UIButton {
         }
     }
     
-    public func configure(textColor: UIColor, color: UIColor, isColorSelection: Bool) {
+    public func configure(textColor: UIColor, color: UIColor) {
         colorSelectionLabel.textColor = textColor
         backgroundColor = color
-        colorSelectionArrowImage.image = UIImage(named: !isColorSelection ? "opendColorSelection" : "closedColorSelection")
         colorSelectionArrowImage.tintColor = .whiteFFFFFF
         colorSelectionArrowImage.tintColor = textColor
+    }
+    
+    public func switchColorSelectionButton(_ isColorSelection: Bool) {
+        colorSelectionArrowImage.image = UIImage(named: !isColorSelection ? "opendColorSelection" : "closedColorSelection")
         
 //        if isColorSelection {
 //            UIView.animate(withDuration: 0.3, delay: 0, options: .curveLinear, animations: {

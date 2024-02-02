@@ -33,10 +33,14 @@ class CalendarViewController: NavigationBarViewController {
     
     private var addScheduleButton = AddScheduleButton()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loadCalendarData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        loadCalendarData111()
         
         NotificationCenter.default.addObserver(self, selector: #selector(presentScheduleViewContoller), name: Notification.Name("PresentScheduleViewController"), object: nil)
         
@@ -114,7 +118,7 @@ class CalendarViewController: NavigationBarViewController {
         viewModel.selectedDate = SelectedDate(year: viewModel.currentYear, month: viewModel.currentMonth)
     }
     
-    func loadCalendarData111() {
+    func loadCalendarData() {
         CalendarManager111.shared.getCalendar(year: viewModel.currentYear, month: viewModel.currentMonth, completion: { result in
             switch result {
             case .success(let response):
@@ -215,7 +219,7 @@ extension CalendarViewController {
         view.backgroundColor = .grayF9F8F7
         viewModel.selectedDate = selectedDate
         updateCurrentDateLabel()
-        loadCalendarData111()
+        loadCalendarData()
     }
     
     private func updateCurrentDateLabel() {
