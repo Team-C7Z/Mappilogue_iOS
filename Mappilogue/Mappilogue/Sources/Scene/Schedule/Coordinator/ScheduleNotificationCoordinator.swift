@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol AddNotificationDelegate: AnyObject {
+protocol ScheduleNotificationDelegate: AnyObject {
     func popViewController()
 }
 
-class AddNotificationCoordinator: AppCoordinator, AddNotificationDelegate {
+class ScheduleNotificationCoordinator: AppCoordinator, ScheduleNotificationDelegate {
     override func start() { 
-        let addNotificationViewController = AddNotificationViewController()
+        let addNotificationViewController = ScheduleNotificationViewController()
         addNotificationViewController.coordinator = self
         navigationController.pushViewController(addNotificationViewController, animated: false)
     }

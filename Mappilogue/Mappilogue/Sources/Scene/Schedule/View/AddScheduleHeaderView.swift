@@ -19,8 +19,7 @@ class AddScheduleHeaderView: BaseCollectionReusableView {
     var onScheduleTitle: ((String) -> Void)?
     var onColorSelectionButtonTapped: (() -> Void)?
     var onColorIndex: ((Int) -> Void)?
-    var onStartDateButtonTapped: ((AddScheduleDateType) -> Void)?
-    var onEndDateButtonTapped: ((AddScheduleDateType) -> Void)?
+    var onSelectedDateButtonTapped: ((AddScheduleDateType) -> Void)?
     var onNotificationButtonTapped: (() -> Void)?
     
     private let titleColorStackView = UIStackView()
@@ -109,11 +108,11 @@ class AddScheduleHeaderView: BaseCollectionReusableView {
     }
     
     @objc private func startDateButtonTapped(_ sender: UIButton) {
-        onStartDateButtonTapped?(.startDate)
+        onSelectedDateButtonTapped?(.startDate)
     }
     
     @objc private func endDateButtonTapped(_ sender: UIButton) {
-        onEndDateButtonTapped?(.endDate)
+        onSelectedDateButtonTapped?(.endDate)
     }
     
     private func setNotificationRepeatButtonAction() {

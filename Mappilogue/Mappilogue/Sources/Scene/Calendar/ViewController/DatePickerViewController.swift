@@ -48,14 +48,15 @@ class DatePickerViewController: BaseViewController {
 
         datePickerOuterView.snp.makeConstraints {
             $0.top.equalTo(view)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(238)
+            $0.leading.trailing.equalTo(view)
+            $0.height.equalTo(266)
         }
         
         datePickerView.snp.makeConstraints {
-            $0.top.centerX.equalTo(datePickerOuterView)
-            $0.width.equalTo(245)
-            $0.height.equalTo(230)
+            $0.centerX.equalTo(datePickerOuterView)
+            $0.width.equalTo(datePickerOuterView)
+            $0.top.equalTo(datePickerOuterView).offset(5)
+            $0.bottom.equalTo(datePickerOuterView)
         }
     }
     
@@ -111,14 +112,14 @@ extension DatePickerViewController: UIPickerViewDelegate, UIPickerViewDataSource
         switch component {
         case 0:
             if let selectedYear = viewModel.selectedDate?.year, selectedYear == viewModel.years[row] {
-                return "\(viewModel.years[row]) 년"
+                return "                \(viewModel.years[row]) 년"
             }
-            return "\(viewModel.years[row])"
+            return "            \(viewModel.years[row])"
         case 1:
             if let selectedMonth = viewModel.selectedDate?.month, selectedMonth == viewModel.months[row] {
-                return "\(viewModel.months[row]) 월"
+                return "\(viewModel.months[row]) 월                       "
             }
-            return "\(viewModel.months[row])"
+            return "\(viewModel.months[row])                        "
         default:
             return ""
         }

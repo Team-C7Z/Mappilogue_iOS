@@ -1,5 +1,5 @@
 //
-//  AddNotificationViewController.swift
+//  ScheduleNotificationViewController.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/07/15.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-class AddNotificationViewController: NavigationBarViewController {
-    weak var coordinator: AddNotificationCoordinator?
-    var viewModel = AddNotificationViewModel()
+class ScheduleNotificationViewController: NavigationBarViewController {
+    weak var coordinator: ScheduleNotificationCoordinator?
+    var viewModel = ScheduleNotificationViewModel()
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -125,7 +125,7 @@ class AddNotificationViewController: NavigationBarViewController {
     
 }
 
-extension AddNotificationViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension ScheduleNotificationViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.notificationList.count
     }
@@ -179,7 +179,7 @@ extension AddNotificationViewController: UICollectionViewDelegate, UICollectionV
     }
 }
 
-extension AddNotificationViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension ScheduleNotificationViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return viewModel.isDate ? 1 : 3
     }
