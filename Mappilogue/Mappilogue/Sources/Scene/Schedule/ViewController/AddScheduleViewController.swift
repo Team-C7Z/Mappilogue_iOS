@@ -36,13 +36,18 @@ class AddScheduleViewController: NavigationBarViewController {
         return collectionView
     }()
     
+    private let datePickerOuterView = UIView()
+    private let datePickerView = UIPickerView()
+    
     var keyboardTap = UITapGestureRecognizer()
+    var datePickerTap = UITapGestureRecognizer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
  
         getColorList()
         viewModel.setCurrentDate()
+        setSelectedDate()
         setKeyboardTap()
         loadScheduleData()
     }
@@ -52,6 +57,12 @@ class AddScheduleViewController: NavigationBarViewController {
 
         setNavigationBar()
         
+        datePickerOuterView.backgroundColor = .grayF5F3F0
+        datePickerOuterView.isHidden = true
+        datePickerView.backgroundColor = .grayF5F3F0
+        datePickerView.delegate = self
+        datePickerView.dataSource = self
+        datePickerTap = UITapGestureRecognizer(target: self, action: #selector(dismissDatePicker))
         keyboardTap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
     }
     
@@ -59,6 +70,8 @@ class AddScheduleViewController: NavigationBarViewController {
         super.setupHierarchy()
         
         view.addSubview(collectionView)
+        view.addSubview(datePickerOuterView)
+        datePickerOuterView.addSubview(datePickerView)
     }
     
     override func setupLayout() {
@@ -67,6 +80,17 @@ class AddScheduleViewController: NavigationBarViewController {
         collectionView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(88)
             $0.leading.bottom.trailing.equalToSuperview()
+        }
+    
+        datePickerOuterView.snp.makeConstraints {
+            $0.leading.bottom.trailing.equalTo(view)
+            $0.height.equalTo(256)
+        }
+        
+        datePickerView.snp.makeConstraints {
+            $0.top.equalTo(datePickerOuterView).offset(5)
+            $0.width.equalTo(datePickerOuterView)
+            $0.bottom.equalTo(datePickerOuterView).offset(-25)
         }
     }
     
@@ -91,6 +115,38 @@ class AddScheduleViewController: NavigationBarViewController {
                           buttonColor: .redF14C4C,
                           alertHeight: 160)
         coordinator?.showAlertViewController(alert: alert)
+    }
+
+    func setSelectedDate() {
+        func selectedRow(_ value: Int, component: Int) {
+            datePickerView.selectRow(value, inComponent: component, animated: false)
+        }
+        if viewModel.scheduleDateType == .startDate {
+            selectedRow(viewModel.years.firstIndex(of: viewModel.startDate.year) ?? 0, component: ComponentType.year.rawValue)
+            selectedRow(viewModel.months.firstIndex(of: viewModel.startDate.month) ?? 0, component: ComponentType.month.rawValue)
+        } else if viewModel.scheduleDateType == .endDate {
+            selectedRow(viewModel.years.firstIndex(of: viewModel.endDate.year) ?? 0, component: ComponentType.year.rawValue)
+            selectedRow(viewModel.months.firstIndex(of: viewModel.endDate.month) ?? 0, component: ComponentType.month.rawValue)
+        }
+
+        if viewModel.scheduleDateType == .startDate {
+            if let day = viewModel.startDate.day, let currentDayIndex = viewModel.days.firstIndex(of: day) {
+                selectedRow(currentDayIndex, component: ComponentType.day.rawValue)
+            }
+        } else if viewModel.scheduleDateType == .endDate {
+            if let day = viewModel.endDate.day, let currentDayIndex = viewModel.days.firstIndex(of: day) {
+                selectedRow(currentDayIndex, component: ComponentType.day.rawValue)
+            }
+        }
+        if viewModel.scheduleDateType == .startDate {
+            if let day = viewModel.startDate.day, let currentDayIndex = viewModel.days.firstIndex(of: day) {
+                selectedRow(currentDayIndex, component: ComponentType.day.rawValue)
+            }
+        } else if viewModel.scheduleDateType == .endDate {
+            if let day = viewModel.endDate.day, let currentDayIndex = viewModel.days.firstIndex(of: day) {
+                selectedRow(currentDayIndex, component: ComponentType.day.rawValue)
+            }
+        }
     }
     
     func setKeyboardTap() {
@@ -119,9 +175,31 @@ class AddScheduleViewController: NavigationBarViewController {
             })
             .store(in: &viewModel.cancellables)
     }
+    
+    func addDatePickerTapGesture() {
+        view.addGestureRecognizer(datePickerTap)
+    }
+    
+    func datePickerButtonTapped() {
+        setSelectedDate()
+        datePickerOuterView.isHidden = false
+        datePickerView.reloadAllComponents()
+        collectionView.reloadData()
+    }
+    
+    @objc func dismissDatePicker(_ gesture: UITapGestureRecognizer) {
+        let location = gesture.location(in: collectionView)
+        if location.y < datePickerOuterView.frame.minY {
+            datePickerOuterView.isHidden = true
+            viewModel.validateDateRange()
+            viewModel.scheduleDateType = .unKnown
+        }
+        collectionView.reloadData()
+        view.removeGestureRecognizer(datePickerTap)
+    }
 
     func navigateToNotificationViewController() {
-        coordinator?.showAddNotificationViewController()
+        coordinator?.showScheduleNotificationViewController()
 //        addNotificationViewController.viewModel.onNotificationSelected = { alarmOptions in
 //            self.viewModel.schedule.alarmOptions = alarmOptions
 //        }
@@ -238,11 +316,15 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
     }
 
     func configureAddScheduleHeaderView(_ headerView: AddScheduleHeaderView) {
-        headerView.configureTitleColor(title: viewModel.schedule.title ?? "",
-                                       isColorSelection: viewModel.isColorSelection,
-                                       colorId: viewModel.schedule.colorId)
+        headerView.configureTitleColor(title: viewModel.schedule.title ?? "", isColorSelection: false, colorId: viewModel.schedule.colorId)
         headerView.configureDate(startDate: viewModel.startDate, endDate: viewModel.endDate, dateType: viewModel.scheduleDateType)
         headerView.configureColorList(viewModel.colorList)
+        
+        let dateButtonConfiguration = { isStartDate in
+            self.viewModel.validateDateRange()
+            self.viewModel.scheduleDateType = isStartDate
+            self.datePickerButtonTapped()
+        }
         
         headerView.onScheduleTitle = { title in
             self.viewModel.schedule.title = title
@@ -256,6 +338,16 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
         headerView.onColorIndex = { colorId in
             self.viewModel.schedule.colorId = colorId
             headerView.configureTitleColor(title: self.viewModel.schedule.title ?? "", isColorSelection: self.viewModel.isColorSelection, colorId: self.viewModel.schedule.colorId)
+        }
+        
+        headerView.onSelectedDateButtonTapped = { dateType in
+            dateButtonConfiguration(dateType)
+            self.addDatePickerTapGesture()
+        }
+        
+        headerView.onSelectedDateButtonTapped = { dateType in
+            dateButtonConfiguration(dateType)
+            self.addDatePickerTapGesture()
         }
         
         headerView.onNotificationButtonTapped = { self.navigateToNotificationViewController()}
@@ -272,7 +364,7 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: section == 0 ? (viewModel.isColorSelection ? 411 : 225) : 32)
+        return CGSize(width: collectionView.bounds.width, height: section == 0 ? (viewModel.isColorSelection ? 363 : 177) : 32)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
@@ -336,6 +428,75 @@ extension AddScheduleViewController: UICollectionViewDropDelegate {
                 }
             )
         }
+    }
+}
+
+extension AddScheduleViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    enum ComponentType: Int, CaseIterable {
+        case year
+        case month
+        case day
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return ComponentType.allCases.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        guard let componentType = ComponentType(rawValue: component) else { return 0 }
+        
+        switch componentType {
+        case .year:
+            return viewModel.years.count
+        case .month:
+            return viewModel.months.count
+        case .day:
+            return viewModel.days.count
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        guard let componentType = ComponentType(rawValue: component) else { return nil }
+        switch componentType {
+        case .year:
+            if viewModel.scheduleDateType == .startDate {
+                if viewModel.startDate.year == viewModel.years[row] { return "    \(viewModel.years[row]) 년" }
+            } else if viewModel.scheduleDateType == .endDate {
+                if viewModel.endDate.year == viewModel.years[row] { return "    \(viewModel.years[row]) 년" }
+            }
+            return "    \(viewModel.years[row])"
+            
+        case .month:
+            if viewModel.scheduleDateType == .startDate {
+                if viewModel.startDate.month == viewModel.months[row] { return "\(viewModel.months[row]) 월" }
+            } else if viewModel.scheduleDateType == .endDate {
+                if viewModel.endDate.month == viewModel.months[row] { return "\(viewModel.months[row]) 월" }
+            }
+            return "\(viewModel.months[row])"
+   
+        case .day:
+            if viewModel.scheduleDateType == .startDate {
+                if viewModel.startDate.day == viewModel.days[row] { return "\(viewModel.days[row]) 일             " }
+            } else if viewModel.scheduleDateType == .endDate {
+                if viewModel.endDate.day == viewModel.days[row] { return "\(viewModel.days[row]) 일             " }
+            }
+            return "\(viewModel.days[row])             "
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        guard let componentType = ComponentType(rawValue: component) else { return }
+        switch componentType {
+        case .year:
+            viewModel.setYearForSelectedDate(row: row)
+        case .month:
+            viewModel.setMonthForSelectedDate(row: row)
+        case .day:
+            viewModel.setDayForSelectedDate(row: row)
+        }
+        
+        viewModel.updateDaysForSelectedDateType()
+        datePickerView.reloadAllComponents()
     }
 }
 

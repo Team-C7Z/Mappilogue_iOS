@@ -13,7 +13,7 @@ class AddLocationFooterView: BaseCollectionReusableView {
     
     var onAddLocationButtonTapped: (() -> Void)?
     
-    private let addLocationButton = AddButton(title: "일정 추가하기")
+    private let addLocationButton = AddButton(title: "장소 추가하기")
     
     override func setupProperty() {
         super.setupProperty()

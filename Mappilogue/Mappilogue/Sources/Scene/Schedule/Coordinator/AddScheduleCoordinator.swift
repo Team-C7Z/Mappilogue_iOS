@@ -10,7 +10,7 @@ import MappilogueKit
 
 protocol AddScheduleDelegate: AnyObject {
     func showAlertViewController(alert: Alert)
-    func showAddNotificationViewController()
+    func showScheduleNotificationViewController()
     func showAddLocationViewController()
     func showTimePickerViewController(selectedTime: String)
     func popViewController()
@@ -36,8 +36,8 @@ class AddScheduleCoordinator: AppCoordinator, AddScheduleDelegate {
         self.childCoordinators.append(coordinator)
     }
     
-    func showAddNotificationViewController() {
-        let coordinator = AddNotificationCoordinator(navigationController: self.navigationController)
+    func showScheduleNotificationViewController() {
+        let coordinator = ScheduleNotificationCoordinator(navigationController: self.navigationController)
         coordinator.start()
         self.childCoordinators.append(coordinator)
     }
