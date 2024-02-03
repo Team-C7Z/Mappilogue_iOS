@@ -17,12 +17,11 @@ protocol AddScheduleDelegate: AnyObject {
 }
 
 class AddScheduleCoordinator: AppCoordinator, AddScheduleDelegate {
-    override func start() {
-        
-    }
+    let addScheduleViewController = AddScheduleViewController()
+    
+    override func start() { }
     
     func showAddScheduleViewController(scheduleId: Int?) {
-        let addScheduleViewController = AddScheduleViewController()
         addScheduleViewController.hidesBottomBarWhenPushed = true
         addScheduleViewController.coordinator = self
         addScheduleViewController.viewModel.scheduleId = scheduleId
@@ -44,6 +43,7 @@ class AddScheduleCoordinator: AppCoordinator, AddScheduleDelegate {
     
     func showAddLocationViewController() {
         let coordinator = AddLocationCoordinator(navigationController: self.navigationController)
+        coordinator.delegate = self
         coordinator.start()
         self.childCoordinators.append(coordinator)
     }
@@ -63,5 +63,11 @@ class AddScheduleCoordinator: AppCoordinator, AddScheduleDelegate {
 extension AddScheduleCoordinator: AlertCompletionDelegate {
     func completeAlertAction() {
         popViewController()
+    }
+}
+
+extension AddScheduleCoordinator: ScheduleLocationDelegate {
+    func addLocation(location: KakaoSearchPlaces) {
+        addScheduleViewController.addLocation(location)
     }
 }

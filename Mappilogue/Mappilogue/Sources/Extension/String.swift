@@ -19,7 +19,7 @@ extension String {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
         if let date = dateFormatter.date(from: self) {
-            dateFormatter.dateFormat = "MM월 d일"
+            dateFormatter.dateFormat = "M월 d일"
             return dateFormatter.string(from: date)
         }
         return ""

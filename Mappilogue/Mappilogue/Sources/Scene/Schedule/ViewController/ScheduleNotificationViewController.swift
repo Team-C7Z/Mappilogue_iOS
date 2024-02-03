@@ -156,7 +156,9 @@ extension ScheduleNotificationViewController: UICollectionViewDelegate, UICollec
         guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: NotificationHeaderView.registerId, for: indexPath) as? NotificationHeaderView else { return UICollectionReusableView() }
     
         headerView.configure(viewModel.selectedNotification)
-        headerView.onStartDateButtonTapped = { self.showPickerView(true) }
+        headerView.onStartDateButtonTapped = { self.showPickerView(true)
+                print("33434")
+        }
         headerView.onStartTimeButtonTapped = { self.showPickerView(false) }
         headerView.onAddNotificationButtonTapped = { self.viewModel.addNotification() }
         collectionView.reloadData()

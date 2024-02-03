@@ -207,22 +207,12 @@ class AddScheduleViewController: NavigationBarViewController {
     }
     
     func presentAddLocationController() {
-//        addLocationViewController.onLocationSelected = { location in
-//            self.viewModel.selectLocation(location)
-//            self.collectionView.reloadData()
-//        }
-//        DispatchQueue.main.async {
-//            self.coordinator?.showAddLocationViewController()
-//        }
-//        
-//
-//        addLocationViewController.onLocationSelected = { location in
-//            self.viewModel.selectLocation(location)
-//            self.collectionView.reloadData()
-//        }
-        
         coordinator?.showAddLocationViewController()
-
+    }
+    
+    func addLocation(_ location: KakaoSearchPlaces) {
+        viewModel.selectLocation(location)
+        collectionView.reloadData()
     }
     
     func presentTimePicker(indexPath: IndexPath) {

@@ -12,7 +12,7 @@ class ScheduleDateFooterView: BaseCollectionReusableView {
     
     var onDateTapped: ((Int) -> Void)?
     
-    private var locations: [Area] = []
+    private var dateLocations: [Area] = []
     private var selectedDateIndex = 0
     
     private lazy var collectionView: UICollectionView = {
@@ -48,18 +48,19 @@ class ScheduleDateFooterView: BaseCollectionReusableView {
     }
     
     func configure(_ locations: [Area]) {
-        self.locations = locations
+        dateLocations = locations
+        collectionView.reloadData()
     }
 }
 
 extension ScheduleDateFooterView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return locations.count
+        return dateLocations.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ScheduleDateCell.registerId, for: indexPath) as? ScheduleDateCell else { return ScheduleDateCell() }
-        let date = locations[indexPath.row].date
+        let date = dateLocations[indexPath.row].date.formatToMMddDateString()
         let isSelected = selectedDateIndex == indexPath.row
         cell.configure(date, isSelected: isSelected)
         return cell

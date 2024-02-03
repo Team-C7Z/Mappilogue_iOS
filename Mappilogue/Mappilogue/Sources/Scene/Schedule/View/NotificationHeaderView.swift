@@ -117,6 +117,7 @@ class NotificationHeaderView: BaseCollectionReusableView {
     }
     
     @objc private func startDateButtonTapped() {
+        print("ㅅㅂㅅㅁㄷㅈㄱ")
         onStartDateButtonTapped?()
     }
     

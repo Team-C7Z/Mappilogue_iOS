@@ -21,6 +21,8 @@ class ScheduleTitleColorView: BaseView {
         backgroundColor = .grayF9F8F7
         
         scheduleTitleTextField.delegate = self
+        scheduleTitleTextField.autocorrectionType = .no
+        scheduleTitleTextField.spellCheckingType = .no
         
         colorSelectionButton.addTarget(self, action: #selector(colorSelectionButtonTapped), for: .touchUpInside)
     }

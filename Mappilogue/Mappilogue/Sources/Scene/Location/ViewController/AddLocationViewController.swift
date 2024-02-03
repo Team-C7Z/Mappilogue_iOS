@@ -11,8 +11,6 @@ import MappilogueKit
 class AddLocationViewController: BaseViewController {
     weak var coordinator: AddLocationCoordinator?
     private var viewModel = LocationViewModel()
-    
-    var onLocationSelected: ((KakaoSearchPlaces) -> Void)?
 
     private let addLocationView = UIView()
     private let searchBar = SearchBar()
@@ -153,9 +151,7 @@ extension AddLocationViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let location = viewModel.searchPlaces[indexPath.row]
-        
-        onLocationSelected?(location)
-        coordinator?.dismissViewController()
+        coordinator?.selectedLocation(location: location)
     }
 }
 

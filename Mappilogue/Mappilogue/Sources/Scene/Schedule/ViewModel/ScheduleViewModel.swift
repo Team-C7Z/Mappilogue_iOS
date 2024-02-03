@@ -162,7 +162,7 @@ class ScheduleViewModel {
             time: initialTime
         )
   
-        if let index = area.firstIndex(where: {$0.date == date.formatToMMddDateString()}) {
+        if let index = area.firstIndex(where: {$0.date == date.formatToyyyyMMddDateString()}) {
             area[index].value.append(location)
         } else {
             let schedule = Area(date: date.formatToyyyyMMddDateString(), value: [location])
