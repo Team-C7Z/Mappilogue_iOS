@@ -73,8 +73,10 @@ class NavigationBarViewController: BaseViewController {
     func setNotificationBar(title: String) {
         notificationBar.configure(title: title)
         
-        notificationBar.onNotificationButtonTapped = {
-            self.pushNotificationController()
+        notificationBar.onNotificationButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            pushNotificationController()
         }
         
         view.addSubview(notificationBar)
@@ -87,8 +89,10 @@ class NavigationBarViewController: BaseViewController {
     func setPopMenuBar(title: String) {
         popMenuBar.configure(title: title)
         
-        popMenuBar.onPopButtonTapped = {
-            self.popNavigationController()
+        popMenuBar.onPopButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            popNavigationController()
         }
         
         view.addSubview(popMenuBar)

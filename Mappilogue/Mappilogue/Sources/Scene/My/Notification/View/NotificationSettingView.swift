@@ -21,8 +21,10 @@ class NotificationSettingView: BaseView {
         notificationLabel.textColor = .black1C1C1C
         notificationLabel.font = .body02
         
-        notificationSwitch.onSwitchTapped = {
-            self.onSwitchTapped?()
+        notificationSwitch.onSwitchTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            onSwitchTapped?()
         }
     }
     

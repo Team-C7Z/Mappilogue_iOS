@@ -71,8 +71,10 @@ class ImagePickerViewController: ImagePickerNavigationViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        dismissSaveBar.onSaveButtonTapped = {
-            self.coordinator?.popViewController(assets: self.selectedAssets)
+        dismissSaveBar.onSaveButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            coordinator?.popViewController(assets: selectedAssets)
         }
         
         photoDirectoryPickerButton.addTarget(self, action: #selector(photoDirectoryPickerButtonTapped), for: .touchUpInside)
@@ -152,8 +154,10 @@ class ImagePickerViewController: ImagePickerNavigationViewController {
             $0.leading.bottom.trailing.equalTo(view)
         }
         
-        photoDirectoryView.onDirectorySelection = { album in
-            self.selectDirectory(album)
+        photoDirectoryView.onDirectorySelection = { [weak self] album in
+            guard let self = self else { return }
+            
+            selectDirectory(album)
         }
     }
     

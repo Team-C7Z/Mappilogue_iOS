@@ -28,8 +28,10 @@ class AlertCoordinator: AppCoordinator, AlertDelegate {
         alertViewController.modalPresentationStyle = .overCurrentContext
         alertViewController.coordinator = self
         alertViewController.configure(alert)
-        alertViewController.onDoneTapped = {
-            self.delegate?.completeAlertAction()
+        alertViewController.onDoneTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            delegate?.completeAlertAction()
         }
         navigationController.present(alertViewController, animated: false)
     }

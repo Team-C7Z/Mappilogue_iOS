@@ -32,14 +32,18 @@ class MapMainLocationViewController: NavigationBarViewController {
 
         setPopBar(title: "대표 위치 설정")
         
-        popBar.onPopButtonTapped = {
-            self.coordinator?.popViewController()
+        popBar.onPopButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            coordinator?.popViewController()
         }
         
         setMapView()
         
-        mainLocationSettingView.onSelectedMapLocation = { address in
-            self.selectMapLocation(address)
+        mainLocationSettingView.onSelectedMapLocation = { [weak self] address in
+            guard let self = self else { return }
+            
+            selectMapLocation(address)
         }
     }
 

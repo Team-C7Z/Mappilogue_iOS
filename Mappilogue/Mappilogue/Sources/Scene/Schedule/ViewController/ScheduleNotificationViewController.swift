@@ -80,8 +80,10 @@ class ScheduleNotificationViewController: NavigationBarViewController {
     
     private func setNavigationBar() {
         setPopBar(title: "알림")
-        popBar.onPopButtonTapped = {
-            self.popToAddScheduleViewController()
+        popBar.onPopButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            popToAddScheduleViewController()
         }
     }
     
@@ -136,8 +138,10 @@ extension ScheduleNotificationViewController: UICollectionViewDelegate, UICollec
         let date = viewModel.notificationList[indexPath.row]
         cell.configure(indexPath.row, date: date)
         
-        cell.onDeleteButtonTapped = { index in
-            self.viewModel.notificationList.remove(at: index)
+        cell.onDeleteButtonTapped = { [weak self] index in
+            guard let self = self else { return }
+            
+            viewModel.notificationList.remove(at: index)
             collectionView.reloadData()
         }
         
@@ -156,11 +160,25 @@ extension ScheduleNotificationViewController: UICollectionViewDelegate, UICollec
         guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: NotificationHeaderView.registerId, for: indexPath) as? NotificationHeaderView else { return UICollectionReusableView() }
     
         headerView.configure(viewModel.selectedNotification)
-        headerView.onStartDateButtonTapped = { self.showPickerView(true)
-                print("33434")
+        
+        headerView.onStartDateButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            showPickerView(true)
         }
-        headerView.onStartTimeButtonTapped = { self.showPickerView(false) }
-        headerView.onAddNotificationButtonTapped = { self.viewModel.addNotification() }
+        
+        headerView.onStartTimeButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            showPickerView(false)
+        }
+        
+        headerView.onAddNotificationButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            viewModel.addNotification()
+        }
+        
         collectionView.reloadData()
         
         return headerView

@@ -37,8 +37,10 @@ class MainLocationViewController: NavigationBarViewController {
 
         setPopBar(title: "대표 위치 설정")
         
-        popBar.onPopButtonTapped = {
-            self.coordinator?.popViewController()
+        popBar.onPopButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            coordinator?.popViewController()
         }
     }
 
@@ -97,11 +99,13 @@ extension MainLocationViewController: UICollectionViewDelegate, UICollectionView
             let isSelect = indexPath.row == viewModel.selectedLocationIndex
             cell.configure(indexPath.row, location: location, isSelect: isSelect)
 
-            cell.onMainLocationSelection = { index in
-                self.viewModel.selectMainLocation(index)
+            cell.onMainLocationSelection = { [weak self] index in
+                guard let self = self else { return }
+                
+                viewModel.selectMainLocation(index)
                 if let index = index {
-                    if index == 0 && self.viewModel.dummyLocation[index].address.isEmpty {
-                        self.presentMainLocationAlert()
+                    if index == 0 && viewModel.dummyLocation[index].address.isEmpty {
+                        presentMainLocationAlert()
                     }
                 }
             }
@@ -121,8 +125,10 @@ extension MainLocationViewController: UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if indexPath.section == 0 {
             guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MapSettingsHeaderView.registerId, for: indexPath) as? MapSettingsHeaderView else { return UICollectionReusableView() }
-            headerView.onMapSetting = {
-                self.setLocationButtonTapped()
+            headerView.onMapSetting = { [weak self] in
+                guard let self = self else { return }
+                
+                setLocationButtonTapped()
             }
             return headerView
         } else {

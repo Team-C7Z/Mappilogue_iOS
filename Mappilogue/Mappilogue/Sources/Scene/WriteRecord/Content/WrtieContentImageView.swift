@@ -95,12 +95,16 @@ extension WrtieContentImageView: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentImageCell.registerId, for: indexPath) as? ContentImageCell else { return UICollectionViewCell() }
 
-        cell.onRemoveImage = { index in
-            self.removeAsset(index)
+        cell.onRemoveImage = { [weak self] index in
+            guard let self = self else { return }
+            
+            removeAsset(index)
         }
         
-        cell.onMainImage = { index in
-            self.selectMainImage(index)
+        cell.onMainImage = { [weak self] index in
+            guard let self = self else { return }
+            
+            selectMainImage(index)
         }
         
         let asset = assets[indexPath.row]

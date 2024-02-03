@@ -23,8 +23,10 @@ class ContentViewController: NavigationBarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        myRecordContentImageView.onImageTapped = { imageName in
-            self.presentImageDetailViewController(imageName)
+        myRecordContentImageView.onImageTapped = { [weak self] imageName in
+            guard let self = self else { return }
+            
+            presentImageDetailViewController(imageName)
         }
     }
     
@@ -32,8 +34,10 @@ class ContentViewController: NavigationBarViewController {
         super.setupProperty()
         
         setPopMenuBar(title: "나의 기록")
-        popMenuBar.onMenuButtonTapped = {
-            self.menuButtonTapped()
+        popMenuBar.onMenuButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            menuButtonTapped()
         }
         
         stackView.axis = .vertical
@@ -45,8 +49,10 @@ class ContentViewController: NavigationBarViewController {
             myRecordContentImageView.configure(images, size: view.frame.width - 32)
         }
         contentTextView.configure(schedule.content ?? "", width: view.frame.width - 32)
-        contentTextView.stackViewHeightUpdated = {
-            self.stackView.layoutIfNeeded()
+        contentTextView.stackViewHeightUpdated = { [weak self] in
+            guard let self = self else { return }
+            
+            stackView.layoutIfNeeded()
         }
     }
     

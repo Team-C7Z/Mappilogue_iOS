@@ -17,8 +17,10 @@ class SelectPermissionViewController: BaseViewController {
         super.viewDidLoad()
         
         viewModel.requestLocationPermission()
-        viewModel.onboardingCompletion = {
-            self.presentOnboardingViewController()
+        viewModel.onboardingCompletion = { [weak self] in
+            guard let self = self else { return }
+            
+            presentOnboardingViewController()
         }
     }
     

@@ -45,8 +45,10 @@ class MyRecordListViewController: NavigationBarViewController {
         
         setPopBar(title: "나의 기록")
         
-        popBar.onPopButtonTapped = {
-            self.coordinator?.popViewController()
+        popBar.onPopButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            coordinator?.popViewController()
         }
     }
     

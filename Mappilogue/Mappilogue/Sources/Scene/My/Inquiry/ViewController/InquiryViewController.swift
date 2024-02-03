@@ -30,8 +30,10 @@ class InquiryViewController: NavigationBarViewController {
         
         setPopBar(title: "문의하기")
         
-        popBar.onPopButtonTapped = {
-            self.coordinator?.popViewController()
+        popBar.onPopButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            coordinator?.popViewController()
         }
         
         inquiryTitleLabel.text = "여러분의 이야기를 기다려요"

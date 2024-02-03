@@ -39,8 +39,10 @@ class NotificationViewController: NavigationBarViewController {
         
         setPopBar(title: "알림")
         
-        popBar.onPopButtonTapped = {
-            self.coordinator?.popViewController()
+        popBar.onPopButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            coordinator?.popViewController()
         }
     }
      
@@ -105,8 +107,10 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
                  let notification = viewModel.notificationData[indexPath.section]
                  cell.configure(notification, index: indexPath.section)
                  
-                 cell.onRemove = { index in
-                     self.removeNotification(index)
+                 cell.onRemove = { [weak self] index in
+                     guard let self = self else { return }
+                     
+                     removeNotification(index)
                  }
                  
                  return cell

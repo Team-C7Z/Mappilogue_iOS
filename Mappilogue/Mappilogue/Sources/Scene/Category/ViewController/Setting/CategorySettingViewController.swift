@@ -44,8 +44,10 @@ class CategorySettingViewController: NavigationBarViewController {
          
          setPopBar(title: "카테고리 설정")
          
-         popBar.onPopButtonTapped = {
-             self.coordinator?.popViewController()
+         popBar.onPopButtonTapped = { [weak self] in
+             guard let self = self else { return }
+             
+             coordinator?.popViewController()
          }
      }
      

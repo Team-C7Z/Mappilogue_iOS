@@ -96,13 +96,19 @@ class AddScheduleViewController: NavigationBarViewController {
     
     func setNavigationBar() {
         setDismissSaveBar(title: "일정")
-        dismissSaveBar.onDismissButtonTapped = {
-            self.presentAlert()
+        dismissSaveBar.onDismissButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            presentAlert()
         }
-        dismissSaveBar.onSaveButtonTapped = {
-            self.viewModel.saveSchedule()
-            self.viewModel.onPop = {
-                self.coordinator?.popViewController()
+        dismissSaveBar.onSaveButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            viewModel.saveSchedule()
+            viewModel.onPop = { [weak self] in
+                guard let self = self else { return }
+                
+                coordinator?.popViewController()
             }
         }
     }
@@ -256,11 +262,15 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
         let location = viewModel.area[viewModel.selectedDateIndex].value[indexPath.row]
         cell.configure([viewModel.selectedDateIndex, indexPath.row], schedule: location, isDeleteMode: viewModel.isDeleteMode)
 
-        cell.onSelectedLocation = { indexPath in
-            self.viewModel.toggleSelectedLocation(at: indexPath)
+        cell.onSelectedLocation = { [weak self] indexPath in
+            guard let self = self else { return }
+            
+            viewModel.toggleSelectedLocation(at: indexPath)
         }
-        cell.onSelectedTime = { indexPath in
-            self.presentTimePicker(indexPath: indexPath)
+        cell.onSelectedTime = { [weak self] indexPath in
+            guard let self = self else { return }
+            
+            presentTimePicker(indexPath: indexPath)
         }
         
         return cell
@@ -290,15 +300,19 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
             if !viewModel.area.isEmpty && indexPath.section == 0 {
                 let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ScheduleDateFooterView.registerId, for: indexPath) as! ScheduleDateFooterView
                 footerView.configure(viewModel.area)
-                footerView.onDateTapped = { index in
-                    self.viewModel.selectedDateIndex = index
-                    self.collectionView.reloadData()
+                footerView.onDateTapped = { [weak self] index in
+                    guard let self = self else { return }
+                    
+                    viewModel.selectedDateIndex = index
+                    collectionView.reloadData()
                 }
                 return footerView
             }
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: AddLocationFooterView.registerId, for: indexPath) as! AddLocationFooterView
-            footerView.onAddLocationButtonTapped = {
-                self.presentAddLocationController()
+            footerView.onAddLocationButtonTapped = { [weak self] in
+                guard let self = self else { return }
+                
+                presentAddLocationController()
             }
             return footerView
         }
@@ -310,46 +324,67 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
         headerView.configureDate(startDate: viewModel.startDate, endDate: viewModel.endDate, dateType: viewModel.scheduleDateType)
         headerView.configureColorList(viewModel.colorList)
         
-        let dateButtonConfiguration = { isStartDate in
-            self.viewModel.validateDateRange()
-            self.viewModel.scheduleDateType = isStartDate
-            self.datePickerButtonTapped()
+        let dateButtonConfiguration = { [weak self] isStartDate in
+            guard let self = self else { return }
+            
+            viewModel.validateDateRange()
+            viewModel.scheduleDateType = isStartDate
+            datePickerButtonTapped()
         }
         
-        headerView.onScheduleTitle = { title in
-            self.viewModel.schedule.title = title
+        headerView.onScheduleTitle = { [weak self] title in
+            guard let self = self else { return }
+            
+            viewModel.schedule.title = title
         }
         
-        headerView.onColorSelectionButtonTapped = {
-            self.viewModel.isColorSelection.toggle()
-            self.collectionView.performBatchUpdates(nil, completion: nil)
+        headerView.onColorSelectionButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            viewModel.isColorSelection.toggle()
+            collectionView.performBatchUpdates(nil, completion: nil)
         }
         
-        headerView.onColorIndex = { colorId in
-            self.viewModel.schedule.colorId = colorId
-            headerView.configureTitleColor(title: self.viewModel.schedule.title ?? "", isColorSelection: self.viewModel.isColorSelection, colorId: self.viewModel.schedule.colorId)
+        headerView.onColorIndex = { [weak self] colorId in
+            guard let self = self else { return }
+            
+            viewModel.schedule.colorId = colorId
+            headerView.configureTitleColor(title: viewModel.schedule.title ?? "", isColorSelection: viewModel.isColorSelection ?? false, colorId: viewModel.schedule.colorId ?? 0)
         }
         
-        headerView.onSelectedDateButtonTapped = { dateType in
+        headerView.onSelectedDateButtonTapped = { [weak self] dateType in
+            guard let self = self else { return }
+            
             dateButtonConfiguration(dateType)
-            self.addDatePickerTapGesture()
+            addDatePickerTapGesture()
         }
         
-        headerView.onSelectedDateButtonTapped = { dateType in
+        headerView.onSelectedDateButtonTapped = { [weak self] dateType in
+            guard let self = self else { return }
+            
             dateButtonConfiguration(dateType)
-            self.addDatePickerTapGesture()
+            addDatePickerTapGesture()
         }
         
-        headerView.onNotificationButtonTapped = { self.navigateToNotificationViewController()}
+        headerView.onNotificationButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            navigateToNotificationViewController()
+        }
     }
     
     func configureDeleteLocationHeaderView(_ headerView: DeleteLocationHeaderView) {
-        headerView.onDeleteMode = {
-            self.viewModel.isDeleteMode.toggle()
-            self.collectionView.reloadData()
+        headerView.onDeleteMode = { [weak self] in
+            guard let self = self else { return }
+            
+            viewModel.isDeleteMode.toggle()
+            collectionView.reloadData()
         }
-        headerView.onDeleteLocation = {
-            self.presentDeleteLocationAlert()
+        
+        headerView.onDeleteLocation = { [weak self] in
+            guard let self = self else { return }
+            
+            presentDeleteLocationAlert()
         }
     }
     

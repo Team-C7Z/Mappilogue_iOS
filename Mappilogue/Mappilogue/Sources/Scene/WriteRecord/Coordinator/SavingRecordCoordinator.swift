@@ -17,8 +17,10 @@ class SavingRecordCoordinator: AppCoordinator, SavingRecordDelegate {
     func showSavingRecordViewController(isNewWrite: Bool, schedule: Schedule2222) {
         let savingRecordViewController = SavingRecordViewController()
         savingRecordViewController.modalPresentationStyle = .overFullScreen
-        savingRecordViewController.onSaveComplete = {
-            self.showContentViewController(isNewWrite: isNewWrite, schedule: schedule)
+        savingRecordViewController.onSaveComplete = { [weak self] in
+            guard let self = self else { return }
+            
+            showContentViewController(isNewWrite: isNewWrite, schedule: schedule)
         }
         navigationController.present(savingRecordViewController, animated: false)
     }

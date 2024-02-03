@@ -29,8 +29,10 @@ class WithdrawalViewController: WithdrawalNavigationViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        popBar.onPopButtonTapped = {
-            self.coordinator?.popViewController()
+        popBar.onPopButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            coordinator?.popViewController()
         }
         
         skipButton.addTarget(self, action: #selector(performWithdrawal), for: .touchUpInside)
@@ -94,9 +96,11 @@ class WithdrawalViewController: WithdrawalNavigationViewController {
         for (index, title) in viewModel.withdrawalReasons.enumerated() {
             let withdrawalReasonView = WithdrawalReasonView()
             withdrawalReasonView.configure(title, index)
-            withdrawalReasonView.onReasonSelected = { index in
-                self.viewModel.updateSelectedReasons(index)
-                self.updateSubmitButtonDesign()
+            withdrawalReasonView.onReasonSelected = { [weak self] index in
+                guard let self = self else { return }
+                
+                viewModel.updateSelectedReasons(index)
+                updateSubmitButtonDesign()
             }
             stackView.addArrangedSubview(withdrawalReasonView)
         }

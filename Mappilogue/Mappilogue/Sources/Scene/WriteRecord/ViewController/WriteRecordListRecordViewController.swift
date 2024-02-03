@@ -38,8 +38,10 @@ class WriteRecordListRecordViewController: NavigationBarViewController {
         
         setPopBar(title: "기록 쓰기")
         
-        popBar.onPopButtonTapped = {
-            self.coordinator?.popViewController()
+        popBar.onPopButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            coordinator?.popViewController()
         }
         
         newWriteButton.addTarget(self, action: #selector(newWriteButtonTapped), for: .touchUpInside)

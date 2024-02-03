@@ -25,8 +25,10 @@ class TermsOfUseViewController: NavigationBarViewController {
         
         setPopBar(title: "이용약관")
         
-        popBar.onPopButtonTapped = {
-            self.coordinator?.popViewController()
+        popBar.onPopButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            coordinator?.popViewController()
         }
     }
     

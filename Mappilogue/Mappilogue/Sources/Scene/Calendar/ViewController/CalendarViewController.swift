@@ -57,8 +57,10 @@ class CalendarViewController: NavigationBarViewController {
         super.setupProperty()
         
         setNotificationBar(title: "캘린더")
-        notificationBar.onNotificationButtonTapped = {
-            self.coordinator?.showNotificationViewController()
+        notificationBar.onNotificationButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            coordinator?.showNotificationViewController()
         }
         
         setCalendarDate()

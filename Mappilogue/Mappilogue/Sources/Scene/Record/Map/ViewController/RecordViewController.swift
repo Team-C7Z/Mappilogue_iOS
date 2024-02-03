@@ -70,8 +70,10 @@ class RecordViewController: NavigationBarViewController {
         
         setNotificationBar(title: "기록")
         
-        notificationBar.onNotificationButtonTapped = {
-            self.coordinator?.showNotificationController()
+        notificationBar.onNotificationButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            coordinator?.showNotificationController()
         }
         
         setMapView()

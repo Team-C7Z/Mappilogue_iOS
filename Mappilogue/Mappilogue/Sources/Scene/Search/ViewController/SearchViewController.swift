@@ -46,8 +46,10 @@ class SearchViewController: NavigationBarViewController {
         super.setupProperty()
         
         setPopBar(title: "검색")
-        popBar.onPopButtonTapped = {
-            self.coordinator?.popViewController()
+        popBar.onPopButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            coordinator?.popViewController()
         }
         
         searchBar.configure("장소 또는 기록 검색")

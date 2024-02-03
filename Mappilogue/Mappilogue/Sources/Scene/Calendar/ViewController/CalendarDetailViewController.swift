@@ -203,9 +203,11 @@ extension CalendarDetailViewController: UICollectionViewDelegate, UICollectionVi
             let schedule = viewModel.schedules.schedulesOnSpecificDate[indexPath.row]
             cell.configure(schedule.scheduleId, schedule: schedule)
             
-            cell.onEditButtonTapped = { index in
-                self.viewModel.selectedScheduleIndex = index
-                self.presentEditScheduleViewController()
+            cell.onEditButtonTapped = { [weak self] index in
+                guard let self = self else { return }
+                
+                viewModel.selectedScheduleIndex = index
+                presentEditScheduleViewController()
             }
             return cell
         }

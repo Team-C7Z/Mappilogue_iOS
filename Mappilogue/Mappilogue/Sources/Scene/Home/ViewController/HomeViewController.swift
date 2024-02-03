@@ -40,8 +40,10 @@ class HomeViewController: NavigationBarViewController {
         
         setLogoNotificationBar()
         
-        logoNotoficationBar.onNotificationButtonTapped = {
-            self.coordinator?.showNotificationViewController()
+        logoNotoficationBar.onNotificationButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            coordinator?.showNotificationViewController()
         }
     }
     
@@ -183,16 +185,22 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         guard let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: MaredRecordsFooterView.registerId) as? MaredRecordsFooterView else { return UIView() }
         
-        footerView.onAddSchedule = {
-            self.coordinator?.showAddScheduleViewController()
+        footerView.onAddSchedule = { [weak self] in
+            guard let self = self else { return }
+            
+            coordinator?.showAddScheduleViewController()
         }
         
-        footerView.onMarkedRecord = {
-            self.coordinator?.showContentViewController()
+        footerView.onMarkedRecord = { [weak self] in
+            guard let self = self else { return }
+            
+            coordinator?.showContentViewController()
         }
         
-        footerView.onAddRecord = {
-            self.coordinator?.showWriteRecordListViewController()
+        footerView.onAddRecord = { [weak self] in
+            guard let self = self else { return }
+            
+            coordinator?.showWriteRecordListViewController()
         }
         return footerView
     }

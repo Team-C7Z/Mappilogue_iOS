@@ -37,8 +37,10 @@ class EditProfileViewController: NavigationBarViewController {
         
         setPopBar(title: "프로필 편집")
         
-        popBar.onPopButtonTapped = {
-            self.coordiantor?.popViewController()
+        popBar.onPopButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            coordiantor?.popViewController()
         }
         
         profileImageButton.addTarget(self, action: #selector(profileImageButtonTapped), for: .touchUpInside)

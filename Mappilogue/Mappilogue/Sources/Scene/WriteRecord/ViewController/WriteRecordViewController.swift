@@ -45,8 +45,10 @@ class WriteRecordViewController: NavigationBarViewController {
         
         setDefaultPopBar(title: "기록 쓰기")
         
-        popBar.onPopButtonTapped = {
-            self.presentAlert()
+        popBar.onPopButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            presentAlert()
         }
 
         titleColorStackView.axis = .vertical
@@ -61,9 +63,11 @@ class WriteRecordViewController: NavigationBarViewController {
         
         mainLocationButton.addTarget(self, action: #selector(mainLocationButtonTapped), for: .touchUpInside)
         
-        contentTextView.stackViewHeightUpdated = {
-            self.stackView.layoutIfNeeded()
-            self.scrollToBottom()
+        contentTextView.stackViewHeightUpdated = { [weak self] in
+            guard let self = self else { return }
+            
+            stackView.layoutIfNeeded()
+            scrollToBottom()
         }
         
         saveRecordView.hideKeyboardButton.addTarget(self, action: #selector(dismissKeyboard), for: .touchUpInside)

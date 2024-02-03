@@ -46,8 +46,10 @@ class MyViewController: NavigationBarViewController {
         
         setNotificationBar(title: "MY")
         
-        notificationBar.onNotificationButtonTapped = {
-            self.coordinator?.showNotificationViewController()
+        notificationBar.onNotificationButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            coordinator?.showNotificationViewController()
         }
     }
     
@@ -128,8 +130,10 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     
     private func configureVersionCell(for indexPath: IndexPath, in collectionView: UICollectionView) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VersionCell.registerId, for: indexPath) as? VersionCell else { return UICollectionViewCell() }
-        cell.onVersionUpdate = {
-            self.openAppStore("")
+        cell.onVersionUpdate = { [weak self] in
+            guard let self = self else { return }
+            
+            openAppStore("")
         }
         return cell
     }

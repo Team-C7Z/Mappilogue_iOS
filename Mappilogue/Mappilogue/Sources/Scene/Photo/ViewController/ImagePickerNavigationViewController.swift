@@ -19,8 +19,10 @@ class ImagePickerNavigationViewController: NavigationBarViewController {
 
         setDismissSaveBar(title: "")
         
-        dismissSaveBar.onDismissButtonTapped = {
-            self.navigationController?.popViewController(animated: false)
+        dismissSaveBar.onDismissButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            navigationController?.popViewController(animated: false)
         }
     }
 

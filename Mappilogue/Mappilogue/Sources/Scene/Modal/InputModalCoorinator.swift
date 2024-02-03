@@ -24,8 +24,10 @@ class InputModalCoordinator: AppCoordinator, InputModalDelegate {
         inputModalViewController.modalPresentationStyle = .overCurrentContext
         inputModalViewController.coordinator = self
         inputModalViewController.configure(categoryName)
-        inputModalViewController.onCompletionTapped = { text in
-            self.delegate?.completeModalAction(text)
+        inputModalViewController.onCompletionTapped = { [weak self] text in
+            guard let self = self else { return }
+            
+            delegate?.completeModalAction(text)
         }
         navigationController.present(inputModalViewController, animated: false)
     }

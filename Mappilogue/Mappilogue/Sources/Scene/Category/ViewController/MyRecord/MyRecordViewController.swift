@@ -38,8 +38,10 @@ class MyRecordViewController: NavigationBarViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        popBar.onPopButtonTapped = {
-            self.coordinator?.popViewController()
+        popBar.onPopButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            coordinator?.popViewController()
         }
         
 //        setNavigationTitleAndBackButton(categoryName, backButtonAction: isNewWrite ? #selector(navigateToMyRecordViewController) : #selector(backButtonTapped))
@@ -65,8 +67,10 @@ class MyRecordViewController: NavigationBarViewController {
     func setMenuButtonItem() {
         if categoryName != "전체" {
             setPopMenuBar(title: categoryName)
-            popMenuBar.onMenuButtonTapped = {
-                self.menuButtonItemTapped()
+            popMenuBar.onMenuButtonTapped = { [weak self] in
+                guard let self = self else { return }
+                
+                menuButtonItemTapped()
             }
         } else {
             setPopBar(title: categoryName)

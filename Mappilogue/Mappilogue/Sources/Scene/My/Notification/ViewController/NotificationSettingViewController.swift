@@ -30,8 +30,10 @@ class NotificationSettingViewController: NavigationBarViewController {
         
         setPopBar(title: "알림 설정")
         
-        popBar.onPopButtonTapped = {
-            self.updateNotification()
+        popBar.onPopButtonTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            updateNotification()
         }
         
         stackView.axis = .vertical
@@ -112,33 +114,37 @@ class NotificationSettingViewController: NavigationBarViewController {
     }
     
     func setSwitchToggleActions() {
-        totalNotiviationView.onSwitchTapped = {
-            guard let notification = self.notificationDTO else { return }
+        totalNotiviationView.onSwitchTapped = { [weak self] in
+            guard let self = self else { return }
+            guard let notification = notificationDTO else { return }
             
-            self.notificationDTO?.isTotalNotification = self.viewModel.switchToggle(notification.isTotalNotification)
-            self.configureNotification()
-            self.setTotalNotificationControl()
+            notificationDTO?.isTotalNotification = viewModel.switchToggle(notification.isTotalNotification)
+            configureNotification()
+            setTotalNotificationControl()
         }
         
-        noticeNotification.onSwitchTapped = {
-            guard let notification = self.notificationDTO else { return }
+        noticeNotification.onSwitchTapped = { [weak self] in
+            guard let self = self else { return }
+            guard let notification = notificationDTO else { return }
             
-            self.notificationDTO?.isNoticeNotification = self.viewModel.switchToggle(notification.isNoticeNotification)
-            self.configureNotification()
+            notificationDTO?.isNoticeNotification = viewModel.switchToggle(notification.isNoticeNotification)
+            configureNotification()
         }
         
-        scheduleReminderNotification.onSwitchTapped = {
-            guard let notification = self.notificationDTO else { return }
+        scheduleReminderNotification.onSwitchTapped = { [weak self] in
+            guard let self = self else { return }
+            guard let notification = notificationDTO else { return }
             
-            self.notificationDTO?.isScheduleReminderNotification = self.viewModel.switchToggle(notification.isScheduleReminderNotification)
-            self.configureNotification()
+            notificationDTO?.isScheduleReminderNotification = viewModel.switchToggle(notification.isScheduleReminderNotification)
+            configureNotification()
         }
         
-        marketingAlertView.onSwitchTapped = {
-            guard let notification = self.notificationDTO else { return }
+        marketingAlertView.onSwitchTapped = { [weak self] in
+            guard let self = self else { return }
+            guard let notification = notificationDTO else { return }
             
-            self.notificationDTO?.isMarketingNotification = self.viewModel.switchToggle(notification.isMarketingNotification)
-            self.configureNotification()
+            notificationDTO?.isMarketingNotification = viewModel.switchToggle(notification.isMarketingNotification)
+            configureNotification()
         }
     }
     
