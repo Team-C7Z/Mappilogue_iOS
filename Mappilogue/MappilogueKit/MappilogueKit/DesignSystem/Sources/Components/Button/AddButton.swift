@@ -8,7 +8,7 @@
 import UIKit
 
 public class AddButton: UIButton {
-    private let outerView = UIView()
+    private let imageLabelView = UIView()
     private let addImage = UIImageView()
     private let addLabel = UILabel()
     
@@ -26,8 +26,9 @@ public class AddButton: UIButton {
     
     private func setupProperty(_ title: String) {
         backgroundColor = .black1C1C1C
-        
         layer.cornerRadius = 12
+        
+        imageLabelView.isUserInteractionEnabled = false
         
         addImage.image = Images.image(named: .buttonAdd)
         
@@ -38,9 +39,9 @@ public class AddButton: UIButton {
     }
     
     private func setupHierarchy() {
-        addSubview(outerView)
-        outerView.addSubview(addImage)
-        outerView.addSubview(addLabel)
+        addSubview(imageLabelView)
+        imageLabelView.addSubview(addImage)
+        imageLabelView.addSubview(addLabel)
     }
     
     private func setupLayout() {
@@ -48,18 +49,18 @@ public class AddButton: UIButton {
             $0.height.equalTo(53)
         }
         
-        outerView.snp.makeConstraints {
+        imageLabelView.snp.makeConstraints {
             $0.center.height.equalTo(self)
             $0.width.equalTo(93)
         }
         
         addImage.snp.makeConstraints {
-            $0.leading.centerY.equalTo(outerView)
+            $0.leading.centerY.equalTo(imageLabelView)
             $0.width.height.equalTo(10)
         }
         
         addLabel.snp.makeConstraints {
-            $0.trailing.centerY.equalTo(outerView)
+            $0.trailing.centerY.equalTo(imageLabelView)
         }
     }
 }
