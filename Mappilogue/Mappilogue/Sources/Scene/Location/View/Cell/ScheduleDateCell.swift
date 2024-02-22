@@ -23,7 +23,6 @@ class ScheduleDateCell: BaseCollectionViewCell {
         
         contentView.layer.cornerRadius = 20
         
-        dateLabel.text = "5월 10일"
         dateLabel.font = .title02
         dateLabel.textColor = .whiteFFFFFF
     }

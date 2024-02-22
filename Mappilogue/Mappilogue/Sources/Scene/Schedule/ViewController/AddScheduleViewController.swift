@@ -223,14 +223,12 @@ class AddScheduleViewController: NavigationBarViewController {
     }
     
     func presentAddLocationController() {
- //       coordinator?.showAddLocationViewController()
+        let viewController = AddLocationViewController()
+        viewController.modalPresentationStyle = .overFullScreen
+        viewController.delegate = self
+        present(viewController, animated: false)
     }
-    
-    func addLocation(_ location: KakaoSearchPlaces) {
-        viewModel.selectLocation(location)
-        collectionView.reloadData()
-    }
-    
+
     func presentTimePicker(indexPath: IndexPath) {
         let selectedTime = viewModel.area[indexPath.section].value[indexPath.row].time
 //        timePickerViewController.onSelectedTime = { selectedTime in
@@ -403,6 +401,9 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        if viewModel.area.count == 1 {
+            return CGSize(width: collectionView.bounds.width, height: section == 0 ? 0 : 53)
+        } 
         return CGSize(width: collectionView.bounds.width, height: !viewModel.area.isEmpty && section == 0 ? 72 : 53)
     }
     
@@ -552,5 +553,12 @@ extension AddScheduleViewController {
                 self.collectionView.reloadData()
             }
             .store(in: &colorViewModel.cancellables)
+    }
+}
+
+extension AddScheduleViewController: ScheduleLocationDelegate {
+    func addLocation(location: KakaoSearchPlaces) {
+        viewModel.selectLocation(location)
+        collectionView.reloadData()
     }
 }

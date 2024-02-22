@@ -32,6 +32,7 @@ class ScheduleNotificationViewController: NavigationBarViewController {
         
         viewModel.selectedNotification = viewModel.setCurrentDate()
         viewModel.setDateList()
+        viewModel.delegate = self
         setSelectedDate()
     }
     
@@ -88,8 +89,7 @@ class ScheduleNotificationViewController: NavigationBarViewController {
     
     func dismissViewController() {
         navigationController?.popViewController(animated: true)
-      //  viewModel.updateAlarmOptionsFromNotificationList()
-    
+        viewModel.updateAlarmOptionsFromNotificationList()
     }
 
     func setSelectedDate() {
@@ -233,5 +233,11 @@ extension ScheduleNotificationViewController: UIPickerViewDelegate, UIPickerView
         default:
             viewModel.updateSelectedNotificationTimePeriod(row: row)
         }
+    }
+}
+
+extension ScheduleNotificationViewController: AddNotificationDelegate {
+    func reloadView() {
+        collectionView.reloadData()
     }
 }

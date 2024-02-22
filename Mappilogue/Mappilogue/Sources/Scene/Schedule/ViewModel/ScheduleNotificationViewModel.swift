@@ -7,7 +7,12 @@
 
 import Foundation
 
+protocol AddNotificationDelegate: AnyObject {
+    func reloadView()
+}
+
 class ScheduleNotificationViewModel {
+    weak var delegate: AddNotificationDelegate?
     var calendarViewModel = CalendarViewModel()
     var onNotificationSelected: (([String]) -> Void)?
     
@@ -60,6 +65,7 @@ class ScheduleNotificationViewModel {
     
     func addNotification() {
         notificationList.append(selectedNotification)
+        delegate?.reloadView()
     }
     
     func updateSelectedNotification(row: Int) {

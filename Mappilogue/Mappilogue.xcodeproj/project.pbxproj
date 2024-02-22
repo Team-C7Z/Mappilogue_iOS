@@ -240,7 +240,6 @@
 		929020C72B397E2A00AFBA66 /* CapturePhotoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020C62B397E2A00AFBA66 /* CapturePhotoCoordinator.swift */; };
 		929020CA2B3A8ED500AFBA66 /* AlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020C92B3A8ED500AFBA66 /* AlertViewController.swift */; };
 		929020D22B3AB7B400AFBA66 /* EditBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020D12B3AB7B400AFBA66 /* EditBottomSheetViewController.swift */; };
-		929020DB2B3E774800AFBA66 /* AddLocationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020DA2B3E774800AFBA66 /* AddLocationCoordinator.swift */; };
 		929020E02B3E8B9800AFBA66 /* TimePickerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020DF2B3E8B9800AFBA66 /* TimePickerCoordinator.swift */; };
 		929020EA2B3F22D100AFBA66 /* InputModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020E92B3F22D100AFBA66 /* InputModalViewController.swift */; };
 		929020EC2B3F234900AFBA66 /* InputModalCoorinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929020EB2B3F234900AFBA66 /* InputModalCoorinator.swift */; };
@@ -595,7 +594,6 @@
 		929020C62B397E2A00AFBA66 /* CapturePhotoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapturePhotoCoordinator.swift; sourceTree = "<group>"; };
 		929020C92B3A8ED500AFBA66 /* AlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewController.swift; sourceTree = "<group>"; };
 		929020D12B3AB7B400AFBA66 /* EditBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBottomSheetViewController.swift; sourceTree = "<group>"; };
-		929020DA2B3E774800AFBA66 /* AddLocationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationCoordinator.swift; sourceTree = "<group>"; };
 		929020DF2B3E8B9800AFBA66 /* TimePickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePickerCoordinator.swift; sourceTree = "<group>"; };
 		929020E92B3F22D100AFBA66 /* InputModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputModalViewController.swift; sourceTree = "<group>"; };
 		929020EB2B3F234900AFBA66 /* InputModalCoorinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputModalCoorinator.swift; sourceTree = "<group>"; };
@@ -1905,7 +1903,6 @@
 		929020DE2B3E8B8900AFBA66 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				929020DA2B3E774800AFBA66 /* AddLocationCoordinator.swift */,
 				929020DF2B3E8B9800AFBA66 /* TimePickerCoordinator.swift */,
 			);
 			path = Coordinator;
@@ -2735,7 +2732,6 @@
 				92011B812A7271D0009B047F /* SelectCategoryButton.swift in Sources */,
 				92011C122A74F8E6009B047F /* SearchRecordCell.swift in Sources */,
 				92139D932AB2C842005344AE /* AnnouncementContentCell.swift in Sources */,
-				929020DB2B3E774800AFBA66 /* AddLocationCoordinator.swift in Sources */,
 				92F00AB32AF4B996001FE43F /* AddCategoryDTO.swift in Sources */,
 				928B7BF52A9CA51500E4F789 /* ErrorDTO.swift in Sources */,
 				92EB3D212B87310200931195 /* MonthType.swift in Sources */,

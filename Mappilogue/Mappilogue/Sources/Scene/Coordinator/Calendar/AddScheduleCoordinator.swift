@@ -8,14 +8,6 @@
 import Foundation
 import MappilogueKit
 
-//protocol AddScheduleDelegate: AnyObject {
-//    func showAlertViewController(alert: Alert)
-//    func showScheduleNotificationViewController()
-//    func showAddLocationViewController()
-//    func showTimePickerViewController(selectedTime: String)
-//    func popViewController()
-//}
-
 class AddScheduleCoordinator {
  //   public var children: [Coordinator1] = []
     public let router: Router

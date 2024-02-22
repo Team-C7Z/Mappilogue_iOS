@@ -8,8 +8,12 @@
 import UIKit
 import MappilogueKit
 
+protocol ScheduleLocationDelegate: AnyObject {
+    func addLocation(location: KakaoSearchPlaces)
+}
+
 class AddLocationViewController: BaseViewController {
-    weak var coordinator: AddLocationCoordinator?
+    weak var delegate: ScheduleLocationDelegate?
     private var viewModel = LocationViewModel()
 
     private let addLocationView = UIView()
@@ -82,7 +86,7 @@ class AddLocationViewController: BaseViewController {
             return
         }
 
-        coordinator?.dismissViewController()
+        dismiss(animated: false)
     }
     
     func loadSearchPlace(_ search: String) {
@@ -151,7 +155,9 @@ extension AddLocationViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let location = viewModel.searchPlaces[indexPath.row]
-        coordinator?.selectedLocation(location: location)
+        dismiss(animated: false) {
+            self.delegate?.addLocation(location: location)
+        }
     }
 }
 
