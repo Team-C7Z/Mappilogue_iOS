@@ -67,7 +67,7 @@ class TermsOfUseViewController: NavigationBarViewController {
     }
     
     func handleTermsOfUserResponse(_ response: Any) {
-        guard let baseResponse = response as? BaseDTO<TermsOfUserDTO>, let result = baseResponse.result else { return }
+        guard let baseResponse = response as? BaseDTOResult<TermsOfUserDTO>, let result = baseResponse.result else { return }
         
         let url = result.link
         self.openWebView(url: url)

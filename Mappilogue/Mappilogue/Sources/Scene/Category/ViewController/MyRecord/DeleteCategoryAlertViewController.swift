@@ -130,12 +130,12 @@ class DeleteCategoryAlertViewController: BaseViewController {
     
     @objc private func cancelButtonTapped(_ sender: UIButton) {
         onCancelTapped?()
-        coordinator?.dismissViewController()
+      //  coordinator?.dismissViewController()
     }
     
     @objc private func deleteButtonTapped(_ sender: UIButton) {
         let option = self.checkButton.isSelected ? "all" : "only"
         onDoneTapped?(option)
-        coordinator?.dismissViewController()
+      //  coordinator?.dismissViewController()
     }
 }

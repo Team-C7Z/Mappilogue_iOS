@@ -7,48 +7,46 @@
 
 import UIKit
 
-protocol HomeDelegate: AnyObject {
-    func showNotificationViewController()
-    func showCalendarDetailViewController()
-    func showAddScheduleViewController()
-    func showContentViewController()
-    func showWriteRecordListViewController()
-}
-
-class HomeCoordinator: AppCoordinator, HomeDelegate {
-    override func start() {
-        let homeViewController = HomeViewController()
-        homeViewController.coordinator = self
-        navigationController.pushViewController(homeViewController, animated: false)
+class HomeCoordinator:HomeViewControllerDelegate {
+ //   var children: [Coordinator1] = []
+    var router: Router
+    
+    public init(router: Router) {
+        self.router = router
     }
     
+    func present(animated: Bool, onDismissed: (() -> Void)?) {
+//        let viewController = HomeViewController(delegate: self)
+//        router.present(viewController, animated: animated, onDismissed: onDismissed)
+    }
+
     func showNotificationViewController() {
-        let coordinator = NotificationCoordinator(navigationController: self.navigationController)
-        coordinator.start()
-        childCoordinators.append(coordinator)
+//        let coordinator = NotificationCoordinator(navigationController: self.navigationController)
+//        coordinator.start()
+//        childCoordinators.append(coordinator)
     }
     
     func showCalendarDetailViewController() {
-        let coordinator = CalendarDetailCoordinator(navigationController: self.navigationController)
-        coordinator.start()
-        self.childCoordinators.append(coordinator)
+//        let coordinator = CalendarDetailCoordinator(navigationController: self.navigationController)
+//        coordinator.start()
+//        self.childCoordinators.append(coordinator)
     }
     
     func showAddScheduleViewController() {
-        let coordinator = AddScheduleCoordinator(navigationController: self.navigationController)
-        coordinator.showAddScheduleViewController(scheduleId: nil)
-        self.childCoordinators.append(coordinator)
+//        let coordinator = AddScheduleCoordinator(navigationController: self.navigationController)
+//        coordinator.showAddScheduleViewController(scheduleId: nil)
+//        self.childCoordinators.append(coordinator)
     }
     
     func showContentViewController() {
-        let coordinator = ContentCoordinator(navigationController: self.navigationController)
-        coordinator.start()
-        self.childCoordinators.append(coordinator)
+//        let coordinator = ContentCoordinator(navigationController: self.navigationController)
+//        coordinator.start()
+//        self.childCoordinators.append(coordinator)
     }
     
     func showWriteRecordListViewController() {
-        let coordinator = WriteRecordListCoordinator(navigationController: self.navigationController)
-        coordinator.start()
-        self.childCoordinators.append(coordinator)
+//        let coordinator = WriteRecordListCoordinator(navigationController: self.navigationController)
+//        coordinator.start()
+//        self.childCoordinators.append(coordinator)
     }
 }

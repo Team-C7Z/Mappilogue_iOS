@@ -11,16 +11,16 @@ protocol DeleteCategoryAlertDelegate: AnyObject {
     func dismissViewController()
 }
 
-class DeleteCategoryAlertCoordinator: AppCoordinator, DeleteCategoryAlertDelegate {
-    override func start() {
-        let alertViewController = DeleteCategoryAlertViewController()
-        alertViewController.modalPresentationStyle = .overCurrentContext
-        alertViewController.coordinator = self
-        navigationController.present(alertViewController, animated: false)
-    }
-    
-    func dismissViewController() {
-        childDidFinish(self)
-        navigationController.dismiss(animated: false)
-    }
+class DeleteCategoryAlertCoordinator {
+//    override func start() {
+//        let alertViewController = DeleteCategoryAlertViewController()
+//        alertViewController.modalPresentationStyle = .overCurrentContext
+//        alertViewController.coordinator = self
+//        navigationController.present(alertViewController, animated: false)
+//    }
+//    
+//    func dismissViewController() {
+//        childDidFinish(self)
+//        navigationController.dismiss(animated: false)
+//    }
 }

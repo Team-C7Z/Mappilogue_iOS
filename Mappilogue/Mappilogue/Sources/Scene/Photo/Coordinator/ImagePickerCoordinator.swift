@@ -34,9 +34,9 @@ class ImagePickerCoordinator: BaseCoordinator, ImagePickerDelegate {
     }
     
     func showCameraPermissionAlert(alert: Alert) {
-        let coordinator = AlertCoordinator(navigationController: self.navigationController)
-        coordinator.showAlert(alert)
-        self.childCoordinators.append(coordinator)
+     //   let coordinator = AlertCoordinator(navigationController: self.navigationController)
+     //      coordinator.showAlert(alert)
+     //   self.childCoordinators.append(coordinator)
     }
     
     func showCameraViewController() {

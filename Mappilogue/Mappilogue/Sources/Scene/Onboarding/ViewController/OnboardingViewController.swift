@@ -9,7 +9,6 @@ import UIKit
 import MappilogueKit
 
 class OnboardingViewController: BaseViewController {
-    weak var coordinator: OnboardingCoordinator?
     var viewModel = OnboardingViewModel()
     
     private let onboardingLabel = UILabel()
@@ -98,8 +97,12 @@ class OnboardingViewController: BaseViewController {
     
     @objc private func startButtonTapped(_ sender: UIButton) {
         RootUserDefaults.setOnboardingComplete()
-        
-        coordinator?.showLoginViewController()
+        showLoginViewController()
+    }
+    
+    private func showLoginViewController() {
+        let viewController = LoginViewController()
+        present(viewController, animated: false)
     }
 }
 

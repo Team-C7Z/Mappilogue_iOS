@@ -9,7 +9,6 @@ import UIKit
 import MappilogueKit
 
 class CalendarViewController: NavigationBarViewController {
-    weak var coordinator: CalendarCoordinator?
     private var viewModel = CalendarViewModel()
 
     private let currentDateButton = UIButton()
@@ -33,16 +32,11 @@ class CalendarViewController: NavigationBarViewController {
     
     private var addScheduleButton = AddScheduleButton()
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        loadCalendarData()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         
-        NotificationCenter.default.addObserver(self, selector: #selector(presentScheduleViewContoller), name: Notification.Name("PresentScheduleViewController"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showCalendarDetailViewContoller), name: Notification.Name("PresentScheduleViewController"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(dismissScheduleViewController), name: Notification.Name("DismissScheduleViewController"), object: nil)
     }
@@ -52,7 +46,7 @@ class CalendarViewController: NavigationBarViewController {
      
         setCurrentPage()
     }
-    
+
     override func setupProperty() {
         super.setupProperty()
         
@@ -60,7 +54,7 @@ class CalendarViewController: NavigationBarViewController {
         notificationBar.onNotificationButtonTapped = { [weak self] in
             guard let self = self else { return }
             
-            coordinator?.showNotificationViewController()
+          //  coordinator?.showNotificationViewController()
         }
         
         setCalendarDate()
@@ -117,66 +111,75 @@ class CalendarViewController: NavigationBarViewController {
     }
     
     func setCalendarDate() {
+        viewModel.loadCalendarData()
+        viewModel.delegate = self
         viewModel.selectedDate = SelectedDate(year: viewModel.currentYear, month: viewModel.currentMonth)
     }
     
-    func loadCalendarData() {
-        CalendarManager111.shared.getCalendar(year: viewModel.currentYear, month: viewModel.currentMonth, completion: { result in
-            switch result {
-            case .success(let response):
-                guard let baseResponse = response as? BaseDTO<CalendarDTO>, let result = baseResponse.result else { return }
-                self.viewModel.calendarSchedules = result.calendarSchedules
-                self.viewModel.setCalendarDot()
-            
-                self.collectionView.reloadData()
-            default:
-                break
-            }
-        })
-    }
-
     func setCurrentPage() {
         let indexPath = IndexPath(item: viewModel.currentPage, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
     }
     
     @objc func changeDateButtonTapped(_ sender: UIButton) {
-        coordinator?.showDatePickerViewController(date: viewModel.selectedDate)
-        
         chageDatePickerMode()
+        showDatePickerViewController()
     }
     
     func chageDatePickerMode() {
         view.backgroundColor = .grayF5F3F0
     }
     
-    @objc func presentScheduleViewContoller(_ notification: Notification) {
+    func showDatePickerViewController() {
+        let viewController = DatePickerViewController()
+        viewController.modalPresentationStyle = .overCurrentContext
+        viewController.viewModel.selectedDate = viewModel.selectedDate
+        viewController.delegate = self
+        present(viewController, animated: false)
+    }
+    
+    @objc func showCalendarDetailViewContoller(_ notification: Notification) {
         addScheduleButton.isHidden = true
-       
         if let date = notification.object as? String {
-            coordinator?.showCalendarDetailViewController(date: date, frame: addScheduleButton.frame)
+            showCalendarDetailViewController(date)
             //            scheduleDetailViewController.onWriteRecordButtonTapped = { schedule in
             //                self.navigationToWriteRecordViewController(schedule)
-            //            }
-            //            calendarDetailViewController.onAddScheduleButtonTapped = { id in
-            //                self.viewModel.scheduleId = id
-            //                self.navigationToAddScheduleViewController()
             //            }
         }
     }
     
+    func showCalendarDetailViewController(_ date: String) {
+        let viewController = CalendarDetailViewController()
+        viewController.modalPresentationStyle = .overFullScreen
+        viewController.addButtonLocation = addScheduleButton.frame
+        viewController.viewModel.date = date
+        viewController.onAddScheduleButtonTapped = { id in
+            self.viewModel.scheduleId = id
+            self.navigationToAddScheduleViewController()
+        }
+        present(viewController, animated: false)
+    }
+    
     func navigationToWriteRecordViewController(_ schedule: Schedule2222) {
-        coordinator?.showWriteRecordViewController(schedule: schedule)
+    //    coordinator?.showWriteRecordViewController(schedule: schedule)
     }
     
     @objc func dismissScheduleViewController(_ notification: Notification) {
         addScheduleButton.isHidden = false
+        
+        viewModel.loadCalendarData()
     }
     
     @objc func navigationToAddScheduleViewController() {
         addScheduleButton.isHidden = false
-
-        coordinator?.showAddScheduleViewController(scheduleId: viewModel.scheduleId)
+        
+        showAddScheduleViewController()
+    }
+    
+    func showAddScheduleViewController() {
+        let viewController = AddScheduleViewController()
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
@@ -216,17 +219,22 @@ extension CalendarViewController: UICollectionViewDelegate, UICollectionViewData
     }
 }
 
-extension CalendarViewController {
-    func chagedDate(_ selectedDate: SelectedDate) {
+extension CalendarViewController: CalendarLoadDataDelegate {
+    func reloadView() {
+        collectionView.reloadData()
+    }
+}
+
+extension CalendarViewController: DismissDatePickerViewControllerDelegate {
+    func changedDate(_ date: SelectedDate) {
         view.backgroundColor = .grayF9F8F7
-        viewModel.selectedDate = selectedDate
-        updateCurrentDateLabel()
-        loadCalendarData()
+        viewModel.selectedDate = date
+        updateCurrentDateLabel(year: date.year, month: date.month)
+        viewModel.loadCalendarData()
+        collectionView.reloadData()
     }
     
-    private func updateCurrentDateLabel() {
-        let year = viewModel.selectedDate.year
-        let month = viewModel.selectedDate.month
+    private func updateCurrentDateLabel(year: Int, month: Int) {
         currentDateLabel.text = "\(year)년 \(month)월"
     }
 }

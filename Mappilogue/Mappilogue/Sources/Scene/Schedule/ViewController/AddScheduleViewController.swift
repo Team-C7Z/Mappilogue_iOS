@@ -9,7 +9,6 @@ import UIKit
 import MappilogueKit
 
 class AddScheduleViewController: NavigationBarViewController {
-    weak var coordinator: AddScheduleCoordinator?
     private var colorViewModel = ColorViewModel()
     var viewModel = ScheduleViewModel()
     
@@ -51,7 +50,7 @@ class AddScheduleViewController: NavigationBarViewController {
         setKeyboardTap()
         loadScheduleData()
     }
-
+    
     override func setupProperty() {
         super.setupProperty()
 
@@ -105,10 +104,10 @@ class AddScheduleViewController: NavigationBarViewController {
             guard let self = self else { return }
             
             viewModel.saveSchedule()
-            viewModel.onPop = { [weak self] in
+            viewModel.onDismiss = { [weak self] in
                 guard let self = self else { return }
-                
-                coordinator?.popViewController()
+      
+                self.dismissViewController()
             }
         }
     }
@@ -120,7 +119,17 @@ class AddScheduleViewController: NavigationBarViewController {
                           doneText: "나가기",
                           buttonColor: .redF14C4C,
                           alertHeight: 160)
-        coordinator?.showAlertViewController(alert: alert)
+        let viewController = AlertViewController()
+        viewController.modalPresentationStyle = .overCurrentContext
+        viewController.configure(alert)
+        viewController.onDoneTapped = {
+            self.dismissViewController()
+        }
+        present(viewController, animated: false)
+    }
+    
+    private func dismissViewController() {
+        navigationController?.popViewController(animated: true)
     }
 
     func setSelectedDate() {
@@ -169,17 +178,17 @@ class AddScheduleViewController: NavigationBarViewController {
     }
     
     func loadScheduleData() {
-        guard let id = viewModel.scheduleId else { return }
-        viewModel.getSchedule(id: id)
-        
-        viewModel.$scheduleResult
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { result in
-                guard let schedule = result else { return }
-                self.viewModel.setScheduleData(getSchedule: schedule)
-                self.collectionView.reloadData()
-            })
-            .store(in: &viewModel.cancellables)
+//        guard let id = viewModel.scheduleId else { return }
+//        viewModel.getSchedule(id: id)
+//        
+//        viewModel.$scheduleResult
+//            .receive(on: DispatchQueue.main)
+//            .sink(receiveValue: { result in
+//                guard let schedule = result else { return }
+//                self.viewModel.setScheduleData(getSchedule: schedule)
+//                self.collectionView.reloadData()
+//            })
+//            .store(in: &viewModel.cancellables)
     }
     
     func addDatePickerTapGesture() {
@@ -204,8 +213,9 @@ class AddScheduleViewController: NavigationBarViewController {
         view.removeGestureRecognizer(datePickerTap)
     }
 
-    func navigateToNotificationViewController() {
-        coordinator?.showScheduleNotificationViewController()
+    func presentNotificationViewController() {
+        let viewController = ScheduleNotificationViewController()
+        navigationController?.pushViewController(viewController, animated: true)
 //        addNotificationViewController.viewModel.onNotificationSelected = { alarmOptions in
 //            self.viewModel.schedule.alarmOptions = alarmOptions
 //        }
@@ -213,7 +223,7 @@ class AddScheduleViewController: NavigationBarViewController {
     }
     
     func presentAddLocationController() {
-        coordinator?.showAddLocationViewController()
+ //       coordinator?.showAddLocationViewController()
     }
     
     func addLocation(_ location: KakaoSearchPlaces) {
@@ -227,7 +237,7 @@ class AddScheduleViewController: NavigationBarViewController {
 //            self.viewModel.area[indexPath.section].value[indexPath.row].time = self.viewModel.formatTime(selectedTime)
 //            self.collectionView.reloadData()
 //        }
-        coordinator?.showTimePickerViewController(selectedTime: viewModel.setSelectedTime(selectedTime: selectedTime))
+//        coordinator?.showTimePickerViewController(selectedTime: viewModel.setSelectedTime(selectedTime: selectedTime))
     }
     
     func presentDeleteLocationAlert() {
@@ -243,7 +253,7 @@ class AddScheduleViewController: NavigationBarViewController {
 //            self.collectionView.reloadData()
 //        }
         
-        coordinator?.showAlertViewController(alert: alert)
+       // coordinator?.showAlertViewController(alert: alert)
     }
 }
 
@@ -349,7 +359,7 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
             guard let self = self else { return }
             
             viewModel.schedule.colorId = colorId
-            headerView.configureTitleColor(title: viewModel.schedule.title ?? "", isColorSelection: viewModel.isColorSelection ?? false, colorId: viewModel.schedule.colorId ?? 0)
+            headerView.configureTitleColor(title: viewModel.schedule.title ?? "", isColorSelection: viewModel.isColorSelection, colorId: viewModel.schedule.colorId )
         }
         
         headerView.onSelectedDateButtonTapped = { [weak self] dateType in
@@ -369,7 +379,7 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
         headerView.onNotificationButtonTapped = { [weak self] in
             guard let self = self else { return }
             
-            navigateToNotificationViewController()
+            presentNotificationViewController()
         }
     }
     

@@ -13,23 +13,23 @@ protocol EditCategoryDelegate: AnyObject {
     func dismissViewController()
 }
 
-class EditCategoryCoordinator: AppCoordinator, EditCategoryDelegate {
-    override func start() { 
-        
-    }
-    
+class EditCategoryCoordinator: EditCategoryDelegate {
+//    override func start() { 
+//        
+//    }
+//    
     func showEditCategoryViewController(categoryId: Int, categoryName: String) {
         let editCategoryViewController = EditCategoryViewController()
         editCategoryViewController.modalPresentationStyle = .overFullScreen
         editCategoryViewController.categoryId = categoryId
         editCategoryViewController.categoryName = categoryName
-        navigationController.present(editCategoryViewController, animated: false)
+     //   navigationController.present(editCategoryViewController, animated: false)
     }
     
     func showInputModalViewController() {
-        let coordinator = InputModalCoordinator(navigationController: navigationController)
-        coordinator.start()
-        childCoordinators.append(coordinator)
+//        let coordinator = InputModalCoordinator(navigationController: navigationController)
+//        coordinator.start()
+//        childCoordinators.append(coordinator)
     }
     
     func showDeleatCategoryAlert() {
@@ -37,7 +37,7 @@ class EditCategoryCoordinator: AppCoordinator, EditCategoryDelegate {
     }
     
     func dismissViewController() {
-        childDidFinish(self)
-        navigationController.dismiss(animated: false)
+//        childDidFinish(self)
+//        navigationController.dismiss(animated: false)
     }
 }

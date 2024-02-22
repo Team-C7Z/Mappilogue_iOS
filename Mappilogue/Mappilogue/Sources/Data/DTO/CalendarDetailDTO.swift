@@ -1,5 +1,5 @@
 //
-//  ScheduleDetailDTO.swift
+//  CalendarDetailDTO.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/11/21.
@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct ScheduleDetailDTO: Codable {
+struct CalendarDetailDTO: Codable {
     let solarDate: String
     let lunarDate: String
-    let schedulesOnSpecificDate: [SchedulesOnSpecificDate]
+    let schedulesOnSpecificDate: [ScheduleOnSpecificDate]
 }
 
-struct SchedulesOnSpecificDate: Codable {
+struct ScheduleOnSpecificDate: Codable {
     let scheduleId: Int
     let startDate: String
     let endDate: String

@@ -11,7 +11,7 @@ import Combine
 class ColorManager: ColorAPI {
     private let baseURL = URL(string: "\(Environment.baseURL)/api/v1/colors")!
     
-    func getColorList() -> AnyPublisher<BaseDTO<[ColorListDTO]>, Error> {
+    func getColorList() -> AnyPublisher<BaseDTOResult<[ColorListDTO]>, Error> {
         var request = URLRequest(url: baseURL)
         request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -23,7 +23,7 @@ class ColorManager: ColorAPI {
                 }
                 return data
             }
-            .decode(type: BaseDTO<[ColorListDTO]>.self, decoder: JSONDecoder())
+            .decode(type: BaseDTOResult<[ColorListDTO]>.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
 }

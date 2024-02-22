@@ -11,16 +11,16 @@ protocol SearchDelegate: AnyObject {
     func popViewController()
 }
 
-class SearchCoordinator: AppCoordinator, SearchDelegate {
-    override func start() {
+class SearchCoordinator: SearchDelegate {
+   func start() {
         let searchViewController = SearchViewController()
         searchViewController.hidesBottomBarWhenPushed = true
         searchViewController.coordinator = self
-        navigationController.pushViewController(searchViewController, animated: false)
+     //   navigationController.pushViewController(searchViewController, animated: false)
     }
     
     func popViewController() {
-        childDidFinish(self)
-        navigationController.popViewController(animated: false)
+    //    childDidFinish(self)
+    //    navigationController.popViewController(animated: false)
     }
 }

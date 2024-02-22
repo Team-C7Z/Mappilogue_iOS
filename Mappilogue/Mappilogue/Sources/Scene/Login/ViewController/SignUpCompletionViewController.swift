@@ -8,8 +8,11 @@
 import UIKit
 import MappilogueKit
 
+protocol SignUpCompletionControllerDelegate {
+    func showTabBarController()
+}
+
 class SignUpCompletionViewController: BaseViewController {
-    weak var coordinator: SignUpCompletionCoordinator?
     var dismissTimer: Timer?
     var minterval = 3.0
     
@@ -102,6 +105,6 @@ class SignUpCompletionViewController: BaseViewController {
     }
     
     private func dismissViewController() {
-        coordinator?.presentTabBarController()
+        dismiss(animated: false)
     }
 }

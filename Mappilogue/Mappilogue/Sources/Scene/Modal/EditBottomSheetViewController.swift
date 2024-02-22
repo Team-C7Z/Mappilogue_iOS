@@ -9,7 +9,6 @@ import UIKit
 import MappilogueKit
 
 class EditBottomSheetViewController: UIViewController {
-    weak var coordinator: EditBottomSheetCoordinator?
     var alert: Alert?
     public var onModify: (() -> Void)?
     public var onDelete: (() -> Void)?
@@ -47,7 +46,7 @@ class EditBottomSheetViewController: UIViewController {
         guard let touch = touches.first, touch.location(in: view).y < modalView.frame.maxY else {
             return
         }
-        coordinator?.dismissViewController()
+        dismiss(animated: false)
     }
     
     public func configure(modifyTitle: String, deleteTitle: String, alert: Alert) {
@@ -58,13 +57,12 @@ class EditBottomSheetViewController: UIViewController {
     
     @objc func modifyButtonTapped(_ button: UIButton) {
         onModify?()
-        coordinator?.dismissViewController()
+      
     }
     
     @objc func deleteButtonTapped(_ button: UIButton) {
-        guard let alert = alert else { return }
-
-        coordinator?.dismissViewController()
-        coordinator?.showAlertViewController(alert: alert)
+        dismiss(animated: false) {
+            self.onDelete?()
+        }
     }
 }

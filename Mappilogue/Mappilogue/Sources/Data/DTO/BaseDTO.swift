@@ -7,8 +7,13 @@
 
 import Foundation
 
-struct BaseDTO<T: Codable>: Codable {
+struct BaseDTOResult<T: Codable>: Codable {
     var isSuccess: Bool
     var statusCode: Int
     var result: T?
+}
+
+struct BaseDTO: Codable {
+    var isSuccess: Bool
+    var statusCode: Int
 }

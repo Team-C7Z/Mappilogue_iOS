@@ -11,7 +11,7 @@ import Combine
 class CategoryManager: CategoryAPI {
     private let baseURL = URL(string: "\(Environment.baseURL)/api/v1/marks/categories")!
     
-    func getCategory() -> AnyPublisher<BaseDTO<GetCategoryDTO>, Error> {
+    func getCategory() -> AnyPublisher<BaseDTOResult<GetCategoryDTO>, Error> {
         let request = setupRequest(for: baseURL, method: "GET")
         
         return URLSession.shared.dataTaskPublisher(for: request)
@@ -21,11 +21,11 @@ class CategoryManager: CategoryAPI {
                 }
                 return data
             }
-            .decode(type: BaseDTO<GetCategoryDTO>.self, decoder: JSONDecoder())
+            .decode(type: BaseDTOResult<GetCategoryDTO>.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
     
-    func addCategory(title: String) -> AnyPublisher<BaseDTO<AddCategoryDTO>, Error> {
+    func addCategory(title: String) -> AnyPublisher<BaseDTOResult<AddCategoryDTO>, Error> {
         var request = setupRequest(for: baseURL, method: "POST")
         
         let requestParameters: [String: Any] = [
@@ -46,7 +46,7 @@ class CategoryManager: CategoryAPI {
             
                 return data
             }
-            .decode(type: BaseDTO<AddCategoryDTO>.self, decoder: JSONDecoder())
+            .decode(type: BaseDTOResult<AddCategoryDTO>.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
     

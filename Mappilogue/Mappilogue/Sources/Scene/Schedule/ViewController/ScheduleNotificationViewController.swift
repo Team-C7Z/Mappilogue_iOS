@@ -8,7 +8,6 @@
 import UIKit
 
 class ScheduleNotificationViewController: NavigationBarViewController {
-    weak var coordinator: ScheduleNotificationCoordinator?
     var viewModel = ScheduleNotificationViewModel()
     
     private lazy var collectionView: UICollectionView = {
@@ -83,13 +82,14 @@ class ScheduleNotificationViewController: NavigationBarViewController {
         popBar.onPopButtonTapped = { [weak self] in
             guard let self = self else { return }
             
-            popToAddScheduleViewController()
+            dismissViewController()
         }
     }
     
-    @objc func popToAddScheduleViewController() {
-        viewModel.updateAlarmOptionsFromNotificationList()
-        coordinator?.popViewController()
+    func dismissViewController() {
+        navigationController?.popViewController(animated: true)
+      //  viewModel.updateAlarmOptionsFromNotificationList()
+    
     }
 
     func setSelectedDate() {
@@ -178,8 +178,6 @@ extension ScheduleNotificationViewController: UICollectionViewDelegate, UICollec
             
             viewModel.addNotification()
         }
-        
-        collectionView.reloadData()
         
         return headerView
     }

@@ -11,21 +11,21 @@ protocol SelectCategoryDelegate: AnyObject {
     func popViewController()
 }
 
-class SelectCategoryCoordinator: AppCoordinator, SelectCategoryDelegate {
-    override func start() {
+class SelectCategoryCoordinator: SelectCategoryDelegate {
+    func start() {
         let selectCategoryViewController = SelectCategoryViewController()
         selectCategoryViewController.coordinator = self
-        navigationController.pushViewController(selectCategoryViewController, animated: false)
+       // navigationController.pushViewController(selectCategoryViewController, animated: false)
     }
     
     func showInputModalViewController() {
-        let coordinator = InputModalCoordinator(navigationController: self.navigationController)
-        coordinator.start()
-        self.childCoordinators.append(coordinator)
+//        let coordinator = InputModalCoordinator(navigationController: self.navigationController)
+//        coordinator.start()
+//        self.childCoordinators.append(coordinator)
     }
     
     func popViewController() {
-        childDidFinish(self)
-        navigationController.popViewController(animated: false)
+//        childDidFinish(self)
+//        navigationController.popViewController(animated: false)
     }
 }

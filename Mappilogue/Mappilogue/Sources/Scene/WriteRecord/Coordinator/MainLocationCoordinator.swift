@@ -12,28 +12,28 @@ protocol MainLocationDelegate: AnyObject {
     func popViewController()
 }
 
-class MainLocationCoordinator: AppCoordinator, MainLocationDelegate {
-    override func start() { 
-        let mainLocationViewController = MainLocationViewController()
-        mainLocationViewController.coordinator = self
-        navigationController.pushViewController(mainLocationViewController, animated: false)
-    }
-    
+class MainLocationCoordinator: MainLocationDelegate {
+//    override func start() { 
+//        let mainLocationViewController = MainLocationViewController()
+//        mainLocationViewController.coordinator = self
+//        navigationController.pushViewController(mainLocationViewController, animated: false)
+//    }
+//    
     func showMapMainLocationViewController() {
-        let coordinator =
-        MapMainLocationCoordinator(navigationController: navigationController)
-        coordinator.start()
-        childCoordinators.append(coordinator)
+        // let coordinator =
+       // MapMainLocationCoordinator(navigationController: navigationController)
+            // coordinator.start()
+      //  childCoordinators.append(coordinator)
     }
     
     func showMainLocationAlertViewController() {
-        let coordinator = MainLocationAlertCoordinator(navigationController: navigationController)
-        coordinator.start()
-        childCoordinators.append(coordinator)
+//        let coordinator = MainLocationAlertCoordinator(navigationController: navigationController)
+//        coordinator.start()
+//        childCoordinators.append(coordinator)
     }
 
     func popViewController() {
-        childDidFinish(self)
-        navigationController.popViewController(animated: false)
+//        childDidFinish(self)
+//        navigationController.popViewController(animated: false)
     }
 }

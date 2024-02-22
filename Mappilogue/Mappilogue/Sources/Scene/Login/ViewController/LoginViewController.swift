@@ -13,7 +13,6 @@ import AuthenticationServices
 import MappilogueKit
 
 class LoginViewController: BaseViewController {
-    weak var coordinator: LoginCoordinator?
     var viewModel = LoginViewModel()
     
     private let logoImage = UIImageView()
@@ -132,11 +131,13 @@ class LoginViewController: BaseViewController {
     }
     
     func presentSignUpCompleteViewController() {
-        coordinator?.showSignUpCompletionViewController()
+        let viewController = SignUpCompletionViewController()
+        present(viewController, animated: false)
     }
     
     func presentTabBarController() {
-        coordinator?.showTabBarController()
+    //    let tabBarController = TabBarController()
+      
     }
 }
 

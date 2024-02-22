@@ -6,13 +6,13 @@
 //
 
 import Foundation
-import Combine
+
+protocol CalendarLoadDataDelegate: AnyObject {
+    func reloadView()
+}
 
 class CalendarViewModel {
-    @Published var calendarResult: CalendarDTO?
-   
-    var cancellables: Set<AnyCancellable> = []
-    private let calendarManager = CalendarManager()
+    weak var delegate: CalendarLoadDataDelegate?
     
     var selectedDate: SelectedDate = SelectedDate(year: 0, month: 0)
     var calendarSchedules: [CalendarSchedules] = []
@@ -349,7 +349,6 @@ class CalendarViewModel {
     
     func compareDateToCurrentMonth(_ date: Date) -> MonthType {
         let calendar = Calendar.current
-        let currentDate = Date()
         
         guard let selectedDate = setDateFormatter(date: selectedDate) else { return .unknown }
   
@@ -403,9 +402,18 @@ class CalendarViewModel {
     }
 }
 
-enum MonthType: String, Codable {
-    case lastMonth
-    case currentMonth
-    case nextMonth
-    case unknown
+extension CalendarViewModel {
+    func loadCalendarData() {
+        CalendarManager.shared.getCalendar(year: currentYear, month: currentMonth, completion: { result in
+            switch result {
+            case .success(let response):
+                guard let baseResponse = response as? BaseDTOResult<CalendarDTO>, let result = baseResponse.result else { return }
+                self.calendarSchedules = result.calendarSchedules
+                self.setCalendarDot()
+                self.delegate?.reloadView()
+            default:
+                break
+            }
+        })
+    }
 }

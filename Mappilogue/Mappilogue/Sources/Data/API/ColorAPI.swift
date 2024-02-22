@@ -9,5 +9,5 @@ import Foundation
 import Combine
 
 protocol ColorAPI {
-    func getColorList() -> AnyPublisher<BaseDTO<[ColorListDTO]>, Error>
+    func getColorList() -> AnyPublisher<BaseDTOResult<[ColorListDTO]>, Error>
 }

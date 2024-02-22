@@ -11,8 +11,8 @@ protocol SavingRecordDelegate: AnyObject {
     func dismissViewController()
 }
 
-class SavingRecordCoordinator: AppCoordinator, SavingRecordDelegate {
-    override func start() { }
+class SavingRecordCoordinator: SavingRecordDelegate {
+   // override func start() { }
     
     func showSavingRecordViewController(isNewWrite: Bool, schedule: Schedule2222) {
         let savingRecordViewController = SavingRecordViewController()
@@ -22,18 +22,18 @@ class SavingRecordCoordinator: AppCoordinator, SavingRecordDelegate {
             
             showContentViewController(isNewWrite: isNewWrite, schedule: schedule)
         }
-        navigationController.present(savingRecordViewController, animated: false)
+     //   navigationController.present(savingRecordViewController, animated: false)
     }
     
     func showContentViewController(isNewWrite: Bool, schedule: Schedule2222) {
-        let coordinator =
-        ContentCoordinator(navigationController: navigationController)
-        coordinator.start()
-        childCoordinators.append(coordinator)
+//        let coordinator =
+//        ContentCoordinator(navigationController: navigationController)
+//        coordinator.start()
+//        childCoordinators.append(coordinator)
     }
     
     func dismissViewController() {
-        childDidFinish(self)
-        navigationController.dismiss(animated: false)
+//        childDidFinish(self)
+//        navigationController.dismiss(animated: false)
     }
 }

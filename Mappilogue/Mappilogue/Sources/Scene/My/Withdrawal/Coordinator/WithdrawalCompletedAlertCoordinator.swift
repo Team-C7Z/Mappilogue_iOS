@@ -21,9 +21,9 @@ class WithdrawalCompletedAlertCoordinator: BaseCoordinator, WithdrawalCompletedA
     }
     
     func showLoginViewController() {
-        let coordinator = LoginCoordinator(navigationController: self.navigationController)
-        coordinator.start()
-        self.childCoordinators.append(coordinator)
+//        let coordinator = LoginCoordinator(navigationController: self.navigationController)
+//        coordinator.start()
+//        self.childCoordinators.append(coordinator)
     }
     
     func popViewController() {

@@ -12,21 +12,21 @@ protocol MapMainLocationDelegate: AnyObject {
     func popViewController()
 }
 
-class MapMainLocationCoordinator: AppCoordinator, MapMainLocationDelegate {
-    override func start() {
-        let mapMainLocationViewController = MapMainLocationViewController()
-        mapMainLocationViewController.coordinator = self
-        navigationController.pushViewController(mapMainLocationViewController, animated: false)
-    }
+class MapMainLocationCoordinator: MapMainLocationDelegate {
+//    override func start() {
+//        let mapMainLocationViewController = MapMainLocationViewController()
+//        mapMainLocationViewController.coordinator = self
+//        navigationController.pushViewController(mapMainLocationViewController, animated: false)
+//    }
     
     func showLocationPermissionAlert(alert: Alert) {
-        let coordinator = AlertCoordinator(navigationController: self.navigationController)
-        coordinator.showAlert(alert)
-        self.childCoordinators.append(coordinator)
+     //   let coordinator = AlertCoordinator(navigationController: self.navigationController)
+     //   coordinator.showAlert(alert)
+     //   self.childCoordinators.append(coordinator)
     }
 
     func popViewController() {
-        childDidFinish(self)
-        navigationController.popViewController(animated: false)
+       // childDidFinish(self)
+       // navigationController.popViewController(animated: false)
     }
 }

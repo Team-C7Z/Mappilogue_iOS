@@ -11,23 +11,28 @@ import MappilogueKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
-    var window: UIWindow?
-    private var appCoordinator: AppCoordinator?
-
+    public var window: UIWindow?
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = (scene as? UIWindowScene) else {
-            return
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        let window = UIWindow(windowScene: windowScene)
+        
+        if RootUserDefaults.isPermissionNeeded() {
+            window.rootViewController = PermissionViewController()
+        } else if RootUserDefaults.isOnboardingNeeded() {
+            window.rootViewController = OnboardingViewController()
+        } else {
+            AuthUserDefaults.autoLogin { success in
+                if success {
+                    window.rootViewController = TabBarController()
+                } else {
+                    window.rootViewController = LoginViewController()
+                }
+            }
         }
-
-        let navigationController = UINavigationController()
-        navigationController.isNavigationBarHidden = true
-        
-        appCoordinator = AppCoordinator(navigationController: navigationController)
-        appCoordinator?.start()
-        
-        window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = navigationController
-        window?.makeKeyAndVisible()
+        window.makeKeyAndVisible()
+        self.window = window
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
@@ -65,7 +70,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
 }
 

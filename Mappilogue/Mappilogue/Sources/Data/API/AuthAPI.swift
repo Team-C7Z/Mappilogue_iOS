@@ -46,7 +46,7 @@ extension AuthAPI: TargetType {
 }
 
 protocol AuthAPI2 {
-    func socialLogin(auth: Auth) -> AnyPublisher<BaseDTO<AuthDTO>, Error>
+    func socialLogin(auth: Auth) -> AnyPublisher<BaseDTOResult<AuthDTO>, Error>
     func logout() -> AnyPublisher<Void, Error>
     func withdrawal(reason: String?) -> AnyPublisher<Void, Error>
 }

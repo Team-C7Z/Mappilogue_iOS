@@ -7,8 +7,13 @@
 
 import UIKit
 
+protocol DismissDatePickerViewControllerDelegate: class {
+    func changedDate(_ date: SelectedDate)
+}
+
 class DatePickerViewController: BaseViewController {
-    weak var coordinator: DatePickerCoordinator?
+    weak var delegate: DismissDatePickerViewControllerDelegate?
+    
     var viewModel = DatePickerViewModel()
  
     let datePickerOuterView = UIView()
@@ -65,11 +70,13 @@ class DatePickerViewController: BaseViewController {
             return
         }
         
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
-            self.datePickerOuterView.frame.origin.y = 0
+        UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseOut, animations: {
+            self.datePickerOuterView.frame.origin.y = 20
         }, completion: { _ in
             guard let date = self.viewModel.selectedDate else { return }
-            self.coordinator?.dismissViewController(date: date)
+            self.dismiss(animated: false) {
+                self.delegate?.changedDate(date)
+            }
         })
     }
 

@@ -18,6 +18,8 @@ class NavigationBarViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.isNavigationBarHidden = true
     }
     
     override func setupProperty() {

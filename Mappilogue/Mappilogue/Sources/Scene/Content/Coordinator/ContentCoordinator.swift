@@ -20,15 +20,15 @@ class ContentCoordinator: BaseCoordinator, ContentDelegate {
     }
     
     func showWriteRecordViewController() {
-        let coordinator = WriteRecordCoordinator(navigationController: self.navigationController)
-        coordinator.start()
-        self.childCoordinators.append(coordinator)
+    //    let coordinator = WriteRecordCoordinator(navigationController: self.navigationController)
+    //    coordinator.start()
+    //    self.childCoordinators.append(coordinator)
     }
     
     func showEditBottomSheetViewController(modifyTitle: String, deleteTitle: String, alert: Alert) {
-        let coordinator = EditBottomSheetCoordinator(navigationController: self.navigationController)
-        coordinator.showEditBottomSheetViewController(modifyTitle: modifyTitle, deleteTitle: deleteTitle, alert: alert)
-        self.childCoordinators.append(coordinator)
+//        let coordinator = EditBottomSheetCoordinator(navigationController: self.navigationController)
+//        coordinator.showEditBottomSheetViewController(modifyTitle: modifyTitle, deleteTitle: deleteTitle, alert: alert)
+//        self.childCoordinators.append(coordinator)
     }
     
     func showImageDetailViewController(imageName: String) {

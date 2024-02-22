@@ -47,9 +47,9 @@ class EditProfileCoordinator: BaseCoordinator, EditProfileDelegate {
     }
     
     func showAlertViewController(alert: Alert) {
-        let coordinator = AlertCoordinator(navigationController: navigationController)
-        coordinator.showAlert(alert)
-        childCoordinators.append(coordinator)
+   //     let coordinator = AlertCoordinator(navigationController: navigationController)
+    //    coordinator.showAlert(alert)
+     //   childCoordinators.append(coordinator)
     }
     
     func popViewController() {

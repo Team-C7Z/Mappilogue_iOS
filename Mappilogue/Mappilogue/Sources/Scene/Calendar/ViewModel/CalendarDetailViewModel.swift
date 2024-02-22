@@ -6,47 +6,17 @@
 //
 
 import Foundation
-import Combine
+
+protocol CalendarDetailLoadDataDelegate: AnyObject {
+    func reloadView()
+}
 
 class CalendarDetailViewModel {
-    @Published var scheduleDetailResult: ScheduleDetailDTO?
-    
-    var cancellables: Set<AnyCancellable> = []
-    private let calendarManager = CalendarManager()
+    weak var delegate: CalendarDetailLoadDataDelegate?
     
     var date: String = ""
-    var schedules = ScheduleDetailDTO(solarDate: "", lunarDate: "", schedulesOnSpecificDate: [])
-    var selectedScheduleIndex: Int?
-    
-    func getScheduleDetail(date: String) {
-        calendarManager.getScheduleDetail(date: date)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure:
-                    print("error")
-                }
-            }, receiveValue: { response in
-                self.scheduleDetailResult = response.result
-            })
-            .store(in: &cancellables)
-    }
-    
-    func deleteSchedule(id: Int, date: String) {
-        calendarManager.deleteSchedule(id: id)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    self.getScheduleDetail(date: date)
-                case .failure:
-                    print("error")
-                }
-            }, receiveValue: { _ in })
-            .store(in: &cancellables)
-    }
+    var schedules = CalendarDetailDTO(solarDate: "", lunarDate: "", schedulesOnSpecificDate: [])
+    var scheduleId: Int?
     
     func setDate(date: String) -> String {
         let dateArr = date.split(separator: " ").map {String($0)}
@@ -55,4 +25,23 @@ class CalendarDetailViewModel {
         return dateMonth + " " + dateDay
     }
     
+    func loadCalendarDetailData() {
+        CalendarManager.shared.getScheduleDetail(date: self.date) { result in
+            switch result {
+            case .success(let response):
+                guard let baseResponse = response as? BaseDTOResult<CalendarDetailDTO>, let result = baseResponse.result else { return }
+                self.schedules = result
+                self.delegate?.reloadView()
+            default:
+                break
+            }
+        }
+    }
+    
+    func deleteSchedule() {
+        guard let id = scheduleId else { return }
+        CalendarManager.shared.deleteSchedule(id: id, completion: { _ in
+            self.loadCalendarDetailData()
+        })
+    }
 }

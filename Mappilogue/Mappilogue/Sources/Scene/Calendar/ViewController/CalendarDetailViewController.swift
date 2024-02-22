@@ -9,7 +9,6 @@ import UIKit
 import MappilogueKit
 
 class CalendarDetailViewController: BaseViewController {
-    weak var coordinator: CalendarDetailCoordinator?
     let viewModel = CalendarDetailViewModel()
  
     var onWriteRecordButtonTapped: ((Schedule) -> Void)?
@@ -40,18 +39,17 @@ class CalendarDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        loadCalendarData()
+        setCalendarDetailData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
        
-    //    animateAddScheduleButton()
+        animateAddScheduleButton()
     }
     
     override func setupProperty() {
         view.backgroundColor = .gray404040.withAlphaComponent(0.1)
-        
         modalView.layer.cornerRadius = 24
         modalView.backgroundColor = .grayF9F8F7
         
@@ -115,29 +113,19 @@ class CalendarDetailViewController: BaseViewController {
             self.view.layoutIfNeeded()
         }, completion: { _ in
             NotificationCenter.default.post(name: Notification.Name("DismissScheduleViewController"), object: nil)
-            self.coordinator?.dismissViewController()
+            self.dismiss(animated: false)
         })
     }
     
-    func loadCalendarData() {
-        DispatchQueue.global().async {
-            CalendarManager111.shared.getScheduleDetail(date: self.viewModel.date) { result in
-                switch result {
-                case .success(let response):
-                    guard let baseResponse = response as? BaseDTO<ScheduleDetailDTO>, let result = baseResponse.result else { return }
-                    self.viewModel.schedules = result
-                    DispatchQueue.main.async {
-                        self.collectionView.reloadData()
-                        self.setDateLabel(date: self.viewModel.schedules.solarDate, lunarDate: self.viewModel.schedules.lunarDate)
-                    }
-                default:
-                    break
-                }
-            }
-        }
+    func setCalendarDetailData() {
+        viewModel.loadCalendarDetailData()
+        viewModel.delegate = self
     }
 
-    func setDateLabel(date: String, lunarDate: String) {
+    func setDateLabel() {
+        let date = viewModel.schedules.solarDate
+        let lunarDate = viewModel.schedules.lunarDate
+      
         dateLabel.text = viewModel.setDate(date: date)
         lunarDateLabel.text = "음력 \(viewModel.setDate(date: lunarDate))"
     }
@@ -155,36 +143,52 @@ class CalendarDetailViewController: BaseViewController {
     }
     
     @objc func addScheduleButtonTapped(_ sender: UIButton) {
-        onAddScheduleButtonTapped?(nil)
-      //  coordinator?.dismissViewController())
-        coordinator?.showAddScheduleViewController()
+        dismiss(animated: false) {
+            self.onAddScheduleButtonTapped?(nil)
+        }
     }
     
     private func presentEditScheduleViewController() {
-//        let editViewController = EditBottomSheetViewController()
-//        editViewController.modalPresentationStyle = .overFullScreen
-//        editViewController.configure(modifyTitle: "기록 작성하기",
-//                                             deleteTitle: "일정 삭제하기",
-//                                             alert: Alert(titleText: "이 일정을 삭제할까요?",
-//                                                          messageText: nil,
-//                                                          cancelText: "취소",
-//                                                          doneText: "삭제",
-//                                                          buttonColor: .redF14C4C,
-//                                                          alertHeight: 140))
-//        editViewController.onModify = { self.showWriteRecordViewController() }
-//        editViewController.onDelete = { self.deleteSchedule() }
-        coordinator?.showEditScheduleViewController()
+        let viewController = EditBottomSheetViewController()
+        viewController.modalPresentationStyle = .overFullScreen
+        viewController.configure(modifyTitle: "기록 작성하기",
+                                             deleteTitle: "일정 삭제하기",
+                                             alert: Alert(titleText: "이 일정을 삭제할까요?",
+                                                          messageText: nil,
+                                                          cancelText: "취소",
+                                                          doneText: "삭제",
+                                                          buttonColor: .redF14C4C,
+                                                          alertHeight: 140))
+        viewController.onModify = { self.showWriteRecordViewController() }
+        viewController.onDelete = { self.showAlertViewController() }
+        present(viewController, animated: false)
+    }
+    
+    private func showAlertViewController() {
+        let alert = Alert(titleText: "이 일정을 삭제할까요?",
+                          cancelText: "취소",
+                          doneText: "삭제",
+                          buttonColor: .redF14C4C,
+                          alertHeight: 140)
+        let viewController = AlertViewController()
+        viewController.modalPresentationStyle = .overCurrentContext
+        viewController.configure(alert)
+        viewController.onDoneTapped = {
+            self.viewModel.deleteSchedule()
+        }
+        present(viewController, animated: false)
     }
     
     private func showWriteRecordViewController() {
-        guard let index = self.viewModel.selectedScheduleIndex else { return }
+        guard let index = self.viewModel.scheduleId else { return }
         //  self.onWriteRecordButtonTapped?(self.schedules[index])
-        coordinator?.dismissViewController()
+      //  coordinator?.dismissViewController()
     }
     
-    private func deleteSchedule() {
-        viewModel.deleteSchedule(id: self.viewModel.selectedScheduleIndex ?? -1, date: viewModel.date)
-    }
+//    private func deleteSchedule() {
+//      //  viewModel.deleteSchedule(id: viewModel.selectedScheduleIndex ?? -1, date: viewModel.date)
+//        collectionView.reloadData()
+//    }
 }
 
 extension CalendarDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -203,10 +207,10 @@ extension CalendarDetailViewController: UICollectionViewDelegate, UICollectionVi
             let schedule = viewModel.schedules.schedulesOnSpecificDate[indexPath.row]
             cell.configure(schedule.scheduleId, schedule: schedule)
             
-            cell.onEditButtonTapped = { [weak self] index in
+            cell.onEditButtonTapped = { [weak self] id in
                 guard let self = self else { return }
                 
-                viewModel.selectedScheduleIndex = index
+                viewModel.scheduleId = id
                 presentEditScheduleViewController()
             }
             return cell
@@ -235,7 +239,14 @@ extension CalendarDetailViewController: UICollectionViewDelegate, UICollectionVi
         if !viewModel.schedules.schedulesOnSpecificDate.isEmpty {
             let id = viewModel.schedules.schedulesOnSpecificDate[indexPath.row].scheduleId
             onAddScheduleButtonTapped?(id)
-            coordinator?.dismissViewController()
+       //     coordinator?.dismissViewController()
         }
+    }
+}
+
+extension CalendarDetailViewController: CalendarDetailLoadDataDelegate {
+    func reloadView() {
+        setDateLabel()
+        collectionView.reloadData()
     }
 }

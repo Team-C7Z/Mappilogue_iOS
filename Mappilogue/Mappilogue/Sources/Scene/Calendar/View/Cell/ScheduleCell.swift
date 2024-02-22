@@ -79,7 +79,7 @@ class ScheduleCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(_ id: Int, schedule: SchedulesOnSpecificDate) {
+    func configure(_ id: Int, schedule: ScheduleOnSpecificDate) {
         self.id = id
         scheduleLabel.text = schedule.title
         scheduleColorView.backgroundColor = UIColor.fromHex(schedule.colorCode)

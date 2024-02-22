@@ -60,7 +60,7 @@ class AuthUserDefaults {
     }
     
     private static func handleRefreshTokenResponse(_ response: Any, completion: @escaping (Bool) -> Void) {
-        guard let baseResponse = response as? BaseDTO<RefreshTokenDTO>, let result = baseResponse.result else { return }
+        guard let baseResponse = response as? BaseDTOResult<RefreshTokenDTO>, let result = baseResponse.result else { return }
         
         AuthUserDefaults.accessToken = result.accessToken
         AuthUserDefaults.refreshToken = result.refreshToken

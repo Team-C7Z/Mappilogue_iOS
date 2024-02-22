@@ -19,7 +19,7 @@ class AuthManager {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseDTO<RefreshTokenDTO>.self)
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTOResult<RefreshTokenDTO>.self)
                 completion(networkResult)
             case .failure(let error):
                 print(error)
@@ -47,7 +47,7 @@ class AuthManager {
 class AuthManager2: AuthAPI2 {
     private let baseURL = "\(Environment.baseURL)/api/v1/users"
     
-    func socialLogin(auth: Auth) -> AnyPublisher<BaseDTO<AuthDTO>, Error> {
+    func socialLogin(auth: Auth) -> AnyPublisher<BaseDTOResult<AuthDTO>, Error> {
         let url = URL(string: "\(baseURL)/social-login")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -79,7 +79,7 @@ class AuthManager2: AuthAPI2 {
                 }
                 return data
             }
-            .decode(type: BaseDTO<AuthDTO>.self, decoder: JSONDecoder())
+            .decode(type: BaseDTOResult<AuthDTO>.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
     

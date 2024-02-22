@@ -8,8 +8,12 @@
 import UIKit
 import MappilogueKit
 
+protocol HomeViewControllerDelegate {
+   // func showLoginViewController(_ viewController: HomeViewController)
+}
+
 class HomeViewController: NavigationBarViewController {
-    weak var coordinator: HomeCoordinator?
+    weak var coordinatorDelegate: HomeCoordinator?
     var viewModel = HomeViewModel()
     
     private lazy var tableView: UITableView = {
@@ -34,7 +38,7 @@ class HomeViewController: NavigationBarViewController {
         super.viewDidLoad()
         
     }
-    
+ 
     override func setupProperty() {
         super.setupProperty()
         
@@ -43,7 +47,7 @@ class HomeViewController: NavigationBarViewController {
         logoNotoficationBar.onNotificationButtonTapped = { [weak self] in
             guard let self = self else { return }
             
-            coordinator?.showNotificationViewController()
+           // coordinator?.showNotificationViewController()
         }
     }
     
@@ -188,19 +192,19 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         footerView.onAddSchedule = { [weak self] in
             guard let self = self else { return }
             
-            coordinator?.showAddScheduleViewController()
+          //  coordinator?.showAddScheduleViewController()
         }
         
         footerView.onMarkedRecord = { [weak self] in
             guard let self = self else { return }
             
-            coordinator?.showContentViewController()
+          //  coordinator?.showContentViewController()
         }
         
         footerView.onAddRecord = { [weak self] in
             guard let self = self else { return }
             
-            coordinator?.showWriteRecordListViewController()
+          //  coordinator?.showWriteRecordListViewController()
         }
         return footerView
     }

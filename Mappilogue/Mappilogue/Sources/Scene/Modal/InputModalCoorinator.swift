@@ -14,10 +14,10 @@ protocol ModalCompletionDelegate: AnyObject {
     func completeModalAction(_ text: String)
 }
 
-class InputModalCoordinator: AppCoordinator, InputModalDelegate {
+class InputModalCoordinator: InputModalDelegate {
     weak var delegate: ModalCompletionDelegate?
     
-    override func start() { }
+  //  override func start() { }
     
     func showInputModalViewController(categoryName: String) {
         let inputModalViewController = InputModalViewController()
@@ -29,11 +29,11 @@ class InputModalCoordinator: AppCoordinator, InputModalDelegate {
             
             delegate?.completeModalAction(text)
         }
-        navigationController.present(inputModalViewController, animated: false)
+     //   navigationController.present(inputModalViewController, animated: false)
     }
     
     func dismissViewController() {
-        childDidFinish(self)
-        navigationController.dismiss(animated: false)
+     //   childDidFinish(self)
+      //  navigationController.dismiss(animated: false)
     }
 }

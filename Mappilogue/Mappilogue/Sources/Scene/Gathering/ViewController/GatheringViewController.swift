@@ -8,10 +8,8 @@
 import UIKit
 
 class GatheringViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
-    }
-    
+    }    
 }

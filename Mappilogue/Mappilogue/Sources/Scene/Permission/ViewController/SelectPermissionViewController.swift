@@ -10,7 +10,6 @@ import Photos
 import CoreLocation
 
 class SelectPermissionViewController: BaseViewController {
-    weak var coordinator: SelectPermissionCoordinator?
     var viewModel = PermissionViewModel()
     
     override func viewDidLoad() {
@@ -24,7 +23,8 @@ class SelectPermissionViewController: BaseViewController {
         }
     }
     
-    func presentOnboardingViewController() {
-        coordinator?.showOnboardingViewController()
+    private func presentOnboardingViewController() {
+        let viewController = OnboardingViewController()
+        present(viewController, animated: false)
     }
 }

@@ -9,8 +9,12 @@ import UIKit
 import KakaoSDKUser
 import MappilogueKit
 
+protocol MyViewControllerDelegate: class {
+    //  func showCalendarDetailViewController(date: String, frame: CGRect, _ viewController: CalendarViewController)
+}
+
 class MyViewController: NavigationBarViewController {
-    weak var coordinator: MyCoordinator?
+    weak var coordinatorDelegate: MyCoordinator?
     var viewModel = MyViewModel()
     
     var profile: ProfileDTO?
@@ -40,7 +44,7 @@ class MyViewController: NavigationBarViewController {
         
         getProfile()
     }
-
+    
     override func setupProperty() {
         super.setupProperty()
         
@@ -49,7 +53,7 @@ class MyViewController: NavigationBarViewController {
         notificationBar.onNotificationButtonTapped = { [weak self] in
             guard let self = self else { return }
             
-            coordinator?.showNotificationViewController()
+     //       coordinator?.showNotificationViewController()
         }
     }
     
@@ -86,7 +90,7 @@ class MyViewController: NavigationBarViewController {
     }
     
     @objc func presentWithdrawalConfirmationAlert() {
-        coordinator?.showWithdrawalCompletedAlertViewController()
+    //    coordinator?.showWithdrawalCompletedAlertViewController()
     }
 }
 
@@ -167,14 +171,15 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            coordinator?.showEditProfileViewController(profile)
+            print("")
+         //   coordinator?.showEditProfileViewController(profile)
         case 2:
             if indexPath.row == 0 {
-                coordinator?.showNotificationSettingViewController()
+          //      coordinator?.showNotificationSettingViewController()
             } else if indexPath.row == 1 {
-                coordinator?.showTermsOfUserViewController()
+           //     coordinator?.showTermsOfUserViewController()
             } else if indexPath.row == 2 {
-                coordinator?.showInquiryViewController()
+           //     coordinator?.showInquiryViewController()
             }
         case 3:
             if indexPath.row == 0 {
@@ -204,11 +209,11 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
 //        alertViewController.onDoneTapped = {
 //            self.logout()
 //        }
-        coordinator?.showLogoutAlert(alert: alert)
+     //   coordinator?.showLogoutAlert(alert: alert)
      }
     
     private func presentWithdrawalAlert() {
-        coordinator?.showWithdrawalAlertViewController()
+     //   coordinator?.showWithdrawalAlertViewController()
     }
     
     func logout() {
@@ -233,6 +238,6 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func presentLoginViewController() {
-        coordinator?.showLoginViewController()
+    //    coordinator?.showLoginViewController()
     }
 }

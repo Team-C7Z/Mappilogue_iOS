@@ -11,18 +11,18 @@ protocol TimePickerDelegate: AnyObject {
     func dismissViewController()
 }
 
-class TimePickerCoordinator: AppCoordinator, TimePickerDelegate {
-    override func start() { }
+class TimePickerCoordinator: TimePickerDelegate {
+  //  override func start() { }
     
     func showTimePickerViewController(_ selectedTime: String) {
-        let timePickerViewController = TimePickerViewController()
-        timePickerViewController.modalPresentationStyle = .overFullScreen
-        timePickerViewController.selectedTime = selectedTime
-        navigationController.present(timePickerViewController, animated: false)
+//        let timePickerViewController = TimePickerViewController()
+//        timePickerViewController.modalPresentationStyle = .overFullScreen
+//        timePickerViewController.selectedTime = selectedTime
+//        navigationController.present(timePickerViewController, animated: false)
     }
     
     func dismissViewController() {
-        childDidFinish(self)
-        navigationController.dismiss(animated: false)
+//        childDidFinish(self)
+//        navigationController.dismiss(animated: false)
     }
 }

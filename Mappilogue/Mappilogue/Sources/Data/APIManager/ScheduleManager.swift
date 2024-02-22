@@ -11,7 +11,7 @@ import Combine
 class ScheduleManager: ScheduleAPI {
     private let baseURL = "\(Environment.baseURL)/api/v1/schedules"
     
-    func addSchedule(schedule: Schedule) -> AnyPublisher<BaseDTO<AddScheduleDTO>, Error> {
+    func addSchedule(schedule: Schedule) -> AnyPublisher<BaseDTOResult<AddScheduleDTO>, Error> {
         let url = URL(string: baseURL)!
         var request = setupRequest(for: url, method: "POST")
         
@@ -70,11 +70,11 @@ class ScheduleManager: ScheduleAPI {
             
                 return data
             }
-            .decode(type: BaseDTO<AddScheduleDTO>.self, decoder: JSONDecoder())
+            .decode(type: BaseDTOResult<AddScheduleDTO>.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
     
-    func getSchedule(id: Int) -> AnyPublisher<BaseDTO<GetScheduleDTO>, Error> {
+    func getSchedule(id: Int) -> AnyPublisher<BaseDTOResult<GetScheduleDTO>, Error> {
         let url = URL(string: "\(baseURL)/detail-by-id?scheduleId=\(id)")!
         let request = setupRequest(for: url, method: "GET")
 
@@ -86,7 +86,7 @@ class ScheduleManager: ScheduleAPI {
               
                 return data
             }
-            .decode(type: BaseDTO<GetScheduleDTO>.self, decoder: JSONDecoder())
+            .decode(type: BaseDTOResult<GetScheduleDTO>.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
     

@@ -14,7 +14,7 @@ class ScheduleViewModel {
     let scheduleManager = ScheduleManager()
     var calendarViewModel = CalendarViewModel()
     
-    var onPop: (() -> Void)?
+    var onDismiss: (() -> Void)?
     
     var scheduleId: Int?
     var schedule = Schedule(colorId: -1, startDate: "", endDate: "")
@@ -36,22 +36,6 @@ class ScheduleViewModel {
     var area: [Area] = []
     var selectedLocations: [IndexPath] = []
     var initialTime: String = "9:00 AM"
-    
-    func addSchedule(schedule: Schedule) {
-        scheduleManager.addSchedule(schedule: schedule)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure:
-                    print("error")
-                }
-            }, receiveValue: { _ in
-                self.onPop?()
-            })
-            .store(in: &cancellables)
-    }
     
     func getSchedule(id: Int) {
         scheduleManager.getSchedule(id: id)
@@ -104,6 +88,18 @@ class ScheduleViewModel {
             updateSchedule(id: id, schedule: schedule)
         } else {
             addSchedule(schedule: schedule)
+        }
+    }
+    
+    private func addSchedule(schedule: Schedule) {
+        CalendarManager.shared.addSchedule(schedule: schedule) { result in
+            switch result {
+            case .success(let response):
+                guard let baseResponse = response as? BaseDTOResult<AddScheduleDTO>, let result = baseResponse.result else { return }
+                self.onDismiss?()
+            default:
+                break
+            }
         }
     }
     

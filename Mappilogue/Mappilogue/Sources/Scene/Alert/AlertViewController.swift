@@ -9,8 +9,6 @@ import UIKit
 import MappilogueKit
 
 class AlertViewController: BaseViewController {
-    weak var coordinator: AlertCoordinator?
-    
     public var onCancelTapped: (() -> Void)?
     public var onDoneTapped: (() -> Void)?
     
@@ -44,11 +42,12 @@ class AlertViewController: BaseViewController {
     }
     
     @objc private func cancelButtonTapped(_ sender: UIButton) {
-        coordinator?.dismissAlert()
+        dismiss(animated: false)
     }
     
     @objc private func deleteButtonTapped(_ sender: UIButton) {
-        onDoneTapped?()
-        coordinator?.dismissAlert()
+        dismiss(animated: false) {
+            self.onDoneTapped?()
+        }
     }
 }

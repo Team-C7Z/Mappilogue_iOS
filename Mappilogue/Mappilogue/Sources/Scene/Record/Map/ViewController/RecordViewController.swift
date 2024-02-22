@@ -9,8 +9,13 @@ import UIKit
 import NMapsMap
 import MappilogueKit
 
+protocol RecordViewControllerDelegate: class {
+    //  func showCalendarDetailViewController(date: String, frame: CGRect, _ viewController: CalendarViewController)
+}
+
 class RecordViewController: NavigationBarViewController {
-    weak var coordinator: RecordCoordinator?
+   // weak var coordinator: RecordCoordinator?
+    weak var coordinatorDelegate: RecordCoordinator?
     
     let dummyCategory: [Category] = []
     let dummyRecord: [Record] = dummyRecordData()
@@ -73,7 +78,7 @@ class RecordViewController: NavigationBarViewController {
         notificationBar.onNotificationButtonTapped = { [weak self] in
             guard let self = self else { return }
             
-            coordinator?.showNotificationController()
+         //   coordinator?.showNotificationController()
         }
         
         setMapView()
@@ -259,7 +264,7 @@ class RecordViewController: NavigationBarViewController {
     }
     
     @objc private func searchTextFieldTapped() {
-        coordinator?.showSearchViewController()
+      //  coordinator?.showSearchViewController()
     }
     
     private func setSearchTextFieldTapGestue() {
@@ -279,11 +284,11 @@ class RecordViewController: NavigationBarViewController {
     }
     
     @objc private func myRecordListButtonTapped() {
-        coordinator?.showMyRecordListViewController()
+     //   coordinator?.showMyRecordListViewController()
     }
     
     @objc private func writeRecordButtonTapped() {
-        coordinator?.showWriteRecordViewController()
+      //  coordinator?.showWriteRecordViewController()
     }
     
     private func setBottomSheetViewController() {
@@ -411,7 +416,7 @@ extension RecordViewController: CLLocationManagerDelegate {
 //            }
 //        }
         
-        coordinator?.showAlertViewController(alert: alert)
+     //   coordinator?.showAlertViewController(alert: alert)
     }
 }
 
@@ -506,7 +511,8 @@ extension RecordViewController: UICollectionViewDelegate, UICollectionViewDataSo
             
             collectionView.reloadData()
         default:
-            coordinator?.showCategorySettingViewController()
+            break
+// coordinator?.showCategorySettingViewController()
         }
     }
 }

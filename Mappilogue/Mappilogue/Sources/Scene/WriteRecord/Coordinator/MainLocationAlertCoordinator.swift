@@ -11,16 +11,16 @@ protocol MainLocationAlertDelegate: AnyObject {
     func dismissViewController()
 }
 
-class MainLocationAlertCoordinator: AppCoordinator, MainLocationAlertDelegate {
-    override func start() {
-        let mainLocationAlertViewController = MainLocationAlertViewController()
-        mainLocationAlertViewController.modalPresentationStyle = .overCurrentContext
-        mainLocationAlertViewController.coordinator = self
-        navigationController.present(mainLocationAlertViewController, animated: false)
-    }
+class MainLocationAlertCoordinator: MainLocationAlertDelegate {
+//    override func start() {
+//        let mainLocationAlertViewController = MainLocationAlertViewController()
+//        mainLocationAlertViewController.modalPresentationStyle = .overCurrentContext
+//        mainLocationAlertViewController.coordinator = self
+//     //   navigationController.present(mainLocationAlertViewController, animated: false)
+//    }
     
     func dismissViewController() {
-        childDidFinish(self)
-        navigationController.dismiss(animated: false)
+     //   childDidFinish(self)
+     //   navigationController.dismiss(animated: false)
     }
 }

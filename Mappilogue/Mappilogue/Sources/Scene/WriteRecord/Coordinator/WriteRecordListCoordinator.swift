@@ -12,23 +12,23 @@ protocol WriteRecordListDelegate: AnyObject {
     func showWriteRecordViewController(schedule: Schedule2222)
 }
 
-class WriteRecordListCoordinator: AppCoordinator, WriteRecordListDelegate {
-    override func start() {
-        let writeRecordListViewController = WriteRecordListRecordViewController()
-        writeRecordListViewController.hidesBottomBarWhenPushed = true
-        writeRecordListViewController.coordinator = self
-        navigationController.pushViewController(writeRecordListViewController, animated: false)
-    }
-    
-    func showWriteRecordViewController(schedule: Schedule2222) {
-        let coordinator =
-        WriteRecordCoordinator(navigationController: self.navigationController)
-        coordinator.showWriteRecordViewController(schedule: schedule)
-        self.childCoordinators.append(coordinator)
-    }
-    
-    func popViewController() {
-        childDidFinish(self)
-        navigationController.popViewController(animated: false)
-    }
+class WriteRecordListCoordinator {
+//    override func start() {
+//        let writeRecordListViewController = WriteRecordListRecordViewController()
+//        writeRecordListViewController.hidesBottomBarWhenPushed = true
+//        writeRecordListViewController.coordinator = self
+//        navigationController.pushViewController(writeRecordListViewController, animated: false)
+//    }
+//    
+//    func showWriteRecordViewController(schedule: Schedule2222) {
+//        let coordinator =
+//        WriteRecordCoordinator(navigationController: self.navigationController)
+//        coordinator.showWriteRecordViewController(schedule: schedule)
+//        self.childCoordinators.append(coordinator)
+//    }
+//    
+//    func popViewController() {
+//        childDidFinish(self)
+//        navigationController.popViewController(animated: false)
+//    }
 }

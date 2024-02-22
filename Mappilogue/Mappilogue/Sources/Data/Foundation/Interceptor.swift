@@ -38,7 +38,7 @@ class Interceptor: RequestInterceptor {
             print(4444)
             switch result {
             case .success(let response):
-                if let baseResponse = response as? BaseDTO<RefreshTokenDTO>, let result = baseResponse.result {
+                if let baseResponse = response as? BaseDTOResult<RefreshTokenDTO>, let result = baseResponse.result {
                     AuthUserDefaults.accessToken = result.accessToken
                     AuthUserDefaults.refreshToken = result.refreshToken
                 }

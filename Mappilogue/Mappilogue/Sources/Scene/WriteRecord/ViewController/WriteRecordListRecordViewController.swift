@@ -41,7 +41,7 @@ class WriteRecordListRecordViewController: NavigationBarViewController {
         popBar.onPopButtonTapped = { [weak self] in
             guard let self = self else { return }
             
-            coordinator?.popViewController()
+         ////   coordinator?.popViewController()
         }
         
         newWriteButton.addTarget(self, action: #selector(newWriteButtonTapped), for: .touchUpInside)
@@ -77,7 +77,7 @@ class WriteRecordListRecordViewController: NavigationBarViewController {
         if let indexPath = indexPath {
             schedule =  dummyData[indexPath.section].schedules[indexPath.row]
         }
-        coordinator?.showWriteRecordViewController(schedule: schedule)
+   //     coordinator?.showWriteRecordViewController(schedule: schedule)
     }
     
     @objc private func newWriteButtonTapped() {

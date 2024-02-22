@@ -12,7 +12,7 @@ import Combine
 class UserManager: UserAPI {
     private let baseURL = "\(Environment.baseURL)/api/v1/users/profiles"
     
-    func getProfile() -> AnyPublisher<BaseDTO<ProfileDTO>, Error> {
+    func getProfile() -> AnyPublisher<BaseDTOResult<ProfileDTO>, Error> {
         let url = URL(string: baseURL)!
         let request = setupRequest(for: url, method: "GET")
         
@@ -23,7 +23,7 @@ class UserManager: UserAPI {
                 }
                 return data
             }
-            .decode(type: BaseDTO<ProfileDTO>.self, decoder: JSONDecoder())
+            .decode(type: BaseDTOResult<ProfileDTO>.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
     
@@ -51,7 +51,7 @@ class UserManager: UserAPI {
             .eraseToAnyPublisher()
     }
     
-    func updateProfileImage(image: Data) -> AnyPublisher<BaseDTO<ProfileImageDTO>, Error> {
+    func updateProfileImage(image: Data) -> AnyPublisher<BaseDTOResult<ProfileImageDTO>, Error> {
         let url = URL(string: "\(baseURL)/images")!
         var request = setupRequest(for: url, method: "PATCH")
         let boundary = UUID().uuidString
@@ -76,11 +76,11 @@ class UserManager: UserAPI {
                 }
                 return data
             }
-            .decode(type: BaseDTO<ProfileImageDTO>.self, decoder: JSONDecoder())
+            .decode(type: BaseDTOResult<ProfileImageDTO>.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
     
-    func getNotificationSetting() -> AnyPublisher<BaseDTO<NotificationDTO>, Error> {
+    func getNotificationSetting() -> AnyPublisher<BaseDTOResult<NotificationDTO>, Error> {
         let url = URL(string: "\(baseURL)/alarm-settings")!
         let request = setupRequest(for: url, method: "GET")
         
@@ -91,7 +91,7 @@ class UserManager: UserAPI {
                 }
                 return data
             }
-            .decode(type: BaseDTO<NotificationDTO>.self, decoder: JSONDecoder())
+            .decode(type: BaseDTOResult<NotificationDTO>.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
     
@@ -122,7 +122,7 @@ class UserManager: UserAPI {
             .eraseToAnyPublisher()
     }
     
-    func getTermsOfUse() -> AnyPublisher<BaseDTO<TermsOfUserDTO>, Error> {
+    func getTermsOfUse() -> AnyPublisher<BaseDTOResult<TermsOfUserDTO>, Error> {
         let url = URL(string: "\(baseURL)/terms-of-services")!
         let request = setupRequest(for: url, method: "GET")
         
@@ -133,7 +133,7 @@ class UserManager: UserAPI {
                 }
                 return data
             }
-            .decode(type: BaseDTO<TermsOfUserDTO>.self, decoder: JSONDecoder())
+            .decode(type: BaseDTOResult<TermsOfUserDTO>.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
     
