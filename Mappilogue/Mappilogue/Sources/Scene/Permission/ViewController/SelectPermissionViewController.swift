@@ -15,7 +15,7 @@ class SelectPermissionViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.requestLocationPermission()
+        viewModel.requestPermission()
         viewModel.onboardingCompletion = { [weak self] in
             guard let self = self else { return }
             
@@ -25,6 +25,7 @@ class SelectPermissionViewController: BaseViewController {
     
     private func presentOnboardingViewController() {
         let viewController = OnboardingViewController()
+        viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: false)
     }
 }

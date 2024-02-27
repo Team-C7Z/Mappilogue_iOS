@@ -35,7 +35,6 @@ class CalendarViewController: NavigationBarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        
         NotificationCenter.default.addObserver(self, selector: #selector(showCalendarDetailViewContoller), name: Notification.Name("PresentScheduleViewController"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(dismissScheduleViewController), name: Notification.Name("DismissScheduleViewController"), object: nil)
@@ -51,12 +50,7 @@ class CalendarViewController: NavigationBarViewController {
         super.setupProperty()
         
         setNotificationBar(title: "캘린더")
-        notificationBar.onNotificationButtonTapped = { [weak self] in
-            guard let self = self else { return }
-            
-          //  coordinator?.showNotificationViewController()
-        }
-        
+
         setCalendarDate()
         
         currentDateButton.addTarget(self, action: #selector(changeDateButtonTapped), for: .touchUpInside)
@@ -151,11 +145,12 @@ class CalendarViewController: NavigationBarViewController {
     func showCalendarDetailViewController(_ date: String) {
         let viewController = CalendarDetailViewController()
         viewController.modalPresentationStyle = .overFullScreen
+        viewController.delegate = self
         viewController.addButtonLocation = addScheduleButton.frame
         viewController.viewModel.date = date
         viewController.onAddScheduleButtonTapped = { id in
             self.viewModel.scheduleId = id
-            self.navigationToAddScheduleViewController()
+            self.showAddScheduleViewController(date: nil, id: id)
         }
         present(viewController, animated: false)
     }
@@ -173,12 +168,14 @@ class CalendarViewController: NavigationBarViewController {
     @objc func navigationToAddScheduleViewController() {
         addScheduleButton.isHidden = false
         
-        showAddScheduleViewController()
+        showAddScheduleViewController(date: nil, id: nil)
     }
     
-    func showAddScheduleViewController() {
+    func showAddScheduleViewController(date: String?, id: Int?) {
         let viewController = AddScheduleViewController()
         viewController.hidesBottomBarWhenPushed = true
+        viewController.viewModel.selectedDate = date
+        viewController.viewModel.scheduleId = id
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
@@ -236,5 +233,11 @@ extension CalendarViewController: DismissDatePickerViewControllerDelegate {
     
     private func updateCurrentDateLabel(year: Int, month: Int) {
         currentDateLabel.text = "\(year)년 \(month)월"
+    }
+}
+
+extension CalendarViewController: CalendarDateDelegate {
+    func selectDate(date: String) {
+      //  showAddScheduleViewController(date: date, id: nil)
     }
 }

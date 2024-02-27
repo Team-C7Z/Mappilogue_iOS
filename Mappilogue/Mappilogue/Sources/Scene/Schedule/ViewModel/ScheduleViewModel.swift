@@ -8,14 +8,20 @@
 import Foundation
 import Combine
 
+protocol ScheduleReloadViewDelegate: AnyObject {
+    func reloadView()
+}
+
 class ScheduleViewModel {
-    @Published var scheduleResult: GetScheduleDTO?
+    var scheduleResult: GetScheduleDTO?
     var cancellables: Set<AnyCancellable> = []
     let scheduleManager = ScheduleManager()
     var calendarViewModel = CalendarViewModel()
     
+    weak var delegate: ScheduleReloadViewDelegate?
     var onDismiss: (() -> Void)?
     
+    var selectedDate: String?
     var scheduleId: Int?
     var schedule = Schedule(colorId: -1, startDate: "", endDate: "")
     
@@ -37,36 +43,27 @@ class ScheduleViewModel {
     var selectedLocations: [IndexPath] = []
     var initialTime: String = "9:00 AM"
     
-    func getSchedule(id: Int) {
-        scheduleManager.getSchedule(id: id)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure:
-                    print("error")
-                }
-            }, receiveValue: { result in
-                self.scheduleResult = result.result
-            })
-            .store(in: &cancellables)
+    func getSchedule() {
+        guard let id = scheduleId else { return }
+        
+        CalendarManager.shared.getSchedule(id: id) { result in
+            switch result {
+            case .success(let response):
+                guard let baseResponse = response as? BaseDTOResult<GetScheduleDTO>, let result = baseResponse.result else { return }
+                self.scheduleResult = result
+                self.setScheduleData(getSchedule: result)
+                self.delegate?.reloadView()
+            default:
+                break
+            }
+        }
     }
     
     func updateSchedule(id: Int, schedule: Schedule) {
-        scheduleManager.updateSchedule(id: id, schedule: schedule)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure:
-                    print("error")
-                }
-            }, receiveValue: { result in
-                print(result)
-            })
-            .store(in: &cancellables)
+        CalendarManager.shared.updateSchedule(id: id, schedule: schedule) { _ in
+            self.onDismiss?()
+        }
+
     }
     
     func setCurrentDate() {
@@ -95,12 +92,27 @@ class ScheduleViewModel {
         CalendarManager.shared.addSchedule(schedule: schedule) { result in
             switch result {
             case .success(let response):
-                guard let baseResponse = response as? BaseDTOResult<AddScheduleDTO>, let result = baseResponse.result else { return }
+                guard let baseResponse = response as? BaseDTOResult<AddScheduleDTO>, let _ = baseResponse.result else { return }
                 self.onDismiss?()
             default:
                 break
             }
         }
+    }
+    
+    func convertStringToInt(date: String) -> SelectedDate {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        if let convertedDate = dateFormatter.date(from: date) {
+            let calendar = Calendar.current
+            let components = calendar.dateComponents([.year, .month, .day], from: convertedDate)
+            
+            let date = SelectedDate(year: components.year ?? 0, month: components.month ?? 0, day: components.day)
+            
+            return date
+        }
+        return SelectedDate(year: 0, month: 0)
     }
     
     func setScheduleData(getSchedule: GetScheduleDTO) {
@@ -112,9 +124,9 @@ class ScheduleViewModel {
             alarmOptions: getSchedule.scheduleAlarmInfo
         )
       
-        startDate = calendarViewModel.convertStringToInt(date: schedule.startDate)
-        endDate = calendarViewModel.convertStringToInt(date: schedule.endDate)
-
+        startDate = convertStringToInt(date: schedule.startDate)
+        endDate = convertStringToInt(date: schedule.endDate)
+        
         for areaInfo in getSchedule.scheduleAreaInfo {
             let date = areaInfo.date
             var locations = [AddSchduleLocation]()

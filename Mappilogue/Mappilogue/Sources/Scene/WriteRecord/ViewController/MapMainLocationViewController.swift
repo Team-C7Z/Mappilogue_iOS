@@ -10,7 +10,6 @@ import NMapsMap
 import MappilogueKit
 
 class MapMainLocationViewController: NavigationBarViewController {
-    weak var coordinator: MapMainLocationCoordinator?
     private var locationViewModel = LocationViewModel()
     var onSelectedMapLocation: ((String) -> Void)?
 
@@ -31,12 +30,6 @@ class MapMainLocationViewController: NavigationBarViewController {
         super.setupProperty()
 
         setPopBar(title: "대표 위치 설정")
-        
-        popBar.onPopButtonTapped = { [weak self] in
-            guard let self = self else { return }
-            
-            coordinator?.popViewController()
-        }
         
         setMapView()
         
@@ -90,7 +83,7 @@ class MapMainLocationViewController: NavigationBarViewController {
 
     func selectMapLocation(_ address: String) {
         self.onSelectedMapLocation?(address)
-        self.coordinator?.popViewController()
+        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -132,12 +125,15 @@ extension MapMainLocationViewController: CLLocationManagerDelegate {
                           doneText: "설정으로 이동",
                           buttonColor: .green2EBD3D,
                           alertHeight: 182)
-//        alertViewController.onDoneTapped = {
-//            if let url = URL(string: UIApplication.openSettingsURLString) {
-//                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-//            }
-//        }
-        coordinator?.showLocationPermissionAlert(alert: alert)
+        let viewController = AlertViewController()
+        viewController.modalPresentationStyle = .overFullScreen
+        viewController.configure(alert)
+        viewController.onDoneTapped = {
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+        present(viewController, animated: false)
     }
 }
 

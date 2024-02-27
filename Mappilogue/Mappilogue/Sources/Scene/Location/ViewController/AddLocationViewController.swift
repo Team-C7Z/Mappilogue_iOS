@@ -168,3 +168,4 @@ extension AddLocationViewController: UISearchBarDelegate {
         loadSearchPlace(search)
     }
 }
+

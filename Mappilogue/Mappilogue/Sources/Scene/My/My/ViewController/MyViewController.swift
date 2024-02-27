@@ -9,15 +9,9 @@ import UIKit
 import KakaoSDKUser
 import MappilogueKit
 
-protocol MyViewControllerDelegate: class {
-    //  func showCalendarDetailViewController(date: String, frame: CGRect, _ viewController: CalendarViewController)
-}
-
 class MyViewController: NavigationBarViewController {
     weak var coordinatorDelegate: MyCoordinator?
     var viewModel = MyViewModel()
-    
-    var profile: ProfileDTO?
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -37,6 +31,8 @@ class MyViewController: NavigationBarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewModel.profileDelegate = self
+        viewModel.logoutDelegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -49,12 +45,6 @@ class MyViewController: NavigationBarViewController {
         super.setupProperty()
         
         setNotificationBar(title: "MY")
-        
-        notificationBar.onNotificationButtonTapped = { [weak self] in
-            guard let self = self else { return }
-            
-     //       coordinator?.showNotificationViewController()
-        }
     }
     
     override func setupHierarchy() {
@@ -74,15 +64,6 @@ class MyViewController: NavigationBarViewController {
     
     private func getProfile() {
         viewModel.getProfile()
-        
-        viewModel.$profileResult
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { result in
-                self.profile = result
-                self.collectionView.reloadData()
-            })
-            .store(in: &viewModel.cancellables)
-        
     }
     
     @objc func checkWithdrawalStatus(_ notification: Notification) {
@@ -128,7 +109,7 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     
     private func configureProfileCell(for indexPath: IndexPath, in collectionView: UICollectionView) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileCell.registerId, for: indexPath) as? ProfileCell else { return UICollectionViewCell() }
-        cell.configure(profile)
+        cell.configure(viewModel.profileResult)
         return cell
     }
     
@@ -175,7 +156,7 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
          //   coordinator?.showEditProfileViewController(profile)
         case 2:
             if indexPath.row == 0 {
-          //      coordinator?.showNotificationSettingViewController()
+                showNotificationSettingViewController()
             } else if indexPath.row == 1 {
            //     coordinator?.showTermsOfUserViewController()
             } else if indexPath.row == 2 {
@@ -199,6 +180,12 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
         }
     }
     
+    private func showNotificationSettingViewController() {
+        let viewController = NotificationSettingViewController()
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     private func presentLogoutAlert() {
         let alert = Alert(titleText: "로그아웃 할까요?",
                           messageText: nil,
@@ -206,30 +193,17 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
                           doneText: "확인",
                           buttonColor: .green2EBD3D,
                           alertHeight: 140)
-//        alertViewController.onDoneTapped = {
-//            self.logout()
-//        }
-     //   coordinator?.showLogoutAlert(alert: alert)
+        let viewController = AlertViewController()
+        viewController.modalPresentationStyle = .overFullScreen
+        viewController.configure(alert)
+        viewController.onDoneTapped = {
+            self.viewModel.logout()
+        }
+        present(viewController, animated: false)
      }
     
     private func presentWithdrawalAlert() {
-     //   coordinator?.showWithdrawalAlertViewController()
-    }
-    
-    func logout() {
-        viewModel.logout()
-            .sink { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(let error):
-                    print("error: \(error.localizedDescription)")
-                }
-            } receiveValue: { _ in
-                self.clearAuthUserDefaults()
-                self.presentLoginViewController()
-            }
-            .store(in: &viewModel.cancellables)
+        showWithdrawalViewController()
     }
     
     private func clearAuthUserDefaults() {
@@ -238,6 +212,27 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func presentLoginViewController() {
-    //    coordinator?.showLoginViewController()
+        let viewController = LoginViewController()
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: false)
+    }
+    
+    private func showWithdrawalViewController() {
+        let viewController = WithdrawalViewController()
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+}
+
+extension MyViewController: ProfileReloadViewDelegate {
+    func reloadView() {
+        collectionView.reloadData()
+    }
+}
+
+extension MyViewController: LogoutDelegate {
+    func logoutAccount() {
+        clearAuthUserDefaults()
+        presentLoginViewController()
     }
 }

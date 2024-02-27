@@ -10,7 +10,6 @@ import Photos
 import MappilogueKit
 
 class WriteRecordViewController: NavigationBarViewController {
-    weak var coordinator: WriteRecordCoordinator?
     private var colorViewModel = ColorViewModel()
    
     private var colorList: [ColorListDTO] = []
@@ -118,24 +117,32 @@ class WriteRecordViewController: NavigationBarViewController {
     }
     
     func presentAlert() {
+        let viewController = AlertViewController()
+        viewController.modalPresentationStyle = .overFullScreen
         let alert = Alert(titleText: "이 기록을 임시저장할까요?",
                           messageText: "쓰기 버튼을 다시 누르면 불러올 수 있어요",
                           cancelText: "삭제",
                           doneText: "임시저장",
                           buttonColor: .green2EBD3D,
                           alertHeight: 161)
-        coordinator?.showAlertViewController(alert: alert)
-//        alertViewController.onCancelTapped = {
-//            self.coordinator?.popViewController()
-//        }
-//        alertViewController.onDoneTapped = {
-//            self.coordinator?.popViewController()
-//        }
+        viewController.configure(alert)
+        viewController.onCancelTapped = {
+            self.navigationController?.popViewController(animated: true)
+        }
+        viewController.onDoneTapped = {
+            self.navigationController?.popViewController(animated: true)
+        }
+        present(viewController, animated: false)
 
     }
     
     @objc func categoryButtonTapped() {
-        coordinator?.showSelectCategoryViewController()
+        showSelectCategoryViewController()
+    }
+    
+    private func showSelectCategoryViewController() {
+        let viewController = SelectCategoryViewController()
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     private func configureScheduleTitleColorView() {
@@ -161,7 +168,12 @@ class WriteRecordViewController: NavigationBarViewController {
     }
     
     @objc func mainLocationButtonTapped() {
-        coordinator?.showMainLocationViewController()
+        showMainLocationViewController()
+    }
+    
+    private func showMainLocationViewController() {
+        let viewController = MainLocationViewController()
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     private func scrollToBottom() {
@@ -234,14 +246,13 @@ class WriteRecordViewController: NavigationBarViewController {
 
     func showImagePickerViewController(_ status: PHAuthorizationStatus) {
         DispatchQueue.main.async {
-            self.coordinator?.showImagePickerViewController(authStatus: status, isProfile: false)
-//            imagePickerViewController.onCompletion = { assets in
-//                self.displayRecordImages(assets)
-//            }
-            
+            let viewController = ImagePickerViewController()
+            viewController.authStatus = status
+            viewController.isProfile = true
+            self.navigationController?.pushViewController(viewController, animated: false)
         }
     }
-    
+
     func presentGalleyPermissionAlert() {
         DispatchQueue.main.async {
             let alert = Alert(titleText: "사진 접근 권한을 허용해 주세요",
@@ -250,12 +261,15 @@ class WriteRecordViewController: NavigationBarViewController {
                               doneText: "설정으로 이동",
                               buttonColor: .green2EBD3D,
                               alertHeight: 182)
-            self.coordinator?.showGalleyPermissionAlertViewController(alert: alert)
-//            alertViewController.onDoneTapped = {
-//                if let url = URL(string: UIApplication.openSettingsURLString) {
-//                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-//                }
-//            }
+            let viewController = AlertViewController()
+            viewController.modalPresentationStyle = .overFullScreen
+            viewController.configure(alert)
+            viewController.onDoneTapped = {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
+            self.present(viewController, animated: false)
         }
     }
     
@@ -264,7 +278,19 @@ class WriteRecordViewController: NavigationBarViewController {
     }
     
     @objc func saveRecordButtonTapped() {
-        coordinator?.showSavingRecordViewController(isNewWrite: true, schedule: schedule)
+        let viewController = SavingRecordViewController()
+        viewController.modalPresentationStyle = .overFullScreen
+        viewController.onSaveComplete = { [weak self] in
+            guard let self = self else { return }
+            
+           // showContentViewController(isNewWrite: isNewWrite, schedule: schedule)
+        }
+        present(viewController, animated: false)
+    }
+    
+    private func showContentViewController() {
+        let viewController = ContentViewController()
+        navigationController?.pushViewController(viewController, animated: false)
     }
 }
 

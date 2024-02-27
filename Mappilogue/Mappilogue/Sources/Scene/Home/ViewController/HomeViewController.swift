@@ -8,12 +8,7 @@
 import UIKit
 import MappilogueKit
 
-protocol HomeViewControllerDelegate {
-   // func showLoginViewController(_ viewController: HomeViewController)
-}
-
 class HomeViewController: NavigationBarViewController {
-    weak var coordinatorDelegate: HomeCoordinator?
     var viewModel = HomeViewModel()
     
     private lazy var tableView: UITableView = {
@@ -34,6 +29,12 @@ class HomeViewController: NavigationBarViewController {
         return tableView
     }()
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.loadHomeData(option: viewModel.selectedScheduleType.rawValue)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,12 +44,6 @@ class HomeViewController: NavigationBarViewController {
         super.setupProperty()
         
         setLogoNotificationBar()
-        
-        logoNotoficationBar.onNotificationButtonTapped = { [weak self] in
-            guard let self = self else { return }
-            
-           // coordinator?.showNotificationViewController()
-        }
     }
     
     override func setupHierarchy() {
@@ -64,6 +59,24 @@ class HomeViewController: NavigationBarViewController {
             $0.top.equalToSuperview().offset(88)
             $0.leading.bottom.trailing.equalToSuperview()
         }
+    }
+    
+    private func showAddScheduleViewController() {
+        let viewController = AddScheduleViewController()
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showContentViewController() {
+        let viewController = ContentViewController()
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showSelectCategoryViewController() {
+        let viewController = SelectCategoryViewController()
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
@@ -192,19 +205,19 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         footerView.onAddSchedule = { [weak self] in
             guard let self = self else { return }
             
-          //  coordinator?.showAddScheduleViewController()
+            showAddScheduleViewController()
         }
         
         footerView.onMarkedRecord = { [weak self] in
             guard let self = self else { return }
             
-          //  coordinator?.showContentViewController()
+            showContentViewController()
         }
         
         footerView.onAddRecord = { [weak self] in
             guard let self = self else { return }
             
-          //  coordinator?.showWriteRecordListViewController()
+            showSelectCategoryViewController()
         }
         return footerView
     }
@@ -240,6 +253,8 @@ extension HomeViewController: ScheduleTypeDelegate, ExpandCellDelegate {
     func scheduleButtonTapped(scheduleType: ScheduleType) {
         self.viewModel.selectedScheduleType = scheduleType
         
+        viewModel.loadHomeData(option: scheduleType.rawValue)
+        print(viewModel.homeSchedules, 99)
         tableView.reloadData()
     }
     

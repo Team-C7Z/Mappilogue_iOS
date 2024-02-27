@@ -8,7 +8,6 @@
 import UIKit
 
 class NotificationViewController: NavigationBarViewController {
-    weak var coordinator: NotificationCoordinator?
     var viewModel = NotificationViewModel()
     
     private lazy var tableView: UITableView = {
@@ -42,7 +41,7 @@ class NotificationViewController: NavigationBarViewController {
         popBar.onPopButtonTapped = { [weak self] in
             guard let self = self else { return }
             
-            coordinator?.popViewController()
+            navigationController?.popViewController(animated: false)
         }
     }
      

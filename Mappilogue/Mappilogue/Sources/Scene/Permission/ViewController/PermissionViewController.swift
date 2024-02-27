@@ -90,6 +90,7 @@ class PermissionViewController: BaseViewController {
     
     private func showPermissionViewController() {
         let viewController = SelectPermissionViewController()
+        viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: false)
     }
 }

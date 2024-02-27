@@ -6,12 +6,20 @@
 //
 
 import UIKit
-import Combine
+
+protocol ProfileReloadViewDelegate: AnyObject {
+    func reloadView()
+}
+
+protocol LogoutDelegate: AnyObject {
+    func logoutAccount()
+}
 
 class MyViewModel {
-    @Published var profileResult: ProfileDTO?
+    weak var profileDelegate: ProfileReloadViewDelegate?
+    weak var logoutDelegate: LogoutDelegate?
+    var profileResult: ProfileDTO?
     
-    var cancellables: Set<AnyCancellable> = []
     private let authManager = AuthManager2()
     private let userManager = UserManager()
     
@@ -28,24 +36,21 @@ class MyViewModel {
     ]
     
     func getProfile() {
-        userManager.getProfile()
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure:
-                    print("error")
-                }
-            }, receiveValue: { response in
-                self.profileResult = response.result
-            })
-            .store(in: &cancellables)
+        MyManager.shared.getProfile { result in
+            switch result {
+            case .success(let response):
+                guard let baseResponse = response as? BaseDTOResult<ProfileDTO>, let result = baseResponse.result else { return }
+                self.profileResult = result
+                self.profileDelegate?.reloadView()
+            default:
+                break
+            }
+        }
     }
     
-    func logout() -> AnyPublisher<Void, Error> {
-        authManager.logout()
-            .receive(on: DispatchQueue.main)
-            .eraseToAnyPublisher()
+    func logout() {
+        AuthManager.shared.logout { _ in
+            self.logoutDelegate?.logoutAccount()
+        }
     }
 }

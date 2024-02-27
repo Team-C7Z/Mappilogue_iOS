@@ -9,14 +9,7 @@ import UIKit
 import NMapsMap
 import MappilogueKit
 
-protocol RecordViewControllerDelegate: class {
-    //  func showCalendarDetailViewController(date: String, frame: CGRect, _ viewController: CalendarViewController)
-}
-
 class RecordViewController: NavigationBarViewController {
-   // weak var coordinator: RecordCoordinator?
-    weak var coordinatorDelegate: RecordCoordinator?
-    
     let dummyCategory: [Category] = []
     let dummyRecord: [Record] = dummyRecordData()
     
@@ -74,12 +67,6 @@ class RecordViewController: NavigationBarViewController {
         super.setupProperty()
         
         setNotificationBar(title: "기록")
-        
-        notificationBar.onNotificationButtonTapped = { [weak self] in
-            guard let self = self else { return }
-            
-         //   coordinator?.showNotificationController()
-        }
         
         setMapView()
         setBottomSheetHeight()
@@ -264,12 +251,18 @@ class RecordViewController: NavigationBarViewController {
     }
     
     @objc private func searchTextFieldTapped() {
-      //  coordinator?.showSearchViewController()
+        showSearchViewController()
     }
     
     private func setSearchTextFieldTapGestue() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(searchTextFieldTapped))
         searchTextField.addGestureRecognizer(tap)
+    }
+    
+    private func showSearchViewController() {
+        let viewController = SearchViewController()
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     @objc private func currentLocationButtonTapped(_ sender: UIButton) {
@@ -284,11 +277,23 @@ class RecordViewController: NavigationBarViewController {
     }
     
     @objc private func myRecordListButtonTapped() {
-     //   coordinator?.showMyRecordListViewController()
+        showMyRecordListViewController()
+    }
+    
+    private func showMyRecordListViewController() {
+        let viewController = MyRecordViewController()
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     @objc private func writeRecordButtonTapped() {
-      //  coordinator?.showWriteRecordViewController()
+        showWriteRecordListViewController()
+    }
+    
+    private func showWriteRecordListViewController() {
+        let viewController = WriteRecordListViewController()
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     private func setBottomSheetViewController() {
@@ -410,13 +415,15 @@ extension RecordViewController: CLLocationManagerDelegate {
                           doneText: "설정으로 이동",
                           buttonColor: .green2EBD3D,
                           alertHeight: 182)
-//        alertViewController.onDoneTapped = {
-//            if let url = URL(string: UIApplication.openSettingsURLString) {
-//                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-//            }
-//        }
-        
-     //   coordinator?.showAlertViewController(alert: alert)
+        let viewController = AlertViewController()
+        viewController.modalPresentationStyle = .overCurrentContext
+        viewController.configure(alert)
+        viewController.onDoneTapped = {
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+        present(viewController, animated: false)
     }
 }
 
@@ -511,9 +518,15 @@ extension RecordViewController: UICollectionViewDelegate, UICollectionViewDataSo
             
             collectionView.reloadData()
         default:
-            break
-// coordinator?.showCategorySettingViewController()
+            showCategoryViewController()
         }
+    }
+    
+    private func showCategoryViewController() {
+        let viewController = CategorySettingViewController()
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
+        
     }
 }
 

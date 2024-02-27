@@ -107,7 +107,7 @@ class ContentViewController: NavigationBarViewController {
     
     private func deleteRecord() {
         if isNewWrite {
-            if let viewControllerToPopTo = navigationController?.viewControllers.first(where: { $0 is WriteRecordListRecordViewController }) {
+            if let viewControllerToPopTo = navigationController?.viewControllers.first(where: { $0 is WriteRecordListViewController }) {
                 
                 navigationController?.popToViewController(viewControllerToPopTo, animated: true)
             }

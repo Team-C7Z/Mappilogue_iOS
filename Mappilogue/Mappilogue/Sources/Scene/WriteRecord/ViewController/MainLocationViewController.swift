@@ -8,7 +8,6 @@
 import UIKit
 
 class MainLocationViewController: NavigationBarViewController {
-    weak var coordinator: MainLocationCoordinator?
     var viewModel = MainLocationViewModel()
 
     private lazy var collectionView: UICollectionView = {
@@ -36,12 +35,6 @@ class MainLocationViewController: NavigationBarViewController {
         super.setupProperty()
 
         setPopBar(title: "대표 위치 설정")
-        
-        popBar.onPopButtonTapped = { [weak self] in
-            guard let self = self else { return }
-            
-            coordinator?.popViewController()
-        }
     }
 
     override func setupHierarchy() {
@@ -60,20 +53,27 @@ class MainLocationViewController: NavigationBarViewController {
     }
 
     func setLocationButtonTapped() {
-        coordinator?.showMapMainLocationViewController()
-//        mapMainLocationViewController.onSelectedMapLocation = { address in
-//            self.viewModel.selectMapLocation(address)
-//            self.collectionView.reloadData()
-//        }
+        showMapMainLocationViewController()
+
     }
 
+    private func showMapMainLocationViewController() {
+        let viewController = MapMainLocationViewController()
+        viewController.onSelectedMapLocation = { address in
+            self.viewModel.selectMapLocation(address)
+            self.collectionView.reloadData()
+        }
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     private func presentMainLocationAlert() {
-        coordinator?.showMainLocationAlertViewController()
-//        mainLocationAlertViewController.onCanelTapped = {
-//            self.viewModel.selectMainLocation(1)
-//            self.collectionView.reloadData()
-//        }
-        
+        let viewController = AlertViewController()
+        viewController.modalPresentationStyle = .overFullScreen
+        viewController.onCancelTapped = {
+            self.viewModel.selectMainLocation(1)
+            self.collectionView.reloadData()
+        }
+        present(viewController, animated: false)
     }
 }
 

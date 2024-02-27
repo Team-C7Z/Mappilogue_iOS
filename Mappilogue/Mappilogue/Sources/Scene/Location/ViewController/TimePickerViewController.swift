@@ -9,8 +9,6 @@ import UIKit
 import MappilogueKit
 
 class TimePickerViewController: BaseViewController {
-    weak var coordinator: TimePickerCoordinator?
-    
     var selectedTime: String = ""
     var onSelectedTime: ((String) -> Void)?
     
@@ -121,16 +119,16 @@ class TimePickerViewController: BaseViewController {
     @objc private func deleteTimeButtonTapped(_ sender: UIButton) {
         selectedTime = "설정 안 함"
         onSelectedTime?(self.selectedTime)
-        coordinator?.dismissViewController()
+        dismiss(animated: false)
     }
     
     @objc private func cancelButtonTapped(_ sender: UIButton) {
-        coordinator?.dismissViewController()
+        dismiss(animated: false)
     }
     
     @objc private func selectedTimeButtonTapped(_ sender: UIButton) {
         onSelectedTime?(selectedTime)
-        coordinator?.dismissViewController()
+        dismiss(animated: false)
     }
     
     @objc private func timePickerValueDidChange(_ timePicker: UIDatePicker) {

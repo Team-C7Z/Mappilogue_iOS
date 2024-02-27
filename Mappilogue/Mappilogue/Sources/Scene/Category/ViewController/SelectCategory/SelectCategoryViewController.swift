@@ -39,12 +39,6 @@ class SelectCategoryViewController: NavigationBarViewController {
         super.setupProperty()
         
         setPopBar(title: "카테고리 선택")
-        
-        popBar.onPopButtonTapped = { [weak self] in
-            guard let self = self else { return }
-            
-            coordinator?.popViewController()
-        }
     }
     
     override func setupHierarchy() {

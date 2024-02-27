@@ -8,7 +8,6 @@
 import UIKit
 
 class NotificationSettingViewController: NavigationBarViewController {
-    weak var coordinator: NotificationSettingCoordinator?
     var viewModel = NotificationSettingViewModel()
     private var notificationDTO: NotificationDTO?
     
@@ -82,20 +81,12 @@ class NotificationSettingViewController: NavigationBarViewController {
             viewModel.updateNotificationSetting(notification: notification)
         }
         
-        coordinator?.popViewController()
+        navigationController?.popViewController(animated: true)
     }
     
     func getNotificationSetting() {
         viewModel.getNotificationSetting()
         
-        viewModel.$notificationResult
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { result in
-                guard let result else { return }
-                
-                self.handleNotificationSettingResponse(result)
-            })
-            .store(in: &viewModel.cancellables)
     }
     
     private func handleNotificationSettingResponse(_ result: NotificationDTO) {

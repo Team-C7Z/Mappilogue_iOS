@@ -9,7 +9,6 @@ import UIKit
 import Lottie
 
 class SavingRecordViewController: BaseViewController {
-    weak var coordinator: SavingRecordCoordinator?
     var onSaveComplete: (() -> Void)?
     
     private let modalView = UIView()
@@ -87,12 +86,11 @@ class SavingRecordViewController: BaseViewController {
     }
     
     @objc func cancelButtonTapped() {
-        coordinator?.dismissViewController()
+        dismiss(animated: false)
     }
     
     private func dismissViewController() {
         lottieAnimationView.stop()
         onSaveComplete?()
-        dismissViewController()
     }
 }

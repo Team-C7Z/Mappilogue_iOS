@@ -10,10 +10,10 @@ import Moya
 import Combine
 
 protocol UserAPI {
-    func getProfile() -> AnyPublisher<BaseDTOResult<ProfileDTO>, Error>
     func updateNickname(nickname: String) -> AnyPublisher<Void, Error>
     func updateProfileImage(image: Data) -> AnyPublisher<BaseDTOResult<ProfileImageDTO>, Error>
     func getNotificationSetting() -> AnyPublisher<BaseDTOResult<NotificationDTO>, Error>
     func updateNotificationSetting(notification: NotificationDTO) -> AnyPublisher<Void, Error>
     func getTermsOfUse() -> AnyPublisher<BaseDTOResult<TermsOfUserDTO>, Error>
 }
+

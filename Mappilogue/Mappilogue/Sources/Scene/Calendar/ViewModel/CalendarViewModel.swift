@@ -332,21 +332,6 @@ class CalendarViewModel {
         }
     }
     
-    func convertStringToInt(date: String) -> SelectedDate {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy년 MM월 dd일"
-        
-        if let convertedDate = dateFormatter.date(from: date) {
-            let calendar = Calendar.current
-            let components = calendar.dateComponents([.year, .month, .day], from: convertedDate)
-            
-            let date = SelectedDate(year: components.year ?? 0, month: components.month ?? 0, day: components.day)
-            
-            return date
-        }
-        return SelectedDate(year: 0, month: 0)
-    }
-    
     func compareDateToCurrentMonth(_ date: Date) -> MonthType {
         let calendar = Calendar.current
         

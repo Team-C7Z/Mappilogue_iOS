@@ -13,6 +13,20 @@ class AuthManager {
     static let shared = AuthManager()
     private let provider = MoyaProvider<AuthAPI>(plugins: [NetworkLoggerPlugin()])
     
+    func socialLogin(auth: Auth, completion: @escaping (NetworkResult<Any>) -> Void) {
+        provider.request(.socialLogin(auth: auth)) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTOResult<AuthDTO>.self)
+                completion(networkResult)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     func updateAccessToken(token: String, completion: @escaping (NetworkResult<Any>) -> Void) {
         provider.request(.refreshToken(token: token)) { result in
             switch result {
@@ -20,6 +34,20 @@ class AuthManager {
                 let statusCode = response.statusCode
                 let data = response.data
                 let networkResult = self.judgeStatus(statusCode, data, BaseDTOResult<RefreshTokenDTO>.self)
+                completion(networkResult)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func logout(completion: @escaping (NetworkResult<Any>) -> Void) {
+        provider.request(.logout) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTO.self)
                 completion(networkResult)
             case .failure(let error):
                 print(error)
@@ -63,7 +91,7 @@ class AuthManager2: AuthAPI2 {
         }
         
         if let isAlarmValue = auth.isAlarmAccept {
-            requestParameters["isAlarmAccept"] = "ACTIVE"
+            requestParameters["isAlarmAccept"] = isAlarmValue
         }
         
         do {

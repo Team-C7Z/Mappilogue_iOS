@@ -17,9 +17,14 @@ class PermissionViewModel: NSObject, CLLocationManagerDelegate {
         locationManager.delegate = self
     }
     
-    func requestLocationPermission() {
+    func requestPermission() {
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { _, _ in
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, _ in
+            if granted {
+                UserDefaults.standard.set(true, forKey: "PushPermission")
+            } else {
+                UserDefaults.standard.set(false, forKey: "PushPermission")
+            }
             self.locationManager.requestWhenInUseAuthorization()
         }
     }

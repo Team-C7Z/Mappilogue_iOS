@@ -102,6 +102,7 @@ class OnboardingViewController: BaseViewController {
     
     private func showLoginViewController() {
         let viewController = LoginViewController()
+        viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: false)
     }
 }

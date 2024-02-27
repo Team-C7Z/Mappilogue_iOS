@@ -12,13 +12,9 @@ import MappilogueKit
 //    func showNotificationSettingViewController()
 // }
 
-class MyCoordinator: MyViewControllerDelegate {
+class MyCoordinator  {
  //   public var children: [Coordinator1] = []
-    public let router: Router
-    
-    public init(router: Router) {
-        self.router = router
-    }
+  
     
     func present(animated: Bool, onDismissed: (() -> Void)?) {
 //        let viewController = MyViewController(delegate: self)
@@ -28,13 +24,7 @@ class MyCoordinator: MyViewControllerDelegate {
 //    override func start() {
 //      
 //    }
-//    
-//    func showNotificationViewController() {
-//        let coordinator = NotificationCoordinator(navigationController: self.navigationController)
-//        coordinator.start()
-//        self.childCoordinators.append(coordinator)
-//    }
-//    
+//
 //    func showEditProfileViewController(_ profile: ProfileDTO?) {
 //        let coordinator = EditProfileCoordinator(navigationController: navigationController)
 //        coordinator.showEditProfileViewController(profile)

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ScheduleType {
-    case today
-    case upcoming
+enum ScheduleType: String, Codable {
+    case today = "today"
+    case upcoming = "after"
 }

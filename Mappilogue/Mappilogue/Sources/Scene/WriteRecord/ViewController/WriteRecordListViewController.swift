@@ -1,5 +1,5 @@
 //
-//  WriteRecordListRecordViewController.swift
+//  WriteRecordListViewController.swift
 //  Mappilogue
 //
 //  Created by hyemi on 2023/07/26.
@@ -7,8 +7,7 @@
 
 import UIKit
 
-class WriteRecordListRecordViewController: NavigationBarViewController {
-    weak var coordinator: WriteRecordListCoordinator?
+class WriteRecordListViewController: NavigationBarViewController {
     var dummyData = dummyScheduleData()
     
     private lazy var collectionView: UICollectionView = {
@@ -37,12 +36,6 @@ class WriteRecordListRecordViewController: NavigationBarViewController {
         super.setupProperty()
         
         setPopBar(title: "기록 쓰기")
-        
-        popBar.onPopButtonTapped = { [weak self] in
-            guard let self = self else { return }
-            
-         ////   coordinator?.popViewController()
-        }
         
         newWriteButton.addTarget(self, action: #selector(newWriteButtonTapped), for: .touchUpInside)
     }
@@ -77,7 +70,9 @@ class WriteRecordListRecordViewController: NavigationBarViewController {
         if let indexPath = indexPath {
             schedule =  dummyData[indexPath.section].schedules[indexPath.row]
         }
-   //     coordinator?.showWriteRecordViewController(schedule: schedule)
+        let viewController = WriteRecordViewController()
+        viewController.schedule = schedule
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     @objc private func newWriteButtonTapped() {
@@ -85,7 +80,7 @@ class WriteRecordListRecordViewController: NavigationBarViewController {
     }
 }
 
-extension WriteRecordListRecordViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension WriteRecordListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return dummyData.count
     }

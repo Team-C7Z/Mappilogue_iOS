@@ -28,9 +28,9 @@ class NavigationBarViewController: BaseViewController {
     }
     
     func setLogoNotificationBar() {
-//        logoNotoficationBar.onNotificationButtonTapped = {
-//            self.pushNotificationController()
-//        }
+        logoNotoficationBar.onNotificationButtonTapped = {
+            self.pushNotificationController()
+        }
 
         view.addSubview(logoNotoficationBar)
         
@@ -61,6 +61,10 @@ class NavigationBarViewController: BaseViewController {
         popBar.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview()
         }
+        
+        popBar.onPopButtonTapped = {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     func setDismissSaveBar(title: String) {
@@ -77,7 +81,7 @@ class NavigationBarViewController: BaseViewController {
         
         notificationBar.onNotificationButtonTapped = { [weak self] in
             guard let self = self else { return }
-            
+    
             pushNotificationController()
         }
         
@@ -105,11 +109,11 @@ class NavigationBarViewController: BaseViewController {
     }
     
     func pushNotificationController() {
-//        let notificationController = NotificationViewController()
-//        notificationController.hidesBottomBarWhenPushed = true
-//        navigationController?.pushViewController(notificationController, animated: true)
+        let notificationController = NotificationViewController()
+        notificationController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(notificationController, animated: true)
     }
-    
+
     @objc func popNavigationController() {
         navigationController?.popViewController(animated: true)
     }

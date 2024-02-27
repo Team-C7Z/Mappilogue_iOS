@@ -26,7 +26,7 @@ class CalendarDetailViewModel {
     }
     
     func loadCalendarDetailData() {
-        CalendarManager.shared.getScheduleDetail(date: self.date) { result in
+        CalendarManager.shared.getCalendarDetail(date: self.date) { result in
             switch result {
             case .success(let response):
                 guard let baseResponse = response as? BaseDTOResult<CalendarDetailDTO>, let result = baseResponse.result else { return }

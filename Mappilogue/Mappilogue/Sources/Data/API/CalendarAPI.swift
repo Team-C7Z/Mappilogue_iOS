@@ -7,12 +7,13 @@
 
 import Foundation
 import Moya
-import Combine
 
 enum CalendarAPI: BaseAPI {
     case getCalendar(year: Int, month: Int)
-    case getScheduleDetail(date: String)
+    case getCalendarDetail(date: String)
     case addSchedule(schedule: Schedule)
+    case getSchedule(id: Int)
+    case updateSchedule(id: Int, schedule: Schedule)
     case deleteSchedule(id: Int)
 }
 
@@ -21,25 +22,29 @@ extension CalendarAPI: TargetType {
         switch self {
         case .getCalendar:
             return "api/v1/schedules/calendars"
-        case .getScheduleDetail:
+        case .getCalendarDetail:
             return "/api/v1/schedules/detail-by-date"
-        case .deleteSchedule(let id):
-            return "/api/v1/schedules/\(id)"
         case .addSchedule:
             return "/api/v1/schedules"
+        case .getSchedule:
+            return "/api/v1/schedules/detail-by-id"
+        case .updateSchedule(let id, _):
+            return "/api/v1/schedules/\(id)"
+        case .deleteSchedule(let id):
+            return "/api/v1/schedules/\(id)"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getCalendar:
+        case .getCalendar, .getCalendarDetail, .getSchedule:
             return .get
-        case .getScheduleDetail:
-            return .get
-        case .deleteSchedule:
-            return .delete
         case .addSchedule:
             return .post
+        case .updateSchedule:
+            return .put
+        case .deleteSchedule:
+            return .delete
         }
     }
     
@@ -51,14 +56,57 @@ extension CalendarAPI: TargetType {
                 "month": month
             ]
             return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
-        case let .getScheduleDetail(date):
+        case let .getCalendarDetail(date):
             let requestParameters: [String: Any] = [
                 "date": date
             ]
             return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
-        case let .deleteSchedule(id):
-            return .requestPlain
         case let .addSchedule(schedule):
+            var requestParameters: [String: Any] = [
+                "colorId": schedule.colorId,
+                "startDate": schedule.startDate,
+                "endDate": schedule.endDate
+            ]
+            
+            if let title = schedule.title {
+                requestParameters["title"] = title
+            }
+            
+            if let alarmOptions = schedule.alarmOptions {
+                requestParameters["alarmOptions"] = alarmOptions
+            }
+            print(schedule.alarmOptions, 88766)
+            
+            if let area = schedule.area {
+                requestParameters["area"] = area.map { areaList in
+                    return [
+                        "date": areaList.date,
+                        "value": areaList.value.map { location in
+                            var locationInfo: [String: Any] = [
+                                "name": location.name
+                            ]
+                            if let streetAddress = location.streetAddress {
+                                locationInfo["streetAddress"] = streetAddress
+                            }
+                            if let latitude = location.latitude {
+                                locationInfo["latitude"] = latitude
+                            }
+                            if let longitude = location.longitude {
+                                locationInfo["longitude"] = longitude
+                            }
+                            if let time = location.time {
+                                locationInfo["time"] = time
+                            }
+                            
+                            return locationInfo
+                        }
+                    ] as [String: Any]
+                }
+            }
+            return .requestParameters(parameters: requestParameters, encoding: JSONEncoding.default)
+        case let .getSchedule(id):
+            return .requestParameters(parameters: ["scheduleId": id], encoding: URLEncoding.queryString)
+        case let .updateSchedule(id, schedule):
             var requestParameters: [String: Any] = [
                 "colorId": schedule.colorId,
                 "startDate": schedule.startDate,
@@ -99,7 +147,10 @@ extension CalendarAPI: TargetType {
                     ] as [String: Any]
                 }
             }
+            
             return .requestParameters(parameters: requestParameters, encoding: JSONEncoding.default)
+        case .deleteSchedule:
+            return .requestPlain
         }
     }
 }

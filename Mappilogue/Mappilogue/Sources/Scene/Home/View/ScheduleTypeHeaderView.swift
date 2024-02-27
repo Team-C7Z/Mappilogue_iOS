@@ -13,7 +13,7 @@ protocol ScheduleTypeDelegate: AnyObject {
 
 class ScheduleTypeHeaderView: BaseTableViewHeaderFooterView {
     static let registerId = "\(ScheduleTypeHeaderView.self)"
-    
+
     var scheduleType: ScheduleType = .today {
         didSet {
             updateButtonTitleColor()

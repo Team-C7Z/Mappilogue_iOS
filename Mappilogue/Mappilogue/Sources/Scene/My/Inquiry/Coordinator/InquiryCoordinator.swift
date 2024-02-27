@@ -11,7 +11,7 @@ protocol InquiryDelegate: AnyObject {
     func popViewController()
 }
 
-class InquiryCoordinator: BaseCoordinator, NotificationSettingDelegate {
+class InquiryCoordinator: BaseCoordinator {
     override func start() {
         let inquiryViewController = InquiryViewController()
         inquiryViewController.hidesBottomBarWhenPushed = true

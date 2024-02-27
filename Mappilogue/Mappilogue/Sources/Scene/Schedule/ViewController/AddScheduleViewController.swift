@@ -44,16 +44,16 @@ class AddScheduleViewController: NavigationBarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
  
+        getScheduleDate()
         getColorList()
         viewModel.setCurrentDate()
         setSelectedDate()
         setKeyboardTap()
-        loadScheduleData()
     }
     
     override func setupProperty() {
         super.setupProperty()
-
+        
         setNavigationBar()
         
         datePickerOuterView.backgroundColor = .grayF5F3F0
@@ -131,6 +131,11 @@ class AddScheduleViewController: NavigationBarViewController {
     private func dismissViewController() {
         navigationController?.popViewController(animated: true)
     }
+    
+    func getScheduleDate() {
+        viewModel.delegate = self
+        viewModel.getSchedule()
+    }
 
     func setSelectedDate() {
         func selectedRow(_ value: Int, component: Int) {
@@ -177,20 +182,6 @@ class AddScheduleViewController: NavigationBarViewController {
         view.removeGestureRecognizer(keyboardTap)
     }
     
-    func loadScheduleData() {
-//        guard let id = viewModel.scheduleId else { return }
-//        viewModel.getSchedule(id: id)
-//        
-//        viewModel.$scheduleResult
-//            .receive(on: DispatchQueue.main)
-//            .sink(receiveValue: { result in
-//                guard let schedule = result else { return }
-//                self.viewModel.setScheduleData(getSchedule: schedule)
-//                self.collectionView.reloadData()
-//            })
-//            .store(in: &viewModel.cancellables)
-    }
-    
     func addDatePickerTapGesture() {
         view.addGestureRecognizer(datePickerTap)
     }
@@ -231,11 +222,14 @@ class AddScheduleViewController: NavigationBarViewController {
 
     func presentTimePicker(indexPath: IndexPath) {
         let selectedTime = viewModel.area[indexPath.section].value[indexPath.row].time
-//        timePickerViewController.onSelectedTime = { selectedTime in
-//            self.viewModel.area[indexPath.section].value[indexPath.row].time = self.viewModel.formatTime(selectedTime)
-//            self.collectionView.reloadData()
-//        }
-//        coordinator?.showTimePickerViewController(selectedTime: viewModel.setSelectedTime(selectedTime: selectedTime))
+        let viewController = TimePickerViewController()
+        viewController.modalPresentationStyle = .overCurrentContext
+        viewController.selectedTime = viewModel.setSelectedTime(selectedTime: selectedTime)
+        viewController.onSelectedTime = { selectedTime in
+            self.viewModel.area[indexPath.section].value[indexPath.row].time = self.viewModel.formatTime(selectedTime)
+            self.collectionView.reloadData()
+        }
+        present(viewController, animated: false)
     }
     
     func presentDeleteLocationAlert() {
@@ -246,12 +240,14 @@ class AddScheduleViewController: NavigationBarViewController {
                           doneText: "삭제",
                           buttonColor: .redF14C4C,
                           alertHeight: 140)
-//        alertViewController.onDoneTapped = {
-//            self.viewModel.deleteSelectedLocations()
-//            self.collectionView.reloadData()
-//        }
-        
-       // coordinator?.showAlertViewController(alert: alert)
+        let viewController = AlertViewController()
+        viewController.modalPresentationStyle = .overCurrentContext
+        viewController.configure(alert)
+        viewController.onDoneTapped = {
+            self.viewModel.deleteSelectedLocations()
+            self.collectionView.reloadData()
+        }
+       present(viewController, animated: false)
     }
 }
 
@@ -330,6 +326,7 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
     func configureAddScheduleHeaderView(_ headerView: AddScheduleHeaderView) {
         headerView.configureTitleColor(title: viewModel.schedule.title ?? "", isColorSelection: false, colorId: viewModel.schedule.colorId)
         headerView.configureDate(startDate: viewModel.startDate, endDate: viewModel.endDate, dateType: viewModel.scheduleDateType)
+      
         headerView.configureColorList(viewModel.colorList)
         
         let dateButtonConfiguration = { [weak self] isStartDate in
@@ -403,7 +400,7 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         if viewModel.area.count == 1 {
             return CGSize(width: collectionView.bounds.width, height: section == 0 ? 0 : 53)
-        } 
+        }
         return CGSize(width: collectionView.bounds.width, height: !viewModel.area.isEmpty && section == 0 ? 72 : 53)
     }
     
@@ -553,6 +550,12 @@ extension AddScheduleViewController {
                 self.collectionView.reloadData()
             }
             .store(in: &colorViewModel.cancellables)
+    }
+}
+
+extension AddScheduleViewController: ScheduleReloadViewDelegate {
+    func reloadView() {
+        collectionView.reloadData()
     }
 }
 

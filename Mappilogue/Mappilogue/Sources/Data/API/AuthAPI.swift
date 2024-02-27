@@ -10,7 +10,10 @@ import Moya
 import Combine
 
 enum AuthAPI {
+    case socialLogin(auth: Auth)
     case refreshToken(token: String)
+    case logout
+    case withdrawal(reason: String?)
 }
 
 extension AuthAPI: TargetType {
@@ -20,8 +23,14 @@ extension AuthAPI: TargetType {
     
     var path: String {
         switch self {
+        case .socialLogin:
+            return "/api/v1/users/social-login"
         case .refreshToken:
             return "/api/v1/users/token-refresh"
+        case .logout:
+            return "/api/v1/users/logout"
+        case .withdrawal:
+            return "/api/v1/users/withdrawal"
         }
     }
     
@@ -31,17 +40,49 @@ extension AuthAPI: TargetType {
     
     var task: Moya.Task {
         switch self {
+        case let .socialLogin(auth):
+            var requestParameters: [String: Any] = [
+                "socialAccessToken": auth.socialAccessToken,
+                "socialVendor": auth.socialVendor
+            ]
+            
+            if let fcmToken = auth.fcmToken {
+                requestParameters["fcmToken"] = fcmToken
+            }
+            
+            if let isAlarmValue = auth.isAlarmAccept {
+                requestParameters["isAlarmAccept"] = isAlarmValue
+            }
+         
+            return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
+            
         case let .refreshToken(token):
             let requestParameters: [String: String] = [
                 "refreshToken": token
             ]
             
             return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
+        case .logout:
+            return .requestPlain
+        case let .withdrawal(reason):
+            var requestParameters: [String: Any] = [:]
+            
+            if let reason = reason {
+                requestParameters["reason"] = reason
+            }
+            
+            return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
         }
     }
     
     var headers: [String: String]? {
-        return nil
+        switch self {
+        case .socialLogin, .refreshToken:
+            return nil
+        case .logout, .withdrawal:
+            guard let token = AuthUserDefaults.accessToken else { return nil }
+            return ["Authorization": "Bearer \(token)"]
+        }
     }
 }
 

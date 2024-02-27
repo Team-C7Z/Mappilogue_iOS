@@ -27,8 +27,8 @@ struct CalendarManager {
         }
     }
     
-    func getScheduleDetail(date: String, completion: @escaping (NetworkResult<Any>) -> Void) {
-        provider.request(.getScheduleDetail(date: date)) { result in
+    func getCalendarDetail(date: String, completion: @escaping (NetworkResult<Any>) -> Void) {
+        provider.request(.getCalendarDetail(date: date)) { result in
             switch result {
             case .success(let response):
                 let statusCode = response.statusCode
@@ -48,6 +48,34 @@ struct CalendarManager {
                 let statusCode = response.statusCode
                 let data = response.data
                 let networkResult = self.judgeStatus(statusCode, data, BaseDTOResult<AddScheduleDTO>.self)
+                completion(networkResult)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func getSchedule(id: Int, completion: @escaping (NetworkResult<Any>) -> Void) {
+        provider.request(.getSchedule(id: id)) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTOResult<GetScheduleDTO>.self)
+                completion(networkResult)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func updateSchedule(id: Int, schedule: Schedule, completion: @escaping (NetworkResult<Any>) -> Void) {
+        provider.request(.updateSchedule(id: id, schedule: schedule)) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTO.self)
                 completion(networkResult)
             case .failure(let error):
                 print(error)

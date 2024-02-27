@@ -8,7 +8,12 @@
 import UIKit
 import MappilogueKit
 
+protocol CalendarDateDelegate: AnyObject {
+    func selectDate(date: String)
+}
+
 class CalendarDetailViewController: BaseViewController {
+    weak var delegate: CalendarDateDelegate?
     let viewModel = CalendarDetailViewModel()
  
     var onWriteRecordButtonTapped: ((Schedule) -> Void)?
@@ -145,6 +150,7 @@ class CalendarDetailViewController: BaseViewController {
     @objc func addScheduleButtonTapped(_ sender: UIButton) {
         dismiss(animated: false) {
             self.onAddScheduleButtonTapped?(nil)
+            self.delegate?.selectDate(date: self.viewModel.schedules.solarDate)
         }
     }
     
@@ -238,8 +244,9 @@ extension CalendarDetailViewController: UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if !viewModel.schedules.schedulesOnSpecificDate.isEmpty {
             let id = viewModel.schedules.schedulesOnSpecificDate[indexPath.row].scheduleId
-            onAddScheduleButtonTapped?(id)
-       //     coordinator?.dismissViewController()
+            dismiss(animated: false) {
+                self.onAddScheduleButtonTapped?(id)
+            }
         }
     }
 }

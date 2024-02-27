@@ -23,6 +23,7 @@ class LoginViewController: BaseViewController {
         super.viewDidLoad()
 
         checkNotificationAuthorizationStatus()
+        viewModel.delegate = self
     }
     
     override func setupProperty() {
@@ -87,19 +88,13 @@ class LoginViewController: BaseViewController {
             let accessToken = oauthToken.accessToken
         
             let socialVendor = AuthVendor.kakao.rawValue
-            let isAlarmAccept = ActiveStatus.inactive.rawValue
-            let auth = Auth(socialAccessToken: accessToken, socialVendor: socialVendor, fcmToken: AuthUserDefaults.fcmToken, isAlarmAccept: isAlarmAccept)
+            let pushPermission = UserDefaults.standard.bool(forKey: "PushPermission")
+            let isAlarmAccept = pushPermission ? ActiveStatus.active.rawValue : ActiveStatus.inactive.rawValue
+            let fcmToken = AuthUserDefaults.fcmToken
+        
+            let auth = Auth(socialAccessToken: accessToken, socialVendor: socialVendor, fcmToken: fcmToken, isAlarmAccept: isAlarmAccept)
 
             viewModel.socialLogin(auth: auth)
-
-            viewModel.$loginResult
-                .receive(on: DispatchQueue.main)
-                .sink(receiveValue: { result in
-                    guard let result else { return }
-                    
-                    self.handleLoginResponse(result)
-                })
-                .store(in: &viewModel.cancellables)
         }
     }
     
@@ -132,12 +127,14 @@ class LoginViewController: BaseViewController {
     
     func presentSignUpCompleteViewController() {
         let viewController = SignUpCompletionViewController()
+        viewController.modalPresentationStyle = .fullScreen
         present(viewController, animated: false)
     }
     
     func presentTabBarController() {
-    //    let tabBarController = TabBarController()
-      
+        let tabBarController = TabBarController()
+        tabBarController.modalPresentationStyle = .fullScreen
+        present(tabBarController, animated: false)
     }
 }
 
@@ -197,5 +194,11 @@ extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         // 로그인 실패(유저의 취소도 포함)
         print("login failed - \(error.localizedDescription)")
+    }
+}
+
+extension LoginViewController: LoginDelegate {
+    func showViewController(result: AuthDTO) {
+        handleLoginResponse(result)
     }
 }

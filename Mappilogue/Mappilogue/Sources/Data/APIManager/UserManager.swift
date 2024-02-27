@@ -12,21 +12,6 @@ import Combine
 class UserManager: UserAPI {
     private let baseURL = "\(Environment.baseURL)/api/v1/users/profiles"
     
-    func getProfile() -> AnyPublisher<BaseDTOResult<ProfileDTO>, Error> {
-        let url = URL(string: baseURL)!
-        let request = setupRequest(for: url, method: "GET")
-        
-        return URLSession.shared.dataTaskPublisher(for: request)
-            .tryMap { data, response in
-                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                    throw URLError(.badServerResponse)
-                }
-                return data
-            }
-            .decode(type: BaseDTOResult<ProfileDTO>.self, decoder: JSONDecoder())
-            .eraseToAnyPublisher()
-    }
-    
     func updateNickname(nickname: String) -> AnyPublisher<Void, Error> {
         let url = URL(string: "\(baseURL)/nicknames")!
         var request = setupRequest(for: url, method: "PATCH")
