@@ -104,11 +104,7 @@ class AddScheduleViewController: NavigationBarViewController {
             guard let self = self else { return }
             
             viewModel.saveSchedule()
-            viewModel.onDismiss = { [weak self] in
-                guard let self = self else { return }
-      
-                self.dismissViewController()
-            }
+            dismissViewController()
         }
     }
     
@@ -129,6 +125,7 @@ class AddScheduleViewController: NavigationBarViewController {
     }
     
     private func dismissViewController() {
+        viewModel.onDismiss?()
         navigationController?.popViewController(animated: true)
     }
     
@@ -206,11 +203,11 @@ class AddScheduleViewController: NavigationBarViewController {
 
     func presentNotificationViewController() {
         let viewController = ScheduleNotificationViewController()
+        viewController.viewModel.alarmOptions = viewModel.schedule.alarmOptions ?? []
+        viewController.onNotificationSelected = { alarmOptions in
+            self.viewModel.schedule.alarmOptions = alarmOptions
+        }
         navigationController?.pushViewController(viewController, animated: true)
-//        addNotificationViewController.viewModel.onNotificationSelected = { alarmOptions in
-//            self.viewModel.schedule.alarmOptions = alarmOptions
-//        }
-        
     }
     
     func presentAddLocationController() {

@@ -8,6 +8,7 @@
 import UIKit
 
 class ScheduleNotificationViewController: NavigationBarViewController {
+    var onNotificationSelected: (([String]) -> Void)?
     var viewModel = ScheduleNotificationViewModel()
     
     private lazy var collectionView: UICollectionView = {
@@ -80,16 +81,16 @@ class ScheduleNotificationViewController: NavigationBarViewController {
     
     private func setNavigationBar() {
         setPopBar(title: "알림")
-        popBar.onPopButtonTapped = { [weak self] in
-            guard let self = self else { return }
-            
-            dismissViewController()
+        
+        popBar.onPopButtonTapped = {
+            self.dismissViewController()
         }
     }
     
-    func dismissViewController() {
-        navigationController?.popViewController(animated: true)
-        viewModel.updateAlarmOptionsFromNotificationList()
+    private func dismissViewController() {
+        var alarOptions = viewModel.updateAlarmOptionsFromNotificationList()
+        onNotificationSelected?(alarOptions)
+        self.navigationController?.popViewController(animated: true)
     }
 
     func setSelectedDate() {

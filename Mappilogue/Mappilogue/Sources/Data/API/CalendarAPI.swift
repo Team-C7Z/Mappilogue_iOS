@@ -62,6 +62,7 @@ extension CalendarAPI: TargetType {
             ]
             return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
         case let .addSchedule(schedule):
+          
             var requestParameters: [String: Any] = [
                 "colorId": schedule.colorId,
                 "startDate": schedule.startDate,
@@ -75,7 +76,6 @@ extension CalendarAPI: TargetType {
             if let alarmOptions = schedule.alarmOptions {
                 requestParameters["alarmOptions"] = alarmOptions
             }
-            print(schedule.alarmOptions, 88766)
             
             if let area = schedule.area {
                 requestParameters["area"] = area.map { areaList in
@@ -106,7 +106,7 @@ extension CalendarAPI: TargetType {
             return .requestParameters(parameters: requestParameters, encoding: JSONEncoding.default)
         case let .getSchedule(id):
             return .requestParameters(parameters: ["scheduleId": id], encoding: URLEncoding.queryString)
-        case let .updateSchedule(id, schedule):
+        case let .updateSchedule(_, schedule):
             var requestParameters: [String: Any] = [
                 "colorId": schedule.colorId,
                 "startDate": schedule.startDate,

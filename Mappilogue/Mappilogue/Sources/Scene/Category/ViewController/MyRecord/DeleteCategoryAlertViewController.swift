@@ -9,8 +9,6 @@ import UIKit
 import MappilogueKit
 
 class DeleteCategoryAlertViewController: BaseViewController {
-    weak var coordinator: DeleteCategoryAlertCoordinator?
-    
     var onCancelTapped: (() -> Void)?
     var onDoneTapped: ((String) -> Void)?
     

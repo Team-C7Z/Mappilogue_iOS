@@ -9,7 +9,7 @@ import Foundation
 import Moya
 import Combine
 
-class UserManager: UserAPI {
+class UserManager {
     private let baseURL = "\(Environment.baseURL)/api/v1/users/profiles"
     
     func updateNickname(nickname: String) -> AnyPublisher<Void, Error> {

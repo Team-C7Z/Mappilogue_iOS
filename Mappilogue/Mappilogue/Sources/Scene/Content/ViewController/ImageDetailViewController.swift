@@ -9,8 +9,6 @@ import UIKit
 import MappilogueKit
 
 class ImageDetailViewController: BaseViewController {
-    weak var coordinator: ImageDetailCoordinator?
-    
     private var outerView = UIView()
     private var image = UIImageView()
     private var dismissButton = UIButton()
@@ -64,6 +62,6 @@ class ImageDetailViewController: BaseViewController {
     }
     
     @objc func dismissImageDetailViewController() {
-        coordinator?.dismissViewController()
+        dismiss(animated: false)
     }
 }

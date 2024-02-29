@@ -8,8 +8,12 @@
 import UIKit
 import MappilogueKit
 
+protocol ModalCompletionDelegate: AnyObject {
+    func completeModalAction(_ text: String)
+}
+
 class SelectCategoryViewController: NavigationBarViewController {
-    weak var coordinator: SelectCategoryCoordinator?
+    weak var delegate: ModalCompletionDelegate?
     
     private var categoryViewModel = CategoryViewModel()
     var categories: [Category] = []
@@ -116,7 +120,18 @@ extension SelectCategoryViewController: UICollectionViewDelegate, UICollectionVi
 //                self.categories[self.categories.count-1].title = inputText
 //                self.collectionView.reloadData()
 //            }
-            coordinator?.showInputModalViewController()
+         //   showInputModalViewController(categoryName: <#String#>)
+        }
+    }
+    
+    private func showInputModalViewController(categoryName: String) {
+        let viewController = InputModalViewController()
+        viewController.modalPresentationStyle = .overCurrentContext
+        viewController.configure(categoryName)
+        viewController.onCompletionTapped = { [weak self] text in
+            guard let self = self else { return }
+            
+            delegate?.completeModalAction(text)
         }
     }
 }

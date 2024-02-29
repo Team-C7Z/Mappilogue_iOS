@@ -10,7 +10,6 @@ import Photos
 import MappilogueKit
 
 class EditProfileViewController: NavigationBarViewController {
-    weak var coordiantor: EditProfileCoordinator?
     var viewModel = ProfileViewModel()
     var onChangedNickname: ((String) -> Void)?
     
@@ -36,12 +35,6 @@ class EditProfileViewController: NavigationBarViewController {
         super.setupProperty()
         
         setPopBar(title: "프로필 편집")
-        
-        popBar.onPopButtonTapped = { [weak self] in
-            guard let self = self else { return }
-            
-            coordiantor?.popViewController()
-        }
         
         profileImageButton.addTarget(self, action: #selector(profileImageButtonTapped), for: .touchUpInside)
         
@@ -210,28 +203,29 @@ class EditProfileViewController: NavigationBarViewController {
                               doneText: "설정으로 이동",
                               buttonColor: .green2EBD3D,
                               alertHeight: 182)
-            self.coordiantor?.showAlertViewController(alert: alert)
-//            alertViewController.onDoneTapped = {
-//                if let url = URL(string: UIApplication.openSettingsURLString) {
-//                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-//                }
-//            }
+            let viewController = AlertViewController()
+            viewController.modalPresentationStyle = .overCurrentContext
+            viewController.configure(alert)
+            viewController.onDoneTapped = {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
         }
     }
     
     func presentImagePickerViewController(_ status: PHAuthorizationStatus) {
         DispatchQueue.main.async {
-//            let imagePickerViewController = ImagePickerViewController()
-//            imagePickerViewController.authStatus = status
-//            imagePickerViewController.isProfile = true
-//            imagePickerViewController.onCompletion = { assets in
-//                if let asset = assets.first {
-//                    self.updateProfileAssetImage(asset)
-//                }
-//            }
-//            imagePickerViewController.modalPresentationStyle = .fullScreen
-//
-            self.coordiantor?.showImagePickerViewController(authStatus: status, isProfile: true)
+            let viewController = ImagePickerViewController()
+            viewController.authStatus = status
+            viewController.isProfile = true
+            viewController.onCompletion = { assets in
+                if let asset = assets.first {
+                    self.updateProfileAssetImage(asset)
+                }
+            }
+            viewController.modalPresentationStyle = .fullScreen
+            self.present(viewController, animated: true)
         }
     }
     
@@ -256,9 +250,16 @@ class EditProfileViewController: NavigationBarViewController {
     }
     
     @objc func presentEditNicknameModalViewController() {
-        coordiantor?.showEditNicknameModalViewController(editNicknameTextField.text ?? "")
+        let nickname = editNicknameTextField.text ?? ""
+        let viewController = EditNicknameModalViewController()
+        viewController.modalPresentationStyle = .overCurrentContext
+        viewController.configure(nickname)
+        viewController.onChangeTapped = { changedNickname in
+            self.changeNickname(changedNickname)
+        }
+        present(viewController, animated: false)
     }
-    
+
     func updateProfilePhotoImage(_ photo: UIImage) {
         profileImage.image = photo
     }
@@ -274,3 +275,10 @@ extension EditProfileViewController: UITextFieldDelegate {
         return false
     }
 }
+
+//extension EditProfileViewController {
+//    func changedNickname(nickname: String) {
+//        editProfileViewController.changeNickname(nickname)
+//    }
+//}
+//

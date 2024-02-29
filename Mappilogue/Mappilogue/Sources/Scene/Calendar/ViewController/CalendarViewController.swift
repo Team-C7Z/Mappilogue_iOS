@@ -37,7 +37,7 @@ class CalendarViewController: NavigationBarViewController {
     
         NotificationCenter.default.addObserver(self, selector: #selector(showCalendarDetailViewContoller), name: Notification.Name("PresentScheduleViewController"), object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(dismissScheduleViewController), name: Notification.Name("DismissScheduleViewController"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(dismissAddScheduleViewController), name: Notification.Name("DismissScheduleViewController"), object: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -159,7 +159,7 @@ class CalendarViewController: NavigationBarViewController {
     //    coordinator?.showWriteRecordViewController(schedule: schedule)
     }
     
-    @objc func dismissScheduleViewController(_ notification: Notification) {
+    @objc func dismissAddScheduleViewController() {
         addScheduleButton.isHidden = false
         
         viewModel.loadCalendarData()
@@ -176,6 +176,9 @@ class CalendarViewController: NavigationBarViewController {
         viewController.hidesBottomBarWhenPushed = true
         viewController.viewModel.selectedDate = date
         viewController.viewModel.scheduleId = id
+        viewController.viewModel.onDismiss = {
+            self.dismissAddScheduleViewController()
+        }
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

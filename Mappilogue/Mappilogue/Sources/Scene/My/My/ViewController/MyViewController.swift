@@ -10,7 +10,6 @@ import KakaoSDKUser
 import MappilogueKit
 
 class MyViewController: NavigationBarViewController {
-    weak var coordinatorDelegate: MyCoordinator?
     var viewModel = MyViewModel()
     
     private lazy var collectionView: UICollectionView = {
@@ -152,25 +151,33 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            print("")
-         //   coordinator?.showEditProfileViewController(profile)
+            showEditProfileViewController(viewModel.profileResult)
         case 2:
             if indexPath.row == 0 {
                 showNotificationSettingViewController()
             } else if indexPath.row == 1 {
-           //     coordinator?.showTermsOfUserViewController()
+                showTermsOfUserViewController()
             } else if indexPath.row == 2 {
-           //     coordinator?.showInquiryViewController()
+                showInquiryViewController()
             }
         case 3:
             if indexPath.row == 0 {
                 presentLogoutAlert()
             } else if indexPath.row == 1 {
-                presentWithdrawalAlert()
+                showWithdrawalAlertViewController()
             }
         default:
             break
         }
+    }
+    
+    private func showEditProfileViewController(_ profile: ProfileDTO?) {
+        let viewcontroller = EditProfileViewController()
+        viewcontroller.hidesBottomBarWhenPushed = true
+        if let profile = profile {
+            viewcontroller.configure(profile)
+        }
+        navigationController?.pushViewController(viewcontroller, animated: true)
     }
     
     private func openAppStore(_ appId: String) {
@@ -182,6 +189,18 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
     
     private func showNotificationSettingViewController() {
         let viewController = NotificationSettingViewController()
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showTermsOfUserViewController() {
+        let viewController = TermsOfUseViewController()
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showInquiryViewController() {
+        let viewController = InquiryViewController()
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
     }
@@ -217,10 +236,31 @@ extension MyViewController: UICollectionViewDelegate, UICollectionViewDataSource
         present(viewController, animated: false)
     }
     
+    private func showWithdrawalAlertViewController() {
+        let viewController = WithdrawalAlertViewController()
+        viewController.modalPresentationStyle = .overFullScreen
+        viewController.viewModel.onDeleteButtonTapped = {
+            self.showWithdrawalViewController()
+        }
+        present(viewController, animated: false)
+    }
+    
     private func showWithdrawalViewController() {
         let viewController = WithdrawalViewController()
         viewController.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    private func showWithdrawalCompletedAlertViewController() {
+        let viewController = WithdrawalAlertViewController()
+        viewController.modalPresentationStyle = .overFullScreen
+        present(viewController, animated: false)
+    }
+    
+    private func showLoginViewController() {
+        let viewController = LoginViewController()
+        viewController.modalPresentationStyle = .fullScreen
+        present(viewController, animated: false)
     }
 }
 

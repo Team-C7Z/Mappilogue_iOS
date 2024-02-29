@@ -18,12 +18,6 @@ class ImagePickerNavigationViewController: NavigationBarViewController {
         super.setupProperty()
 
         setDismissSaveBar(title: "")
-        
-        dismissSaveBar.onDismissButtonTapped = { [weak self] in
-            guard let self = self else { return }
-            
-            navigationController?.popViewController(animated: false)
-        }
     }
 
     override func setupHierarchy() {

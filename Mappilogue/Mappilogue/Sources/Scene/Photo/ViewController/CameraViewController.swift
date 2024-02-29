@@ -10,8 +10,6 @@ import AVFoundation
 import MappilogueKit
 
 class CameraViewController: CameraNavigationBarViewController {
-    weak var coordinator: CameraCoordinator?
-    
     let captureSettion = AVCaptureSession()
     var videoDeviceInput: AVCaptureDeviceInput!
     let photoOutput = AVCapturePhotoOutput()
@@ -85,7 +83,8 @@ class CameraViewController: CameraNavigationBarViewController {
     }
     
     private func presentCapturePhotoViewController(_ photo: UIImage) {
-        coordinator?.showCapturePhotoViewController(photo: photo)
+        let viewController = CapturePhotoViewController()
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     @objc func switchMode() {

@@ -141,7 +141,9 @@ class WithdrawalAlertViewController: BaseViewController {
     
     @objc private func deleteButtonTapped(_ sender: UIButton) {
         if viewModel.isChecked {
-            dismiss(animated: false)
+            dismiss(animated: false) {
+                self.viewModel.onDeleteButtonTapped?()
+            }
         }
     }
 }

@@ -9,7 +9,6 @@ import UIKit
 import MappilogueKit
 
 class ContentViewController: NavigationBarViewController {
-    weak var coordinator: ContentCoordinator?
     var schedule = Schedule2222()
     var isNewWrite: Bool = false
     
@@ -98,11 +97,16 @@ class ContentViewController: NavigationBarViewController {
                           doneText: "삭제",
                           buttonColor: .redF14C4C,
                           alertHeight: 140)
-        coordinator?.showEditBottomSheetViewController(modifyTitle: "수정하기", deleteTitle: "삭제하기", alert: alert)
+        let viewController = BottomSheetViewController()
+        viewController.modalPresentationStyle = .overCurrentContext
+        present(viewController, animated: false)
+//        coordinator?.showEditBottomSheetViewController(modifyTitle: "수정하기", deleteTitle: "삭제하기", alert: alert)
+        
     }
     
     private func modifyRecord() {
-        coordinator?.showWriteRecordViewController()
+        let viewController = WriteRecordViewController()
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     private func deleteRecord() {
@@ -112,11 +116,13 @@ class ContentViewController: NavigationBarViewController {
                 navigationController?.popToViewController(viewControllerToPopTo, animated: true)
             }
         } else {
-            coordinator?.popViewController()
+            dismiss(animated: false)
         }
     }
     
     private func presentImageDetailViewController(_ imageName: String) {
-        coordinator?.showImageDetailViewController(imageName: imageName)
+        let viewController = ImageDetailViewController()
+        viewController.modalPresentationStyle = .overCurrentContext
+        present(viewController, animated: false)
     }
 }

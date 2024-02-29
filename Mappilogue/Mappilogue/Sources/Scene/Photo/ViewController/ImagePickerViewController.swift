@@ -11,8 +11,6 @@ import PhotosUI
 import MappilogueKit
 
 class ImagePickerViewController: ImagePickerNavigationViewController {
-    weak var coordinator: ImagePickerCoordinator?
-    
     var allPhotos = PHFetchResult<PHAsset>()
     var authStatus: PHAuthorizationStatus?
     var favoritePhotosAlbum =  PHFetchResult<PHAsset>()
@@ -71,10 +69,10 @@ class ImagePickerViewController: ImagePickerNavigationViewController {
     override func setupProperty() {
         super.setupProperty()
         
-        dismissSaveBar.onSaveButtonTapped = { [weak self] in
-            guard let self = self else { return }
-            
-            coordinator?.popViewController(assets: selectedAssets)
+        dismissSaveBar.onSaveButtonTapped = {
+            self.dismiss(animated: true) {
+                self.onCompletion?(self.selectedAssets)
+            }
         }
         
         photoDirectoryPickerButton.addTarget(self, action: #selector(photoDirectoryPickerButtonTapped), for: .touchUpInside)
@@ -188,17 +186,20 @@ class ImagePickerViewController: ImagePickerNavigationViewController {
                           doneText: "설정으로 이동",
                           buttonColor: .green2EBD3D,
                           alertHeight: 182)
-        coordinator?.showCameraPermissionAlert(alert: alert)
-//        alertViewController.onDoneTapped = {
-//            if let url = URL(string: UIApplication.openSettingsURLString) {
-//                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-//            }
-//        }
-        
+        let viewController = AlertViewController()
+        viewController.modalPresentationStyle = .overCurrentContext
+        viewController.configure(alert)
+        viewController.onDoneTapped = {
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+        present(viewController, animated: false)
     }
 
     private func presentCameraViewController() {
-        coordinator?.showCameraViewController()
+        let viewController = CameraViewController()
+        navigationController?.pushViewController(viewController, animated: false)
     }
     
     func setToastMessage() {

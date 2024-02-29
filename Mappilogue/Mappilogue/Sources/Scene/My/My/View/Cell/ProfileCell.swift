@@ -73,7 +73,7 @@ class ProfileCell: BaseCollectionViewCell {
 
         profileNameLabel.text = profile.nickname
         profileEmailLabel.text = profile.email
-        
+
         let url = URL(string: profile.profileImageUrl)!
         DispatchQueue.global().async { [weak self] in
             if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {

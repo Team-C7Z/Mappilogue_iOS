@@ -8,8 +8,6 @@
 import UIKit
 
 class WithdrawalCompletedAlertViewController: BaseViewController {
-    weak var coordinator: WithdrawalCompletedAlertDelegate?
-    
     private let alertView = UIView()
     private let titleLabel = UILabel()
     private let goToLoginButton = UIButton()
@@ -70,6 +68,6 @@ class WithdrawalCompletedAlertViewController: BaseViewController {
     }
     
     @objc func goToLogin() {
-        coordinator?.showLoginViewController()
+        // 로그인 이동
     }
 }

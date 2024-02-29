@@ -17,8 +17,6 @@ class NotificationSettingViewModel {
             case .success(let response):
                 guard let baseResponse = response as? BaseDTOResult<NotificationDTO>, let result = baseResponse.result else { return }
                 self.notificationResult = result
-                
-                print(self.notificationResult, 776756)
             default:
                 break
             }

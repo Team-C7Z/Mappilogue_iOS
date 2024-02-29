@@ -11,10 +11,10 @@ import Moya
 struct MyManager {
     static let shared = MyManager()
     private let provider = MoyaProvider<MyAPI>(plugins: [NetworkLoggerPlugin()])
-    private let interceptorSessionProvider = MoyaProvider<HomeAPI>(session: Session(interceptor: Interceptor()), plugins: [NetworkLoggerPlugin()])
-  
+    private let interceptorSessionProvider = MoyaProvider<MyAPI>(session: Session(interceptor: Interceptor()), plugins: [NetworkLoggerPlugin()])
+    
     func getProfile(completion: @escaping (NetworkResult<Any>) -> Void) {
-        provider.request(.getProfile) { result in
+        interceptorSessionProvider.request(.getProfile) { result in
             switch result {
             case .success(let response):
                 let statusCode = response.statusCode
@@ -26,14 +26,100 @@ struct MyManager {
             }
         }
     }
+
+    func updateNickname(nickname: String, completion: @escaping (NetworkResult<Any>) -> Void) {
+        interceptorSessionProvider.request(.updateNickname(nickname: nickname)) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTO.self)
+                completion(networkResult)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func updateProfileImage(profileImage: Data, completion: @escaping (NetworkResult<Any>) -> Void) {
+        let formData = MultipartFormData(provider: .data(profileImage), name: "image", fileName: "image.jpg", mimeType: "image/jpg")
+
+        interceptorSessionProvider.request(.updateProfileImage(image: formData)) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTOResult<ProfileImageDTO>.self)
+                completion(networkResult)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
     
     func getNotificationSetting(completion: @escaping (NetworkResult<Any>) -> Void) {
-        provider.request(.getNotificationSetting) { result in
+        interceptorSessionProvider.request(.getNotificationSetting) { result in
             switch result {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
                 let networkResult = self.judgeStatus(statusCode, data, BaseDTOResult<NotificationDTO>.self)
+                completion(networkResult)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+
+    func updateNotificationSetting(completion: @escaping (NetworkResult<Any>) -> Void) {
+        interceptorSessionProvider.request(.getNotificationSetting) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTO.self)
+                completion(networkResult)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func termsOfUse(completion: @escaping (NetworkResult<Any>) -> Void) {
+        provider.request(.termsOfUse) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTOResult<TermsOfUserDTO>.self)
+                completion(networkResult)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func logout(completion: @escaping (NetworkResult<Any>) -> Void) {
+        provider.request(.logout) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTO.self)
+                completion(networkResult)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+
+    func withdrawal(reason: String?, completion: @escaping (NetworkResult<Any>) -> Void) {
+        provider.request(.withdrawal(reason: reason)) { result in
+            switch result {
+            case .success(let response):
+                let statusCode = response.statusCode
+                let data = response.data
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTO.self)
                 completion(networkResult)
             case .failure(let error):
                 print(error)
@@ -56,4 +142,5 @@ struct MyManager {
               return .networkFail
           }
       }
+
 }

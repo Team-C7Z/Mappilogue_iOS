@@ -9,7 +9,6 @@ import UIKit
 import MappilogueKit
 
 class CategorySettingViewController: NavigationBarViewController {
-    weak var coordinator: CategorySettingCoordinator?
     private var categoryViewModel = CategoryViewModel()
     
     var categories: [Category] = []
@@ -185,10 +184,12 @@ extension CategorySettingViewController: UICollectionViewDelegate, UICollectionV
     }
     
     private func presentInputAlertViewController() {
-        coordinator?.showInputModalViewController()
-//        inputAlertViewController.onCompletionTapped = { inputText in
-//            self.categoryViewModel.addCategory(title: inputText)
-//        }
+        let viewController = InputModalViewController()
+        viewController.modalPresentationStyle = .overCurrentContext
+        viewController.onCompletionTapped = { inputText in
+            self.categoryViewModel.addCategory(title: inputText)
+        }
+        present(viewController, animated: false)
     }
     
     private func isIndexPathValid(_ indexPath: IndexPath) -> Bool {

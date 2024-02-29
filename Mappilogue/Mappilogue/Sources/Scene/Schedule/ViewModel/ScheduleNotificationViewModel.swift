@@ -14,7 +14,6 @@ protocol AddNotificationDelegate: AnyObject {
 class ScheduleNotificationViewModel {
     weak var delegate: AddNotificationDelegate?
     var calendarViewModel = CalendarViewModel()
-    var onNotificationSelected: (([String]) -> Void)?
     
     var dates = ["7일 전", "3일 전", "이틀 전", "전날", "당일"]
     var beforDay = [7, 3, 2, 1, 0]
@@ -29,7 +28,7 @@ class ScheduleNotificationViewModel {
     var notificationList: [SelectedNotification] = []
     var alarmOptions: [String] = []
     
-    func updateAlarmOptionsFromNotificationList() {
+    func updateAlarmOptionsFromNotificationList() -> [String] {
         notificationList.forEach {
             if let time = calendarViewModel.convertTimeIntToDate(
                 hour: $0.hour ?? 0,
@@ -41,7 +40,7 @@ class ScheduleNotificationViewModel {
             }
         }
         
-        onNotificationSelected?(alarmOptions)
+        return alarmOptions
     }
     
     func setCurrentDate() -> SelectedNotification {

@@ -8,8 +8,7 @@
 import UIKit
 
 class MyRecordListViewController: NavigationBarViewController {
-    weak var coordinator: MyRecordListCoordinator?
-    private var categoryViewModel = CategoryViewModel()
+    private var viewModel = CategoryViewModel()
     
     var categories: [Category] = []
     var totalCategoryCount: Int = 0
@@ -44,12 +43,6 @@ class MyRecordListViewController: NavigationBarViewController {
         super.setupProperty()
         
         setPopBar(title: "나의 기록")
-        
-        popBar.onPopButtonTapped = { [weak self] in
-            guard let self = self else { return }
-            
-            coordinator?.popViewController()
-        }
     }
     
     override func setupHierarchy() {
@@ -126,7 +119,7 @@ extension MyRecordListViewController: UITableViewDelegate, UITableViewDataSource
         case 0:
             didSelectMyRecordCategoryCell(indexPath)
         case 1:
-            didSelectCategorySettingCell()
+            showCategorySettingViewController()
         default:
             break
         }
@@ -137,27 +130,35 @@ extension MyRecordListViewController: UITableViewDelegate, UITableViewDataSource
         let categoryId = indexPath.row == 0 ? 0 : categories[indexPath.row-1].id
         let categoryName = indexPath.row == 0 ? "전체" : categories[indexPath.row-1].title
         
-        coordinator?.showMyRecordViewController(cateogryId: categoryId, categoryName: categoryName)
-//        myRecordViewController.onModifyCategory = { categoryName in
-//            self.categories[indexPath.row-1].title = categoryName
-//            self.tableView.reloadData()
-//        }
-//        myRecordViewController.onDeleteCategory = {
-//            self.categories.remove(at: indexPath.row-1)
-//            self.tableView.reloadData()
-//        }
+        showMyRecordViewController(categoryId: categoryId, categoryName: categoryName, indexPath)
     }
     
-    func didSelectCategorySettingCell() {
-        coordinator?.showCategorySettingViewController()
+    private func showMyRecordViewController(categoryId: Int, categoryName: String, _ indexPath: IndexPath) {
+        let viewController = MyRecordViewController()
+        viewController.categoryId = categoryId
+        viewController.categoryName = categoryName
+        viewController.onModifyCategory = { categoryName in
+            self.categories[indexPath.row-1].title = categoryName
+            self.tableView.reloadData()
+        }
+        viewController.onDeleteCategory = {
+            self.categories.remove(at: indexPath.row-1)
+            self.tableView.reloadData()
+        }
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showCategorySettingViewController() {
+        let viewController = CategorySettingViewController()
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
 extension MyRecordListViewController {
     private func loadCategoryData() {
-        categoryViewModel.getCategory()
+        viewModel.getCategory()
      
-        categoryViewModel.$categoryResult
+        viewModel.$categoryResult
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { result in
                 guard let result else { return }
@@ -166,7 +167,7 @@ extension MyRecordListViewController {
                 self.totalCategoryCount = result.totalCategoryMarkCount
                 self.tableView.reloadData()
             })
-            .store(in: &categoryViewModel.cancellables)
+            .store(in: &viewModel.cancellables)
     
     }
 }

@@ -9,7 +9,6 @@ import UIKit
 import MappilogueKit
 
 class EditCategoryViewController: BaseViewController {
-    weak var coordinator: EditCategoryCoordinator?
     private var categoryViewModel = CategoryViewModel()
     
     var categoryId: Int = 0
@@ -122,13 +121,16 @@ class EditCategoryViewController: BaseViewController {
             guard let touch = touches.first, touch.location(in: view).y < modalView.frame.maxY else {
                 return
             }
-            coordinator?.dismissViewController()
+            dismiss(animated: false)
         }
     }
     
     @objc func modifyCategoryButtonTapped(_ button: UIButton) {
         editMode = false
         
+        let viewController = InputModalViewController()
+        viewController.modalPresentationStyle = .overCurrentContext
+        present(viewController, animated: false)
 
 //        inputAlertViewController.onCancelTapped = {
 //            self.dismiss(animated: false)
@@ -141,7 +143,7 @@ class EditCategoryViewController: BaseViewController {
 //            
 //            self.dismiss(animated: false)
 //        }
-        coordinator?.showInputModalViewController()
+        
     
     }
     
@@ -161,6 +163,8 @@ class EditCategoryViewController: BaseViewController {
 //                self.onDeleteCategory?()
 //            }
 //        }
-        coordinator?.showDeleatCategoryAlert()
+        let viewController = DeleteCategoryAlertViewController()
+        viewController.modalPresentationStyle = .overCurrentContext
+        present(viewController, animated: false)
     }
 }

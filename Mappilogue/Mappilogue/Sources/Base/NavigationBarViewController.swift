@@ -74,6 +74,10 @@ class NavigationBarViewController: BaseViewController {
         dismissSaveBar.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview()
         }
+        
+        dismissSaveBar.onDismissButtonTapped = {
+            self.dismiss(animated: true)
+        }
     }
     
     func setNotificationBar(title: String) {

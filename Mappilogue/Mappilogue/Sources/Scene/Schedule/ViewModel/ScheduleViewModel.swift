@@ -61,7 +61,7 @@ class ScheduleViewModel {
     
     func updateSchedule(id: Int, schedule: Schedule) {
         CalendarManager.shared.updateSchedule(id: id, schedule: schedule) { _ in
-            self.onDismiss?()
+          //  self.onDismiss?()
         }
 
     }
@@ -81,6 +81,7 @@ class ScheduleViewModel {
         
         schedule.area = area.isEmpty ? nil : area
         
+        print(schedule, 7667678)
         if let id = scheduleId {
             updateSchedule(id: id, schedule: schedule)
         } else {
@@ -93,7 +94,7 @@ class ScheduleViewModel {
             switch result {
             case .success(let response):
                 guard let baseResponse = response as? BaseDTOResult<AddScheduleDTO>, let _ = baseResponse.result else { return }
-                self.onDismiss?()
+               // self.onDismiss?()
             default:
                 break
             }

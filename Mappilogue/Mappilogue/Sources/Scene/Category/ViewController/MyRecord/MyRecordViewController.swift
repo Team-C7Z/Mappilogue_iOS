@@ -8,8 +8,6 @@
 import UIKit
 
 class MyRecordViewController: NavigationBarViewController {
-    weak var coordinator: MyRecordCoordinator?
-    
     let dummyRecord = dummyRecordData()
     var categoryId: Int = 0
     var categoryName: String = ""
@@ -37,12 +35,6 @@ class MyRecordViewController: NavigationBarViewController {
     
     override func setupProperty() {
         super.setupProperty()
-        
-        popBar.onPopButtonTapped = { [weak self] in
-            guard let self = self else { return }
-            
-            coordinator?.popViewController()
-        }
         
 //        setNavigationTitleAndBackButton(categoryName, backButtonAction: isNewWrite ? #selector(navigateToMyRecordViewController) : #selector(backButtonTapped))
         setMenuButtonItem()
@@ -78,23 +70,30 @@ class MyRecordViewController: NavigationBarViewController {
     }
     
     @objc func menuButtonItemTapped() {
-        coordinator?.showEditCategoryViewController(categoryId: categoryId, categoryName: categoryName)
-//        editCategoryViewController.onModifyCategory = { categoryName in
+        let viewController = EditCategoryViewController()
+        viewController.modalPresentationStyle = .overFullScreen
+        viewController.categoryId = categoryId
+        viewController.categoryName = categoryName
+//        viewController.onModifyCategory = { categoryName in
 //            self.title = categoryName
 //            self.onModifyCategory?(categoryName)
 //        }
-//        editCategoryViewController.onDeleteCategory = {
+//        viewController.onDeleteCategory = {
 //            self.onDeleteCategory?()
 //            self.coordinator?.popViewController()
 //        }
+        present(viewController, animated: false)
     }
     
     private func navigateToRecordContentViewController() {
-        coordinator?.showContentViewController()
+        let viewController = ContentViewController()
+        viewController.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     @objc private func navigateToMyRecordListViewController() {
-        coordinator?.showMyRecordListViewController()
+        let viewController = MyRecordListViewController()
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 

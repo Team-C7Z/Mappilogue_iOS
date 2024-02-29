@@ -8,7 +8,6 @@
 import UIKit
 
 class EditNicknameModalViewController: BaseViewController {
-    weak var coordinator: EditNicknameCoordinator?
     var viewModel = ProfileViewModel()
     var onChangeTapped: ((String) -> Void)?
     
@@ -60,14 +59,14 @@ class EditNicknameModalViewController: BaseViewController {
         closeButton.backgroundColor = .grayF5F3F0
         closeButton.setTitleColor(.black1C1C1C, for: .normal)
         closeButton.titleLabel?.font = .body02
-        closeButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         
         changeButton.setTitle("바꾸기", for: .normal)
         changeButton.layer.cornerRadius = 12
         changeButton.backgroundColor = .green2EBD3D
         changeButton.setTitleColor(.whiteFFFFFF, for: .normal)
         changeButton.titleLabel?.font = .body03
-        changeButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
+        changeButton.addTarget(self, action: #selector(changeButtonTapped), for: .touchUpInside)
     }
     
     override func setupHierarchy() {
@@ -127,17 +126,19 @@ class EditNicknameModalViewController: BaseViewController {
         inputTextField.text = textFieldText
     }
     
-    @objc private func cancelButtonTapped(_ sender: UIButton) {
-        coordinator?.dismissViewController(inputTextField.text ?? "")
+    @objc private func closeButtonTapped(_ sender: UIButton) {
+        dismiss(animated: false)
+       // coordinator?.dismissViewController(inputTextField.text ?? "")
     }
     
-    @objc private func deleteButtonTapped(_ sender: UIButton) {
+    @objc private func changeButtonTapped(_ sender: UIButton) {
         guard let text = inputTextField.text else { return }
             
         if isValidNickname(text) && !text.isEmpty {
             updateNickname(text)
-            onChangeTapped?(text)
-            coordinator?.dismissViewController(text)
+            dismiss(animated: false) {
+                self.onChangeTapped?(text)
+            }
         } else {
             alertView.snp.updateConstraints {
                 $0.height.equalTo(179)
