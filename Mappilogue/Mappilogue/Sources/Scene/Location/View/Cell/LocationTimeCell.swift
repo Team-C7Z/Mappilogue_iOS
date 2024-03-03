@@ -122,7 +122,7 @@ class LocationTimeCell: BaseCollectionViewCell {
     func configure(_ indexPath: IndexPath, schedule: AddSchduleLocation, isDeleteMode: Bool) {
         self.indexPath = indexPath
         locationLabel.text = schedule.name
-        timeLabel.text = schedule.time
+        timeLabel.text = schedule.time == "" ? "설정 안 함" : schedule.time
         checkButton.isHidden = !isDeleteMode
         editImage.isHidden = isDeleteMode
     }

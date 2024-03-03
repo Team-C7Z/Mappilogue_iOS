@@ -76,11 +76,11 @@ class TodayScheduleInfoCell: BaseTableViewCell {
         }
     }
     
-    func configure(location: String, time: String?) {
-        locationLabel.text = location
-        if let time = time {
+    func configure(_ area: Areas) {
+        locationLabel.text = area.name
+        if area.time != "" {
             separatorImage.image = Images.image(named: .imageSeparator)
-            timeLabel.text = time
+            timeLabel.text = area.time
         } else {
             timeLabel.text = ""
         }

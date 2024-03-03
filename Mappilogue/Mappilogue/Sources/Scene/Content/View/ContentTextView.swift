@@ -15,6 +15,8 @@ class ContentTextView: BaseView {
     override func setupProperty() {
         super.setupProperty()
         
+        textView.autocorrectionType = .no
+        textView.spellCheckingType = .no
         textView.backgroundColor = .clear
         textView.isEditable = false
         textView.isScrollEnabled = false

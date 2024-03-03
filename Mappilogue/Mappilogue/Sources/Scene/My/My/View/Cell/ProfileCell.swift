@@ -81,7 +81,6 @@ class ProfileCell: BaseCollectionViewCell {
                     self?.profileImage.image = image
                 }
             }
-            
         }
     }
 }

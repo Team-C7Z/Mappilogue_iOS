@@ -63,9 +63,9 @@ class AnnouncementCell: BaseTableViewCell {
         }
     }
     
-    func configure(_ announcement: AnnouncementData, isExpanded: Bool) {
+    func configure(_ announcement: AnnouncementDTO, isExpanded: Bool) {
         titleLabel.text = announcement.title
-        dateLabel.text = announcement.date
+        dateLabel.text = announcement.createdAt
         expandButton.setImage(Images.image(named: isExpanded ? .buttonClose : .buttonExpand), for: .normal)
     }
     

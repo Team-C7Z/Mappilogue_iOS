@@ -31,6 +31,8 @@ class ScheduleNotificationViewController: NavigationBarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewModel.convertedAlarmsFormat()
+        print(viewModel.notificationList.count, viewModel.notificationList, 88986)
         viewModel.selectedNotification = viewModel.setCurrentDate()
         viewModel.setDateList()
         viewModel.delegate = self
@@ -88,8 +90,8 @@ class ScheduleNotificationViewController: NavigationBarViewController {
     }
     
     private func dismissViewController() {
-        var alarOptions = viewModel.updateAlarmOptionsFromNotificationList()
-        onNotificationSelected?(alarOptions)
+        let alarmOptions = viewModel.updateAlarmOptionsFromNotificationList()
+        onNotificationSelected?(alarmOptions)
         self.navigationController?.popViewController(animated: true)
     }
 

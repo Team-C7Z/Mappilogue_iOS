@@ -35,6 +35,8 @@ class InputModalViewController: UIViewController {
         titleLabel.textColor = .color000000
         titleLabel.font = .title02
         
+        inputTextField.autocorrectionType = .no
+        inputTextField.spellCheckingType = .no
         inputTextField.textColor = .black1C1C1C
         inputTextField.font = .body02
         inputTextField.backgroundColor = .grayF5F3F0

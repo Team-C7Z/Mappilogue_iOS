@@ -20,6 +20,8 @@ class NewCategoryCell: BaseCollectionViewCell {
     override func setupProperty() {
         super.setupProperty()
         
+        categoryLabel.autocorrectionType = .no
+        categoryLabel.spellCheckingType = .no
         categoryLabel.textColor = .black1C1C1C
         categoryLabel.font = .body02
         categoryLabel.returnKeyType = .done

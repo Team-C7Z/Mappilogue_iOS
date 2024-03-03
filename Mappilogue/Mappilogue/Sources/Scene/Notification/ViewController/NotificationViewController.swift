@@ -31,6 +31,7 @@ class NotificationViewController: NavigationBarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewModel.delegate = self
     }
 
     override func setupProperty() {
@@ -60,6 +61,14 @@ class NotificationViewController: NavigationBarViewController {
         }
     }
     
+    private func loadAnnouncement() {
+        guard !viewModel.isLoading && viewModel.currentPage <= viewModel.totalPage else { return }
+        
+        viewModel.isLoading = true
+        
+        viewModel.getAnnouncementData(pageNo: viewModel.currentPage)
+    }
+    
     private func removeNotification(_ index: Int) {
         viewModel.notificationData.remove(at: index)
         
@@ -73,7 +82,7 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
         case .notification:
             return 1
         case .announcement:
-            return viewModel.announcementData.isEmpty ? 1 : viewModel.announcementData.count
+            return viewModel.announcements.isEmpty ? 1 : viewModel.announcements.count
         }
     }
     
@@ -82,7 +91,7 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
         case .notification:
             return 1
         case .announcement:
-            if viewModel.announcementData.isEmpty {
+            if viewModel.announcements.isEmpty {
                 return 1
             } else {
                 return viewModel.isAnnouncementExpanded[section] ? 2 : 1
@@ -115,7 +124,7 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
                  return cell
              }
         case .announcement:
-            if viewModel.announcementData.isEmpty {
+            if viewModel.announcements.isEmpty {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: EmptyNotificationCell.registerId, for: indexPath) as? EmptyNotificationCell else { return UITableViewCell() }
                 cell.selectionStyle = .none
                 cell.configure(notificationType: .announcement)
@@ -127,15 +136,15 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
                     cell.selectionStyle = .none
                     cell.delegate = self
                     
-                    let announcement = viewModel.announcementData[indexPath.section]
+                    let announcement = viewModel.announcements[indexPath.section]
                     let isExpanded = viewModel.isAnnouncementExpanded[indexPath.section]
-                    cell.configure(announcement, isExpanded: isExpanded)
+                   cell.configure(announcement, isExpanded: isExpanded)
                 
                     return cell
                 } else {
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: AnnouncementContentCell.registerId, for: indexPath) as? AnnouncementContentCell else { return UITableViewCell() }
                     
-                    let content = viewModel.announcementData[indexPath.section].content
+                    let content = viewModel.announcements[indexPath.section].content
                     cell.configure(content)
               
                     return cell
@@ -149,10 +158,10 @@ extension NotificationViewController: UITableViewDelegate, UITableViewDataSource
         case .notification:
             return viewModel.notificationData.isEmpty ? tableView.frame.height - 100 : 83
         case .announcement:
-            if viewModel.announcementData.isEmpty {
+            if viewModel.announcements.isEmpty {
                 return tableView.frame.height - 100
             } else {
-                let content = viewModel.announcementData[indexPath.section].content
+                let content = viewModel.announcements[indexPath.section].content
                 let contentTextHeight = calculateTextHeight(text: content, font: UIFont.systemFont(ofSize: 17.8), width: tableView.frame.width)
                 let cellHeight = contentTextHeight + 16
                 
@@ -193,6 +202,10 @@ extension NotificationViewController: NotificationTypeDelegate {
     func categoryButtonTapped(_ notificationType: NotificationType) {
         viewModel.notificationType = notificationType
 
+        if notificationType == .announcement {
+            loadAnnouncement()
+        }
+        
         tableView.reloadData()
     }
 }
@@ -202,5 +215,11 @@ extension NotificationViewController: ExpandCellDelegate {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         viewModel.isAnnouncementExpanded[indexPath.section].toggle()
         tableView.reloadSections([indexPath.section], with: .none)
+    }
+}
+
+extension NotificationViewController: AnnouncementDelegate {
+    func getAnnouncement() {
+        tableView.reloadData()
     }
 }

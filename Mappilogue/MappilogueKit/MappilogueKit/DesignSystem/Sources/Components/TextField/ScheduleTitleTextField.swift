@@ -11,6 +11,8 @@ public class ScheduleTitleTextField: UITextField {
     override public init(frame: CGRect) {
         super.init(frame: frame)
         
+        autocorrectionType = .no
+        spellCheckingType = .no
         setScheduleTitleTextField()
     }
     

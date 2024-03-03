@@ -17,7 +17,7 @@ class MaredRecordsFooterView: BaseTableViewHeaderFooterView {
     
     private let addScheduleButton = AddButton(title: "일정 추가하기")
     
-    let dummyMarkedData = dummyMarkedRecordData(markedRecordCount: 1         )
+    var marks: [Marks] = []
     let limitedMarkedRecordsCount = 3
     
     private var markedRecordsLabel = UILabel()
@@ -85,14 +85,14 @@ class MaredRecordsFooterView: BaseTableViewHeaderFooterView {
 
 extension MaredRecordsFooterView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return min(dummyMarkedData.count, limitedMarkedRecordsCount) + 1
+        return min(marks.count, limitedMarkedRecordsCount) + 1
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.row < min(dummyMarkedData.count, limitedMarkedRecordsCount) {
+        if indexPath.row < min(marks.count, limitedMarkedRecordsCount) {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MarkedRecordCell.registerId, for: indexPath) as? MarkedRecordCell else { return UICollectionViewCell() }
             
-            let record = dummyMarkedData[indexPath.row]
+            let record = marks[indexPath.row]
             cell.configure(record)
             
             return cell
@@ -107,7 +107,7 @@ extension MaredRecordsFooterView: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row < min(dummyMarkedData.count, limitedMarkedRecordsCount) {
+        if indexPath.row < min(marks.count, limitedMarkedRecordsCount) {
             onMarkedRecord?()
         } else {
             onAddRecord?()

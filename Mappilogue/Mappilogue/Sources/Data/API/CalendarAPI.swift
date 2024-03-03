@@ -120,7 +120,7 @@ extension CalendarAPI: TargetType {
             if let alarmOptions = schedule.alarmOptions {
                 requestParameters["alarmOptions"] = alarmOptions
             }
-            
+          
             if let area = schedule.area {
                 requestParameters["area"] = area.map { areaList in
                     return [

@@ -117,7 +117,7 @@ class TimePickerViewController: BaseViewController {
     }
     
     @objc private func deleteTimeButtonTapped(_ sender: UIButton) {
-        selectedTime = "설정 안 함"
+        selectedTime = ""
         onSelectedTime?(self.selectedTime)
         dismiss(animated: false)
     }

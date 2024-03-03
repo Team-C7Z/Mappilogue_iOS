@@ -25,6 +25,8 @@ public class SearchBar: UISearchBar {
         directionalLayoutMargins = directionalMargins
         
         if let textfield = value(forKey: "searchField") as? UITextField {
+            textfield.autocorrectionType = .no
+            textfield.spellCheckingType = .no
             textfield.backgroundColor = .grayF5F3F0
             textfield.attributedPlaceholder = NSAttributedString(string: textfield.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor: UIColor.grayC9C6C2])
             textfield.textColor = .black1C1C1C

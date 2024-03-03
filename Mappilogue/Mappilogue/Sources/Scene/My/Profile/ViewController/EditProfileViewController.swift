@@ -52,6 +52,8 @@ class EditProfileViewController: NavigationBarViewController {
         nicknameTitleLabel.textColor = .gray707070
         nicknameTitleLabel.font = .body02
         
+        editNicknameTextField.autocorrectionType = .no
+        editNicknameTextField.spellCheckingType = .no
         editNicknameTextField.textColor = .black1C1C1C
         editNicknameTextField.font = .title02
         editNicknameTextField.tintColor = .green2EBD3D

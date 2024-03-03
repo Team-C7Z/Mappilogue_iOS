@@ -39,7 +39,6 @@ class ScheduleNotificationViewModel {
                 alarmOptions.append(alarm)
             }
         }
-        
         return alarmOptions
     }
     
@@ -84,5 +83,38 @@ class ScheduleNotificationViewModel {
     func updateSelectedNotificationTimePeriod(row: Int) {
         selectedNotification.timePeriod = timePeriod[row]
         selectedTimePeriodIndex = row
+    }
+    
+    func convertedAlarmsFormat() {
+        for alarm in alarmOptions {
+            guard let convertedAlarm = convertToSelectedNotification(alarm) else { return }
+            notificationList.append(convertedAlarm)
+        }
+        alarmOptions = []
+    }
+    
+    private func convertToSelectedNotification(_ alarm: String) -> SelectedNotification? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        
+        guard let date = formatter.date(from: alarm) else {
+            return nil
+        }
+        
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
+        
+        let notificationFormatter = DateFormatter()
+        notificationFormatter.dateFormat = "yyyy-MM-dd"
+        let notification = notificationFormatter.string(from: date)
+        let hour = components.hour ?? 0
+        let convertedHour = hour > 12 ? hour - 12 : hour
+        let minute = components.minute
+        let dateMonthFormatter = DateFormatter()
+        dateMonthFormatter.dateFormat = "M월 d일"
+        let dateStr = dateMonthFormatter.string(from: date)
+        let timePeriod = calendar.component(.hour, from: date) < 12 ? "AM" : "PM"
+        
+        return SelectedNotification(notification: notification, date: dateStr, hour: convertedHour, minute: minute, timePeriod: timePeriod)
     }
 }

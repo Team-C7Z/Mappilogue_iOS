@@ -125,7 +125,6 @@ class AddScheduleViewController: NavigationBarViewController {
     }
     
     private func dismissViewController() {
-        viewModel.onDismiss?()
         navigationController?.popViewController(animated: true)
     }
     

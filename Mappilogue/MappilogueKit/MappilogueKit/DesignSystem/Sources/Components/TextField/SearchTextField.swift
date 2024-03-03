@@ -23,6 +23,9 @@ public class SearchTextField: UITextField {
     }
     
     private func setupProperty() {
+        autocorrectionType = .no
+        spellCheckingType = .no
+        
         placeholder = "장소 또는 기록 검색"
         addLeftPadding()
         layer.cornerRadius = 12

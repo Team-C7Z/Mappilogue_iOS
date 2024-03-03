@@ -186,7 +186,6 @@
 		928B7BE72A9B1B3E00E4F789 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BE62A9B1B3E00E4F789 /* AuthManager.swift */; };
 		928B7BE92A9B1C5B00E4F789 /* BaseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BE82A9B1C5B00E4F789 /* BaseDTO.swift */; };
 		928B7BEB2A9B27E800E4F789 /* AuthDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BEA2A9B27E800E4F789 /* AuthDTO.swift */; };
-		928B7BEE2A9C603C00E4F789 /* TodaySchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BED2A9C603C00E4F789 /* TodaySchedule.swift */; };
 		928B7BF32A9C7B4400E4F789 /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BF22A9C7B4400E4F789 /* NetworkLoggerPlugin.swift */; };
 		928B7BF52A9CA51500E4F789 /* ErrorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BF42A9CA51500E4F789 /* ErrorDTO.swift */; };
 		928B7BF72A9CA92F00E4F789 /* ActiveStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7BF62A9CA92F00E4F789 /* ActiveStatus.swift */; };
@@ -217,6 +216,7 @@
 		9297EA7E2B8C7BBB007F0E3F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9297EA7D2B8C7BBB007F0E3F /* GoogleService-Info.plist */; };
 		9297EA802B8C827E007F0E3F /* MyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9297EA7F2B8C827E007F0E3F /* MyAPI.swift */; };
 		9297EA822B8C8326007F0E3F /* MyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9297EA812B8C8326007F0E3F /* MyManager.swift */; };
+		9297EA862B923E6A007F0E3F /* AnnouncementDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9297EA852B923E6A007F0E3F /* AnnouncementDTO.swift */; };
 		929E23152AB737DC003180B3 /* ProfileImageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23142AB737DC003180B3 /* ProfileImageDTO.swift */; };
 		929E23172AB7F6C4003180B3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23162AB7F6C4003180B3 /* Utils.swift */; };
 		929E231C2AB81EB1003180B3 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 929E231B2AB81EB1003180B3 /* FirebaseMessaging */; };
@@ -504,7 +504,6 @@
 		928B7BE62A9B1B3E00E4F789 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		928B7BE82A9B1C5B00E4F789 /* BaseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDTO.swift; sourceTree = "<group>"; };
 		928B7BEA2A9B27E800E4F789 /* AuthDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDTO.swift; sourceTree = "<group>"; };
-		928B7BED2A9C603C00E4F789 /* TodaySchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodaySchedule.swift; sourceTree = "<group>"; };
 		928B7BF22A9C7B4400E4F789 /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
 		928B7BF42A9CA51500E4F789 /* ErrorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorDTO.swift; sourceTree = "<group>"; };
 		928B7BF62A9CA92F00E4F789 /* ActiveStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveStatus.swift; sourceTree = "<group>"; };
@@ -535,6 +534,7 @@
 		9297EA7D2B8C7BBB007F0E3F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9297EA7F2B8C827E007F0E3F /* MyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAPI.swift; sourceTree = "<group>"; };
 		9297EA812B8C8326007F0E3F /* MyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyManager.swift; sourceTree = "<group>"; };
+		9297EA852B923E6A007F0E3F /* AnnouncementDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnouncementDTO.swift; sourceTree = "<group>"; };
 		929E23142AB737DC003180B3 /* ProfileImageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageDTO.swift; sourceTree = "<group>"; };
 		929E23162AB7F6C4003180B3 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		929E231D2AB81EEE003180B3 /* Mappilogue.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Mappilogue.entitlements; sourceTree = "<group>"; };
@@ -707,6 +707,7 @@
 				9245BC2D2B0DCA2300383F4D /* GetScheduleDTO.swift */,
 				9245BC2B2B0BBBFF00383F4D /* CalendarDetailDTO.swift */,
 				9297EA7B2B8BCAF6007F0E3F /* HomeDTO.swift */,
+				9297EA852B923E6A007F0E3F /* AnnouncementDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -1580,7 +1581,6 @@
 		928B7BEC2A9C5C7A00E4F789 /* Mappilogue */ = {
 			isa = PBXGroup;
 			children = (
-				928B7BED2A9C603C00E4F789 /* TodaySchedule.swift */,
 				92A7B6652A4E5B3A009C9293 /* UpcomingSchedule.swift */,
 				92459EDB2A53158A00493941 /* MarkedRecord.swift */,
 				9224FD1A2A61705D000A56A6 /* ColorSelection.swift */,
@@ -2418,6 +2418,7 @@
 				9224FCF92A5FCF72000A56A6 /* ScheduleCell.swift in Sources */,
 				9263786E2A5475AF004E5B6E /* OnboardingCell.swift in Sources */,
 				92139D752AAD67E8005344AE /* MyRecordContentImageView.swift in Sources */,
+				9297EA862B923E6A007F0E3F /* AnnouncementDTO.swift in Sources */,
 				926999362A14F443003DDAD2 /* BaseView.swift in Sources */,
 				92B365EA2B24878E00502446 /* HomeViewModel.swift in Sources */,
 				92E3F4102B1CBC7400E03C15 /* WithdrawalNavigationViewController.swift in Sources */,
@@ -2513,7 +2514,6 @@
 				925840BD2A7F459600997434 /* NotificationSettingView.swift in Sources */,
 				928B7BE72A9B1B3E00E4F789 /* AuthManager.swift in Sources */,
 				92E3F4712B1ED64C00E03C15 /* PreviewView.swift in Sources */,
-				928B7BEE2A9C603C00E4F789 /* TodaySchedule.swift in Sources */,
 				92E3F4732B1ED66400E03C15 /* CapturePhotoViewController.swift in Sources */,
 				92011C142A74F9DE009B047F /* SearchLocationCell.swift in Sources */,
 				9245BBE22B087FF400383F4D /* ColorManager.swift in Sources */,

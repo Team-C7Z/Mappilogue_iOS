@@ -19,6 +19,8 @@ class WriteContentTextView: BaseView {
         
         backgroundColor = .grayF9F8F7
        
+        textView.autocorrectionType = .no
+        textView.spellCheckingType = .no
         textView.text = textViewPlaceHolder
         textView.textColor = .gray9B9791
         textView.backgroundColor = .clear

@@ -10,6 +10,7 @@ import Moya
 
 enum HomeAPI: BaseAPI {
     case getHome(option: String)
+    case getAnnouncement(pageNo: Int = 1, pageSize: Int = 10)
 }
 
 extension HomeAPI: TargetType {
@@ -17,13 +18,14 @@ extension HomeAPI: TargetType {
         switch self {
         case .getHome:
             return "/api/v1/users/homes"
-            
+        case .getAnnouncement:
+            return "/api/v1/users/homes/announcements"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getHome:
+        case .getHome, .getAnnouncement:
             return .get
         }
     }
@@ -33,6 +35,12 @@ extension HomeAPI: TargetType {
         case let .getHome(option):
             let requestParameters: [String: Any] = [
                 "option": option
+            ]
+            return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
+        case let .getAnnouncement(pageNo, pageSize):
+            let requestParameters: [String: Any] = [
+                "pageNo": pageNo,
+                "pageSize": pageSize
             ]
             return .requestParameters(parameters: requestParameters, encoding: URLEncoding.default)
         }

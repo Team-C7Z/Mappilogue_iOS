@@ -14,8 +14,6 @@ protocol ScheduleReloadViewDelegate: AnyObject {
 
 class ScheduleViewModel {
     var scheduleResult: GetScheduleDTO?
-    var cancellables: Set<AnyCancellable> = []
-    let scheduleManager = ScheduleManager()
     var calendarViewModel = CalendarViewModel()
     
     weak var delegate: ScheduleReloadViewDelegate?
@@ -80,8 +78,8 @@ class ScheduleViewModel {
         }
         
         schedule.area = area.isEmpty ? nil : area
-        
-        print(schedule, 7667678)
+   
+        print(schedule, 8865)
         if let id = scheduleId {
             updateSchedule(id: id, schedule: schedule)
         } else {

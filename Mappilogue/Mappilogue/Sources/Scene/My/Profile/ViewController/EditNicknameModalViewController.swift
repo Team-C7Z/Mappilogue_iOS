@@ -32,6 +32,8 @@ class EditNicknameModalViewController: BaseViewController {
         alertView.layer.cornerRadius = 12
         alertView.backgroundColor = .grayF9F8F7
         
+        inputTextField.autocorrectionType = .no
+        inputTextField.spellCheckingType = .no
         inputTextField.textColor = .black1C1C1C
         inputTextField.font = .body02
         inputTextField.backgroundColor = .grayF5F3F0

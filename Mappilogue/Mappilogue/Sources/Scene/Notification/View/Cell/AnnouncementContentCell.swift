@@ -21,6 +21,8 @@ class AnnouncementContentCell: BaseTableViewCell {
     override func setupProperty() {
         super.setupProperty()
         
+        contentTextView.autocorrectionType = .no
+        contentTextView.spellCheckingType = .no
         contentTextView.textColor = .color000000
         contentTextView.font = .body02
         contentTextView.sizeToFit()

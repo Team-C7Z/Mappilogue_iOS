@@ -70,10 +70,10 @@ class MarkedRecordCell: BaseCollectionViewCell {
         }
     }
     
-    func configure(_ markedRecord: MarkedRecord) {
+    func configure(_ mark: Marks) {
         markedRecordImage.image = UIImage(named: "markedRecordTest")
-        markedRecordDateLabel.text = markedRecord.date
-        markedRecordLocationLabel.text = markedRecord.location
-        markView.backgroundColor = markedRecord.color
+        markedRecordDateLabel.text = mark.createdAt
+        markedRecordLocationLabel.text = mark.title
+        markView.backgroundColor = UIColor.fromHex(mark.colorCode)
     }
 }
