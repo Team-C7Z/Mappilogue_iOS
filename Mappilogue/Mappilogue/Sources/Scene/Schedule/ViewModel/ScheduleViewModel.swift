@@ -79,7 +79,6 @@ class ScheduleViewModel {
         
         schedule.area = area.isEmpty ? nil : area
    
-        print(schedule, 8865)
         if let id = scheduleId {
             updateSchedule(id: id, schedule: schedule)
         } else {

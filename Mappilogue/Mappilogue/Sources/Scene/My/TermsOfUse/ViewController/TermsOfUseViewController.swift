@@ -16,7 +16,8 @@ class TermsOfUseViewController: NavigationBarViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        getTermsOfUserURL()
+        viewModel.delegate = self
+        viewModel.getTermsOfUse()
     }
     
     override func setupProperty() {
@@ -46,23 +47,10 @@ class TermsOfUseViewController: NavigationBarViewController {
         let request = URLRequest(url: url)
         webView.load(request)
     }
-    
-    func getTermsOfUserURL() {
-        viewModel.getTermsOfUse()
-        
-        viewModel.$termsOfUserResult
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { result in
-                guard let result else { return }
-                self.handleTermsOfUserResponse(result)
-            })
-            .store(in: &viewModel.cancellables)
-    }
-    
-    func handleTermsOfUserResponse(_ response: Any) {
-        guard let baseResponse = response as? BaseDTOResult<TermsOfUserDTO>, let result = baseResponse.result else { return }
-        
-        let url = result.link
-        self.openWebView(url: url)
+}
+
+extension TermsOfUseViewController: TermsOfUseDelegate {
+    func getTermsOfUser(url: String) {
+        openWebView(url: url)
     }
 }

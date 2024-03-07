@@ -107,21 +107,6 @@ class UserManager {
             .eraseToAnyPublisher()
     }
     
-    func getTermsOfUse() -> AnyPublisher<BaseDTOResult<TermsOfUserDTO>, Error> {
-        let url = URL(string: "\(baseURL)/terms-of-services")!
-        let request = setupRequest(for: url, method: "GET")
-        
-        return URLSession.shared.dataTaskPublisher(for: request)
-            .tryMap { data, response in
-                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                    throw URLError(.badServerResponse)
-                }
-                return data
-            }
-            .decode(type: BaseDTOResult<TermsOfUserDTO>.self, decoder: JSONDecoder())
-            .eraseToAnyPublisher()
-    }
-    
     private func setupRequest(for url: URL, method: String) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = method

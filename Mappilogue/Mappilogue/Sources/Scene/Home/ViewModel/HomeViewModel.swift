@@ -6,22 +6,29 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 protocol HomeLoadDataDelegate: AnyObject {
     func reloadView()
 }
 
 class HomeViewModel {
+    private let disposeBag = DisposeBag()
+    
     let dummyUpcomingData = dummyUpcomingScheduleData(scheduleCount: 0)
     weak var delegate: HomeLoadDataDelegate?
+    var homeSchedules2: BehaviorRelay<HomeDTO?> = BehaviorRelay(value: nil)
     var homeSchedules: HomeDTO?
     var isScheduleExpanded = [Bool]()
+    var isScheduleExpanded2: BehaviorRelay<[Bool]> = BehaviorRelay(value: [])
     
     var selectedScheduleType: ScheduleType = .today
     var limitedUpcomingScheduleCount = 4
     
     init() {
         isScheduleExpanded = Array(repeating: true, count: 0)
+        isScheduleExpanded2.accept((Array(repeating: true, count: 0)))
     }
     
     func loadHomeData(option: String) {

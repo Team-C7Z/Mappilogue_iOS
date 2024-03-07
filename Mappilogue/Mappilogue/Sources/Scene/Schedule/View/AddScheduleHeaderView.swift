@@ -128,6 +128,7 @@ extension AddScheduleHeaderView {
     func enterNameTextField() {
         scheduleTitleColorView.onNameEntered = { [weak self] name in
             guard let self = self else { return }
+            
             onScheduleTitle?(name)
         }
     }

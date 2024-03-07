@@ -71,8 +71,8 @@ struct MyManager {
         }
     }
 
-    func updateNotificationSetting(completion: @escaping (NetworkResult<Any>) -> Void) {
-        interceptorSessionProvider.request(.getNotificationSetting) { result in
+    func updateNotificationSetting(notification: NotificationDTO, completion: @escaping (NetworkResult<Any>) -> Void) {
+        interceptorSessionProvider.request(.updateNotificationSetting(notification: notification)) { result in
             switch result {
             case .success(let response):
                 let statusCode = response.statusCode
@@ -91,7 +91,7 @@ struct MyManager {
             case .success(let response):
                 let statusCode = response.statusCode
                 let data = response.data
-                let networkResult = self.judgeStatus(statusCode, data, BaseDTOResult<TermsOfUserDTO>.self)
+                let networkResult = self.judgeStatus(statusCode, data, BaseDTOResult<TermsOfUseDTO>.self)
                 completion(networkResult)
             case .failure(let error):
                 print(error)

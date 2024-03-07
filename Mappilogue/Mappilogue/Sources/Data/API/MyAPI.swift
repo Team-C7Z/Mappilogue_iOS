@@ -35,9 +35,9 @@ extension MyAPI: TargetType {
         case .getNotificationSetting:
             return "/api/v1/user-profiles/alarm-settings"
         case .updateNotificationSetting:
-            return "/api/v1/users/alarms-setting"
+            return "/api/v1/user-profiles/alarm-settings"
         case .termsOfUse:
-            return "/api/v1/users/tos"
+            return "/api/v1/user-profiles/terms-of-services"
         case .logout:
             return "/api/v1/users/logout"
         case .withdrawal:

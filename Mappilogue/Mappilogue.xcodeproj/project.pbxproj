@@ -198,7 +198,7 @@
 		928B7C0C2AA06F7400E4F789 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C0B2AA06F7400E4F789 /* EditProfileViewController.swift */; };
 		928B7C162AA1C62400E4F789 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C152AA1C62400E4F789 /* UserManager.swift */; };
 		928B7C192AA462CE00E4F789 /* TermsOfUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C182AA462CE00E4F789 /* TermsOfUseViewController.swift */; };
-		928B7C1B2AA4784500E4F789 /* TermsOfUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C1A2AA4784500E4F789 /* TermsOfUserDTO.swift */; };
+		928B7C1B2AA4784500E4F789 /* TermsOfUseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C1A2AA4784500E4F789 /* TermsOfUseDTO.swift */; };
 		928B7C1D2AA489F600E4F789 /* NotificationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C1C2AA489F600E4F789 /* NotificationDTO.swift */; };
 		928B7C1F2AA6DADA00E4F789 /* ProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C1E2AA6DADA00E4F789 /* ProfileDTO.swift */; };
 		928B7C222AA83D2000E4F789 /* EditNicknameModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B7C212AA83D2000E4F789 /* EditNicknameModalViewController.swift */; };
@@ -217,6 +217,10 @@
 		9297EA802B8C827E007F0E3F /* MyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9297EA7F2B8C827E007F0E3F /* MyAPI.swift */; };
 		9297EA822B8C8326007F0E3F /* MyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9297EA812B8C8326007F0E3F /* MyManager.swift */; };
 		9297EA862B923E6A007F0E3F /* AnnouncementDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9297EA852B923E6A007F0E3F /* AnnouncementDTO.swift */; };
+		9297EA892B962960007F0E3F /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 9297EA882B962960007F0E3F /* RxCocoa */; };
+		9297EA8B2B962B4A007F0E3F /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 9297EA8A2B962B4A007F0E3F /* RxMoya */; };
+		9297EA8E2B97A048007F0E3F /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 9297EA8D2B97A048007F0E3F /* RxDataSources */; };
+		9297EA902B97B837007F0E3F /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9297EA8F2B97B837007F0E3F /* RxSwift */; };
 		929E23152AB737DC003180B3 /* ProfileImageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23142AB737DC003180B3 /* ProfileImageDTO.swift */; };
 		929E23172AB7F6C4003180B3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929E23162AB7F6C4003180B3 /* Utils.swift */; };
 		929E231C2AB81EB1003180B3 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 929E231B2AB81EB1003180B3 /* FirebaseMessaging */; };
@@ -516,7 +520,7 @@
 		928B7C0B2AA06F7400E4F789 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		928B7C152AA1C62400E4F789 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		928B7C182AA462CE00E4F789 /* TermsOfUseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewController.swift; sourceTree = "<group>"; };
-		928B7C1A2AA4784500E4F789 /* TermsOfUserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUserDTO.swift; sourceTree = "<group>"; };
+		928B7C1A2AA4784500E4F789 /* TermsOfUseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseDTO.swift; sourceTree = "<group>"; };
 		928B7C1C2AA489F600E4F789 /* NotificationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDTO.swift; sourceTree = "<group>"; };
 		928B7C1E2AA6DADA00E4F789 /* ProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDTO.swift; sourceTree = "<group>"; };
 		928B7C212AA83D2000E4F789 /* EditNicknameModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNicknameModalViewController.swift; sourceTree = "<group>"; };
@@ -602,9 +606,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9297EA8B2B962B4A007F0E3F /* RxMoya in Frameworks */,
+				9297EA892B962960007F0E3F /* RxCocoa in Frameworks */,
 				520E9D02714F72A41E207B62 /* Pods_Mappilogue.framework in Frameworks */,
 				923AA0982B1B3C27006028AF /* SnapKit in Frameworks */,
 				929E231C2AB81EB1003180B3 /* FirebaseMessaging in Frameworks */,
+				9297EA8E2B97A048007F0E3F /* RxDataSources in Frameworks */,
+				9297EA902B97B837007F0E3F /* RxSwift in Frameworks */,
 				928B7BDE2A99B50400E4F789 /* KakaoSDKUser in Frameworks */,
 				920031CD2A8B626B00E3170D /* Moya in Frameworks */,
 				920031DE2A8DF62A00E3170D /* Lottie in Frameworks */,
@@ -693,7 +701,7 @@
 				928B7BF42A9CA51500E4F789 /* ErrorDTO.swift */,
 				928B7BEA2A9B27E800E4F789 /* AuthDTO.swift */,
 				928B7C042A9F9CD900E4F789 /* RefreshTokenDTO.swift */,
-				928B7C1A2AA4784500E4F789 /* TermsOfUserDTO.swift */,
+				928B7C1A2AA4784500E4F789 /* TermsOfUseDTO.swift */,
 				928B7C1C2AA489F600E4F789 /* NotificationDTO.swift */,
 				928B7C1E2AA6DADA00E4F789 /* ProfileDTO.swift */,
 				9245BC272B0A4D3400383F4D /* CalendarDTO.swift */,
@@ -2034,6 +2042,10 @@
 				928B7BDD2A99B50400E4F789 /* KakaoSDKUser */,
 				929E231B2AB81EB1003180B3 /* FirebaseMessaging */,
 				923AA0972B1B3C27006028AF /* SnapKit */,
+				9297EA882B962960007F0E3F /* RxCocoa */,
+				9297EA8A2B962B4A007F0E3F /* RxMoya */,
+				9297EA8D2B97A048007F0E3F /* RxDataSources */,
+				9297EA8F2B97B837007F0E3F /* RxSwift */,
 			);
 			productName = Mappilogue;
 			productReference = 926998F32A14EC07003DDAD2 /* Mappilogue.app */;
@@ -2116,6 +2128,8 @@
 				920031DC2A8DF62A00E3170D /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				928B7BDA2A99B50400E4F789 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				929E231A2AB81EB1003180B3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				9297EA872B96286D007F0E3F /* XCRemoteSwiftPackageReference "RxSwift" */,
+				9297EA8C2B97A00B007F0E3F /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = 926998F42A14EC07003DDAD2 /* Products */;
 			projectDirPath = "";
@@ -2543,7 +2557,7 @@
 				9245BC2E2B0DCA2300383F4D /* GetScheduleDTO.swift in Sources */,
 				92A7B6632A4E20BF009C9293 /* BaseTableViewCell.swift in Sources */,
 				92CD36FA2A7B505900768B61 /* MyRecordViewController.swift in Sources */,
-				928B7C1B2AA4784500E4F789 /* TermsOfUserDTO.swift in Sources */,
+				928B7C1B2AA4784500E4F789 /* TermsOfUseDTO.swift in Sources */,
 				9224FD1B2A61705D000A56A6 /* ColorSelection.swift in Sources */,
 				9273C94E2ABEEFC300224DE1 /* AddScheduleDateType.swift in Sources */,
 				928B7BF72A9CA92F00E4F789 /* ActiveStatus.swift in Sources */,
@@ -2937,6 +2951,23 @@
 				kind = branch;
 			};
 		};
+		9297EA872B96286D007F0E3F /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = versionRange;
+				maximumVersion = 7.0.0;
+				minimumVersion = 6.6.0;
+			};
+		};
+		9297EA8C2B97A00B007F0E3F /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.2;
+			};
+		};
 		929E231A2AB81EB1003180B3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -2972,6 +3003,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 928B7BDA2A99B50400E4F789 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
 			productName = KakaoSDKUser;
+		};
+		9297EA882B962960007F0E3F /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9297EA872B96286D007F0E3F /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		9297EA8A2B962B4A007F0E3F /* RxMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 920031CB2A8B626B00E3170D /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = RxMoya;
+		};
+		9297EA8D2B97A048007F0E3F /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9297EA8C2B97A00B007F0E3F /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
+		};
+		9297EA8F2B97B837007F0E3F /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9297EA872B96286D007F0E3F /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
 		};
 		929E231B2AB81EB1003180B3 /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;

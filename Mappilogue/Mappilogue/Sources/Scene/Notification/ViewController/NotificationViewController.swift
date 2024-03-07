@@ -6,9 +6,13 @@
 //
 
 import UIKit
+import RxSwift
+import RxDataSources
+import RxCocoa
 
 class NotificationViewController: NavigationBarViewController {
     var viewModel = NotificationViewModel()
+    var disposeBag = DisposeBag()
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -23,8 +27,6 @@ class NotificationViewController: NavigationBarViewController {
         tableView.register(AnnouncementContentCell.self, forCellReuseIdentifier: AnnouncementContentCell.registerId)
         tableView.register(NotificationAnnouncementHeaderView.self, forHeaderFooterViewReuseIdentifier: NotificationAnnouncementHeaderView.registerId)
         tableView.register(LineHeaderView.self, forHeaderFooterViewReuseIdentifier: LineHeaderView.registerId)
-        tableView.delegate = self
-        tableView.dataSource = self
         return tableView
     }()
     
@@ -32,6 +34,7 @@ class NotificationViewController: NavigationBarViewController {
         super.viewDidLoad()
         
         viewModel.delegate = self
+        loadAnnouncementsAPI()
     }
 
     override func setupProperty() {
@@ -70,145 +73,235 @@ class NotificationViewController: NavigationBarViewController {
     }
     
     private func removeNotification(_ index: Int) {
-        viewModel.notificationData.remove(at: index)
+   //     viewModel.notifications.remove(at: index)
         
         tableView.reloadData()
     }
 }
 
-extension NotificationViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        switch viewModel.notificationType {
-        case .notification:
-            return 1
-        case .announcement:
-            return viewModel.announcements.isEmpty ? 1 : viewModel.announcements.count
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch viewModel.notificationType {
-        case .notification:
-            return 1
-        case .announcement:
-            if viewModel.announcements.isEmpty {
-                return 1
-            } else {
-                return viewModel.isAnnouncementExpanded[section] ? 2 : 1
-            }
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch viewModel.notificationType {
-        case .notification:
-            if viewModel.notificationData.isEmpty {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: EmptyNotificationCell.registerId, for: indexPath) as? EmptyNotificationCell else { return UITableViewCell() }
-                cell.selectionStyle = .none
-                cell.configure(notificationType: .notification)
-                
-                return cell
-             } else {
-                 guard let cell = tableView.dequeueReusableCell(withIdentifier: NotificationCell.registerId, for: indexPath) as? NotificationCell else { return UITableViewCell() }
-                 cell.selectionStyle = .none
-                 
-                 let notification = viewModel.notificationData[indexPath.section]
-                 cell.configure(notification, index: indexPath.section)
-                 
-                 cell.onRemove = { [weak self] index in
-                     guard let self = self else { return }
-                     
-                     removeNotification(index)
-                 }
-                 
-                 return cell
-             }
-        case .announcement:
-            if viewModel.announcements.isEmpty {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: EmptyNotificationCell.registerId, for: indexPath) as? EmptyNotificationCell else { return UITableViewCell() }
-                cell.selectionStyle = .none
-                cell.configure(notificationType: .announcement)
-            
-                return cell
-            } else {
-                if indexPath.row == 0 {
-                    guard let cell = tableView.dequeueReusableCell(withIdentifier: AnnouncementCell.registerId, for: indexPath) as? AnnouncementCell else { return UITableViewCell() }
-                    cell.selectionStyle = .none
-                    cell.delegate = self
-                    
-                    let announcement = viewModel.announcements[indexPath.section]
-                    let isExpanded = viewModel.isAnnouncementExpanded[indexPath.section]
-                   cell.configure(announcement, isExpanded: isExpanded)
-                
-                    return cell
-                } else {
-                    guard let cell = tableView.dequeueReusableCell(withIdentifier: AnnouncementContentCell.registerId, for: indexPath) as? AnnouncementContentCell else { return UITableViewCell() }
-                    
-                    let content = viewModel.announcements[indexPath.section].content
-                    cell.configure(content)
-              
-                    return cell
-                }
-            }
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch viewModel.notificationType {
-        case .notification:
-            return viewModel.notificationData.isEmpty ? tableView.frame.height - 100 : 83
-        case .announcement:
-            if viewModel.announcements.isEmpty {
-                return tableView.frame.height - 100
-            } else {
-                let content = viewModel.announcements[indexPath.section].content
-                let contentTextHeight = calculateTextHeight(text: content, font: UIFont.systemFont(ofSize: 17.8), width: tableView.frame.width)
-                let cellHeight = contentTextHeight + 16
-                
-                return indexPath.row == 0 ? 70 : cellHeight
-            }
-        }
-    }
-    
-    func calculateTextHeight(text: String, font: UIFont, width: CGFloat) -> CGFloat {
-          let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
-          let boundingBox = text.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
-          return ceil(boundingBox.height)
-      
-  }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0 {
-            guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: NotificationAnnouncementHeaderView.registerId) as? NotificationAnnouncementHeaderView else { return UIView() }
-            headerView.delegate = self
-            headerView.configure(viewModel.notificationType)
-            return headerView
-        } else {
-            guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: LineHeaderView.registerId) as? LineHeaderView else { return UIView() }
-            return headerView
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? 66 : 1
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      
-    }
+enum CellType {
+    case empty
+    case regular(AnnouncementDTO)
 }
+
 
 extension NotificationViewController: NotificationTypeDelegate {
     func categoryButtonTapped(_ notificationType: NotificationType) {
         viewModel.notificationType = notificationType
-
+        
         if notificationType == .announcement {
-            loadAnnouncement()
+            loadAnnouncementsAPI()
         }
         
-        tableView.reloadData()
+        // tableView.reloadData()
+    }
+    
+    private func loadAnnouncementsAPI() {
+        let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<Void, CellType>>(
+            configureCell: { _, tableView, indexPath, item in
+                switch item {
+                case .empty:
+                    let cell = tableView.dequeueReusableCell(withIdentifier: EmptyNotificationCell.registerId, for: indexPath) as! EmptyNotificationCell
+                    cell.configure(notificationType: .announcement)
+                    return cell
+                case .regular(let announcement):
+                    let isExpanded = self.viewModel.isAnnouncementExpanded1.value[indexPath.row]
+                    let cell = tableView.dequeueReusableCell(withIdentifier: AnnouncementCell.registerId, for: indexPath) as! AnnouncementCell
+                    cell.configure(announcement, isExpanded: isExpanded)
+                    return cell
+                }
+            })
+        
+        viewModel.announcements1
+            .map { announcements -> [SectionModel<Void, CellType>] in
+                if announcements.isEmpty {
+                    return [SectionModel(model: (), items: [.empty])]
+                } else {
+                    let cells = announcements.map { CellType.regular($0) }
+                    return [SectionModel(model: (), items: cells)]
+                }
+            }
+        
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+        
+        viewModel.getAnnouncements(pageNo: viewModel.currentPage)
+        
+        tableView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+        
+//        viewModel.announcements1
+//            .map { announcements in
+//                
+//                
+////                if announcements.isEmpty {
+////                    return self.tableView.frame.height - 120
+////                }
+////                return 0
+//            }
+//            .bind(to: tableView.rx.rowHeight)
+//            .disposed(by: disposeBag)
+    }
+    
+    private func calculateCellHeight(content: String) -> CGFloat {
+        let contentTextHeight = calculateTextHeight(text: content, font: UIFont.systemFont(ofSize: 17.8), width: tableView.frame.width)
+        let cellHeight = contentTextHeight + 16
+        return cellHeight
+    }
+    
+    func calculateTextHeight(text: String, font: UIFont, width: CGFloat) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = text.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+        return ceil(boundingBox.height)
+        
     }
 }
+
+extension NotificationViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch datasou
+//        switch viewModel.notificationType {
+//        case .notification:
+//            return viewModel.notificationData.isEmpty ? tableView.frame.height - 100 : 83
+//        case .announcement:
+//            if viewModel.announcements1.count {
+//                return tableView.frame.height - 100
+//            } else {
+//                let content = viewModel.announcements1[indexPath.section].content
+//                let contentTextHeight = calculateTextHeight(text: content, font: UIFont.systemFont(ofSize: 17.8), width: tableView.frame.width)
+//                let cellHeight = contentTextHeight + 16
+//                
+//                return indexPath.row == 0 ? 70 : cellHeight
+//            }
+//                }
+//
+    }
+
+}
+
+//
+//extension NotificationViewController: UITableViewDelegate, UITableViewDataSource {
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        switch viewModel.notificationType {
+//        case .notification:
+//            return 1
+//        case .announcement:
+//            return viewModel.announcements.isEmpty ? 1 : viewModel.announcements.count
+//        }
+//    }
+//    
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        switch viewModel.notificationType {
+//        case .notification:
+//            return 1
+//        case .announcement:
+//            if viewModel.announcements.isEmpty {
+//                return 1
+//            } else {
+//                return viewModel.isAnnouncementExpanded[section] ? 2 : 1
+//            }
+//        }
+//    }
+//    
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        switch viewModel.notificationType {
+//        case .notification:
+//            if viewModel.notificationData.isEmpty {
+//                guard let cell = tableView.dequeueReusableCell(withIdentifier: EmptyNotificationCell.registerId, for: indexPath) as? EmptyNotificationCell else { return UITableViewCell() }
+//                cell.selectionStyle = .none
+//                cell.configure(notificationType: .notification)
+//                
+//                return cell
+//             } else {
+//                 guard let cell = tableView.dequeueReusableCell(withIdentifier: NotificationCell.registerId, for: indexPath) as? NotificationCell else { return UITableViewCell() }
+//                 cell.selectionStyle = .none
+//                 
+////                 let notification = viewModel.notificationData[indexPath.section]
+////                 cell.configure(notification, index: indexPath.section)
+//                 
+//                 cell.onRemove = { [weak self] index in
+//                     guard let self = self else { return }
+//                     
+//                     removeNotification(index)
+//                 }
+//                 
+//                 return cell
+//             }
+//        case .announcement:
+//            if viewModel.announcements.isEmpty {
+//                guard let cell = tableView.dequeueReusableCell(withIdentifier: EmptyNotificationCell.registerId, for: indexPath) as? EmptyNotificationCell else { return UITableViewCell() }
+//                cell.selectionStyle = .none
+//                cell.configure(notificationType: .announcement)
+//            
+//                return cell
+//            } else {
+//                if indexPath.row == 0 {
+//                    guard let cell = tableView.dequeueReusableCell(withIdentifier: AnnouncementCell.registerId, for: indexPath) as? AnnouncementCell else { return UITableViewCell() }
+//                    cell.selectionStyle = .none
+//                    cell.delegate = self
+//                    
+//                    let announcement = viewModel.announcements[indexPath.section]
+//                    let isExpanded = viewModel.isAnnouncementExpanded[indexPath.section]
+//                   cell.configure(announcement, isExpanded: isExpanded)
+//                
+//                    return cell
+//                } else {
+//                    guard let cell = tableView.dequeueReusableCell(withIdentifier: AnnouncementContentCell.registerId, for: indexPath) as? AnnouncementContentCell else { return UITableViewCell() }
+//                    
+//                    let content = viewModel.announcements[indexPath.section].content
+//                    cell.configure(content)
+//              
+//                    return cell
+//                }
+//            }
+//        }
+//    }
+//    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        switch viewModel.notificationType {
+//        case .notification:
+//            return viewModel.notificationData.isEmpty ? tableView.frame.height - 100 : 83
+//        case .announcement:
+//            if viewModel.announcements.isEmpty {
+//                return tableView.frame.height - 100
+//            } else {
+//                let content = viewModel.announcements[indexPath.section].content
+//                let contentTextHeight = calculateTextHeight(text: content, font: UIFont.systemFont(ofSize: 17.8), width: tableView.frame.width)
+//                let cellHeight = contentTextHeight + 16
+//                
+//                return indexPath.row == 0 ? 70 : cellHeight
+//            }
+//        }
+//    }
+//    
+//    func calculateTextHeight(text: String, font: UIFont, width: CGFloat) -> CGFloat {
+//          let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+//          let boundingBox = text.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+//          return ceil(boundingBox.height)
+//      
+//  }
+//    
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        if section == 0 {
+//            guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: NotificationAnnouncementHeaderView.registerId) as? NotificationAnnouncementHeaderView else { return UIView() }
+//            headerView.delegate = self
+//            headerView.configure(viewModel.notificationType)
+//            return headerView
+//        } else {
+//            guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: LineHeaderView.registerId) as? LineHeaderView else { return UIView() }
+//            return headerView
+//        }
+//    }
+//    
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return section == 0 ? 66 : 1
+//    }
+//    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//      
+//    }
+//}
+
 
 extension NotificationViewController: ExpandCellDelegate {
     func expandButtonTapped(in cell: UITableViewCell) {

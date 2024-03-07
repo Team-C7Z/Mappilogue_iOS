@@ -8,15 +8,24 @@
 import UIKit
 import Combine
 
+protocol NotificationSettingDelegate: AnyObject {
+    func getNotification()
+}
+
 class NotificationSettingViewModel {
-    var notificationResult: NotificationDTO?
+    weak var delegate: NotificationSettingDelegate?
+    var notification = NotificationDTO(isTotalNotification: ActiveStatus.inactive.rawValue,
+                                       isNoticeNotification: ActiveStatus.inactive.rawValue,
+                                       isScheduleReminderNotification: ActiveStatus.inactive.rawValue,
+                                       isMarketingNotification: ActiveStatus.inactive.rawValue)
     
     func getNotificationSetting() {
         MyManager.shared.getNotificationSetting { result in
             switch result {
             case .success(let response):
                 guard let baseResponse = response as? BaseDTOResult<NotificationDTO>, let result = baseResponse.result else { return }
-                self.notificationResult = result
+                self.notification = result
+                self.delegate?.getNotification()
             default:
                 break
             }
@@ -24,22 +33,19 @@ class NotificationSettingViewModel {
     }
     
     func updateNotificationSetting(notification: NotificationDTO) {
-//        userManager.updateNotificationSetting(notification: notification)
-//            .receive(on: DispatchQueue.main)
-//            .sink(receiveCompletion: { completion in
-//                switch completion {
-//                case .finished:
-//                    break
-//                case .failure:
-//                    print("error")
-//                }
-//            }, receiveValue: { _ in })
-//            .store(in: &cancellables)
+        MyManager.shared.updateNotificationSetting(notification: notification) { result in
+            switch result {
+            case .success(let response):
+                guard let baseResponse = response as? BaseDTOResult<NotificationDTO>, let result = baseResponse.result else { return }
+                
+            default:
+                break
+            }
+        }
     }
     
     func switchToggle(_ notification: String?) -> String {
         guard let notification = notification else { return "" }
-        
         let currentType = ActiveStatus(rawValue: notification)
         let newType: ActiveStatus = currentType == .active ? .inactive : .active
         

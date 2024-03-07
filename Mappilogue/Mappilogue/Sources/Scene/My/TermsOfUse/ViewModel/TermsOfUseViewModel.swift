@@ -6,27 +6,23 @@
 //
 
 import Foundation
-import Combine
+
+protocol TermsOfUseDelegate: AnyObject {
+    func getTermsOfUser(url: String)
+}
 
 class TermsOfUseViewModel {
-    @Published var termsOfUserResult: TermsOfUserDTO?
-    
-    var cancellables: Set<AnyCancellable> = []
-    private let userManager = UserManager()
+    weak var delegate: TermsOfUseDelegate?
     
     func getTermsOfUse() {
-        userManager.getTermsOfUse()
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure:
-                    print("error")
-                }
-            }, receiveValue: { response in
-                self.termsOfUserResult = response.result
-            })
-            .store(in: &cancellables)
+        MyManager.shared.termsOfUse { result in
+            switch result {
+            case .success(let response):
+                guard let baseResponse = response as? BaseDTOResult<TermsOfUseDTO>, let result = baseResponse.result else { return }
+                self.delegate?.getTermsOfUser(url: result.link)
+            default:
+                break
+            }
+        }
     }
 }

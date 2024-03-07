@@ -335,15 +335,15 @@ extension AddScheduleViewController: UICollectionViewDelegate, UICollectionViewD
         
         headerView.onScheduleTitle = { [weak self] title in
             guard let self = self else { return }
-            
             viewModel.schedule.title = title
+       
         }
         
         headerView.onColorSelectionButtonTapped = { [weak self] in
             guard let self = self else { return }
-            
             viewModel.isColorSelection.toggle()
             collectionView.performBatchUpdates(nil, completion: nil)
+            headerView.configureTitleColor(title: viewModel.schedule.title ?? "", isColorSelection: false, colorId: viewModel.schedule.colorId)
         }
         
         headerView.onColorIndex = { [weak self] colorId in

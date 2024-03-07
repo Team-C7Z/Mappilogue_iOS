@@ -55,6 +55,7 @@ class ScheduleTitleColorView: BaseView {
     }
     
     func configure(_ isAdd: Bool, title: String, colorId: Int, color: UIColor) {
+        print(title, 898)
         scheduleTitleTextField.text = title
         scheduleTitleTextField.textColor = isAdd ? .black1C1C1C : .grayC9C6C2
         
@@ -80,5 +81,6 @@ extension ScheduleTitleColorView: UITextFieldDelegate {
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
         onNameEntered?(scheduleTitleTextField.text ?? "")
+        print(textField.text, 666555)
     }
 }

@@ -9,8 +9,6 @@ import UIKit
 
 class NotificationSettingViewController: NavigationBarViewController {
     var viewModel = NotificationSettingViewModel()
-    private var notificationDTO: NotificationDTO?
-    
     private let totalNotiviationView = NotificationSettingView()
     private var stackView = UIStackView()
     private let noticeNotification = NotificationSettingView()
@@ -28,13 +26,7 @@ class NotificationSettingViewController: NavigationBarViewController {
         super.setupProperty()
         
         setPopBar(title: "알림 설정")
-        
-        popBar.onPopButtonTapped = { [weak self] in
-            guard let self = self else { return }
-            
-            updateNotification()
-        }
-        
+    
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
         stackView.spacing = 1
@@ -75,29 +67,15 @@ class NotificationSettingViewController: NavigationBarViewController {
             $0.width.height.equalTo(stackView)
         }
     }
-    
-    @objc private func updateNotification() {
-        if let notification = notificationDTO {
-            viewModel.updateNotificationSetting(notification: notification)
-        }
-        
-        navigationController?.popViewController(animated: true)
-    }
-    
+
     func getNotificationSetting() {
+        viewModel.delegate = self
         viewModel.getNotificationSetting()
-        
-    }
-    
-    private func handleNotificationSettingResponse(_ result: NotificationDTO) {
-        notificationDTO = result
-        configureNotification()
-        setTotalNotificationControl()
     }
     
     func configureNotification() {
-        guard let notification = notificationDTO else { return }
- 
+        let notification = viewModel.notification
+        
         totalNotiviationView.configure(title: "알림 받기", isSwitch: notification.isTotalNotification)
         noticeNotification.configure(title: "공지사항 알림", isSwitch: notification.isNoticeNotification)
         scheduleReminderNotification.configure(title: "일정 미리 알림", isSwitch: notification.isScheduleReminderNotification)
@@ -107,41 +85,45 @@ class NotificationSettingViewController: NavigationBarViewController {
     func setSwitchToggleActions() {
         totalNotiviationView.onSwitchTapped = { [weak self] in
             guard let self = self else { return }
-            guard let notification = notificationDTO else { return }
-            
-            notificationDTO?.isTotalNotification = viewModel.switchToggle(notification.isTotalNotification)
+    
+            viewModel.notification.isTotalNotification = viewModel.switchToggle(viewModel.notification.isTotalNotification)
             configureNotification()
             setTotalNotificationControl()
+            viewModel.updateNotificationSetting(notification: viewModel.notification)
         }
         
         noticeNotification.onSwitchTapped = { [weak self] in
             guard let self = self else { return }
-            guard let notification = notificationDTO else { return }
-            
-            notificationDTO?.isNoticeNotification = viewModel.switchToggle(notification.isNoticeNotification)
+            viewModel.notification.isNoticeNotification = viewModel.switchToggle(viewModel.notification.isNoticeNotification)
             configureNotification()
+            viewModel.updateNotificationSetting(notification: viewModel.notification)
         }
         
         scheduleReminderNotification.onSwitchTapped = { [weak self] in
             guard let self = self else { return }
-            guard let notification = notificationDTO else { return }
-            
-            notificationDTO?.isScheduleReminderNotification = viewModel.switchToggle(notification.isScheduleReminderNotification)
+            viewModel.notification.isScheduleReminderNotification = viewModel.switchToggle(viewModel.notification.isScheduleReminderNotification)
             configureNotification()
+            viewModel.updateNotificationSetting(notification: viewModel.notification)
         }
         
         marketingAlertView.onSwitchTapped = { [weak self] in
             guard let self = self else { return }
-            guard let notification = notificationDTO else { return }
             
-            notificationDTO?.isMarketingNotification = viewModel.switchToggle(notification.isMarketingNotification)
+            viewModel.notification.isMarketingNotification = viewModel.switchToggle(viewModel.notification.isMarketingNotification)
             configureNotification()
+            viewModel.updateNotificationSetting(notification: viewModel.notification)
         }
     }
     
     func setTotalNotificationControl() {
-        guard let notification = notificationDTO, let isTotalNotification = ActiveStatus(rawValue: notification.isTotalNotification) else { return }
-        
-        notificationControlOffView.isHidden = isTotalNotification == .active
+        let active = ActiveStatus.active.rawValue
+        notificationControlOffView.isHidden = viewModel.notification.isTotalNotification == active
+    }
+}
+
+extension NotificationSettingViewController: NotificationSettingDelegate {
+    func getNotification() {
+        configureNotification()
+        setTotalNotificationControl()
     }
 }
